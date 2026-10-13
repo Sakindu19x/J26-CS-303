@@ -1,0 +1,143 @@
+Metadata-Version: 2.4
+Name: c4
+Version: 0.1.0
+Summary: C4: CTI-Assisted Digital Forensic Investigation Tool for SMEs - Timeline Reconstruction & Next-Stage Prediction
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=2.0
+Requires-Dist: numpy>=1.24
+Requires-Dist: streamlit>=1.30
+Requires-Dist: plotly>=5.18
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+
+# C4 — CTI-Assisted Forensic Timeline Reconstruction (Research Prototype)
+
+Component 4 (C4) of the research project: **"CTI-Assisted Digital Forensic Investigation Tool for SMEs: Explainable Attack Timeline Reconstruction and Next-Stage Prediction Model"**.
+
+Processes the CAM-LDS (Cyber Attack Manifestations Log Data Set) dataset across 4 attack simulation scenarios (`scenario_1_sudo_pam`, `scenario_2_cron`, `scenario_3_vnc_apt`, `scenario_4`).
+
+---
+
+## Directory Layout
+```
+c4/
+├── data/
+│   ├── raw/             Original CAM-LDS zip archives (read-only, never modified)
+│   ├── reference/       Official MITRE ATT&CK Enterprise STIX reference (enterprise-attack.json)
+│   ├── interim/         Temporary / staging extraction files
+│   └── processed/       Normalized events, timelines, sequences, samples, LOEO folds
+├── reports/             Data quality, timeline validation, and sequence statistics reports
+├── src/c4/              Core library modules:
+│   ├── data_loading.py          Raw archive loading & integrity checks
+│   ├── normalization.py         AttackMate event normalization & cleaning
+│   ├── mitre_reference.py       MITRE ATT&CK v16.1 reference & discrepancy checks
+│   ├── episodes.py              Episode container & strict isolation manager
+│   ├── timeline.py              Chronological timeline reconstruction & filters
+│   ├── attack_sequence.py       Raw & collapsed ATT&CK manifestation sequences
+│   ├── samples.py               Prefix-target sequence sample generator
+│   ├── sequence_statistics.py   LOEO fold coverage & overlap matrix calculator
+│   └── dashboard/               Streamlit + Plotly forensic investigation dashboard
+├── scripts/             Batch execution pipelines:
+│   ├── run_normalization.py     Event normalization & Wazuh alert extraction
+│   ├── run_timeline_pipeline.py Chronological timeline & ATT&CK sequence generation
+│   └── run_samples_and_stats.py Next-step sample generation & statistics reports
+└── tests/               Comprehensive pytest unit & regression test suite
+```
+
+---
+
+## Setup & Environment
+
+Ensure Python 3.10+ (or Python 3.12) is installed.
+From the repository root or `c4/` directory:
+
+```bash
+# Activate virtual environment
+..\.venv\Scripts\activate
+
+# Install requirements (or editable package)
+pip install -r requirements.txt
+pip install -e .
+```
+
+---
+
+## Pipeline Execution Order
+
+Execute the three processing pipelines sequentially:
+
+```bash
+# 1. Normalize AttackMate steps and extract in-window Wazuh telemetry
+python scripts/run_normalization.py
+
+# 2. Reconstruct chronological timelines and build ATT&CK sequences
+python scripts/run_timeline_pipeline.py
+
+# 3. Generate 2x2 next-step samples and compute statistics / LOEO coverage
+python scripts/run_samples_and_stats.py
+```
+
+### Generated Artifacts
+- `reports/raw_archive_hashes.json`: SHA-256 integrity hashes of raw CAM-LDS archives.
+- `reports/stage1_acceptance_report.{json,md}`: Comprehensive audit matrix (R1..R15) and empirical verification.
+- `data/processed/normalized_events.{csv,json}`: 190 normalized events across 4 episodes.
+- `data/processed/technique_tactic_reference.json`: Official ATT&CK v16.1 reference mapping.
+- `data/processed/attack_timelines.{csv,json}`: Chronological timelines with timing metrics.
+- `data/processed/attack_sequences.json`: Raw and collapsed sequences tracking skipped gaps.
+- `data/processed/next_technique_samples.{csv,json}`: 324 samples across 2x2 combinations.
+- `data/processed/loeo_folds.json`: 4 leave-one-episode-out cross-validation partitions.
+- `reports/data_quality_report.{json,md}`: Data quality audit & C3 field provenance plan.
+- `reports/timeline_validation_report.{json,md}`: Sequence compression & monotonicity audit.
+- `reports/sequence_statistics.{json,md}`: Overlap matrix & LOEO coverage metrics.
+- `reports/tactic_discrepancy_report.json`: Ground-truth vs official tactic discrepancies.
+
+---
+
+## Running the Forensic Dashboard
+
+Launch the interactive Streamlit + Plotly investigation dashboard:
+
+```bash
+streamlit run src/c4/dashboard/app.py
+```
+
+### Dashboard Capabilities
+- **Overview:** Executive summary across all 4 episodes (events, ground truth %, distinct techniques).
+- **Episode Selector:** Independent inspection of `E1`, `E2`, `E3`, and `E4` without run blending.
+- **Interactive Timeline:** Plotly chronological scatter plot with filters (hostname, technique, tactic, label status).
+- **Event Inspector:** Deep inspection card with ground truth / derived / missing field badges.
+- **Sequence View:** Raw vs collapsed toggle, gap counters, and forensic causality notice.
+- **Tactic Discrepancy Panel:** Audit of dataset labeling vs official ATT&CK v16.1 tactics.
+- **Data Quality & C3:** Parsing integrity, whitespace repairs, and field provenance table.
+- **Wazuh Telemetry:** Detector-derived host telemetry (isolated from ground-truth labels).
+- **Data Export:** Direct download of filtered episode timelines in CSV and JSON formats.
+
+---
+
+## Running Tests
+
+Execute the full pytest suite:
+
+```bash
+pytest -v
+```
+
+---
+
+## Troubleshooting
+
+1. **`MissingArtifactError: Required processed files missing`**:
+   The dashboard requires preprocessed files in `data/processed/`. Run:
+   ```bash
+   python scripts/run_normalization.py
+   python scripts/run_timeline_pipeline.py
+   python scripts/run_samples_and_stats.py
+   ```
+2. **Raw archive missing (`data/raw/*.zip`)**:
+   Regression tests check for the presence of CAM-LDS zip archives in `data/raw/`. Ensure all 4 zip files exist: `scenario_1_sudo_pam.zip`, `scenario_2_cron.zip`, `scenario_3_vnc_apt.zip`, and `scenario_4.zip`.
+3. **Streamlit port conflict**:
+   If port 8501 is busy, specify an alternative port:
+   ```bash
+   streamlit run src/c4/dashboard/app.py --server.port 8502
+   ```

@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest cache
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Raw dataset archives (Zenodo MD5 hashes are canonical and recorded in reports/zenodo_md5_manifest.json)
+data/raw/*.zip
+data/raw/*.tar.gz
+data/raw/*.tgz

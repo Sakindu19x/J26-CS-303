@@ -1,0 +1,781 @@
+{
+  "metadata": {
+    "v16": {
+      "version": "16.1",
+      "source_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-16.1.json",
+      "local_stix_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\reference\\enterprise-attack.json",
+      "total_techniques_in_kb": 799
+    },
+    "newest": {
+      "version": "19.2",
+      "source_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-19.2.json",
+      "local_stix_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\reference\\enterprise-attack-19.2.json",
+      "total_techniques_in_kb": 858
+    },
+    "cam_lds_total_events": 190,
+    "cam_lds_distinct_techniques": 64
+  },
+  "discrepancy_counts": {
+    "v16_discrepant_events_count": 8,
+    "v19_discrepant_events_count": 22,
+    "identical_discrepant_event_set": false,
+    "events_with_discrepancies": [
+      "E2-S016",
+      "E2-S017",
+      "E2-S024",
+      "E4-S003",
+      "E4-S007",
+      "E4-S009",
+      "E4-S041",
+      "E4-S043"
+    ]
+  },
+  "technique_level_changes_in_dataset_vocab": [
+    {
+      "technique_id": "T1036.005",
+      "v16_name": "Match Legitimate Name or Location",
+      "v19_name": "Match Legitimate Resource Name or Location",
+      "v16_tactics": [
+        "Defense Evasion"
+      ],
+      "v19_tactics": [
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1070.004",
+      "v16_name": "File Deletion",
+      "v19_name": "File Deletion",
+      "v16_tactics": [
+        "Defense Evasion"
+      ],
+      "v19_tactics": [
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1078.003",
+      "v16_name": "Local Accounts",
+      "v19_name": "Local Accounts",
+      "v16_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "v19_tactics": [
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1205.001",
+      "v16_name": "Port Knocking",
+      "v19_name": "Port Knocking",
+      "v16_tactics": [
+        "Command and Control",
+        "Defense Evasion",
+        "Persistence"
+      ],
+      "v19_tactics": [
+        "Command and Control",
+        "Persistence",
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1218",
+      "v16_name": "System Binary Proxy Execution",
+      "v19_name": "System Binary Proxy Execution",
+      "v16_tactics": [
+        "Defense Evasion"
+      ],
+      "v19_tactics": [
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1497.001",
+      "v16_name": "System Checks",
+      "v19_name": "System Checks",
+      "v16_tactics": [
+        "Defense Evasion",
+        "Discovery"
+      ],
+      "v19_tactics": [
+        "Discovery",
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1548.003",
+      "v16_name": "Sudo and Sudo Caching",
+      "v19_name": "Sudo and Sudo Caching",
+      "v16_tactics": [
+        "Defense Evasion",
+        "Privilege Escalation"
+      ],
+      "v19_tactics": [
+        "Privilege Escalation"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1556.003",
+      "v16_name": "Pluggable Authentication Modules",
+      "v19_name": "Pluggable Authentication Modules",
+      "v16_tactics": [
+        "Credential Access",
+        "Defense Evasion",
+        "Persistence"
+      ],
+      "v19_tactics": [
+        "Credential Access",
+        "Defense Impairment",
+        "Persistence"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1564.001",
+      "v16_name": "Hidden Files and Directories",
+      "v19_name": "Hidden Files and Directories",
+      "v16_tactics": [
+        "Defense Evasion"
+      ],
+      "v19_tactics": [
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1574",
+      "v16_name": "Hijack Execution Flow",
+      "v19_name": "Hijack Execution Flow",
+      "v16_tactics": [
+        "Defense Evasion",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "v19_tactics": [
+        "Execution",
+        "Stealth"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    },
+    {
+      "technique_id": "T1599",
+      "v16_name": "Network Boundary Bridging",
+      "v19_name": "Network Boundary Bridging",
+      "v16_tactics": [
+        "Defense Evasion"
+      ],
+      "v19_tactics": [
+        "Defense Impairment"
+      ],
+      "v16_deprecated": false,
+      "v19_deprecated": false,
+      "v16_revoked": false,
+      "v19_revoked": false
+    }
+  ],
+  "discrepancies_v16": [
+    {
+      "event_id": "E2-S016",
+      "episode_id": "E2",
+      "techniques": [
+        "T1003.008",
+        "T1041"
+      ],
+      "dataset_tactics": [
+        "Collection",
+        "Credential Access",
+        "Exfiltration"
+      ],
+      "official_tactics": [
+        "Credential Access",
+        "Exfiltration"
+      ],
+      "discrepancy_tactics": [
+        "Collection"
+      ]
+    },
+    {
+      "event_id": "E2-S017",
+      "episode_id": "E2",
+      "techniques": [
+        "T1560.001",
+        "T1074.001"
+      ],
+      "dataset_tactics": [
+        "Collection",
+        "Exfiltration"
+      ],
+      "official_tactics": [
+        "Collection"
+      ],
+      "discrepancy_tactics": [
+        "Exfiltration"
+      ]
+    },
+    {
+      "event_id": "E2-S024",
+      "episode_id": "E2",
+      "techniques": [
+        "T1003.008"
+      ],
+      "dataset_tactics": [
+        "Discovery"
+      ],
+      "official_tactics": [
+        "Credential Access"
+      ],
+      "discrepancy_tactics": [
+        "Discovery"
+      ]
+    },
+    {
+      "event_id": "E4-S003",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003",
+        "T1105",
+        "T1205.001"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Command and Control",
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S007",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S009",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S041",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S043",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    }
+  ],
+  "discrepancies_v19": [
+    {
+      "event_id": "E1-S021",
+      "episode_id": "E1",
+      "techniques": [
+        "T1548.003"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Privilege Escalation"
+      ],
+      "official_tactics": [
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E1-S022",
+      "episode_id": "E1",
+      "techniques": [
+        "T1548.003"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Privilege Escalation"
+      ],
+      "official_tactics": [
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E1-S025",
+      "episode_id": "E1",
+      "techniques": [
+        "T1218",
+        "T1556.003"
+      ],
+      "dataset_tactics": [
+        "Credential Access",
+        "Defense Evasion",
+        "Persistence"
+      ],
+      "official_tactics": [
+        "Credential Access",
+        "Defense Impairment",
+        "Persistence",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E1-S026",
+      "episode_id": "E1",
+      "techniques": [
+        "T1070.004"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E1-S028",
+      "episode_id": "E1",
+      "techniques": [
+        "T1070.004"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E1-S037",
+      "episode_id": "E1",
+      "techniques": [
+        "T1497.001"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Discovery"
+      ],
+      "official_tactics": [
+        "Discovery",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E2-S016",
+      "episode_id": "E2",
+      "techniques": [
+        "T1003.008",
+        "T1041"
+      ],
+      "dataset_tactics": [
+        "Collection",
+        "Credential Access",
+        "Exfiltration"
+      ],
+      "official_tactics": [
+        "Credential Access",
+        "Exfiltration"
+      ],
+      "discrepancy_tactics": [
+        "Collection"
+      ]
+    },
+    {
+      "event_id": "E2-S017",
+      "episode_id": "E2",
+      "techniques": [
+        "T1560.001",
+        "T1074.001"
+      ],
+      "dataset_tactics": [
+        "Collection",
+        "Exfiltration"
+      ],
+      "official_tactics": [
+        "Collection"
+      ],
+      "discrepancy_tactics": [
+        "Exfiltration"
+      ]
+    },
+    {
+      "event_id": "E2-S021",
+      "episode_id": "E2",
+      "techniques": [
+        "T1070.004"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E2-S024",
+      "episode_id": "E2",
+      "techniques": [
+        "T1003.008"
+      ],
+      "dataset_tactics": [
+        "Discovery"
+      ],
+      "official_tactics": [
+        "Credential Access"
+      ],
+      "discrepancy_tactics": [
+        "Discovery"
+      ]
+    },
+    {
+      "event_id": "E3-S039",
+      "episode_id": "E3",
+      "techniques": [
+        "T1036.005",
+        "T1564.001"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E3-S043",
+      "episode_id": "E3",
+      "techniques": [
+        "T1574"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Persistence"
+      ],
+      "official_tactics": [
+        "Execution",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion",
+        "Persistence"
+      ]
+    },
+    {
+      "event_id": "E4-S003",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003",
+        "T1105",
+        "T1205.001"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Command and Control",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion",
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S007",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S009",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S013",
+      "episode_id": "E4",
+      "techniques": [
+        "T1036.005",
+        "T1205.001"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Command and Control",
+        "Persistence",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E4-S014",
+      "episode_id": "E4",
+      "techniques": [
+        "T1070.004"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E4-S036",
+      "episode_id": "E4",
+      "techniques": [
+        "T1205.001",
+        "T1071.001",
+        "T1036.005"
+      ],
+      "dataset_tactics": [
+        "Command and Control",
+        "Defense Evasion",
+        "Persistence"
+      ],
+      "official_tactics": [
+        "Command and Control",
+        "Persistence",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E4-S038",
+      "episode_id": "E4",
+      "techniques": [
+        "T1599"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Defense Impairment"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E4-S039",
+      "episode_id": "E4",
+      "techniques": [
+        "T1599"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion"
+      ],
+      "official_tactics": [
+        "Defense Impairment"
+      ],
+      "discrepancy_tactics": [
+        "Defense Evasion"
+      ]
+    },
+    {
+      "event_id": "E4-S041",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S043",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Stealth"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    }
+  ],
+  "conclusion": "Comparison between MITRE ATT&CK v16.1 and newest v19.2 confirms that the 8 discrepant events in CAM-LDS remain exactly identical (8 in v16.1 vs 22 in v19.2 across the exact same events ['E2-S016', 'E2-S017', 'E2-S024', 'E4-S003', 'E4-S007', 'E4-S009', 'E4-S041', 'E4-S043']). None of the 64 CAM-LDS technique IDs had their official tactic kill-chain phases altered between v16.1 and v19.2. Keeping v16.1 as the baseline reference is fully sound and consistent."
+}

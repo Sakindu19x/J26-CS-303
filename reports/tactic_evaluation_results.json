@@ -1,0 +1,1991 @@
+{
+  "derived_tactics": {
+    "mean_tactics_per_top1_technique": {
+      "collapsed_full": {
+        "frequency": {
+          "mean_tactics_per_top1": 1.0,
+          "n_predicted": 67
+        },
+        "markov": {
+          "mean_tactics_per_top1": 1.2058823529411764,
+          "n_predicted": 34
+        },
+        "markov_fallback": {
+          "mean_tactics_per_top1": 1.1044776119402986,
+          "n_predicted": 67
+        }
+      },
+      "raw_full": {
+        "frequency": {
+          "mean_tactics_per_top1": 1.8842105263157896,
+          "n_predicted": 95
+        },
+        "markov": {
+          "mean_tactics_per_top1": 1.163265306122449,
+          "n_predicted": 49
+        },
+        "markov_fallback": {
+          "mean_tactics_per_top1": 1.5578947368421052,
+          "n_predicted": 95
+        }
+      }
+    },
+    "methods": {
+      "collapsed_full": {
+        "frequency": {
+          "coverage_rate": 1.0,
+          "covered": 67,
+          "hit1": 17,
+          "hit3": 32,
+          "n": 67,
+          "top1": 0.2537313432835821,
+          "top3": 0.47761194029850745,
+          "wilson95_top1": [
+            0.16487913818578948,
+            0.3692919453950009
+          ],
+          "wilson95_top3": [
+            0.3625038659495962,
+            0.5951480507395663
+          ]
+        },
+        "markov": {
+          "coverage_rate": 0.5074626865671642,
+          "covered": 34,
+          "hit1": 13,
+          "hit3": 21,
+          "n": 67,
+          "top1": 0.19402985074626866,
+          "top3": 0.31343283582089554,
+          "wilson95_top1": [
+            0.1170517391641159,
+            0.3041911222544419
+          ],
+          "wilson95_top3": [
+            0.21505348258237716,
+            0.4320458231606458
+          ]
+        },
+        "markov_fallback": {
+          "coverage_rate": 1.0,
+          "covered": 67,
+          "hit1": 19,
+          "hit3": 38,
+          "n": 67,
+          "top1": 0.2835820895522388,
+          "top3": 0.5671641791044776,
+          "wilson95_top1": [
+            0.18970281181710177,
+            0.4009323828448048
+          ],
+          "wilson95_top3": [
+            0.44808736490792916,
+            0.6789568850245825
+          ]
+        }
+      },
+      "raw_full": {
+        "frequency": {
+          "coverage_rate": 1.0,
+          "covered": 95,
+          "hit1": 12,
+          "hit3": 33,
+          "n": 95,
+          "top1": 0.12631578947368421,
+          "top3": 0.3473684210526316,
+          "wilson95_top1": [
+            0.07375654198137557,
+            0.20792140119023053
+          ],
+          "wilson95_top3": [
+            0.2592472968100605,
+            0.44735355321777864
+          ]
+        },
+        "markov": {
+          "coverage_rate": 0.5157894736842106,
+          "covered": 49,
+          "hit1": 28,
+          "hit3": 37,
+          "n": 95,
+          "top1": 0.29473684210526313,
+          "top3": 0.3894736842105263,
+          "wilson95_top1": [
+            0.21247932282989435,
+            0.39294940651788923
+          ],
+          "wilson95_top3": [
+            0.2975409519053737,
+            0.4899975946665098
+          ]
+        },
+        "markov_fallback": {
+          "coverage_rate": 1.0,
+          "covered": 95,
+          "hit1": 31,
+          "hit3": 48,
+          "n": 95,
+          "top1": 0.3263157894736842,
+          "top3": 0.5052631578947369,
+          "wilson95_top1": [
+            0.24038712734007606,
+            0.42574487441574094
+          ],
+          "wilson95_top3": [
+            0.4064930002803157,
+            0.6036242117876898
+          ]
+        }
+      }
+    }
+  },
+  "discrepant_events_sensitivity": {
+    "discrepant_events": [
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "initial-access"
+        ],
+        "episode_id": "E1",
+        "event_id": "E1-S008",
+        "extra_tactics": [],
+        "official_tactics": [
+          "execution",
+          "initial-access"
+        ],
+        "techniques": [
+          "T1059.006",
+          "T1190"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "command-and-control",
+          "credential-access",
+          "persistence"
+        ],
+        "episode_id": "E1",
+        "event_id": "E1-S024",
+        "extra_tactics": [],
+        "official_tactics": [
+          "command-and-control",
+          "credential-access",
+          "defense-evasion",
+          "persistence"
+        ],
+        "techniques": [
+          "T1105",
+          "T1556.003"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "execution",
+          "persistence"
+        ],
+        "episode_id": "E2",
+        "event_id": "E2-S006",
+        "extra_tactics": [],
+        "official_tactics": [
+          "execution",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1547",
+          "T1569"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "collection",
+          "credential-access",
+          "exfiltration"
+        ],
+        "episode_id": "E2",
+        "event_id": "E2-S016",
+        "extra_tactics": [
+          "collection"
+        ],
+        "official_tactics": [
+          "credential-access",
+          "exfiltration"
+        ],
+        "techniques": [
+          "T1003.008",
+          "T1041"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "collection",
+          "exfiltration"
+        ],
+        "episode_id": "E2",
+        "event_id": "E2-S017",
+        "extra_tactics": [
+          "exfiltration"
+        ],
+        "official_tactics": [
+          "collection"
+        ],
+        "techniques": [
+          "T1074.001",
+          "T1560.001"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "discovery"
+        ],
+        "episode_id": "E2",
+        "event_id": "E2-S024",
+        "extra_tactics": [
+          "discovery"
+        ],
+        "official_tactics": [
+          "credential-access"
+        ],
+        "techniques": [
+          "T1003.008"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "command-and-control"
+        ],
+        "episode_id": "E2",
+        "event_id": "E2-S026",
+        "extra_tactics": [],
+        "official_tactics": [
+          "command-and-control",
+          "discovery"
+        ],
+        "techniques": [
+          "T1018",
+          "T1046",
+          "T1105"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "defense-evasion",
+          "persistence"
+        ],
+        "episode_id": "E3",
+        "event_id": "E3-S043",
+        "extra_tactics": [],
+        "official_tactics": [
+          "defense-evasion",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1574"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "execution"
+        ],
+        "episode_id": "E3",
+        "event_id": "E3-S046",
+        "extra_tactics": [],
+        "official_tactics": [
+          "defense-evasion",
+          "execution",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1059",
+          "T1574"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "command-and-control",
+          "persistence"
+        ],
+        "episode_id": "E3",
+        "event_id": "E3-S048",
+        "extra_tactics": [],
+        "official_tactics": [
+          "command-and-control",
+          "execution",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1053.003",
+          "T1071.001",
+          "T1105"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "lateral-movement"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S003",
+        "extra_tactics": [
+          "lateral-movement"
+        ],
+        "official_tactics": [
+          "command-and-control",
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003",
+          "T1105",
+          "T1205.001"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "initial-access"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S005",
+        "extra_tactics": [],
+        "official_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "lateral-movement"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S007",
+        "extra_tactics": [
+          "lateral-movement"
+        ],
+        "official_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "lateral-movement"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S009",
+        "extra_tactics": [
+          "lateral-movement"
+        ],
+        "official_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "privilege-escalation"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S010",
+        "extra_tactics": [],
+        "official_tactics": [
+          "defense-evasion",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1548.003"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "privilege-escalation"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S012",
+        "extra_tactics": [],
+        "official_tactics": [
+          "defense-evasion",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1548.003"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "defense-evasion"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S013",
+        "extra_tactics": [],
+        "official_tactics": [
+          "command-and-control",
+          "defense-evasion",
+          "persistence"
+        ],
+        "techniques": [
+          "T1036.005",
+          "T1205.001"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "persistence"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S023",
+        "extra_tactics": [],
+        "official_tactics": [
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1543.002"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "persistence"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S025",
+        "extra_tactics": [],
+        "official_tactics": [
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1543.002"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "persistence"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S027",
+        "extra_tactics": [],
+        "official_tactics": [
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1543.002"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "persistence"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S029",
+        "extra_tactics": [],
+        "official_tactics": [
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1543.002"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "persistence"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S031",
+        "extra_tactics": [],
+        "official_tactics": [
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1543.002"
+        ]
+      },
+      {
+        "classification": "b",
+        "classification_description": "Dataset set is strict subset of official set",
+        "dataset_tactics": [
+          "initial-access"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S040",
+        "extra_tactics": [],
+        "official_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "lateral-movement"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S041",
+        "extra_tactics": [
+          "lateral-movement"
+        ],
+        "official_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003"
+        ]
+      },
+      {
+        "classification": "a",
+        "classification_description": "Dataset contains tactic NOT in official set",
+        "dataset_tactics": [
+          "lateral-movement"
+        ],
+        "episode_id": "E4",
+        "event_id": "E4-S043",
+        "extra_tactics": [
+          "lateral-movement"
+        ],
+        "official_tactics": [
+          "defense-evasion",
+          "initial-access",
+          "persistence",
+          "privilege-escalation"
+        ],
+        "techniques": [
+          "T1078.003"
+        ]
+      }
+    ],
+    "discrepant_events_count": 25,
+    "type_a_count": 8,
+    "type_a_event_ids": [
+      "E2-S016",
+      "E2-S017",
+      "E2-S024",
+      "E4-S003",
+      "E4-S007",
+      "E4-S009",
+      "E4-S041",
+      "E4-S043"
+    ],
+    "type_b_count": 17,
+    "type_b_event_ids": [
+      "E1-S008",
+      "E1-S024",
+      "E2-S006",
+      "E2-S026",
+      "E3-S043",
+      "E3-S046",
+      "E3-S048",
+      "E4-S005",
+      "E4-S010",
+      "E4-S012",
+      "E4-S013",
+      "E4-S023",
+      "E4-S025",
+      "E4-S027",
+      "E4-S029",
+      "E4-S031",
+      "E4-S040"
+    ]
+  },
+  "metadata": {
+    "evaluation_type": "Secondary Leave-One-Episode-Out (LOEO) Next-Tactic Prediction",
+    "evaluator": "c4.tactic_evaluation",
+    "framing": "Primary result remains technique-level, collapsed/full (reports/evaluation_report.md). This tactic-level evaluation is secondary and exploratory. All slices are reported; none is selected after the fact.",
+    "tactics_count": 14,
+    "tactics_universe": [
+      "collection",
+      "command-and-control",
+      "credential-access",
+      "defense-evasion",
+      "discovery",
+      "execution",
+      "exfiltration",
+      "impact",
+      "initial-access",
+      "lateral-movement",
+      "persistence",
+      "privilege-escalation",
+      "reconnaissance",
+      "resource-development"
+    ]
+  },
+  "slices": {
+    "tactic_collapsed": {
+      "ceiling": {
+        "ceiling_rate": 0.9245283018867925,
+        "hits": 49
+      },
+      "configuration": "tactic_collapsed",
+      "coverage": {
+        "coverage_rate": 0.9433962264150944,
+        "covered_samples": 50
+      },
+      "covered_only": {
+        "fallback_hit1": 11,
+        "fallback_hit3": 28,
+        "frequency_hit1": 7,
+        "frequency_hit3": 31,
+        "markov_hit1": 11,
+        "markov_hit3": 28,
+        "n": 50
+      },
+      "diagnostics": {
+        "hit_concentration": {
+          "frequency": {
+            "top1": {
+              "defense-evasion": 1,
+              "discovery": 8
+            },
+            "top3": {
+              "credential-access": 4,
+              "defense-evasion": 17,
+              "discovery": 14,
+              "execution": 1
+            }
+          },
+          "markov": {
+            "top1": {
+              "collection": 1,
+              "credential-access": 5,
+              "defense-evasion": 1,
+              "discovery": 3,
+              "execution": 1
+            },
+            "top3": {
+              "collection": 2,
+              "command-and-control": 2,
+              "credential-access": 5,
+              "defense-evasion": 10,
+              "discovery": 8,
+              "execution": 1,
+              "persistence": 2
+            }
+          },
+          "markov_fallback": {
+            "top1": {
+              "collection": 1,
+              "credential-access": 5,
+              "defense-evasion": 2,
+              "discovery": 4,
+              "execution": 1
+            },
+            "top3": {
+              "collection": 2,
+              "command-and-control": 2,
+              "credential-access": 5,
+              "defense-evasion": 11,
+              "discovery": 9,
+              "execution": 1,
+              "persistence": 2
+            }
+          }
+        },
+        "random_guess": {
+          "mean_p_hit1": 0.12264150943396225,
+          "mean_p_hit3": 0.3299295044578064
+        },
+        "repeat_current_set": {
+          "hit1": 10,
+          "hit3": 20,
+          "top1": 0.18867924528301888,
+          "top3": 0.37735849056603776,
+          "wilson95_top1": [
+            0.10585325107685913,
+            0.31358459086702545
+          ],
+          "wilson95_top3": [
+            0.2593626547287611,
+            0.5119310405824662
+          ]
+        },
+        "self_repeat": {
+          "equal": 0,
+          "equal_rate": 0.0,
+          "overlap": 20,
+          "overlap_rate": 0.37735849056603776
+        },
+        "strict_single_tactic": {
+          "fallback_hit1": 9,
+          "fallback_hit3": 17,
+          "frequency_hit1": 8,
+          "frequency_hit3": 19,
+          "markov_hit1": 7,
+          "markov_hit3": 15,
+          "n": 33,
+          "repeat_hit1": 1,
+          "repeat_hit3": 7
+        },
+        "tie_diagnostic": {
+          "n_equal_top_gte_3": 0,
+          "n_ok": 50,
+          "split_top1_tied": {
+            "not_tied": {
+              "hit1": 6,
+              "hit3": 21,
+              "n": 42
+            },
+            "tied": {
+              "hit1": 5,
+              "hit3": 7,
+              "n": 8
+            }
+          },
+          "top1_tied": 8,
+          "top3_boundary_tied": 8
+        },
+        "top_targets_pooled": [
+          {
+            "count": 17,
+            "tactic": "defense-evasion"
+          },
+          {
+            "count": 14,
+            "tactic": "discovery"
+          },
+          {
+            "count": 12,
+            "tactic": "persistence"
+          },
+          {
+            "count": 10,
+            "tactic": "privilege-escalation"
+          },
+          {
+            "count": 9,
+            "tactic": "command-and-control"
+          }
+        ]
+      },
+      "frequency_only_split": {
+        "top1": {
+          "freq_only_total": 7,
+          "markov_abstained": 2,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 5
+        },
+        "top3": {
+          "freq_only_total": 12,
+          "markov_abstained": 2,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 10
+        }
+      },
+      "headline": {
+        "frequency": {
+          "fold_mean_top1": 0.17115384615384616,
+          "fold_mean_top3": 0.6506410256410257,
+          "hit1": 9,
+          "hit3": 33,
+          "top1": 0.16981132075471697,
+          "top3": 0.6226415094339622,
+          "wilson95_top1": [
+            0.09199945379618975,
+            0.2922528028109605
+          ],
+          "wilson95_top3": [
+            0.4880689594175337,
+            0.7406373452712388
+          ]
+        },
+        "markov": {
+          "fold_mean_top1": 0.19102564102564104,
+          "fold_mean_top3": 0.5403846153846154,
+          "hit1": 11,
+          "hit3": 28,
+          "top1": 0.20754716981132076,
+          "top3": 0.5283018867924528,
+          "wilson95_top1": [
+            0.12004598026413958,
+            0.3345774470164792
+          ],
+          "wilson95_top3": [
+            0.3966008127870629,
+            0.6561775652180384
+          ]
+        },
+        "markov_fallback": {
+          "fold_mean_top1": 0.22435897435897437,
+          "fold_mean_top3": 0.5737179487179487,
+          "hit1": 13,
+          "hit3": 30,
+          "top1": 0.24528301886792453,
+          "top3": 0.5660377358490566,
+          "wilson95_top1": [
+            0.14932902108056811,
+            0.3756655768735192
+          ],
+          "wilson95_top3": [
+            0.4326535142760728,
+            0.6904960344024968
+          ]
+        }
+      },
+      "n_samples": 53,
+      "paired_2x2": {
+        "top1": {
+          "both_hit": 2,
+          "freq_only": 7,
+          "markov_only": 9,
+          "neither": 35
+        },
+        "top3": {
+          "both_hit": 21,
+          "freq_only": 12,
+          "markov_only": 7,
+          "neither": 13
+        }
+      },
+      "per_fold": {
+        "fold_1": {
+          "ceiling_hits": 13,
+          "covered_samples": 12,
+          "fallback": {
+            "hit1": 3,
+            "hit3": 6,
+            "top1": 0.23076923076923078,
+            "top3": 0.46153846153846156
+          },
+          "frequency": {
+            "hit1": 5,
+            "hit3": 10,
+            "top1": 0.38461538461538464,
+            "top3": 0.7692307692307693
+          },
+          "markov": {
+            "hit1": 3,
+            "hit3": 6,
+            "top1": 0.23076923076923078,
+            "top3": 0.46153846153846156
+          },
+          "n_samples": 13,
+          "test_episode": "E1"
+        },
+        "fold_2": {
+          "ceiling_hits": 14,
+          "covered_samples": 14,
+          "fallback": {
+            "hit1": 7,
+            "hit3": 10,
+            "top1": 0.4666666666666667,
+            "top3": 0.6666666666666666
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 8,
+            "top1": 0.06666666666666667,
+            "top3": 0.5333333333333333
+          },
+          "markov": {
+            "hit1": 6,
+            "hit3": 9,
+            "top1": 0.4,
+            "top3": 0.6
+          },
+          "n_samples": 15,
+          "test_episode": "E2"
+        },
+        "fold_3": {
+          "ceiling_hits": 12,
+          "covered_samples": 14,
+          "fallback": {
+            "hit1": 3,
+            "hit3": 7,
+            "top1": 0.2,
+            "top3": 0.4666666666666667
+          },
+          "frequency": {
+            "hit1": 2,
+            "hit3": 6,
+            "top1": 0.13333333333333333,
+            "top3": 0.4
+          },
+          "markov": {
+            "hit1": 2,
+            "hit3": 6,
+            "top1": 0.13333333333333333,
+            "top3": 0.4
+          },
+          "n_samples": 15,
+          "test_episode": "E3"
+        },
+        "fold_4": {
+          "ceiling_hits": 10,
+          "covered_samples": 10,
+          "fallback": {
+            "hit1": 0,
+            "hit3": 7,
+            "top1": 0.0,
+            "top3": 0.7
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 9,
+            "top1": 0.1,
+            "top3": 0.9
+          },
+          "markov": {
+            "hit1": 0,
+            "hit3": 7,
+            "top1": 0.0,
+            "top3": 0.7
+          },
+          "n_samples": 10,
+          "test_episode": "E4"
+        }
+      },
+      "use_dataset_tactics": false,
+      "variant": "tactic_collapsed"
+    },
+    "tactic_collapsed_dataset_tactics": {
+      "ceiling": {
+        "ceiling_rate": 0.9423076923076923,
+        "hits": 49
+      },
+      "configuration": "tactic_collapsed_dataset_tactics",
+      "coverage": {
+        "coverage_rate": 0.9423076923076923,
+        "covered_samples": 49
+      },
+      "covered_only": {
+        "fallback_hit1": 7,
+        "fallback_hit3": 16,
+        "frequency_hit1": 11,
+        "frequency_hit3": 24,
+        "markov_hit1": 7,
+        "markov_hit3": 16,
+        "n": 49
+      },
+      "diagnostics": {
+        "hit_concentration": {
+          "frequency": {
+            "top1": {
+              "discovery": 12
+            },
+            "top3": {
+              "command-and-control": 2,
+              "defense-evasion": 11,
+              "discovery": 12,
+              "execution": 2
+            }
+          },
+          "markov": {
+            "top1": {
+              "credential-access": 4,
+              "discovery": 2,
+              "execution": 1
+            },
+            "top3": {
+              "collection": 2,
+              "command-and-control": 1,
+              "credential-access": 4,
+              "defense-evasion": 2,
+              "discovery": 5,
+              "execution": 3
+            }
+          },
+          "markov_fallback": {
+            "top1": {
+              "credential-access": 4,
+              "discovery": 3,
+              "execution": 1
+            },
+            "top3": {
+              "collection": 2,
+              "command-and-control": 1,
+              "credential-access": 4,
+              "defense-evasion": 3,
+              "discovery": 6,
+              "execution": 3
+            }
+          }
+        },
+        "random_guess": {
+          "mean_p_hit1": 0.09615384615384613,
+          "mean_p_hit3": 0.2741441251056636
+        },
+        "repeat_current_set": {
+          "hit1": 5,
+          "hit3": 12,
+          "top1": 0.09615384615384616,
+          "top3": 0.23076923076923078,
+          "wilson95_top1": [
+            0.04177435105257249,
+            0.20609630120131633
+          ],
+          "wilson95_top3": [
+            0.13724260925492748,
+            0.3613378255809984
+          ]
+        },
+        "self_repeat": {
+          "equal": 0,
+          "equal_rate": 0.0,
+          "overlap": 12,
+          "overlap_rate": 0.23076923076923078
+        },
+        "strict_single_tactic": {
+          "fallback_hit1": 5,
+          "fallback_hit3": 12,
+          "frequency_hit1": 11,
+          "frequency_hit3": 17,
+          "markov_hit1": 4,
+          "markov_hit3": 10,
+          "n": 39,
+          "repeat_hit1": 1,
+          "repeat_hit3": 7
+        },
+        "tie_diagnostic": {
+          "n_equal_top_gte_3": 2,
+          "n_ok": 49,
+          "split_top1_tied": {
+            "not_tied": {
+              "hit1": 7,
+              "hit3": 14,
+              "n": 42
+            },
+            "tied": {
+              "hit1": 0,
+              "hit3": 2,
+              "n": 7
+            }
+          },
+          "top1_tied": 7,
+          "top3_boundary_tied": 12
+        },
+        "top_targets_pooled": [
+          {
+            "count": 12,
+            "tactic": "discovery"
+          },
+          {
+            "count": 11,
+            "tactic": "defense-evasion"
+          },
+          {
+            "count": 7,
+            "tactic": "command-and-control"
+          },
+          {
+            "count": 7,
+            "tactic": "persistence"
+          },
+          {
+            "count": 6,
+            "tactic": "execution"
+          }
+        ]
+      },
+      "frequency_only_split": {
+        "top1": {
+          "freq_only_total": 10,
+          "markov_abstained": 1,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 9
+        },
+        "top3": {
+          "freq_only_total": 17,
+          "markov_abstained": 2,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 15
+        }
+      },
+      "headline": {
+        "frequency": {
+          "fold_mean_top1": 0.22913752913752916,
+          "fold_mean_top3": 0.5020979020979021,
+          "hit1": 12,
+          "hit3": 26,
+          "top1": 0.23076923076923078,
+          "top3": 0.5,
+          "wilson95_top1": [
+            0.13724260925492748,
+            0.3613378255809984
+          ],
+          "wilson95_top3": [
+            0.36885862959780547,
+            0.6311413704021945
+          ]
+        },
+        "markov": {
+          "fold_mean_top1": 0.13205128205128205,
+          "fold_mean_top3": 0.306993006993007,
+          "hit1": 7,
+          "hit3": 16,
+          "top1": 0.1346153846153846,
+          "top3": 0.3076923076923077,
+          "wilson95_top1": [
+            0.0667688170539614,
+            0.2527332016519379
+          ],
+          "wilson95_top3": [
+            0.1991472794928904,
+            0.4426958882470567
+          ]
+        },
+        "markov_fallback": {
+          "fold_mean_top1": 0.14871794871794872,
+          "fold_mean_top3": 0.3428904428904429,
+          "hit1": 8,
+          "hit3": 18,
+          "top1": 0.15384615384615385,
+          "top3": 0.34615384615384615,
+          "wilson95_top1": [
+            0.08007685016780322,
+            0.2752408517641015
+          ],
+          "wilson95_top3": [
+            0.2315100766646591,
+            0.48196445752729855
+          ]
+        }
+      },
+      "n_samples": 52,
+      "paired_2x2": {
+        "top1": {
+          "both_hit": 2,
+          "freq_only": 10,
+          "markov_only": 5,
+          "neither": 35
+        },
+        "top3": {
+          "both_hit": 9,
+          "freq_only": 17,
+          "markov_only": 7,
+          "neither": 19
+        }
+      },
+      "per_fold": {
+        "fold_1": {
+          "ceiling_hits": 13,
+          "covered_samples": 12,
+          "fallback": {
+            "hit1": 2,
+            "hit3": 5,
+            "top1": 0.15384615384615385,
+            "top3": 0.38461538461538464
+          },
+          "frequency": {
+            "hit1": 5,
+            "hit3": 9,
+            "top1": 0.38461538461538464,
+            "top3": 0.6923076923076923
+          },
+          "markov": {
+            "hit1": 2,
+            "hit3": 5,
+            "top1": 0.15384615384615385,
+            "top3": 0.38461538461538464
+          },
+          "n_samples": 13,
+          "test_episode": "E1"
+        },
+        "fold_2": {
+          "ceiling_hits": 12,
+          "covered_samples": 12,
+          "fallback": {
+            "hit1": 4,
+            "hit3": 7,
+            "top1": 0.3076923076923077,
+            "top3": 0.5384615384615384
+          },
+          "frequency": {
+            "hit1": 4,
+            "hit3": 6,
+            "top1": 0.3076923076923077,
+            "top3": 0.46153846153846156
+          },
+          "markov": {
+            "hit1": 4,
+            "hit3": 6,
+            "top1": 0.3076923076923077,
+            "top3": 0.46153846153846156
+          },
+          "n_samples": 13,
+          "test_episode": "E2"
+        },
+        "fold_3": {
+          "ceiling_hits": 13,
+          "covered_samples": 14,
+          "fallback": {
+            "hit1": 2,
+            "hit3": 4,
+            "top1": 0.13333333333333333,
+            "top3": 0.26666666666666666
+          },
+          "frequency": {
+            "hit1": 2,
+            "hit3": 6,
+            "top1": 0.13333333333333333,
+            "top3": 0.4
+          },
+          "markov": {
+            "hit1": 1,
+            "hit3": 3,
+            "top1": 0.06666666666666667,
+            "top3": 0.2
+          },
+          "n_samples": 15,
+          "test_episode": "E3"
+        },
+        "fold_4": {
+          "ceiling_hits": 11,
+          "covered_samples": 11,
+          "fallback": {
+            "hit1": 0,
+            "hit3": 2,
+            "top1": 0.0,
+            "top3": 0.18181818181818182
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 5,
+            "top1": 0.09090909090909091,
+            "top3": 0.45454545454545453
+          },
+          "markov": {
+            "hit1": 0,
+            "hit3": 2,
+            "top1": 0.0,
+            "top3": 0.18181818181818182
+          },
+          "n_samples": 11,
+          "test_episode": "E4"
+        }
+      },
+      "use_dataset_tactics": true,
+      "variant": "tactic_collapsed"
+    },
+    "tactic_raw": {
+      "ceiling": {
+        "ceiling_rate": 0.8736842105263158,
+        "hits": 83
+      },
+      "configuration": "tactic_raw",
+      "coverage": {
+        "coverage_rate": 0.9052631578947369,
+        "covered_samples": 86
+      },
+      "covered_only": {
+        "fallback_hit1": 35,
+        "fallback_hit3": 62,
+        "frequency_hit1": 12,
+        "frequency_hit3": 61,
+        "markov_hit1": 35,
+        "markov_hit3": 62,
+        "n": 86
+      },
+      "diagnostics": {
+        "hit_concentration": {
+          "frequency": {
+            "top1": {
+              "discovery": 12,
+              "execution": 1
+            },
+            "top3": {
+              "defense-evasion": 25,
+              "discovery": 22,
+              "execution": 19
+            }
+          },
+          "markov": {
+            "top1": {
+              "collection": 1,
+              "command-and-control": 1,
+              "defense-evasion": 9,
+              "discovery": 13,
+              "execution": 11
+            },
+            "top3": {
+              "collection": 2,
+              "command-and-control": 4,
+              "credential-access": 5,
+              "defense-evasion": 19,
+              "discovery": 17,
+              "execution": 15,
+              "persistence": 1,
+              "privilege-escalation": 5
+            }
+          },
+          "markov_fallback": {
+            "top1": {
+              "collection": 1,
+              "command-and-control": 1,
+              "defense-evasion": 9,
+              "discovery": 14,
+              "execution": 11
+            },
+            "top3": {
+              "collection": 2,
+              "command-and-control": 4,
+              "credential-access": 5,
+              "defense-evasion": 20,
+              "discovery": 18,
+              "execution": 16,
+              "persistence": 1,
+              "privilege-escalation": 5
+            }
+          }
+        },
+        "random_guess": {
+          "mean_p_hit1": 0.11428571428571427,
+          "mean_p_hit3": 0.3113649508386351
+        },
+        "repeat_current_set": {
+          "hit1": 52,
+          "hit3": 62,
+          "top1": 0.5473684210526316,
+          "top3": 0.6526315789473685,
+          "wilson95_top1": [
+            0.44738266913924607,
+            0.6436722394728039
+          ],
+          "wilson95_top3": [
+            0.5526464467822214,
+            0.7407527031899395
+          ]
+        },
+        "self_repeat": {
+          "equal": 42,
+          "equal_rate": 0.4421052631578947,
+          "overlap": 62,
+          "overlap_rate": 0.6526315789473685
+        },
+        "strict_single_tactic": {
+          "fallback_hit1": 28,
+          "fallback_hit3": 40,
+          "frequency_hit1": 11,
+          "frequency_hit3": 40,
+          "markov_hit1": 27,
+          "markov_hit3": 38,
+          "n": 64,
+          "repeat_hit1": 32,
+          "repeat_hit3": 38
+        },
+        "tie_diagnostic": {
+          "n_equal_top_gte_3": 0,
+          "n_ok": 86,
+          "split_top1_tied": {
+            "not_tied": {
+              "hit1": 33,
+              "hit3": 57,
+              "n": 79
+            },
+            "tied": {
+              "hit1": 2,
+              "hit3": 5,
+              "n": 7
+            }
+          },
+          "top1_tied": 7,
+          "top3_boundary_tied": 10
+        },
+        "top_targets_pooled": [
+          {
+            "count": 25,
+            "tactic": "defense-evasion"
+          },
+          {
+            "count": 22,
+            "tactic": "discovery"
+          },
+          {
+            "count": 20,
+            "tactic": "privilege-escalation"
+          },
+          {
+            "count": 20,
+            "tactic": "persistence"
+          },
+          {
+            "count": 19,
+            "tactic": "execution"
+          }
+        ]
+      },
+      "frequency_only_split": {
+        "top1": {
+          "freq_only_total": 6,
+          "markov_abstained": 1,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 5
+        },
+        "top3": {
+          "freq_only_total": 11,
+          "markov_abstained": 3,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 8
+        }
+      },
+      "headline": {
+        "frequency": {
+          "fold_mean_top1": 0.1281135531135531,
+          "fold_mean_top3": 0.6733516483516484,
+          "hit1": 13,
+          "hit3": 64,
+          "top1": 0.1368421052631579,
+          "top3": 0.6736842105263158,
+          "wilson95_top1": [
+            0.08174793559632484,
+            0.22016443171129238
+          ],
+          "wilson95_top3": [
+            0.5742551255842591,
+            0.7596128726599239
+          ]
+        },
+        "markov": {
+          "fold_mean_top1": 0.3619047619047619,
+          "fold_mean_top3": 0.6657509157509157,
+          "hit1": 35,
+          "hit3": 62,
+          "top1": 0.3684210526315789,
+          "top3": 0.6526315789473685,
+          "wilson95_top1": [
+            0.2783009458551568,
+            0.46876875244470445
+          ],
+          "wilson95_top3": [
+            0.5526464467822214,
+            0.7407527031899395
+          ]
+        },
+        "markov_fallback": {
+          "fold_mean_top1": 0.37083333333333335,
+          "fold_mean_top3": 0.6967948717948718,
+          "hit1": 36,
+          "hit3": 65,
+          "top1": 0.37894736842105264,
+          "top3": 0.6842105263157895,
+          "wilson95_top1": [
+            0.2878980426320408,
+            0.47940607980383165
+          ],
+          "wilson95_top3": [
+            0.5851346840006258,
+            0.7689677383795684
+          ]
+        }
+      },
+      "n_samples": 95,
+      "paired_2x2": {
+        "top1": {
+          "both_hit": 7,
+          "freq_only": 6,
+          "markov_only": 28,
+          "neither": 54
+        },
+        "top3": {
+          "both_hit": 53,
+          "freq_only": 11,
+          "markov_only": 9,
+          "neither": 22
+        }
+      },
+      "per_fold": {
+        "fold_1": {
+          "ceiling_hits": 23,
+          "covered_samples": 22,
+          "fallback": {
+            "hit1": 13,
+            "hit3": 17,
+            "top1": 0.5,
+            "top3": 0.6538461538461539
+          },
+          "frequency": {
+            "hit1": 8,
+            "hit3": 21,
+            "top1": 0.3076923076923077,
+            "top3": 0.8076923076923077
+          },
+          "markov": {
+            "hit1": 13,
+            "hit3": 16,
+            "top1": 0.5,
+            "top3": 0.6153846153846154
+          },
+          "n_samples": 26,
+          "test_episode": "E1"
+        },
+        "fold_2": {
+          "ceiling_hits": 19,
+          "covered_samples": 19,
+          "fallback": {
+            "hit1": 8,
+            "hit3": 16,
+            "top1": 0.4,
+            "top3": 0.8
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 12,
+            "top1": 0.05,
+            "top3": 0.6
+          },
+          "markov": {
+            "hit1": 8,
+            "hit3": 15,
+            "top1": 0.4,
+            "top3": 0.75
+          },
+          "n_samples": 20,
+          "test_episode": "E2"
+        },
+        "fold_3": {
+          "ceiling_hits": 20,
+          "covered_samples": 24,
+          "fallback": {
+            "hit1": 11,
+            "hit3": 16,
+            "top1": 0.39285714285714285,
+            "top3": 0.5714285714285714
+          },
+          "frequency": {
+            "hit1": 3,
+            "hit3": 16,
+            "top1": 0.10714285714285714,
+            "top3": 0.5714285714285714
+          },
+          "markov": {
+            "hit1": 10,
+            "hit3": 15,
+            "top1": 0.35714285714285715,
+            "top3": 0.5357142857142857
+          },
+          "n_samples": 28,
+          "test_episode": "E3"
+        },
+        "fold_4": {
+          "ceiling_hits": 21,
+          "covered_samples": 21,
+          "fallback": {
+            "hit1": 4,
+            "hit3": 16,
+            "top1": 0.19047619047619047,
+            "top3": 0.7619047619047619
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 15,
+            "top1": 0.047619047619047616,
+            "top3": 0.7142857142857143
+          },
+          "markov": {
+            "hit1": 4,
+            "hit3": 16,
+            "top1": 0.19047619047619047,
+            "top3": 0.7619047619047619
+          },
+          "n_samples": 21,
+          "test_episode": "E4"
+        }
+      },
+      "use_dataset_tactics": false,
+      "variant": "tactic_raw"
+    },
+    "tactic_raw_dataset_tactics": {
+      "ceiling": {
+        "ceiling_rate": 0.9052631578947369,
+        "hits": 86
+      },
+      "configuration": "tactic_raw_dataset_tactics",
+      "coverage": {
+        "coverage_rate": 0.9052631578947369,
+        "covered_samples": 86
+      },
+      "covered_only": {
+        "fallback_hit1": 36,
+        "fallback_hit3": 54,
+        "frequency_hit1": 12,
+        "frequency_hit3": 46,
+        "markov_hit1": 36,
+        "markov_hit3": 54,
+        "n": 86
+      },
+      "diagnostics": {
+        "hit_concentration": {
+          "frequency": {
+            "top1": {
+              "discovery": 12,
+              "execution": 1
+            },
+            "top3": {
+              "defense-evasion": 9,
+              "discovery": 22,
+              "execution": 17
+            }
+          },
+          "markov": {
+            "top1": {
+              "collection": 1,
+              "defense-evasion": 5,
+              "discovery": 12,
+              "execution": 13,
+              "lateral-movement": 4,
+              "persistence": 1
+            },
+            "top3": {
+              "collection": 3,
+              "command-and-control": 3,
+              "credential-access": 4,
+              "defense-evasion": 9,
+              "discovery": 15,
+              "execution": 14,
+              "lateral-movement": 6,
+              "persistence": 1,
+              "privilege-escalation": 2
+            }
+          },
+          "markov_fallback": {
+            "top1": {
+              "collection": 1,
+              "defense-evasion": 5,
+              "discovery": 13,
+              "execution": 13,
+              "lateral-movement": 4,
+              "persistence": 1
+            },
+            "top3": {
+              "collection": 3,
+              "command-and-control": 3,
+              "credential-access": 4,
+              "defense-evasion": 10,
+              "discovery": 16,
+              "execution": 14,
+              "lateral-movement": 6,
+              "persistence": 1,
+              "privilege-escalation": 2
+            }
+          }
+        },
+        "random_guess": {
+          "mean_p_hit1": 0.0864661654135338,
+          "mean_p_hit3": 0.2508675534991325
+        },
+        "repeat_current_set": {
+          "hit1": 48,
+          "hit3": 55,
+          "top1": 0.5052631578947369,
+          "top3": 0.5789473684210527,
+          "wilson95_top1": [
+            0.4064930002803157,
+            0.6036242117876898
+          ],
+          "wilson95_top3": [
+            0.4784963648984185,
+            0.6732618161216647
+          ]
+        },
+        "self_repeat": {
+          "equal": 43,
+          "equal_rate": 0.45263157894736844,
+          "overlap": 55,
+          "overlap_rate": 0.5789473684210527
+        },
+        "strict_single_tactic": {
+          "fallback_hit1": 30,
+          "fallback_hit3": 46,
+          "frequency_hit1": 11,
+          "frequency_hit3": 41,
+          "markov_hit1": 29,
+          "markov_hit3": 44,
+          "n": 80,
+          "repeat_hit1": 42,
+          "repeat_hit3": 48
+        },
+        "tie_diagnostic": {
+          "n_equal_top_gte_3": 0,
+          "n_ok": 86,
+          "split_top1_tied": {
+            "not_tied": {
+              "hit1": 35,
+              "hit3": 51,
+              "n": 82
+            },
+            "tied": {
+              "hit1": 1,
+              "hit3": 3,
+              "n": 4
+            }
+          },
+          "top1_tied": 4,
+          "top3_boundary_tied": 22
+        },
+        "top_targets_pooled": [
+          {
+            "count": 22,
+            "tactic": "discovery"
+          },
+          {
+            "count": 17,
+            "tactic": "execution"
+          },
+          {
+            "count": 15,
+            "tactic": "defense-evasion"
+          },
+          {
+            "count": 11,
+            "tactic": "persistence"
+          },
+          {
+            "count": 10,
+            "tactic": "lateral-movement"
+          }
+        ]
+      },
+      "frequency_only_split": {
+        "top1": {
+          "freq_only_total": 6,
+          "markov_abstained": 1,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 5
+        },
+        "top3": {
+          "freq_only_total": 13,
+          "markov_abstained": 2,
+          "markov_other_status": 0,
+          "markov_returned_and_missed": 11
+        }
+      },
+      "headline": {
+        "frequency": {
+          "fold_mean_top1": 0.1281135531135531,
+          "fold_mean_top3": 0.5018772893772894,
+          "hit1": 13,
+          "hit3": 48,
+          "top1": 0.1368421052631579,
+          "top3": 0.5052631578947369,
+          "wilson95_top1": [
+            0.08174793559632484,
+            0.22016443171129238
+          ],
+          "wilson95_top3": [
+            0.4064930002803157,
+            0.6036242117876898
+          ]
+        },
+        "markov": {
+          "fold_mean_top1": 0.37014652014652016,
+          "fold_mean_top3": 0.567032967032967,
+          "hit1": 36,
+          "hit3": 54,
+          "top1": 0.37894736842105264,
+          "top3": 0.5684210526315789,
+          "wilson95_top1": [
+            0.2878980426320408,
+            0.47940607980383165
+          ],
+          "wilson95_top3": [
+            0.46808208987214145,
+            0.6634416670119307
+          ]
+        },
+        "markov_fallback": {
+          "fold_mean_top1": 0.37907509157509156,
+          "fold_mean_top3": 0.5884615384615385,
+          "hit1": 37,
+          "hit3": 56,
+          "top1": 0.3894736842105263,
+          "top3": 0.5894736842105263,
+          "wilson95_top1": [
+            0.2975409519053737,
+            0.4899975946665098
+          ],
+          "wilson95_top3": [
+            0.4889541909881697,
+            0.6830384141679245
+          ]
+        }
+      },
+      "n_samples": 95,
+      "paired_2x2": {
+        "top1": {
+          "both_hit": 7,
+          "freq_only": 6,
+          "markov_only": 29,
+          "neither": 53
+        },
+        "top3": {
+          "both_hit": 35,
+          "freq_only": 13,
+          "markov_only": 19,
+          "neither": 28
+        }
+      },
+      "per_fold": {
+        "fold_1": {
+          "ceiling_hits": 23,
+          "covered_samples": 22,
+          "fallback": {
+            "hit1": 12,
+            "hit3": 17,
+            "top1": 0.46153846153846156,
+            "top3": 0.6538461538461539
+          },
+          "frequency": {
+            "hit1": 8,
+            "hit3": 14,
+            "top1": 0.3076923076923077,
+            "top3": 0.5384615384615384
+          },
+          "markov": {
+            "hit1": 12,
+            "hit3": 17,
+            "top1": 0.46153846153846156,
+            "top3": 0.6538461538461539
+          },
+          "n_samples": 26,
+          "test_episode": "E1"
+        },
+        "fold_2": {
+          "ceiling_hits": 19,
+          "covered_samples": 19,
+          "fallback": {
+            "hit1": 8,
+            "hit3": 14,
+            "top1": 0.4,
+            "top3": 0.7
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 12,
+            "top1": 0.05,
+            "top3": 0.6
+          },
+          "markov": {
+            "hit1": 8,
+            "hit3": 13,
+            "top1": 0.4,
+            "top3": 0.65
+          },
+          "n_samples": 20,
+          "test_episode": "E2"
+        },
+        "fold_3": {
+          "ceiling_hits": 23,
+          "covered_samples": 24,
+          "fallback": {
+            "hit1": 13,
+            "hit3": 16,
+            "top1": 0.4642857142857143,
+            "top3": 0.5714285714285714
+          },
+          "frequency": {
+            "hit1": 3,
+            "hit3": 15,
+            "top1": 0.10714285714285714,
+            "top3": 0.5357142857142857
+          },
+          "markov": {
+            "hit1": 12,
+            "hit3": 15,
+            "top1": 0.42857142857142855,
+            "top3": 0.5357142857142857
+          },
+          "n_samples": 28,
+          "test_episode": "E3"
+        },
+        "fold_4": {
+          "ceiling_hits": 21,
+          "covered_samples": 21,
+          "fallback": {
+            "hit1": 4,
+            "hit3": 9,
+            "top1": 0.19047619047619047,
+            "top3": 0.42857142857142855
+          },
+          "frequency": {
+            "hit1": 1,
+            "hit3": 7,
+            "top1": 0.047619047619047616,
+            "top3": 0.3333333333333333
+          },
+          "markov": {
+            "hit1": 4,
+            "hit3": 9,
+            "top1": 0.19047619047619047,
+            "top3": 0.42857142857142855
+          },
+          "n_samples": 21,
+          "test_episode": "E4"
+        }
+      },
+      "use_dataset_tactics": true,
+      "variant": "tactic_raw"
+    }
+  }
+}

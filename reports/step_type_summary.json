@@ -1,0 +1,248 @@
+{
+  "double_counting_analysis": "Double-Counting Assessment of Composite Steps:\nIn CAM-LDS, composite container step E3-S006 (type 'loop', cmd 'items(LISTA)') in Episode 3 is labeled with MITRE ATT&CK techniques (['T1110.001', 'T1021.005'] for VNC password guessing). Inspection of its raw parameters shows a loop count of 3 with a single nested template command ('vnc move') iterating over password variable '$LOOP_ITEM'.\nThe subsequent execution steps (E3-S007, E3-S009, E3-S011, E3-S013 of type 'vnc') are independently recorded top-level lines in attackmate.json with differing commands ('click', 'type', 'key', 'type'), labeled with ['T1021.005']. Whether these subsequent steps represent runtime iterations emitted by the loop execution or are separate sequential log entries in the AttackMate playbook cannot be definitively determined from the log structure alone and is unconfirmed.\nConsequence in Sequences:\n1. Raw Variant: Technique T1021.005 is represented in E3-S006 and then immediately repeated in individual VNC interaction steps (E3-S007, E3-S009, E3-S013), causing repeated consecutive entries of the same technique.\n2. Collapsed Variant: Because E3-S006 carries a multi-technique set {T1021.005, T1110.001} while the subsequent steps carry {T1021.005}, the merge condition (identical consecutive sets) does not merge the container with its subsequent steps. Consequently, the collapsed sequence contains a transition from {T1021.005, T1110.001} -> {T1021.005}.\n3. Recommendation: The sequences remain unmodified as specified by protocol to preserve fidelity to raw AttackMate ground truth, but modeling and evaluation must note that transitions out of E3-S006 may reflect composite step container boundaries.",
+  "episodes": {
+    "E1": {
+      "archive": "scenario_1_sudo_pam.zip",
+      "composite_steps": [],
+      "step_types": {
+        "msf-module": {
+          "labeled": 1,
+          "total": 1,
+          "unlabeled": 0
+        },
+        "msf-session": {
+          "labeled": 16,
+          "total": 20,
+          "unlabeled": 4
+        },
+        "shell": {
+          "labeled": 4,
+          "total": 5,
+          "unlabeled": 1
+        },
+        "sleep": {
+          "labeled": 0,
+          "total": 5,
+          "unlabeled": 5
+        },
+        "ssh": {
+          "labeled": 6,
+          "total": 7,
+          "unlabeled": 1
+        }
+      },
+      "total_events": 38
+    },
+    "E2": {
+      "archive": "scenario_2_cron.zip",
+      "composite_steps": [],
+      "step_types": {
+        "debug": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "mktemp": {
+          "labeled": 0,
+          "total": 4,
+          "unlabeled": 4
+        },
+        "regex": {
+          "labeled": 1,
+          "total": 1,
+          "unlabeled": 0
+        },
+        "sftp": {
+          "labeled": 1,
+          "total": 1,
+          "unlabeled": 0
+        },
+        "shell": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "sleep": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "sliver": {
+          "labeled": 1,
+          "total": 2,
+          "unlabeled": 1
+        },
+        "sliver-session": {
+          "labeled": 16,
+          "total": 16,
+          "unlabeled": 0
+        },
+        "ssh": {
+          "labeled": 2,
+          "total": 2,
+          "unlabeled": 0
+        }
+      },
+      "total_events": 29
+    },
+    "E3": {
+      "archive": "scenario_3_vnc_apt.zip",
+      "composite_steps": [
+        {
+          "cmd": "items(LISTA)",
+          "event_id": "E3-S006",
+          "is_labeled": true,
+          "nested_commands_count": 1,
+          "overlapping_subsequent_events": [
+            {
+              "event_id": "E3-S007",
+              "overlapping_techniques": [
+                "T1021.005"
+              ],
+              "step_type": "vnc",
+              "techniques": [
+                "T1021.005"
+              ],
+              "timestamp": "2025-12-12T18:09:34.236494+00:00"
+            },
+            {
+              "event_id": "E3-S009",
+              "overlapping_techniques": [
+                "T1021.005"
+              ],
+              "step_type": "vnc",
+              "techniques": [
+                "T1021.005"
+              ],
+              "timestamp": "2025-12-12T18:09:52.251434+00:00"
+            },
+            {
+              "event_id": "E3-S013",
+              "overlapping_techniques": [
+                "T1021.005"
+              ],
+              "step_type": "vnc",
+              "techniques": [
+                "T1021.005"
+              ],
+              "timestamp": "2025-12-12T18:10:28.269497+00:00"
+            }
+          ],
+          "step_index": 5,
+          "step_type": "loop",
+          "techniques": [
+            "T1110.001",
+            "T1021.005"
+          ],
+          "timestamp": "2025-12-12T18:09:04.102559+00:00"
+        },
+        {
+          "cmd": "include commands",
+          "event_id": "E3-S068",
+          "is_labeled": false,
+          "nested_commands_count": 0,
+          "overlapping_subsequent_events": [],
+          "step_index": 67,
+          "step_type": "include",
+          "techniques": [],
+          "timestamp": "2025-12-12T18:30:25.124334+00:00"
+        }
+      ],
+      "step_types": {
+        "include": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "loop": {
+          "labeled": 1,
+          "total": 1,
+          "unlabeled": 0
+        },
+        "mktemp": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "msf-module": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "msf-payload": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "msf-session": {
+          "labeled": 14,
+          "total": 15,
+          "unlabeled": 1
+        },
+        "setvar": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "shell": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        },
+        "sleep": {
+          "labeled": 0,
+          "total": 16,
+          "unlabeled": 16
+        },
+        "vnc": {
+          "labeled": 14,
+          "total": 38,
+          "unlabeled": 24
+        },
+        "webserv": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        }
+      },
+      "total_events": 77
+    },
+    "E4": {
+      "archive": "scenario_4.zip",
+      "composite_steps": [],
+      "step_types": {
+        "shell": {
+          "labeled": 2,
+          "total": 2,
+          "unlabeled": 0
+        },
+        "sleep": {
+          "labeled": 0,
+          "total": 15,
+          "unlabeled": 15
+        },
+        "sliver": {
+          "labeled": 2,
+          "total": 2,
+          "unlabeled": 0
+        },
+        "sliver-session": {
+          "labeled": 2,
+          "total": 2,
+          "unlabeled": 0
+        },
+        "ssh": {
+          "labeled": 16,
+          "total": 24,
+          "unlabeled": 8
+        },
+        "webserv": {
+          "labeled": 0,
+          "total": 1,
+          "unlabeled": 1
+        }
+      },
+      "total_events": 46
+    }
+  }
+}

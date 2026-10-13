@@ -1,0 +1,405 @@
+{
+  "summary": {
+    "total_episodes": 4,
+    "total_events": 190,
+    "total_labeled": 99,
+    "total_unlabeled": 91,
+    "total_multi_technique_steps": 22
+  },
+  "episodes": {
+    "E1": {
+      "scenario_id": "scenario_1_sudo_pam",
+      "source_archive": "scenario_1_sudo_pam.zip",
+      "total_events": 38,
+      "labeled_events": 27,
+      "unlabeled_events": 11,
+      "multi_technique_steps": 6,
+      "window_start": "2025-09-22T13:48:30.907163+00:00",
+      "window_end": "2025-09-22T14:10:54.791711+00:00"
+    },
+    "E2": {
+      "scenario_id": "scenario_2_cron",
+      "source_archive": "scenario_2_cron.zip",
+      "total_events": 29,
+      "labeled_events": 21,
+      "unlabeled_events": 8,
+      "multi_technique_steps": 7,
+      "window_start": "2025-10-01T10:14:14.955559+00:00",
+      "window_end": "2025-10-01T10:35:06.286635+00:00"
+    },
+    "E3": {
+      "scenario_id": "scenario_3_vnc_apt",
+      "source_archive": "scenario_3_vnc_apt.zip",
+      "total_events": 77,
+      "labeled_events": 29,
+      "unlabeled_events": 48,
+      "multi_technique_steps": 6,
+      "window_start": "2025-12-12T18:07:53.665927+00:00",
+      "window_end": "2025-12-12T18:34:13.417531+00:00"
+    },
+    "E4": {
+      "scenario_id": "scenario_4",
+      "source_archive": "scenario_4.zip",
+      "total_events": 46,
+      "labeled_events": 22,
+      "unlabeled_events": 24,
+      "multi_technique_steps": 3,
+      "window_start": "2025-12-15T11:02:51.184731+00:00",
+      "window_end": "2025-12-15T11:13:30.318178+00:00"
+    }
+  },
+  "quality_issues": {
+    "whitespace_fixes_count": 4,
+    "whitespace_fixes": [
+      {
+        "episode_id": "E1",
+        "step_index": 36,
+        "field": "tactics",
+        "raw_part": " Discovery",
+        "cleaned_part": "Discovery"
+      },
+      {
+        "episode_id": "E3",
+        "step_index": 5,
+        "field": "tactics",
+        "raw_part": " Lateral Movement",
+        "cleaned_part": "Lateral Movement"
+      },
+      {
+        "episode_id": "E3",
+        "step_index": 38,
+        "field": "techniques",
+        "raw_part": "T1564.001 ",
+        "cleaned_part": "T1564.001"
+      },
+      {
+        "episode_id": "E3",
+        "step_index": 47,
+        "field": "techniques",
+        "raw_part": "T1071.001 ",
+        "cleaned_part": "T1071.001"
+      }
+    ],
+    "invalid_techniques_count": 0,
+    "invalid_techniques": [],
+    "malformed_records_count": 1,
+    "malformed_records": [
+      {
+        "episode_id": "E1",
+        "step_index": 23,
+        "description": "Malformed technique_name JSON key with embedded quotes/colons recovered",
+        "raw_key": "technique_name:\"Ingress Tool Transfer,Modify Authentication Process",
+        "raw_val": "Pluggable Authentication Modules\"",
+        "recovered_name": "Ingress Tool Transfer,Modify Authentication Process: Pluggable Authentication Modules"
+      }
+    ],
+    "missing_timestamps_count": 0,
+    "missing_timestamps": [],
+    "skipped_records_count": 0,
+    "skipped_records": []
+  },
+  "wazuh_enrichment": {
+    "E1": {
+      "total_alerts": 15006,
+      "unparseable_lines": 0,
+      "in_window": 14355,
+      "excluded_before_window": 487,
+      "excluded_after_window": 164,
+      "excluded_unparseable_ts": 0,
+      "top_10_rules": [
+        {
+          "rule_id": "31101",
+          "rule_description": "Web server 400 error code.",
+          "count": 11004,
+          "share_percent": 76.66
+        },
+        {
+          "rule_id": "20101",
+          "rule_description": "IDS event.",
+          "count": 869,
+          "share_percent": 6.05
+        },
+        {
+          "rule_id": "31151",
+          "rule_description": "Multiple web server 400 error codes from same source ip.",
+          "count": 846,
+          "share_percent": 5.89
+        },
+        {
+          "rule_id": "31104",
+          "rule_description": "Common web attack.",
+          "count": 324,
+          "share_percent": 2.26
+        },
+        {
+          "rule_id": "31105",
+          "rule_description": "XSS (Cross Site Scripting) attempt.",
+          "count": 259,
+          "share_percent": 1.8
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt",
+          "count": 217,
+          "share_percent": 1.51
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - SURICATA HTTP unable to match response to request",
+          "count": 215,
+          "share_percent": 1.5
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - ET WEB_SERVER /etc/passwd Detected in URI",
+          "count": 204,
+          "share_percent": 1.42
+        },
+        {
+          "rule_id": "20100",
+          "rule_description": "First time this IDS alert is generated.",
+          "count": 82,
+          "share_percent": 0.57
+        },
+        {
+          "rule_id": "31153",
+          "rule_description": "Multiple common web attacks from same source ip.",
+          "count": 35,
+          "share_percent": 0.24
+        }
+      ],
+      "in_window_with_rule_id": 14355,
+      "in_window_with_mitre": 1542
+    },
+    "E2": {
+      "total_alerts": 657,
+      "unparseable_lines": 0,
+      "in_window": 10,
+      "excluded_before_window": 492,
+      "excluded_after_window": 155,
+      "excluded_unparseable_ts": 0,
+      "top_10_rules": [
+        {
+          "rule_id": "5501",
+          "rule_description": "PAM: Login session opened.",
+          "count": 4,
+          "share_percent": 40.0
+        },
+        {
+          "rule_id": "5715",
+          "rule_description": "sshd: authentication success.",
+          "count": 2,
+          "share_percent": 20.0
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - SURICATA STREAM excessive retransmissions",
+          "count": 2,
+          "share_percent": 20.0
+        },
+        {
+          "rule_id": "20100",
+          "rule_description": "First time this IDS alert is generated.",
+          "count": 2,
+          "share_percent": 20.0
+        }
+      ],
+      "in_window_with_rule_id": 10,
+      "in_window_with_mitre": 6
+    },
+    "E3": {
+      "total_alerts": 661,
+      "unparseable_lines": 0,
+      "in_window": 110,
+      "excluded_before_window": 454,
+      "excluded_after_window": 97,
+      "excluded_unparseable_ts": 0,
+      "top_10_rules": [
+        {
+          "rule_id": "20101",
+          "rule_description": "IDS event.",
+          "count": 46,
+          "share_percent": 41.82
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - SURICATA STREAM pkt seen on wrong thread",
+          "count": 44,
+          "share_percent": 40.0
+        },
+        {
+          "rule_id": "20100",
+          "rule_description": "First time this IDS alert is generated.",
+          "count": 8,
+          "share_percent": 7.27
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+          "count": 6,
+          "share_percent": 5.45
+        },
+        {
+          "rule_id": "80730",
+          "rule_description": "Auditd: SELinux permission check.",
+          "count": 2,
+          "share_percent": 1.82
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad",
+          "count": 2,
+          "share_percent": 1.82
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - SURICATA STREAM excessive retransmissions",
+          "count": 1,
+          "share_percent": 0.91
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - ET POLICY Executable and linking format (ELF) file download Over HTTP",
+          "count": 1,
+          "share_percent": 0.91
+        }
+      ],
+      "in_window_with_rule_id": 110,
+      "in_window_with_mitre": 0
+    },
+    "E4": {
+      "total_alerts": 598,
+      "unparseable_lines": 0,
+      "in_window": 99,
+      "excluded_before_window": 310,
+      "excluded_after_window": 189,
+      "excluded_unparseable_ts": 0,
+      "top_10_rules": [
+        {
+          "rule_id": "5501",
+          "rule_description": "PAM: Login session opened.",
+          "count": 24,
+          "share_percent": 24.24
+        },
+        {
+          "rule_id": "5502",
+          "rule_description": "PAM: Login session closed.",
+          "count": 17,
+          "share_percent": 17.17
+        },
+        {
+          "rule_id": "86601",
+          "rule_description": "Suricata: Alert - SURICATA STREAM pkt seen on wrong thread",
+          "count": 17,
+          "share_percent": 17.17
+        },
+        {
+          "rule_id": "20101",
+          "rule_description": "IDS event.",
+          "count": 17,
+          "share_percent": 17.17
+        },
+        {
+          "rule_id": "5402",
+          "rule_description": "Successful sudo to ROOT executed.",
+          "count": 14,
+          "share_percent": 14.14
+        },
+        {
+          "rule_id": "5403",
+          "rule_description": "First time user executed sudo.",
+          "count": 4,
+          "share_percent": 4.04
+        },
+        {
+          "rule_id": "5715",
+          "rule_description": "sshd: authentication success.",
+          "count": 3,
+          "share_percent": 3.03
+        },
+        {
+          "rule_id": "5104",
+          "rule_description": "Interface entered in promiscuous(sniffing) mode.",
+          "count": 2,
+          "share_percent": 2.02
+        },
+        {
+          "rule_id": "80710",
+          "rule_description": "Auditd: Device enables promiscuous mode.",
+          "count": 1,
+          "share_percent": 1.01
+        }
+      ],
+      "in_window_with_rule_id": 99,
+      "in_window_with_mitre": 47
+    }
+  },
+  "field_provenance": [
+    {
+      "field": "event_id",
+      "provenance": "Derived (deterministic)",
+      "source": "episode_id + 1-indexed step number (e.g. E1-S001)",
+      "c3_role": "Unique stable identifier for forensic timeline graph nodes"
+    },
+    {
+      "field": "episode_id",
+      "provenance": "Observed / mapped",
+      "source": "CAM-LDS scenario archive mapping (E1..E4)",
+      "c3_role": "Episode isolation boundary (runs never combined)"
+    },
+    {
+      "field": "timestamp",
+      "provenance": "Observed + UTC assumption",
+      "source": "attackmate.json start-datetime standardized to ISO 8601 UTC",
+      "c3_role": "Temporal anchor for chronological timeline ordering"
+    },
+    {
+      "field": "step_type, cmd, hostname, username",
+      "provenance": "Observed",
+      "source": "attackmate.json parameters",
+      "c3_role": "Forensic event evidence and entity metadata"
+    },
+    {
+      "field": "techniques, tactics, technique_names",
+      "provenance": "Observed (ground-truth label)",
+      "source": "attackmate.json parameters.metadata (cleaned)",
+      "c3_role": "Ground-truth labels for evaluation of next-stage prediction"
+    },
+    {
+      "field": "local_occurrence",
+      "provenance": "Derived (forensic computation)",
+      "source": "Formula (derived): per-technique mapping {technique_id: cumulative 1-indexed occurrence count within episode up to this event}. For unlabeled events, null.",
+      "c3_role": "derived by C4 for CAM-LDS; the real C3 will supply its own value (format to be agreed)"
+    },
+    {
+      "field": "ioc, ioc_type",
+      "provenance": "Missing in CAM-LDS (null)",
+      "source": "Not present in simulation logs",
+      "c3_role": "to be supplied by C3; format to be agreed with the C3 owner"
+    },
+    {
+      "field": "incident_stage",
+      "provenance": "Missing in CAM-LDS (null)",
+      "source": "Not present in simulation logs",
+      "c3_role": "to be supplied by C3; format to be agreed with the C3 owner"
+    },
+    {
+      "field": "asset_criticality",
+      "provenance": "Missing in CAM-LDS (null)",
+      "source": "Not present in simulation logs",
+      "c3_role": "to be supplied by C3; format to be agreed with the C3 owner"
+    },
+    {
+      "field": "cti_confidence, freshness",
+      "provenance": "Missing in CAM-LDS (null)",
+      "source": "Not present in simulation logs",
+      "c3_role": "to be supplied by C3; format to be agreed with the C3 owner"
+    },
+    {
+      "field": "c3_threat_score, investigation_priority",
+      "provenance": "Missing in CAM-LDS (null)",
+      "source": "Not present in simulation logs",
+      "c3_role": "to be supplied by C3; format to be agreed with the C3 owner"
+    }
+  ]
+}
