@@ -164,14 +164,14 @@ Monte Carlo permutation standard errors are given by $\text{SE}_{\text{MC}}(p) =
 
 | Statistic | Observed Rate | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
 |:---|:---:|:---:|:---:|:---:|:---:|:---|
-| Markov Hit@1               | +0.2075 | +0.1016 | 0.0409 | +0.0361 | +0.1951 | 0.0150 | observed exceeds the shuffled-order null (p=0.0150) |
-| Markov Hit@3               | +0.5283 | +0.2725 | 0.0647 | +0.1511 | +0.4070 | 0.0010 | observed exceeds the shuffled-order null (p=0.0010) |
-| Frequency Hit@1            | +0.1698 | +0.1296 | 0.0201 | +0.0976 | +0.1810 | 0.0270 | observed exceeds the shuffled-order null (p=0.0270) |
-| Frequency Hit@3            | +0.6226 | +0.5552 | 0.0601 | +0.4046 | +0.6585 | 0.1978 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1978) |
-| Markov Fallback Hit@1      | +0.2453 | +0.1226 | 0.0417 | +0.0513 | +0.2208 | 0.0070 | observed exceeds the shuffled-order null (p=0.0070) |
-| Markov Fallback Hit@3      | +0.5660 | +0.3362 | 0.0655 | +0.2184 | +0.4750 | 0.0010 | observed exceeds the shuffled-order null (p=0.0010) |
-| Markov - Frequency Hit@1   | +0.0377 | -0.0279 | 0.0424 | -0.1011 | +0.0698 | 0.0679 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0679) |
-| Markov - Frequency Hit@3   | -0.0943 | -0.2828 | 0.0822 | -0.4405 | -0.1071 | 0.0210 | observed exceeds the shuffled-order null (p=0.0210) |
+| Markov Hit@1               | +0.2075 | +0.1016 | 0.0409 | +0.0361 | +0.1951 | 0.0150 | INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0150) |
+| Markov Hit@3               | +0.5283 | +0.2725 | 0.0647 | +0.1511 | +0.4070 | 0.0010 | INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0010) |
+| Frequency Hit@1            | +0.1698 | +0.1296 | 0.0201 | +0.0976 | +0.1810 | 0.0270 | INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0270) |
+| Frequency Hit@3            | +0.6226 | +0.5552 | 0.0601 | +0.4046 | +0.6585 | 0.1978 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1978) |
+| Markov Fallback Hit@1      | +0.2453 | +0.1226 | 0.0417 | +0.0513 | +0.2208 | 0.0070 | INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0070) |
+| Markov Fallback Hit@3      | +0.5660 | +0.3362 | 0.0655 | +0.2184 | +0.4750 | 0.0010 | INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0010) |
+| Markov - Frequency Hit@1   | +0.0377 | -0.0279 | 0.0424 | -0.1011 | +0.0698 | 0.0679 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0679) |
+| Markov - Frequency Hit@3   | -0.0943 | -0.2828 | 0.0822 | -0.4405 | -0.1071 | 0.0210 | INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0210) |
 
 ---
 

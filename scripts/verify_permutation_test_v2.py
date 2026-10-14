@@ -170,6 +170,15 @@ def verify_permutation_test_v2() -> bool:
 
                 rec_stat = compute_summary_stats(obs_val, null_vals)
 
+                # Check if level is invalid (order-free stat p < 0.05)
+                # Compute order free stats p-values for this scheme and level
+                lvl_invalid = any(
+                    compute_summary_stats(obs_from_csv[lvl][of_st], null_data[sc][lvl][of_st])["p_value"] < 0.05
+                    for of_st in ["frequency_hit1", "frequency_hit3"]
+                )
+                if lvl_invalid:
+                    rec_stat["conclusion"] = f"INVALID NULL - do not cite: {rec_stat['conclusion']}"
+
                 # Assert precision matches
                 for k in ["null_mean", "null_sd", "null_p2_5", "null_p97_5", "null_min", "null_max", "p_value"]:
                     diff = abs(rpt_stat[k] - rec_stat[k])

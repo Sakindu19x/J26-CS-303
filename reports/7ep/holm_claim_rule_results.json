@@ -1,0 +1,81 @@
+{
+  "claim_rule_evaluation": {
+    "formal_verdict": "not demonstrated",
+    "order_signal_verdict": "Order carries detectable predictive signal beyond the shuffled-order null at the tactic level (Holm-adjusted p=0.0180), but order signal is not distinguishable from the shuffled-order null at the technique level (Holm-adjusted p=0.7712).",
+    "overall_baseline_improvement": false,
+    "rationale": "Under the pre-registered claim rule, an improvement over the baseline is not demonstrated because: (1) At the technique level (P2), although the McNemar difference is statistically significant (Holm-adjusted p=0.0094), pooled Markov Hit@3 (0.0316) is lower than Frequency Hit@3 (0.1684), favoring the baseline; and (2) At the tactic level (P1), pooled Markov Hit@3 (0.6316) equals Frequency Hit@3 (0.6316) with Holm-adjusted p=1.0000.",
+    "rule": "improvement over the baseline demonstrated requires pooled Markov Hit@3 > Frequency Hit@3 AND Holm-adjusted p < 0.05 for at least one level; otherwise not demonstrated",
+    "tactic_improves_over_frequency": false,
+    "technique_improves_over_frequency": false
+  },
+  "family": {
+    "P1": {
+      "adjusted_p": 1.0,
+      "frequency_hit3": 0.631578947368421,
+      "id": "P1",
+      "level": "tactic_collapsed",
+      "markov_exceeds_frequency": false,
+      "markov_hit3": 0.631578947368421,
+      "multiplier": 1,
+      "name": "Tactic Markov Hit@3 vs Frequency Hit@3",
+      "rank": 4,
+      "raw_p": 1.0,
+      "significant_at_05": false,
+      "test_type": "Exact two-sided McNemar"
+    },
+    "P2": {
+      "adjusted_p": 0.0093994140625,
+      "frequency_hit3": 0.16842105263157894,
+      "id": "P2",
+      "level": "collapsed_full",
+      "markov_exceeds_frequency": false,
+      "markov_hit3": 0.031578947368421054,
+      "multiplier": 4,
+      "name": "Technique Markov Hit@3 vs Frequency Hit@3",
+      "rank": 1,
+      "raw_p": 0.002349853515625,
+      "significant_at_05": true,
+      "test_type": "Exact two-sided McNemar"
+    },
+    "P3": {
+      "adjusted_p": 0.017982017982017984,
+      "frequency_hit3": 0.631578947368421,
+      "id": "P3",
+      "level": "tactic_collapsed",
+      "markov_hit3": 0.631578947368421,
+      "multiplier": 3,
+      "name": "Tactic Markov Hit@3 vs S1 Shuffled Null",
+      "rank": 2,
+      "raw_p": 0.005994005994005994,
+      "s3_raw_p": 0.01098901098901099,
+      "significant_at_05": true,
+      "test_type": "One-sided S1 Permutation Test (B=1000)"
+    },
+    "P4": {
+      "adjusted_p": 0.7712287712287712,
+      "frequency_hit3": 0.16842105263157894,
+      "id": "P4",
+      "level": "collapsed_full",
+      "markov_hit3": 0.031578947368421054,
+      "multiplier": 2,
+      "name": "Technique Markov Hit@3 vs S1 Shuffled Null",
+      "rank": 3,
+      "raw_p": 0.3856143856143856,
+      "s3_raw_p": 0.36563436563436563,
+      "significant_at_05": false,
+      "test_type": "One-sided S1 Permutation Test (B=1000)"
+    }
+  },
+  "metadata": {
+    "correction_method": "Holm-Bonferroni step-down",
+    "eval_source": "reports/7ep/evaluation_7ep_results.json",
+    "family_ids": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ],
+    "family_size": 4,
+    "perm_source": "reports/7ep/permutation_7ep_report.json"
+  }
+}

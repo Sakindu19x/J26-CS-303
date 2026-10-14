@@ -265,6 +265,118 @@ def is_exempt_eval_7ep(
     return False, ""
 
 
+def is_exempt_learning_curve_7ep(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Subsets / Ep |" in line or "| Episode |" in line or "| k |" in line:
+        return True, "Table column header label"
+    if "prereg_7episode_design.md" in line:
+        return True, "Document filename / amendment cross-reference"
+    if "Amendments 1–4" in line:
+        return True, "Amendment cross-reference"
+    if "C4 dataset" in line and tok == "4":
+        return True, "Dataset name C4"
+    if "(E1–E7)" in line and tok in ("1", "7"):
+        return True, "Episode range identifier (E1-E7)"
+    if "Section 7" in line and tok == "7":
+        return True, "Preregistration section reference"
+    if "reports/7ep/" in line and tok == "7":
+        return True, "Filepath directory component 7ep"
+    return False, ""
+
+
+def is_exempt_permutation_7ep(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Scheme |" in line or "| Statistic |" in line or "| Observed Rate |" in line or "| Permutation Min N |" in line:
+        return True, "Table column header label"
+    if "Max Tries Allowed Per Episode" in line and tok == "10000":
+        return True, "Pre-declared S3 rejection sampling maximum tries parameter"
+    if "up to 10,000 tries" in line and tok == "10000":
+        return True, "Pre-declared S3 rejection sampling maximum tries parameter"
+    if "B=1000" in line and tok in ("1000", "0", "999"):
+        return True, "Permutation count parameter syntax B=1000"
+    if "prereg_7episode_design.md" in line:
+        return True, "Prereg document reference"
+    if "Section 10" in line and tok == "10":
+        return True, "Prereg section reference"
+    if "(E1–E7)" in line and tok in ("1", "7"):
+        return True, "Episode range identifier (E1-E7)"
+    return False, ""
+
+
+def is_exempt_planted_realscale_7ep(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Signal" in line or "| Gate" in line:
+        return True, "Table column header label"
+    if r"\pi(t_i)" in line or "1/(V - 1)" in line:
+        return True, "Mathematical formula definition syntax"
+    if "(E1–E7)" in line and tok in ("1", "7"):
+        return True, "Episode range identifier (E1-E7)"
+    return False, ""
+
+
+def is_exempt_e5_removed(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Metric |" in line or "| Fold |" in line or "| Comparison |" in line:
+        return True, "Table column header label"
+    if "prereg Section 8" in line and tok == "8":
+        return True, "Prereg section reference"
+    return False, ""
+
+
+def is_exempt_holm_claim_rule(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Hypothesis |" in line:
+        return True, "Table column header label"
+    if line.strip().startswith("> 1.") or line.strip().startswith("> 2."):
+        return True, "Pre-declared claim rule condition index"
+    if r"\alpha=0.05" in line and tok in ("0.05", "05"):
+        return True, "Pre-declared alpha significance threshold syntax"
+    if "prereg Section 6" in line and tok == "6":
+        return True, "Prereg section reference"
+    if "Amendment 1" in line and tok == "1":
+        return True, "Prereg amendment reference"
+    if "m=4" in line and tok == "4":
+        return True, "Hypothesis family count parameter m=4"
+    return False, ""
+
+
+def is_exempt_diagnostics_7ep(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Slice |" in line or "| Held-Out Episode |" in line:
+        return True, "Table column header label"
+    return False, ""
+
+
 def sweep_report_numeric(
     report_name: str,
     file_path: Path,
@@ -571,6 +683,18 @@ def format_summary_block(results: dict[str, dict[str, Any]], title: str = "MUTAT
         lines.append(format_summary_line("PlantedRealscale", results["planted_realscale"]))
     if "evaluation_7ep" in results:
         lines.append(format_summary_line("Eval7Ep", results["evaluation_7ep"]))
+    if "learning_curve_7ep" in results:
+        lines.append(format_summary_line("LearnCurve7Ep", results["learning_curve_7ep"]))
+    if "permutation_7ep" in results:
+        lines.append(format_summary_line("Perm7Ep", results["permutation_7ep"]))
+    if "planted_realscale_7ep" in results:
+        lines.append(format_summary_line("Planted7Ep", results["planted_realscale_7ep"]))
+    if "e5_removed" in results:
+        lines.append(format_summary_line("E5Removed", results["e5_removed"]))
+    if "holm_claim_rule" in results:
+        lines.append(format_summary_line("HolmClaimRule", results["holm_claim_rule"]))
+    if "diagnostics_7ep" in results:
+        lines.append(format_summary_line("Diag7Ep", results["diagnostics_7ep"]))
     lines.append("=" * 80)
     return "\n".join(lines)
 
@@ -1177,6 +1301,342 @@ def get_eval_7ep_check_suites() -> list[Callable[[str], None]]:
     ]
 
 
+def get_check_suites_7ep_inference():
+    lc_json = json.loads((REPORTS_DIR / "7ep" / "learning_curve_7ep_results.json").read_text(encoding="utf-8"))
+    perm_7ep_json = json.loads((REPORTS_DIR / "7ep" / "permutation_7ep_report.json").read_text(encoding="utf-8"))
+    pr_7ep_json = json.loads((REPORTS_DIR / "7ep" / "planted_realscale_7ep_report.json").read_text(encoding="utf-8"))
+    e5_json = json.loads((REPORTS_DIR / "7ep" / "e5_removed_results.json").read_text(encoding="utf-8"))
+    holm_json = json.loads((REPORTS_DIR / "7ep" / "holm_claim_rule_results.json").read_text(encoding="utf-8"))
+    diag_json = json.loads((REPORTS_DIR / "7ep" / "diagnostics_7ep.json").read_text(encoding="utf-8"))
+
+    def check_lc_table(md: str) -> None:
+        assert "# Pre-Registered 7-Episode Learning Curve Report" in md
+        assert "Technique `collapsed_full` ($N=95$) and Tactic `tactic_collapsed` ($N=76$)" in md
+        assert "- **Held-Out Test Episodes**: $e \\in \\{E1, E2, E3, E4, E5, E6, E7\\}$ ($7$ episodes)." in md
+        assert "- **Training Subset Sizes**: $k \\in \\{1, 2, 3, 4, 5, 6\\}$." in md
+        assert "- $k=1$: $\\binom{6}{1} = 6$ subsets per episode ($42$ evaluations per slice)" in md
+        assert "- $k=2$: $\\binom{6}{2} = 15$ subsets per episode ($105$ evaluations per slice)" in md
+        assert "- $k=3$: $\\binom{6}{3} = 20$ subsets per episode ($140$ evaluations per slice)" in md
+        assert "- $k=4$: $\\binom{6}{4} = 15$ subsets per episode ($105$ evaluations per slice)" in md
+        assert "- $k=5$: $\\binom{6}{5} = 6$ subsets per episode ($42$ evaluations per slice)" in md
+        assert "- $k=6$: $\\binom{6}{6} = 1$ subset per episode ($7$ evaluations per slice" in md
+        assert "- **Total Evaluations per Slice**: $63$ subsets per episode $\\times 7$ episodes $= 441$ training subset evaluations ($882$ across both slices)." in md
+
+        # Check pooled tables
+        for sl in ["technique_collapsed_full", "tactic_collapsed"]:
+            for k in range(1, 7):
+                kd = lc_json["learning_curve"][sl][f"k_{k}"]
+                n_sub = kd["n_subsets_per_episode"]
+                tot_evals = n_sub * 7
+                p = kd["pooled_sample_weighted"]
+                line = (
+                    f"| {k} | {n_sub} | {tot_evals} | "
+                    f"{p['markov_hit1']:.4f} | {p['markov_hit3']:.4f} | "
+                    f"{p['frequency_hit1']:.4f} | {p['frequency_hit3']:.4f} | "
+                    f"{p['markov_fallback_hit1']:.4f} | {p['markov_fallback_hit3']:.4f} | "
+                    f"{p['coverage']:.4f} | {p['ceiling']:.4f} |"
+                )
+                assert line in md, f"Missing LC pooled line: {line}"
+
+        # Check per-episode tables
+        for sl in ["technique_collapsed_full", "tactic_collapsed"]:
+            for k in range(1, 7):
+                for ep in ["E1", "E2", "E3", "E4", "E5", "E6", "E7"]:
+                    ep_d = lc_json["learning_curve"][sl][f"k_{k}"]["per_episode_means"][ep]
+                    line = (
+                        f"| {k} | {ep} | {ep_d['n_samples']} | "
+                        f"{ep_d['markov']['hit1_rate']:.4f} | {ep_d['markov']['hit3_rate']:.4f} | "
+                        f"{ep_d['frequency']['hit1_rate']:.4f} | {ep_d['frequency']['hit3_rate']:.4f} | "
+                        f"{ep_d['markov_fallback']['hit1_rate']:.4f} | {ep_d['markov_fallback']['hit3_rate']:.4f} | "
+                        f"{ep_d['coverage_rate']:.4f} | {ep_d['ceiling_rate']:.4f} |"
+                    )
+                    assert line in md, f"Missing LC per-ep line: {line}"
+
+        assert "- **Combinatorial Enumeration**: For each held-out episode $e$, all $\\binom{6}{k}$ subsets of the remaining 6 episodes were evaluated:" in md
+        assert "- **Aggregation Method**: Per pre-registration Section 7, metric averages are first computed across all $\\binom{6}{k}$ subsets for each held-out episode, and then averaged across all 7 episodes" in md
+
+        t_k1 = lc_json["learning_curve"]["technique_collapsed_full"]["k_1"]["pooled_sample_weighted"]
+        t_k6 = lc_json["learning_curve"]["technique_collapsed_full"]["k_6"]["pooled_sample_weighted"]
+        tac_k1 = lc_json["learning_curve"]["tactic_collapsed"]["k_1"]["pooled_sample_weighted"]
+        tac_k6 = lc_json["learning_curve"]["tactic_collapsed"]["k_6"]["pooled_sample_weighted"]
+        exp_line = f"- **Technique Coverage and Ceiling Growth**: As training episodes expand from k=1 to k=6, technique Markov coverage increases from {t_k1['coverage']:.4f} to {t_k6['coverage']:.4f} ({t_k6['coverage'] - t_k1['coverage']:+.4f}), and target ceiling increases from {t_k1['ceiling']:.4f} to {t_k6['ceiling']:.4f} ({t_k6['ceiling'] - t_k1['ceiling']:+.4f})."
+        assert exp_line in md
+        assert f"- **Technique Model Trajectories**: Across k=1..6, pooled technique Markov Hit@3 changes from {t_k1['markov_hit3']:.4f} to {t_k6['markov_hit3']:.4f}, while Frequency Hit@3 changes from {t_k1['frequency_hit3']:.4f} to {t_k6['frequency_hit3']:.4f}." in md
+        assert f"- **Tactic Coverage and Ceiling Growth**: Across k=1..6, tactic coverage moves from {tac_k1['coverage']:.4f} to {tac_k6['coverage']:.4f}, and tactic ceiling moves from {tac_k1['ceiling']:.4f} to {tac_k6['ceiling']:.4f}." in md
+        assert f"- **Tactic Model Trajectories**: Across k=1..6, pooled tactic Markov Hit@3 moves from {tac_k1['markov_hit3']:.4f} to {tac_k6['markov_hit3']:.4f}, while Frequency Hit@3 moves from {tac_k1['frequency_hit3']:.4f} to {tac_k6['frequency_hit3']:.4f}." in md
+
+    def check_perm_7ep(md: str) -> None:
+        assert "# Pre-Registered 7-Episode Permutation Test Report" in md
+        meta = perm_7ep_json["metadata"]
+        assert "- **Null Replicates**: B=1000 permutations (stdlib `random.Random` seeds 0..999)." in md
+        assert f"- **One-Sided p-value Formula**: `{meta['p_value_formula']}`." in md
+        assert "- **Pre-Registered Primary Comparisons**: P3 = Tactic Markov Hit@3 vs S1 null; P4 = Technique Markov Hit@3 vs S1 null." in md
+
+        # Validity
+        stat_labels = {
+            "markov_hit1": "Markov Hit@1",
+            "markov_hit3": "Markov Hit@3",
+            "frequency_hit1": "Frequency Hit@1",
+            "frequency_hit3": "Frequency Hit@3",
+            "markov_fallback_hit1": "Markov Fallback Hit@1",
+            "markov_fallback_hit3": "Markov Fallback Hit@3",
+            "markov_minus_frequency_hit1": "Markov - Frequency Hit@1",
+            "markov_minus_frequency_hit3": "Markov - Frequency Hit@3",
+        }
+        for sc, sc_label in [("S1_collapsed_order", "S1 (Collapsed-Order)"), ("S3_constrained_shuffle", "S3 (Constrained Shuffle)")]:
+            for lvl, lvl_label in [("technique_collapsed_full", "Technique"), ("tactic_collapsed", "Tactic")]:
+                for st in ["frequency_hit1", "frequency_hit3"]:
+                    row = perm_7ep_json["schemes"][sc][lvl][st]
+                    lbl = stat_labels[st]
+                    status_str = "**FLAG (p < 0.05)**" if row["p_value"] < 0.05 else "PASS (Valid)"
+                    line = f"| {sc_label} | {lvl_label} | {lbl} | {row['observed']:+.4f} | {row['null_mean']:+.4f} | {row['p_value']:.4f} | {row['mc_se']:.4f} | {status_str} |"
+                    assert line in md, f"Missing validity line: {line}"
+
+        assert "- **S1 Validity**: Confirmed valid order-only null (all order-free Frequency statistics have $p \\ge 0.05$)." in md
+        assert "- **S3 Validity**: Confirmed valid order-only null (all order-free Frequency statistics have $p \\ge 0.05$)." in md
+
+        # Sample counts
+        s_sum = meta["sample_counts_summary"]
+        for sc, sc_label in [("S1_collapsed_order", "S1 (Collapsed-Order)"), ("S3_constrained_shuffle", "S3 (Constrained Shuffle)")]:
+            for lvl, lvl_label in [("technique_collapsed_full", "Technique (collapsed_full)"), ("tactic_collapsed", "Tactic (tactic_collapsed)")]:
+                info = s_sum[sc][lvl]
+                obs_n = meta["observed_sample_counts"][lvl]
+                inv_str = "**YES (Constant)**" if info["is_constant"] else "NO (Variable)"
+                line = f"| {sc_label} | {lvl_label} | {obs_n} | {info['min']} | {info['mean']:.2f} | {info['max']} | {inv_str} |"
+                assert line in md, f"Missing sample count line: {line}"
+
+        s3_meta = meta["s3_rejection_sampling_summary"]
+        assert f"- **Technique Level**: Excluded Permutations = {s3_meta['technique_collapsed_full']['excluded_permutations']}, Min Tries = {s3_meta['technique_collapsed_full']['min_total_tries']}, Mean Tries = {s3_meta['technique_collapsed_full']['mean_total_tries']:.2f}, Max Tries = {s3_meta['technique_collapsed_full']['max_total_tries']}" in md
+        assert f"- **Tactic Level**: Excluded Permutations = {s3_meta['tactic_collapsed']['excluded_permutations']}, Min Tries = {s3_meta['tactic_collapsed']['min_total_tries']}, Mean Tries = {s3_meta['tactic_collapsed']['mean_total_tries']:.2f}, Max Tries = {s3_meta['tactic_collapsed']['max_total_tries']}" in md
+
+        # S1 & S3 Tables
+        counts_tech = meta["observed_baseline_counts"]["technique_collapsed_full"]
+        counts_tac = meta["observed_baseline_counts"]["tactic_collapsed"]
+        for sc in ["S1_collapsed_order", "S3_constrained_shuffle"]:
+            for lvl, counts, N in [("technique_collapsed_full", counts_tech, 95), ("tactic_collapsed", counts_tac, 76)]:
+                d_lvl = perm_7ep_json["schemes"][sc][lvl]
+                for st, lbl in stat_labels.items():
+                    row = d_lvl[st]
+                    h_str = f"{counts[st]:+d} / {N}" if "minus" in st else f"{counts[st]} / {N}"
+                    line = f"| {lbl:26s} | {row['observed']:+.4f} | {h_str:9s} | {row['null_mean']:+.4f} | {row['null_sd']:.4f} | {row['null_p2_5']:+.4f} | {row['null_p97_5']:+.4f} | {row['p_value']:.4f} | {row['mc_se']:.4f} | {row['conclusion']} |"
+                    assert line in md, f"Missing S1/S3 line: {line}"
+
+        # Consistency
+        for lvl, lvl_label in [("technique_collapsed_full", "Technique Level (`collapsed_full`)"), ("tactic_collapsed", "Tactic Level (`tactic_collapsed`)")]:
+            for st, lbl in stat_labels.items():
+                p1 = perm_7ep_json["schemes"]["S1_collapsed_order"][lvl][st]["p_value"]
+                p3 = perm_7ep_json["schemes"]["S3_constrained_shuffle"][lvl][st]["p_value"]
+                se1 = perm_7ep_json["schemes"]["S1_collapsed_order"][lvl][st]["mc_se"]
+                se3 = perm_7ep_json["schemes"]["S3_constrained_shuffle"][lvl][st]["mc_se"]
+                diff = abs(p1 - p3)
+                combined_2se = 2.0 * math.sqrt(se1**2 + se3**2)
+                if diff <= combined_2se:
+                    verdict = f"is less than two combined Monte Carlo standard errors ({combined_2se:.4f}), confirming S1 and S3 are consistent."
+                else:
+                    verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences."
+                line = f"- **{lbl}**: S1 $p = {p1:.4f}$ (MC SE $= {se1:.4f}$), S3 $p = {p3:.4f}$ (MC SE $= {se3:.4f}$); difference $|p_{{S1}} - p_{{S3}}| = {diff:.4f}$ {verdict}"
+                assert line in md, f"Missing consistency line: {line}"
+
+        assert "- **Purpose**: Determine whether attack event order carries predictive signal beyond order-free baselines across all seven episodes (E1–E7)." in md
+        assert "- **Primary Scheme (S1 - Collapsed-Order Shuffle)**: Pre-declared headline null hypothesis (prereg Section 10). Shuffles the collapsed sequence strictly within each episode, preserving exact sample counts ($N=95$ technique, $N=76$ tactic) and marginal item frequencies. S1 p-values enter the pre-registered Holm step-down correction for hypotheses P3 and P4." in md
+        assert "- **Constrained Scheme (S3 - Adjacency-Constrained Shuffle)**: Shuffles the collapsed sequence uniformly at random subject to the strict constraint that no two adjacent items share identical technique sets (technique level) or identical tactic sets (tactic level), using rejection sampling with up to 10,000 tries per episode. Reported alongside S1." in md
+        assert "- **Excluded Scheme (S2)**: S2 (raw-event shuffle) is excluded from the 7-episode design per prereg Section 10." in md
+        assert "A valid order-only null permutation must not perturb the performance of an **order-free** model (FrequencyBaseline). If an order-free statistic exhibits $p < 0.05$" in md
+        assert "Monte Carlo permutation standard errors are given by $\\text{SE}_{\\text{MC}}(p) = \\sqrt{p(1-p)/B}$ ($B=1000$)." in md
+        assert "S1 and S3 p-values differing by less than two combined Monte Carlo standard errors are statistically consistent:" in md
+
+        p3_val = perm_7ep_json["schemes"]["S1_collapsed_order"]["tactic_collapsed"]["markov_hit3"]["p_value"]
+        p4_val = perm_7ep_json["schemes"]["S1_collapsed_order"]["technique_collapsed_full"]["markov_hit3"]["p_value"]
+        assert f"- **Hypothesis P3 (Tactic Markov Hit@3 vs S1 Null)**: Raw $p = {p3_val:.4f}$ (S3 reported alongside: $p = {perm_7ep_json['schemes']['S3_constrained_shuffle']['tactic_collapsed']['markov_hit3']['p_value']:.4f}$)." in md
+        assert f"- **Hypothesis P4 (Technique Markov Hit@3 vs S1 Null)**: Raw $p = {p4_val:.4f}$ (S3 reported alongside: $p = {perm_7ep_json['schemes']['S3_constrained_shuffle']['technique_collapsed_full']['markov_hit3']['p_value']:.4f}$)." in md
+
+    def check_pr_7ep(md: str) -> None:
+        assert "# Real-Scale Planted-Structure Power Analysis Report (7 Episodes)" in md
+        g = pr_7ep_json["gates"]
+        assert f"| **G8** | {g['G8']['description']} | `{g['G8']['measured_diff']:.4f}` | `<= {g['G8']['threshold']:.4f}` | **PASS** |" in md
+        traj_str = str([round(x, 4) for x in g['G9']['measured_trajectory']])
+        assert f"| **G9** | {g['G9']['description']} | `{traj_str}` | Non-decreasing | **PASS** |" in md
+        assert f"| **G10** | {g['G10']['description']} | Ratio: `{g['G10']['mean_ratio_m1_to_r']:.4f}` | All <= R & Ratio >= 0.9900 | **PASS** |" in md
+        assert f"| **G11** | {g['G11']['description']} | Ratio: `{g['G11']['broken_ratio_to_r']:.4f}` | `< 0.9900 (must fail G10)` | **PASS (Failed G10 as expected)** |" in md
+        for s_str in ["0.0", "0.25", "0.5", "0.75", "1.0"]:
+            row = pr_7ep_json["results_by_signal"][s_str]
+            s = float(s_str)
+            m1_str = f"{row['markov_top1_mean']:.4f} ± {row['markov_top1_se']:.4f}"
+            f1_str = f"{row['frequency_top1_mean']:.4f} ± {row['frequency_top1_se']:.4f}"
+            r_str = f"{row['reachable_fraction_mean']:.4f}"
+            r_no_e5_str = f"{row['reachable_fraction_no_e5_mean']:.4f}"
+            exc_str = f"**YES** (diff = {row['markov_top1_mean'] - row['frequency_top1_mean']:+.4f})" if row["exceeds_2_combined_se"] else f"NO (diff = {row['markov_top1_mean'] - row['frequency_top1_mean']:+.4f})"
+            line = f"| {s:.2f} | {m1_str} | {row['markov_top3_mean']:.4f} ± {row['markov_top3_se']:.4f} | {f1_str} | {row['frequency_top3_mean']:.4f} | {r_str} | {r_no_e5_str} | {exc_str} |"
+            assert line in md, f"Missing PR 7ep row: {line}"
+
+        assert "| *Real Data* | `0.0316` | `0.0316` | `0.0737` | `0.1684` | — | — | *real data, different generator, shown for scale only* |" in md
+        assert "**Smallest signal $s$ at which Markov Top-1 exceeds Frequency Top-1 by > 2 combined SE**: `s = 0.25`." in md
+
+        # Setup section
+        assert "- **Vocabulary (V)**: All 82 distinct MITRE ATT&CK technique IDs across real collapsed sequences E1–E7 (read at runtime, $V=82$)." in md
+        assert "- **Episode Lengths**: Real collapsed lengths of E1–E7 (E1: 19, E2: 20, E3: 21, E4: 11, E5: 3, E6: 15, E7: 13), yielding 95 evaluated transition samples per replicate dataset (93 samples when excluding E5)." in md
+        assert "- **Evaluation Protocol**: 7-episode Leave-One-Episode-Out cross-validation using production `MarkovModel` and `FrequencyBaseline`." in md
+        assert "- **Signal Levels (s)**: `0.00, 0.25, 0.50, 0.75, 1.00` (200 replicates per signal level, seeds 0..199)." in md
+        assert "- **Mean R at $s=1.0$ across all 7 episodes (95 samples)**: `0.6498`" in md
+        assert "- **Mean R at $s=1.0$ excluding E5 (93 samples)**: `0.6482` (Note: E5 has length 3 items, yielding 2 transition samples, with 0 reachable transitions)." in md
+        assert "- **Chance Top-1**: $1/(V - 1) = 1/81 = 0.012346$." in md
+
+        # Section 4
+        assert "- Under full signal ($s=1.00$), the 7-episode design achieves a mean reachable fraction of $R = 0.6498$ across all 95 transition samples." in md
+        assert "- When excluding episode E5 (which contains only 2 transition samples and exhibits 0 training transitions), the mean reachable fraction is $R = 0.6482$ across the remaining 93 samples." in md
+        assert "- Production MarkovModel captures 100% of reachable signal at $s=1.00$ (mean Top-1 matches mean $R$ exactly)." in md
+
+    def check_e5_removed(md: str) -> None:
+        assert "# Pre-Registered E5-Removed Sensitivity Analysis Report" in md
+        assert "- **Purpose**: Evaluate the sensitivity of findings to the inclusion of Episode E5 (which contains only 3 labeled steps and 2 transitions, with 0 coverage and 0 ceiling hits under 7-fold LOEO)." in md
+        assert "- **Protocol**: Full 6-fold Leave-One-Episode-Out cross-validation across {E1, E2, E3, E4, E6, E7}, with Episode E5 entirely excluded from both model training and evaluation." in md
+        assert "- **Evaluated Slices**: Technique `collapsed_full` ($N=93$) and Tactic `tactic_collapsed` ($N=74$)." in md
+        assert '- **Statistical Labels**: Paired McNemar tests labeled strictly as `"sensitivity, raw p"`.' in md
+
+        cmp_d = e5_json["comparison_with_all_7ep"]
+        for sl in ["technique_collapsed_full", "tactic_collapsed"]:
+            c_all = cmp_d[sl]["all_7ep"]
+            c_no = cmp_d[sl]["e5_removed_6ep"]
+            assert f"| Evaluated Samples ($N$) | {c_all['n_samples']} | {c_no['n_samples']} | {c_no['n_samples'] - c_all['n_samples']} |" in md
+            assert f"| Coverage Rate | {c_all['coverage_rate']:.4f} ({c_all['coverage_covered']}/{c_all['n_samples']}) | {c_no['coverage_rate']:.4f} ({c_no['coverage_covered']}/{c_no['n_samples']}) | {c_no['coverage_rate'] - c_all['coverage_rate']:+.4f} |" in md
+            assert f"| Ceiling Rate | {c_all['ceiling_rate']:.4f} ({c_all['ceiling_hits']}/{c_all['n_samples']}) | {c_no['ceiling_rate']:.4f} ({c_no['ceiling_hits']}/{c_no['n_samples']}) | {c_no['ceiling_rate'] - c_all['ceiling_rate']:+.4f} |" in md
+            assert f"| Markov Hit@1 | {c_all['markov_top1']:.4f} ({c_all['markov_hit1']}/{c_all['n_samples']}) | {c_no['markov_top1']:.4f} ({c_no['markov_hit1']}/{c_no['n_samples']}) | {c_no['markov_top1'] - c_all['markov_top1']:+.4f} |" in md
+            assert f"| Markov Hit@3 | {c_all['markov_top3']:.4f} ({c_all['markov_hit3']}/{c_all['n_samples']}) | {c_no['markov_top3']:.4f} ({c_no['markov_hit3']}/{c_no['n_samples']}) | {c_no['markov_top3'] - c_all['markov_top3']:+.4f} |" in md
+            assert f"| Frequency Hit@1 | {c_all['frequency_top1']:.4f} ({c_all['frequency_hit1']}/{c_all['n_samples']}) | {c_no['frequency_top1']:.4f} ({c_no['frequency_hit1']}/{c_no['n_samples']}) | {c_no['frequency_top1'] - c_all['frequency_top1']:+.4f} |" in md
+            assert f"| Frequency Hit@3 | {c_all['frequency_top3']:.4f} ({c_all['frequency_hit3']}/{c_all['n_samples']}) | {c_no['frequency_top3']:.4f} ({c_no['frequency_hit3']}/{c_no['n_samples']}) | {c_no['frequency_top3'] - c_all['frequency_top3']:+.4f} |" in md
+            assert f"| Fallback Hit@1 | {c_all['fallback_top1']:.4f} ({c_all['fallback_hit1']}/{c_all['n_samples']}) | {c_no['fallback_top1']:.4f} ({c_no['fallback_hit1']}/{c_no['n_samples']}) | {c_no['fallback_top1'] - c_all['fallback_top1']:+.4f} |" in md
+            assert f"| Fallback Hit@3 | {c_all['fallback_top3']:.4f} ({c_all['fallback_hit3']}/{c_all['n_samples']}) | {c_no['fallback_top3']:.4f} ({c_no['fallback_hit3']}/{c_no['n_samples']}) | {c_no['fallback_top3'] - c_all['fallback_top3']:+.4f} |" in md
+            assert f"| Exact McNemar p (Hit@3) | {c_all['mcnemar_p_hit3']:.4f} | {c_no['mcnemar_p_hit3']:.4f} (sensitivity, raw p) | {c_no['mcnemar_p_hit3'] - c_all['mcnemar_p_hit3']:+.4f} |" in md
+
+        # Check pooled summary bullets
+        for sl, N in [("technique_collapsed_full", 93), ("tactic_collapsed", 74)]:
+            cmp_e5 = e5_json["comparison_with_all_7ep"][sl]["e5_removed_6ep"]
+            hl = e5_json[sl]["headline"]
+            assert f"- **Coverage**: `{cmp_e5['coverage_covered']}/{N}` ({cmp_e5['coverage_rate']:.4f})" in md
+            assert f"- **Ceiling**: `{cmp_e5['ceiling_hits']}/{N}` ({cmp_e5['ceiling_rate']:.4f})" in md
+            m = hl["markov"]
+            f = hl["frequency"]
+            fb = hl.get("fallback", hl.get("markov_fallback"))
+            assert f"- **Markov Hit@1**: `{m['hit1']}/{N}` ({m['top1']:.4f}, 95% Wilson: `[{m['wilson95_top1'][0]:.4f}, {m['wilson95_top1'][1]:.4f}]`)" in md
+            assert f"- **Markov Hit@3**: `{m['hit3']}/{N}` ({m['top3']:.4f}, 95% Wilson: `[{m['wilson95_top3'][0]:.4f}, {m['wilson95_top3'][1]:.4f}]`)" in md
+            assert f"- **Frequency Hit@1**: `{f['hit1']}/{N}` ({f['top1']:.4f}, 95% Wilson: `[{f['wilson95_top1'][0]:.4f}, {f['wilson95_top1'][1]:.4f}]`)" in md
+            assert f"- **Frequency Hit@3**: `{f['hit3']}/{N}` ({f['top3']:.4f}, 95% Wilson: `[{f['wilson95_top3'][0]:.4f}, {f['wilson95_top3'][1]:.4f}]`)" in md
+            assert f"- **Fallback Hit@1**: `{fb['hit1']}/{N}` ({fb['top1']:.4f}, 95% Wilson: `[{fb['wilson95_top1'][0]:.4f}, {fb['wilson95_top1'][1]:.4f}]`)" in md
+            assert f"- **Fallback Hit@3**: `{fb['hit3']}/{N}` ({fb['top3']:.4f}, 95% Wilson: `[{fb['wilson95_top3'][0]:.4f}, {fb['wilson95_top3'][1]:.4f}]`)" in md
+
+        # Check fold tables
+        for sl in ["technique_collapsed_full", "tactic_collapsed"]:
+            f_dict = e5_json[sl]["per_fold"]
+            for f_name, f_d in f_dict.items():
+                if "markov" in f_d and "coverage" in f_d["markov"]:
+                    cov_r = f_d["markov"]["coverage"]
+                    ceil_r = f_d["ceiling"]["rate"]
+                    fb_top1 = f_d["fallback"]["top1"]
+                    fb_top3 = f_d["fallback"]["top3"]
+                else:
+                    cov_r = f_d["covered_samples"] / f_d["n_samples"]
+                    ceil_r = f_d["ceiling_hits"] / f_d["n_samples"]
+                    fb_top1 = f_d.get("fallback", f_d.get("markov_fallback", {})).get("top1", 0.0)
+                    fb_top3 = f_d.get("fallback", f_d.get("markov_fallback", {})).get("top3", 0.0)
+                line = (
+                    f"| {f_name} | {f_d['test_episode']} | {f_d['n_samples']} | "
+                    f"{cov_r:.4f} | {ceil_r:.4f} | "
+                    f"{f_d['markov']['top1']:.4f} | {f_d['markov']['top3']:.4f} | "
+                    f"{f_d['frequency']['top1']:.4f} | {f_d['frequency']['top3']:.4f} | "
+                    f"{fb_top1:.4f} | {fb_top3:.4f} |"
+                )
+                assert line in md, f"Missing fold line: {line}"
+
+        # McNemar table
+        for k in ["technique_hit3", "tactic_hit3", "technique_hit1", "tactic_hit1"]:
+            pt = e5_json["paired_tests"][k]
+            tb = pt["table_2x2"]
+            line = f"| {pt['slice']} {pt['metric']} | {pt['n_samples']} | {tb['both_hit']} | {tb['m1_hit_m2_miss']} | {tb['m1_miss_m2_hit']} | {tb['neither_hit']} | {pt['markov_rate']:.4f} | {pt['frequency_rate']:.4f} | {pt['difference']:+.4f} | {pt['p_value_raw']:.4f} |"
+            assert line in md, f"Missing McNemar line: {line}"
+
+    def check_holm(md: str) -> None:
+        assert "# Pre-Registered Holm Step-Down Adjustment and Substantive Claim Rule Report" in md
+        assert "- **Primary Hypotheses Family**: $m=4$ pre-registered hypothesis tests:" in md
+        assert "- **P1**: Tactic level (`tactic_collapsed`) `MarkovModel` Hit@3 vs `FrequencyBaseline` Hit@3 (two-sided exact McNemar test from 12a evaluation)." in md
+        assert "- **P2**: Technique level (`collapsed_full`) `MarkovModel` Hit@3 vs `FrequencyBaseline` Hit@3 (two-sided exact McNemar test from 12a evaluation)." in md
+        assert "- **P3**: Tactic level (`tactic_collapsed`) `MarkovModel` Hit@3 vs S1 shuffled-order null (one-sided permutation test, $B=1000$; S3 reported alongside)." in md
+        assert "- **P4**: Technique level (`collapsed_full`) `MarkovModel` Hit@3 vs S1 shuffled-order null (one-sided permutation test, $B=1000$; S3 reported alongside)." in md
+
+        fam = holm_json["family"]
+        for hid in ["P2", "P3", "P4", "P1"]:
+            h = fam[hid]
+            m_gt_f = "**YES**" if h["markov_hit3"] > h["frequency_hit3"] else ("NO (Markov < Freq)" if h["markov_hit3"] < h["frequency_hit3"] else "NO (Markov == Freq)")
+            sig_str = "**YES (p < 0.05)**" if h["significant_at_05"] else "NO (p ≥ 0.05)"
+            line = f"| **{h['id']}** | `{h['level']}` | {h['test_type']} | `{h['raw_p']:.4f}` | {h['rank']} | {h['multiplier']} | `{h['adjusted_p']:.4f}` | {sig_str} | `{h['markov_hit3']:.4f}` | `{h['frequency_hit3']:.4f}` | {m_gt_f} |"
+            assert line in md, f"Missing Holm line: {line}"
+
+        assert "*(Note for P3 and P4: S3 constrained shuffle p-values reported alongside S1 are $p=0.0110$ for tactic P3 and $p=0.3656$ for technique P4; per Amendment 1, only the pre-declared headline S1 p-values enter the Holm adjustment).*" in md
+        assert '- **Separate Order Signal Question**: Hypotheses P3 and P4 address the separate question: *"Does sequence order carry detectable predictive signal beyond unigram frequency?"*' in md
+        cr = holm_json["claim_rule_evaluation"]
+        assert f"### Substantive Baseline Improvement: **{cr['formal_verdict']}**" in md
+        assert cr["rationale"] in md
+        assert cr["order_signal_verdict"] in md
+
+    def check_diag(md: str) -> None:
+        assert "# Read-Only Diagnostics Report (7 Episodes)" in md
+        f1 = diag_json["F1_candidate_distribution_and_ranks"]
+        f2 = diag_json["F2_raw_full_self_repeats"]
+        f3 = diag_json["F3_unseen_states_and_miss_shares"]
+        for sl, sl_lbl in [
+            ("collapsed_full", "Technique (collapsed_full)"),
+            ("tactic_collapsed", "Tactic (tactic_collapsed)"),
+            ("raw_full", "Technique (raw_full)"),
+        ]:
+            d = f1[sl]
+            n_ok = d["n_samples_markov_ok"]
+            mc = d["markov_candidate_count_distribution"]
+            fc = d["frequency_candidate_count_distribution"]
+            m_int = f"{d['markov_target_intersects_full_list_count']}/{n_ok} ({d['markov_target_intersects_full_list_rate']:.4f})"
+            f_int = f"{d['frequency_target_intersects_full_list_count']}/{n_ok} ({d['frequency_target_intersects_full_list_rate']:.4f})"
+            m_mr = f"{d['markov_first_correct_mean_rank']:.2f}" if d["markov_first_correct_mean_rank"] is not None else "—"
+            f_mr = f"{d['frequency_first_correct_mean_rank']:.2f}" if d["frequency_first_correct_mean_rank"] is not None else "—"
+            assert f"| {sl_lbl} | {n_ok} | Markov | {mc['1']} | {mc['2']} | {mc['3']} | {mc['4_or_more']} | {m_int} | {m_mr} |" in md
+            assert f"| | | Frequency | {fc['1']} | {fc['2']} | {fc['3']} | {fc['4_or_more']} | {f_int} | {f_mr} |" in md
+
+        # Check rank counts strings
+        for sl, sl_sec in [("collapsed_full", "Technique (collapsed_full)"), ("tactic_collapsed", "Tactic (tactic_collapsed)"), ("raw_full", "Technique (raw_full)")]:
+            m_rc = f1[sl]["markov_first_correct_rank_distribution"]
+            f_rc = f1[sl]["frequency_first_correct_rank_distribution"]
+            m_rc_str = str({int(k): v for k, v in m_rc.items()})
+            f_rc_str = str({int(k): v for k, v in f_rc.items()})
+            assert f"- **Markov Rank Counts**: `{m_rc_str}`" in md
+            assert f"- **Frequency Rank Counts**: `{f_rc_str}`" in md
+
+        assert f"- **Total Samples in `raw_full`**: {f2['total_samples']}" in md
+        assert f"- **Self-Repeat Samples (`target == current`)**: {f2['self_repeat_samples']} out of {f2['total_samples']} ({f2['self_repeat_share']:.4f} of all samples)." in md
+        assert f"- **Total Markov Hit@1 Hits in `raw_full`**: {f2['markov_hit1_total']} hits ({f2['markov_hit1_total']/f2['total_samples']:.4f})." in md
+        assert f"- **Markov Hit@1 Hits on Self-Repeats**: {f2['markov_hit1_on_self_repeat']} out of {f2['markov_hit1_total']} total hits ({f2['markov_hit1_self_repeat_share']:.4f} of hits occurred on self-repeats)." in md
+        assert f"- **Performance Restricted to Non-Self-Repeat Targets ($N={f2['non_self_repeat_samples']}$)**:" in md
+        assert f"- **Markov Hit@1**: {f2['non_self_repeat_markov_hit1']}/{f2['non_self_repeat_samples']} ({f2['non_self_repeat_markov_hit1_rate']:.4f})" in md
+        assert f"- **Frequency Hit@1**: {f2['non_self_repeat_frequency_hit1']}/{f2['non_self_repeat_samples']} ({f2['non_self_repeat_frequency_hit1_rate']:.4f})" in md
+
+        sec_tech = md.split("### Technique Level (`collapsed_full`")[1].split("### Tactic Level")[0]
+        sec_tac = md.split("### Tactic Level (`tactic_collapsed`")[1].split("### Reference Slice")[0]
+        sec_raw = md.split("### Reference Slice (`raw_full`")[1]
+        sec_map = {
+            "collapsed_full": sec_tech,
+            "tactic_collapsed": sec_tac,
+            "raw_full": sec_raw,
+        }
+
+        for sl, sec_text in sec_map.items():
+            f3_sl = diag_json["F3_unseen_states_and_miss_shares"][sl]
+            for ep in ["E1", "E2", "E3", "E4", "E5", "E6", "E7"]:
+                e_d = f3_sl["per_episode"][ep]
+                line = f"| {ep} | {e_d['n_samples']} | {e_d['unseen_current_state_count']} | {e_d['unseen_current_state_rate']:.4f} | {e_d['markov_hit3_miss_count']} | {e_d['unseen_state_hit3_miss_count']} | {e_d['unseen_state_share_of_hit3_misses']:.4f} |"
+                assert line in sec_text, f"Missing F3 ep line in {sl}: {line}"
+            p = f3_sl["pooled"]
+            line = f"| **Pooled Total** | **{p['total_samples']}** | **{p['unseen_current_state_count']}** | **{p['unseen_current_state_rate']:.4f}** | **{p['total_hit3_misses']}** | **{p['unseen_state_hit3_misses']}** | **{p['unseen_share_of_hit3_misses']:.4f}** |"
+            assert line in sec_text, f"Missing F3 pooled line in {sl}: {line}"
+
+    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag]
+
+
 def run_mutation_sweep() -> dict[str, dict[str, Any]]:
     """Backward-compatible entry point returning numeric mutation results for all reports."""
     tactic_checks, tech_checks = get_check_suites()
@@ -1219,6 +1679,50 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         eval_7ep_checks,
         is_exempt_eval_7ep,
     )
+    (
+        lc_checks,
+        perm_7ep_checks,
+        pr_7ep_checks,
+        e5_checks,
+        holm_checks,
+        diag_checks,
+    ) = get_check_suites_7ep_inference()
+    lc_res = sweep_report_numeric(
+        "learning_curve_7ep_report.md",
+        REPORTS_DIR / "7ep" / "learning_curve_7ep_report.md",
+        lc_checks,
+        is_exempt_learning_curve_7ep,
+    )
+    perm_7ep_res = sweep_report_numeric(
+        "permutation_7ep_report.md",
+        REPORTS_DIR / "7ep" / "permutation_7ep_report.md",
+        perm_7ep_checks,
+        is_exempt_permutation_7ep,
+    )
+    pr_7ep_res = sweep_report_numeric(
+        "planted_realscale_7ep_report.md",
+        REPORTS_DIR / "7ep" / "planted_realscale_7ep_report.md",
+        pr_7ep_checks,
+        is_exempt_planted_realscale_7ep,
+    )
+    e5_res = sweep_report_numeric(
+        "e5_removed_report.md",
+        REPORTS_DIR / "7ep" / "e5_removed_report.md",
+        e5_checks,
+        is_exempt_e5_removed,
+    )
+    holm_res = sweep_report_numeric(
+        "holm_claim_rule_report.md",
+        REPORTS_DIR / "7ep" / "holm_claim_rule_report.md",
+        holm_checks,
+        is_exempt_holm_claim_rule,
+    )
+    diag_res = sweep_report_numeric(
+        "diagnostics_7ep.md",
+        REPORTS_DIR / "7ep" / "diagnostics_7ep.md",
+        diag_checks,
+        is_exempt_diagnostics_7ep,
+    )
     return {
         "tactic": tactic_res,
         "technique": tech_res,
@@ -1227,6 +1731,12 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         "permutation_test_v2": perm_v2_res,
         "planted_realscale": realscale_res,
         "evaluation_7ep": eval_7ep_res,
+        "learning_curve_7ep": lc_res,
+        "permutation_7ep": perm_7ep_res,
+        "planted_realscale_7ep": pr_7ep_res,
+        "e5_removed": e5_res,
+        "holm_claim_rule": holm_res,
+        "diagnostics_7ep": diag_res,
     }
 
 
@@ -1256,6 +1766,14 @@ def run_all_mutation_sweeps() -> None:
     tactic_checks, tech_checks = get_check_suites()
     planted_checks, perm_v2_checks, realscale_checks = get_validation_check_suites()
     eval_7ep_checks = get_eval_7ep_check_suites()
+    (
+        lc_checks,
+        perm_7ep_checks,
+        pr_7ep_checks,
+        e5_checks,
+        holm_checks,
+        diag_checks,
+    ) = get_check_suites_7ep_inference()
 
     # =========================================================================
     # PART A & B: Numeric Mutation Sweep
@@ -1300,6 +1818,42 @@ def run_all_mutation_sweeps() -> None:
         eval_7ep_checks,
         is_exempt_eval_7ep,
     )
+    num_lc = sweep_report_numeric(
+        "learning_curve_7ep_report.md",
+        REPORTS_DIR / "7ep" / "learning_curve_7ep_report.md",
+        lc_checks,
+        is_exempt_learning_curve_7ep,
+    )
+    num_perm_7ep = sweep_report_numeric(
+        "permutation_7ep_report.md",
+        REPORTS_DIR / "7ep" / "permutation_7ep_report.md",
+        perm_7ep_checks,
+        is_exempt_permutation_7ep,
+    )
+    num_pr_7ep = sweep_report_numeric(
+        "planted_realscale_7ep_report.md",
+        REPORTS_DIR / "7ep" / "planted_realscale_7ep_report.md",
+        pr_7ep_checks,
+        is_exempt_planted_realscale_7ep,
+    )
+    num_e5 = sweep_report_numeric(
+        "e5_removed_report.md",
+        REPORTS_DIR / "7ep" / "e5_removed_report.md",
+        e5_checks,
+        is_exempt_e5_removed,
+    )
+    num_holm = sweep_report_numeric(
+        "holm_claim_rule_report.md",
+        REPORTS_DIR / "7ep" / "holm_claim_rule_report.md",
+        holm_checks,
+        is_exempt_holm_claim_rule,
+    )
+    num_diag = sweep_report_numeric(
+        "diagnostics_7ep.md",
+        REPORTS_DIR / "7ep" / "diagnostics_7ep.md",
+        diag_checks,
+        is_exempt_diagnostics_7ep,
+    )
 
     numeric_results = {
         "tactic": num_tactic,
@@ -1308,6 +1862,12 @@ def run_all_mutation_sweeps() -> None:
         "permutation_test_v2": num_perm_v2,
         "planted_realscale": num_realscale,
         "evaluation_7ep": num_eval_7ep,
+        "learning_curve_7ep": num_lc,
+        "permutation_7ep": num_perm_7ep,
+        "planted_realscale_7ep": num_pr_7ep,
+        "e5_removed": num_e5,
+        "holm_claim_rule": num_holm,
+        "diagnostics_7ep": num_diag,
     }
 
     # Print Part A Exempt list

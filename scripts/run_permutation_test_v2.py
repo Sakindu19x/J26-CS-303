@@ -804,6 +804,19 @@ def run_permutation_test_v2() -> dict[str, Any]:
             "warning": warning_msg,
         }
 
+    # Apply "INVALID NULL - do not cite:" prefix to conclusion text for invalid schemes/levels
+    for sc in schemes:
+        for lvl in levels:
+            lvl_invalid = any(
+                report_data["schemes"][sc][lvl][st]["p_value"] < 0.05
+                for st in order_free_stats
+            )
+            if lvl_invalid:
+                for st in stats_keys:
+                    old_c = report_data["schemes"][sc][lvl][st]["conclusion"]
+                    if not old_c.startswith("INVALID NULL - do not cite:"):
+                        report_data["schemes"][sc][lvl][st]["conclusion"] = f"INVALID NULL - do not cite: {old_c}"
+
     # Write JSON
     print(f"Writing report JSON to {JSON_OUT_PATH}...")
     with open(JSON_OUT_PATH, "w", encoding="utf-8") as f:

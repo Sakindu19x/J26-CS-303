@@ -105,6 +105,21 @@ if hash_file_7ep_eval.is_file():
         if not match:
             raise ValueError(f"Byte mismatch in 7-episode Evaluation file: {rel_path}")
 
+# (f) 7-Episode Inference files
+print("\n(f) 7-Episode Inference Files (vs reports/_baseline_hashes_7ep_inference.json):")
+hash_file_7ep_inf = BASE_DIR / "reports" / "_baseline_hashes_7ep_inference.json"
+if hash_file_7ep_inf.is_file():
+    with open(hash_file_7ep_inf, "r", encoding="utf-8") as f:
+        b_7ep_inf = json.load(f)
+    for rel_path, exp_h in b_7ep_inf.items():
+        p = BASE_DIR / rel_path
+        h = hashlib.sha256(p.read_bytes()).hexdigest()
+        match = (h == exp_h)
+        status = "MATCH" if match else "MISMATCH"
+        print(f"  {rel_path:<60} {h}  [{status}]")
+        if not match:
+            raise ValueError(f"Byte mismatch in 7-episode Inference file: {rel_path}")
+
 print("\n" + "=" * 80)
 print("ALL BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED")
 print("=" * 80)

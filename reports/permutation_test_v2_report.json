@@ -662,7 +662,7 @@
           "n_ge_observed": 14,
           "b_permutations": 1000,
           "p_value": 0.014985014985014986,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0150)"
+          "conclusion": "INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0150)"
         },
         "markov_hit3": {
           "observed": 0.5283018867924528,
@@ -675,7 +675,7 @@
           "n_ge_observed": 0,
           "b_permutations": 1000,
           "p_value": 0.000999000999000999,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0010)"
+          "conclusion": "INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0010)"
         },
         "frequency_hit1": {
           "observed": 0.16981132075471697,
@@ -688,7 +688,7 @@
           "n_ge_observed": 26,
           "b_permutations": 1000,
           "p_value": 0.026973026973026972,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0270)"
+          "conclusion": "INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0270)"
         },
         "frequency_hit3": {
           "observed": 0.6226415094339622,
@@ -701,7 +701,7 @@
           "n_ge_observed": 197,
           "b_permutations": 1000,
           "p_value": 0.1978021978021978,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1978)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1978)"
         },
         "markov_fallback_hit1": {
           "observed": 0.24528301886792453,
@@ -714,7 +714,7 @@
           "n_ge_observed": 6,
           "b_permutations": 1000,
           "p_value": 0.006993006993006993,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0070)"
+          "conclusion": "INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0070)"
         },
         "markov_fallback_hit3": {
           "observed": 0.5660377358490566,
@@ -727,7 +727,7 @@
           "n_ge_observed": 0,
           "b_permutations": 1000,
           "p_value": 0.000999000999000999,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0010)"
+          "conclusion": "INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0010)"
         },
         "markov_minus_frequency_hit1": {
           "observed": 0.03773584905660377,
@@ -740,7 +740,7 @@
           "n_ge_observed": 67,
           "b_permutations": 1000,
           "p_value": 0.06793206793206794,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0679)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0679)"
         },
         "markov_minus_frequency_hit3": {
           "observed": -0.09433962264150944,
@@ -753,7 +753,7 @@
           "n_ge_observed": 20,
           "b_permutations": 1000,
           "p_value": 0.02097902097902098,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0210)"
+          "conclusion": "INVALID NULL - do not cite: observed exceeds the shuffled-order null (p=0.0210)"
         }
       }
     }
