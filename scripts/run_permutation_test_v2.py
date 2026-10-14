@@ -319,12 +319,12 @@ def run_permutation_test_v2() -> dict[str, Any]:
                 "observed_value": f"{obs_rates['technique_collapsed_full'][k]:.10f}",
             })
 
-        # S1 Tactic
-        rng_tac = random.Random(b)
+        # S1 Tactic: continues the exact rng stream from S1 Technique (4 episodes sorted by ep_id)
+        # exactly matching the committed v2 implementation in 23296b8.
         s1_tac_col = {}
         for ep_id in sorted(canonical_tac_col.keys()):
             shuffled_tac = copy.deepcopy(canonical_tac_col[ep_id])
-            rng_tac.shuffle(shuffled_tac)
+            rng.shuffle(shuffled_tac)
             s1_tac_col[ep_id] = shuffled_tac
 
         orig_te_fn = te.build_tactic_sequences
@@ -386,6 +386,17 @@ def run_permutation_test_v2() -> dict[str, Any]:
     # =========================================================================
     # SCHEME S3: Constrained Shuffle (No Adjacent Identical Items)
     # =========================================================================
+    # S3 Random Stream Isolation:
+    # Scheme S3 uses its own independent RNG instances per seed b, completely
+    # isolated from Scheme S1 and Scheme S2:
+    # 1. rng_s3_tech = random.Random(b): consumed sequentially per episode in
+    #    sorted order (E1..E4) via rejection sampling until no adjacent identical
+    #    technique sets exist (or MAX_S3_TRIES is reached).
+    # 2. rng_s3_tac = random.Random(b): consumed sequentially per episode in
+    #    sorted order (E1..E4) via rejection sampling until no adjacent identical
+    #    tactic sets exist (or MAX_S3_TRIES is reached).
+    # This isolation guarantees that S3 execution never perturbs S1 or S2.
+    # =========================================================================
     t_s3 = time.time()
     print(f"\nRunning {B_PERMUTATIONS} permutations under Scheme S3 (constrained shuffle)...")
     s3_tech_tries_list: list[int] = []
@@ -394,7 +405,7 @@ def run_permutation_test_v2() -> dict[str, Any]:
     s3_tac_fails = 0
 
     for b in range(B_PERMUTATIONS):
-        rng = random.Random(b)
+        rng_s3_tech = random.Random(b)
 
         # S3 Technique
         s3_tech_episodes = {}
@@ -402,7 +413,7 @@ def run_permutation_test_v2() -> dict[str, Any]:
         b_tech_tries = 0
         tech_valid = True
         for ep_id, ep_data in sorted(orig_seqs["episodes"].items()):
-            shuffled_col, tries = shuffle_constrained_tech(ep_data["collapsed"], rng, MAX_S3_TRIES)
+            shuffled_col, tries = shuffle_constrained_tech(ep_data["collapsed"], rng_s3_tech, MAX_S3_TRIES)
             b_tech_tries += tries
             if shuffled_col is None:
                 tech_valid = False
@@ -471,13 +482,13 @@ def run_permutation_test_v2() -> dict[str, Any]:
                     "observed_value": f"{obs_rates['technique_collapsed_full'][k]:.10f}",
                 })
 
-        # S3 Tactic
-        rng_tac = random.Random(b)
+        # S3 Tactic (dedicated independent RNG stream)
+        rng_s3_tac = random.Random(b)
         s3_tac_col = {}
         b_tac_tries = 0
         tac_valid = True
         for ep_id in sorted(canonical_tac_col.keys()):
-            shuffled_tac, tries = shuffle_constrained_tac(canonical_tac_col[ep_id], rng_tac, MAX_S3_TRIES)
+            shuffled_tac, tries = shuffle_constrained_tac(canonical_tac_col[ep_id], rng_s3_tac, MAX_S3_TRIES)
             b_tac_tries += tries
             if shuffled_tac is None:
                 tac_valid = False
@@ -939,6 +950,27 @@ def generate_markdown_report_v2(data: dict[str, Any]) -> None:
         A(f"| {lbl:26s} | {row['observed']:+.4f} | {h_str:9s} | {row['null_mean']:+.4f} | {row['null_sd']:.4f} | {row['null_p2_5']:+.4f} | {row['null_p97_5']:+.4f} | {row['p_value']:.4f} | {row['conclusion']} |")
 
     A()
+    A("### S1 vs S3 Monte Carlo Consistency")
+    A()
+    A("Monte Carlo permutation standard errors are given by $\\text{SE}_{\\text{MC}}(p) = \\sqrt{p(1-p)/B}$ ($B=1000$). S1 and S3 p-values differing by less than two Monte Carlo standard errors are statistically consistent:")
+    A()
+    for lvl, lvl_label in [("technique_collapsed_full", "Technique Level (`collapsed_full`)"), ("tactic_collapsed", "Tactic Level (`tactic_collapsed`)")]:
+        A(f"#### {lvl_label}")
+        A()
+        for st, lbl in stat_labels.items():
+            p1 = data["schemes"]["S1_collapsed_order"][lvl][st]["p_value"]
+            p3 = data["schemes"]["S3_constrained_shuffle"][lvl][st]["p_value"]
+            se1 = math.sqrt(p1 * (1.0 - p1) / 1000.0)
+            se3 = math.sqrt(p3 * (1.0 - p3) / 1000.0)
+            diff = abs(p1 - p3)
+            combined_2se = 2.0 * math.sqrt(se1**2 + se3**2)
+            if diff <= combined_2se:
+                verdict = f"is less than two combined Monte Carlo standard errors ({combined_2se:.4f}), confirming S1 and S3 are consistent."
+            else:
+                verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences."
+            A(f"- **{lbl}**: S1 $p = {p1:.4f}$ (MC SE $= {se1:.4f}$), S3 $p = {p3:.4f}$ (MC SE $= {se3:.4f}$); difference $|p_{{S1}} - p_{{S3}}| = {diff:.4f}$ {verdict}")
+        A()
+
     A("---")
     A()
     A("## Sensitivity Scheme S2 Results (Rate-Based Comparison)")

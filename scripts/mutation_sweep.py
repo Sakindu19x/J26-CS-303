@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import re
 import sys
 from collections import Counter
@@ -757,6 +758,37 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
             assert line_tac in md, f"Missing S2 tac row: {line_tac}"
 
 
+    def check_perm_v2_monte_carlo(md: str) -> None:
+        assert "### S1 vs S3 Monte Carlo Consistency" in md
+        assert (
+            "Monte Carlo permutation standard errors are given by $\\text{SE}_{\\text{MC}}(p) = \\sqrt{p(1-p)/B}$ ($B=1000$). "
+            "S1 and S3 p-values differing by less than two Monte Carlo standard errors are statistically consistent:"
+        ) in md
+        stat_map = [
+            ("markov_hit1", "Markov Hit@1"),
+            ("markov_hit3", "Markov Hit@3"),
+            ("frequency_hit1", "Frequency Hit@1"),
+            ("frequency_hit3", "Frequency Hit@3"),
+            ("markov_fallback_hit1", "Markov Fallback Hit@1"),
+            ("markov_fallback_hit3", "Markov Fallback Hit@3"),
+            ("markov_minus_frequency_hit1", "Markov - Frequency Hit@1"),
+            ("markov_minus_frequency_hit3", "Markov - Frequency Hit@3"),
+        ]
+        for lvl in ["technique_collapsed_full", "tactic_collapsed"]:
+            for st, lbl in stat_map:
+                p1 = perm_v2_json["schemes"]["S1_collapsed_order"][lvl][st]["p_value"]
+                p3 = perm_v2_json["schemes"]["S3_constrained_shuffle"][lvl][st]["p_value"]
+                se1 = math.sqrt(p1 * (1.0 - p1) / 1000.0)
+                se3 = math.sqrt(p3 * (1.0 - p3) / 1000.0)
+                diff = abs(p1 - p3)
+                combined_2se = 2.0 * math.sqrt(se1**2 + se3**2)
+                if diff <= combined_2se:
+                    verdict = f"is less than two combined Monte Carlo standard errors ({combined_2se:.4f}), confirming S1 and S3 are consistent."
+                else:
+                    verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences."
+                expected_line = f"- **{lbl}**: S1 $p = {p1:.4f}$ (MC SE $= {se1:.4f}$), S3 $p = {p3:.4f}$ (MC SE $= {se3:.4f}$); difference $|p_{{S1}} - p_{{S3}}| = {diff:.4f}$ {verdict}"
+                assert expected_line in md, f"Missing MC line: {expected_line}"
+
     def check_perm_v2_what_this_cannot_show(md: str) -> None:
         assert "$N=67$ transition samples, and the tactic evaluation contains only $N=53$ transition samples across four episodes." in md
         assert "models are trained on only three episodes per fold, limiting transition coverage across a large technique vocabulary ($V=64$)." in md
@@ -770,6 +802,7 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
         check_perm_v2_sample_counts,
         check_perm_v2_s1_tables,
         check_perm_v2_s3_tables,
+        check_perm_v2_monte_carlo,
         check_perm_v2_s2_tables,
         check_perm_v2_what_this_cannot_show,
     ]

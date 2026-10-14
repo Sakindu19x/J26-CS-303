@@ -136,3 +136,29 @@ def test_permutation_v2_byte_identical_reproducibility() -> None:
 def test_permutation_v2_report_equals_verifier() -> None:
     """Verify that independent CSV-only verifier confirms report match."""
     assert verify_permutation_test_v2() is True
+
+
+@pytest.mark.slow
+def test_full_b_reproducibility() -> None:
+    """Verify full B=1000 reproducibility across two complete runs."""
+    import hashlib
+    import subprocess
+    import sys
+
+    # Compute current hashes
+    h_csv1 = hashlib.sha256(Path(BASE_DIR / "data" / "processed" / "permutation_v2_null_distribution.csv").read_bytes()).hexdigest()
+    h_json1 = hashlib.sha256(Path(BASE_DIR / "reports" / "permutation_test_v2_report.json").read_bytes()).hexdigest()
+    h_md1 = hashlib.sha256(Path(BASE_DIR / "reports" / "permutation_test_v2_report.md").read_bytes()).hexdigest()
+
+    # Re-run permutation script
+    res = subprocess.run([sys.executable, str(BASE_DIR / "scripts" / "run_permutation_test_v2.py")], capture_output=True, text=True)
+    assert res.returncode == 0, f"Rerun failed: {res.stderr}"
+
+    h_csv2 = hashlib.sha256(Path(BASE_DIR / "data" / "processed" / "permutation_v2_null_distribution.csv").read_bytes()).hexdigest()
+    h_json2 = hashlib.sha256(Path(BASE_DIR / "reports" / "permutation_test_v2_report.json").read_bytes()).hexdigest()
+    h_md2 = hashlib.sha256(Path(BASE_DIR / "reports" / "permutation_test_v2_report.md").read_bytes()).hexdigest()
+
+    assert h_csv1 == h_csv2, "CSV hash changed on rerun!"
+    assert h_json1 == h_json2, "JSON hash changed on rerun!"
+    assert h_md1 == h_md2, "MD hash changed on rerun!"
+

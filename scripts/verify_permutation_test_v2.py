@@ -131,7 +131,31 @@ def verify_permutation_test_v2() -> bool:
     assert sample_counts["S1_collapsed_order"]["tactic_collapsed"] == {53}, "S1 tactic N not constant 53!"
     assert sample_counts["S3_constrained_shuffle"]["technique_collapsed_full"] == {67}, "S3 technique N not constant 67!"
     assert sample_counts["S3_constrained_shuffle"]["tactic_collapsed"] == {53}, "S3 tactic N not constant 53!"
+    
+    # Verify S2 variability bounds
+    s2_tech_n = sample_counts["S2_raw_shuffle_rate"]["technique_collapsed_full"]
+    s2_tac_n = sample_counts["S2_raw_shuffle_rate"]["tactic_collapsed"]
+    assert min(s2_tech_n) == 82 and max(s2_tech_n) == 95, f"S2 technique N range unexpected: {min(s2_tech_n)}..{max(s2_tech_n)}"
+    assert min(s2_tac_n) == 74 and max(s2_tac_n) == 90, f"S2 tactic N range unexpected: {min(s2_tac_n)}..{max(s2_tac_n)}"
     print("S1 and S3 constant sample counts verified: Technique N=67, Tactic N=53.")
+    print("S2 variable sample counts verified: Technique N in [82, 95], Tactic N in [74, 90].")
+
+    # Verify pairwise distinctness across schemes (FAILS if any two schemes have identical permutation distributions)
+    print("\n[Step 1b] Verifying pairwise scheme distinctness (no scheme equals another)...")
+    scheme_pairs = [
+        ("S1_collapsed_order", "S3_constrained_shuffle"),
+        ("S1_collapsed_order", "S2_raw_shuffle_rate"),
+        ("S3_constrained_shuffle", "S2_raw_shuffle_rate"),
+    ]
+    for s_a, s_b in scheme_pairs:
+        for lvl in levels:
+            for st in stats_keys:
+                vals_a = null_data[s_a][lvl][st]
+                vals_b = null_data[s_b][lvl][st]
+                assert len(vals_a) == len(vals_b) == 1000
+                if vals_a == vals_b:
+                    raise ValueError(f"CRITICAL INTEGRITY FAILURE: Permutation rows of schemes {s_a} and {s_b} are identical for {lvl} {st}!")
+    print("Pairwise scheme distinctness verified: S1, S2, and S3 are strictly distinct across all statistics and levels.")
 
     # 2. Recompute statistics and verify against JSON
     print("\n[Step 2] Recomputing null statistics and verifying against report JSON...")
