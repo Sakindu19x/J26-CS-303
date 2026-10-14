@@ -1,3 +1,5 @@
+> **SUPERSEDED: hit counts were compared across permutations with different sample counts N. Do not cite.**
+
 # Permutation Test on Real Episodes (E1–E4) Report
 
 ## Pre-Declared Test Design & Purpose

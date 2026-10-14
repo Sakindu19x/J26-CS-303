@@ -317,8 +317,15 @@ def run_experiment() -> dict[str, Any]:
 
     # Variant A2: Skewed Targets
     print("\n--- Running Variant A2 (Skewed Targets, No Order) ---")
+    a2_total_items = 0
+    a2_dom_items = 0
     for rep_id in range(N_REPLICATES):
         eps = generate_a2_dataset(rep_id)
+        for ep_data in eps.values():
+            for itm in ep_data["collapsed"]:
+                a2_total_items += 1
+                if V[0] in itm["techniques"]:
+                    a2_dom_items += 1
         rep_res, rows = evaluate_dataset_loeo(eps, "A2", 0.0, rep_id)
         a2_reps.append(rep_res)
         all_csv_rows.extend(rows)
@@ -326,7 +333,8 @@ def run_experiment() -> dict[str, Any]:
     a2_m_mean = sum(r["markov"]["top1"] for r in a2_reps) / N_REPLICATES
     a2_f_mean = sum(r["frequency"]["top1"] for r in a2_reps) / N_REPLICATES
     a2_diff = abs(a2_m_mean - a2_f_mean)
-    print(f"  A2 | Markov Top-1: {a2_m_mean:.4f} | Freq Top-1: {a2_f_mean:.4f} | Diff: {a2_diff:.4f}")
+    a2_dom_freq = a2_dom_items / a2_total_items
+    print(f"  A2 | Markov Top-1: {a2_m_mean:.4f} | Freq Top-1: {a2_f_mean:.4f} | Diff: {a2_diff:.4f} | Dom Freq: {a2_dom_freq:.4f}")
 
     # Variant A3: Set-Valued Steps
     print("\n--- Running Variant A3 (Set-Valued Steps {x, c(x)}) ---")
@@ -453,6 +461,9 @@ def run_experiment() -> dict[str, Any]:
             "markov_top1_mean": a2_m_mean,
             "frequency_top1_mean": a2_f_mean,
             "difference": a2_diff,
+            "dominant_nominal_probability": 0.30,
+            "dominant_post_collapse_frequency": a2_dom_freq,
+            "dominant_uniform_other_nominal": 0.06363636363636363,
         },
         "A3": a3_by_s,
         "negative_control": {
@@ -510,7 +521,7 @@ def generate_markdown_report(data: dict[str, Any]) -> None:
     A(f"  `{', '.join(data['vocabulary'])}`")
     A("- **Planted Successor Permutation (pi)**: Cyclic permutation `pi(t_i) = t_{(i+1) % 12}` without fixed points (marginal target frequencies are uniform).")
     A("- **Generator**: stdlib `random.Random` (seeds 0..19). Episode length: 26 items; 8 episodes per replicate dataset; 20 replicate datasets per signal level.")
-    A("- **Signal Levels (s)**: `0.0, 0.25, 0.50, 0.75, 1.00`.")
+    A(f"- **Signal Levels (s)**: `{', '.join(f'{s:.2f}' for s in data['signal_levels'])}`.")
     A("- **Evaluation Code**: Production `MarkovModel` and `FrequencyBaseline` evaluated under 8-fold Leave-One-Episode-Out cross-validation.")
     A(f"- **Theoretical Closed Forms**: Oracle Top-1 = `s + (1-s)/(V-1)`; Chance Top-1 = `1/(V-1) = 1/11 = {data['chance_top1']:.6f}`.")
     A()
@@ -545,7 +556,7 @@ def generate_markdown_report(data: dict[str, Any]) -> None:
     A()
     A("### Variant A2: Skewed Targets (No Order Structure)")
     A()
-    A("Evaluates i.i.d. draws with one dominant technique having probability 0.30 and the remaining 11 techniques uniform (`(1 - 0.30)/11 = 0.0636`):")
+    A(f"Evaluates i.i.d. draws with one dominant technique having nominal probability {data['A2']['dominant_nominal_probability']:.2f} (empirical post-collapse frequency {data['A2']['dominant_post_collapse_frequency']:.4f}) and the remaining 11 techniques uniform (`(1 - {data['A2']['dominant_nominal_probability']:.2f})/11 = {data['A2']['dominant_uniform_other_nominal']:.4f}`):")
     A(f"- **Markov Top-1 Mean**: `{data['A2']['markov_top1_mean']:.4f}`")
     A(f"- **Frequency Baseline Top-1 Mean**: `{data['A2']['frequency_top1_mean']:.4f}`")
     A(f"- **Absolute Difference**: `{data['A2']['difference']:.4f}` (Gate G6 requires `<= 0.0300`)")
@@ -568,6 +579,47 @@ def generate_markdown_report(data: dict[str, Any]) -> None:
     A(f"- Broken Markov Top-1 at s=1.0: `{data['negative_control']['broken_markov_top1']:.4f}`")
     A("- Gate G1 threshold: `>= 0.9800`")
     A("- Verdict: **G1 FAILS as expected**, proving that the test gate has non-trivial discriminating power.")
+    A()
+    A("---")
+    A()
+    A("## Appendix: A2 Design History")
+    A()
+    A("This appendix discloses the design history of Variant A2 prior to the final accepted design. Gate G6 is evaluated on the final design only.")
+    A()
+    A("1. `test_a2_diff.py`:")
+    A("   - **What it changed**: Evaluated whether running LOEO with variant=\"collapsed\" versus variant=\"raw\" without applying `collapse_sequence` to the raw generated events affected the A2 evaluation.")
+    A("   - **G6 value (|Markov - Frequency|)**: `0.0343` (Mean Markov = 0.2707, Mean Frequency = 0.3050). Failed G6 threshold (<= 0.0300).")
+    A("   - **Why changed**: Both variants returned identical scores because raw events had not been passed through `collapse_sequence()`, leaving repeated consecutive events unmerged.")
+    A()
+    A("2. `inspect_a2.py`:")
+    A("   - **What it changed**: Inspected conditional transition probabilities and frequency predictions for a single fold of A2 to isolate why Markov Top-1 lagged Frequency Top-1.")
+    A("   - **G6 value**: Diagnostic run on a single fold (not an 8-fold cross-replicate benchmark).")
+    A("   - **Why changed**: Showed that Frequency consistently picked the dominant technique `T1003` (marginal frequency ~27.4%), whereas Markov conditional on `T1003` only chose `T1003` 19.5% of the time due to uncollapsed self-transitions `T1003 -> T1003`.")
+    A()
+    A("3. `test_a2_choices.py`:")
+    A("   - **What it changed**: Tested whether sampling via `random.Random.choices` with explicit weights `[0.30] + [0.70/11]*11` differed from the Bernoulli sampling rule (`T1003 if random() < 0.30 else choice(others)`).")
+    A("   - **G6 value (|Markov - Frequency|)**: `choices` produced diff = `0.0355` (Markov = 0.2712, Frequency = 0.3067); `bernoulli` produced diff = `0.0343` (Markov = 0.2707, Frequency = 0.3050). Both failed G6 (<= 0.0300).")
+    A("   - **Why changed**: Sampling mechanism did not resolve the gap; the uncollapsed consecutive items remained the source of the discrepancy.")
+    A()
+    A("4. `test_a2_proper.py`:")
+    A("   - **What it changed**: Verified independent 8-episode generation per replicate with fresh seed across 20 replicates without sequence collapsing.")
+    A("   - **G6 value (|Markov - Frequency|)**: `0.0343` (Markov = 0.2707, Frequency = 0.3050). Failed G6 threshold (<= 0.0300).")
+    A("   - **Why changed**: Confirmed that the gap was reproducible and intrinsic to uncollapsed i.i.d. draws.")
+    A()
+    A("5. `test_a2_dom.py`:")
+    A("   - **What it changed**: Compared fixed dominant technique (`V[0] = T1003`) against rotating the dominant technique per replicate seed (`V[seed % 12]`).")
+    A("   - **G6 value (|Markov - Frequency|)**: Fixed gave diff = `0.0343` (Markov = 0.2707, Frequency = 0.3050); seed-varying gave diff = `0.0503` (Markov = 0.2547, Frequency = 0.3050).")
+    A("   - **Why changed**: Rotating dominant technique widened the discrepancy; fixed dominant technique was retained.")
+    A()
+    A("6. `test_a2_collapsed.py`:")
+    A("   - **What it changed**: Applied production `collapse_sequence` to raw A2 sequences so consecutive identical events merge into collapsed items, exactly matching the real data pipeline and production collapsed sequence format.")
+    A("   - **G6 value (|Markov - Frequency|)**: `0.0112` (Markov = 0.2347, Frequency = 0.2458). Passed G6 threshold (<= 0.0300).")
+    A("   - **Why changed**: In real telemetry (and throughout C4 evaluation), sequential analysis is conducted on collapsed sequences; applying `collapse_sequence` eliminated self-repeats and aligned Markov and Frequency expectations.")
+    A()
+    A("7. `test_all_gates.py`:")
+    A("   - **What it changed**: Integrated the collapsed A2 design alongside A1, A3, and negative control into a unified gate verification harness.")
+    A("   - **G6 value**: `0.0112` (Markov = 0.2347, Frequency = 0.2458, diff = 0.0112 <= 0.0300). Passed.")
+    A("   - **Why changed**: Final pre-execution gate validation confirming all pre-declared gates G1–G7 pass on the final design before generating production artifacts.")
 
     with open(MD_OUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")

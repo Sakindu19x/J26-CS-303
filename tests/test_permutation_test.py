@@ -20,7 +20,7 @@ from src.c4.tactic_evaluation import evaluate_tactic_slice
 from scripts.verify_permutation_test import verify_permutation_test
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-JSON_PATH = BASE_DIR / "reports" / "permutation_test_report.json"
+JSON_PATH = BASE_DIR / "reports" / "archive" / "permutation_test_report_v1_counts_superseded.json"
 ATTACK_SEQS_PATH = BASE_DIR / "data" / "processed" / "attack_sequences.json"
 
 

@@ -2180,7 +2180,10 @@
   "A2": {
     "markov_top1_mean": 0.23467375385507375,
     "frequency_top1_mean": 0.24584613597764618,
-    "difference": 0.011172382122572433
+    "difference": 0.011172382122572433,
+    "dominant_nominal_probability": 0.3,
+    "dominant_post_collapse_frequency": 0.24903793293018142,
+    "dominant_uniform_other_nominal": 0.06363636363636363
   },
   "A3": {
     "0.0": {

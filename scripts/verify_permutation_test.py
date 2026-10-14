@@ -21,9 +21,9 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-CSV_PATH = BASE_DIR / "data" / "processed" / "permutation_null_distribution.csv"
-JSON_PATH = BASE_DIR / "reports" / "permutation_test_report.json"
-MD_PATH = BASE_DIR / "reports" / "permutation_test_report.md"
+CSV_PATH = BASE_DIR / "reports" / "archive" / "permutation_null_distribution_v1_counts_superseded.csv"
+JSON_PATH = BASE_DIR / "reports" / "archive" / "permutation_test_report_v1_counts_superseded.json"
+MD_PATH = BASE_DIR / "reports" / "archive" / "permutation_test_report_v1_counts_superseded.md"
 
 
 def percentile_linear(data: list[float], p: float) -> float:

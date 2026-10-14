@@ -16,3 +16,6 @@ env/
 data/raw/*.zip
 data/raw/*.tar.gz
 data/raw/*.tgz
+
+# Conversation transcripts
+docs/c4_full_conversation_history.md
