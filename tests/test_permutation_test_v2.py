@@ -1,10 +1,12 @@
-r"""Unit tests for Permutation Test on Real Episodes v2 (Part C).
+r"""Unit tests for Permutation Test on Real Episodes v2.1.
 
 Tests:
 1. test_observed_values_equal_reports: observed baseline rates and hits match production reports.
-2. test_n_constant_under_s1: assert N is strictly invariant (67 technique, 53 tactic) under S1.
-3. test_permutation_v2_byte_identical_reproducibility: assert identical output with same seed.
-4. test_permutation_v2_report_equals_verifier: independent CSV-based verifier confirms report match.
+2. test_n_constant_under_s1_and_s3: assert N is strictly invariant (67 technique, 53 tactic) under S1 and S3.
+3. test_scheme_validity_warnings: assert validity warning present exactly when a Frequency statistic has p < 0.05.
+4. test_s3_rejection_sampling_bounds: assert S3 had <= 5% exclusions (actually 0) and non-zero tries.
+5. test_permutation_v2_byte_identical_reproducibility: assert identical output with same seed.
+6. test_permutation_v2_report_equals_verifier: independent CSV-based verifier confirms report match.
 """
 from __future__ import annotations
 
@@ -62,19 +64,53 @@ def test_observed_values_equal_reports() -> None:
     assert obs_counts["tactic_collapsed"]["frequency_hit3"] == 33
 
 
-def test_n_constant_under_s1() -> None:
-    """Verify that under S1 scheme, N is strictly constant (67 technique, 53 tactic)."""
+def test_n_constant_under_s1_and_s3() -> None:
+    """Verify that under S1 and S3 schemes, N is strictly constant (67 technique, 53 tactic)."""
     with open(JSON_PATH, "r", encoding="utf-8") as f:
         v2_data = json.load(f)
 
-    s1_sum = v2_data["metadata"]["sample_counts_summary"]["S1_collapsed_order"]
-    assert s1_sum["technique_collapsed_full"]["min"] == 67
-    assert s1_sum["technique_collapsed_full"]["max"] == 67
-    assert s1_sum["technique_collapsed_full"]["is_constant"] is True
+    for sc in ["S1_collapsed_order", "S3_constrained_shuffle"]:
+        s_sum = v2_data["metadata"]["sample_counts_summary"][sc]
+        assert s_sum["technique_collapsed_full"]["min"] == 67
+        assert s_sum["technique_collapsed_full"]["max"] == 67
+        assert s_sum["technique_collapsed_full"]["is_constant"] is True
 
-    assert s1_sum["tactic_collapsed"]["min"] == 53
-    assert s1_sum["tactic_collapsed"]["max"] == 53
-    assert s1_sum["tactic_collapsed"]["is_constant"] is True
+        assert s_sum["tactic_collapsed"]["min"] == 53
+        assert s_sum["tactic_collapsed"]["max"] == 53
+        assert s_sum["tactic_collapsed"]["is_constant"] is True
+
+
+def test_scheme_validity_warnings() -> None:
+    """Verify that validity warnings are present exactly when an order-free Frequency statistic has p < 0.05."""
+    with open(JSON_PATH, "r", encoding="utf-8") as f:
+        v2_data = json.load(f)
+
+    chk = v2_data["scheme_validity_check"]
+
+    # S1 and S3 must be valid order-only nulls
+    assert chk["S1_collapsed_order"]["is_valid_order_null"] is True
+    assert chk["S1_collapsed_order"]["warning"] is None
+
+    assert chk["S3_constrained_shuffle"]["is_valid_order_null"] is True
+    assert chk["S3_constrained_shuffle"]["warning"] is None
+
+    # S2 must be flagged as invalid because tactic Frequency Hit@1 has p < 0.05 (p=0.0270)
+    assert chk["S2_raw_shuffle_rate"]["is_valid_order_null"] is False
+    assert chk["S2_raw_shuffle_rate"]["warning"] is not None
+    assert "NOT an order-only null" in chk["S2_raw_shuffle_rate"]["warning"]
+    assert "tactic_collapsed" in chk["S2_raw_shuffle_rate"]["warning"]
+
+
+def test_s3_rejection_sampling_bounds() -> None:
+    """Verify that S3 rejection sampling completed with <= 5% exclusions."""
+    with open(JSON_PATH, "r", encoding="utf-8") as f:
+        v2_data = json.load(f)
+
+    s3_meta = v2_data["metadata"]["s3_rejection_sampling_summary"]
+    assert s3_meta["technique_collapsed_full"]["excluded_permutations"] <= 50
+    assert s3_meta["tactic_collapsed"]["excluded_permutations"] <= 50
+    assert s3_meta["technique_collapsed_full"]["mean_total_tries"] >= 4.0
+    assert s3_meta["tactic_collapsed"]["mean_total_tries"] >= 4.0
 
 
 def test_permutation_v2_byte_identical_reproducibility() -> None:

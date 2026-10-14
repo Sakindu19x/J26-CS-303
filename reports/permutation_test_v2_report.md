@@ -1,14 +1,42 @@
-# Permutation Test on Real Episodes (E1–E4) v2 Report
+# Permutation Test on Real Episodes (E1–E4) v2.1 Report
 
 ## Pre-Declared Test Design & Purpose
 
 - **Purpose**: Determine whether attack event order carries predictive signal beyond order-free baselines in real telemetry episodes E1–E4.
-- **Primary Scheme (S1 - Collapsed-Order Shuffle)**: The items of the stored collapsed sequence for each episode are shuffled strictly within the episode. Sample counts $N$ are strictly invariant ($N=67$ for technique, $N=53$ for tactic in every permutation). Headline decisions are made solely under S1.
-- **Sensitivity Scheme (S2 - Raw-Shuffle Rate-Based)**: Raw labeled events are shuffled within each episode and re-collapsed, yielding variable sample counts ($N \in [82, 95]$ technique, $N \in [74, 90]$ tactic). The statistic is evaluated as hit rate (hits / $N_{perm}$) compared against observed hit rate.
+- **Primary Scheme (S1 - Collapsed-Order Shuffle)**: The items of the stored collapsed sequence for each episode are shuffled strictly within the episode. Sample counts $N$ are strictly invariant ($N=67$ for technique, $N=53$ for tactic in every permutation). Headline decisions are made under S1.
+- **Constrained Scheme (S3 - Adjacency-Constrained Shuffle)**: Shuffles the collapsed sequence uniformly at random subject to the strict constraint that no two adjacent items have identical technique sets (technique level) or identical tactic sets (tactic level), using rejection sampling with up to 10,000 tries per episode. Added after the S1 and S2 results to remove an artifact (adjacent identical items introduced by unconstrained shuffling that are absent in real collapsed data). S1 remains the pre-declared headline; S3 is reported alongside it, and if S1 and S3 disagree, both are reported.
+- **Sensitivity Scheme (S2 - Raw-Shuffle Rate-Based)**: Raw labeled events are shuffled within each episode and re-collapsed, yielding variable sample counts ($N \in [82, 95]$ technique, $N \in [74, 90]$ tactic). Evaluated as hit rate (hits / $N_{perm}$) compared against observed hit rate.
 - **Null Replicates**: B=1000 permutations (stdlib `random.Random` seeds 0..999).
 - **One-Sided p-value Formula**: `p = (1 + count(null >= observed)) / (1 + B)`.
-- **Pre-Declared Decision Rule**: `p < 0.05` under S1 only. Sensitivity scheme S2 is documented alongside S1 for methodological completeness.
+- **Pre-Declared Decision Rule**: `p < 0.05` under S1/S3. Sensitivity scheme S2 is documented alongside S1 and S3 for methodological completeness.
 - **Conclusion Text Generation Rule**: Every conclusion sentence is generated strictly by code from the p-value: if $p < 0.05$, *'observed exceeds the shuffled-order null (p=...)'*; else *'not distinguishable from the shuffled-order null at this sample size (this is not proof of absence)'*. No causal inferences are asserted.
+
+---
+
+## Scheme Validity Check (Order-Free Frequency Statistics)
+
+A valid order-only null permutation must not perturb the performance of an **order-free** model (FrequencyBaseline). If an order-free statistic exhibits $p < 0.05$, the scheme alters marginal event distributions or set compositions in addition to order, confounding order-signal tests.
+
+| Scheme | Level | Statistic | Observed Rate | Null Mean Rate | p-value | Order-Free Status |
+|:---|:---|:---|:---:|:---:|:---:|:---|
+| S1 (Collapsed-Order) | Technique | Frequency Hit@1 | +0.0597 | +0.0493 | 0.6114 | PASS (Valid) |
+| S1 (Collapsed-Order) | Technique | Frequency Hit@3 | +0.1194 | +0.1082 | 0.5944 | PASS (Valid) |
+| S1 (Collapsed-Order) | Tactic | Frequency Hit@1 | +0.1698 | +0.1834 | 0.5085 | PASS (Valid) |
+| S1 (Collapsed-Order) | Tactic | Frequency Hit@3 | +0.6226 | +0.5627 | 0.1548 | PASS (Valid) |
+| S3 (Constrained Shuffle) | Technique | Frequency Hit@1 | +0.0597 | +0.0494 | 0.6134 | PASS (Valid) |
+| S3 (Constrained Shuffle) | Technique | Frequency Hit@3 | +0.1194 | +0.1088 | 0.6004 | PASS (Valid) |
+| S3 (Constrained Shuffle) | Tactic | Frequency Hit@1 | +0.1698 | +0.1786 | 0.4605 | PASS (Valid) |
+| S3 (Constrained Shuffle) | Tactic | Frequency Hit@3 | +0.6226 | +0.5659 | 0.1089 | PASS (Valid) |
+| S2 (Raw-Shuffle) | Technique | Frequency Hit@1 | +0.0597 | +0.0641 | 0.3656 | PASS (Valid) |
+| S2 (Raw-Shuffle) | Technique | Frequency Hit@3 | +0.1194 | +0.1181 | 0.6853 | PASS (Valid) |
+| S2 (Raw-Shuffle) | Tactic | Frequency Hit@1 | +0.1698 | +0.1296 | 0.0270 | **FLAG (p < 0.05)** |
+| S2 (Raw-Shuffle) | Tactic | Frequency Hit@3 | +0.6226 | +0.5552 | 0.1978 | PASS (Valid) |
+
+- **S1 Validity**: Confirmed valid order-only null (all order-free Frequency statistics have $p \ge 0.05$).
+- **S3 Validity**: Confirmed valid order-only null (all order-free Frequency statistics have $p \ge 0.05$).
+> [!WARNING]
+> **Scheme Validity Warning (S2)**: WARNING: Scheme 'S2_raw_shuffle_rate' exhibits statistically significant deviation (p < 0.05) on order-free Frequency statistic(s): tactic_collapsed frequency_hit1 (p=0.0270). This indicates that the scheme perturbs marginal distributions/compositions in addition to sequence order. Therefore, it is NOT an order-only null and MUST NOT be used for an order-signal claim.
+
 
 ---
 
@@ -18,8 +46,16 @@
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
 | S1 (Collapsed-Order) | Technique (collapsed_full) | 67 | 67 | 67.00 | 67 | **YES (Constant)** |
 | S1 (Collapsed-Order) | Tactic (tactic_collapsed) | 53 | 53 | 53.00 | 53 | **YES (Constant)** |
+| S3 (Constrained Shuffle) | Technique (collapsed_full) | 67 | 67 | 67.00 | 67 | **YES (Constant)** |
+| S3 (Constrained Shuffle) | Tactic (tactic_collapsed) | 53 | 53 | 53.00 | 53 | **YES (Constant)** |
 | S2 (Raw-Shuffle) | Technique (collapsed_full) | 67 | 82 | 89.36 | 95 | NO (Variable) |
 | S2 (Raw-Shuffle) | Tactic (tactic_collapsed) | 53 | 74 | 82.51 | 90 | NO (Variable) |
+
+### S3 Constrained Shuffle Rejection Sampling Statistics
+
+- **Max Tries Allowed Per Episode**: 10000
+- **Technique Level**: Excluded Permutations = 0, Min Tries = 4, Mean Tries = 4.73, Max Tries = 11
+- **Tactic Level**: Excluded Permutations = 0, Min Tries = 4, Mean Tries = 13.20, Max Tries = 58
 
 ---
 
@@ -42,14 +78,44 @@
 
 | Statistic | Observed Rate | Observed Hits / N | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
-| Markov Hit@1               | +0.2075 | 11 / 53   | +0.1574 | 0.0588 | +0.0566 | +0.2830 | 0.2298 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2298) |
-| Markov Hit@3               | +0.5283 | 28 / 53   | +0.3909 | 0.0811 | +0.2264 | +0.5472 | 0.0589 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0589) |
-| Frequency Hit@1            | +0.1698 | 9 / 53    | +0.1842 | 0.0491 | +0.1321 | +0.2642 | 0.5095 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5095) |
-| Frequency Hit@3            | +0.6226 | 33 / 53   | +0.5637 | 0.0652 | +0.4340 | +0.6226 | 0.1299 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1299) |
-| Markov Fallback Hit@1      | +0.2453 | 13 / 53   | +0.1730 | 0.0593 | +0.0755 | +0.3019 | 0.1429 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1429) |
-| Markov Fallback Hit@3      | +0.5660 | 30 / 53   | +0.4310 | 0.0793 | +0.2825 | +0.5849 | 0.0609 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0609) |
-| Markov - Frequency Hit@1   | +0.0377 | +2 / 53   | -0.0268 | 0.0725 | -0.1698 | +0.1321 | 0.2328 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2328) |
-| Markov - Frequency Hit@3   | -0.0943 | -5 / 53   | -0.1728 | 0.0966 | -0.3585 | +0.0377 | 0.2208 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2208) |
+| Markov Hit@1               | +0.2075 | 11 / 53   | +0.1601 | 0.0563 | +0.0566 | +0.2830 | 0.2547 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2547) |
+| Markov Hit@3               | +0.5283 | 28 / 53   | +0.3960 | 0.0791 | +0.2453 | +0.5472 | 0.0589 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0589) |
+| Frequency Hit@1            | +0.1698 | 9 / 53    | +0.1834 | 0.0479 | +0.1321 | +0.2642 | 0.5085 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5085) |
+| Frequency Hit@3            | +0.6226 | 33 / 53   | +0.5627 | 0.0660 | +0.4340 | +0.6226 | 0.1548 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1548) |
+| Markov Fallback Hit@1      | +0.2453 | 13 / 53   | +0.1747 | 0.0573 | +0.0755 | +0.2835 | 0.1419 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1419) |
+| Markov Fallback Hit@3      | +0.5660 | 30 / 53   | +0.4371 | 0.0774 | +0.2830 | +0.5849 | 0.0579 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0579) |
+| Markov - Frequency Hit@1   | +0.0377 | +2 / 53   | -0.0233 | 0.0721 | -0.1698 | +0.1132 | 0.2517 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2517) |
+| Markov - Frequency Hit@3   | -0.0943 | -5 / 53   | -0.1667 | 0.0951 | -0.3396 | +0.0189 | 0.2557 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2557) |
+
+---
+
+## Constrained Scheme S3 Results (Adjacency-Constrained Null)
+
+### Technique Level (`collapsed_full`, N=67)
+
+| Statistic | Observed Rate | Observed Hits / N | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| Markov Hit@1               | +0.0149 | 1 / 67    | +0.0072 | 0.0113 | +0.0000 | +0.0299 | 0.3367 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3367) |
+| Markov Hit@3               | +0.0299 | 2 / 67    | +0.0146 | 0.0172 | +0.0000 | +0.0597 | 0.3257 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3257) |
+| Frequency Hit@1            | +0.0597 | 4 / 67    | +0.0494 | 0.0250 | +0.0149 | +0.0896 | 0.6134 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6134) |
+| Frequency Hit@3            | +0.1194 | 8 / 67    | +0.1088 | 0.0253 | +0.0448 | +0.1343 | 0.6004 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6004) |
+| Markov Fallback Hit@1      | +0.0299 | 2 / 67    | +0.0364 | 0.0212 | +0.0000 | +0.0746 | 0.7133 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7133) |
+| Markov Fallback Hit@3      | +0.0746 | 5 / 67    | +0.0745 | 0.0274 | +0.0149 | +0.1194 | 0.6104 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6104) |
+| Markov - Frequency Hit@1   | -0.0448 | -3 / 67   | -0.0422 | 0.0269 | -0.0896 | +0.0149 | 0.5425 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5425) |
+| Markov - Frequency Hit@3   | -0.0896 | -6 / 67   | -0.0943 | 0.0302 | -0.1343 | -0.0299 | 0.4545 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.4545) |
+
+### Tactic Level (`tactic_collapsed`, N=53)
+
+| Statistic | Observed Rate | Observed Hits / N | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| Markov Hit@1               | +0.2075 | 11 / 53   | +0.1658 | 0.0559 | +0.0566 | +0.2830 | 0.2737 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2737) |
+| Markov Hit@3               | +0.5283 | 28 / 53   | +0.3962 | 0.0756 | +0.2453 | +0.5472 | 0.0460 | observed exceeds the shuffled-order null (p=0.0460) |
+| Frequency Hit@1            | +0.1698 | 9 / 53    | +0.1786 | 0.0452 | +0.1321 | +0.2642 | 0.4605 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.4605) |
+| Frequency Hit@3            | +0.6226 | 33 / 53   | +0.5659 | 0.0614 | +0.4340 | +0.6226 | 0.1089 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1089) |
+| Markov Fallback Hit@1      | +0.2453 | 13 / 53   | +0.1840 | 0.0562 | +0.0755 | +0.3019 | 0.1778 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1778) |
+| Markov Fallback Hit@3      | +0.5660 | 30 / 53   | +0.4415 | 0.0740 | +0.3019 | +0.5849 | 0.0579 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0579) |
+| Markov - Frequency Hit@1   | +0.0377 | +2 / 53   | -0.0128 | 0.0692 | -0.1509 | +0.1132 | 0.2847 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2847) |
+| Markov - Frequency Hit@3   | -0.0943 | -5 / 53   | -0.1698 | 0.0950 | -0.3396 | +0.0377 | 0.2288 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2288) |
 
 ---
 
@@ -58,7 +124,7 @@
 ### Technique Level (`collapsed_full`, N_perm in [82, 95])
 
 | Statistic | Observed Rate | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+|:---|:---:|:---:|:---:|:---:|:---:|:---|
 | Markov Hit@1               | +0.0149 | +0.0070 | 0.0106 | +0.0000 | +0.0337 | 0.1758 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1758) |
 | Markov Hit@3               | +0.0299 | +0.0166 | 0.0164 | +0.0000 | +0.0556 | 0.2298 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2298) |
 | Frequency Hit@1            | +0.0597 | +0.0641 | 0.0501 | +0.0000 | +0.1413 | 0.3656 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3656) |
@@ -71,7 +137,7 @@
 ### Tactic Level (`tactic_collapsed`, N_perm in [74, 90])
 
 | Statistic | Observed Rate | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+|:---|:---:|:---:|:---:|:---:|:---:|:---|
 | Markov Hit@1               | +0.2075 | +0.1016 | 0.0409 | +0.0361 | +0.1951 | 0.0150 | observed exceeds the shuffled-order null (p=0.0150) |
 | Markov Hit@3               | +0.5283 | +0.2725 | 0.0647 | +0.1511 | +0.4070 | 0.0010 | observed exceeds the shuffled-order null (p=0.0010) |
 | Frequency Hit@1            | +0.1698 | +0.1296 | 0.0201 | +0.0976 | +0.1810 | 0.0270 | observed exceeds the shuffled-order null (p=0.0270) |

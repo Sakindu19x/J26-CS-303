@@ -203,6 +203,12 @@ def is_exempt_perm_v2(
     if "| Statistic" in line or "| Scheme" in line:
         return True, "Table column header label"
 
+    # Rule 4: S3 max tries parameter description
+    if "Max Tries Allowed Per Episode" in line and tok == "10000":
+        return True, "Pre-declared S3 rejection sampling maximum tries parameter"
+    if "up to 10,000 tries" in line and tok == "10000":
+        return True, "Pre-declared S3 rejection sampling maximum tries parameter"
+
     return False, ""
 
 
@@ -608,25 +614,50 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
     def check_perm_v2_setup(md: str) -> None:
         meta = perm_v2_json["metadata"]
         assert "- **Purpose**: Determine whether attack event order carries predictive signal beyond order-free baselines in real telemetry episodes E1–E4." in md
-        assert "- **Primary Scheme (S1 - Collapsed-Order Shuffle)**: The items of the stored collapsed sequence for each episode are shuffled strictly within the episode. Sample counts $N$ are strictly invariant ($N=67$ for technique, $N=53$ for tactic in every permutation). Headline decisions are made solely under S1." in md
-        assert "- **Sensitivity Scheme (S2 - Raw-Shuffle Rate-Based)**: Raw labeled events are shuffled within each episode and re-collapsed, yielding variable sample counts ($N \\in [82, 95]$ technique, $N \\in [74, 90]$ tactic). The statistic is evaluated as hit rate (hits / $N_{perm}$) compared against observed hit rate." in md
+        assert "- **Primary Scheme (S1 - Collapsed-Order Shuffle)**: The items of the stored collapsed sequence for each episode are shuffled strictly within the episode. Sample counts $N$ are strictly invariant ($N=67$ for technique, $N=53$ for tactic in every permutation). Headline decisions are made under S1." in md
+        assert "- **Constrained Scheme (S3 - Adjacency-Constrained Shuffle)**: Shuffles the collapsed sequence uniformly at random subject to the strict constraint that no two adjacent items have identical technique sets (technique level) or identical tactic sets (tactic level), using rejection sampling with up to 10,000 tries per episode. Added after the S1 and S2 results to remove an artifact (adjacent identical items introduced by unconstrained shuffling that are absent in real collapsed data). S1 remains the pre-declared headline; S3 is reported alongside it, and if S1 and S3 disagree, both are reported." in md
+        assert "- **Sensitivity Scheme (S2 - Raw-Shuffle Rate-Based)**: Raw labeled events are shuffled within each episode and re-collapsed, yielding variable sample counts ($N \\in [82, 95]$ technique, $N \\in [74, 90]$ tactic). Evaluated as hit rate (hits / $N_{perm}$) compared against observed hit rate." in md
         assert f"- **Null Replicates**: B={meta['b_permutations']} permutations (stdlib `random.Random` seeds 0..{meta['b_permutations'] - 1})." in md
         assert f"- **One-Sided p-value Formula**: `{meta['p_value_formula']}`." in md
-        assert "- **Pre-Declared Decision Rule**: `p < 0.05` under S1 only. Sensitivity scheme S2 is documented alongside S1 for methodological completeness." in md
+        assert "- **Pre-Declared Decision Rule**: `p < 0.05` under S1/S3. Sensitivity scheme S2 is documented alongside S1 and S3 for methodological completeness." in md
         assert "- **Conclusion Text Generation Rule**: Every conclusion sentence is generated strictly by code from the p-value: if $p < 0.05$, *'observed exceeds the shuffled-order null (p=...)'*; else *'not distinguishable from the shuffled-order null at this sample size (this is not proof of absence)'*. No causal inferences are asserted." in md
 
+    def check_perm_v2_scheme_validity(md: str) -> None:
+        assert "## Scheme Validity Check (Order-Free Frequency Statistics)" in md
+        assert "A valid order-only null permutation must not perturb the performance of an **order-free** model (FrequencyBaseline). If an order-free statistic exhibits $p < 0.05$" in md
+        stat_labels = {"frequency_hit1": "Frequency Hit@1", "frequency_hit3": "Frequency Hit@3"}
+        for sc, sc_label in [("S1_collapsed_order", "S1 (Collapsed-Order)"), ("S3_constrained_shuffle", "S3 (Constrained Shuffle)"), ("S2_raw_shuffle_rate", "S2 (Raw-Shuffle)")]:
+            for lvl, lvl_label in [("technique_collapsed_full", "Technique"), ("tactic_collapsed", "Tactic")]:
+                for st in ["frequency_hit1", "frequency_hit3"]:
+                    row = perm_v2_json["schemes"][sc][lvl][st]
+                    lbl = stat_labels[st]
+                    status_str = "**FLAG (p < 0.05)**" if row["p_value"] < 0.05 else "PASS (Valid)"
+                    line = f"| {sc_label} | {lvl_label} | {lbl} | {row['observed']:+.4f} | {row['null_mean']:+.4f} | {row['p_value']:.4f} | {status_str} |"
+                    assert line in md, f"Missing validity table row: {line}"
+        assert "- **S1 Validity**: Confirmed valid order-only null (all order-free Frequency statistics have $p \\ge 0.05$)." in md
+        assert "- **S3 Validity**: Confirmed valid order-only null (all order-free Frequency statistics have $p \\ge 0.05$)." in md
+        warn_msg = perm_v2_json["scheme_validity_check"]["S2_raw_shuffle_rate"]["warning"]
+        assert f"> **Scheme Validity Warning (S2)**: {warn_msg}" in md
 
     def check_perm_v2_sample_counts(md: str) -> None:
         sc = perm_v2_json["metadata"]["sample_counts_summary"]
         s1_t = sc["S1_collapsed_order"]["technique_collapsed_full"]
         s1_tac = sc["S1_collapsed_order"]["tactic_collapsed"]
+        s3_t = sc["S3_constrained_shuffle"]["technique_collapsed_full"]
+        s3_tac = sc["S3_constrained_shuffle"]["tactic_collapsed"]
         s2_t = sc["S2_raw_shuffle_rate"]["technique_collapsed_full"]
         s2_tac = sc["S2_raw_shuffle_rate"]["tactic_collapsed"]
 
         assert f"| S1 (Collapsed-Order) | Technique (collapsed_full) | 67 | {s1_t['min']} | {s1_t['mean']:.2f} | {s1_t['max']} | **YES (Constant)** |" in md
         assert f"| S1 (Collapsed-Order) | Tactic (tactic_collapsed) | 53 | {s1_tac['min']} | {s1_tac['mean']:.2f} | {s1_tac['max']} | **YES (Constant)** |" in md
+        assert f"| S3 (Constrained Shuffle) | Technique (collapsed_full) | 67 | {s3_t['min']} | {s3_t['mean']:.2f} | {s3_t['max']} | **YES (Constant)** |" in md
+        assert f"| S3 (Constrained Shuffle) | Tactic (tactic_collapsed) | 53 | {s3_tac['min']} | {s3_tac['mean']:.2f} | {s3_tac['max']} | **YES (Constant)** |" in md
         assert f"| S2 (Raw-Shuffle) | Technique (collapsed_full) | 67 | {s2_t['min']} | {s2_t['mean']:.2f} | {s2_t['max']} | NO (Variable) |" in md
         assert f"| S2 (Raw-Shuffle) | Tactic (tactic_collapsed) | 53 | {s2_tac['min']} | {s2_tac['mean']:.2f} | {s2_tac['max']} | NO (Variable) |" in md
+
+        s3_m = perm_v2_json["metadata"]["s3_rejection_sampling_summary"]
+        assert f"- **Technique Level**: Excluded Permutations = {s3_m['technique_collapsed_full']['excluded_permutations']}, Min Tries = {s3_m['technique_collapsed_full']['min_total_tries']}, Mean Tries = {s3_m['technique_collapsed_full']['mean_total_tries']:.2f}, Max Tries = {s3_m['technique_collapsed_full']['max_total_tries']}" in md
+        assert f"- **Tactic Level**: Excluded Permutations = {s3_m['tactic_collapsed']['excluded_permutations']}, Min Tries = {s3_m['tactic_collapsed']['min_total_tries']}, Mean Tries = {s3_m['tactic_collapsed']['mean_total_tries']:.2f}, Max Tries = {s3_m['tactic_collapsed']['max_total_tries']}" in md
 
     def check_perm_v2_s1_tables(md: str) -> None:
         s1 = perm_v2_json["schemes"]["S1_collapsed_order"]
@@ -661,6 +692,40 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
                 f"{row_tac['null_p97_5']:+.4f} | {row_tac['p_value']:.4f} | {row_tac['conclusion']} |"
             )
             assert line_tac in md, f"Missing S1 tac row: {line_tac}"
+
+    def check_perm_v2_s3_tables(md: str) -> None:
+        s3 = perm_v2_json["schemes"]["S3_constrained_shuffle"]
+        obs_counts = perm_v2_json["metadata"]["observed_baseline_counts"]
+        stat_map = [
+            ("markov_hit1", "Markov Hit@1"),
+            ("markov_hit3", "Markov Hit@3"),
+            ("frequency_hit1", "Frequency Hit@1"),
+            ("frequency_hit3", "Frequency Hit@3"),
+            ("markov_fallback_hit1", "Markov Fallback Hit@1"),
+            ("markov_fallback_hit3", "Markov Fallback Hit@3"),
+            ("markov_minus_frequency_hit1", "Markov - Frequency Hit@1"),
+            ("markov_minus_frequency_hit3", "Markov - Frequency Hit@3"),
+        ]
+        for stat_key, s_name in stat_map:
+            row_tech = s3["technique_collapsed_full"][stat_key]
+            cnt_tech = obs_counts["technique_collapsed_full"][stat_key]
+            h_str_tech = f"{cnt_tech:+d} / 67" if "minus" in stat_key else f"{cnt_tech} / 67"
+            line_tech = (
+                f"| {s_name:26s} | {row_tech['observed']:+.4f} | {h_str_tech:9s} | "
+                f"{row_tech['null_mean']:+.4f} | {row_tech['null_sd']:.4f} | {row_tech['null_p2_5']:+.4f} | "
+                f"{row_tech['null_p97_5']:+.4f} | {row_tech['p_value']:.4f} | {row_tech['conclusion']} |"
+            )
+            assert line_tech in md, f"Missing S3 tech row: {line_tech}"
+
+            row_tac = s3["tactic_collapsed"][stat_key]
+            cnt_tac = obs_counts["tactic_collapsed"][stat_key]
+            h_str_tac = f"{cnt_tac:+d} / 53" if "minus" in stat_key else f"{cnt_tac} / 53"
+            line_tac = (
+                f"| {s_name:26s} | {row_tac['observed']:+.4f} | {h_str_tac:9s} | "
+                f"{row_tac['null_mean']:+.4f} | {row_tac['null_sd']:.4f} | {row_tac['null_p2_5']:+.4f} | "
+                f"{row_tac['null_p97_5']:+.4f} | {row_tac['p_value']:.4f} | {row_tac['conclusion']} |"
+            )
+            assert line_tac in md, f"Missing S3 tac row: {line_tac}"
 
     def check_perm_v2_s2_tables(md: str) -> None:
         s2 = perm_v2_json["schemes"]["S2_raw_shuffle_rate"]
@@ -701,8 +766,10 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
 
     perm_v2_checks: list[Callable[[str], None]] = [
         check_perm_v2_setup,
+        check_perm_v2_scheme_validity,
         check_perm_v2_sample_counts,
         check_perm_v2_s1_tables,
+        check_perm_v2_s3_tables,
         check_perm_v2_s2_tables,
         check_perm_v2_what_this_cannot_show,
     ]

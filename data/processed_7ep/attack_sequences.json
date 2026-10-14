@@ -1,0 +1,4456 @@
+{
+  "causation_disclaimer": "Note on Forensic Causality: Chronological ordering of attack steps reflects the temporal manifestation sequence recorded in telemetry; temporal precedence does not by itself prove causal dependency.",
+  "episodes": {
+    "E1": {
+      "raw": [
+        {
+          "event_id": "E1-S002",
+          "timestamp": "2025-09-22T13:48:45.914565+00:00",
+          "techniques": [
+            "T1590.002",
+            "T1591"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S003",
+          "timestamp": "2025-09-22T13:49:04.518780+00:00",
+          "techniques": [
+            "T1592.002",
+            "T1595"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S004",
+          "timestamp": "2025-09-22T13:49:32.635068+00:00",
+          "techniques": [
+            "T1595.002"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S006",
+          "timestamp": "2025-09-22T13:50:32.305495+00:00",
+          "techniques": [
+            "T1595.003"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S008",
+          "timestamp": "2025-09-22T13:52:23.317936+00:00",
+          "techniques": [
+            "T1059.006",
+            "T1190"
+          ],
+          "tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Initial Access"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S010",
+          "timestamp": "2025-09-22T13:53:45.841396+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S012",
+          "timestamp": "2025-09-22T13:54:18.520174+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S013",
+          "timestamp": "2025-09-22T13:54:34.878174+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S014",
+          "timestamp": "2025-09-22T13:54:51.251623+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S015",
+          "timestamp": "2025-09-22T13:55:07.636377+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S016",
+          "timestamp": "2025-09-22T13:55:23.998459+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S017",
+          "timestamp": "2025-09-22T13:55:40.220715+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S018",
+          "timestamp": "2025-09-22T13:55:56.594335+00:00",
+          "techniques": [
+            "T1007",
+            "T1016",
+            "T1033",
+            "T1049",
+            "T1057",
+            "T1069",
+            "T1082",
+            "T1083",
+            "T1087",
+            "T1201",
+            "T1518",
+            "T1614",
+            "T1615"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S020",
+          "timestamp": "2025-09-22T14:06:12.930683+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S021",
+          "timestamp": "2025-09-22T14:06:28.136474+00:00",
+          "techniques": [
+            "T1548.003"
+          ],
+          "tactics": [
+            "Privilege Escalation",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S022",
+          "timestamp": "2025-09-22T14:06:43.284033+00:00",
+          "techniques": [
+            "T1548.003"
+          ],
+          "tactics": [
+            "Privilege Escalation",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S023",
+          "timestamp": "2025-09-22T14:06:59.661578+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S024",
+          "timestamp": "2025-09-22T14:07:15.971087+00:00",
+          "techniques": [
+            "T1105",
+            "T1556.003"
+          ],
+          "tactics": [
+            "Command and Control",
+            "Persistence",
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Credential Access",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S025",
+          "timestamp": "2025-09-22T14:07:32.334700+00:00",
+          "techniques": [
+            "T1218",
+            "T1556.003"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S026",
+          "timestamp": "2025-09-22T14:07:48.702795+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S028",
+          "timestamp": "2025-09-22T14:08:21.330234+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S031",
+          "timestamp": "2025-09-22T14:09:24.030431+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E1-S033",
+          "timestamp": "2025-09-22T14:09:54.411737+00:00",
+          "techniques": [
+            "T1003.008"
+          ],
+          "tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E1-S034",
+          "timestamp": "2025-09-22T14:10:09.443136+00:00",
+          "techniques": [
+            "T1120"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S035",
+          "timestamp": "2025-09-22T14:10:24.504126+00:00",
+          "techniques": [
+            "T1120"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S036",
+          "timestamp": "2025-09-22T14:10:39.547908+00:00",
+          "techniques": [
+            "T1124"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E1-S037",
+          "timestamp": "2025-09-22T14:10:54.567193+00:00",
+          "techniques": [
+            "T1497.001"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E1-S002"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:48:45.914565+00:00",
+          "end_timestamp": "2025-09-22T13:48:45.914565+00:00",
+          "techniques": [
+            "T1590.002",
+            "T1591"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S003"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:49:04.518780+00:00",
+          "end_timestamp": "2025-09-22T13:49:04.518780+00:00",
+          "techniques": [
+            "T1592.002",
+            "T1595"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S004"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:49:32.635068+00:00",
+          "end_timestamp": "2025-09-22T13:49:32.635068+00:00",
+          "techniques": [
+            "T1595.002"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S006"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:50:32.305495+00:00",
+          "end_timestamp": "2025-09-22T13:50:32.305495+00:00",
+          "techniques": [
+            "T1595.003"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S008"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:52:23.317936+00:00",
+          "end_timestamp": "2025-09-22T13:52:23.317936+00:00",
+          "techniques": [
+            "T1059.006",
+            "T1190"
+          ],
+          "tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Initial Access"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S010"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:53:45.841396+00:00",
+          "end_timestamp": "2025-09-22T13:53:45.841396+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S012",
+            "E1-S013",
+            "E1-S014",
+            "E1-S015",
+            "E1-S016",
+            "E1-S017"
+          ],
+          "repeat_count": 6,
+          "timestamp": "2025-09-22T13:54:18.520174+00:00",
+          "end_timestamp": "2025-09-22T13:55:40.220715+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E1-S018"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T13:55:56.594335+00:00",
+          "end_timestamp": "2025-09-22T13:55:56.594335+00:00",
+          "techniques": [
+            "T1007",
+            "T1016",
+            "T1033",
+            "T1049",
+            "T1057",
+            "T1069",
+            "T1082",
+            "T1083",
+            "T1087",
+            "T1201",
+            "T1518",
+            "T1614",
+            "T1615"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S020"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:06:12.930683+00:00",
+          "end_timestamp": "2025-09-22T14:06:12.930683+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S021",
+            "E1-S022"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-09-22T14:06:28.136474+00:00",
+          "end_timestamp": "2025-09-22T14:06:43.284033+00:00",
+          "techniques": [
+            "T1548.003"
+          ],
+          "tactics": [
+            "Privilege Escalation",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E1-S023"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:06:59.661578+00:00",
+          "end_timestamp": "2025-09-22T14:06:59.661578+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S024"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:07:15.971087+00:00",
+          "end_timestamp": "2025-09-22T14:07:15.971087+00:00",
+          "techniques": [
+            "T1105",
+            "T1556.003"
+          ],
+          "tactics": [
+            "Command and Control",
+            "Persistence",
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Credential Access",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S025"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:07:32.334700+00:00",
+          "end_timestamp": "2025-09-22T14:07:32.334700+00:00",
+          "techniques": [
+            "T1218",
+            "T1556.003"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S026",
+            "E1-S028"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-09-22T14:07:48.702795+00:00",
+          "end_timestamp": "2025-09-22T14:08:21.330234+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            1
+          ]
+        },
+        {
+          "event_ids": [
+            "E1-S031"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:09:24.030431+00:00",
+          "end_timestamp": "2025-09-22T14:09:24.030431+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S033"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:09:54.411737+00:00",
+          "end_timestamp": "2025-09-22T14:09:54.411737+00:00",
+          "techniques": [
+            "T1003.008"
+          ],
+          "tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S034",
+            "E1-S035"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-09-22T14:10:09.443136+00:00",
+          "end_timestamp": "2025-09-22T14:10:24.504126+00:00",
+          "techniques": [
+            "T1120"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E1-S036"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:10:39.547908+00:00",
+          "end_timestamp": "2025-09-22T14:10:39.547908+00:00",
+          "techniques": [
+            "T1124"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E1-S037"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-09-22T14:10:54.567193+00:00",
+          "end_timestamp": "2025-09-22T14:10:54.567193+00:00",
+          "techniques": [
+            "T1497.001"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        }
+      ],
+      "raw_length": 27,
+      "collapsed_length": 19,
+      "distinct_techniques_count": 31,
+      "distinct_techniques": [
+        "T1003.008",
+        "T1007",
+        "T1016",
+        "T1033",
+        "T1049",
+        "T1057",
+        "T1059",
+        "T1059.006",
+        "T1069",
+        "T1070.004",
+        "T1082",
+        "T1083",
+        "T1087",
+        "T1105",
+        "T1120",
+        "T1124",
+        "T1190",
+        "T1201",
+        "T1218",
+        "T1497.001",
+        "T1518",
+        "T1548.003",
+        "T1556.003",
+        "T1590.002",
+        "T1591",
+        "T1592.002",
+        "T1595",
+        "T1595.002",
+        "T1595.003",
+        "T1614",
+        "T1615"
+      ]
+    },
+    "E2": {
+      "raw": [
+        {
+          "event_id": "E2-S001",
+          "timestamp": "2025-10-01T10:14:14.955559+00:00",
+          "techniques": [
+            "T1021.004"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S003",
+          "timestamp": "2025-10-01T10:15:00.689764+00:00",
+          "techniques": [
+            "T1071.001",
+            "T1573.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E2-S005",
+          "timestamp": "2025-10-01T10:15:31.002694+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E2-S006",
+          "timestamp": "2025-10-01T10:15:46.147666+00:00",
+          "techniques": [
+            "T1547",
+            "T1569"
+          ],
+          "tactics": [
+            "Persistence",
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S007",
+          "timestamp": "2025-10-01T10:16:01.232391+00:00",
+          "techniques": [
+            "T1083"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S008",
+          "timestamp": "2025-10-01T10:30:17.295482+00:00",
+          "techniques": [
+            "T1057"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S009",
+          "timestamp": "2025-10-01T10:30:32.356325+00:00",
+          "techniques": [
+            "T1007"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S012",
+          "timestamp": "2025-10-01T10:31:02.405776+00:00",
+          "techniques": [
+            "T1003"
+          ],
+          "tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E2-S013",
+          "timestamp": "2025-10-01T10:31:17.862978+00:00",
+          "techniques": [
+            "T1049"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S014",
+          "timestamp": "2025-10-01T10:31:32.953936+00:00",
+          "techniques": [
+            "T1016"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S016",
+          "timestamp": "2025-10-01T10:32:03.048554+00:00",
+          "techniques": [
+            "T1003.008",
+            "T1041"
+          ],
+          "tactics": [
+            "Credential Access",
+            "Collection",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Exfiltration"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E2-S017",
+          "timestamp": "2025-10-01T10:32:18.107786+00:00",
+          "techniques": [
+            "T1074.001",
+            "T1560.001"
+          ],
+          "tactics": [
+            "Collection",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S020",
+          "timestamp": "2025-10-01T10:33:03.186505+00:00",
+          "techniques": [
+            "T1041"
+          ],
+          "tactics": [
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Exfiltration"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E2-S021",
+          "timestamp": "2025-10-01T10:33:18.253830+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S022",
+          "timestamp": "2025-10-01T10:33:33.306144+00:00",
+          "techniques": [
+            "T1005"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S023",
+          "timestamp": "2025-10-01T10:33:48.367095+00:00",
+          "techniques": [
+            "T1201"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S024",
+          "timestamp": "2025-10-01T10:34:03.431046+00:00",
+          "techniques": [
+            "T1003.008"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S025",
+          "timestamp": "2025-10-01T10:34:18.490044+00:00",
+          "techniques": [
+            "T1201"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S026",
+          "timestamp": "2025-10-01T10:34:33.560183+00:00",
+          "techniques": [
+            "T1018",
+            "T1046",
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S027",
+          "timestamp": "2025-10-01T10:34:49.136502+00:00",
+          "techniques": [
+            "T1018",
+            "T1046"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E2-S028",
+          "timestamp": "2025-10-01T10:35:04.190490+00:00",
+          "techniques": [
+            "T1018",
+            "T1046"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E2-S001"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:14:14.955559+00:00",
+          "end_timestamp": "2025-10-01T10:14:14.955559+00:00",
+          "techniques": [
+            "T1021.004"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S003"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:15:00.689764+00:00",
+          "end_timestamp": "2025-10-01T10:15:00.689764+00:00",
+          "techniques": [
+            "T1071.001",
+            "T1573.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S005"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:15:31.002694+00:00",
+          "end_timestamp": "2025-10-01T10:15:31.002694+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S006"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:15:46.147666+00:00",
+          "end_timestamp": "2025-10-01T10:15:46.147666+00:00",
+          "techniques": [
+            "T1547",
+            "T1569"
+          ],
+          "tactics": [
+            "Persistence",
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S007"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:16:01.232391+00:00",
+          "end_timestamp": "2025-10-01T10:16:01.232391+00:00",
+          "techniques": [
+            "T1083"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S008"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:30:17.295482+00:00",
+          "end_timestamp": "2025-10-01T10:30:17.295482+00:00",
+          "techniques": [
+            "T1057"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S009"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:30:32.356325+00:00",
+          "end_timestamp": "2025-10-01T10:30:32.356325+00:00",
+          "techniques": [
+            "T1007"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S012"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:31:02.405776+00:00",
+          "end_timestamp": "2025-10-01T10:31:02.405776+00:00",
+          "techniques": [
+            "T1003"
+          ],
+          "tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S013"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:31:17.862978+00:00",
+          "end_timestamp": "2025-10-01T10:31:17.862978+00:00",
+          "techniques": [
+            "T1049"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S014"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:31:32.953936+00:00",
+          "end_timestamp": "2025-10-01T10:31:32.953936+00:00",
+          "techniques": [
+            "T1016"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S016"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:32:03.048554+00:00",
+          "end_timestamp": "2025-10-01T10:32:03.048554+00:00",
+          "techniques": [
+            "T1003.008",
+            "T1041"
+          ],
+          "tactics": [
+            "Credential Access",
+            "Collection",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Exfiltration"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S017"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:32:18.107786+00:00",
+          "end_timestamp": "2025-10-01T10:32:18.107786+00:00",
+          "techniques": [
+            "T1074.001",
+            "T1560.001"
+          ],
+          "tactics": [
+            "Collection",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S020"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:33:03.186505+00:00",
+          "end_timestamp": "2025-10-01T10:33:03.186505+00:00",
+          "techniques": [
+            "T1041"
+          ],
+          "tactics": [
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Exfiltration"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S021"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:33:18.253830+00:00",
+          "end_timestamp": "2025-10-01T10:33:18.253830+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S022"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:33:33.306144+00:00",
+          "end_timestamp": "2025-10-01T10:33:33.306144+00:00",
+          "techniques": [
+            "T1005"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S023"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:33:48.367095+00:00",
+          "end_timestamp": "2025-10-01T10:33:48.367095+00:00",
+          "techniques": [
+            "T1201"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S024"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:34:03.431046+00:00",
+          "end_timestamp": "2025-10-01T10:34:03.431046+00:00",
+          "techniques": [
+            "T1003.008"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S025"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:34:18.490044+00:00",
+          "end_timestamp": "2025-10-01T10:34:18.490044+00:00",
+          "techniques": [
+            "T1201"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S026"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-01T10:34:33.560183+00:00",
+          "end_timestamp": "2025-10-01T10:34:33.560183+00:00",
+          "techniques": [
+            "T1018",
+            "T1046",
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E2-S027",
+            "E2-S028"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-10-01T10:34:49.136502+00:00",
+          "end_timestamp": "2025-10-01T10:35:04.190490+00:00",
+          "techniques": [
+            "T1018",
+            "T1046"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            0
+          ]
+        }
+      ],
+      "raw_length": 21,
+      "collapsed_length": 20,
+      "distinct_techniques_count": 21,
+      "distinct_techniques": [
+        "T1003",
+        "T1003.008",
+        "T1005",
+        "T1007",
+        "T1016",
+        "T1018",
+        "T1021.004",
+        "T1041",
+        "T1046",
+        "T1049",
+        "T1057",
+        "T1070.004",
+        "T1071.001",
+        "T1074.001",
+        "T1083",
+        "T1105",
+        "T1201",
+        "T1547",
+        "T1560.001",
+        "T1569",
+        "T1573.001"
+      ]
+    },
+    "E3": {
+      "raw": [
+        {
+          "event_id": "E3-S006",
+          "timestamp": "2025-12-12T18:09:04.102559+00:00",
+          "techniques": [
+            "T1021.005",
+            "T1110.001"
+          ],
+          "tactics": [
+            "Credential Access",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 4
+        },
+        {
+          "event_id": "E3-S007",
+          "timestamp": "2025-12-12T18:09:34.236494+00:00",
+          "techniques": [
+            "T1021.005"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E3-S009",
+          "timestamp": "2025-12-12T18:09:52.251434+00:00",
+          "techniques": [
+            "T1021.005"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E3-S013",
+          "timestamp": "2025-12-12T18:10:28.269497+00:00",
+          "techniques": [
+            "T1021.005"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 3
+        },
+        {
+          "event_id": "E3-S023",
+          "timestamp": "2025-12-12T18:11:56.315146+00:00",
+          "techniques": [
+            "T1003.008"
+          ],
+          "tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 9
+        },
+        {
+          "event_id": "E3-S027",
+          "timestamp": "2025-12-12T18:12:31.336021+00:00",
+          "techniques": [
+            "T1213"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 3
+        },
+        {
+          "event_id": "E3-S031",
+          "timestamp": "2025-12-12T18:13:06.355962+00:00",
+          "techniques": [
+            "T1039"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 3
+        },
+        {
+          "event_id": "E3-S034",
+          "timestamp": "2025-12-12T18:13:38.369842+00:00",
+          "techniques": [
+            "T1083"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E3-S036",
+          "timestamp": "2025-12-12T18:14:08.384436+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E3-S039",
+          "timestamp": "2025-12-12T18:20:38.401406+00:00",
+          "techniques": [
+            "T1036.005",
+            "T1564.001"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E3-S043",
+          "timestamp": "2025-12-12T18:21:38.439139+00:00",
+          "techniques": [
+            "T1574"
+          ],
+          "tactics": [
+            "Persistence",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 3
+        },
+        {
+          "event_id": "E3-S046",
+          "timestamp": "2025-12-12T18:22:23.455037+00:00",
+          "techniques": [
+            "T1059",
+            "T1574"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E3-S048",
+          "timestamp": "2025-12-12T18:22:53.471376+00:00",
+          "techniques": [
+            "T1053.003",
+            "T1071.001",
+            "T1105"
+          ],
+          "tactics": [
+            "Persistence",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E3-S053",
+          "timestamp": "2025-12-12T18:24:08.524044+00:00",
+          "techniques": [
+            "T1072"
+          ],
+          "tactics": [
+            "Execution",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 4
+        },
+        {
+          "event_id": "E3-S057",
+          "timestamp": "2025-12-12T18:25:08.553629+00:00",
+          "techniques": [
+            "T1072"
+          ],
+          "tactics": [
+            "Execution",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 3
+        },
+        {
+          "event_id": "E3-S062",
+          "timestamp": "2025-12-12T18:30:40.138155+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 5
+        },
+        {
+          "event_id": "E3-S063",
+          "timestamp": "2025-12-12T18:30:56.497476+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S064",
+          "timestamp": "2025-12-12T18:31:12.774186+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S065",
+          "timestamp": "2025-12-12T18:31:28.997685+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S066",
+          "timestamp": "2025-12-12T18:31:45.308279+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S067",
+          "timestamp": "2025-12-12T18:32:01.643304+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S069",
+          "timestamp": "2025-12-12T18:32:17.862390+00:00",
+          "techniques": [
+            "T1105",
+            "T1486"
+          ],
+          "tactics": [
+            "Impact",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S070",
+          "timestamp": "2025-12-12T18:32:34.123251+00:00",
+          "techniques": [
+            "T1486",
+            "T1565.001"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S071",
+          "timestamp": "2025-12-12T18:32:50.485283+00:00",
+          "techniques": [
+            "T1018"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S072",
+          "timestamp": "2025-12-12T18:33:06.703938+00:00",
+          "techniques": [
+            "T1087.001"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S073",
+          "timestamp": "2025-12-12T18:33:23.034618+00:00",
+          "techniques": [
+            "T1531"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S074",
+          "timestamp": "2025-12-12T18:33:39.413314+00:00",
+          "techniques": [
+            "T1485"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S075",
+          "timestamp": "2025-12-12T18:33:55.707637+00:00",
+          "techniques": [
+            "T1490"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E3-S076",
+          "timestamp": "2025-12-12T18:34:12.087127+00:00",
+          "techniques": [
+            "T1489"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E3-S006"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:09:04.102559+00:00",
+          "end_timestamp": "2025-12-12T18:09:04.102559+00:00",
+          "techniques": [
+            "T1021.005",
+            "T1110.001"
+          ],
+          "tactics": [
+            "Credential Access",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 4,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S007",
+            "E3-S009",
+            "E3-S013"
+          ],
+          "repeat_count": 3,
+          "timestamp": "2025-12-12T18:09:34.236494+00:00",
+          "end_timestamp": "2025-12-12T18:10:28.269497+00:00",
+          "techniques": [
+            "T1021.005"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": [
+            1,
+            3
+          ]
+        },
+        {
+          "event_ids": [
+            "E3-S023"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:11:56.315146+00:00",
+          "end_timestamp": "2025-12-12T18:11:56.315146+00:00",
+          "techniques": [
+            "T1003.008"
+          ],
+          "tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access"
+          ],
+          "unlabeled_steps_skipped_before": 9,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S027"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:12:31.336021+00:00",
+          "end_timestamp": "2025-12-12T18:12:31.336021+00:00",
+          "techniques": [
+            "T1213"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 3,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S031"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:13:06.355962+00:00",
+          "end_timestamp": "2025-12-12T18:13:06.355962+00:00",
+          "techniques": [
+            "T1039"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 3,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S034"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:13:38.369842+00:00",
+          "end_timestamp": "2025-12-12T18:13:38.369842+00:00",
+          "techniques": [
+            "T1083"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S036"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:14:08.384436+00:00",
+          "end_timestamp": "2025-12-12T18:14:08.384436+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S039"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:20:38.401406+00:00",
+          "end_timestamp": "2025-12-12T18:20:38.401406+00:00",
+          "techniques": [
+            "T1036.005",
+            "T1564.001"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S043"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:21:38.439139+00:00",
+          "end_timestamp": "2025-12-12T18:21:38.439139+00:00",
+          "techniques": [
+            "T1574"
+          ],
+          "tactics": [
+            "Persistence",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 3,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S046"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:22:23.455037+00:00",
+          "end_timestamp": "2025-12-12T18:22:23.455037+00:00",
+          "techniques": [
+            "T1059",
+            "T1574"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S048"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:22:53.471376+00:00",
+          "end_timestamp": "2025-12-12T18:22:53.471376+00:00",
+          "techniques": [
+            "T1053.003",
+            "T1071.001",
+            "T1105"
+          ],
+          "tactics": [
+            "Persistence",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S053",
+            "E3-S057"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-12-12T18:24:08.524044+00:00",
+          "end_timestamp": "2025-12-12T18:25:08.553629+00:00",
+          "techniques": [
+            "T1072"
+          ],
+          "tactics": [
+            "Execution",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 4,
+          "unlabeled_steps_skipped_between": [
+            3
+          ]
+        },
+        {
+          "event_ids": [
+            "E3-S062",
+            "E3-S063",
+            "E3-S064",
+            "E3-S065",
+            "E3-S066",
+            "E3-S067"
+          ],
+          "repeat_count": 6,
+          "timestamp": "2025-12-12T18:30:40.138155+00:00",
+          "end_timestamp": "2025-12-12T18:32:01.643304+00:00",
+          "techniques": [
+            "T1059"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 5,
+          "unlabeled_steps_skipped_between": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E3-S069"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:32:17.862390+00:00",
+          "end_timestamp": "2025-12-12T18:32:17.862390+00:00",
+          "techniques": [
+            "T1105",
+            "T1486"
+          ],
+          "tactics": [
+            "Impact",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S070"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:32:34.123251+00:00",
+          "end_timestamp": "2025-12-12T18:32:34.123251+00:00",
+          "techniques": [
+            "T1486",
+            "T1565.001"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S071"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:32:50.485283+00:00",
+          "end_timestamp": "2025-12-12T18:32:50.485283+00:00",
+          "techniques": [
+            "T1018"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S072"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:33:06.703938+00:00",
+          "end_timestamp": "2025-12-12T18:33:06.703938+00:00",
+          "techniques": [
+            "T1087.001"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S073"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:33:23.034618+00:00",
+          "end_timestamp": "2025-12-12T18:33:23.034618+00:00",
+          "techniques": [
+            "T1531"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S074"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:33:39.413314+00:00",
+          "end_timestamp": "2025-12-12T18:33:39.413314+00:00",
+          "techniques": [
+            "T1485"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S075"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:33:55.707637+00:00",
+          "end_timestamp": "2025-12-12T18:33:55.707637+00:00",
+          "techniques": [
+            "T1490"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E3-S076"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-12T18:34:12.087127+00:00",
+          "end_timestamp": "2025-12-12T18:34:12.087127+00:00",
+          "techniques": [
+            "T1489"
+          ],
+          "tactics": [
+            "Impact"
+          ],
+          "official_tactics": [
+            "Impact"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        }
+      ],
+      "raw_length": 29,
+      "collapsed_length": 21,
+      "distinct_techniques_count": 23,
+      "distinct_techniques": [
+        "T1003.008",
+        "T1018",
+        "T1021.005",
+        "T1036.005",
+        "T1039",
+        "T1053.003",
+        "T1059",
+        "T1059.004",
+        "T1071.001",
+        "T1072",
+        "T1083",
+        "T1087.001",
+        "T1105",
+        "T1110.001",
+        "T1213",
+        "T1485",
+        "T1486",
+        "T1489",
+        "T1490",
+        "T1531",
+        "T1564.001",
+        "T1565.001",
+        "T1574"
+      ]
+    },
+    "E4": {
+      "raw": [
+        {
+          "event_id": "E4-S001",
+          "timestamp": "2025-12-15T11:02:51.184731+00:00",
+          "techniques": [
+            "T1071.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S002",
+          "timestamp": "2025-12-15T11:03:19.973346+00:00",
+          "techniques": [
+            "T1071.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S003",
+          "timestamp": "2025-12-15T11:03:35.743321+00:00",
+          "techniques": [
+            "T1078.003",
+            "T1105",
+            "T1205.001"
+          ],
+          "tactics": [
+            "Initial Access",
+            "Lateral Movement",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S005",
+          "timestamp": "2025-12-15T11:04:05.173316+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S007",
+          "timestamp": "2025-12-15T11:04:31.397715+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S009",
+          "timestamp": "2025-12-15T11:04:56.503413+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S010",
+          "timestamp": "2025-12-15T11:05:13.363792+00:00",
+          "techniques": [
+            "T1548.003"
+          ],
+          "tactics": [
+            "Privilege Escalation"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S012",
+          "timestamp": "2025-12-15T11:05:45.370515+00:00",
+          "techniques": [
+            "T1548.003"
+          ],
+          "tactics": [
+            "Privilege Escalation"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S013",
+          "timestamp": "2025-12-15T11:06:01.102844+00:00",
+          "techniques": [
+            "T1036.005",
+            "T1205.001"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S014",
+          "timestamp": "2025-12-15T11:06:16.201647+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S023",
+          "timestamp": "2025-12-15T11:08:49.353032+00:00",
+          "techniques": [
+            "T1543.002"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 8
+        },
+        {
+          "event_id": "E4-S025",
+          "timestamp": "2025-12-15T11:09:49.364409+00:00",
+          "techniques": [
+            "T1543.002"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S027",
+          "timestamp": "2025-12-15T11:10:06.402143+00:00",
+          "techniques": [
+            "T1543.002"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S029",
+          "timestamp": "2025-12-15T11:10:26.860971+00:00",
+          "techniques": [
+            "T1543.002"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S031",
+          "timestamp": "2025-12-15T11:10:45.267958+00:00",
+          "techniques": [
+            "T1543.002"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S036",
+          "timestamp": "2025-12-15T11:11:45.398182+00:00",
+          "techniques": [
+            "T1036.005",
+            "T1071.001",
+            "T1205.001"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 4
+        },
+        {
+          "event_id": "E4-S038",
+          "timestamp": "2025-12-15T11:12:05.443731+00:00",
+          "techniques": [
+            "T1599"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S039",
+          "timestamp": "2025-12-15T11:12:20.534163+00:00",
+          "techniques": [
+            "T1599"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S040",
+          "timestamp": "2025-12-15T11:12:36.587276+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S041",
+          "timestamp": "2025-12-15T11:12:53.153277+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E4-S043",
+          "timestamp": "2025-12-15T11:13:13.241217+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E4-S045",
+          "timestamp": "2025-12-15T11:13:30.297004+00:00",
+          "techniques": [
+            "T1082"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E4-S001",
+            "E4-S002"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-12-15T11:02:51.184731+00:00",
+          "end_timestamp": "2025-12-15T11:03:19.973346+00:00",
+          "techniques": [
+            "T1071.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E4-S003"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-15T11:03:35.743321+00:00",
+          "end_timestamp": "2025-12-15T11:03:35.743321+00:00",
+          "techniques": [
+            "T1078.003",
+            "T1105",
+            "T1205.001"
+          ],
+          "tactics": [
+            "Initial Access",
+            "Lateral Movement",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E4-S005",
+            "E4-S007",
+            "E4-S009"
+          ],
+          "repeat_count": 3,
+          "timestamp": "2025-12-15T11:04:05.173316+00:00",
+          "end_timestamp": "2025-12-15T11:04:56.503413+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Initial Access",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": [
+            1,
+            1
+          ]
+        },
+        {
+          "event_ids": [
+            "E4-S010",
+            "E4-S012"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-12-15T11:05:13.363792+00:00",
+          "end_timestamp": "2025-12-15T11:05:45.370515+00:00",
+          "techniques": [
+            "T1548.003"
+          ],
+          "tactics": [
+            "Privilege Escalation"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            1
+          ]
+        },
+        {
+          "event_ids": [
+            "E4-S013"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-15T11:06:01.102844+00:00",
+          "end_timestamp": "2025-12-15T11:06:01.102844+00:00",
+          "techniques": [
+            "T1036.005",
+            "T1205.001"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E4-S014"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-15T11:06:16.201647+00:00",
+          "end_timestamp": "2025-12-15T11:06:16.201647+00:00",
+          "techniques": [
+            "T1070.004"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E4-S023",
+            "E4-S025",
+            "E4-S027",
+            "E4-S029",
+            "E4-S031"
+          ],
+          "repeat_count": 5,
+          "timestamp": "2025-12-15T11:08:49.353032+00:00",
+          "end_timestamp": "2025-12-15T11:10:45.267958+00:00",
+          "techniques": [
+            "T1543.002"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 8,
+          "unlabeled_steps_skipped_between": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "event_ids": [
+            "E4-S036"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-15T11:11:45.398182+00:00",
+          "end_timestamp": "2025-12-15T11:11:45.398182+00:00",
+          "techniques": [
+            "T1036.005",
+            "T1071.001",
+            "T1205.001"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "unlabeled_steps_skipped_before": 4,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E4-S038",
+            "E4-S039"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-12-15T11:12:05.443731+00:00",
+          "end_timestamp": "2025-12-15T11:12:20.534163+00:00",
+          "techniques": [
+            "T1599"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": [
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E4-S040",
+            "E4-S041",
+            "E4-S043"
+          ],
+          "repeat_count": 3,
+          "timestamp": "2025-12-15T11:12:36.587276+00:00",
+          "end_timestamp": "2025-12-15T11:13:13.241217+00:00",
+          "techniques": [
+            "T1078.003"
+          ],
+          "tactics": [
+            "Initial Access",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            0,
+            1
+          ]
+        },
+        {
+          "event_ids": [
+            "E4-S045"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-15T11:13:30.297004+00:00",
+          "end_timestamp": "2025-12-15T11:13:30.297004+00:00",
+          "techniques": [
+            "T1082"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        }
+      ],
+      "raw_length": 22,
+      "collapsed_length": 11,
+      "distinct_techniques_count": 10,
+      "distinct_techniques": [
+        "T1036.005",
+        "T1070.004",
+        "T1071.001",
+        "T1078.003",
+        "T1082",
+        "T1105",
+        "T1205.001",
+        "T1543.002",
+        "T1548.003",
+        "T1599"
+      ]
+    },
+    "E5": {
+      "raw": [
+        {
+          "event_id": "E5-S001",
+          "timestamp": "2025-10-09T11:08:38.165282+00:00",
+          "techniques": [
+            "T1040",
+            "T1557.002"
+          ],
+          "tactics": [],
+          "official_tactics": [
+            "Collection",
+            "Credential Access",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E5-S002",
+          "timestamp": "2025-10-09T11:08:58.165282+00:00",
+          "techniques": [
+            "T1040",
+            "T1528"
+          ],
+          "tactics": [],
+          "official_tactics": [
+            "Credential Access",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E5-S007",
+          "timestamp": "2025-10-09T11:10:36.553295+00:00",
+          "techniques": [
+            "T1550.001"
+          ],
+          "tactics": [],
+          "official_tactics": [
+            "Defense Evasion",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 4
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E5-S001"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-09T11:08:38.165282+00:00",
+          "end_timestamp": "2025-10-09T11:08:38.165282+00:00",
+          "techniques": [
+            "T1040",
+            "T1557.002"
+          ],
+          "tactics": [],
+          "official_tactics": [
+            "Collection",
+            "Credential Access",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E5-S002"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-09T11:08:58.165282+00:00",
+          "end_timestamp": "2025-10-09T11:08:58.165282+00:00",
+          "techniques": [
+            "T1040",
+            "T1528"
+          ],
+          "tactics": [],
+          "official_tactics": [
+            "Credential Access",
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E5-S007"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-10-09T11:10:36.553295+00:00",
+          "end_timestamp": "2025-10-09T11:10:36.553295+00:00",
+          "techniques": [
+            "T1550.001"
+          ],
+          "tactics": [],
+          "official_tactics": [
+            "Defense Evasion",
+            "Lateral Movement"
+          ],
+          "unlabeled_steps_skipped_before": 4,
+          "unlabeled_steps_skipped_between": []
+        }
+      ],
+      "raw_length": 3,
+      "collapsed_length": 3,
+      "distinct_techniques_count": 4,
+      "distinct_techniques": [
+        "T1040",
+        "T1528",
+        "T1550.001",
+        "T1557.002"
+      ]
+    },
+    "E6": {
+      "raw": [
+        {
+          "event_id": "E6-S018",
+          "timestamp": "2025-12-09T10:51:20.871410+00:00",
+          "techniques": [
+            "T1105",
+            "T1204.002"
+          ],
+          "tactics": [
+            "Command and Control",
+            "Execution"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 17
+        },
+        {
+          "event_id": "E6-S022",
+          "timestamp": "2025-12-09T10:51:56.897282+00:00",
+          "techniques": [
+            "T1204.002"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 3
+        },
+        {
+          "event_id": "E6-S024",
+          "timestamp": "2025-12-09T10:52:15.089892+00:00",
+          "techniques": [
+            "T1082"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E6-S025",
+          "timestamp": "2025-12-09T10:52:36.661725+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S027",
+          "timestamp": "2025-12-09T10:53:08.054663+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E6-S028",
+          "timestamp": "2025-12-09T10:53:24.413240+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S029",
+          "timestamp": "2025-12-09T10:53:40.773499+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S030",
+          "timestamp": "2025-12-09T10:53:57.149335+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S031",
+          "timestamp": "2025-12-09T10:54:13.515965+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S032",
+          "timestamp": "2025-12-09T10:54:29.883572+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S034",
+          "timestamp": "2025-12-09T10:54:46.220261+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S035",
+          "timestamp": "2025-12-09T10:55:02.586054+00:00",
+          "techniques": [
+            "T1546",
+            "T1574.008"
+          ],
+          "tactics": [
+            "Persistence",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S036",
+          "timestamp": "2025-12-09T10:55:18.916823+00:00",
+          "techniques": [
+            "T1222.002"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S037",
+          "timestamp": "2025-12-09T10:55:35.273726+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S038",
+          "timestamp": "2025-12-09T10:55:51.514484+00:00",
+          "techniques": [
+            "T1115"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S039",
+          "timestamp": "2025-12-09T10:56:07.881365+00:00",
+          "techniques": [
+            "T1564.001"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S040",
+          "timestamp": "2025-12-09T10:56:24.122814+00:00",
+          "techniques": [
+            "T1222.002"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S041",
+          "timestamp": "2025-12-09T10:56:40.485548+00:00",
+          "techniques": [
+            "T1222.002"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S042",
+          "timestamp": "2025-12-09T10:56:56.850158+00:00",
+          "techniques": [
+            "T1010"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S043",
+          "timestamp": "2025-12-09T10:57:13.168499+00:00",
+          "techniques": [
+            "T1053.003"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E6-S046",
+          "timestamp": "2025-12-09T10:58:02.182365+00:00",
+          "techniques": [
+            "T1053.003"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E6-S048",
+          "timestamp": "2025-12-09T10:58:34.824707+00:00",
+          "techniques": [
+            "T1053.003"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E6-S049",
+          "timestamp": "2025-12-09T10:58:51.179431+00:00",
+          "techniques": [
+            "T1070.003"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E6-S018"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:51:20.871410+00:00",
+          "end_timestamp": "2025-12-09T10:51:20.871410+00:00",
+          "techniques": [
+            "T1105",
+            "T1204.002"
+          ],
+          "tactics": [
+            "Command and Control",
+            "Execution"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 17,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S022"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:51:56.897282+00:00",
+          "end_timestamp": "2025-12-09T10:51:56.897282+00:00",
+          "techniques": [
+            "T1204.002"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 3,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S024"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:52:15.089892+00:00",
+          "end_timestamp": "2025-12-09T10:52:15.089892+00:00",
+          "techniques": [
+            "T1082"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S025"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:52:36.661725+00:00",
+          "end_timestamp": "2025-12-09T10:52:36.661725+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S027",
+            "E6-S028",
+            "E6-S029",
+            "E6-S030",
+            "E6-S031",
+            "E6-S032"
+          ],
+          "repeat_count": 6,
+          "timestamp": "2025-12-09T10:53:08.054663+00:00",
+          "end_timestamp": "2025-12-09T10:54:29.883572+00:00",
+          "techniques": [
+            "T1059.004"
+          ],
+          "tactics": [
+            "Execution"
+          ],
+          "official_tactics": [
+            "Execution"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E6-S034"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:54:46.220261+00:00",
+          "end_timestamp": "2025-12-09T10:54:46.220261+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S035"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:55:02.586054+00:00",
+          "end_timestamp": "2025-12-09T10:55:02.586054+00:00",
+          "techniques": [
+            "T1546",
+            "T1574.008"
+          ],
+          "tactics": [
+            "Persistence",
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S036"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:55:18.916823+00:00",
+          "end_timestamp": "2025-12-09T10:55:18.916823+00:00",
+          "techniques": [
+            "T1222.002"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S037"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:55:35.273726+00:00",
+          "end_timestamp": "2025-12-09T10:55:35.273726+00:00",
+          "techniques": [
+            "T1105"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S038"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:55:51.514484+00:00",
+          "end_timestamp": "2025-12-09T10:55:51.514484+00:00",
+          "techniques": [
+            "T1115"
+          ],
+          "tactics": [
+            "Collection"
+          ],
+          "official_tactics": [
+            "Collection"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S039"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:56:07.881365+00:00",
+          "end_timestamp": "2025-12-09T10:56:07.881365+00:00",
+          "techniques": [
+            "T1564.001"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S040",
+            "E6-S041"
+          ],
+          "repeat_count": 2,
+          "timestamp": "2025-12-09T10:56:24.122814+00:00",
+          "end_timestamp": "2025-12-09T10:56:40.485548+00:00",
+          "techniques": [
+            "T1222.002"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            0
+          ]
+        },
+        {
+          "event_ids": [
+            "E6-S042"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:56:56.850158+00:00",
+          "end_timestamp": "2025-12-09T10:56:56.850158+00:00",
+          "techniques": [
+            "T1010"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E6-S043",
+            "E6-S046",
+            "E6-S048"
+          ],
+          "repeat_count": 3,
+          "timestamp": "2025-12-09T10:57:13.168499+00:00",
+          "end_timestamp": "2025-12-09T10:58:34.824707+00:00",
+          "techniques": [
+            "T1053.003"
+          ],
+          "tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": [
+            2,
+            1
+          ]
+        },
+        {
+          "event_ids": [
+            "E6-S049"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2025-12-09T10:58:51.179431+00:00",
+          "end_timestamp": "2025-12-09T10:58:51.179431+00:00",
+          "techniques": [
+            "T1070.003"
+          ],
+          "tactics": [
+            "Defense Evasion"
+          ],
+          "official_tactics": [
+            "Defense Evasion"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        }
+      ],
+      "raw_length": 23,
+      "collapsed_length": 15,
+      "distinct_techniques_count": 12,
+      "distinct_techniques": [
+        "T1010",
+        "T1053.003",
+        "T1059.004",
+        "T1070.003",
+        "T1082",
+        "T1105",
+        "T1115",
+        "T1204.002",
+        "T1222.002",
+        "T1546",
+        "T1564.001",
+        "T1574.008"
+      ]
+    },
+    "E7": {
+      "raw": [
+        {
+          "event_id": "E7-S001",
+          "timestamp": "2026-01-21T10:10:08.725780+00:00",
+          "techniques": [
+            "T1590.002",
+            "T1591"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E7-S002",
+          "timestamp": "2026-01-21T10:10:27.391788+00:00",
+          "techniques": [
+            "T1589.002"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E7-S004",
+          "timestamp": "2026-01-21T10:11:12.641499+00:00",
+          "techniques": [
+            "T1078.002",
+            "T1110.001",
+            "T1133"
+          ],
+          "tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S006",
+          "timestamp": "2026-01-21T10:31:51.034047+00:00",
+          "techniques": [
+            "T1592.002"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S008",
+          "timestamp": "2026-01-21T10:32:35.638031+00:00",
+          "techniques": [
+            "T1071.001",
+            "T1573.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S010",
+          "timestamp": "2026-01-21T10:33:10.967257+00:00",
+          "techniques": [
+            "T1059.004",
+            "T1095",
+            "T1190"
+          ],
+          "tactics": [
+            "Initial Access",
+            "Execution",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Execution",
+            "Initial Access"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S011",
+          "timestamp": "2026-01-21T10:34:46.529027+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0
+        },
+        {
+          "event_id": "E7-S014",
+          "timestamp": "2026-01-21T10:35:49.515527+00:00",
+          "techniques": [
+            "T1057"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        },
+        {
+          "event_id": "E7-S016",
+          "timestamp": "2026-01-21T10:36:34.664986+00:00",
+          "techniques": [
+            "T1016"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S018",
+          "timestamp": "2026-01-21T10:37:19.780463+00:00",
+          "techniques": [
+            "T1053.003",
+            "T1210",
+            "T1525",
+            "T1610"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Execution",
+            "Persistence",
+            "Privilege Escalation",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Execution",
+            "Lateral Movement",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S020",
+          "timestamp": "2026-01-21T10:44:10.007286+00:00",
+          "techniques": [
+            "T1083"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S022",
+          "timestamp": "2026-01-21T10:44:55.071921+00:00",
+          "techniques": [
+            "T1057"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1
+        },
+        {
+          "event_id": "E7-S025",
+          "timestamp": "2026-01-21T10:45:55.165605+00:00",
+          "techniques": [
+            "T1003.008",
+            "T1041"
+          ],
+          "tactics": [
+            "Credential Access",
+            "Collection",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Exfiltration"
+          ],
+          "unlabeled_steps_skipped_before": 2
+        }
+      ],
+      "collapsed": [
+        {
+          "event_ids": [
+            "E7-S001"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:10:08.725780+00:00",
+          "end_timestamp": "2026-01-21T10:10:08.725780+00:00",
+          "techniques": [
+            "T1590.002",
+            "T1591"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S002"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:10:27.391788+00:00",
+          "end_timestamp": "2026-01-21T10:10:27.391788+00:00",
+          "techniques": [
+            "T1589.002"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S004"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:11:12.641499+00:00",
+          "end_timestamp": "2026-01-21T10:11:12.641499+00:00",
+          "techniques": [
+            "T1078.002",
+            "T1110.001",
+            "T1133"
+          ],
+          "tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S006"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:31:51.034047+00:00",
+          "end_timestamp": "2026-01-21T10:31:51.034047+00:00",
+          "techniques": [
+            "T1592.002"
+          ],
+          "tactics": [
+            "Reconnaissance"
+          ],
+          "official_tactics": [
+            "Reconnaissance"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S008"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:32:35.638031+00:00",
+          "end_timestamp": "2026-01-21T10:32:35.638031+00:00",
+          "techniques": [
+            "T1071.001",
+            "T1573.001"
+          ],
+          "tactics": [
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S010"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:33:10.967257+00:00",
+          "end_timestamp": "2026-01-21T10:33:10.967257+00:00",
+          "techniques": [
+            "T1059.004",
+            "T1095",
+            "T1190"
+          ],
+          "tactics": [
+            "Initial Access",
+            "Execution",
+            "Command and Control"
+          ],
+          "official_tactics": [
+            "Command and Control",
+            "Execution",
+            "Initial Access"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S011"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:34:46.529027+00:00",
+          "end_timestamp": "2026-01-21T10:34:46.529027+00:00",
+          "techniques": [
+            "T1033"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 0,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S014"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:35:49.515527+00:00",
+          "end_timestamp": "2026-01-21T10:35:49.515527+00:00",
+          "techniques": [
+            "T1057"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S016"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:36:34.664986+00:00",
+          "end_timestamp": "2026-01-21T10:36:34.664986+00:00",
+          "techniques": [
+            "T1016"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S018"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:37:19.780463+00:00",
+          "end_timestamp": "2026-01-21T10:37:19.780463+00:00",
+          "techniques": [
+            "T1053.003",
+            "T1210",
+            "T1525",
+            "T1610"
+          ],
+          "tactics": [
+            "Defense Evasion",
+            "Execution",
+            "Persistence",
+            "Privilege Escalation",
+            "Lateral Movement"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Execution",
+            "Lateral Movement",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S020"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:44:10.007286+00:00",
+          "end_timestamp": "2026-01-21T10:44:10.007286+00:00",
+          "techniques": [
+            "T1083"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S022"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:44:55.071921+00:00",
+          "end_timestamp": "2026-01-21T10:44:55.071921+00:00",
+          "techniques": [
+            "T1057"
+          ],
+          "tactics": [
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Discovery"
+          ],
+          "unlabeled_steps_skipped_before": 1,
+          "unlabeled_steps_skipped_between": []
+        },
+        {
+          "event_ids": [
+            "E7-S025"
+          ],
+          "repeat_count": 1,
+          "timestamp": "2026-01-21T10:45:55.165605+00:00",
+          "end_timestamp": "2026-01-21T10:45:55.165605+00:00",
+          "techniques": [
+            "T1003.008",
+            "T1041"
+          ],
+          "tactics": [
+            "Credential Access",
+            "Collection",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Exfiltration"
+          ],
+          "unlabeled_steps_skipped_before": 2,
+          "unlabeled_steps_skipped_between": []
+        }
+      ],
+      "raw_length": 13,
+      "collapsed_length": 13,
+      "distinct_techniques_count": 22,
+      "distinct_techniques": [
+        "T1003.008",
+        "T1016",
+        "T1033",
+        "T1041",
+        "T1053.003",
+        "T1057",
+        "T1059.004",
+        "T1071.001",
+        "T1078.002",
+        "T1083",
+        "T1095",
+        "T1110.001",
+        "T1133",
+        "T1190",
+        "T1210",
+        "T1525",
+        "T1573.001",
+        "T1589.002",
+        "T1590.002",
+        "T1591",
+        "T1592.002",
+        "T1610"
+      ]
+    }
+  }
+}

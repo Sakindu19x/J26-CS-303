@@ -1,0 +1,86 @@
+[
+  {
+    "fold_id": "fold_1",
+    "test_episode": "E1",
+    "training_episodes": [
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7"
+    ]
+  },
+  {
+    "fold_id": "fold_2",
+    "test_episode": "E2",
+    "training_episodes": [
+      "E1",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7"
+    ]
+  },
+  {
+    "fold_id": "fold_3",
+    "test_episode": "E3",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E4",
+      "E5",
+      "E6",
+      "E7"
+    ]
+  },
+  {
+    "fold_id": "fold_4",
+    "test_episode": "E4",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E5",
+      "E6",
+      "E7"
+    ]
+  },
+  {
+    "fold_id": "fold_5",
+    "test_episode": "E5",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E6",
+      "E7"
+    ]
+  },
+  {
+    "fold_id": "fold_6",
+    "test_episode": "E6",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E7"
+    ]
+  },
+  {
+    "fold_id": "fold_7",
+    "test_episode": "E7",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6"
+    ]
+  }
+]

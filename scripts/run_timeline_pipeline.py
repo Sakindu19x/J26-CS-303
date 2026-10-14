@@ -73,4 +73,11 @@ def run_timeline_pipeline(
 
 
 if __name__ == "__main__":
-    run_timeline_pipeline()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run timeline pipeline.")
+    parser.add_argument("--processed-dir", "--out-dir", dest="processed_dir", type=Path, default=PROCESSED_DIR, help="Output directory for processed data")
+    parser.add_argument("--reports-dir", type=Path, default=REPORTS_DIR, help="Output directory for reports")
+    args = parser.parse_args()
+
+    run_timeline_pipeline(processed_dir=args.processed_dir, reports_dir=args.reports_dir)

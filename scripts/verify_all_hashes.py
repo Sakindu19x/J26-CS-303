@@ -75,6 +75,22 @@ for name, p in tactic_paths.items():
     if not match:
         raise ValueError(f"Byte mismatch in tactic file: {name}")
 
+# (d) 7-Episode Stage 1 files
+print("\n(d) 7-Episode Stage 1 Files (vs reports/_baseline_hashes_7ep_stage1.json):")
+hash_file_7ep = BASE_DIR / "reports" / "_baseline_hashes_7ep_stage1.json"
+if hash_file_7ep.is_file():
+    with open(hash_file_7ep, "r", encoding="utf-8") as f:
+        b_7ep = json.load(f)
+    for rel_path, exp_h in b_7ep.items():
+        p = BASE_DIR / rel_path
+        h = hashlib.sha256(p.read_bytes()).hexdigest()
+        match = (h == exp_h)
+        status = "MATCH" if match else "MISMATCH"
+        print(f"  {rel_path:<52} {h}  [{status}]")
+        if not match:
+            raise ValueError(f"Byte mismatch in 7-episode Stage 1 file: {rel_path}")
+
 print("\n" + "=" * 80)
-print("ALL 16 BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED")
+print("ALL BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED")
 print("=" * 80)
+

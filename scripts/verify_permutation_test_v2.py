@@ -1,4 +1,4 @@
-r"""Independent Verifier for Permutation Test on Real Episodes v2.
+r"""Independent Verifier for Permutation Test on Real Episodes v2.1.
 
 Constraints:
 - Reads ONLY data/processed/permutation_v2_null_distribution.csv and report artifacts.
@@ -6,7 +6,8 @@ Constraints:
 - Recomputes all null statistics (mean, SD, 2.5th and 97.5th percentiles, min, max).
 - Recomputes empirical one-sided p-values: p = (1 + count(null >= observed)) / (1 + B).
 - Verifies that report JSON and Markdown match the recomputed values exactly.
-- Verifies that N is constant (67 technique, 53 tactic) under S1.
+- Verifies that N is constant (67 technique, 53 tactic) under S1 and S3.
+- Verifies that Scheme Validity Warnings are present if and only if an order-free Frequency statistic has p < 0.05.
 """
 from __future__ import annotations
 
@@ -43,13 +44,13 @@ def percentile_linear(data: list[float], p: float) -> float:
 
 def compute_summary_stats(observed: float, null_values: list[float]) -> dict[str, Any]:
     b = len(null_values)
-    mean_val = sum(null_values) / b
+    mean_val = sum(null_values) / b if b > 0 else 0.0
     var = sum((x - mean_val) ** 2 for x in null_values) / (b - 1) if b > 1 else 0.0
     sd_val = math.sqrt(var)
-    p2_5 = percentile_linear(null_values, 2.5)
-    p97_5 = percentile_linear(null_values, 97.5)
-    min_val = min(null_values)
-    max_val = max(null_values)
+    p2_5 = percentile_linear(null_values, 2.5) if b > 0 else 0.0
+    p97_5 = percentile_linear(null_values, 97.5) if b > 0 else 0.0
+    min_val = min(null_values) if b > 0 else 0.0
+    max_val = max(null_values) if b > 0 else 0.0
     n_ge = sum(1 for x in null_values if x >= observed - 1e-12)
     p_val = (1.0 + n_ge) / (1.0 + b)
     if p_val < 0.05:
@@ -74,7 +75,7 @@ def compute_summary_stats(observed: float, null_values: list[float]) -> dict[str
 
 def verify_permutation_test_v2() -> bool:
     print("=" * 80)
-    print("VERIFYING PERMUTATION TEST v2 (INDEPENDENT CSV RECOMPUTATION)")
+    print("VERIFYING PERMUTATION TEST v2.1 (INDEPENDENT CSV RECOMPUTATION)")
     print("=" * 80)
 
     if not CSV_PATH.exists():
@@ -89,7 +90,7 @@ def verify_permutation_test_v2() -> bool:
 
     # 1. Read CSV and group values
     print("\n[Step 1] Reading CSV and grouping null distributions...")
-    schemes = ["S1_collapsed_order", "S2_raw_shuffle_rate"]
+    schemes = ["S1_collapsed_order", "S3_constrained_shuffle", "S2_raw_shuffle_rate"]
     levels = ["technique_collapsed_full", "tactic_collapsed"]
     stats_keys = [
         "markov_hit1", "markov_hit3",
@@ -122,13 +123,15 @@ def verify_permutation_test_v2() -> bool:
             sample_counts[sc][lvl].add(n_s)
             obs_from_csv[lvl][st] = obs
 
-    print(f"Read {n_rows} rows from CSV successfully (expected 32000).")
-    assert n_rows == 32000, f"Expected 32000 rows, got {n_rows}"
+    print(f"Read {n_rows} rows from CSV successfully (expected 48000).")
+    assert n_rows == 48000, f"Expected 48000 rows, got {n_rows}"
 
-    # Verify S1 invariance
+    # Verify S1 and S3 invariance
     assert sample_counts["S1_collapsed_order"]["technique_collapsed_full"] == {67}, "S1 technique N not constant 67!"
     assert sample_counts["S1_collapsed_order"]["tactic_collapsed"] == {53}, "S1 tactic N not constant 53!"
-    print("S1 constant sample counts verified: Technique N=67, Tactic N=53.")
+    assert sample_counts["S3_constrained_shuffle"]["technique_collapsed_full"] == {67}, "S3 technique N not constant 67!"
+    assert sample_counts["S3_constrained_shuffle"]["tactic_collapsed"] == {53}, "S3 tactic N not constant 53!"
+    print("S1 and S3 constant sample counts verified: Technique N=67, Tactic N=53.")
 
     # 2. Recompute statistics and verify against JSON
     print("\n[Step 2] Recomputing null statistics and verifying against report JSON...")
@@ -161,10 +164,33 @@ def verify_permutation_test_v2() -> bool:
                     f"| SD: {rec_stat['null_sd']:.4f} | p: {rec_stat['p_value']:.4f} [MATCH]"
                 )
 
-    # 3. Check Markdown report consistency
-    print("\n[Step 3] Checking Markdown report consistency...")
+    # 3. Check Scheme Validity Check
+    print("\n[Step 3] Checking Scheme Validity Warnings...")
+    val_check = report_data["scheme_validity_check"]
+    for sc in schemes:
+        sig_stats = []
+        for lvl in levels:
+            for st in ["frequency_hit1", "frequency_hit3"]:
+                p = report_data["schemes"][sc][lvl][st]["p_value"]
+                if p < 0.05:
+                    sig_stats.append((lvl, st, p))
+        expected_valid = len(sig_stats) == 0
+        actual_valid = val_check[sc]["is_valid_order_null"]
+        assert actual_valid == expected_valid, f"Validity mismatch for {sc}: actual={actual_valid}, expected={expected_valid}"
+        if not expected_valid:
+            assert val_check[sc]["warning"] is not None, f"Expected warning message for invalid scheme {sc}!"
+            print(f"  {sc}: Invalid null as expected (significant order-free stats: {sig_stats}) [PASS]")
+        else:
+            assert val_check[sc]["warning"] is None, f"Unexpected warning for valid scheme {sc}!"
+            print(f"  {sc}: Valid order-only null as expected [PASS]")
+
+    # 4. Check Markdown report consistency
+    print("\n[Step 4] Checking Markdown report consistency...")
     with open(MD_PATH, "r", encoding="utf-8") as f:
         md_text = f.read()
+
+    assert "v2.1 Report" in md_text
+    assert "S3 (Constrained Shuffle)" in md_text
 
     for sc in schemes:
         for lvl in levels:
@@ -183,8 +209,11 @@ def verify_permutation_test_v2() -> bool:
     assert "89.36" in md_text
     assert "82.51" in md_text
 
+    # Check warning token in markdown
+    assert "Scheme Validity Warning (S2)" in md_text
+
     print("All Markdown tokens verified.")
-    print("\nALL PERMUTATION TEST v2 VERIFICATIONS PASSED SUCCESSFULLY.")
+    print("\nALL PERMUTATION TEST v2.1 VERIFICATIONS PASSED SUCCESSFULLY.")
     return True
 
 

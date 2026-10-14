@@ -1,0 +1,2014 @@
+{
+  "episodes": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6",
+    "E7"
+  ],
+  "overlap_matrices": {
+    "full": {
+      "distinct_techniques_per_episode": {
+        "E1": 31,
+        "E2": 21,
+        "E3": 23,
+        "E4": 10,
+        "E5": 4,
+        "E6": 12,
+        "E7": 22
+      },
+      "technique_sets_per_episode": {
+        "E1": [
+          "T1003.008",
+          "T1007",
+          "T1016",
+          "T1033",
+          "T1049",
+          "T1057",
+          "T1059",
+          "T1059.006",
+          "T1069",
+          "T1070.004",
+          "T1082",
+          "T1083",
+          "T1087",
+          "T1105",
+          "T1120",
+          "T1124",
+          "T1190",
+          "T1201",
+          "T1218",
+          "T1497.001",
+          "T1518",
+          "T1548.003",
+          "T1556.003",
+          "T1590.002",
+          "T1591",
+          "T1592.002",
+          "T1595",
+          "T1595.002",
+          "T1595.003",
+          "T1614",
+          "T1615"
+        ],
+        "E2": [
+          "T1003",
+          "T1003.008",
+          "T1005",
+          "T1007",
+          "T1016",
+          "T1018",
+          "T1021.004",
+          "T1041",
+          "T1046",
+          "T1049",
+          "T1057",
+          "T1070.004",
+          "T1071.001",
+          "T1074.001",
+          "T1083",
+          "T1105",
+          "T1201",
+          "T1547",
+          "T1560.001",
+          "T1569",
+          "T1573.001"
+        ],
+        "E3": [
+          "T1003.008",
+          "T1018",
+          "T1021.005",
+          "T1036.005",
+          "T1039",
+          "T1053.003",
+          "T1059",
+          "T1059.004",
+          "T1071.001",
+          "T1072",
+          "T1083",
+          "T1087.001",
+          "T1105",
+          "T1110.001",
+          "T1213",
+          "T1485",
+          "T1486",
+          "T1489",
+          "T1490",
+          "T1531",
+          "T1564.001",
+          "T1565.001",
+          "T1574"
+        ],
+        "E4": [
+          "T1036.005",
+          "T1070.004",
+          "T1071.001",
+          "T1078.003",
+          "T1082",
+          "T1105",
+          "T1205.001",
+          "T1543.002",
+          "T1548.003",
+          "T1599"
+        ],
+        "E5": [
+          "T1040",
+          "T1528",
+          "T1550.001",
+          "T1557.002"
+        ],
+        "E6": [
+          "T1010",
+          "T1053.003",
+          "T1059.004",
+          "T1070.003",
+          "T1082",
+          "T1105",
+          "T1115",
+          "T1204.002",
+          "T1222.002",
+          "T1546",
+          "T1564.001",
+          "T1574.008"
+        ],
+        "E7": [
+          "T1003.008",
+          "T1016",
+          "T1033",
+          "T1041",
+          "T1053.003",
+          "T1057",
+          "T1059.004",
+          "T1071.001",
+          "T1078.002",
+          "T1083",
+          "T1095",
+          "T1110.001",
+          "T1133",
+          "T1190",
+          "T1210",
+          "T1525",
+          "T1573.001",
+          "T1589.002",
+          "T1590.002",
+          "T1591",
+          "T1592.002",
+          "T1610"
+        ]
+      },
+      "matrix": {
+        "E1": {
+          "E1": 31,
+          "E2": 9,
+          "E3": 4,
+          "E4": 4,
+          "E5": 0,
+          "E6": 2,
+          "E7": 9
+        },
+        "E2": {
+          "E1": 9,
+          "E2": 21,
+          "E3": 5,
+          "E4": 3,
+          "E5": 0,
+          "E6": 1,
+          "E7": 7
+        },
+        "E3": {
+          "E1": 4,
+          "E2": 5,
+          "E3": 23,
+          "E4": 3,
+          "E5": 0,
+          "E6": 4,
+          "E7": 6
+        },
+        "E4": {
+          "E1": 4,
+          "E2": 3,
+          "E3": 3,
+          "E4": 10,
+          "E5": 0,
+          "E6": 2,
+          "E7": 1
+        },
+        "E5": {
+          "E1": 0,
+          "E2": 0,
+          "E3": 0,
+          "E4": 0,
+          "E5": 4,
+          "E6": 0,
+          "E7": 0
+        },
+        "E6": {
+          "E1": 2,
+          "E2": 1,
+          "E3": 4,
+          "E4": 2,
+          "E5": 0,
+          "E6": 12,
+          "E7": 2
+        },
+        "E7": {
+          "E1": 9,
+          "E2": 7,
+          "E3": 6,
+          "E4": 1,
+          "E5": 0,
+          "E6": 2,
+          "E7": 22
+        }
+      },
+      "pairwise_shared": [
+        {
+          "episode_a": "E1",
+          "episode_b": "E2",
+          "shared_count": 9,
+          "shared_techniques": [
+            "T1003.008",
+            "T1007",
+            "T1016",
+            "T1049",
+            "T1057",
+            "T1070.004",
+            "T1083",
+            "T1105",
+            "T1201"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E3",
+          "shared_count": 4,
+          "shared_techniques": [
+            "T1003.008",
+            "T1059",
+            "T1083",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E4",
+          "shared_count": 4,
+          "shared_techniques": [
+            "T1070.004",
+            "T1082",
+            "T1105",
+            "T1548.003"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E6",
+          "shared_count": 2,
+          "shared_techniques": [
+            "T1082",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E7",
+          "shared_count": 9,
+          "shared_techniques": [
+            "T1003.008",
+            "T1016",
+            "T1033",
+            "T1057",
+            "T1083",
+            "T1190",
+            "T1590.002",
+            "T1591",
+            "T1592.002"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E3",
+          "shared_count": 5,
+          "shared_techniques": [
+            "T1003.008",
+            "T1018",
+            "T1071.001",
+            "T1083",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E4",
+          "shared_count": 3,
+          "shared_techniques": [
+            "T1070.004",
+            "T1071.001",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E6",
+          "shared_count": 1,
+          "shared_techniques": [
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E7",
+          "shared_count": 7,
+          "shared_techniques": [
+            "T1003.008",
+            "T1016",
+            "T1041",
+            "T1057",
+            "T1071.001",
+            "T1083",
+            "T1573.001"
+          ]
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E4",
+          "shared_count": 3,
+          "shared_techniques": [
+            "T1036.005",
+            "T1071.001",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E6",
+          "shared_count": 4,
+          "shared_techniques": [
+            "T1053.003",
+            "T1059.004",
+            "T1105",
+            "T1564.001"
+          ]
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E7",
+          "shared_count": 6,
+          "shared_techniques": [
+            "T1003.008",
+            "T1053.003",
+            "T1059.004",
+            "T1071.001",
+            "T1083",
+            "T1110.001"
+          ]
+        },
+        {
+          "episode_a": "E4",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E4",
+          "episode_b": "E6",
+          "shared_count": 2,
+          "shared_techniques": [
+            "T1082",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E4",
+          "episode_b": "E7",
+          "shared_count": 1,
+          "shared_techniques": [
+            "T1071.001"
+          ]
+        },
+        {
+          "episode_a": "E5",
+          "episode_b": "E6",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E5",
+          "episode_b": "E7",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E6",
+          "episode_b": "E7",
+          "shared_count": 2,
+          "shared_techniques": [
+            "T1053.003",
+            "T1059.004"
+          ]
+        }
+      ]
+    },
+    "parent": {
+      "distinct_techniques_per_episode": {
+        "E1": 28,
+        "E2": 20,
+        "E3": 22,
+        "E4": 10,
+        "E5": 4,
+        "E6": 12,
+        "E7": 22
+      },
+      "technique_sets_per_episode": {
+        "E1": [
+          "T1003",
+          "T1007",
+          "T1016",
+          "T1033",
+          "T1049",
+          "T1057",
+          "T1059",
+          "T1069",
+          "T1070",
+          "T1082",
+          "T1083",
+          "T1087",
+          "T1105",
+          "T1120",
+          "T1124",
+          "T1190",
+          "T1201",
+          "T1218",
+          "T1497",
+          "T1518",
+          "T1548",
+          "T1556",
+          "T1590",
+          "T1591",
+          "T1592",
+          "T1595",
+          "T1614",
+          "T1615"
+        ],
+        "E2": [
+          "T1003",
+          "T1005",
+          "T1007",
+          "T1016",
+          "T1018",
+          "T1021",
+          "T1041",
+          "T1046",
+          "T1049",
+          "T1057",
+          "T1070",
+          "T1071",
+          "T1074",
+          "T1083",
+          "T1105",
+          "T1201",
+          "T1547",
+          "T1560",
+          "T1569",
+          "T1573"
+        ],
+        "E3": [
+          "T1003",
+          "T1018",
+          "T1021",
+          "T1036",
+          "T1039",
+          "T1053",
+          "T1059",
+          "T1071",
+          "T1072",
+          "T1083",
+          "T1087",
+          "T1105",
+          "T1110",
+          "T1213",
+          "T1485",
+          "T1486",
+          "T1489",
+          "T1490",
+          "T1531",
+          "T1564",
+          "T1565",
+          "T1574"
+        ],
+        "E4": [
+          "T1036",
+          "T1070",
+          "T1071",
+          "T1078",
+          "T1082",
+          "T1105",
+          "T1205",
+          "T1543",
+          "T1548",
+          "T1599"
+        ],
+        "E5": [
+          "T1040",
+          "T1528",
+          "T1550",
+          "T1557"
+        ],
+        "E6": [
+          "T1010",
+          "T1053",
+          "T1059",
+          "T1070",
+          "T1082",
+          "T1105",
+          "T1115",
+          "T1204",
+          "T1222",
+          "T1546",
+          "T1564",
+          "T1574"
+        ],
+        "E7": [
+          "T1003",
+          "T1016",
+          "T1033",
+          "T1041",
+          "T1053",
+          "T1057",
+          "T1059",
+          "T1071",
+          "T1078",
+          "T1083",
+          "T1095",
+          "T1110",
+          "T1133",
+          "T1190",
+          "T1210",
+          "T1525",
+          "T1573",
+          "T1589",
+          "T1590",
+          "T1591",
+          "T1592",
+          "T1610"
+        ]
+      },
+      "matrix": {
+        "E1": {
+          "E1": 28,
+          "E2": 9,
+          "E3": 5,
+          "E4": 4,
+          "E5": 0,
+          "E6": 4,
+          "E7": 10
+        },
+        "E2": {
+          "E1": 9,
+          "E2": 20,
+          "E3": 6,
+          "E4": 3,
+          "E5": 0,
+          "E6": 2,
+          "E7": 7
+        },
+        "E3": {
+          "E1": 5,
+          "E2": 6,
+          "E3": 22,
+          "E4": 3,
+          "E5": 0,
+          "E6": 5,
+          "E7": 6
+        },
+        "E4": {
+          "E1": 4,
+          "E2": 3,
+          "E3": 3,
+          "E4": 10,
+          "E5": 0,
+          "E6": 3,
+          "E7": 2
+        },
+        "E5": {
+          "E1": 0,
+          "E2": 0,
+          "E3": 0,
+          "E4": 0,
+          "E5": 4,
+          "E6": 0,
+          "E7": 0
+        },
+        "E6": {
+          "E1": 4,
+          "E2": 2,
+          "E3": 5,
+          "E4": 3,
+          "E5": 0,
+          "E6": 12,
+          "E7": 2
+        },
+        "E7": {
+          "E1": 10,
+          "E2": 7,
+          "E3": 6,
+          "E4": 2,
+          "E5": 0,
+          "E6": 2,
+          "E7": 22
+        }
+      },
+      "pairwise_shared": [
+        {
+          "episode_a": "E1",
+          "episode_b": "E2",
+          "shared_count": 9,
+          "shared_techniques": [
+            "T1003",
+            "T1007",
+            "T1016",
+            "T1049",
+            "T1057",
+            "T1070",
+            "T1083",
+            "T1105",
+            "T1201"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E3",
+          "shared_count": 5,
+          "shared_techniques": [
+            "T1003",
+            "T1059",
+            "T1083",
+            "T1087",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E4",
+          "shared_count": 4,
+          "shared_techniques": [
+            "T1070",
+            "T1082",
+            "T1105",
+            "T1548"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E6",
+          "shared_count": 4,
+          "shared_techniques": [
+            "T1059",
+            "T1070",
+            "T1082",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E1",
+          "episode_b": "E7",
+          "shared_count": 10,
+          "shared_techniques": [
+            "T1003",
+            "T1016",
+            "T1033",
+            "T1057",
+            "T1059",
+            "T1083",
+            "T1190",
+            "T1590",
+            "T1591",
+            "T1592"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E3",
+          "shared_count": 6,
+          "shared_techniques": [
+            "T1003",
+            "T1018",
+            "T1021",
+            "T1071",
+            "T1083",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E4",
+          "shared_count": 3,
+          "shared_techniques": [
+            "T1070",
+            "T1071",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E6",
+          "shared_count": 2,
+          "shared_techniques": [
+            "T1070",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E2",
+          "episode_b": "E7",
+          "shared_count": 7,
+          "shared_techniques": [
+            "T1003",
+            "T1016",
+            "T1041",
+            "T1057",
+            "T1071",
+            "T1083",
+            "T1573"
+          ]
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E4",
+          "shared_count": 3,
+          "shared_techniques": [
+            "T1036",
+            "T1071",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E6",
+          "shared_count": 5,
+          "shared_techniques": [
+            "T1053",
+            "T1059",
+            "T1105",
+            "T1564",
+            "T1574"
+          ]
+        },
+        {
+          "episode_a": "E3",
+          "episode_b": "E7",
+          "shared_count": 6,
+          "shared_techniques": [
+            "T1003",
+            "T1053",
+            "T1059",
+            "T1071",
+            "T1083",
+            "T1110"
+          ]
+        },
+        {
+          "episode_a": "E4",
+          "episode_b": "E5",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E4",
+          "episode_b": "E6",
+          "shared_count": 3,
+          "shared_techniques": [
+            "T1070",
+            "T1082",
+            "T1105"
+          ]
+        },
+        {
+          "episode_a": "E4",
+          "episode_b": "E7",
+          "shared_count": 2,
+          "shared_techniques": [
+            "T1071",
+            "T1078"
+          ]
+        },
+        {
+          "episode_a": "E5",
+          "episode_b": "E6",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E5",
+          "episode_b": "E7",
+          "shared_count": 0,
+          "shared_techniques": []
+        },
+        {
+          "episode_a": "E6",
+          "episode_b": "E7",
+          "shared_count": 2,
+          "shared_techniques": [
+            "T1053",
+            "T1059"
+          ]
+        }
+      ]
+    }
+  },
+  "slices": {
+    "collapsed_full": {
+      "variant": "collapsed",
+      "granularity": "full",
+      "total_samples": 95,
+      "expected_samples": 67,
+      "count_mismatch": true,
+      "samples_per_episode": {
+        "E1": 18,
+        "E2": 19,
+        "E3": 20,
+        "E4": 10,
+        "E5": 2,
+        "E6": 14,
+        "E7": 12
+      },
+      "self_repeat_count": 0,
+      "self_repeat_rate_percent": 0.0,
+      "multi_technique_inputs_count": 29,
+      "multi_technique_targets_count": 26,
+      "top_current_techniques": [
+        [
+          "T1105",
+          11
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1071.001",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ],
+        [
+          "T1083",
+          4
+        ],
+        [
+          "T1003.008",
+          4
+        ],
+        [
+          "T1059",
+          3
+        ],
+        [
+          "T1016",
+          3
+        ],
+        [
+          "T1201",
+          3
+        ],
+        [
+          "T1070.004",
+          3
+        ]
+      ],
+      "top_target_techniques": [
+        [
+          "T1105",
+          10
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1003.008",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ],
+        [
+          "T1083",
+          4
+        ],
+        [
+          "T1071.001",
+          4
+        ],
+        [
+          "T1059",
+          3
+        ],
+        [
+          "T1016",
+          3
+        ],
+        [
+          "T1082",
+          3
+        ],
+        [
+          "T1201",
+          3
+        ]
+      ],
+      "loeo_folds": [
+        {
+          "test_episode": "E1",
+          "train_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 18,
+          "usable_samples_count": 13,
+          "usable_percent": 72.2,
+          "reachable_samples_count": 12,
+          "reachable_percent": 66.7,
+          "distinct_unseen_targets_count": 14,
+          "distinct_unseen_targets": [
+            "T1059.006",
+            "T1069",
+            "T1087",
+            "T1120",
+            "T1124",
+            "T1218",
+            "T1497.001",
+            "T1518",
+            "T1556.003",
+            "T1595",
+            "T1595.002",
+            "T1595.003",
+            "T1614",
+            "T1615"
+          ]
+        },
+        {
+          "test_episode": "E2",
+          "train_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 19,
+          "usable_samples_count": 13,
+          "usable_percent": 68.4,
+          "reachable_samples_count": 15,
+          "reachable_percent": 78.9,
+          "distinct_unseen_targets_count": 7,
+          "distinct_unseen_targets": [
+            "T1003",
+            "T1005",
+            "T1046",
+            "T1074.001",
+            "T1547",
+            "T1560.001",
+            "T1569"
+          ]
+        },
+        {
+          "test_episode": "E3",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 20,
+          "usable_samples_count": 10,
+          "usable_percent": 50.0,
+          "reachable_samples_count": 9,
+          "reachable_percent": 45.0,
+          "distinct_unseen_targets_count": 12,
+          "distinct_unseen_targets": [
+            "T1021.005",
+            "T1039",
+            "T1072",
+            "T1087.001",
+            "T1213",
+            "T1485",
+            "T1486",
+            "T1489",
+            "T1490",
+            "T1531",
+            "T1565.001",
+            "T1574"
+          ]
+        },
+        {
+          "test_episode": "E4",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 10,
+          "usable_samples_count": 6,
+          "usable_percent": 60.0,
+          "reachable_samples_count": 6,
+          "reachable_percent": 60.0,
+          "distinct_unseen_targets_count": 4,
+          "distinct_unseen_targets": [
+            "T1078.003",
+            "T1205.001",
+            "T1543.002",
+            "T1599"
+          ]
+        },
+        {
+          "test_episode": "E5",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 2,
+          "usable_samples_count": 0,
+          "usable_percent": 0.0,
+          "reachable_samples_count": 0,
+          "reachable_percent": 0.0,
+          "distinct_unseen_targets_count": 3,
+          "distinct_unseen_targets": [
+            "T1040",
+            "T1528",
+            "T1550.001"
+          ]
+        },
+        {
+          "test_episode": "E6",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E7"
+          ],
+          "test_samples_count": 14,
+          "usable_samples_count": 8,
+          "usable_percent": 57.1,
+          "reachable_samples_count": 7,
+          "reachable_percent": 50.0,
+          "distinct_unseen_targets_count": 7,
+          "distinct_unseen_targets": [
+            "T1010",
+            "T1070.003",
+            "T1115",
+            "T1204.002",
+            "T1222.002",
+            "T1546",
+            "T1574.008"
+          ]
+        },
+        {
+          "test_episode": "E7",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "test_samples_count": 12,
+          "usable_samples_count": 11,
+          "usable_percent": 91.7,
+          "reachable_samples_count": 10,
+          "reachable_percent": 83.3,
+          "distinct_unseen_targets_count": 8,
+          "distinct_unseen_targets": [
+            "T1078.002",
+            "T1095",
+            "T1110.001",
+            "T1133",
+            "T1210",
+            "T1525",
+            "T1589.002",
+            "T1610"
+          ]
+        }
+      ]
+    },
+    "collapsed_parent": {
+      "variant": "collapsed",
+      "granularity": "parent",
+      "total_samples": 95,
+      "expected_samples": 67,
+      "count_mismatch": true,
+      "samples_per_episode": {
+        "E1": 18,
+        "E2": 19,
+        "E3": 20,
+        "E4": 10,
+        "E5": 2,
+        "E6": 14,
+        "E7": 12
+      },
+      "self_repeat_count": 1,
+      "self_repeat_rate_percent": 1.05,
+      "multi_technique_inputs_count": 29,
+      "multi_technique_targets_count": 26,
+      "top_current_techniques": [
+        [
+          "T1105",
+          11
+        ],
+        [
+          "T1059",
+          7
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1003",
+          5
+        ],
+        [
+          "T1071",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ],
+        [
+          "T1083",
+          4
+        ],
+        [
+          "T1078",
+          4
+        ],
+        [
+          "T1595",
+          3
+        ],
+        [
+          "T1016",
+          3
+        ]
+      ],
+      "top_target_techniques": [
+        [
+          "T1105",
+          10
+        ],
+        [
+          "T1059",
+          7
+        ],
+        [
+          "T1003",
+          6
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ],
+        [
+          "T1083",
+          4
+        ],
+        [
+          "T1070",
+          4
+        ],
+        [
+          "T1071",
+          4
+        ],
+        [
+          "T1078",
+          4
+        ],
+        [
+          "T1595",
+          3
+        ]
+      ],
+      "loeo_folds": [
+        {
+          "test_episode": "E1",
+          "train_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 18,
+          "usable_samples_count": 13,
+          "usable_percent": 72.2,
+          "reachable_samples_count": 12,
+          "reachable_percent": 66.7,
+          "distinct_unseen_targets_count": 10,
+          "distinct_unseen_targets": [
+            "T1069",
+            "T1120",
+            "T1124",
+            "T1218",
+            "T1497",
+            "T1518",
+            "T1556",
+            "T1595",
+            "T1614",
+            "T1615"
+          ]
+        },
+        {
+          "test_episode": "E2",
+          "train_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 19,
+          "usable_samples_count": 15,
+          "usable_percent": 78.9,
+          "reachable_samples_count": 16,
+          "reachable_percent": 84.2,
+          "distinct_unseen_targets_count": 6,
+          "distinct_unseen_targets": [
+            "T1005",
+            "T1046",
+            "T1074",
+            "T1547",
+            "T1560",
+            "T1569"
+          ]
+        },
+        {
+          "test_episode": "E3",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 20,
+          "usable_samples_count": 13,
+          "usable_percent": 65.0,
+          "reachable_samples_count": 11,
+          "reachable_percent": 55.0,
+          "distinct_unseen_targets_count": 10,
+          "distinct_unseen_targets": [
+            "T1021",
+            "T1039",
+            "T1072",
+            "T1213",
+            "T1485",
+            "T1486",
+            "T1489",
+            "T1490",
+            "T1531",
+            "T1565"
+          ]
+        },
+        {
+          "test_episode": "E4",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 10,
+          "usable_samples_count": 8,
+          "usable_percent": 80.0,
+          "reachable_samples_count": 8,
+          "reachable_percent": 80.0,
+          "distinct_unseen_targets_count": 3,
+          "distinct_unseen_targets": [
+            "T1205",
+            "T1543",
+            "T1599"
+          ]
+        },
+        {
+          "test_episode": "E5",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 2,
+          "usable_samples_count": 0,
+          "usable_percent": 0.0,
+          "reachable_samples_count": 0,
+          "reachable_percent": 0.0,
+          "distinct_unseen_targets_count": 3,
+          "distinct_unseen_targets": [
+            "T1040",
+            "T1528",
+            "T1550"
+          ]
+        },
+        {
+          "test_episode": "E6",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E7"
+          ],
+          "test_samples_count": 14,
+          "usable_samples_count": 9,
+          "usable_percent": 64.3,
+          "reachable_samples_count": 9,
+          "reachable_percent": 64.3,
+          "distinct_unseen_targets_count": 5,
+          "distinct_unseen_targets": [
+            "T1010",
+            "T1115",
+            "T1204",
+            "T1222",
+            "T1546"
+          ]
+        },
+        {
+          "test_episode": "E7",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "test_samples_count": 12,
+          "usable_samples_count": 11,
+          "usable_percent": 91.7,
+          "reachable_samples_count": 11,
+          "reachable_percent": 91.7,
+          "distinct_unseen_targets_count": 7,
+          "distinct_unseen_targets": [
+            "T1095",
+            "T1110",
+            "T1133",
+            "T1210",
+            "T1525",
+            "T1589",
+            "T1610"
+          ]
+        }
+      ]
+    },
+    "raw_full": {
+      "variant": "raw",
+      "granularity": "full",
+      "total_samples": 131,
+      "expected_samples": 95,
+      "count_mismatch": true,
+      "samples_per_episode": {
+        "E1": 26,
+        "E2": 20,
+        "E3": 28,
+        "E4": 21,
+        "E5": 2,
+        "E6": 22,
+        "E7": 12
+      },
+      "self_repeat_count": 36,
+      "self_repeat_rate_percent": 27.48,
+      "multi_technique_inputs_count": 30,
+      "multi_technique_targets_count": 27,
+      "top_current_techniques": [
+        [
+          "T1059",
+          13
+        ],
+        [
+          "T1105",
+          11
+        ],
+        [
+          "T1059.004",
+          8
+        ],
+        [
+          "T1078.003",
+          7
+        ],
+        [
+          "T1071.001",
+          6
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1053.003",
+          5
+        ],
+        [
+          "T1543.002",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ],
+        [
+          "T1083",
+          4
+        ]
+      ],
+      "top_target_techniques": [
+        [
+          "T1059",
+          13
+        ],
+        [
+          "T1105",
+          10
+        ],
+        [
+          "T1059.004",
+          8
+        ],
+        [
+          "T1078.003",
+          7
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1003.008",
+          5
+        ],
+        [
+          "T1071.001",
+          5
+        ],
+        [
+          "T1053.003",
+          5
+        ],
+        [
+          "T1543.002",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ]
+      ],
+      "loeo_folds": [
+        {
+          "test_episode": "E1",
+          "train_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 26,
+          "usable_samples_count": 20,
+          "usable_percent": 76.9,
+          "reachable_samples_count": 19,
+          "reachable_percent": 73.1,
+          "distinct_unseen_targets_count": 14,
+          "distinct_unseen_targets": [
+            "T1059.006",
+            "T1069",
+            "T1087",
+            "T1120",
+            "T1124",
+            "T1218",
+            "T1497.001",
+            "T1518",
+            "T1556.003",
+            "T1595",
+            "T1595.002",
+            "T1595.003",
+            "T1614",
+            "T1615"
+          ]
+        },
+        {
+          "test_episode": "E2",
+          "train_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 20,
+          "usable_samples_count": 14,
+          "usable_percent": 70.0,
+          "reachable_samples_count": 16,
+          "reachable_percent": 80.0,
+          "distinct_unseen_targets_count": 7,
+          "distinct_unseen_targets": [
+            "T1003",
+            "T1005",
+            "T1046",
+            "T1074.001",
+            "T1547",
+            "T1560.001",
+            "T1569"
+          ]
+        },
+        {
+          "test_episode": "E3",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 28,
+          "usable_samples_count": 15,
+          "usable_percent": 53.6,
+          "reachable_samples_count": 14,
+          "reachable_percent": 50.0,
+          "distinct_unseen_targets_count": 12,
+          "distinct_unseen_targets": [
+            "T1021.005",
+            "T1039",
+            "T1072",
+            "T1087.001",
+            "T1213",
+            "T1485",
+            "T1486",
+            "T1489",
+            "T1490",
+            "T1531",
+            "T1565.001",
+            "T1574"
+          ]
+        },
+        {
+          "test_episode": "E4",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 21,
+          "usable_samples_count": 8,
+          "usable_percent": 38.1,
+          "reachable_samples_count": 8,
+          "reachable_percent": 38.1,
+          "distinct_unseen_targets_count": 4,
+          "distinct_unseen_targets": [
+            "T1078.003",
+            "T1205.001",
+            "T1543.002",
+            "T1599"
+          ]
+        },
+        {
+          "test_episode": "E5",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 2,
+          "usable_samples_count": 0,
+          "usable_percent": 0.0,
+          "reachable_samples_count": 0,
+          "reachable_percent": 0.0,
+          "distinct_unseen_targets_count": 3,
+          "distinct_unseen_targets": [
+            "T1040",
+            "T1528",
+            "T1550.001"
+          ]
+        },
+        {
+          "test_episode": "E6",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E7"
+          ],
+          "test_samples_count": 22,
+          "usable_samples_count": 15,
+          "usable_percent": 68.2,
+          "reachable_samples_count": 14,
+          "reachable_percent": 63.6,
+          "distinct_unseen_targets_count": 7,
+          "distinct_unseen_targets": [
+            "T1010",
+            "T1070.003",
+            "T1115",
+            "T1204.002",
+            "T1222.002",
+            "T1546",
+            "T1574.008"
+          ]
+        },
+        {
+          "test_episode": "E7",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "test_samples_count": 12,
+          "usable_samples_count": 11,
+          "usable_percent": 91.7,
+          "reachable_samples_count": 10,
+          "reachable_percent": 83.3,
+          "distinct_unseen_targets_count": 8,
+          "distinct_unseen_targets": [
+            "T1078.002",
+            "T1095",
+            "T1110.001",
+            "T1133",
+            "T1210",
+            "T1525",
+            "T1589.002",
+            "T1610"
+          ]
+        }
+      ]
+    },
+    "raw_parent": {
+      "variant": "raw",
+      "granularity": "parent",
+      "total_samples": 131,
+      "expected_samples": 95,
+      "count_mismatch": true,
+      "samples_per_episode": {
+        "E1": 26,
+        "E2": 20,
+        "E3": 28,
+        "E4": 21,
+        "E5": 2,
+        "E6": 22,
+        "E7": 12
+      },
+      "self_repeat_count": 37,
+      "self_repeat_rate_percent": 28.24,
+      "multi_technique_inputs_count": 30,
+      "multi_technique_targets_count": 27,
+      "top_current_techniques": [
+        [
+          "T1059",
+          22
+        ],
+        [
+          "T1105",
+          11
+        ],
+        [
+          "T1078",
+          8
+        ],
+        [
+          "T1071",
+          6
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1003",
+          5
+        ],
+        [
+          "T1021",
+          5
+        ],
+        [
+          "T1053",
+          5
+        ],
+        [
+          "T1543",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ]
+      ],
+      "top_target_techniques": [
+        [
+          "T1059",
+          22
+        ],
+        [
+          "T1105",
+          10
+        ],
+        [
+          "T1078",
+          8
+        ],
+        [
+          "T1003",
+          6
+        ],
+        [
+          "T1033",
+          5
+        ],
+        [
+          "T1070",
+          5
+        ],
+        [
+          "T1071",
+          5
+        ],
+        [
+          "T1053",
+          5
+        ],
+        [
+          "T1543",
+          5
+        ],
+        [
+          "T1057",
+          4
+        ]
+      ],
+      "loeo_folds": [
+        {
+          "test_episode": "E1",
+          "train_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 26,
+          "usable_samples_count": 20,
+          "usable_percent": 76.9,
+          "reachable_samples_count": 19,
+          "reachable_percent": 73.1,
+          "distinct_unseen_targets_count": 10,
+          "distinct_unseen_targets": [
+            "T1069",
+            "T1120",
+            "T1124",
+            "T1218",
+            "T1497",
+            "T1518",
+            "T1556",
+            "T1595",
+            "T1614",
+            "T1615"
+          ]
+        },
+        {
+          "test_episode": "E2",
+          "train_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 20,
+          "usable_samples_count": 16,
+          "usable_percent": 80.0,
+          "reachable_samples_count": 17,
+          "reachable_percent": 85.0,
+          "distinct_unseen_targets_count": 6,
+          "distinct_unseen_targets": [
+            "T1005",
+            "T1046",
+            "T1074",
+            "T1547",
+            "T1560",
+            "T1569"
+          ]
+        },
+        {
+          "test_episode": "E3",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 28,
+          "usable_samples_count": 20,
+          "usable_percent": 71.4,
+          "reachable_samples_count": 16,
+          "reachable_percent": 57.1,
+          "distinct_unseen_targets_count": 10,
+          "distinct_unseen_targets": [
+            "T1021",
+            "T1039",
+            "T1072",
+            "T1213",
+            "T1485",
+            "T1486",
+            "T1489",
+            "T1490",
+            "T1531",
+            "T1565"
+          ]
+        },
+        {
+          "test_episode": "E4",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 21,
+          "usable_samples_count": 14,
+          "usable_percent": 66.7,
+          "reachable_samples_count": 14,
+          "reachable_percent": 66.7,
+          "distinct_unseen_targets_count": 3,
+          "distinct_unseen_targets": [
+            "T1205",
+            "T1543",
+            "T1599"
+          ]
+        },
+        {
+          "test_episode": "E5",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "E7"
+          ],
+          "test_samples_count": 2,
+          "usable_samples_count": 0,
+          "usable_percent": 0.0,
+          "reachable_samples_count": 0,
+          "reachable_percent": 0.0,
+          "distinct_unseen_targets_count": 3,
+          "distinct_unseen_targets": [
+            "T1040",
+            "T1528",
+            "T1550"
+          ]
+        },
+        {
+          "test_episode": "E6",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E7"
+          ],
+          "test_samples_count": 22,
+          "usable_samples_count": 16,
+          "usable_percent": 72.7,
+          "reachable_samples_count": 16,
+          "reachable_percent": 72.7,
+          "distinct_unseen_targets_count": 5,
+          "distinct_unseen_targets": [
+            "T1010",
+            "T1115",
+            "T1204",
+            "T1222",
+            "T1546"
+          ]
+        },
+        {
+          "test_episode": "E7",
+          "train_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "test_samples_count": 12,
+          "usable_samples_count": 11,
+          "usable_percent": 91.7,
+          "reachable_samples_count": 11,
+          "reachable_percent": 91.7,
+          "distinct_unseen_targets_count": 7,
+          "distinct_unseen_targets": [
+            "T1095",
+            "T1110",
+            "T1133",
+            "T1210",
+            "T1525",
+            "T1589",
+            "T1610"
+          ]
+        }
+      ]
+    }
+  },
+  "evaluation_limitations_summary": "Empirical Limitations of CAM-LDS Next-Stage Modeling:\n1. Dataset Sample Size: Across all four distinct attack campaigns, only 67 collapsed transition samples (95 raw transition samples) are available at full technique granularity.\n2. Closed-Vocabulary Bounds (Full ID Granularity): Pooled over the 4 collapsed full-ID folds, 34 of 67 test samples (50.7%) have a current technique seen in training and 35 of 67 (52.2%) have a target technique seen in training. These values establish the empirical upper bounds on what any closed-vocabulary model can achieve on this dataset.\n3. Closed-Vocabulary Bounds (Parent Granularity): For parent granularity, 41 of 67 test samples (61.2%) have a current technique seen in training and 39 of 67 (58.2%) have a target technique seen in training targets."
+}

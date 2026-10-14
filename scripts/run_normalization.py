@@ -16,6 +16,7 @@ from c4.data_loading import RAW_DIR
 from c4.data_quality import build_data_quality_report, render_quality_markdown
 from c4.normalization import (
     EPISODE_MAPPING,
+    EPISODE_MAPPING_7EP,
     QualityLog,
     events_to_dataframe,
     normalize_episode_steps,
@@ -30,9 +31,13 @@ def run_pipeline(
     raw_dir: Path = RAW_DIR,
     processed_dir: Path = PROCESSED_DIR,
     reports_dir: Path = REPORTS_DIR,
+    episode_mapping: dict[str, str] | None = None,
 ) -> dict:
     processed_dir.mkdir(parents=True, exist_ok=True)
     reports_dir.mkdir(parents=True, exist_ok=True)
+
+    if episode_mapping is None:
+        episode_mapping = EPISODE_MAPPING
 
     qlog = QualityLog()
     all_events = []
@@ -40,7 +45,7 @@ def run_pipeline(
     episode_summaries = {}
     wazuh_summaries = {}
 
-    for scenario_id, episode_id in EPISODE_MAPPING.items():
+    for scenario_id, episode_id in episode_mapping.items():
         archive_name = f"{scenario_id}.zip"
         archive_path = raw_dir / archive_name
         if not archive_path.is_file():
@@ -158,4 +163,13 @@ def run_pipeline(
 
 
 if __name__ == "__main__":
-    run_pipeline()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run normalization pipeline.")
+    parser.add_argument("--episodes", choices=["4", "7", "all"], default="4", help="Episodes to process: 4 (E1-E4) or 7 (E1-E7)")
+    parser.add_argument("--processed-dir", "--out-dir", dest="processed_dir", type=Path, default=PROCESSED_DIR, help="Output directory for processed data")
+    parser.add_argument("--reports-dir", type=Path, default=REPORTS_DIR, help="Output directory for reports")
+    args = parser.parse_args()
+
+    ep_map = EPISODE_MAPPING_7EP if args.episodes in ("7", "all") else EPISODE_MAPPING
+    run_pipeline(processed_dir=args.processed_dir, reports_dir=args.reports_dir, episode_mapping=ep_map)

@@ -20,6 +20,16 @@ EPISODE_MAPPING = {
     "scenario_4": "E4",
 }
 
+EPISODE_MAPPING_7EP = {
+    "scenario_1_sudo_pam": "E1",
+    "scenario_2_cron": "E2",
+    "scenario_3_vnc_apt": "E3",
+    "scenario_4": "E4",
+    "scenario_5": "E5",
+    "scenario_6_macro_binary": "E6",
+    "scenario_7": "E7",
+}
+
 TIMESTAMP_ASSUMPTIONS = {
     "E1": "UTC (verified via host audit log correlation within 0.33s)",
     "E2": "UTC (inconclusive direct audit match, but consistent with host /etc/timezone Etc/UTC)",
