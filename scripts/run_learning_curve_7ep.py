@@ -39,7 +39,6 @@ from src.c4.tactic_evaluation import (
     build_tactic_sequences,
 )
 
-BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_7EP = BASE_DIR / "data" / "processed_7ep"
 REPORTS_7EP = BASE_DIR / "reports" / "7ep"
 
@@ -51,6 +50,7 @@ JSON_OUT = REPORTS_7EP / "learning_curve_7ep_results.json"
 MD_OUT = REPORTS_7EP / "learning_curve_7ep_report.md"
 PNG_OUT = REPORTS_7EP / "learning_curve_7ep.png"
 PLOT_DATA_OUT = REPORTS_7EP / "learning_curve_7ep_plot_data.json"
+EVAL_RESULTS_PATH = REPORTS_7EP / "evaluation_7ep_results.json"
 
 EPISODES = ["E1", "E2", "E3", "E4", "E5", "E6", "E7"]
 MODELS = ["markov", "frequency", "markov_fallback"]
@@ -177,7 +177,7 @@ def run_learning_curve_7ep() -> dict[str, Any]:
                     })
 
     # 2. Tactic Evaluation
-    print("[2/2] Evaluating Tactic (tactic_collapsed) across 441 subsets...")
+    print("\n[2/2] Evaluating Tactic (tactic_collapsed) across 441 subsets...")
     for ep in EPISODES:
         others = [x for x in EPISODES if x != ep]
         fold_samples = tac_samples_by_ep[ep]
@@ -260,7 +260,7 @@ def run_learning_curve_7ep() -> dict[str, Any]:
                         "ceiling_rate": f"{ceil / n_samples:.6f}",
                     })
 
-    # Write CSV
+    # Write CSV (only if not already byte-identical, or rewrite identically)
     print(f"\nWriting learning curve CSV ({len(csv_rows)} rows) to {CSV_OUT}...")
     fieldnames = [
         "held_out_episode", "k", "subset_id", "training_episodes", "slice",
@@ -298,6 +298,21 @@ def run_learning_curve_7ep() -> dict[str, Any]:
         aggregated_results["learning_curve"][sl] = {}
         plot_data["slices"][sl] = {
             "k": list(range(1, 7)),
+            "episode_mean": {
+                "markov_hit3": [],
+                "frequency_hit3": [],
+                "fallback_hit3": [],
+                "ceiling": [],
+                "coverage": [],
+            },
+            "sample_weighted": {
+                "markov_hit3": [],
+                "frequency_hit3": [],
+                "fallback_hit3": [],
+                "ceiling": [],
+                "coverage": [],
+            },
+            # Primary series mapped to top-level for convenience
             "markov_hit3": [],
             "frequency_hit3": [],
             "fallback_hit3": [],
@@ -370,6 +385,33 @@ def run_learning_curve_7ep() -> dict[str, Any]:
 
             tot_n = weighted_totals["total_eval_samples"]
 
+            # Compute E5-excluded aggregation
+            no_e5_eps = [ep for ep in EPISODES if ep != "E5"]
+            tot_n_no_e5 = sum(per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps)
+            e5_excluded_summary = {
+                "unweighted_episode_mean": {
+                    "markov_hit1": sum(per_ep_metrics[ep]["markov"]["hit1_rate"] for ep in no_e5_eps) / 6.0,
+                    "markov_hit3": sum(per_ep_metrics[ep]["markov"]["hit3_rate"] for ep in no_e5_eps) / 6.0,
+                    "frequency_hit1": sum(per_ep_metrics[ep]["frequency"]["hit1_rate"] for ep in no_e5_eps) / 6.0,
+                    "frequency_hit3": sum(per_ep_metrics[ep]["frequency"]["hit3_rate"] for ep in no_e5_eps) / 6.0,
+                    "markov_fallback_hit1": sum(per_ep_metrics[ep]["markov_fallback"]["hit1_rate"] for ep in no_e5_eps) / 6.0,
+                    "markov_fallback_hit3": sum(per_ep_metrics[ep]["markov_fallback"]["hit3_rate"] for ep in no_e5_eps) / 6.0,
+                    "coverage": sum(per_ep_metrics[ep]["coverage_rate"] for ep in no_e5_eps) / 6.0,
+                    "ceiling": sum(per_ep_metrics[ep]["ceiling_rate"] for ep in no_e5_eps) / 6.0,
+                },
+                "pooled_sample_weighted": {
+                    "total_samples": tot_n_no_e5,
+                    "markov_hit1": sum(per_ep_metrics[ep]["markov"]["hit1_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "markov_hit3": sum(per_ep_metrics[ep]["markov"]["hit3_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "frequency_hit1": sum(per_ep_metrics[ep]["frequency"]["hit1_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "frequency_hit3": sum(per_ep_metrics[ep]["frequency"]["hit3_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "markov_fallback_hit1": sum(per_ep_metrics[ep]["markov_fallback"]["hit1_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "markov_fallback_hit3": sum(per_ep_metrics[ep]["markov_fallback"]["hit3_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "coverage": sum(per_ep_metrics[ep]["coverage_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                    "ceiling": sum(per_ep_metrics[ep]["ceiling_rate"] * per_ep_metrics[ep]["n_samples"] for ep in no_e5_eps) / tot_n_no_e5,
+                },
+            }
+
             k_summary = {
                 "k": k,
                 "n_subsets_per_episode": n_subsets,
@@ -395,19 +437,82 @@ def run_learning_curve_7ep() -> dict[str, Any]:
                     "coverage": weighted_totals["covered_samples"] / tot_n,
                     "ceiling": weighted_totals["ceiling_samples"] / tot_n,
                 },
+                "e5_excluded": e5_excluded_summary,
             }
             aggregated_results["learning_curve"][sl][f"k_{k}"] = k_summary
 
-            # Use sample-weighted pooled for plot
+            # Plot data tracking
+            unw = k_summary["unweighted_episode_mean"]
             pw = k_summary["pooled_sample_weighted"]
-            plot_data["slices"][sl]["markov_hit3"].append(pw["markov_hit3"])
-            plot_data["slices"][sl]["frequency_hit3"].append(pw["frequency_hit3"])
-            plot_data["slices"][sl]["fallback_hit3"].append(pw["markov_fallback_hit3"])
-            plot_data["slices"][sl]["ceiling"].append(pw["ceiling"])
-            plot_data["slices"][sl]["coverage"].append(pw["coverage"])
+
+            plot_data["slices"][sl]["episode_mean"]["markov_hit3"].append(unw["markov_hit3"])
+            plot_data["slices"][sl]["episode_mean"]["frequency_hit3"].append(unw["frequency_hit3"])
+            plot_data["slices"][sl]["episode_mean"]["fallback_hit3"].append(unw["markov_fallback_hit3"])
+            plot_data["slices"][sl]["episode_mean"]["ceiling"].append(unw["ceiling"])
+            plot_data["slices"][sl]["episode_mean"]["coverage"].append(unw["coverage"])
+
+            plot_data["slices"][sl]["sample_weighted"]["markov_hit3"].append(pw["markov_hit3"])
+            plot_data["slices"][sl]["sample_weighted"]["frequency_hit3"].append(pw["frequency_hit3"])
+            plot_data["slices"][sl]["sample_weighted"]["fallback_hit3"].append(pw["markov_fallback_hit3"])
+            plot_data["slices"][sl]["sample_weighted"]["ceiling"].append(pw["ceiling"])
+            plot_data["slices"][sl]["sample_weighted"]["coverage"].append(pw["coverage"])
+
+            # Map primary (episode-mean) to top-level
+            plot_data["slices"][sl]["markov_hit3"].append(unw["markov_hit3"])
+            plot_data["slices"][sl]["frequency_hit3"].append(unw["frequency_hit3"])
+            plot_data["slices"][sl]["fallback_hit3"].append(unw["markov_fallback_hit3"])
+            plot_data["slices"][sl]["ceiling"].append(unw["ceiling"])
+            plot_data["slices"][sl]["coverage"].append(unw["coverage"])
+
+    # Code assertions at k=6 against evaluation_7ep_results.json
+    print("\nAsserting k=6 aggregations against evaluation_7ep_results.json fold-mean and pooled values...")
+    if EVAL_RESULTS_PATH.is_file():
+        with open(EVAL_RESULTS_PATH, "r", encoding="utf-8") as f:
+            ev_json = json.load(f)
+
+        # Technique assertions
+        lc_t6_unw = aggregated_results["learning_curve"]["technique_collapsed_full"]["k_6"]["unweighted_episode_mean"]
+        lc_t6_w = aggregated_results["learning_curve"]["technique_collapsed_full"]["k_6"]["pooled_sample_weighted"]
+        ev_t_head = ev_json["primary_slice_technique_collapsed_full"]["headline"]
+
+        assert math.isclose(lc_t6_unw["markov_hit1"], ev_t_head["markov"]["fold_mean_top1"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_unw["markov_hit3"], ev_t_head["markov"]["fold_mean_top3"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_unw["frequency_hit1"], ev_t_head["frequency"]["fold_mean_top1"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_unw["frequency_hit3"], ev_t_head["frequency"]["fold_mean_top3"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_unw["markov_fallback_hit1"], ev_t_head["fallback"]["fold_mean_top1"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_unw["markov_fallback_hit3"], ev_t_head["fallback"]["fold_mean_top3"], abs_tol=1e-6)
+
+        assert math.isclose(lc_t6_w["markov_hit1"], ev_t_head["markov"]["top1"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["markov_hit3"], ev_t_head["markov"]["top3"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["frequency_hit1"], ev_t_head["frequency"]["top1"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["frequency_hit3"], ev_t_head["frequency"]["top3"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["markov_fallback_hit1"], ev_t_head["fallback"]["top1"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["markov_fallback_hit3"], ev_t_head["fallback"]["top3"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["coverage"], ev_t_head["coverage"]["coverage_rate"], abs_tol=1e-6)
+        assert math.isclose(lc_t6_w["ceiling"], ev_t_head["ceiling"]["ceiling_rate"], abs_tol=1e-6)
+
+        # Tactic assertions
+        lc_tac6_unw = aggregated_results["learning_curve"]["tactic_collapsed"]["k_6"]["unweighted_episode_mean"]
+        lc_tac6_w = aggregated_results["learning_curve"]["tactic_collapsed"]["k_6"]["pooled_sample_weighted"]
+        ev_tac_head = ev_json["secondary_slice_tactic_collapsed"]["headline"]
+
+        assert math.isclose(lc_tac6_unw["markov_hit1"], ev_tac_head["markov"]["fold_mean_top1"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_unw["markov_hit3"], ev_tac_head["markov"]["fold_mean_top3"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_unw["frequency_hit1"], ev_tac_head["frequency"]["fold_mean_top1"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_unw["frequency_hit3"], ev_tac_head["frequency"]["fold_mean_top3"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_unw["markov_fallback_hit1"], ev_tac_head["markov_fallback"]["fold_mean_top1"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_unw["markov_fallback_hit3"], ev_tac_head["markov_fallback"]["fold_mean_top3"], abs_tol=1e-6)
+
+        assert math.isclose(lc_tac6_w["markov_hit1"], ev_tac_head["markov"]["top1"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_w["markov_hit3"], ev_tac_head["markov"]["top3"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_w["frequency_hit1"], ev_tac_head["frequency"]["top1"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_w["frequency_hit3"], ev_tac_head["frequency"]["top3"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_w["markov_fallback_hit1"], ev_tac_head["markov_fallback"]["top1"], abs_tol=1e-6)
+        assert math.isclose(lc_tac6_w["markov_fallback_hit3"], ev_tac_head["markov_fallback"]["top3"], abs_tol=1e-6)
+        print("  All k=6 aggregations exactly MATCH evaluation_7ep_results.json fold-mean and pooled values [PASS]")
 
     # Write Results JSON
-    print(f"Writing learning curve results JSON to {JSON_OUT}...")
+    print(f"\nWriting learning curve results JSON to {JSON_OUT}...")
     with open(JSON_OUT, "w", encoding="utf-8") as f:
         json.dump(aggregated_results, f, indent=2)
 
@@ -416,7 +521,7 @@ def run_learning_curve_7ep() -> dict[str, Any]:
     with open(PLOT_DATA_OUT, "w", encoding="utf-8") as f:
         json.dump(plot_data, f, indent=2)
 
-    # Generate Plot
+    # Generate Plot (Primary solid, Secondary dashed)
     print(f"Generating learning curve figure at {PNG_OUT}...")
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5), sharey=False)
 
@@ -425,36 +530,52 @@ def run_learning_curve_7ep() -> dict[str, Any]:
     # Panel 1: Technique
     ax1 = axes[0]
     p_tech = plot_data["slices"]["technique_collapsed_full"]
-    ax1.plot(ks, p_tech["ceiling"], "k--", marker="o", label="Target Ceiling")
-    ax1.plot(ks, p_tech["coverage"], "c-.", marker="v", label="Markov Coverage")
-    ax1.plot(ks, p_tech["frequency_hit3"], "s-", color="#d95f02", label="Frequency Hit@3")
-    ax1.plot(ks, p_tech["fallback_hit3"], "^-", color="#7570b3", label="Markov Fallback Hit@3")
-    ax1.plot(ks, p_tech["markov_hit3"], "o-", color="#1b9e77", label="Markov Hit@3")
+    # Primary (Solid lines with markers)
+    ax1.plot(ks, p_tech["episode_mean"]["ceiling"], "k-o", label="Ceiling (Episode-Mean)")
+    ax1.plot(ks, p_tech["episode_mean"]["coverage"], "c-v", label="Coverage (Episode-Mean)")
+    ax1.plot(ks, p_tech["episode_mean"]["frequency_hit3"], "s-", color="#d95f02", label="Frequency Hit@3 (Episode-Mean)")
+    ax1.plot(ks, p_tech["episode_mean"]["fallback_hit3"], "^-", color="#7570b3", label="Fallback Hit@3 (Episode-Mean)")
+    ax1.plot(ks, p_tech["episode_mean"]["markov_hit3"], "o-", color="#1b9e77", label="Markov Hit@3 (Episode-Mean)")
+    # Secondary (Dashed lines without markers)
+    ax1.plot(ks, p_tech["sample_weighted"]["ceiling"], "k--", alpha=0.7, label="Ceiling (Pooled)")
+    ax1.plot(ks, p_tech["sample_weighted"]["coverage"], "c--", alpha=0.7, label="Coverage (Pooled)")
+    ax1.plot(ks, p_tech["sample_weighted"]["frequency_hit3"], "--", color="#d95f02", alpha=0.7, label="Frequency Hit@3 (Pooled)")
+    ax1.plot(ks, p_tech["sample_weighted"]["fallback_hit3"], "--", color="#7570b3", alpha=0.7, label="Fallback Hit@3 (Pooled)")
+    ax1.plot(ks, p_tech["sample_weighted"]["markov_hit3"], "--", color="#1b9e77", alpha=0.7, label="Markov Hit@3 (Pooled)")
+
     ax1.set_title("Technique Level (collapsed_full, N=95)")
     ax1.set_xlabel("Number of Training Episodes (k)")
     ax1.set_ylabel("Rate")
     ax1.set_xticks(ks)
     ax1.set_ylim(-0.02, 0.75)
     ax1.grid(True, linestyle=":", alpha=0.6)
-    ax1.legend(loc="upper left")
+    ax1.legend(loc="upper left", fontsize=8)
 
     # Panel 2: Tactic
     ax2 = axes[1]
     p_tac = plot_data["slices"]["tactic_collapsed"]
-    ax2.plot(ks, p_tac["ceiling"], "k--", marker="o", label="Target Ceiling")
-    ax2.plot(ks, p_tac["coverage"], "c-.", marker="v", label="Markov Coverage")
-    ax2.plot(ks, p_tac["frequency_hit3"], "s-", color="#d95f02", label="Frequency Hit@3")
-    ax2.plot(ks, p_tac["fallback_hit3"], "^-", color="#7570b3", label="Markov Fallback Hit@3")
-    ax2.plot(ks, p_tac["markov_hit3"], "o-", color="#1b9e77", label="Markov Hit@3")
+    # Primary (Solid lines with markers)
+    ax2.plot(ks, p_tac["episode_mean"]["ceiling"], "k-o", label="Ceiling (Episode-Mean)")
+    ax2.plot(ks, p_tac["episode_mean"]["coverage"], "c-v", label="Coverage (Episode-Mean)")
+    ax2.plot(ks, p_tac["episode_mean"]["frequency_hit3"], "s-", color="#d95f02", label="Frequency Hit@3 (Episode-Mean)")
+    ax2.plot(ks, p_tac["episode_mean"]["fallback_hit3"], "^-", color="#7570b3", label="Fallback Hit@3 (Episode-Mean)")
+    ax2.plot(ks, p_tac["episode_mean"]["markov_hit3"], "o-", color="#1b9e77", label="Markov Hit@3 (Episode-Mean)")
+    # Secondary (Dashed lines without markers)
+    ax2.plot(ks, p_tac["sample_weighted"]["ceiling"], "k--", alpha=0.7, label="Ceiling (Pooled)")
+    ax2.plot(ks, p_tac["sample_weighted"]["coverage"], "c--", alpha=0.7, label="Coverage (Pooled)")
+    ax2.plot(ks, p_tac["sample_weighted"]["frequency_hit3"], "--", color="#d95f02", alpha=0.7, label="Frequency Hit@3 (Pooled)")
+    ax2.plot(ks, p_tac["sample_weighted"]["fallback_hit3"], "--", color="#7570b3", alpha=0.7, label="Fallback Hit@3 (Pooled)")
+    ax2.plot(ks, p_tac["sample_weighted"]["markov_hit3"], "--", color="#1b9e77", alpha=0.7, label="Markov Hit@3 (Pooled)")
+
     ax2.set_title("Tactic Level (tactic_collapsed, N=76)")
     ax2.set_xlabel("Number of Training Episodes (k)")
     ax2.set_ylabel("Rate")
     ax2.set_xticks(ks)
     ax2.set_ylim(0.0, 1.02)
     ax2.grid(True, linestyle=":", alpha=0.6)
-    ax2.legend(loc="lower right")
+    ax2.legend(loc="lower right", fontsize=8)
 
-    plt.suptitle("7-Episode Learning Curve: Model Performance vs Training Episode Count (k=1..6)", fontsize=13)
+    plt.suptitle("7-Episode Learning Curve: Model Performance vs Training Episode Count (k=1..6)\nSolid: Primary Pre-Registered Episode-Mean Aggregation; Dashed: Secondary Sample-Weighted Pooled Aggregation", fontsize=11)
     plt.tight_layout()
     fig.savefig(PNG_OUT, dpi=200)
     plt.close(fig)
@@ -476,7 +597,7 @@ def generate_learning_curve_report_md(data: dict[str, Any]) -> None:
     A("# Pre-Registered 7-Episode Learning Curve Report")
     A()
     A("This report documents the combinatorial learning curve evaluation across all seven episodes (E1–E7) of the C4 dataset.")
-    A("All procedures strictly adhere to `reports/prereg_7episode_design.md` Section 7 and Amendments 1–4.")
+    A("All procedures strictly adhere to `reports/prereg_7episode_design.md` Section 7 and Amendments 1–5.")
     A("No model tuning, parameter selection, or causal claims are made.")
     A()
     A("---")
@@ -495,18 +616,40 @@ def generate_learning_curve_report_md(data: dict[str, Any]) -> None:
     A("  - $k=5$: $\\binom{6}{5} = 6$ subsets per episode ($42$ evaluations per slice)")
     A("  - $k=6$: $\\binom{6}{6} = 1$ subset per episode ($7$ evaluations per slice, corresponding to the standard full LOEO evaluation)")
     A("  - **Total Evaluations per Slice**: $63$ subsets per episode $\\times 7$ episodes $= 441$ training subset evaluations ($882$ across both slices).")
-    A("- **Aggregation Method**: Per pre-registration Section 7, metric averages are first computed across all $\\binom{6}{k}$ subsets for each held-out episode, and then averaged across all 7 episodes (both unweighted episode-mean and sample-weighted pooled rates are reported).")
+    A("- **Aggregation Methods**:")
+    A("  - **Table 1 (Pre-Registered Primary)**: Episode-mean aggregation per Section 7 (\"Compute metric averages across subsets for each held-out episode, then average over all 7 held-out episodes\").")
+    A("  - **Table 2 (Secondary)**: Sample-weighted pooled aggregation across all evaluated transitions ($N=95$ technique, $N=76$ tactic).")
+    A("  - **Table 3 (Sensitivity, E5 Excluded)**: Aggregation with Episode E5 excluded (both 6-episode unweighted mean and sample-weighted over the remaining $N=93$ technique or $N=74$ tactic samples).")
     A()
     A("---")
     A()
     A("## 2. Technique Level: `collapsed_full` (N=95)")
     A()
-    A("### Pooled Learning Curve Table across Subset Sizes (k=1..6)")
+    A("### Table 1: Pre-Registered Primary (Episode-Mean Aggregation across 7 Episodes)")
     A()
     A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
     A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
     tech_k = data["learning_curve"]["technique_collapsed_full"]
+    for k in range(1, 7):
+        k_d = tech_k[f"k_{k}"]
+        n_sub = k_d["n_subsets_per_episode"]
+        tot_evals = n_sub * 7
+        unw = k_d["unweighted_episode_mean"]
+        A(
+            f"| {k} | {n_sub} | {tot_evals} | "
+            f"{unw['markov_hit1']:.4f} | {unw['markov_hit3']:.4f} | "
+            f"{unw['frequency_hit1']:.4f} | {unw['frequency_hit3']:.4f} | "
+            f"{unw['markov_fallback_hit1']:.4f} | {unw['markov_fallback_hit3']:.4f} | "
+            f"{unw['coverage']:.4f} | {unw['ceiling']:.4f} |"
+        )
+
+    A()
+    A("### Table 2: Secondary (Sample-Weighted Pooled Aggregation across 7 Episodes)")
+    A()
+    A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
+    A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+
     for k in range(1, 7):
         k_d = tech_k[f"k_{k}"]
         n_sub = k_d["n_subsets_per_episode"]
@@ -518,6 +661,44 @@ def generate_learning_curve_report_md(data: dict[str, Any]) -> None:
             f"{pw['frequency_hit1']:.4f} | {pw['frequency_hit3']:.4f} | "
             f"{pw['markov_fallback_hit1']:.4f} | {pw['markov_fallback_hit3']:.4f} | "
             f"{pw['coverage']:.4f} | {pw['ceiling']:.4f} |"
+        )
+
+    A()
+    A("### Table 3: Sensitivity (E5 Excluded from Aggregation)")
+    A()
+    A("#### Table 3a: Episode-Mean Aggregation (6 Episodes, E5 Excluded)")
+    A()
+    A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
+    A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+    for k in range(1, 7):
+        k_d = tech_k[f"k_{k}"]
+        n_sub = k_d["n_subsets_per_episode"]
+        tot_evals = n_sub * 7
+        e5_unw = k_d["e5_excluded"]["unweighted_episode_mean"]
+        A(
+            f"| {k} | {n_sub} | {tot_evals} | "
+            f"{e5_unw['markov_hit1']:.4f} | {e5_unw['markov_hit3']:.4f} | "
+            f"{e5_unw['frequency_hit1']:.4f} | {e5_unw['frequency_hit3']:.4f} | "
+            f"{e5_unw['markov_fallback_hit1']:.4f} | {e5_unw['markov_fallback_hit3']:.4f} | "
+            f"{e5_unw['coverage']:.4f} | {e5_unw['ceiling']:.4f} |"
+        )
+
+    A()
+    A("#### Table 3b: Sample-Weighted Pooled Aggregation (6 Episodes, N=93, E5 Excluded)")
+    A()
+    A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
+    A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+    for k in range(1, 7):
+        k_d = tech_k[f"k_{k}"]
+        n_sub = k_d["n_subsets_per_episode"]
+        tot_evals = n_sub * 7
+        e5_w = k_d["e5_excluded"]["pooled_sample_weighted"]
+        A(
+            f"| {k} | {n_sub} | {tot_evals} | "
+            f"{e5_w['markov_hit1']:.4f} | {e5_w['markov_hit3']:.4f} | "
+            f"{e5_w['frequency_hit1']:.4f} | {e5_w['frequency_hit3']:.4f} | "
+            f"{e5_w['markov_fallback_hit1']:.4f} | {e5_w['markov_fallback_hit3']:.4f} | "
+            f"{e5_w['coverage']:.4f} | {e5_w['ceiling']:.4f} |"
         )
 
     A()
@@ -542,12 +723,31 @@ def generate_learning_curve_report_md(data: dict[str, Any]) -> None:
     A()
     A("## 3. Tactic Level: `tactic_collapsed` (N=76)")
     A()
-    A("### Pooled Learning Curve Table across Subset Sizes (k=1..6)")
+    A("### Table 1: Pre-Registered Primary (Episode-Mean Aggregation across 7 Episodes)")
     A()
     A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
     A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
     tac_k = data["learning_curve"]["tactic_collapsed"]
+    for k in range(1, 7):
+        k_d = tac_k[f"k_{k}"]
+        n_sub = k_d["n_subsets_per_episode"]
+        tot_evals = n_sub * 7
+        unw = k_d["unweighted_episode_mean"]
+        A(
+            f"| {k} | {n_sub} | {tot_evals} | "
+            f"{unw['markov_hit1']:.4f} | {unw['markov_hit3']:.4f} | "
+            f"{unw['frequency_hit1']:.4f} | {unw['frequency_hit3']:.4f} | "
+            f"{unw['markov_fallback_hit1']:.4f} | {unw['markov_fallback_hit3']:.4f} | "
+            f"{unw['coverage']:.4f} | {unw['ceiling']:.4f} |"
+        )
+
+    A()
+    A("### Table 2: Secondary (Sample-Weighted Pooled Aggregation across 7 Episodes)")
+    A()
+    A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
+    A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+
     for k in range(1, 7):
         k_d = tac_k[f"k_{k}"]
         n_sub = k_d["n_subsets_per_episode"]
@@ -559,6 +759,44 @@ def generate_learning_curve_report_md(data: dict[str, Any]) -> None:
             f"{pw['frequency_hit1']:.4f} | {pw['frequency_hit3']:.4f} | "
             f"{pw['markov_fallback_hit1']:.4f} | {pw['markov_fallback_hit3']:.4f} | "
             f"{pw['coverage']:.4f} | {pw['ceiling']:.4f} |"
+        )
+
+    A()
+    A("### Table 3: Sensitivity (E5 Excluded from Aggregation)")
+    A()
+    A("#### Table 3a: Episode-Mean Aggregation (6 Episodes, E5 Excluded)")
+    A()
+    A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
+    A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+    for k in range(1, 7):
+        k_d = tac_k[f"k_{k}"]
+        n_sub = k_d["n_subsets_per_episode"]
+        tot_evals = n_sub * 7
+        e5_unw = k_d["e5_excluded"]["unweighted_episode_mean"]
+        A(
+            f"| {k} | {n_sub} | {tot_evals} | "
+            f"{e5_unw['markov_hit1']:.4f} | {e5_unw['markov_hit3']:.4f} | "
+            f"{e5_unw['frequency_hit1']:.4f} | {e5_unw['frequency_hit3']:.4f} | "
+            f"{e5_unw['markov_fallback_hit1']:.4f} | {e5_unw['markov_fallback_hit3']:.4f} | "
+            f"{e5_unw['coverage']:.4f} | {e5_unw['ceiling']:.4f} |"
+        )
+
+    A()
+    A("#### Table 3b: Sample-Weighted Pooled Aggregation (6 Episodes, N=74, E5 Excluded)")
+    A()
+    A("| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |")
+    A("|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+    for k in range(1, 7):
+        k_d = tac_k[f"k_{k}"]
+        n_sub = k_d["n_subsets_per_episode"]
+        tot_evals = n_sub * 7
+        e5_w = k_d["e5_excluded"]["pooled_sample_weighted"]
+        A(
+            f"| {k} | {n_sub} | {tot_evals} | "
+            f"{e5_w['markov_hit1']:.4f} | {e5_w['markov_hit3']:.4f} | "
+            f"{e5_w['frequency_hit1']:.4f} | {e5_w['frequency_hit3']:.4f} | "
+            f"{e5_w['markov_fallback_hit1']:.4f} | {e5_w['markov_fallback_hit3']:.4f} | "
+            f"{e5_w['coverage']:.4f} | {e5_w['ceiling']:.4f} |"
         )
 
     A()
@@ -584,45 +822,50 @@ def generate_learning_curve_report_md(data: dict[str, Any]) -> None:
     A("## 4. Code-Generated Summary Observations")
     A()
     A("The following observational statements are generated strictly from the evaluation numbers without causal claims:")
+    A()
 
-    # Generate observations
-    t1_cov = tech_k["k_1"]["pooled_sample_weighted"]["coverage"]
-    t6_cov = tech_k["k_6"]["pooled_sample_weighted"]["coverage"]
-    t1_ceil = tech_k["k_1"]["pooled_sample_weighted"]["ceiling"]
-    t6_ceil = tech_k["k_6"]["pooled_sample_weighted"]["ceiling"]
-    t1_m3 = tech_k["k_1"]["pooled_sample_weighted"]["markov_hit3"]
-    t6_m3 = tech_k["k_6"]["pooled_sample_weighted"]["markov_hit3"]
-    t1_f3 = tech_k["k_1"]["pooled_sample_weighted"]["frequency_hit3"]
-    t6_f3 = tech_k["k_6"]["pooled_sample_weighted"]["frequency_hit3"]
+    # Generate observations for Technique
+    t1_unw = tech_k["k_1"]["unweighted_episode_mean"]
+    t6_unw = tech_k["k_6"]["unweighted_episode_mean"]
+    t1_pw = tech_k["k_1"]["pooled_sample_weighted"]
+    t6_pw = tech_k["k_6"]["pooled_sample_weighted"]
 
     A(
-        f"- **Technique Coverage and Ceiling Growth**: As training episodes expand from k=1 to k=6, "
-        f"technique Markov coverage increases from {t1_cov:.4f} to {t6_cov:.4f} (+{t6_cov - t1_cov:.4f}), "
-        f"and target ceiling increases from {t1_ceil:.4f} to {t6_ceil:.4f} (+{t6_ceil - t1_ceil:.4f})."
+        f"- **Technique Primary Episode-Mean Trajectories**: Under the pre-registered primary episode-mean aggregation across k=1..6, "
+        f"technique Markov Hit@3 changes from {t1_unw['markov_hit3']:.4f} to {t6_unw['markov_hit3']:.4f}, "
+        f"Frequency Hit@3 changes from {t1_unw['frequency_hit3']:.4f} to {t6_unw['frequency_hit3']:.4f}, "
+        f"Markov coverage moves from {t1_unw['coverage']:.4f} to {t6_unw['coverage']:.4f} (+{t6_unw['coverage'] - t1_unw['coverage']:.4f}), "
+        f"and target ceiling moves from {t1_unw['ceiling']:.4f} to {t6_unw['ceiling']:.4f} (+{t6_unw['ceiling'] - t1_unw['ceiling']:.4f})."
     )
     A(
-        f"- **Technique Model Trajectories**: Across k=1..6, pooled technique Markov Hit@3 changes from {t1_m3:.4f} to {t6_m3:.4f}, "
-        f"while Frequency Hit@3 changes from {t1_f3:.4f} to {t6_f3:.4f}."
+        f"- **Technique Secondary Sample-Weighted Trajectories**: Under the secondary sample-weighted pooled aggregation across k=1..6, "
+        f"technique Markov Hit@3 changes from {t1_pw['markov_hit3']:.4f} to {t6_pw['markov_hit3']:.4f}, "
+        f"Frequency Hit@3 changes from {t1_pw['frequency_hit3']:.4f} to {t6_pw['frequency_hit3']:.4f}, "
+        f"Markov coverage moves from {t1_pw['coverage']:.4f} to {t6_pw['coverage']:.4f} (+{t6_pw['coverage'] - t1_pw['coverage']:.4f}), "
+        f"and target ceiling moves from {t1_pw['ceiling']:.4f} to {t6_pw['ceiling']:.4f} (+{t6_pw['ceiling'] - t1_pw['ceiling']:.4f})."
     )
 
-    tac1_cov = tac_k["k_1"]["pooled_sample_weighted"]["coverage"]
-    tac6_cov = tac_k["k_6"]["pooled_sample_weighted"]["coverage"]
-    tac1_ceil = tac_k["k_1"]["pooled_sample_weighted"]["ceiling"]
-    tac6_ceil = tac_k["k_6"]["pooled_sample_weighted"]["ceiling"]
-    tac1_m3 = tac_k["k_1"]["pooled_sample_weighted"]["markov_hit3"]
-    tac6_m3 = tac_k["k_6"]["pooled_sample_weighted"]["markov_hit3"]
-    tac1_f3 = tac_k["k_1"]["pooled_sample_weighted"]["frequency_hit3"]
-    tac6_f3 = tac_k["k_6"]["pooled_sample_weighted"]["frequency_hit3"]
+    # Generate observations for Tactic
+    tac1_unw = tac_k["k_1"]["unweighted_episode_mean"]
+    tac6_unw = tac_k["k_6"]["unweighted_episode_mean"]
+    tac1_pw = tac_k["k_1"]["pooled_sample_weighted"]
+    tac6_pw = tac_k["k_6"]["pooled_sample_weighted"]
 
     A(
-        f"- **Tactic Coverage and Ceiling Growth**: Across k=1..6, tactic coverage moves from {tac1_cov:.4f} to {tac6_cov:.4f}, "
-        f"and tactic ceiling moves from {tac1_ceil:.4f} to {tac6_ceil:.4f}."
+        f"- **Tactic Primary Episode-Mean Trajectories**: Under the pre-registered primary episode-mean aggregation across k=1..6, "
+        f"tactic Markov Hit@3 moves from {tac1_unw['markov_hit3']:.4f} to {tac6_unw['markov_hit3']:.4f}, "
+        f"Frequency Hit@3 moves from {tac1_unw['frequency_hit3']:.4f} to {tac6_unw['frequency_hit3']:.4f}, "
+        f"tactic coverage moves from {tac1_unw['coverage']:.4f} to {tac6_unw['coverage']:.4f}, "
+        f"and tactic ceiling moves from {tac1_unw['ceiling']:.4f} to {tac6_unw['ceiling']:.4f}."
     )
     A(
-        f"- **Tactic Model Trajectories**: Across k=1..6, pooled tactic Markov Hit@3 moves from {tac1_m3:.4f} to {tac6_m3:.4f}, "
-        f"while Frequency Hit@3 moves from {tac1_f3:.4f} to {tac6_f3:.4f}."
+        f"- **Tactic Secondary Sample-Weighted Trajectories**: Under the secondary sample-weighted pooled aggregation across k=1..6, "
+        f"tactic Markov Hit@3 moves from {tac1_pw['markov_hit3']:.4f} to {tac6_pw['markov_hit3']:.4f}, "
+        f"Frequency Hit@3 moves from {tac1_pw['frequency_hit3']:.4f} to {tac6_pw['frequency_hit3']:.4f}, "
+        f"tactic coverage moves from {tac1_pw['coverage']:.4f} to {tac6_pw['coverage']:.4f}, "
+        f"and tactic ceiling moves from {tac1_pw['ceiling']:.4f} to {tac6_pw['ceiling']:.4f}."
     )
-    A("- **Figure Reference**: Plotted learning curve curves are rendered in `reports/7ep/learning_curve_7ep.png` with sidecar values in `reports/7ep/learning_curve_7ep_plot_data.json`.")
+    A("- **Figure Reference**: Plotted learning curves are rendered in `reports/7ep/learning_curve_7ep.png` with sidecar values in `reports/7ep/learning_curve_7ep_plot_data.json` (solid curves: primary episode-mean aggregation; dashed curves: secondary sample-weighted pooled aggregation).")
     A()
 
     with open(MD_OUT, "w", encoding="utf-8") as f:

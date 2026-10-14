@@ -113,6 +113,17 @@ def test_learning_curve_outputs():
     with open(json_path, "r", encoding="utf-8") as f:
         d = json.load(f)
     assert d["metadata"]["total_evaluations_per_slice"] == 441
+    tech_k6 = d["learning_curve"]["technique_collapsed_full"]["k_6"]
+    assert tech_k6["unweighted_episode_mean"]["markov_hit1"] == pytest.approx(0.0337, abs=1e-4)
+    assert tech_k6["pooled_sample_weighted"]["markov_hit1"] == pytest.approx(0.0316, abs=1e-4)
+    assert "e5_excluded" in tech_k6
+    assert tech_k6["e5_excluded"]["unweighted_episode_mean"]["markov_hit1"] == pytest.approx(0.0393, abs=1e-4)
+
+    tac_k6 = d["learning_curve"]["tactic_collapsed"]["k_6"]
+    assert tac_k6["unweighted_episode_mean"]["markov_hit1"] == pytest.approx(0.3093, abs=1e-4)
+    assert tac_k6["pooled_sample_weighted"]["markov_hit1"] == pytest.approx(0.2895, abs=1e-4)
+    assert "e5_excluded" in tac_k6
+    assert tac_k6["e5_excluded"]["unweighted_episode_mean"]["markov_hit1"] == pytest.approx(0.2776, abs=1e-4)
 
 
 # 4. Permutation 7ep invariants test
@@ -177,3 +188,23 @@ def test_diagnostics_7ep():
     assert d["F2_raw_full_self_repeats"]["total_samples"] == 131
     assert d["F2_raw_full_self_repeats"]["self_repeat_samples"] == 36
     assert d["F2_raw_full_self_repeats"]["markov_hit1_on_self_repeat"] == 11
+
+
+# 8. E5 Hit@1 change diagnostic test
+def test_e5_hit1_change_diagnostic():
+    json_path = REPORTS_7EP / "e5_hit1_change_diagnostic.json"
+    md_path = REPORTS_7EP / "e5_hit1_change_diagnostic.md"
+    assert json_path.exists()
+    assert md_path.exists()
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        d = json.load(f)
+    assert d["metadata"]["label"] == "diagnostic, not a pre-registered test"
+    assert d["metadata"]["summary_accounting"]["markov_total_hits_7ep"] == 22
+    assert d["metadata"]["summary_accounting"]["markov_hits_6ep_in_e5_removed_run"] == 18
+    assert d["metadata"]["summary_accounting"]["markov_hits_difference_in_6ep"] == -3
+    assert len(d["markov_differing_samples"]) == 7
+    assert len(d["frequency_differing_samples"]) == 0
+
+    from scripts.verify_e5_hit1_diagnostic import verify_e5_hit1_diagnostic
+    assert verify_e5_hit1_diagnostic() is True

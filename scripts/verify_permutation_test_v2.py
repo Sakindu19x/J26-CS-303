@@ -170,13 +170,13 @@ def verify_permutation_test_v2() -> bool:
 
                 rec_stat = compute_summary_stats(obs_val, null_vals)
 
-                # Check if level is invalid (order-free stat p < 0.05)
-                # Compute order free stats p-values for this scheme and level
-                lvl_invalid = any(
-                    compute_summary_stats(obs_from_csv[lvl][of_st], null_data[sc][lvl][of_st])["p_value"] < 0.05
+                # Check if scheme is invalid (order-free stat p < 0.05 at any level)
+                sc_invalid = any(
+                    compute_summary_stats(obs_from_csv[l][of_st], null_data[sc][l][of_st])["p_value"] < 0.05
+                    for l in levels
                     for of_st in ["frequency_hit1", "frequency_hit3"]
                 )
-                if lvl_invalid:
+                if sc_invalid:
                     rec_stat["conclusion"] = f"INVALID NULL - do not cite: {rec_stat['conclusion']}"
 
                 # Assert precision matches
@@ -244,6 +244,7 @@ def verify_permutation_test_v2() -> bool:
 
     # Check warning token in markdown
     assert "Scheme Validity Warning (S2)" in md_text
+    assert "a scheme that fails validity at any level is labelled invalid at every level" in md_text
 
     print("All Markdown tokens verified.")
     print("\nALL PERMUTATION TEST v2.1 VERIFICATIONS PASSED SUCCESSFULLY.")

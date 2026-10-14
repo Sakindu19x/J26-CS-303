@@ -159,7 +159,18 @@ def verify_learning_curve_7ep() -> bool:
                 assert abs(ep_json["coverage_rate"] - mean_cov) < 1e-6
                 assert abs(ep_json["ceiling_rate"] - mean_ceil) < 1e-6
 
-            # Compare pooled JSON
+            # Compare unweighted episode-mean JSON (Pre-registered primary Table 1)
+            unw_json = k_json["unweighted_episode_mean"]
+            assert abs(unw_json["markov_hit1"] - (sum(recomputed_ep_means[ep]["m1"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["markov_hit3"] - (sum(recomputed_ep_means[ep]["m3"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["frequency_hit1"] - (sum(recomputed_ep_means[ep]["f1"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["frequency_hit3"] - (sum(recomputed_ep_means[ep]["f3"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["markov_fallback_hit1"] - (sum(recomputed_ep_means[ep]["fb1"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["markov_fallback_hit3"] - (sum(recomputed_ep_means[ep]["fb3"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["coverage"] - (sum(recomputed_ep_means[ep]["cov"] for ep in EPISODES) / 7.0)) < 1e-6
+            assert abs(unw_json["ceiling"] - (sum(recomputed_ep_means[ep]["ceil"] for ep in EPISODES) / 7.0)) < 1e-6
+
+            # Compare pooled JSON (Secondary Table 2)
             pw_json = k_json["pooled_sample_weighted"]
             assert abs(pw_json["markov_hit1"] - (weighted_tot_m1 / tot_samples)) < 1e-6
             assert abs(pw_json["markov_hit3"] - (weighted_tot_m3 / tot_samples)) < 1e-6
@@ -170,7 +181,39 @@ def verify_learning_curve_7ep() -> bool:
             assert abs(pw_json["coverage"] - (weighted_tot_cov / tot_samples)) < 1e-6
             assert abs(pw_json["ceiling"] - (weighted_tot_ceil / tot_samples)) < 1e-6
 
-    print("  All per-episode averages and pooled sample-weighted rates verified against JSON [PASS]")
+            # Compare E5-excluded aggregations (Sensitivity Table 3)
+            eps_no_e5 = [ep for ep in EPISODES if ep != "E5"]
+            tot_samples_no_e5 = sum(exp_n_map[ep] for ep in eps_no_e5)
+            e5_unw_json = k_json["e5_excluded"]["unweighted_episode_mean"]
+            assert abs(e5_unw_json["markov_hit1"] - (sum(recomputed_ep_means[ep]["m1"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["markov_hit3"] - (sum(recomputed_ep_means[ep]["m3"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["frequency_hit1"] - (sum(recomputed_ep_means[ep]["f1"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["frequency_hit3"] - (sum(recomputed_ep_means[ep]["f3"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["markov_fallback_hit1"] - (sum(recomputed_ep_means[ep]["fb1"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["markov_fallback_hit3"] - (sum(recomputed_ep_means[ep]["fb3"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["coverage"] - (sum(recomputed_ep_means[ep]["cov"] for ep in eps_no_e5) / 6.0)) < 1e-6
+            assert abs(e5_unw_json["ceiling"] - (sum(recomputed_ep_means[ep]["ceil"] for ep in eps_no_e5) / 6.0)) < 1e-6
+
+            e5_pw_json = k_json["e5_excluded"]["pooled_sample_weighted"]
+            e5_w_m1 = sum(recomputed_ep_means[ep]["m1"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_m3 = sum(recomputed_ep_means[ep]["m3"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_f1 = sum(recomputed_ep_means[ep]["f1"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_f3 = sum(recomputed_ep_means[ep]["f3"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_fb1 = sum(recomputed_ep_means[ep]["fb1"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_fb3 = sum(recomputed_ep_means[ep]["fb3"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_cov = sum(recomputed_ep_means[ep]["cov"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+            e5_w_ceil = sum(recomputed_ep_means[ep]["ceil"] * exp_n_map[ep] for ep in eps_no_e5) / tot_samples_no_e5
+
+            assert abs(e5_pw_json["markov_hit1"] - e5_w_m1) < 1e-6
+            assert abs(e5_pw_json["markov_hit3"] - e5_w_m3) < 1e-6
+            assert abs(e5_pw_json["frequency_hit1"] - e5_w_f1) < 1e-6
+            assert abs(e5_pw_json["frequency_hit3"] - e5_w_f3) < 1e-6
+            assert abs(e5_pw_json["markov_fallback_hit1"] - e5_w_fb1) < 1e-6
+            assert abs(e5_pw_json["markov_fallback_hit3"] - e5_w_fb3) < 1e-6
+            assert abs(e5_pw_json["coverage"] - e5_w_cov) < 1e-6
+            assert abs(e5_pw_json["ceiling"] - e5_w_ceil) < 1e-6
+
+    print("  All per-episode averages, unweighted episode-means, pooled rates, and E5-excluded sensitivities verified against JSON [PASS]")
 
     # 4. Verify Markdown report consistency
     print("\n[Step 4] Verifying Markdown report number tokens...")
@@ -180,15 +223,19 @@ def verify_learning_curve_7ep() -> bool:
     # Verify key tokens in Markdown report
     for sl in SLICES:
         for k in range(1, 7):
+            unw = json_data["learning_curve"][sl][f"k_{k}"]["unweighted_episode_mean"]
             pw = json_data["learning_curve"][sl][f"k_{k}"]["pooled_sample_weighted"]
-            tok_m3 = f"{pw['markov_hit3']:.4f}"
-            tok_f3 = f"{pw['frequency_hit3']:.4f}"
-            tok_cov = f"{pw['coverage']:.4f}"
-            tok_ceil = f"{pw['ceiling']:.4f}"
-            for tok in [tok_m3, tok_f3, tok_cov, tok_ceil]:
-                assert tok in md_text, f"Token '{tok}' (slice {sl} k={k}) missing from Markdown report!"
+            e5_unw = json_data["learning_curve"][sl][f"k_{k}"]["e5_excluded"]["unweighted_episode_mean"]
+            e5_pw = json_data["learning_curve"][sl][f"k_{k}"]["e5_excluded"]["pooled_sample_weighted"]
+            for agg in [unw, pw, e5_unw, e5_pw]:
+                tok_m3 = f"{agg['markov_hit3']:.4f}"
+                tok_f3 = f"{agg['frequency_hit3']:.4f}"
+                tok_cov = f"{agg['coverage']:.4f}"
+                tok_ceil = f"{agg['ceiling']:.4f}"
+                for tok in [tok_m3, tok_f3, tok_cov, tok_ceil]:
+                    assert tok in md_text, f"Token '{tok}' (slice {sl} k={k}) missing from Markdown report!"
 
-    print("  All pooled rates and per-k tokens verified in Markdown report [PASS]")
+    print("  All Table 1, Table 2, and Table 3 tokens verified in Markdown report [PASS]")
     print("\n================================================================================")
     print("ALL LEARNING CURVE VERIFICATION CHECKS PASSED (EXIT CODE 0)")
     print("================================================================================")

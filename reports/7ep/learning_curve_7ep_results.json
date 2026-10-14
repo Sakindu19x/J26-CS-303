@@ -184,6 +184,29 @@
           "markov_fallback_hit3": 0.05087719298245614,
           "coverage": 0.22982456140350876,
           "ceiling": 0.2333333333333333
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.00655458089668616,
+            "markov_hit3": 0.008016569200779727,
+            "frequency_hit1": 0.019972384665367122,
+            "frequency_hit3": 0.06215770908753365,
+            "markov_fallback_hit1": 0.021206952566601687,
+            "markov_fallback_hit3": 0.049533556112503485,
+            "coverage": 0.23967905875800613,
+            "ceiling": 0.2406548779355797
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.005376344086021506,
+            "markov_hit3": 0.007168458781362007,
+            "frequency_hit1": 0.021505376344086023,
+            "frequency_hit3": 0.06630824372759857,
+            "markov_fallback_hit1": 0.021505376344086023,
+            "markov_fallback_hit3": 0.05197132616487455,
+            "coverage": 0.23476702508960573,
+            "ceiling": 0.2383512544802867
+          }
         }
       },
       "k_2": {
@@ -330,6 +353,29 @@
           "markov_fallback_hit3": 0.05754385964912281,
           "coverage": 0.3775438596491228,
           "ceiling": 0.37894736842105264
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.01310916179337232,
+            "markov_hit3": 0.015448343079922025,
+            "frequency_hit1": 0.03263482781026641,
+            "frequency_hit3": 0.08030678548222407,
+            "markov_fallback_hit1": 0.030692007797270954,
+            "markov_fallback_hit3": 0.05610461338531514,
+            "coverage": 0.39422352176738146,
+            "ceiling": 0.3924338624338624
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.010752688172043012,
+            "markov_hit3": 0.013620071684587813,
+            "frequency_hit1": 0.034408602150537634,
+            "frequency_hit3": 0.08387096774193548,
+            "markov_fallback_hit1": 0.03082437275985663,
+            "markov_fallback_hit3": 0.05878136200716846,
+            "coverage": 0.385663082437276,
+            "ceiling": 0.3870967741935484
+          }
         }
       },
       "k_3": {
@@ -476,6 +522,29 @@
           "markov_fallback_hit3": 0.05684210526315789,
           "coverage": 0.4757894736842105,
           "ceiling": 0.4726315789473684
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.01966374269005848,
+            "markov_hit3": 0.0222953216374269,
+            "frequency_hit1": 0.04731899192425509,
+            "frequency_hit3": 0.09207846003898634,
+            "markov_fallback_hit1": 0.03776037315511,
+            "markov_fallback_hit3": 0.05630639097744361,
+            "coverage": 0.49643205235310495,
+            "ceiling": 0.4901503759398496
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.016129032258064516,
+            "markov_hit3": 0.019354838709677417,
+            "frequency_hit1": 0.04946236559139785,
+            "frequency_hit3": 0.09516129032258064,
+            "markov_fallback_hit1": 0.037096774193548385,
+            "markov_fallback_hit3": 0.05806451612903226,
+            "coverage": 0.48602150537634403,
+            "ceiling": 0.4827956989247312
+          }
         }
       },
       "k_4": {
@@ -622,6 +691,29 @@
           "markov_fallback_hit3": 0.05543859649122807,
           "coverage": 0.5459649122807018,
           "ceiling": 0.536842105263158
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.02621832358674464,
+            "markov_hit3": 0.028557504873294347,
+            "frequency_hit1": 0.05994987468671679,
+            "frequency_hit3": 0.11127309013273927,
+            "markov_fallback_hit1": 0.042349391998514806,
+            "markov_fallback_hit3": 0.05719576719576719,
+            "coverage": 0.5684628237259817,
+            "ceiling": 0.55630186577555
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.021505376344086023,
+            "markov_hit3": 0.024372759856630823,
+            "frequency_hit1": 0.06308243727598566,
+            "frequency_hit3": 0.1139784946236559,
+            "markov_fallback_hit1": 0.04014336917562724,
+            "markov_fallback_hit3": 0.056630824372759854,
+            "coverage": 0.5577060931899641,
+            "ceiling": 0.5483870967741935
+          }
         }
       },
       "k_5": {
@@ -768,6 +860,29 @@
           "markov_fallback_hit3": 0.04912280701754385,
           "coverage": 0.5999999999999999,
           "ceiling": 0.5842105263157895
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.032772904483430794,
+            "markov_hit3": 0.03423489278752436,
+            "frequency_hit1": 0.06532535041306971,
+            "frequency_hit3": 0.1380221386800334,
+            "markov_fallback_hit1": 0.042083217302515546,
+            "markov_fallback_hit3": 0.05456813329620347,
+            "coverage": 0.6232224078715306,
+            "ceiling": 0.6040019029054117
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.026881720430107527,
+            "markov_hit3": 0.02867383512544803,
+            "frequency_hit1": 0.06989247311827956,
+            "frequency_hit3": 0.13978494623655913,
+            "markov_fallback_hit1": 0.03763440860215054,
+            "markov_fallback_hit3": 0.050179211469534045,
+            "coverage": 0.6129032258064516,
+            "ceiling": 0.5967741935483871
+          }
         }
       },
       "k_6": {
@@ -914,6 +1029,29 @@
           "markov_fallback_hit3": 0.042105263157894736,
           "coverage": 0.6421052631578947,
           "ceiling": 0.6210526315789474
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.03932748538011696,
+            "markov_hit3": 0.03932748538011696,
+            "frequency_hit1": 0.06939571150097466,
+            "frequency_hit3": 0.1689501531606795,
+            "markov_fallback_hit1": 0.03932748538011696,
+            "markov_fallback_hit3": 0.05123224728487886,
+            "coverage": 0.6657546644388749,
+            "ceiling": 0.6399122807017544
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.03225806451612903,
+            "markov_hit3": 0.03225806451612903,
+            "frequency_hit1": 0.07526881720430108,
+            "frequency_hit3": 0.17204301075268819,
+            "markov_fallback_hit1": 0.03225806451612903,
+            "markov_fallback_hit3": 0.043010752688172046,
+            "coverage": 0.6559139784946236,
+            "ceiling": 0.6344086021505376
+          }
         }
       }
     },
@@ -1062,6 +1200,29 @@
           "markov_fallback_hit3": 0.45833333333333337,
           "coverage": 0.7368421052631579,
           "ceiling": 0.8267543859649124
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.17832977207977208,
+            "markov_hit3": 0.3526353276353276,
+            "frequency_hit1": 0.2108262108262108,
+            "frequency_hit3": 0.46581196581196577,
+            "markov_fallback_hit1": 0.22327279202279202,
+            "markov_fallback_hit3": 0.47663817663817665,
+            "coverage": 0.738230056980057,
+            "ceiling": 0.8314458689458689
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.1711711711711712,
+            "markov_hit3": 0.33783783783783783,
+            "frequency_hit1": 0.20720720720720723,
+            "frequency_hit3": 0.45720720720720726,
+            "markov_fallback_hit1": 0.21621621621621623,
+            "markov_fallback_hit3": 0.45720720720720726,
+            "coverage": 0.7342342342342342,
+            "ceiling": 0.8220720720720721
+          }
         }
       },
       "k_2": {
@@ -1208,6 +1369,29 @@
           "markov_fallback_hit3": 0.5175438596491228,
           "coverage": 0.9157894736842105,
           "ceiling": 0.9157894736842106
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2217806267806268,
+            "markov_hit3": 0.47792735042735046,
+            "frequency_hit1": 0.21585470085470085,
+            "frequency_hit3": 0.5535754985754986,
+            "markov_fallback_hit1": 0.24408831908831907,
+            "markov_fallback_hit3": 0.5303205128205128,
+            "coverage": 0.9139886039886039,
+            "ceiling": 0.9173789173789174
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.21261261261261263,
+            "markov_hit3": 0.4603603603603603,
+            "frequency_hit1": 0.21441441441441442,
+            "frequency_hit3": 0.5414414414414414,
+            "markov_fallback_hit1": 0.23603603603603607,
+            "markov_fallback_hit3": 0.5135135135135135,
+            "coverage": 0.9135135135135134,
+            "ceiling": 0.9135135135135134
+          }
         }
       },
       "k_3": {
@@ -1354,6 +1538,29 @@
           "markov_fallback_hit3": 0.5717105263157896,
           "coverage": 0.9460526315789473,
           "ceiling": 0.9407894736842105
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.24061431623931626,
+            "markov_hit3": 0.5401068376068375,
+            "frequency_hit1": 0.2242094017094017,
+            "frequency_hit3": 0.6110576923076924,
+            "markov_fallback_hit1": 0.2597809829059829,
+            "markov_fallback_hit3": 0.5819391025641026,
+            "coverage": 0.9437820512820513,
+            "ceiling": 0.9399358974358974
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.23175675675675675,
+            "markov_hit3": 0.5236486486486487,
+            "frequency_hit1": 0.22432432432432434,
+            "frequency_hit3": 0.595945945945946,
+            "markov_fallback_hit1": 0.2527027027027027,
+            "markov_fallback_hit3": 0.5662162162162162,
+            "coverage": 0.9445945945945945,
+            "ceiling": 0.9391891891891891
+          }
         }
       },
       "k_4": {
@@ -1500,6 +1707,29 @@
           "markov_fallback_hit3": 0.6131578947368421,
           "coverage": 0.9587719298245613,
           "ceiling": 0.9517543859649122
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2599074074074074,
+            "markov_hit3": 0.5882122507122507,
+            "frequency_hit1": 0.21297720797720798,
+            "frequency_hit3": 0.6456125356125356,
+            "markov_fallback_hit1": 0.2761111111111111,
+            "markov_fallback_hit3": 0.6226068376068375,
+            "coverage": 0.9581339031339032,
+            "ceiling": 0.949423076923077
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.2522522522522523,
+            "markov_hit3": 0.572972972972973,
+            "frequency_hit1": 0.21351351351351353,
+            "frequency_hit3": 0.627927927927928,
+            "markov_fallback_hit1": 0.2711711711711712,
+            "markov_fallback_hit3": 0.609009009009009,
+            "coverage": 0.9576576576576575,
+            "ceiling": 0.9504504504504504
+          }
         }
       },
       "k_5": {
@@ -1646,6 +1876,29 @@
           "markov_fallback_hit3": 0.6403508771929826,
           "coverage": 0.9671052631578947,
           "ceiling": 0.9583333333333335
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2765135327635328,
+            "markov_hit3": 0.6221688034188034,
+            "frequency_hit1": 0.2017806267806268,
+            "frequency_hit3": 0.6409366096866097,
+            "markov_fallback_hit1": 0.29318019943019946,
+            "markov_fallback_hit3": 0.6513354700854701,
+            "coverage": 0.9686965811965812,
+            "ceiling": 0.9550925925925927
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.2725225225225225,
+            "markov_hit3": 0.6081081081081081,
+            "frequency_hit1": 0.20045045045045046,
+            "frequency_hit3": 0.6193693693693694,
+            "markov_fallback_hit1": 0.2927927927927928,
+            "markov_fallback_hit3": 0.6396396396396397,
+            "coverage": 0.9662162162162162,
+            "ceiling": 0.9572072072072071
+          }
         }
       },
       "k_6": {
@@ -1792,6 +2045,29 @@
           "markov_fallback_hit3": 0.6578947368421053,
           "coverage": 0.9736842105263158,
           "ceiling": 0.9605263157894737
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2775641025641026,
+            "markov_hit3": 0.6460470085470086,
+            "frequency_hit1": 0.18141025641025643,
+            "frequency_hit3": 0.6467948717948718,
+            "markov_fallback_hit1": 0.2997863247863248,
+            "markov_fallback_hit3": 0.6682692307692308,
+            "coverage": 0.9777777777777779,
+            "ceiling": 0.9569444444444445
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.28378378378378377,
+            "markov_hit3": 0.6351351351351351,
+            "frequency_hit1": 0.17567567567567569,
+            "frequency_hit3": 0.6216216216216216,
+            "markov_fallback_hit1": 0.3108108108108108,
+            "markov_fallback_hit3": 0.6621621621621622,
+            "coverage": 0.972972972972973,
+            "ceiling": 0.9594594594594594
+          }
         }
       }
     }

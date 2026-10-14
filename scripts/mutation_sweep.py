@@ -377,6 +377,28 @@ def is_exempt_diagnostics_7ep(
     return False, ""
 
 
+def is_exempt_e5_hit1_diagnostic(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Sample ID |" in line or "| Test Episode |" in line:
+        return True, "Table column header label"
+    if "(E1–E4, E6, E7, N=74)" in line and tok in ("1", "4", "6", "7"):
+        return True, "Episode range identifier in prose"
+    if "E1–E4, E6, or E7" in line and tok in ("1", "4", "6", "7"):
+        return True, "Episode range identifier in prose"
+    if "7-episode" in line and tok == "7":
+        return True, "7-episode protocol reference in prose"
+    if "7-Episode" in line and tok == "7":
+        return True, "7-episode protocol reference in prose"
+    if "E5-removed" in line and tok == "5":
+        return True, "E5 episode identifier in prose"
+    return False, ""
+
+
 def sweep_report_numeric(
     report_name: str,
     file_path: Path,
@@ -695,6 +717,8 @@ def format_summary_block(results: dict[str, dict[str, Any]], title: str = "MUTAT
         lines.append(format_summary_line("HolmClaimRule", results["holm_claim_rule"]))
     if "diagnostics_7ep" in results:
         lines.append(format_summary_line("Diag7Ep", results["diagnostics_7ep"]))
+    if "e5_hit1_change_diagnostic" in results:
+        lines.append(format_summary_line("E5Hit1Diag", results["e5_hit1_change_diagnostic"]))
     lines.append("=" * 80)
     return "\n".join(lines)
 
@@ -916,6 +940,8 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
                 f"{row_tac['null_p97_5']:+.4f} | {row_tac['p_value']:.4f} | {row_tac['conclusion']} |"
             )
             assert line_tac in md, f"Missing S2 tac row: {line_tac}"
+
+        assert "a scheme that fails validity at any level is labelled invalid at every level" in md
 
 
     def check_perm_v2_monte_carlo(md: str) -> None:
@@ -1322,7 +1348,23 @@ def get_check_suites_7ep_inference():
         assert "- $k=6$: $\\binom{6}{6} = 1$ subset per episode ($7$ evaluations per slice" in md
         assert "- **Total Evaluations per Slice**: $63$ subsets per episode $\\times 7$ episodes $= 441$ training subset evaluations ($882$ across both slices)." in md
 
-        # Check pooled tables
+        # Check Table 1 (Pre-Registered Primary, Episode-Mean)
+        for sl in ["technique_collapsed_full", "tactic_collapsed"]:
+            for k in range(1, 7):
+                kd = lc_json["learning_curve"][sl][f"k_{k}"]
+                n_sub = kd["n_subsets_per_episode"]
+                tot_evals = n_sub * 7
+                unw = kd["unweighted_episode_mean"]
+                line = (
+                    f"| {k} | {n_sub} | {tot_evals} | "
+                    f"{unw['markov_hit1']:.4f} | {unw['markov_hit3']:.4f} | "
+                    f"{unw['frequency_hit1']:.4f} | {unw['frequency_hit3']:.4f} | "
+                    f"{unw['markov_fallback_hit1']:.4f} | {unw['markov_fallback_hit3']:.4f} | "
+                    f"{unw['coverage']:.4f} | {unw['ceiling']:.4f} |"
+                )
+                assert line in md, f"Missing LC Table 1 line: {line}"
+
+        # Check Table 2 (Secondary, Sample-Weighted Pooled)
         for sl in ["technique_collapsed_full", "tactic_collapsed"]:
             for k in range(1, 7):
                 kd = lc_json["learning_curve"][sl][f"k_{k}"]
@@ -1336,7 +1378,33 @@ def get_check_suites_7ep_inference():
                     f"{p['markov_fallback_hit1']:.4f} | {p['markov_fallback_hit3']:.4f} | "
                     f"{p['coverage']:.4f} | {p['ceiling']:.4f} |"
                 )
-                assert line in md, f"Missing LC pooled line: {line}"
+                assert line in md, f"Missing LC Table 2 line: {line}"
+
+        # Check Table 3 (Sensitivity, E5 Excluded)
+        for sl in ["technique_collapsed_full", "tactic_collapsed"]:
+            for k in range(1, 7):
+                kd = lc_json["learning_curve"][sl][f"k_{k}"]
+                n_sub = kd["n_subsets_per_episode"]
+                tot_evals = n_sub * 7
+                e5_unw = kd["e5_excluded"]["unweighted_episode_mean"]
+                line_3a = (
+                    f"| {k} | {n_sub} | {tot_evals} | "
+                    f"{e5_unw['markov_hit1']:.4f} | {e5_unw['markov_hit3']:.4f} | "
+                    f"{e5_unw['frequency_hit1']:.4f} | {e5_unw['frequency_hit3']:.4f} | "
+                    f"{e5_unw['markov_fallback_hit1']:.4f} | {e5_unw['markov_fallback_hit3']:.4f} | "
+                    f"{e5_unw['coverage']:.4f} | {e5_unw['ceiling']:.4f} |"
+                )
+                assert line_3a in md, f"Missing LC Table 3a line: {line_3a}"
+
+                e5_pw = kd["e5_excluded"]["pooled_sample_weighted"]
+                line_3b = (
+                    f"| {k} | {n_sub} | {tot_evals} | "
+                    f"{e5_pw['markov_hit1']:.4f} | {e5_pw['markov_hit3']:.4f} | "
+                    f"{e5_pw['frequency_hit1']:.4f} | {e5_pw['frequency_hit3']:.4f} | "
+                    f"{e5_pw['markov_fallback_hit1']:.4f} | {e5_pw['markov_fallback_hit3']:.4f} | "
+                    f"{e5_pw['coverage']:.4f} | {e5_pw['ceiling']:.4f} |"
+                )
+                assert line_3b in md, f"Missing LC Table 3b line: {line_3b}"
 
         # Check per-episode tables
         for sl in ["technique_collapsed_full", "tactic_collapsed"]:
@@ -1353,17 +1421,56 @@ def get_check_suites_7ep_inference():
                     assert line in md, f"Missing LC per-ep line: {line}"
 
         assert "- **Combinatorial Enumeration**: For each held-out episode $e$, all $\\binom{6}{k}$ subsets of the remaining 6 episodes were evaluated:" in md
-        assert "- **Aggregation Method**: Per pre-registration Section 7, metric averages are first computed across all $\\binom{6}{k}$ subsets for each held-out episode, and then averaged across all 7 episodes" in md
+        assert "- **Aggregation Methods**:" in md
+        assert "- **Table 1 (Pre-Registered Primary)**: Episode-mean aggregation per Section 7 (\"Compute metric averages across subsets for each held-out episode, then average over all 7 held-out episodes\")." in md
+        assert "- **Table 2 (Secondary)**: Sample-weighted pooled aggregation across all evaluated transitions ($N=95$ technique, $N=76$ tactic)." in md
+        assert "- **Table 3 (Sensitivity, E5 Excluded)**: Aggregation with Episode E5 excluded (both 6-episode unweighted mean and sample-weighted over the remaining $N=93$ technique or $N=74$ tactic samples)." in md
 
-        t_k1 = lc_json["learning_curve"]["technique_collapsed_full"]["k_1"]["pooled_sample_weighted"]
-        t_k6 = lc_json["learning_curve"]["technique_collapsed_full"]["k_6"]["pooled_sample_weighted"]
-        tac_k1 = lc_json["learning_curve"]["tactic_collapsed"]["k_1"]["pooled_sample_weighted"]
-        tac_k6 = lc_json["learning_curve"]["tactic_collapsed"]["k_6"]["pooled_sample_weighted"]
-        exp_line = f"- **Technique Coverage and Ceiling Growth**: As training episodes expand from k=1 to k=6, technique Markov coverage increases from {t_k1['coverage']:.4f} to {t_k6['coverage']:.4f} ({t_k6['coverage'] - t_k1['coverage']:+.4f}), and target ceiling increases from {t_k1['ceiling']:.4f} to {t_k6['ceiling']:.4f} ({t_k6['ceiling'] - t_k1['ceiling']:+.4f})."
-        assert exp_line in md
-        assert f"- **Technique Model Trajectories**: Across k=1..6, pooled technique Markov Hit@3 changes from {t_k1['markov_hit3']:.4f} to {t_k6['markov_hit3']:.4f}, while Frequency Hit@3 changes from {t_k1['frequency_hit3']:.4f} to {t_k6['frequency_hit3']:.4f}." in md
-        assert f"- **Tactic Coverage and Ceiling Growth**: Across k=1..6, tactic coverage moves from {tac_k1['coverage']:.4f} to {tac_k6['coverage']:.4f}, and tactic ceiling moves from {tac_k1['ceiling']:.4f} to {tac_k6['ceiling']:.4f}." in md
-        assert f"- **Tactic Model Trajectories**: Across k=1..6, pooled tactic Markov Hit@3 moves from {tac_k1['markov_hit3']:.4f} to {tac_k6['markov_hit3']:.4f}, while Frequency Hit@3 moves from {tac_k1['frequency_hit3']:.4f} to {tac_k6['frequency_hit3']:.4f}." in md
+        t_k1_unw = lc_json["learning_curve"]["technique_collapsed_full"]["k_1"]["unweighted_episode_mean"]
+        t_k6_unw = lc_json["learning_curve"]["technique_collapsed_full"]["k_6"]["unweighted_episode_mean"]
+        t_k1_pw = lc_json["learning_curve"]["technique_collapsed_full"]["k_1"]["pooled_sample_weighted"]
+        t_k6_pw = lc_json["learning_curve"]["technique_collapsed_full"]["k_6"]["pooled_sample_weighted"]
+
+        tac_k1_unw = lc_json["learning_curve"]["tactic_collapsed"]["k_1"]["unweighted_episode_mean"]
+        tac_k6_unw = lc_json["learning_curve"]["tactic_collapsed"]["k_6"]["unweighted_episode_mean"]
+        tac_k1_pw = lc_json["learning_curve"]["tactic_collapsed"]["k_1"]["pooled_sample_weighted"]
+        tac_k6_pw = lc_json["learning_curve"]["tactic_collapsed"]["k_6"]["pooled_sample_weighted"]
+
+        exp_t_unw = (
+            f"- **Technique Primary Episode-Mean Trajectories**: Under the pre-registered primary episode-mean aggregation across k=1..6, "
+            f"technique Markov Hit@3 changes from {t_k1_unw['markov_hit3']:.4f} to {t_k6_unw['markov_hit3']:.4f}, "
+            f"Frequency Hit@3 changes from {t_k1_unw['frequency_hit3']:.4f} to {t_k6_unw['frequency_hit3']:.4f}, "
+            f"Markov coverage moves from {t_k1_unw['coverage']:.4f} to {t_k6_unw['coverage']:.4f} (+{t_k6_unw['coverage'] - t_k1_unw['coverage']:.4f}), "
+            f"and target ceiling moves from {t_k1_unw['ceiling']:.4f} to {t_k6_unw['ceiling']:.4f} (+{t_k6_unw['ceiling'] - t_k1_unw['ceiling']:.4f})."
+        )
+        assert exp_t_unw in md
+
+        exp_t_pw = (
+            f"- **Technique Secondary Sample-Weighted Trajectories**: Under the secondary sample-weighted pooled aggregation across k=1..6, "
+            f"technique Markov Hit@3 changes from {t_k1_pw['markov_hit3']:.4f} to {t_k6_pw['markov_hit3']:.4f}, "
+            f"Frequency Hit@3 changes from {t_k1_pw['frequency_hit3']:.4f} to {t_k6_pw['frequency_hit3']:.4f}, "
+            f"Markov coverage moves from {t_k1_pw['coverage']:.4f} to {t_k6_pw['coverage']:.4f} (+{t_k6_pw['coverage'] - t_k1_pw['coverage']:.4f}), "
+            f"and target ceiling moves from {t_k1_pw['ceiling']:.4f} to {t_k6_pw['ceiling']:.4f} (+{t_k6_pw['ceiling'] - t_k1_pw['ceiling']:.4f})."
+        )
+        assert exp_t_pw in md
+
+        exp_tac_unw = (
+            f"- **Tactic Primary Episode-Mean Trajectories**: Under the pre-registered primary episode-mean aggregation across k=1..6, "
+            f"tactic Markov Hit@3 moves from {tac_k1_unw['markov_hit3']:.4f} to {tac_k6_unw['markov_hit3']:.4f}, "
+            f"Frequency Hit@3 moves from {tac_k1_unw['frequency_hit3']:.4f} to {tac_k6_unw['frequency_hit3']:.4f}, "
+            f"tactic coverage moves from {tac_k1_unw['coverage']:.4f} to {tac_k6_unw['coverage']:.4f}, "
+            f"and tactic ceiling moves from {tac_k1_unw['ceiling']:.4f} to {tac_k6_unw['ceiling']:.4f}."
+        )
+        assert exp_tac_unw in md
+
+        exp_tac_pw = (
+            f"- **Tactic Secondary Sample-Weighted Trajectories**: Under the secondary sample-weighted pooled aggregation across k=1..6, "
+            f"tactic Markov Hit@3 moves from {tac_k1_pw['markov_hit3']:.4f} to {tac_k6_pw['markov_hit3']:.4f}, "
+            f"Frequency Hit@3 moves from {tac_k1_pw['frequency_hit3']:.4f} to {tac_k6_pw['frequency_hit3']:.4f}, "
+            f"tactic coverage moves from {tac_k1_pw['coverage']:.4f} to {tac_k6_pw['coverage']:.4f}, "
+            f"and tactic ceiling moves from {tac_k1_pw['ceiling']:.4f} to {tac_k6_pw['ceiling']:.4f}."
+        )
+        assert exp_tac_pw in md
 
     def check_perm_7ep(md: str) -> None:
         assert "# Pre-Registered 7-Episode Permutation Test Report" in md
@@ -1634,7 +1741,39 @@ def get_check_suites_7ep_inference():
             line = f"| **Pooled Total** | **{p['total_samples']}** | **{p['unseen_current_state_count']}** | **{p['unseen_current_state_rate']:.4f}** | **{p['total_hit3_misses']}** | **{p['unseen_state_hit3_misses']}** | **{p['unseen_share_of_hit3_misses']:.4f}** |"
             assert line in sec_text, f"Missing F3 pooled line in {sl}: {line}"
 
-    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag]
+    def check_e5_hit1_diag(md: str) -> None:
+        assert "# E5-Removed Tactic Hit@1 Change Diagnostic" in md
+        assert "diagnostic, not a pre-registered test" in md
+        e5_hit1_json = json.loads((REPORTS_DIR / "7ep" / "e5_hit1_change_diagnostic.json").read_text(encoding="utf-8"))
+        acc = e5_hit1_json["metadata"]["summary_accounting"]
+        assert f"- **Tactic 7-Episode Baseline**: Markov Hit@1 is {acc['markov_total_hits_7ep']} / {acc['markov_total_samples_7ep']} ({acc['markov_total_hits_7ep'] / acc['markov_total_samples_7ep']:.4f})." in md
+        assert f"- **E5 Test Sample Performance in 7-Episode LOEO**: {acc['markov_e5_test_hits']} / {acc['markov_e5_test_samples']} hits." in md
+        assert "- **Performance on Remaining Folds (E1–E4, E6, E7, N=74)**:" in md
+        assert f"  - In 7-episode run (E5 in training pool): {acc['markov_hits_6ep_in_7ep_run']} / 74 hits ({acc['markov_hits_6ep_in_7ep_run'] / 74:.4f})." in md
+        assert f"  - In E5-removed run (E5 absent from training pool): {acc['markov_hits_6ep_in_e5_removed_run']} / 74 hits ({acc['markov_hits_6ep_in_e5_removed_run'] / 74:.4f})." in md
+        assert f"  - Net difference in other folds: {acc['markov_hits_difference_in_6ep']:+d} hits." in md
+        assert "- **Frequency Baseline Comparison on Remaining Folds (N=74)**:" in md
+        assert f"  - In 7-episode run: {acc['frequency_hits_6ep_in_7ep_run']} / 74 hits ({acc['frequency_hits_6ep_in_7ep_run'] / 74:.4f})." in md
+        assert f"  - In E5-removed run: {acc['frequency_hits_6ep_in_e5_removed_run']} / 74 hits ({acc['frequency_hits_6ep_in_e5_removed_run'] / 74:.4f})." in md
+        assert f"  - Net difference in Frequency hits: {acc['frequency_hits_difference_in_6ep']:+d} hits." in md
+
+        m_diffs = e5_hit1_json["markov_differing_samples"]
+        assert f"Total samples with differing Markov top-1 prediction or Hit@1: **{len(m_diffs)}**." in md
+        for d in m_diffs:
+            c_str = ", ".join(d["current_tactics"])
+            t_str = ", ".join(d["target_tactics"])
+            counts_7_str = ", ".join(f"{k}: {v}" for k, v in sorted(d["transition_counts_7ep"].items()))
+            counts_no_str = ", ".join(f"{k}: {v}" for k, v in sorted(d["transition_counts_no_e5"].items()))
+            line = (
+                f"| {d['sample_id']} | {d['episode_id']} | {c_str} | {t_str} | "
+                f"{d['pred_7ep']} | {d['hit1_7ep']} | {d['pred_no_e5']} | {d['hit1_no_e5']} | "
+                f"`{{{counts_7_str}}}` | tied counts: {d['tied_7ep']} | `{{{counts_no_str}}}` | tied counts: {d['tied_no_e5']} |"
+            )
+            assert line in md, f"Missing diagnostic table line: {line}"
+
+        assert f"Total samples with differing Frequency top-1 prediction or Hit@1: **{len(e5_hit1_json['frequency_differing_samples'])}**." in md
+
+    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag], [check_e5_hit1_diag]
 
 
 def run_mutation_sweep() -> dict[str, dict[str, Any]]:
@@ -1686,6 +1825,7 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         e5_checks,
         holm_checks,
         diag_checks,
+        e5_hit1_checks,
     ) = get_check_suites_7ep_inference()
     lc_res = sweep_report_numeric(
         "learning_curve_7ep_report.md",
@@ -1723,6 +1863,12 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         diag_checks,
         is_exempt_diagnostics_7ep,
     )
+    e5_hit1_res = sweep_report_numeric(
+        "e5_hit1_change_diagnostic.md",
+        REPORTS_DIR / "7ep" / "e5_hit1_change_diagnostic.md",
+        e5_hit1_checks,
+        is_exempt_e5_hit1_diagnostic,
+    )
     return {
         "tactic": tactic_res,
         "technique": tech_res,
@@ -1737,6 +1883,7 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         "e5_removed": e5_res,
         "holm_claim_rule": holm_res,
         "diagnostics_7ep": diag_res,
+        "e5_hit1_change_diagnostic": e5_hit1_res,
     }
 
 
@@ -1773,6 +1920,7 @@ def run_all_mutation_sweeps() -> None:
         e5_checks,
         holm_checks,
         diag_checks,
+        e5_hit1_checks,
     ) = get_check_suites_7ep_inference()
 
     # =========================================================================
@@ -1854,6 +2002,12 @@ def run_all_mutation_sweeps() -> None:
         diag_checks,
         is_exempt_diagnostics_7ep,
     )
+    num_e5_hit1 = sweep_report_numeric(
+        "e5_hit1_change_diagnostic.md",
+        REPORTS_DIR / "7ep" / "e5_hit1_change_diagnostic.md",
+        e5_hit1_checks,
+        is_exempt_e5_hit1_diagnostic,
+    )
 
     numeric_results = {
         "tactic": num_tactic,
@@ -1868,6 +2022,7 @@ def run_all_mutation_sweeps() -> None:
         "e5_removed": num_e5,
         "holm_claim_rule": num_holm,
         "diagnostics_7ep": num_diag,
+        "e5_hit1_change_diagnostic": num_e5_hit1,
     }
 
     # Print Part A Exempt list

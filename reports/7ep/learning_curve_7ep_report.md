@@ -1,7 +1,7 @@
 # Pre-Registered 7-Episode Learning Curve Report
 
 This report documents the combinatorial learning curve evaluation across all seven episodes (E1–E7) of the C4 dataset.
-All procedures strictly adhere to `reports/prereg_7episode_design.md` Section 7 and Amendments 1–4.
+All procedures strictly adhere to `reports/prereg_7episode_design.md` Section 7 and Amendments 1–5.
 No model tuning, parameter selection, or causal claims are made.
 
 ---
@@ -20,13 +20,27 @@ No model tuning, parameter selection, or causal claims are made.
   - $k=5$: $\binom{6}{5} = 6$ subsets per episode ($42$ evaluations per slice)
   - $k=6$: $\binom{6}{6} = 1$ subset per episode ($7$ evaluations per slice, corresponding to the standard full LOEO evaluation)
   - **Total Evaluations per Slice**: $63$ subsets per episode $\times 7$ episodes $= 441$ training subset evaluations ($882$ across both slices).
-- **Aggregation Method**: Per pre-registration Section 7, metric averages are first computed across all $\binom{6}{k}$ subsets for each held-out episode, and then averaged across all 7 episodes (both unweighted episode-mean and sample-weighted pooled rates are reported).
+- **Aggregation Methods**:
+  - **Table 1 (Pre-Registered Primary)**: Episode-mean aggregation per Section 7 ("Compute metric averages across subsets for each held-out episode, then average over all 7 held-out episodes").
+  - **Table 2 (Secondary)**: Sample-weighted pooled aggregation across all evaluated transitions ($N=95$ technique, $N=76$ tactic).
+  - **Table 3 (Sensitivity, E5 Excluded)**: Aggregation with Episode E5 excluded (both 6-episode unweighted mean and sample-weighted over the remaining $N=93$ technique or $N=74$ tactic samples).
 
 ---
 
 ## 2. Technique Level: `collapsed_full` (N=95)
 
-### Pooled Learning Curve Table across Subset Sizes (k=1..6)
+### Table 1: Pre-Registered Primary (Episode-Mean Aggregation across 7 Episodes)
+
+| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 6 | 42 | 0.0056 | 0.0069 | 0.0171 | 0.0533 | 0.0182 | 0.0425 | 0.2054 | 0.2063 |
+| 2 | 15 | 105 | 0.0112 | 0.0132 | 0.0280 | 0.0688 | 0.0263 | 0.0481 | 0.3379 | 0.3364 |
+| 3 | 20 | 140 | 0.0169 | 0.0191 | 0.0406 | 0.0789 | 0.0324 | 0.0483 | 0.4255 | 0.4201 |
+| 4 | 15 | 105 | 0.0225 | 0.0245 | 0.0514 | 0.0954 | 0.0363 | 0.0490 | 0.4873 | 0.4768 |
+| 5 | 6 | 42 | 0.0281 | 0.0293 | 0.0560 | 0.1183 | 0.0361 | 0.0468 | 0.5342 | 0.5177 |
+| 6 | 1 | 7 | 0.0337 | 0.0337 | 0.0595 | 0.1448 | 0.0337 | 0.0439 | 0.5706 | 0.5485 |
+
+### Table 2: Secondary (Sample-Weighted Pooled Aggregation across 7 Episodes)
 
 | k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -36,6 +50,30 @@ No model tuning, parameter selection, or causal claims are made.
 | 4 | 15 | 105 | 0.0211 | 0.0239 | 0.0618 | 0.1116 | 0.0393 | 0.0554 | 0.5460 | 0.5368 |
 | 5 | 6 | 42 | 0.0263 | 0.0281 | 0.0684 | 0.1368 | 0.0368 | 0.0491 | 0.6000 | 0.5842 |
 | 6 | 1 | 7 | 0.0316 | 0.0316 | 0.0737 | 0.1684 | 0.0316 | 0.0421 | 0.6421 | 0.6211 |
+
+### Table 3: Sensitivity (E5 Excluded from Aggregation)
+
+#### Table 3a: Episode-Mean Aggregation (6 Episodes, E5 Excluded)
+
+| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 6 | 42 | 0.0066 | 0.0080 | 0.0200 | 0.0622 | 0.0212 | 0.0495 | 0.2397 | 0.2407 |
+| 2 | 15 | 105 | 0.0131 | 0.0154 | 0.0326 | 0.0803 | 0.0307 | 0.0561 | 0.3942 | 0.3924 |
+| 3 | 20 | 140 | 0.0197 | 0.0223 | 0.0473 | 0.0921 | 0.0378 | 0.0563 | 0.4964 | 0.4902 |
+| 4 | 15 | 105 | 0.0262 | 0.0286 | 0.0599 | 0.1113 | 0.0423 | 0.0572 | 0.5685 | 0.5563 |
+| 5 | 6 | 42 | 0.0328 | 0.0342 | 0.0653 | 0.1380 | 0.0421 | 0.0546 | 0.6232 | 0.6040 |
+| 6 | 1 | 7 | 0.0393 | 0.0393 | 0.0694 | 0.1690 | 0.0393 | 0.0512 | 0.6658 | 0.6399 |
+
+#### Table 3b: Sample-Weighted Pooled Aggregation (6 Episodes, N=93, E5 Excluded)
+
+| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 6 | 42 | 0.0054 | 0.0072 | 0.0215 | 0.0663 | 0.0215 | 0.0520 | 0.2348 | 0.2384 |
+| 2 | 15 | 105 | 0.0108 | 0.0136 | 0.0344 | 0.0839 | 0.0308 | 0.0588 | 0.3857 | 0.3871 |
+| 3 | 20 | 140 | 0.0161 | 0.0194 | 0.0495 | 0.0952 | 0.0371 | 0.0581 | 0.4860 | 0.4828 |
+| 4 | 15 | 105 | 0.0215 | 0.0244 | 0.0631 | 0.1140 | 0.0401 | 0.0566 | 0.5577 | 0.5484 |
+| 5 | 6 | 42 | 0.0269 | 0.0287 | 0.0699 | 0.1398 | 0.0376 | 0.0502 | 0.6129 | 0.5968 |
+| 6 | 1 | 7 | 0.0323 | 0.0323 | 0.0753 | 0.1720 | 0.0323 | 0.0430 | 0.6559 | 0.6344 |
 
 ### Per-Episode Breakdown by Training Scenario Count (k)
 
@@ -88,7 +126,18 @@ No model tuning, parameter selection, or causal claims are made.
 
 ## 3. Tactic Level: `tactic_collapsed` (N=76)
 
-### Pooled Learning Curve Table across Subset Sizes (k=1..6)
+### Table 1: Pre-Registered Primary (Episode-Mean Aggregation across 7 Episodes)
+
+| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 6 | 42 | 0.1886 | 0.3618 | 0.2402 | 0.4826 | 0.2390 | 0.4800 | 0.7518 | 0.8555 |
+| 2 | 15 | 105 | 0.2377 | 0.5049 | 0.2469 | 0.6031 | 0.2568 | 0.5498 | 0.9263 | 0.9292 |
+| 3 | 20 | 140 | 0.2598 | 0.5737 | 0.2636 | 0.6595 | 0.2762 | 0.6095 | 0.9518 | 0.9485 |
+| 4 | 15 | 105 | 0.2847 | 0.6137 | 0.2540 | 0.6962 | 0.2986 | 0.6432 | 0.9641 | 0.9566 |
+| 5 | 6 | 42 | 0.3084 | 0.6285 | 0.2444 | 0.6922 | 0.3227 | 0.6535 | 0.9732 | 0.9615 |
+| 6 | 1 | 7 | 0.3093 | 0.6252 | 0.2269 | 0.6973 | 0.3284 | 0.6442 | 0.9810 | 0.9631 |
+
+### Table 2: Secondary (Sample-Weighted Pooled Aggregation across 7 Episodes)
 
 | k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -98,6 +147,30 @@ No model tuning, parameter selection, or causal claims are made.
 | 4 | 15 | 105 | 0.2570 | 0.5781 | 0.2211 | 0.6377 | 0.2754 | 0.6132 | 0.9588 | 0.9518 |
 | 5 | 6 | 42 | 0.2785 | 0.6096 | 0.2083 | 0.6294 | 0.2982 | 0.6404 | 0.9671 | 0.9583 |
 | 6 | 1 | 7 | 0.2895 | 0.6316 | 0.1842 | 0.6316 | 0.3158 | 0.6579 | 0.9737 | 0.9605 |
+
+### Table 3: Sensitivity (E5 Excluded from Aggregation)
+
+#### Table 3a: Episode-Mean Aggregation (6 Episodes, E5 Excluded)
+
+| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 6 | 42 | 0.1783 | 0.3526 | 0.2108 | 0.4658 | 0.2233 | 0.4766 | 0.7382 | 0.8314 |
+| 2 | 15 | 105 | 0.2218 | 0.4779 | 0.2159 | 0.5536 | 0.2441 | 0.5303 | 0.9140 | 0.9174 |
+| 3 | 20 | 140 | 0.2406 | 0.5401 | 0.2242 | 0.6111 | 0.2598 | 0.5819 | 0.9438 | 0.9399 |
+| 4 | 15 | 105 | 0.2599 | 0.5882 | 0.2130 | 0.6456 | 0.2761 | 0.6226 | 0.9581 | 0.9494 |
+| 5 | 6 | 42 | 0.2765 | 0.6222 | 0.2018 | 0.6409 | 0.2932 | 0.6513 | 0.9687 | 0.9551 |
+| 6 | 1 | 7 | 0.2776 | 0.6460 | 0.1814 | 0.6468 | 0.2998 | 0.6683 | 0.9778 | 0.9569 |
+
+#### Table 3b: Sample-Weighted Pooled Aggregation (6 Episodes, N=74, E5 Excluded)
+
+| k | Subsets / Ep | Total Evals | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Coverage | Ceiling |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 6 | 42 | 0.1712 | 0.3378 | 0.2072 | 0.4572 | 0.2162 | 0.4572 | 0.7342 | 0.8221 |
+| 2 | 15 | 105 | 0.2126 | 0.4604 | 0.2144 | 0.5414 | 0.2360 | 0.5135 | 0.9135 | 0.9135 |
+| 3 | 20 | 140 | 0.2318 | 0.5236 | 0.2243 | 0.5959 | 0.2527 | 0.5662 | 0.9446 | 0.9392 |
+| 4 | 15 | 105 | 0.2523 | 0.5730 | 0.2135 | 0.6279 | 0.2712 | 0.6090 | 0.9577 | 0.9505 |
+| 5 | 6 | 42 | 0.2725 | 0.6081 | 0.2005 | 0.6194 | 0.2928 | 0.6396 | 0.9662 | 0.9572 |
+| 6 | 1 | 7 | 0.2838 | 0.6351 | 0.1757 | 0.6216 | 0.3108 | 0.6622 | 0.9730 | 0.9595 |
 
 ### Per-Episode Breakdown by Training Scenario Count (k)
 
@@ -151,9 +224,10 @@ No model tuning, parameter selection, or causal claims are made.
 ## 4. Code-Generated Summary Observations
 
 The following observational statements are generated strictly from the evaluation numbers without causal claims:
-- **Technique Coverage and Ceiling Growth**: As training episodes expand from k=1 to k=6, technique Markov coverage increases from 0.2298 to 0.6421 (+0.4123), and target ceiling increases from 0.2333 to 0.6211 (+0.3877).
-- **Technique Model Trajectories**: Across k=1..6, pooled technique Markov Hit@3 changes from 0.0070 to 0.0316, while Frequency Hit@3 changes from 0.0649 to 0.1684.
-- **Tactic Coverage and Ceiling Growth**: Across k=1..6, tactic coverage moves from 0.7368 to 0.9737, and tactic ceiling moves from 0.8268 to 0.9605.
-- **Tactic Model Trajectories**: Across k=1..6, pooled tactic Markov Hit@3 moves from 0.3399 to 0.6316, while Frequency Hit@3 moves from 0.4605 to 0.6316.
-- **Figure Reference**: Plotted learning curve curves are rendered in `reports/7ep/learning_curve_7ep.png` with sidecar values in `reports/7ep/learning_curve_7ep_plot_data.json`.
+
+- **Technique Primary Episode-Mean Trajectories**: Under the pre-registered primary episode-mean aggregation across k=1..6, technique Markov Hit@3 changes from 0.0069 to 0.0337, Frequency Hit@3 changes from 0.0533 to 0.1448, Markov coverage moves from 0.2054 to 0.5706 (+0.3652), and target ceiling moves from 0.2063 to 0.5485 (+0.3422).
+- **Technique Secondary Sample-Weighted Trajectories**: Under the secondary sample-weighted pooled aggregation across k=1..6, technique Markov Hit@3 changes from 0.0070 to 0.0316, Frequency Hit@3 changes from 0.0649 to 0.1684, Markov coverage moves from 0.2298 to 0.6421 (+0.4123), and target ceiling moves from 0.2333 to 0.6211 (+0.3877).
+- **Tactic Primary Episode-Mean Trajectories**: Under the pre-registered primary episode-mean aggregation across k=1..6, tactic Markov Hit@3 moves from 0.3618 to 0.6252, Frequency Hit@3 moves from 0.4826 to 0.6973, tactic coverage moves from 0.7518 to 0.9810, and tactic ceiling moves from 0.8555 to 0.9631.
+- **Tactic Secondary Sample-Weighted Trajectories**: Under the secondary sample-weighted pooled aggregation across k=1..6, tactic Markov Hit@3 moves from 0.3399 to 0.6316, Frequency Hit@3 moves from 0.4605 to 0.6316, tactic coverage moves from 0.7368 to 0.9737, and tactic ceiling moves from 0.8268 to 0.9605.
+- **Figure Reference**: Plotted learning curves are rendered in `reports/7ep/learning_curve_7ep.png` with sidecar values in `reports/7ep/learning_curve_7ep_plot_data.json` (solid curves: primary episode-mean aggregation; dashed curves: secondary sample-weighted pooled aggregation).
 

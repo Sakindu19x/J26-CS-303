@@ -144,6 +144,14 @@ def verify_permutation_7ep() -> bool:
     assert sample_counts["S3_constrained_shuffle"]["tactic_collapsed"] == {76}, "S3 tactic N not constant 76!"
     print("S1 and S3 constant sample counts verified: Technique N=95, Tactic N=76.")
 
+    # S3 rejection sampling tries verification
+    s3_meta = report_data["metadata"]["s3_rejection_sampling_summary"]
+    tech_tries = s3_meta["technique_collapsed_full"]
+    tac_tries = s3_meta["tactic_collapsed"]
+    assert tech_tries["excluded_permutations"] == 0, f"Tech excluded: {tech_tries['excluded_permutations']}"
+    assert tac_tries["excluded_permutations"] == 0, f"Tac excluded: {tac_tries['excluded_permutations']}"
+    print(f"S3 rejection sampling tries verified: Technique (excluded={tech_tries['excluded_permutations']}, mean_tries={tech_tries['mean_total_tries']:.2f}, max_tries={tech_tries['max_total_tries']}), Tactic (excluded={tac_tries['excluded_permutations']}, mean_tries={tac_tries['mean_total_tries']:.2f}, max_tries={tac_tries['max_total_tries']}) [PASS]")
+
     # Verify pairwise distinctness across schemes
     print("\n[Step 1b] Verifying pairwise scheme distinctness (no scheme equals another)...")
     for lvl in levels:

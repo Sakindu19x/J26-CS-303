@@ -24,6 +24,8 @@ INFERENCE_FILES = [
     "reports/7ep/holm_claim_rule_report.md",
     "reports/7ep/diagnostics_7ep.json",
     "reports/7ep/diagnostics_7ep.md",
+    "reports/7ep/e5_hit1_change_diagnostic.json",
+    "reports/7ep/e5_hit1_change_diagnostic.md",
 ]
 
 hashes = {}

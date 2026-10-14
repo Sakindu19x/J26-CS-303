@@ -147,18 +147,20 @@ Monte Carlo permutation standard errors are given by $\text{SE}_{\text{MC}}(p) =
 
 ## Sensitivity Scheme S2 Results (Rate-Based Comparison)
 
+Per the pre-declared validity rule, a scheme that fails validity at any level is labelled invalid at every level.
+
 ### Technique Level (`collapsed_full`, N_perm in [82, 95])
 
 | Statistic | Observed Rate | Null Mean Rate | Null SD | Null 2.5% | Null 97.5% | p-value | Code-Generated Conclusion |
 |:---|:---:|:---:|:---:|:---:|:---:|:---|
-| Markov Hit@1               | +0.0149 | +0.0070 | 0.0106 | +0.0000 | +0.0337 | 0.1758 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1758) |
-| Markov Hit@3               | +0.0299 | +0.0166 | 0.0164 | +0.0000 | +0.0556 | 0.2298 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2298) |
-| Frequency Hit@1            | +0.0597 | +0.0641 | 0.0501 | +0.0000 | +0.1413 | 0.3656 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3656) |
-| Frequency Hit@3            | +0.1194 | +0.1181 | 0.0302 | +0.0435 | +0.1548 | 0.6853 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6853) |
-| Markov Fallback Hit@1      | +0.0299 | +0.0484 | 0.0363 | +0.0000 | +0.1196 | 0.6693 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6693) |
-| Markov Fallback Hit@3      | +0.0746 | +0.0937 | 0.0283 | +0.0324 | +0.1444 | 0.7952 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7952) |
-| Markov - Frequency Hit@1   | -0.0448 | -0.0570 | 0.0512 | -0.1349 | +0.0225 | 0.4585 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.4585) |
-| Markov - Frequency Hit@3   | -0.0896 | -0.1015 | 0.0346 | -0.1461 | -0.0112 | 0.2537 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2537) |
+| Markov Hit@1               | +0.0149 | +0.0070 | 0.0106 | +0.0000 | +0.0337 | 0.1758 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1758) |
+| Markov Hit@3               | +0.0299 | +0.0166 | 0.0164 | +0.0000 | +0.0556 | 0.2298 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2298) |
+| Frequency Hit@1            | +0.0597 | +0.0641 | 0.0501 | +0.0000 | +0.1413 | 0.3656 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3656) |
+| Frequency Hit@3            | +0.1194 | +0.1181 | 0.0302 | +0.0435 | +0.1548 | 0.6853 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6853) |
+| Markov Fallback Hit@1      | +0.0299 | +0.0484 | 0.0363 | +0.0000 | +0.1196 | 0.6693 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6693) |
+| Markov Fallback Hit@3      | +0.0746 | +0.0937 | 0.0283 | +0.0324 | +0.1444 | 0.7952 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7952) |
+| Markov - Frequency Hit@1   | -0.0448 | -0.0570 | 0.0512 | -0.1349 | +0.0225 | 0.4585 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.4585) |
+| Markov - Frequency Hit@3   | -0.0896 | -0.1015 | 0.0346 | -0.1461 | -0.0112 | 0.2537 | INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2537) |
 
 ### Tactic Level (`tactic_collapsed`, N_perm in [74, 90])
 

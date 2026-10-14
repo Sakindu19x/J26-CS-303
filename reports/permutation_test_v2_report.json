@@ -556,7 +556,7 @@
           "n_ge_observed": 175,
           "b_permutations": 1000,
           "p_value": 0.17582417582417584,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1758)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1758)"
         },
         "markov_hit3": {
           "observed": 0.029850746268656716,
@@ -569,7 +569,7 @@
           "n_ge_observed": 229,
           "b_permutations": 1000,
           "p_value": 0.22977022977022976,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2298)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2298)"
         },
         "frequency_hit1": {
           "observed": 0.05970149253731343,
@@ -582,7 +582,7 @@
           "n_ge_observed": 365,
           "b_permutations": 1000,
           "p_value": 0.36563436563436563,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3656)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3656)"
         },
         "frequency_hit3": {
           "observed": 0.11940298507462686,
@@ -595,7 +595,7 @@
           "n_ge_observed": 685,
           "b_permutations": 1000,
           "p_value": 0.6853146853146853,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6853)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6853)"
         },
         "markov_fallback_hit1": {
           "observed": 0.029850746268656716,
@@ -608,7 +608,7 @@
           "n_ge_observed": 669,
           "b_permutations": 1000,
           "p_value": 0.6693306693306693,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6693)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6693)"
         },
         "markov_fallback_hit3": {
           "observed": 0.07462686567164178,
@@ -621,7 +621,7 @@
           "n_ge_observed": 795,
           "b_permutations": 1000,
           "p_value": 0.7952047952047953,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7952)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7952)"
         },
         "markov_minus_frequency_hit1": {
           "observed": -0.04477611940298507,
@@ -634,7 +634,7 @@
           "n_ge_observed": 458,
           "b_permutations": 1000,
           "p_value": 0.45854145854145856,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.4585)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.4585)"
         },
         "markov_minus_frequency_hit3": {
           "observed": -0.08955223880597014,
@@ -647,7 +647,7 @@
           "n_ge_observed": 253,
           "b_permutations": 1000,
           "p_value": 0.25374625374625376,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2537)"
+          "conclusion": "INVALID NULL - do not cite: not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2537)"
         }
       },
       "tactic_collapsed": {

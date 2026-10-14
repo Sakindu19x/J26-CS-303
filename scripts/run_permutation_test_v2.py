@@ -804,14 +804,10 @@ def run_permutation_test_v2() -> dict[str, Any]:
             "warning": warning_msg,
         }
 
-    # Apply "INVALID NULL - do not cite:" prefix to conclusion text for invalid schemes/levels
+    # Apply "INVALID NULL - do not cite:" prefix to conclusion text for invalid schemes at EVERY level
     for sc in schemes:
-        for lvl in levels:
-            lvl_invalid = any(
-                report_data["schemes"][sc][lvl][st]["p_value"] < 0.05
-                for st in order_free_stats
-            )
-            if lvl_invalid:
+        if not report_data["scheme_validity_check"][sc]["is_valid_order_null"]:
+            for lvl in levels:
                 for st in stats_keys:
                     old_c = report_data["schemes"][sc][lvl][st]["conclusion"]
                     if not old_c.startswith("INVALID NULL - do not cite:"):
@@ -987,6 +983,8 @@ def generate_markdown_report_v2(data: dict[str, Any]) -> None:
     A("---")
     A()
     A("## Sensitivity Scheme S2 Results (Rate-Based Comparison)")
+    A()
+    A("Per the pre-declared validity rule, a scheme that fails validity at any level is labelled invalid at every level.")
     A()
     A("### Technique Level (`collapsed_full`, N_perm in [82, 95])")
     A()
