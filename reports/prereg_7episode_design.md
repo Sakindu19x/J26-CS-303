@@ -236,3 +236,21 @@ For each episode and permutation replicate, scheme S3 shuffles the collapsed seq
 - **Abort Criterion**: If more than **5%** (> 50 of the 1,000 permutations) fail to find a valid constrained shuffle, the procedure must abort.
 - **Reporting of Excluded Replicates**: If valid shuffles are found in $\ge 95\%$ of permutations, any failing permutations are excluded, their exact count is reported, and the mean and maximum number of rejection tries are documented.
 - **Sample Invariant**: In every valid S3 permutation, the number of evaluated samples $N$ is asserted to equal the empirical observed sample count $N$ ($N=67$ at 4 episodes, $N=95$ at 7 episodes).
+
+## Amendment 2 (2026-10-14, before any 7-episode model run)
+
+This amendment clarifies the scope and findings of the verification check regarding the `scenario_6_macro_library` example from Section 1 and Amendment 1, and explicitly records the supersession relationships between Amendment 1 and earlier sections.
+
+### 1. Scope and Correction of the `macro_library` Check (Correction to Item 6 of Amendment 1)
+- **Search Scope**: The search conducted was an automated string match for `"macro_library"` across text files of type `.md`, `.json`, `.py`, and `.txt` in the repository workspace.
+- **Match Count**: Exactly 1 match was found—namely, in `reports/prereg_7episode_design.md` itself (the file where the term was originally introduced). Zero matches were found in any code, configuration, or audit reports (including `reports/new_episodes_intake_audit.json` and `reports/raw_archive_hashes_extended.json`).
+- **Unsearched Sources**: The external Zenodo record's remote file list and the uncompressed internal contents of the raw zip archives were **not** searched.
+- **Correction**: The claim in Amendment 1 that an audit of "Zenodo archives" was performed is hereby removed and retracted. Because no occurrence was verified in repository audit records or intake files, the example `scenario_6_macro_library` remains **not verified** and is formally withdrawn.
+
+### 2. Supersession of Original Text by Amendment 1
+Amendment 1 formally supersedes the following original sections and passages of this document:
+1. **Section 4**: Superseded in full regarding the model implementation file location (models reside in `src/c4/models/` rather than `src/c4/models.py`) and the fallback rule (the label `unseen_history` is inaccurate; fallback applies when `status != 'ok'`, assigning `status = 'fallback_frequency'`).
+2. **Section 5**: Superseded regarding the exact ceiling definition (fraction of samples whose target set contains at least one technique appearing as a target in that fold's training episodes, matching `reports/evaluation_report.md` and `src/c4/evaluation.py`).
+3. **Section 8**: Superseded regarding the statement that E5 has "zero test coverage"; replaced with the exact per-fold counts from `reports/new_episodes_intake_audit.json` (N=2, covered=0, ceiling=0).
+4. **Section 9**: Superseded in its entirety; replaced by the pre-declared A4 real-scale power analysis design and gates G8–G11 quoted verbatim from `reports/planted_realscale_report.md` and `reports/planted_realscale_report.json`.
+5. **Section 1**: Superseded regarding the unverified example `scenario_6_macro_library`, which is withdrawn as not verified.
