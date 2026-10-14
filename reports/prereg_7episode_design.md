@@ -331,3 +331,35 @@ This amendment records wording-only neutralizations in permutation test reportin
    - *Scope*: Independent CSV-only recomputation of technique report Section 5.2 (per-fold ceiling and coverage), Section 11 (most frequent Top-1 error pairs, abstentions by target, parent confusion matrix metrics), and Section 12 (rule-based example selection: Top-1 hits, Frequency-only hits with Markov ok, abstentions).
    - *Completeness*: All data elements are 100% reconstructible from `data/processed/evaluation_predictions.csv` without missing fields.
 
+
+## Amendment 7 (2026-10-15, exploratory post hoc variant, declared before it is run)
+
+### 1. Motivation and Objective
+Cross-episode diagnostics on the 7-episode design (`reports/7ep/diagnostics_7ep.md`) demonstrated that technique-level transitions do not transfer across disparate scenarios (high vocabulary diversity, zero repeat transitions between different attack campaigns). However, permutation test results under S1 (`reports/7ep/permutation_7ep_report.md`) demonstrated that attack sequence order carries detectable signal at the tactic level ($p = 0.0410$ at Hit@1, $p = 0.0390$ at Hit@3).
+
+This amendment pre-declares exactly ONE exploratory post hoc variant before execution: **Tactic-Conditioned Technique Prediction**. The variant uses the tactic-level Markov transition model to predict next tactics from current tactics, and then projects the predicted tactics onto candidate techniques using within-tactic marginal training frequencies.
+
+### 2. Constraints and Registration Boundary
+1. **Single Variant**: Exactly ONE exploratory variant is declared and run. There is no tuning, no secondary variant, no grid search, and no adjustment of definitions after inspecting results. Any subsequent modification would require an additional amendment explicitly documenting the deviation.
+2. **Post Hoc Classification**: This variant is explicitly post hoc and is NOT part of the pre-registered Holm step-down hypothesis testing family.
+3. **Verdict Immutability**: The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant, regardless of outcome.
+4. **Unconditional Reporting**: The performance of this variant will be reported in full regardless of whether the results are positive, neutral, or negative.
+
+### 3. Model Definition and Algorithm
+1. **Current Tactic Derivation**: Given a sample's current technique set from `collapsed_full`, map each technique to its corresponding tactic(s) using `technique_tactic_reference.json`. The union of these tactics forms the sample's `current_tactic_set`.
+2. **Tactic-Level Markov Inference**: The tactic-level Markov model, trained strictly on the training episodes of the fold under `tactic_collapsed` (identical training to the pre-registered tactic LOEO evaluation), receives `current_tactic_set` and returns ranked next-tactic candidates.
+3. **Candidate Technique Projection**:
+   - For each predicted tactic in that rank order:
+     - Identify all candidate techniques that (a) map to that tactic in `technique_tactic_reference.json`, and (b) appear as transition targets in the fold's training episodes under `collapsed_full`.
+     - Sort these techniques by descending training target frequency (`-training_target_count`, with ascending technique ID as deterministic tie-break).
+     - Concatenate these candidate techniques across predicted tactics, de-duplicating to retain only the first occurrence of each technique. Techniques mapping to multiple tactics appear under the earliest tactic in rank order.
+4. **Top-k Selection**: Top-k candidates are the first $k$ techniques from the concatenated list.
+5. **Fallback and Padding**:
+   - If the tactic Markov model status is not `"ok"` (e.g. unseen state) or the candidate list is empty, the model falls back to the fold's `collapsed_full` Frequency baseline list (identical to `markov_fallback`).
+   - If the candidate list has fewer than $k$ techniques, remaining slots are padded with the fold's `collapsed_full` Frequency baseline candidates, de-duplicated against already selected candidates.
+6. **Evaluation Protocol and Slices**:
+   - Evaluated strictly across all 7 episodes (LOEO, 7 folds) on `collapsed_full` ($N=95$).
+   - Metrics: Top-1 and Top-3 pooled hit rates (with Wilson 95% confidence intervals) and episode-mean hit rates.
+   - Descriptive paired exact McNemar test versus the Frequency baseline (raw $p$-value only, descriptive).
+   - E5-removed sensitivity slice repeat ($N=83$).
+   - Tie sensitivity computed using the P2 machinery.
