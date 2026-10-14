@@ -150,3 +150,89 @@ Permutation testing at 7 episodes evaluates order dependence against unigram bas
 - **Pre-Registration Lock**: This document is finalized and committed prior to running any model training, prediction, or evaluation on episodes E5, E6, or E7.
 - **Post-Run Amendments**: Following any 7-episode model run, this file may not be modified except by appending dated, explicitly labeled amendment sections detailing post-hoc explorations.
 - **Preservation of Prior Art**: The 4-episode experimental artifacts and reports (`evaluation_results.json`, `tactic_evaluation_results.json`, `permutation_test_v2_report.json`, etc.) remain archived with their verified, frozen SHA-256 hashes.
+
+
+---
+
+## Amendment 1 (2026-10-14, before any 7-episode model run)
+
+This amendment formally records corrections and clarifications to the pre-registration protocol prior to running any model training, prediction, or evaluation on episodes E5, E6, or E7.
+
+### 1. Model Implementation Location, Docstrings, and Fallback Rule (Correction to Section 4)
+The baseline models reside in the package `src/c4/models/` (specifically `src/c4/models/markov.py` and `src/c4/models/frequency.py`), not in a single `src/c4/models.py` file.
+
+- **`MarkovModel` class docstring** (quoted verbatim from `src/c4/models/markov.py`):
+  > "First-order Markov model capturing conditional ATT&CK technique transition probabilities."
+
+- **`FrequencyBaseline` class docstring** (quoted verbatim from `src/c4/models/frequency.py`):
+  > "Frequency baseline model estimating marginal next-technique probability P(T_{t+1} = b)."
+
+- **`markov_fallback` evaluation-level rule** (quoted verbatim from `src/c4/evaluation.py`, lines 262–266):
+```python
+            if m_status == "ok":
+                fb_status, fb_raw, fb1, fb3 = "ok_markov", m_raw, m1, m3
+            else:
+                fb_status, fb_raw = "fallback_frequency", [list(c) for c in f_cands_raw]
+                fb1, fb3 = f1, f3
+```
+- **Accuracy of `unseen_history` description in Section 4**:
+  The description in Section 4 using the label `unseen_history` is inaccurate: the codebase implements fallback whenever `m_status != 'ok'` (specifically when `m_status == 'insufficient_evidence'` due to no outgoing transitions observed in training for the conditioning techniques, assigning fallback status `'fallback_frequency'`). The token `unseen_history` does not exist in `src/c4/models/` or `src/c4/evaluation.py`.
+
+### 2. Ceiling and Coverage Exact Definitions (Correction to Section 5)
+- **Ceiling Definition** (quoted verbatim from `reports/evaluation_report.md`):
+  > "Ceiling: fraction of test samples whose target set contains at least one technique that appears as a target in that fold's training episodes."
+  
+  And from `src/c4/evaluation.py` (lines 208–232):
+```python
+        train_target_pool: set[str] = set()
+        for ep in train_eps:
+            items = ep_sequences[ep][variant]
+            for i in range(len(items) - 1):
+                train_target_pool.update(markov._extract_tech_set(items[i + 1]))
+...
+            if tgt & train_target_pool:
+                ceiling_hits += 1
+```
+- **Coverage Definition** (quoted verbatim from `reports/evaluation_report.md`):
+  > "Coverage: fraction of samples with Markov status ok."
+  
+  Where `status == 'ok'` indicates that the conditioning technique set had observed transitions in training.
+
+### 3. Episode E5 Counting Bounds (Correction to Section 8)
+The initial phrasing that E5 has 'zero test coverage' was an informal description; the exact per-fold counting metrics for E5 under the 7-episode design (fold 5) read directly from `reports/new_episodes_intake_audit.json` are:
+- Evaluated samples ($N$): 2
+- Covered samples: 0 (coverage rate: 0.0%)
+- Ceiling hits: 0 (ceiling rate: 0.0%)
+
+### 4. Real-Scale Planted Structure Power Analysis Design (Correction to Section 9)
+The text previously drafted in Section 9 referenced generic Markov benchmarks rather than the actual pre-declared A4 design. The wrong text in Section 9 was drafted using generic synthetic Markov benchmark language rather than quoting the pre-declared A4 real-scale power analysis protocol established in Prompt 10b.
+
+The actual A4 design parameters and gates, quoted directly from `reports/planted_realscale_report.md` and `reports/planted_realscale_report.json`, are:
+- **Vocabulary ($V$)**: All distinct MITRE ATT&CK technique IDs present in the collapsed sequence vocabulary across the evaluated episodes.
+- **Planted Successor Permutation ($\pi$)**: Deterministic cyclic permutation $\pi(t_i) = t_{(i+1) % V}$ over the sorted vocabulary without fixed points.
+- **Episode Lengths**: Exact empirical collapsed sequence lengths of the evaluated episodes (yielding 95 evaluated transition samples at 7 episodes).
+- **Evaluation Protocol**: Leave-One-Episode-Out cross-validation evaluating production `MarkovModel` and `FrequencyBaseline`.
+- **Signal Levels ($s$)**: `0.00, 0.25, 0.50, 0.75, 1.00`.
+- **Replicates**: 200 synthetic dataset replicates per signal level using random seeds `0..199`.
+- **Reachable Fraction ($R$)**: Share of test fold samples whose exact $(current \to target)$ transition appears at least once in that fold's training episodes (computed independently of model predictions).
+- **Pre-Declared Gates (quoted verbatim from `reports/planted_realscale_report.json`)**:
+  - **G8**: "at s=0, |Markov Top-1 - 1/(V-1)| <= max(0.02, 3*SE)"
+  - **G9**: "Markov Top-1 mean is non-decreasing across s levels"
+  - **G10**: "at s=1.0, Markov Top-1 <= R + 1e-9 in every replicate AND mean Markov Top-1 >= 0.99 * mean R"
+  - **G11**: "Negative control: with Markov deliberately broken (fixed candidate), G10 fails"
+
+
+### 5. Primary Comparisons, Holm Adjustment, and Claim Boundary (Clarification to Section 6)
+- The $p$-value entering the Holm-Bonferroni correction for primary tests P3 and P4 is strictly the **S1** permutation $p$-value. Scheme S3 is reported alongside S1 as a sensitivity null and does not enter the Holm step-down correction.
+- The substantive claim **"improvement over the baseline demonstrated"** is governed **strictly by P1 and P2** (Markov vs. Frequency). Hypotheses P3 and P4 (Markov vs. Shuffled Null) support the separate, independent claim: **"order carries detectable signal"**.
+- The paired McNemar test is two-sided; however, to claim that Markov improves over Frequency, it is an explicit requirement that **pooled Markov Hit@3 > pooled Frequency Hit@3** in addition to the Holm-adjusted $p < 0.05$.
+
+### 6. Withdrawal of Unverified Scenario Reference (Correction to Section 1)
+In Section 1, the mention of `scenario_6_macro_library` as a hypothetical counterpart to `scenario_6_macro_binary` was unverified. An automated filesystem and metadata audit across all repository files and Zenodo archives confirmed that no archive or scenario named `scenario_6_macro_library` exists. The example is confirmed **not verified** and is formally withdrawn.
+
+### 7. Constrained Shuffle Scheme S3 Execution Protocol (Specification for Section 10)
+For each episode and permutation replicate, scheme S3 shuffles the collapsed sequence uniformly at random subject to the strict constraint that no two adjacent items share identical technique sets (technique slice) or identical tactic sets (tactic slice):
+- **Rejection Sampling Bound**: Rejection sampling will perform at most **10,000 tries** per episode per permutation replicate.
+- **Abort Criterion**: If more than **5%** (> 50 of the 1,000 permutations) fail to find a valid constrained shuffle, the procedure must abort.
+- **Reporting of Excluded Replicates**: If valid shuffles are found in $\ge 95\%$ of permutations, any failing permutations are excluded, their exact count is reported, and the mean and maximum number of rejection tries are documented.
+- **Sample Invariant**: In every valid S3 permutation, the number of evaluated samples $N$ is asserted to equal the empirical observed sample count $N$ ($N=67$ at 4 episodes, $N=95$ at 7 episodes).
