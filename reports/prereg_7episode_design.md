@@ -269,3 +269,27 @@ To avoid any ambiguity in section referencing, the exact verbatim heading titles
 - **Raw Match Count**: An exhaustive repository search across all text files (`.md`, `.json`, `.py`, `.txt`, excluding `.git`) returns exactly **1 matching file**: `reports/prereg_7episode_design.md` (which contains 8 occurrences across Section 1, Amendment 1, and Amendment 2).
 - **Explanation of Discrepancy**: Across all other repository files—including all source code (`src/c4/`), scripts (`scripts/`), test suites (`tests/`), data artifacts (`data/`), and intake audits (`reports/`)—there are **0 matches**. The string `"macro_library"` originated exclusively as an unverified narrative example within this pre-registration file itself and has never appeared anywhere in the repository's data pipeline, code, or intake audits.
 
+## Amendment 4 (2026-10-14, before any inference run)
+
+### 1. Retraction of Informal Section Titles and Descriptions in Amendment 2 Section 2
+In Amendment 2 Section 2 ("Supersession of Original Text by Amendment 1"), the quoted section titles and summary descriptions for Sections 1, 4, 5, 8, and 9 were informal paraphrases rather than the verbatim heading titles of the original pre-registration document (commit `2cf7786`). Those informal titles and descriptions are formally retracted.
+
+### 2. Correct Verbatim Section Titles
+As established in Amendment 3 Section 1, the authentic verbatim titles from the original pre-registration document (commit `2cf7786`) are:
+- **Section 1**: `## 1. Episodes and Archive Identification`
+- **Section 4**: `## 4. Models and Tuning Constraints`
+- **Section 5**: `## 5. Evaluation Metrics`
+- **Section 8**: `## 8. Handling of Episode E5 (Sensitivity Analysis)`
+- **Section 9**: `## 9. Real-Scale Planted Structure Power Analysis (A4 Re-Run)`
+
+### 3. Exhaustive Record of What Amendment 1 Actually Changed
+Quoting directly and verbatim from Amendment 1's own section headings and operational text, Amendment 1 made the following seven specific changes and clarifications:
+1. **Model Implementation Location, Docstrings, and Fallback Rule (Correction to Section 4)**: Specified model locations in `src/c4/models/`, quoted class docstrings for `MarkovModel` and `FrequencyBaseline`, quoted the evaluation fallback rule in `src/c4/evaluation.py` (assigning `'fallback_frequency'` when `m_status != 'ok'`), and retracted the nonexistent token `unseen_history`.
+2. **Ceiling and Coverage Exact Definitions (Correction to Section 5)**: Quoted verbatim definitions of Target Ceiling and Coverage matching `reports/evaluation_report.md` and `src/c4/evaluation.py`.
+3. **Episode E5 Counting Bounds (Correction to Section 8)**: Recorded exact per-fold counts for E5 ($N=2$, covered=0, ceiling=0) from `reports/new_episodes_intake_audit.json`.
+4. **Real-Scale Planted Structure Power Analysis Design (Correction to Section 9)**: Recorded the pre-declared A4 simulation parameters ($V=82$, cyclic permutation $\pi$, empirical collapsed lengths, 200 replicates, signal levels $s$, reachable fraction $R$) and pre-declared gates G8–G11 quoted verbatim from `reports/planted_realscale_report.json`.
+5. **Primary Comparisons, Holm Adjustment, and Claim Boundary (Clarification to Section 6)**: Clarified that S1 permutation $p$-value enters Holm adjustment with S3 reported alongside; defined the claim rule boundary ("improvement over baseline" governed strictly by P1/P2; requires pooled Markov Hit@3 > Frequency Hit@3 and Holm $p < 0.05$; order-signal governed by P3/P4).
+6. **Withdrawal of Unverified Scenario Reference (Correction to Section 1)**: Formally withdrew the unverified reference to `scenario_6_macro_library`.
+7. **Constrained Shuffle Scheme S3 Execution Protocol (Specification for Section 10)**: Specified the rejection sampling protocol (maximum 10,000 tries per episode per replicate, abort if >5% infeasible, report excluded replicates, and assert sample size invariant $N$).
+
+
