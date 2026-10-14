@@ -208,3 +208,40 @@ def test_e5_hit1_change_diagnostic():
 
     from scripts.verify_e5_hit1_diagnostic import verify_e5_hit1_diagnostic
     assert verify_e5_hit1_diagnostic() is True
+
+
+def test_tie_sensitivity_diagnostic() -> None:
+    """Test tie sensitivity calculation on toy cases (including 3-way tie) and report invariants."""
+    from scripts.run_tie_sensitivity_7ep import evaluate_sample_ties
+
+    # Toy Case 1: 3-way tie straddling top-3 boundary (positions 2, 3, 4; g=3, slots=2, 1 target)
+    cands_3way = [("A", 0.5), ("B", 0.2), ("C", 0.2), ("D", 0.2), ("E", 0.1)]
+    g, in_grp, exp_h, best_h, worst_h = evaluate_sample_ties(cands_3way, {"C"}, 3, "ok")
+    assert g == 3
+    assert in_grp is True
+    assert abs(exp_h - 2.0 / 3.0) < 1e-9
+    assert best_h == 1
+    assert worst_h == 0
+
+    # Toy Case 2: 2-way tie at top-1 boundary (positions 1, 2; g=2, slots=1, 1 target)
+    cands_2way = [("A", 0.5), ("B", 0.5), ("C", 0.1)]
+    g, in_grp, exp_h, best_h, worst_h = evaluate_sample_ties(cands_2way, {"B"}, 1, "ok")
+    assert g == 2
+    assert in_grp is True
+    assert abs(exp_h - 0.5) < 1e-9
+    assert best_h == 1
+    assert worst_h == 0
+
+    # Toy Case 3: Target strictly above boundary (A=1 target above boundary of B, C)
+    g, in_grp, exp_h, best_h, worst_h = evaluate_sample_ties(cands_2way, {"A"}, 2, "ok")
+    assert exp_h == 1.0
+    assert best_h == 1
+    assert worst_h == 1
+
+    # Invariants on reports
+    json_path = REPORTS_7EP / "tie_sensitivity_7ep.json"
+    assert json_path.exists()
+    with open(json_path, "r", encoding="utf-8") as f:
+        d = json.load(f)
+    assert d["pre_registered_conclusion_bounds"]["bound_A_markov_favoured"]["claim_rule_verdict"] == "not demonstrated"
+    assert d["pre_registered_conclusion_bounds"]["bound_B_frequency_favoured"]["claim_rule_verdict"] == "not demonstrated"

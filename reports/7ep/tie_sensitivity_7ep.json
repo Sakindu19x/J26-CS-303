@@ -1,0 +1,649 @@
+{
+  "e5_hit1_diagnostic_7_samples": [
+    {
+      "7ep": {
+        "score_vector": {
+          "collection": 0.242915,
+          "credential-access": 0.060729,
+          "defense-evasion": 0.161943,
+          "discovery": 0.283401,
+          "lateral-movement": 0.182186,
+          "persistence": 0.020243,
+          "reconnaissance": 0.048583
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "credential-access"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "collection": 0.304569,
+          "credential-access": 0.025381,
+          "defense-evasion": 0.126904,
+          "discovery": 0.304569,
+          "lateral-movement": 0.152284,
+          "persistence": 0.025381,
+          "reconnaissance": 0.060914
+        },
+        "top1_group_size": 2,
+        "top1_tied": true
+      },
+      "sample_id": "E2-tac-col-K05",
+      "target_tactics": [
+        "discovery"
+      ],
+      "test_episode": "E2"
+    },
+    {
+      "7ep": {
+        "score_vector": {
+          "collection": 0.242915,
+          "credential-access": 0.060729,
+          "defense-evasion": 0.161943,
+          "discovery": 0.283401,
+          "lateral-movement": 0.182186,
+          "persistence": 0.020243,
+          "reconnaissance": 0.048583
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "credential-access",
+        "exfiltration"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "collection": 0.304569,
+          "credential-access": 0.025381,
+          "defense-evasion": 0.126904,
+          "discovery": 0.304569,
+          "lateral-movement": 0.152284,
+          "persistence": 0.025381,
+          "reconnaissance": 0.060914
+        },
+        "top1_group_size": 2,
+        "top1_tied": true
+      },
+      "sample_id": "E2-tac-col-K07",
+      "target_tactics": [
+        "collection"
+      ],
+      "test_episode": "E2"
+    },
+    {
+      "7ep": {
+        "score_vector": {
+          "credential-access": 0.071429,
+          "defense-evasion": 0.428571,
+          "discovery": 0.5
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "collection"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "defense-evasion": 0.5,
+          "discovery": 0.5
+        },
+        "top1_group_size": 2,
+        "top1_tied": true
+      },
+      "sample_id": "E2-tac-col-K08",
+      "target_tactics": [
+        "exfiltration"
+      ],
+      "test_episode": "E2"
+    },
+    {
+      "7ep": {
+        "score_vector": {
+          "credential-access": 0.071429,
+          "defense-evasion": 0.428571,
+          "discovery": 0.5
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "collection"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "defense-evasion": 0.5,
+          "discovery": 0.5
+        },
+        "top1_group_size": 2,
+        "top1_tied": true
+      },
+      "sample_id": "E2-tac-col-K11",
+      "target_tactics": [
+        "discovery"
+      ],
+      "test_episode": "E2"
+    },
+    {
+      "7ep": {
+        "score_vector": {
+          "collection": 0.242915,
+          "credential-access": 0.060729,
+          "defense-evasion": 0.161943,
+          "discovery": 0.283401,
+          "lateral-movement": 0.182186,
+          "persistence": 0.020243,
+          "reconnaissance": 0.048583
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "credential-access"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "collection": 0.304569,
+          "credential-access": 0.025381,
+          "defense-evasion": 0.126904,
+          "discovery": 0.304569,
+          "lateral-movement": 0.152284,
+          "persistence": 0.025381,
+          "reconnaissance": 0.060914
+        },
+        "top1_group_size": 2,
+        "top1_tied": true
+      },
+      "sample_id": "E2-tac-col-K13",
+      "target_tactics": [
+        "discovery"
+      ],
+      "test_episode": "E2"
+    },
+    {
+      "7ep": {
+        "score_vector": {
+          "collection": 0.04886,
+          "command-and-control": 0.416667,
+          "credential-access": 0.02443,
+          "defense-evasion": 0.065147,
+          "discovery": 0.39278,
+          "lateral-movement": 0.02443,
+          "persistence": 0.008143,
+          "reconnaissance": 0.019544
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "credential-access",
+        "lateral-movement"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "collection": 0.058366,
+          "command-and-control": 0.416667,
+          "credential-access": 0.009728,
+          "defense-evasion": 0.048638,
+          "discovery": 0.433528,
+          "persistence": 0.009728,
+          "reconnaissance": 0.023346
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "sample_id": "E3-tac-col-K01",
+      "target_tactics": [
+        "lateral-movement"
+      ],
+      "test_episode": "E3"
+    },
+    {
+      "7ep": {
+        "score_vector": {
+          "credential-access": 0.05,
+          "defense-evasion": 0.3,
+          "discovery": 0.35,
+          "exfiltration": 0.3
+        },
+        "top1_group_size": 1,
+        "top1_tied": false
+      },
+      "current_tactics": [
+        "collection"
+      ],
+      "no_e5": {
+        "score_vector": {
+          "defense-evasion": 0.333333,
+          "discovery": 0.333333,
+          "exfiltration": 0.333333
+        },
+        "top1_group_size": 3,
+        "top1_tied": true
+      },
+      "sample_id": "E3-tac-col-K04",
+      "target_tactics": [
+        "discovery"
+      ],
+      "test_episode": "E3"
+    }
+  ],
+  "e5_removed_sensitivity_comparison": {
+    "frequency": {
+      "7ep_expected": 0.18421052631578946,
+      "7ep_observed": 0.18421052631578946,
+      "diff_expected": 0.008534850640113778,
+      "diff_observed": 0.008534850640113778,
+      "e5_removed_expected": 0.17567567567567569,
+      "e5_removed_observed": 0.17567567567567569
+    },
+    "markov": {
+      "7ep_expected": 0.29605263157894735,
+      "7ep_observed": 0.2894736842105263,
+      "diff_expected": 0.028034618065433836,
+      "diff_observed": 0.04623044096728307,
+      "e5_removed_expected": 0.2680180135135135,
+      "e5_removed_observed": 0.24324324324324326
+    }
+  },
+  "metadata": {
+    "episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7"
+    ],
+    "runs": [
+      "7ep",
+      "e5_removed"
+    ],
+    "slices": [
+      "collapsed_full",
+      "tactic_collapsed"
+    ],
+    "status": "post hoc sensitivity bounds, not pre-registered tests; the pre-registered verdict is unchanged",
+    "title": "Post Hoc Tie-Sensitivity Diagnostic Report (7 Episodes)"
+  },
+  "pre_registered_conclusion_bounds": {
+    "bound_A_markov_favoured": {
+      "b_tactic": 13,
+      "b_technique": 2,
+      "c_tactic": 12,
+      "c_technique": 12,
+      "case": "A",
+      "claim_rule_verdict": "not demonstrated",
+      "p1_holm": 1.0,
+      "p1_raw": 1.0,
+      "p1_sig": false,
+      "p2_holm": 0.038818359375,
+      "p2_raw": 0.012939453125,
+      "p2_sig": true,
+      "p3_holm": 0.024,
+      "p3_raw": 0.006,
+      "p4_holm": 0.7712,
+      "p4_raw": 0.3856
+    },
+    "bound_B_frequency_favoured": {
+      "b_tactic": 12,
+      "b_technique": 2,
+      "c_tactic": 12,
+      "c_technique": 15,
+      "case": "B",
+      "claim_rule_verdict": "not demonstrated",
+      "p1_holm": 1.0,
+      "p1_raw": 1.0,
+      "p1_sig": false,
+      "p2_holm": 0.0093994140625,
+      "p2_raw": 0.002349853515625,
+      "p2_sig": true,
+      "p3_holm": 0.018000000000000002,
+      "p3_raw": 0.006,
+      "p4_holm": 0.7712,
+      "p4_raw": 0.3856
+    }
+  },
+  "summary_tables": {
+    "7ep": {
+      "collapsed_full": {
+        "frequency": {
+          "episode_mean": {
+            "best_hit1": 0.05948203842940685,
+            "best_hit3": 0.14481441699486813,
+            "expected_hit1": 0.05948203842940685,
+            "expected_hit3": 0.1346501200023869,
+            "observed_hit1": 0.05948203842940685,
+            "observed_hit3": 0.14481441699486813,
+            "worst_hit1": 0.05948203842940685,
+            "worst_hit3": 0.12184031507339778
+          },
+          "pooled": {
+            "best_hit1": 0.07368421052631578,
+            "best_hit3": 0.16842105263157894,
+            "expected_hit1": 0.07368421052631578,
+            "expected_hit3": 0.15438596842105262,
+            "n_samples": 95,
+            "observed_hit1": 0.07368421052631578,
+            "observed_hit3": 0.16842105263157894,
+            "tied_top1_count": 0,
+            "tied_top1_rate": 0.0,
+            "tied_top3_count": 51,
+            "tied_top3_rate": 0.5368421052631579,
+            "worst_hit1": 0.07368421052631578,
+            "worst_hit3": 0.1368421052631579
+          }
+        },
+        "markov": {
+          "episode_mean": {
+            "best_hit1": 0.0337092731829574,
+            "best_hit3": 0.0337092731829574,
+            "expected_hit1": 0.02399749373433584,
+            "expected_hit3": 0.0337092731829574,
+            "observed_hit1": 0.0337092731829574,
+            "observed_hit3": 0.0337092731829574,
+            "worst_hit1": 0.014285714285714287,
+            "worst_hit3": 0.0337092731829574
+          },
+          "pooled": {
+            "best_hit1": 0.031578947368421054,
+            "best_hit3": 0.031578947368421054,
+            "expected_hit1": 0.021052631578947368,
+            "expected_hit3": 0.031578947368421054,
+            "n_samples": 95,
+            "observed_hit1": 0.031578947368421054,
+            "observed_hit3": 0.031578947368421054,
+            "tied_top1_count": 25,
+            "tied_top1_rate": 0.2631578947368421,
+            "tied_top3_count": 22,
+            "tied_top3_rate": 0.23157894736842105,
+            "worst_hit1": 0.010526315789473684,
+            "worst_hit3": 0.031578947368421054
+          }
+        },
+        "markov_fallback": {
+          "episode_mean": {
+            "best_hit1": 0.0337092731829574,
+            "best_hit3": 0.04391335481561045,
+            "expected_hit1": 0.02399749373433584,
+            "expected_hit3": 0.04391335481561045,
+            "observed_hit1": 0.0337092731829574,
+            "observed_hit3": 0.04391335481561045,
+            "worst_hit1": 0.014285714285714287,
+            "worst_hit3": 0.04391335481561045
+          },
+          "pooled": {
+            "best_hit1": 0.031578947368421054,
+            "best_hit3": 0.042105263157894736,
+            "expected_hit1": 0.021052631578947368,
+            "expected_hit3": 0.042105263157894736,
+            "n_samples": 95,
+            "observed_hit1": 0.031578947368421054,
+            "observed_hit3": 0.042105263157894736,
+            "tied_top1_count": 25,
+            "tied_top1_rate": 0.2631578947368421,
+            "tied_top3_count": 39,
+            "tied_top3_rate": 0.4105263157894737,
+            "worst_hit1": 0.010526315789473684,
+            "worst_hit3": 0.042105263157894736
+          }
+        }
+      },
+      "tactic_collapsed": {
+        "frequency": {
+          "episode_mean": {
+            "best_hit1": 0.22692307692307695,
+            "best_hit3": 0.6972527472527473,
+            "expected_hit1": 0.22692307692307695,
+            "expected_hit3": 0.6972527472527473,
+            "observed_hit1": 0.22692307692307695,
+            "observed_hit3": 0.6972527472527473,
+            "worst_hit1": 0.22692307692307695,
+            "worst_hit3": 0.6972527472527473
+          },
+          "pooled": {
+            "best_hit1": 0.18421052631578946,
+            "best_hit3": 0.631578947368421,
+            "expected_hit1": 0.18421052631578946,
+            "expected_hit3": 0.631578947368421,
+            "n_samples": 76,
+            "observed_hit1": 0.18421052631578946,
+            "observed_hit3": 0.631578947368421,
+            "tied_top1_count": 0,
+            "tied_top1_rate": 0.0,
+            "tied_top3_count": 0,
+            "tied_top3_rate": 0.0,
+            "worst_hit1": 0.18421052631578946,
+            "worst_hit3": 0.631578947368421
+          }
+        },
+        "markov": {
+          "episode_mean": {
+            "best_hit1": 0.3271978021978022,
+            "best_hit3": 0.6361721611721611,
+            "expected_hit1": 0.31826923076923075,
+            "expected_hit3": 0.6295787545787546,
+            "observed_hit1": 0.3093406593406593,
+            "observed_hit3": 0.6251831501831502,
+            "worst_hit1": 0.3093406593406593,
+            "worst_hit3": 0.6251831501831502
+          },
+          "pooled": {
+            "best_hit1": 0.3026315789473684,
+            "best_hit3": 0.6447368421052632,
+            "expected_hit1": 0.29605263157894735,
+            "expected_hit3": 0.6368421052631579,
+            "n_samples": 76,
+            "observed_hit1": 0.2894736842105263,
+            "observed_hit3": 0.631578947368421,
+            "tied_top1_count": 2,
+            "tied_top1_rate": 0.02631578947368421,
+            "tied_top3_count": 5,
+            "tied_top3_rate": 0.06578947368421052,
+            "worst_hit1": 0.2894736842105263,
+            "worst_hit3": 0.631578947368421
+          }
+        },
+        "markov_fallback": {
+          "episode_mean": {
+            "best_hit1": 0.34624542124542124,
+            "best_hit3": 0.6552197802197802,
+            "expected_hit1": 0.3373168498168498,
+            "expected_hit3": 0.6486263736263737,
+            "observed_hit1": 0.3283882783882784,
+            "observed_hit3": 0.6442307692307693,
+            "worst_hit1": 0.3283882783882784,
+            "worst_hit3": 0.6442307692307693
+          },
+          "pooled": {
+            "best_hit1": 0.32894736842105265,
+            "best_hit3": 0.6710526315789473,
+            "expected_hit1": 0.3223684210526316,
+            "expected_hit3": 0.6631578947368421,
+            "n_samples": 76,
+            "observed_hit1": 0.3157894736842105,
+            "observed_hit3": 0.6578947368421053,
+            "tied_top1_count": 2,
+            "tied_top1_rate": 0.02631578947368421,
+            "tied_top3_count": 5,
+            "tied_top3_rate": 0.06578947368421052,
+            "worst_hit1": 0.3157894736842105,
+            "worst_hit3": 0.6578947368421053
+          }
+        }
+      }
+    },
+    "e5_removed": {
+      "collapsed_full": {
+        "frequency": {
+          "episode_mean": {
+            "best_hit1": 0.06939571150097466,
+            "best_hit3": 0.1689501531606795,
+            "expected_hit1": 0.06939571150097466,
+            "expected_hit3": 0.1570918066694514,
+            "observed_hit1": 0.06939571150097466,
+            "observed_hit3": 0.1689501531606795,
+            "worst_hit1": 0.06939571150097466,
+            "worst_hit3": 0.1421470342522974
+          },
+          "pooled": {
+            "best_hit1": 0.07526881720430108,
+            "best_hit3": 0.17204301075268819,
+            "expected_hit1": 0.07526881720430108,
+            "expected_hit3": 0.15770609677419356,
+            "n_samples": 93,
+            "observed_hit1": 0.07526881720430108,
+            "observed_hit3": 0.17204301075268819,
+            "tied_top1_count": 0,
+            "tied_top1_rate": 0.0,
+            "tied_top3_count": 51,
+            "tied_top3_rate": 0.5483870967741935,
+            "worst_hit1": 0.07526881720430108,
+            "worst_hit3": 0.13978494623655913
+          }
+        },
+        "markov": {
+          "episode_mean": {
+            "best_hit1": 0.03932748538011696,
+            "best_hit3": 0.03932748538011696,
+            "expected_hit1": 0.027997076023391812,
+            "expected_hit3": 0.03932748538011696,
+            "observed_hit1": 0.03932748538011696,
+            "observed_hit3": 0.03932748538011696,
+            "worst_hit1": 0.016666666666666666,
+            "worst_hit3": 0.03932748538011696
+          },
+          "pooled": {
+            "best_hit1": 0.03225806451612903,
+            "best_hit3": 0.03225806451612903,
+            "expected_hit1": 0.021505376344086023,
+            "expected_hit3": 0.03225806451612903,
+            "n_samples": 93,
+            "observed_hit1": 0.03225806451612903,
+            "observed_hit3": 0.03225806451612903,
+            "tied_top1_count": 25,
+            "tied_top1_rate": 0.26881720430107525,
+            "tied_top3_count": 22,
+            "tied_top3_rate": 0.23655913978494625,
+            "worst_hit1": 0.010752688172043012,
+            "worst_hit3": 0.03225806451612903
+          }
+        },
+        "markov_fallback": {
+          "episode_mean": {
+            "best_hit1": 0.03932748538011696,
+            "best_hit3": 0.05123224728487886,
+            "expected_hit1": 0.027997076023391812,
+            "expected_hit3": 0.05123224728487886,
+            "observed_hit1": 0.03932748538011696,
+            "observed_hit3": 0.05123224728487886,
+            "worst_hit1": 0.016666666666666666,
+            "worst_hit3": 0.05123224728487886
+          },
+          "pooled": {
+            "best_hit1": 0.03225806451612903,
+            "best_hit3": 0.043010752688172046,
+            "expected_hit1": 0.021505376344086023,
+            "expected_hit3": 0.043010752688172046,
+            "n_samples": 93,
+            "observed_hit1": 0.03225806451612903,
+            "observed_hit3": 0.043010752688172046,
+            "tied_top1_count": 25,
+            "tied_top1_rate": 0.26881720430107525,
+            "tied_top3_count": 39,
+            "tied_top3_rate": 0.41935483870967744,
+            "worst_hit1": 0.010752688172043012,
+            "worst_hit3": 0.043010752688172046
+          }
+        }
+      },
+      "tactic_collapsed": {
+        "frequency": {
+          "episode_mean": {
+            "best_hit1": 0.18141025641025643,
+            "best_hit3": 0.6467948717948718,
+            "expected_hit1": 0.18141025641025643,
+            "expected_hit3": 0.6467948717948718,
+            "observed_hit1": 0.18141025641025643,
+            "observed_hit3": 0.6467948717948718,
+            "worst_hit1": 0.18141025641025643,
+            "worst_hit3": 0.6467948717948718
+          },
+          "pooled": {
+            "best_hit1": 0.17567567567567569,
+            "best_hit3": 0.6216216216216216,
+            "expected_hit1": 0.17567567567567569,
+            "expected_hit3": 0.6216216216216216,
+            "n_samples": 74,
+            "observed_hit1": 0.17567567567567569,
+            "observed_hit3": 0.6216216216216216,
+            "tied_top1_count": 0,
+            "tied_top1_rate": 0.0,
+            "tied_top3_count": 0,
+            "tied_top3_rate": 0.0,
+            "worst_hit1": 0.17567567567567569,
+            "worst_hit3": 0.6216216216216216
+          }
+        },
+        "markov": {
+          "episode_mean": {
+            "best_hit1": 0.309508547008547,
+            "best_hit3": 0.6588675213675214,
+            "expected_hit1": 0.26946224700854704,
+            "expected_hit3": 0.6511752136752137,
+            "observed_hit1": 0.24423076923076925,
+            "observed_hit3": 0.6460470085470086,
+            "worst_hit1": 0.23311965811965815,
+            "worst_hit3": 0.6460470085470086
+          },
+          "pooled": {
+            "best_hit1": 0.3108108108108108,
+            "best_hit3": 0.6486486486486487,
+            "expected_hit1": 0.2680180135135135,
+            "expected_hit3": 0.6405405405405405,
+            "n_samples": 74,
+            "observed_hit1": 0.24324324324324326,
+            "observed_hit3": 0.6351351351351351,
+            "tied_top1_count": 8,
+            "tied_top1_rate": 0.10810810810810811,
+            "tied_top3_count": 5,
+            "tied_top3_rate": 0.06756756756756757,
+            "worst_hit1": 0.22972972972972974,
+            "worst_hit3": 0.6351351351351351
+          }
+        },
+        "markov_fallback": {
+          "episode_mean": {
+            "best_hit1": 0.3317307692307692,
+            "best_hit3": 0.6810897435897436,
+            "expected_hit1": 0.29168446923076924,
+            "expected_hit3": 0.673397435897436,
+            "observed_hit1": 0.26645299145299145,
+            "observed_hit3": 0.6682692307692308,
+            "worst_hit1": 0.2553418803418804,
+            "worst_hit3": 0.6682692307692308
+          },
+          "pooled": {
+            "best_hit1": 0.33783783783783783,
+            "best_hit3": 0.6756756756756757,
+            "expected_hit1": 0.29504504054054054,
+            "expected_hit3": 0.6675675675675675,
+            "n_samples": 74,
+            "observed_hit1": 0.2702702702702703,
+            "observed_hit3": 0.6621621621621622,
+            "tied_top1_count": 8,
+            "tied_top1_rate": 0.10810810810810811,
+            "tied_top3_count": 5,
+            "tied_top3_rate": 0.06756756756756757,
+            "worst_hit1": 0.25675675675675674,
+            "worst_hit3": 0.6621621621621622
+          }
+        }
+      }
+    }
+  }
+}

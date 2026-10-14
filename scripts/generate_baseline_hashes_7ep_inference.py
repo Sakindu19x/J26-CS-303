@@ -26,6 +26,9 @@ INFERENCE_FILES = [
     "reports/7ep/diagnostics_7ep.md",
     "reports/7ep/e5_hit1_change_diagnostic.json",
     "reports/7ep/e5_hit1_change_diagnostic.md",
+    "data/processed_7ep/tie_sensitivity_7ep_samples.csv",
+    "reports/7ep/tie_sensitivity_7ep.json",
+    "reports/7ep/tie_sensitivity_7ep.md",
 ]
 
 hashes = {}

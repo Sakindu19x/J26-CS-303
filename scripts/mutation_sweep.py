@@ -399,6 +399,45 @@ def is_exempt_e5_hit1_diagnostic(
     return False, ""
 
 
+def is_exempt_tie_sensitivity_7ep(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if (
+        "| Run |" in line
+        or "| Model |" in line
+        or "| Sample ID |" in line
+        or "| Bound Condition |" in line
+        or "| Observed Hit@1 |" in line
+    ):
+        return True, "Table column header label"
+    if line.strip().startswith("- **E") and ("-tac-" in line or "-col-" in line):
+        return True, "Sample ID and episode identifier in list header"
+    if "The 7 samples whose Markov top-1" in line:
+        return True, "Explanatory lead-in sentence for diagnostic 7 samples"
+    if "For tactic Hit@1" in line and tok == "1":
+        return True, "Metric name Hit@1 in explanatory sentence"
+    if "7-episode" in line and tok == "7":
+        return True, "7-episode reference"
+    if "7-Episode" in line and tok == "7":
+        return True, "7-episode reference"
+    if "E5" in line and tok == "5":
+        return True, "E5 episode reference"
+    if "N=76" in line and tok in ("76",):
+        return True, "Sample count reference N=76"
+    if "N=95" in line and tok in ("95",):
+        return True, "Sample count reference N=95"
+    if "1e-9" in line and tok in ("1", "9"):
+        return True, "Float tolerance constant 1e-9"
+    if "10^{-9}" in line and tok in ("10", "9"):
+        return True, "Float tolerance LaTeX constant 10^-9"
+    return False, ""
+
+
+
 def sweep_report_numeric(
     report_name: str,
     file_path: Path,
@@ -1773,7 +1812,61 @@ def get_check_suites_7ep_inference():
 
         assert f"Total samples with differing Frequency top-1 prediction or Hit@1: **{len(e5_hit1_json['frequency_differing_samples'])}**." in md
 
-    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag], [check_e5_hit1_diag]
+    def check_tie_sensitivity(md: str) -> None:
+        assert "# Post Hoc Tie-Sensitivity Diagnostic Report (7 Episodes)" in md
+        assert "post hoc sensitivity bounds, not pre-registered tests; the pre-registered verdict is unchanged" in md
+        tie_json = json.loads((REPORTS_DIR / "7ep" / "tie_sensitivity_7ep.json").read_text(encoding="utf-8"))
+        for r_id, r_dict in tie_json["summary_tables"].items():
+            for sl_id, sl_dict in r_dict.items():
+                for m_id, m_dict in sl_dict.items():
+                    p = m_dict["pooled"]
+                    line_bd = f"| {r_id} | `{sl_id}` | `{m_id}` | {p['n_samples']} | {p['tied_top1_count']} | {p['tied_top1_rate']:.4f} | {p['tied_top3_count']} | {p['tied_top3_rate']:.4f} |"
+                    assert line_bd in md, f"Missing boundary table line: {line_bd}"
+                    line_pl = (
+                        f"| {r_id} | `{sl_id}` | `{m_id}` | {p['n_samples']} | "
+                        f"{p['observed_hit1']:.4f} | {p['expected_hit1']:.4f} | {p['best_hit1']:.4f} | {p['worst_hit1']:.4f} | "
+                        f"{p['observed_hit3']:.4f} | {p['expected_hit3']:.4f} | {p['best_hit3']:.4f} | {p['worst_hit3']:.4f} |"
+                    )
+                    assert line_pl in md, f"Missing pooled summary line: {line_pl}"
+                    em = m_dict["episode_mean"]
+                    line_em = (
+                        f"| {r_id} | `{sl_id}` | `{m_id}` | "
+                        f"{em['observed_hit1']:.4f} | {em['expected_hit1']:.4f} | {em['best_hit1']:.4f} | {em['worst_hit1']:.4f} | "
+                        f"{em['observed_hit3']:.4f} | {em['expected_hit3']:.4f} | {em['best_hit3']:.4f} | {em['worst_hit3']:.4f} |"
+                    )
+                    assert line_em in md, f"Missing episode-mean line: {line_em}"
+
+        # 7-sample diagnostic list and score vectors
+        for item in tie_json["e5_hit1_diagnostic_7_samples"]:
+            c_str = ", ".join(item["current_tactics"])
+            t_str = ", ".join(item["target_tactics"])
+            line_diag = f"| {item['sample_id']} | {item['test_episode']} | {c_str} | {t_str} | {item['7ep']['top1_tied']} | {item['7ep']['top1_group_size']} | {item['no_e5']['top1_tied']} | {item['no_e5']['top1_group_size']} |"
+            assert line_diag in md, f"Missing diag 7 line: {line_diag}"
+            sample_sec = md.split(f"**{item['sample_id']}**")[1].split("- **E" if item != tie_json["e5_hit1_diagnostic_7_samples"][-1] else "---")[0]
+            v7_str = ", ".join(f"{k}: {v}" for k, v in sorted(item["7ep"]["score_vector"].items()))
+            vno_str = ", ".join(f"{k}: {v}" for k, v in sorted(item["no_e5"]["score_vector"].items()))
+            assert f"7-Episode Score Vector: `{{{v7_str}}}`" in sample_sec, f"Missing v7 in {item['sample_id']}"
+            assert f"No-E5 Score Vector: `{{{vno_str}}}`" in sample_sec, f"Missing vno in {item['sample_id']}"
+
+        # Section 4: 7ep minus e5-removed difference
+        for mod_name in ["markov", "frequency"]:
+            d = tie_json["e5_removed_sensitivity_comparison"][mod_name]
+            line_diff = (
+                f"| `{mod_name}` | {d['7ep_observed']:.4f} | {d['e5_removed_observed']:.4f} | "
+                f"{d['diff_observed']:+.4f} | {d['7ep_expected']:.4f} | {d['e5_removed_expected']:.4f} | "
+                f"{d['diff_expected']:+.4f} |"
+            )
+            assert line_diff in md, f"Missing e5 diff line: {line_diff}"
+
+        b_a = tie_json["pre_registered_conclusion_bounds"]["bound_A_markov_favoured"]
+        b_b = tie_json["pre_registered_conclusion_bounds"]["bound_B_frequency_favoured"]
+        line_a = f"| Bound A (Markov favoured) | {b_a['b_tactic']} / {b_a['c_tactic']} | {b_a['p1_raw']:.4f} | {b_a['p1_holm']:.4f} | {b_a['b_technique']} / {b_a['c_technique']} | {b_a['p2_raw']:.4f} | {b_a['p2_holm']:.4f} | **{b_a['claim_rule_verdict']}** |"
+        line_b = f"| Bound B (Frequency favoured) | {b_b['b_tactic']} / {b_b['c_tactic']} | {b_b['p1_raw']:.4f} | {b_b['p1_holm']:.4f} | {b_b['b_technique']} / {b_b['c_technique']} | {b_b['p2_raw']:.4f} | {b_b['p2_holm']:.4f} | **{b_b['claim_rule_verdict']}** |"
+        assert line_a in md, f"Missing Bound A line: {line_a}"
+        assert line_b in md, f"Missing Bound B line: {line_b}"
+
+    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag], [check_e5_hit1_diag], [check_tie_sensitivity]
+
 
 
 def run_mutation_sweep() -> dict[str, dict[str, Any]]:
@@ -1826,6 +1919,7 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         holm_checks,
         diag_checks,
         e5_hit1_checks,
+        tie_checks,
     ) = get_check_suites_7ep_inference()
     lc_res = sweep_report_numeric(
         "learning_curve_7ep_report.md",
@@ -1869,6 +1963,12 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         e5_hit1_checks,
         is_exempt_e5_hit1_diagnostic,
     )
+    tie_res = sweep_report_numeric(
+        "tie_sensitivity_7ep.md",
+        REPORTS_DIR / "7ep" / "tie_sensitivity_7ep.md",
+        tie_checks,
+        is_exempt_tie_sensitivity_7ep,
+    )
     return {
         "tactic": tactic_res,
         "technique": tech_res,
@@ -1884,6 +1984,7 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         "holm_claim_rule": holm_res,
         "diagnostics_7ep": diag_res,
         "e5_hit1_change_diagnostic": e5_hit1_res,
+        "tie_sensitivity_7ep": tie_res,
     }
 
 
@@ -1921,6 +2022,7 @@ def run_all_mutation_sweeps() -> None:
         holm_checks,
         diag_checks,
         e5_hit1_checks,
+        tie_checks,
     ) = get_check_suites_7ep_inference()
 
     # =========================================================================
@@ -2008,6 +2110,12 @@ def run_all_mutation_sweeps() -> None:
         e5_hit1_checks,
         is_exempt_e5_hit1_diagnostic,
     )
+    num_tie = sweep_report_numeric(
+        "tie_sensitivity_7ep.md",
+        REPORTS_DIR / "7ep" / "tie_sensitivity_7ep.md",
+        tie_checks,
+        is_exempt_tie_sensitivity_7ep,
+    )
 
     numeric_results = {
         "tactic": num_tactic,
@@ -2023,6 +2131,7 @@ def run_all_mutation_sweeps() -> None:
         "holm_claim_rule": num_holm,
         "diagnostics_7ep": num_diag,
         "e5_hit1_change_diagnostic": num_e5_hit1,
+        "tie_sensitivity_7ep": num_tie,
     }
 
     # Print Part A Exempt list
