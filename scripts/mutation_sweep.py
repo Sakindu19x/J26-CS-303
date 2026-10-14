@@ -236,6 +236,34 @@ def is_exempt_planted_realscale(
     return False, ""
 
 
+def is_exempt_eval_7ep(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    """Explicit exemption rules for reports/7ep/evaluation_7ep_report.md."""
+    # Rule 1: Heading lines
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+
+    # Rule 2: Table delimiter rows
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+
+    # Rule 3: Table column header labels
+    if (
+        "| Model |" in line
+        or "| Fold |" in line
+        or "| Contingency Cell |" in line
+        or "| Comparison |" in line
+        or "| Slice |" in line
+    ):
+        return True, "Table column header label"
+
+    # Rule 4: Parameter k in Random baseline label
+    if "| Random (k=1,3)" in line and tok in ("1", "3"):
+        return True, "Random baseline parameter specification (k=1,3)"
+
+    return False, ""
+
 
 def sweep_report_numeric(
     report_name: str,
@@ -347,8 +375,8 @@ LABEL_VOCABULARY: dict[str, list[str]] = {
         "collapsed_full_no_s006", "collapsed_parent", "collapsed_full",
         "raw_parent", "raw_full", "tactic_collapsed", "tactic_raw",
     ],
-    "fold": ["fold_1", "fold_2", "fold_3", "fold_4"],
-    "episode": ["E1", "E2", "E3", "E4"],
+    "fold": ["fold_1", "fold_2", "fold_3", "fold_4", "fold_5", "fold_6", "fold_7"],
+    "episode": ["E1", "E2", "E3", "E4", "E5", "E6", "E7"],
     "comparison": ["equal to", "the same", "different", "above", "below"],
     "status": ["insufficient_evidence", "abstained", "abstain", "ok"],
 }
@@ -358,6 +386,7 @@ LABEL_REPLACEMENTS: dict[str, dict[str, str]] = {
         "markov": "frequency", "Markov": "Frequency",
         "frequency": "markov", "Frequency": "Markov",
         "markov_fallback": "markov", "Markov_fallback": "Markov",
+        "Markov Fallback": "Markov", "Fallback": "Frequency",
     },
     "configuration": {
         "collapsed_full": "collapsed_parent",
@@ -373,11 +402,16 @@ LABEL_REPLACEMENTS: dict[str, dict[str, str]] = {
     "fold": {
         "fold_1": "fold_2", "fold_2": "fold_1",
         "fold_3": "fold_4", "fold_4": "fold_3",
+        "fold_5": "fold_6", "fold_6": "fold_5",
+        "fold_7": "fold_1",
         "Fold_1": "Fold_2", "Fold_2": "Fold_1",
         "Fold_3": "Fold_4", "Fold_4": "Fold_3",
+        "Fold_5": "Fold_6", "Fold_6": "Fold_5",
+        "Fold_7": "Fold_1",
     },
     "episode": {
         "E1": "E2", "E2": "E1", "E3": "E4", "E4": "E3",
+        "E5": "E6", "E6": "E5", "E7": "E1",
     },
     "comparison": {
         "above": "below", "Above": "Below",
@@ -535,6 +569,8 @@ def format_summary_block(results: dict[str, dict[str, Any]], title: str = "MUTAT
         lines.append(format_summary_line("PermutationV2", results["permutation_test_v2"]))
     if "planted_realscale" in results:
         lines.append(format_summary_line("PlantedRealscale", results["planted_realscale"]))
+    if "evaluation_7ep" in results:
+        lines.append(format_summary_line("Eval7Ep", results["evaluation_7ep"]))
     lines.append("=" * 80)
     return "\n".join(lines)
 
@@ -916,10 +952,236 @@ def get_check_suites() -> tuple[list[Callable[[str], None]], list[Callable[[str]
     return tactic_checks, tech_checks
 
 
+def get_eval_7ep_check_suites() -> list[Callable[[str], None]]:
+    results_json = json.loads((REPORTS_DIR / "7ep" / "evaluation_7ep_results.json").read_text(encoding="utf-8"))
+
+    def check_eval_7ep_intro_and_setup(md: str) -> None:
+        assert "This report documents the pre-registered leave-one-episode-out (LOEO) evaluation across all seven episodes (E1–E7) of the C4 dataset." in md
+        assert "All procedures strictly adhere to `reports/prereg_7episode_design.md` with Amendments 1, 2, and 3." in md
+        assert "- **Evaluated Episodes**: E1, E2, E3, E4, E5, E6, E7 ($7$ folds)." in md
+        assert "1. **Primary**: Technique `collapsed_full` ($N=95$ transition samples)." in md
+        assert "2. **Secondary**: Tactic `tactic_collapsed` ($N=76$ transition samples)." in md
+        assert "3. **Reference**: Technique `raw_full` ($N=131$ transition samples)." in md
+        assert "- **Models Evaluated**: `MarkovModel` (first-order Markov chain), `FrequencyBaseline` (unconditional frequency), and `markov_fallback` (fallback to frequency when Markov status is not ok)." in md
+        assert "- **Fold Models**: Stored deterministically in `artifacts/7ep/fold_models/<slice>/<test_episode>.json` with hashes recorded in `artifacts/7ep/fold_models/manifest.json`." in md
+        assert "- **Episode E5**: Evaluated as an explicit test fold ($N=2$, covered=0, ceiling=0)." in md
+
+    def check_eval_7ep_primary_collapsed_full(md: str) -> None:
+        sec2 = md.split("## 2. Primary Slice")[1].split("## 3. Secondary Slice")[0]
+        head = results_json["primary_slice_technique_collapsed_full"]["headline"]
+        m = head["markov"]
+        f = head["frequency"]
+        fb = head["fallback"]
+        line_m = f"| Markov          |  {m['hit1']} / 95 | {m['top1']:.4f} | [{m['wilson95_top1'][0]:.4f}, {m['wilson95_top1'][1]:.4f}]      |  {m['hit3']} / 95 | {m['top3']:.4f} | [{m['wilson95_top3'][0]:.4f}, {m['wilson95_top3'][1]:.4f}]      | {m['fold_mean_top1']:.4f} | {m['fold_mean_top3']:.4f} |"
+        assert line_m in sec2, f"Missing: {line_m}"
+        line_f = f"| Frequency       |  {f['hit1']} / 95 | {f['top1']:.4f} | [{f['wilson95_top1'][0]:.4f}, {f['wilson95_top1'][1]:.4f}]      | {f['hit3']} / 95 | {f['top3']:.4f} | [{f['wilson95_top3'][0]:.4f}, {f['wilson95_top3'][1]:.4f}]      | {f['fold_mean_top1']:.4f} | {f['fold_mean_top3']:.4f} |"
+        assert line_f in sec2, f"Missing: {line_f}"
+        line_fb = f"| Markov Fallback |  {fb['hit1']} / 95 | {fb['top1']:.4f} | [{fb['wilson95_top1'][0]:.4f}, {fb['wilson95_top1'][1]:.4f}]      |  {fb['hit3']} / 95 | {fb['top3']:.4f} | [{fb['wilson95_top3'][0]:.4f}, {fb['wilson95_top3'][1]:.4f}]      | {fb['fold_mean_top1']:.4f} | {fb['fold_mean_top3']:.4f} |"
+        assert line_fb in sec2, f"Missing: {line_fb}"
+
+        cov = head["coverage"]
+        assert f"- **Coverage (Markov Status ok)**: {cov['covered_samples']}/95 ({cov['coverage_rate']:.4f})." in sec2
+        assert f"- On covered samples ($N={cov['covered_n']}$): Markov Hit@1 = {cov['markov_on_covered_hit1']}/{cov['covered_n']} ({cov['markov_on_covered_top1']:.4f}), Frequency Hit@1 = {cov['frequency_on_covered_hit1']}/{cov['covered_n']} ({cov['frequency_on_covered_top1']:.4f})." in sec2
+        assert f"- On covered samples ($N={cov['covered_n']}$): Markov Hit@3 = {cov['markov_on_covered_hit3']}/{cov['covered_n']} ({cov['markov_on_covered_top3']:.4f}), Frequency Hit@3 = {cov['frequency_on_covered_hit3']}/{cov['covered_n']} ({cov['frequency_on_covered_top3']:.4f})." in sec2
+        assert f"- **Target Ceiling**: {head['ceiling']['hits']}/95 ({head['ceiling']['ceiling_rate']:.4f}) of samples had at least one target technique appearing in training targets for that fold." in sec2
+
+        pf = results_json["primary_slice_technique_collapsed_full"]["per_fold"]
+        for fid, fd in sorted(pf.items(), key=lambda x: int(x[0].split("_")[1])):
+            tep = fd["test_episode"]
+            fn = fd["n_samples"]
+            m_h1 = fd["markov"]["hit1"]
+            m_h3 = fd["markov"]["hit3"]
+            f_h1 = fd["frequency"]["hit1"]
+            f_h3 = fd["frequency"]["hit3"]
+            fb_h1 = fd["fallback"]["hit1"]
+            fb_h3 = fd["fallback"]["hit3"]
+            cov_s = fd["markov"]["covered_samples"]
+            ceil_s = fd["ceiling"]["hits"]
+            line_pf = f"| {fid:6s} | {tep:12s} | {fn:2d} | {m_h1:2d} ({fd['markov']['top1']:.4f}) | {m_h3:2d} ({fd['markov']['top3']:.4f}) | {f_h1:2d} ({fd['frequency']['top1']:.4f}) | {f_h3:2d} ({fd['frequency']['top3']:.4f}) | {fb_h1:2d} ({fd['fallback']['top1']:.4f}) | {fb_h3:2d} ({fd['fallback']['top3']:.4f}) | {cov_s:2d} / {fn:2d} | {ceil_s:2d} / {fn:2d} |"
+            assert line_pf in sec2, f"Missing per-fold line in sec2: {line_pf}"
+
+    def check_eval_7ep_secondary_tactic(md: str) -> None:
+        sec3 = md.split("## 3. Secondary Slice")[1].split("## 4. Reference Slice")[0]
+        sec = results_json["secondary_slice_tactic_collapsed"]
+        head = sec["headline"]
+        m = head["markov"]
+        f = head["frequency"]
+        fb = head["markov_fallback"]
+        line_m = f"| Markov          | {m['hit1']} / 76 | {m['top1']:.4f} | [{m['wilson95_top1'][0]:.4f}, {m['wilson95_top1'][1]:.4f}]      | {m['hit3']} / 76 | {m['top3']:.4f} | [{m['wilson95_top3'][0]:.4f}, {m['wilson95_top3'][1]:.4f}]      | {m['fold_mean_top1']:.4f} | {m['fold_mean_top3']:.4f} |"
+        assert line_m in sec3, f"Missing: {line_m}"
+        line_f = f"| Frequency       | {f['hit1']} / 76 | {f['top1']:.4f} | [{f['wilson95_top1'][0]:.4f}, {f['wilson95_top1'][1]:.4f}]      | {f['hit3']} / 76 | {f['top3']:.4f} | [{f['wilson95_top3'][0]:.4f}, {f['wilson95_top3'][1]:.4f}]      | {f['fold_mean_top1']:.4f} | {f['fold_mean_top3']:.4f} |"
+        assert line_f in sec3, f"Missing: {line_f}"
+        line_fb = f"| Markov Fallback | {fb['hit1']} / 76 | {fb['top1']:.4f} | [{fb['wilson95_top1'][0]:.4f}, {fb['wilson95_top1'][1]:.4f}]      | {fb['hit3']} / 76 | {fb['top3']:.4f} | [{fb['wilson95_top3'][0]:.4f}, {fb['wilson95_top3'][1]:.4f}]      | {fb['fold_mean_top1']:.4f} | {fb['fold_mean_top3']:.4f} |"
+        assert line_fb in sec3, f"Missing: {line_fb}"
+
+        rg = sec["diagnostics"]["random_guess"]
+        line_rg = f"| Random (k=1,3)  |  --  / 76 | {rg['mean_p_hit1']:.4f} | [Expected Reference]  |  --  / 76 | {rg['mean_p_hit3']:.4f} | [Expected Reference]  |   --   |   --   |"
+        assert line_rg in sec3, f"Missing: {line_rg}"
+
+        cov = sec["coverage"]
+        ceil = sec["ceiling"]
+        assert f"- **Coverage (Markov Status ok)**: {cov['covered_samples']}/76 ({cov['coverage_rate']:.4f})." in sec3
+        assert f"- **Target Ceiling**: {ceil['hits']}/76 ({ceil['ceiling_rate']:.4f})." in sec3
+
+        pf = sec["per_fold"]
+        for fid, fd in sorted(pf.items(), key=lambda x: int(x[0].split("_")[1])):
+            tep = fd["test_episode"]
+            fn = fd["n_samples"]
+            m_h1 = fd["markov"]["hit1"]
+            m_h3 = fd["markov"]["hit3"]
+            f_h1 = fd["frequency"]["hit1"]
+            f_h3 = fd["frequency"]["hit3"]
+            fb_h1 = fd["fallback"]["hit1"]
+            fb_h3 = fd["fallback"]["hit3"]
+            cov_s = fd["covered_samples"]
+            ceil_s = fd["ceiling_hits"]
+            line_pf = f"| {fid:6s} | {tep:12s} | {fn:2d} | {m_h1:2d} ({fd['markov']['top1']:.4f}) | {m_h3:2d} ({fd['markov']['top3']:.4f}) | {f_h1:2d} ({fd['frequency']['top1']:.4f}) | {f_h3:2d} ({fd['frequency']['top3']:.4f}) | {fb_h1:2d} ({fd['fallback']['top1']:.4f}) | {fb_h3:2d} ({fd['fallback']['top3']:.4f}) | {cov_s:2d} / {fn:2d} | {ceil_s:2d} / {fn:2d} |"
+            assert line_pf in sec3, f"Missing per-fold line in sec3: {line_pf}"
+
+    def check_eval_7ep_reference_raw_full(md: str) -> None:
+        sec4 = md.split("## 4. Reference Slice")[1].split("## 5. Pre-Registered Paired Comparisons")[0]
+        ref = results_json["reference_slice_technique_raw_full"]
+        head = ref["headline"]
+        m = head["markov"]
+        f = head["frequency"]
+        fb = head["fallback"]
+        line_m = f"| Markov          | {m['hit1']} / 131 | {m['top1']:.4f} | [{m['wilson95_top1'][0]:.4f}, {m['wilson95_top1'][1]:.4f}]      | {m['hit3']} / 131 | {m['top3']:.4f} | [{m['wilson95_top3'][0]:.4f}, {m['wilson95_top3'][1]:.4f}]      | {m['fold_mean_top1']:.4f} | {m['fold_mean_top3']:.4f} |"
+        assert line_m in sec4, f"Missing: {line_m}"
+        line_f = f"| Frequency       |  {f['hit1']} / 131 | {f['top1']:.4f} | [{f['wilson95_top1'][0]:.4f}, {f['wilson95_top1'][1]:.4f}]      | {f['hit3']} / 131 | {f['top3']:.4f} | [{f['wilson95_top3'][0]:.4f}, {f['wilson95_top3'][1]:.4f}]      | {f['fold_mean_top1']:.4f} | {f['fold_mean_top3']:.4f} |"
+        assert line_f in sec4, f"Missing: {line_f}"
+        line_fb = f"| Markov Fallback | {fb['hit1']} / 131 | {fb['top1']:.4f} | [{fb['wilson95_top1'][0]:.4f}, {fb['wilson95_top1'][1]:.4f}]      | {fb['hit3']} / 131 | {fb['top3']:.4f} | [{fb['wilson95_top3'][0]:.4f}, {fb['wilson95_top3'][1]:.4f}]      | {fb['fold_mean_top1']:.4f} | {fb['fold_mean_top3']:.4f} |"
+        assert line_fb in sec4, f"Missing: {line_fb}"
+
+        cov = head["coverage"]
+        ceil = head["ceiling"]
+        assert f"- **Coverage (Markov Status ok)**: {cov['covered_samples']}/131 ({cov['coverage_rate']:.4f})." in sec4
+        assert f"- **Target Ceiling**: {ceil['hits']}/131 ({ceil['ceiling_rate']:.4f})." in sec4
+
+        pf = ref["per_fold"]
+        for fid, fd in sorted(pf.items(), key=lambda x: int(x[0].split("_")[1])):
+            tep = fd["test_episode"]
+            fn = fd["n_samples"]
+            m_h1 = fd["markov"]["hit1"]
+            m_h3 = fd["markov"]["hit3"]
+            f_h1 = fd["frequency"]["hit1"]
+            f_h3 = fd["frequency"]["hit3"]
+            fb_h1 = fd["fallback"]["hit1"]
+            fb_h3 = fd["fallback"]["hit3"]
+            cov_s = fd["markov"]["covered_samples"]
+            ceil_s = fd["ceiling"]["hits"]
+            line_pf = f"| {fid:6s} | {tep:12s} | {fn:2d} | {m_h1:2d} ({fd['markov']['top1']:.4f}) | {m_h3:2d} ({fd['markov']['top3']:.4f}) | {f_h1:2d} ({fd['frequency']['top1']:.4f}) | {f_h3:2d} ({fd['frequency']['top3']:.4f}) | {fb_h1:2d} ({fd['fallback']['top1']:.4f}) | {fb_h3:2d} ({fd['fallback']['top3']:.4f}) | {cov_s:2d} / {fn:2d} | {ceil_s:2d} / {fn:2d} |"
+            assert line_pf in sec4, f"Missing per-fold line in sec4: {line_pf}"
+
+    def check_eval_7ep_paired_tests(md: str) -> None:
+        assert "Per `reports/prereg_7episode_design.md` Section 6, the paired comparisons between `MarkovModel` and `FrequencyBaseline` are evaluated using exact two-sided McNemar tests on per-sample binary hit outcomes:" in md
+        pts = results_json["paired_tests"]
+        p1 = pts["P1_tactic_collapsed_hit3"]
+        t1 = p1["table"]
+        assert f"| Both Hit ($a$) | {t1['both_hit']:2d} | Both models predicted a correct tactic in top-3 |" in md
+        assert f"| Markov Only ($b$) | {t1['b_m1_only']:2d} | Markov predicted correct in top-3, Frequency missed |" in md
+        assert f"| Frequency Only ($c$) | {t1['c_m2_only']:2d} | Frequency predicted correct in top-3, Markov missed |" in md
+        assert f"| Neither Hit ($d$) | {t1['neither']:2d} | Neither model predicted a correct tactic in top-3 |" in md
+        assert f"- **Sample Size**: $N = {p1['n_samples']}$" in md
+        assert f"- **Markov Pooled Rate**: {p1['m1_rate']:.4f} ({p1['m1_rate']*p1['n_samples']:.0f}/{p1['n_samples']})" in md
+        assert f"- **Frequency Pooled Rate**: {p1['m2_rate']:.4f} ({p1['m2_rate']*p1['n_samples']:.0f}/{p1['n_samples']})" in md
+        assert f"- **Pooled Rate Difference (Markov - Frequency)**: {p1['rate_difference']:+.4f}" in md
+        assert f"- **Discordant Counts**: $b = {t1['b_m1_only']}$, $c = {t1['c_m2_only']}$" in md
+        assert f"- **Exact Two-Sided McNemar Test**: $p = {p1['p_value_raw']:.4f}$ (raw p, pre-Holm)" in md
+
+        p2 = pts["P2_technique_collapsed_full_hit3"]
+        t2 = p2["table"]
+        assert f"| Both Hit ($a$) |  {t2['both_hit']} | Both models predicted a correct technique in top-3 |" in md
+        assert f"| Markov Only ($b$) |  {t2['b_m1_only']} | Markov predicted correct in top-3, Frequency missed |" in md
+        assert f"| Frequency Only ($c$) | {t2['c_m2_only']:2d} | Frequency predicted correct in top-3, Markov missed |" in md
+        assert f"| Neither Hit ($d$) | {t2['neither']:2d} | Neither model predicted a correct technique in top-3 |" in md
+        assert f"- **Sample Size**: $N = {p2['n_samples']}$" in md
+        assert f"- **Markov Pooled Rate**: {p2['m1_rate']:.4f} ({p2['m1_rate']*p2['n_samples']:.0f}/{p2['n_samples']})" in md
+        assert f"- **Frequency Pooled Rate**: {p2['m2_rate']:.4f} ({p2['m2_rate']*p2['n_samples']:.0f}/{p2['n_samples']})" in md
+        assert f"- **Pooled Rate Difference (Markov - Frequency)**: {p2['rate_difference']:+.4f}" in md
+        assert f"- **Discordant Counts**: $b = {t2['b_m1_only']}$, $c = {t2['c_m2_only']}$" in md
+        assert f"- **Exact Two-Sided McNemar Test**: $p = {p2['p_value_raw']:.4f}$ (raw p, pre-Holm)" in md
+
+        desc_keys = [
+            ("descriptive_technique_collapsed_full_hit1", "Markov vs Frequency", "collapsed_full", "Hit@1"),
+            ("descriptive_tactic_collapsed_hit1", "Markov vs Frequency", "tactic_collapsed", "Hit@1"),
+            ("descriptive_technique_fallback_vs_freq_hit3", "Fallback vs Frequency", "collapsed_full", "Hit@3"),
+            ("descriptive_technique_fallback_vs_freq_hit1", "Fallback vs Frequency", "collapsed_full", "Hit@1"),
+            ("descriptive_tactic_fallback_vs_freq_hit3", "Fallback vs Frequency", "tactic_collapsed", "Hit@3"),
+            ("descriptive_tactic_fallback_vs_freq_hit1", "Fallback vs Frequency", "tactic_collapsed", "Hit@1"),
+        ]
+        for k_test, comp_label, sl_label, met_label in desc_keys:
+            pt = pts[k_test]
+            tt = pt["table"]
+            line_desc = f"| {comp_label:23s} | {sl_label:16s} | {met_label:5s} | {pt['m1_rate']:.4f} | {pt['m2_rate']:.4f} | {pt['rate_difference']:+.4f} | {tt['b_m1_only']:2d} | {tt['c_m2_only']:2d} | {pt['p_value_raw']:.4f} | raw p, pre-Holm |"
+            assert line_desc in md, f"Missing non-primary line: {line_desc}"
+
+    def check_eval_7ep_comparison_4ep(md: str) -> None:
+        assert "The following table compares the 7-episode results with the archived 4-episode baseline numbers read directly from `reports/evaluation_results.json` and `reports/tactic_evaluation_results.json`:" in md
+        comp = results_json["comparison_with_4ep"]
+        ct = comp["technique_collapsed_full"]
+        c4t = ct["4ep"]
+        c7t = ct["7ep"]
+        assert f"| Technique (`collapsed_full`) | Sample Count ($N$) | {c4t['n_samples']} | {c7t['n_samples']} | +{c7t['n_samples'] - c4t['n_samples']} |" in md
+        assert f"| Technique (`collapsed_full`) | Markov Hit@1 | {c4t['markov_hit1']}/{c4t['n_samples']} ({c4t['markov_hit1']/c4t['n_samples']:.4f}) | {c7t['markov_hit1']}/{c7t['n_samples']} ({c7t['markov_hit1']/c7t['n_samples']:.4f}) | {c7t['markov_hit1']/c7t['n_samples'] - c4t['markov_hit1']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Markov Hit@3 | {c4t['markov_hit3']}/{c4t['n_samples']} ({c4t['markov_hit3']/c4t['n_samples']:.4f}) | {c7t['markov_hit3']}/{c7t['n_samples']} ({c7t['markov_hit3']/c7t['n_samples']:.4f}) | {c7t['markov_hit3']/c7t['n_samples'] - c4t['markov_hit3']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Frequency Hit@1 | {c4t['frequency_hit1']}/{c4t['n_samples']} ({c4t['frequency_hit1']/c4t['n_samples']:.4f}) | {c7t['frequency_hit1']}/{c7t['n_samples']} ({c7t['frequency_hit1']/c7t['n_samples']:.4f}) | {c7t['frequency_hit1']/c7t['n_samples'] - c4t['frequency_hit1']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Frequency Hit@3 | {c4t['frequency_hit3']}/{c4t['n_samples']} ({c4t['frequency_hit3']/c4t['n_samples']:.4f}) | {c7t['frequency_hit3']}/{c7t['n_samples']} ({c7t['frequency_hit3']/c7t['n_samples']:.4f}) | {c7t['frequency_hit3']/c7t['n_samples'] - c4t['frequency_hit3']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Markov Fallback Hit@1 | {c4t['fallback_hit1']}/{c4t['n_samples']} ({c4t['fallback_hit1']/c4t['n_samples']:.4f}) | {c7t['fallback_hit1']}/{c7t['n_samples']} ({c7t['fallback_hit1']/c7t['n_samples']:.4f}) | {c7t['fallback_hit1']/c7t['n_samples'] - c4t['fallback_hit1']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Markov Fallback Hit@3 | {c4t['fallback_hit3']}/{c4t['n_samples']} ({c4t['fallback_hit3']/c4t['n_samples']:.4f}) | {c7t['fallback_hit3']}/{c7t['n_samples']} ({c7t['fallback_hit3']/c7t['n_samples']:.4f}) | {c7t['fallback_hit3']/c7t['n_samples'] - c4t['fallback_hit3']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Coverage (Status ok) | {c4t['coverage_covered']}/{c4t['n_samples']} ({c4t['coverage_covered']/c4t['n_samples']:.4f}) | {c7t['coverage_covered']}/{c7t['n_samples']} ({c7t['coverage_covered']/c7t['n_samples']:.4f}) | {c7t['coverage_covered']/c7t['n_samples'] - c4t['coverage_covered']/c4t['n_samples']:+.4f} |" in md
+        assert f"| Technique (`collapsed_full`) | Target Ceiling | {c4t['ceiling_hits']}/{c4t['n_samples']} ({c4t['ceiling_hits']/c4t['n_samples']:.4f}) | {c7t['ceiling_hits']}/{c7t['n_samples']} ({c7t['ceiling_hits']/c7t['n_samples']:.4f}) | {c7t['ceiling_hits']/c7t['n_samples'] - c4t['ceiling_hits']/c4t['n_samples']:+.4f} |" in md
+
+        ca = comp["tactic_collapsed"]
+        c4a = ca["4ep"]
+        c7a = ca["7ep"]
+        assert f"| Tactic (`tactic_collapsed`) | Sample Count ($N$) | {c4a['n_samples']} | {c7a['n_samples']} | +{c7a['n_samples'] - c4a['n_samples']} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Markov Hit@1 | {c4a['markov_hit1']}/{c4a['n_samples']} ({c4a['markov_hit1']/c4a['n_samples']:.4f}) | {c7a['markov_hit1']}/{c7a['n_samples']} ({c7a['markov_hit1']/c7a['n_samples']:.4f}) | {c7a['markov_hit1']/c7a['n_samples'] - c4a['markov_hit1']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Markov Hit@3 | {c4a['markov_hit3']}/{c4a['n_samples']} ({c4a['markov_hit3']/c4a['n_samples']:.4f}) | {c7a['markov_hit3']}/{c7a['n_samples']} ({c7a['markov_hit3']/c7a['n_samples']:.4f}) | {c7a['markov_hit3']/c7a['n_samples'] - c4a['markov_hit3']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Frequency Hit@1 | {c4a['frequency_hit1']}/{c4a['n_samples']} ({c4a['frequency_hit1']/c4a['n_samples']:.4f}) | {c7a['frequency_hit1']}/{c7a['n_samples']} ({c7a['frequency_hit1']/c7a['n_samples']:.4f}) | {c7a['frequency_hit1']/c7a['n_samples'] - c4a['frequency_hit1']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Frequency Hit@3 | {c4a['frequency_hit3']}/{c4a['n_samples']} ({c4a['frequency_hit3']/c4a['n_samples']:.4f}) | {c7a['frequency_hit3']}/{c7a['n_samples']} ({c7a['frequency_hit3']/c7a['n_samples']:.4f}) | {c7a['frequency_hit3']/c7a['n_samples'] - c4a['frequency_hit3']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Markov Fallback Hit@1 | {c4a['fallback_hit1']}/{c4a['n_samples']} ({c4a['fallback_hit1']/c4a['n_samples']:.4f}) | {c7a['fallback_hit1']}/{c7a['n_samples']} ({c7a['fallback_hit1']/c7a['n_samples']:.4f}) | {c7a['fallback_hit1']/c7a['n_samples'] - c4a['fallback_hit1']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Markov Fallback Hit@3 | {c4a['fallback_hit3']}/{c4a['n_samples']} ({c4a['fallback_hit3']/c4a['n_samples']:.4f}) | {c7a['fallback_hit3']}/{c7a['n_samples']} ({c7a['fallback_hit3']/c7a['n_samples']:.4f}) | {c7a['fallback_hit3']/c7a['n_samples'] - c4a['fallback_hit3']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Coverage (Status ok) | {c4a['coverage_covered']}/{c4a['n_samples']} ({c4a['coverage_covered']/c4a['n_samples']:.4f}) | {c7a['coverage_covered']}/{c7a['n_samples']} ({c7a['coverage_covered']/c7a['n_samples']:.4f}) | {c7a['coverage_covered']/c7a['n_samples'] - c4a['coverage_covered']/c4a['n_samples']:+.4f} |" in md
+        assert f"| Tactic (`tactic_collapsed`) | Target Ceiling | {c4a['ceiling_hits']}/{c4a['n_samples']} ({c4a['ceiling_hits']/c4a['n_samples']:.4f}) | {c7a['ceiling_hits']}/{c7a['n_samples']} ({c7a['ceiling_hits']/c7a['n_samples']:.4f}) | {c7a['ceiling_hits']/c7a['n_samples'] - c4a['ceiling_hits']/c4a['n_samples']:+.4f} |" in md
+
+    def check_eval_7ep_conclusions(md: str) -> None:
+        pts = results_json["paired_tests"]
+        p1 = pts["P1_tactic_collapsed_hit3"]
+        p2 = pts["P2_technique_collapsed_full_hit3"]
+        t1 = p1["table"]
+        t2 = p2["table"]
+        assert f"- **Primary Hypothesis P2 (Technique `collapsed_full` Hit@3)**: Markov achieved {p2['m1_rate']:.4f} ({t2['both_hit'] + t2['b_m1_only']}/{p2['n_samples']}) versus Frequency {p2['m2_rate']:.4f} ({t2['both_hit'] + t2['c_m2_only']}/{p2['n_samples']}), yielding pooled difference {p2['rate_difference']:+.4f} (discordant pairs: b={t2['b_m1_only']}, c={t2['c_m2_only']}, raw p={p2['p_value_raw']:.4f})." in md
+        assert f"- **Secondary Hypothesis P1 (Tactic `tactic_collapsed` Hit@3)**: Markov achieved {p1['m1_rate']:.4f} ({t1['both_hit'] + t1['b_m1_only']}/{p1['n_samples']}) versus Frequency {p1['m2_rate']:.4f} ({t1['both_hit'] + t1['c_m2_only']}/{p1['n_samples']}), yielding pooled difference {p1['rate_difference']:+.4f} (discordant pairs: b={t1['b_m1_only']}, c={t1['c_m2_only']}, raw p={p1['p_value_raw']:.4f})." in md
+        assert "- **Sample Expansion**: Expanding from 4 to 7 episodes increased evaluated technique transition samples from 67 to 95 (+28 samples) and tactic transition samples from 53 to 76 (+23 samples)." in md
+        assert "- **Claim Rule Boundary**: Per pre-registration protocol, substantive claims of improvement or order-signal presence are governed by the joint P1–P4 criteria and Holm adjustment evaluated after permutation testing (Prompt 12b)." in md
+
+    def check_eval_7ep_headers(md: str) -> None:
+        sec2 = md.split("## 2. Primary Slice")[1].split("## 3. Secondary Slice")[0]
+        sec3 = md.split("## 3. Secondary Slice")[1].split("## 4. Reference Slice")[0]
+        sec4 = md.split("## 4. Reference Slice")[1].split("## 5. Pre-Registered Paired Comparisons")[0]
+        header = "| Fold | Test Episode | N | Markov Hit@1 | Markov Hit@3 | Freq Hit@1 | Freq Hit@3 | Fallback Hit@1 | Fallback Hit@3 | Covered / N | Ceiling / N |"
+        assert header in sec2
+        assert header in sec3
+        assert header in sec4
+        assert "| Slice | Metric | 4-Episode Baseline (E1–E4) | 7-Episode Evaluation (E1–E7) | Absolute Change |" in md
+
+    return [
+        check_eval_7ep_intro_and_setup,
+        check_eval_7ep_primary_collapsed_full,
+        check_eval_7ep_secondary_tactic,
+        check_eval_7ep_reference_raw_full,
+        check_eval_7ep_paired_tests,
+        check_eval_7ep_comparison_4ep,
+        check_eval_7ep_conclusions,
+        check_eval_7ep_headers,
+    ]
+
+
 def run_mutation_sweep() -> dict[str, dict[str, Any]]:
     """Backward-compatible entry point returning numeric mutation results for all reports."""
     tactic_checks, tech_checks = get_check_suites()
     planted_checks, perm_v2_checks, realscale_checks = get_validation_check_suites()
+    eval_7ep_checks = get_eval_7ep_check_suites()
 
     tactic_res = sweep_report_numeric(
         "tactic_evaluation_report.md",
@@ -951,6 +1213,12 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         realscale_checks,
         is_exempt_planted_realscale,
     )
+    eval_7ep_res = sweep_report_numeric(
+        "evaluation_7ep_report.md",
+        REPORTS_DIR / "7ep" / "evaluation_7ep_report.md",
+        eval_7ep_checks,
+        is_exempt_eval_7ep,
+    )
     return {
         "tactic": tactic_res,
         "technique": tech_res,
@@ -958,12 +1226,14 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         "permutation_test": perm_v2_res,
         "permutation_test_v2": perm_v2_res,
         "planted_realscale": realscale_res,
+        "evaluation_7ep": eval_7ep_res,
     }
 
 
 def run_label_mutation_sweep() -> dict[str, dict[str, Any]]:
     """Run label mutation sweep returning results dictionary."""
     tactic_checks, tech_checks = get_check_suites()
+    eval_7ep_checks = get_eval_7ep_check_suites()
     tactic_res = sweep_report_labels(
         "tactic_evaluation_report.md",
         REPORTS_DIR / "tactic_evaluation_report.md",
@@ -974,12 +1244,18 @@ def run_label_mutation_sweep() -> dict[str, dict[str, Any]]:
         REPORTS_DIR / "evaluation_report.md",
         tech_checks,
     )
-    return {"tactic": tactic_res, "technique": tech_res}
+    eval_7ep_res = sweep_report_labels(
+        "evaluation_7ep_report.md",
+        REPORTS_DIR / "7ep" / "evaluation_7ep_report.md",
+        eval_7ep_checks,
+    )
+    return {"tactic": tactic_res, "technique": tech_res, "evaluation_7ep": eval_7ep_res}
 
 
 def run_all_mutation_sweeps() -> None:
     tactic_checks, tech_checks = get_check_suites()
     planted_checks, perm_v2_checks, realscale_checks = get_validation_check_suites()
+    eval_7ep_checks = get_eval_7ep_check_suites()
 
     # =========================================================================
     # PART A & B: Numeric Mutation Sweep
@@ -1018,6 +1294,12 @@ def run_all_mutation_sweeps() -> None:
         realscale_checks,
         is_exempt_planted_realscale,
     )
+    num_eval_7ep = sweep_report_numeric(
+        "evaluation_7ep_report.md",
+        REPORTS_DIR / "7ep" / "evaluation_7ep_report.md",
+        eval_7ep_checks,
+        is_exempt_eval_7ep,
+    )
 
     numeric_results = {
         "tactic": num_tactic,
@@ -1025,6 +1307,7 @@ def run_all_mutation_sweeps() -> None:
         "planted_structure": num_planted,
         "permutation_test_v2": num_perm_v2,
         "planted_realscale": num_realscale,
+        "evaluation_7ep": num_eval_7ep,
     }
 
     # Print Part A Exempt list
@@ -1082,7 +1365,12 @@ def run_all_mutation_sweeps() -> None:
         REPORTS_DIR / "evaluation_report.md",
         tech_checks,
     )
-    label_results = {"tactic": label_tactic, "technique": label_tech}
+    label_eval_7ep = sweep_report_labels(
+        "evaluation_7ep_report.md",
+        REPORTS_DIR / "7ep" / "evaluation_7ep_report.md",
+        eval_7ep_checks,
+    )
+    label_results = {"tactic": label_tactic, "technique": label_tech, "evaluation_7ep": label_eval_7ep}
 
     for key, res in label_results.items():
         print(f"\n--- REPORT: {res['report']} ---")
