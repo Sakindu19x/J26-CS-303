@@ -552,6 +552,12 @@ LABEL_VOCABULARY: dict[str, list[str]] = {
     "episode": ["E1", "E2", "E3", "E4", "E5", "E6", "E7"],
     "comparison": ["equal to", "the same", "different", "above", "below"],
     "status": ["insufficient_evidence", "abstained", "abstain", "ok"],
+    "tactic": [
+        "initial-access", "execution", "persistence", "privilege-escalation",
+        "defense-evasion", "credential-access", "discovery", "lateral-movement",
+        "collection", "command-and-control", "exfiltration", "impact",
+        "reconnaissance", "resource-development",
+    ],
 }
 
 LABEL_REPLACEMENTS: dict[str, dict[str, str]] = {
@@ -599,6 +605,22 @@ LABEL_REPLACEMENTS: dict[str, dict[str, str]] = {
         "insufficient_evidence": "ok", "Insufficient_evidence": "Ok",
         "abstain": "ok", "ABSTAIN": "OK",
     },
+    "tactic": {
+        "initial-access": "execution",
+        "execution": "initial-access",
+        "persistence": "privilege-escalation",
+        "privilege-escalation": "persistence",
+        "defense-evasion": "credential-access",
+        "credential-access": "defense-evasion",
+        "discovery": "lateral-movement",
+        "lateral-movement": "discovery",
+        "collection": "command-and-control",
+        "command-and-control": "collection",
+        "exfiltration": "impact",
+        "impact": "exfiltration",
+        "reconnaissance": "resource-development",
+        "resource-development": "reconnaissance",
+    },
 }
 
 VOCAB_SCAN_ORDER = [
@@ -608,6 +630,7 @@ VOCAB_SCAN_ORDER = [
     ("episode", LABEL_VOCABULARY["episode"]),
     ("comparison", LABEL_VOCABULARY["comparison"]),
     ("status", LABEL_VOCABULARY["status"]),
+    ("tactic", LABEL_VOCABULARY["tactic"]),
 ]
 
 
@@ -1010,7 +1033,7 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
                 if diff <= combined_2se:
                     verdict = f"is less than two combined Monte Carlo standard errors ({combined_2se:.4f}), confirming S1 and S3 are consistent."
                 else:
-                    verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences."
+                    verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred."
                 expected_line = f"- **{lbl}**: S1 $p = {p1:.4f}$ (MC SE $= {se1:.4f}$), S3 $p = {p3:.4f}$ (MC SE $= {se3:.4f}$); difference $|p_{{S1}} - p_{{S3}}| = {diff:.4f}$ {verdict}"
                 assert expected_line in md, f"Missing MC line: {expected_line}"
 
@@ -1090,10 +1113,15 @@ def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Cal
     return planted_checks, perm_v2_checks, realscale_checks
 
 
+def check_tac_universe_setup(md: str) -> None:
+    assert "- **Tactic Universe**: 14 ATT&CK Enterprise v16.1 tactics (shortname tokens, e.g. `initial-access`, `defense-evasion`)." in md
+
+
 def get_check_suites() -> tuple[list[Callable[[str], None]], list[Callable[[str], None]]]:
     """Precompute and cache recomputed datasets once for fast sweep execution."""
     recomputed_tactic = recompute_tactic()
     tactic_checks: list[Callable[[str], None]] = [
+        check_tac_universe_setup,
         lambda md: check_tac_sample_counts(md, recomputed_tactic),
         lambda md: check_headline_counts(md, recomputed_tactic),
         lambda md: check_headline_percentages(md, recomputed_tactic),
@@ -1579,7 +1607,7 @@ def get_check_suites_7ep_inference():
                 if diff <= combined_2se:
                     verdict = f"is less than two combined Monte Carlo standard errors ({combined_2se:.4f}), confirming S1 and S3 are consistent."
                 else:
-                    verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences."
+                    verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred."
                 line = f"- **{lbl}**: S1 $p = {p1:.4f}$ (MC SE $= {se1:.4f}$), S3 $p = {p3:.4f}$ (MC SE $= {se3:.4f}$); difference $|p_{{S1}} - p_{{S3}}| = {diff:.4f}$ {verdict}"
                 assert line in md, f"Missing consistency line: {line}"
 

@@ -81,7 +81,9 @@ def percentile_linear(data: list[float], p: float) -> float:
     return float(sorted_d[low] * (1.0 - weight) + sorted_d[high] * weight)
 
 
-def compute_summary_stats(observed: float, null_values: list[float], is_valid_null: bool = True) -> dict[str, Any]:
+def compute_summary_stats(
+    observed: float, null_values: list[float], is_valid_null: bool = True, stat_name: str = ""
+) -> dict[str, Any]:
     b = len(null_values)
     mean_val = sum(null_values) / b if b > 0 else 0.0
     var = sum((x - mean_val) ** 2 for x in null_values) / (b - 1) if b > 1 else 0.0
@@ -94,7 +96,12 @@ def compute_summary_stats(observed: float, null_values: list[float], is_valid_nu
     p_val = (1.0 + n_ge) / (1.0 + b)
     mc_se = math.sqrt(p_val * (1.0 - p_val) / b) if b > 0 else 0.0
 
-    if is_valid_null:
+    if stat_name in ("diff_hit1", "diff_hit3", "markov_minus_frequency_hit1", "markov_minus_frequency_hit3"):
+        if is_valid_null:
+            conclusion = "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        else:
+            conclusion = "INVALID NULL - do not cite: difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+    elif is_valid_null:
         if p_val < 0.05:
             conclusion = f"observed exceeds the shuffled-order null (p={p_val:.4f})"
         else:
@@ -653,7 +660,7 @@ def run_permutation_test_7ep() -> dict[str, Any]:
             for st in stats_keys:
                 obs_val = obs_rates[lvl][st]
                 null_vals = null_distributions[sc][lvl][st]
-                stat_summary = compute_summary_stats(obs_val, null_vals, is_valid_null=True)
+                stat_summary = compute_summary_stats(obs_val, null_vals, is_valid_null=True, stat_name=st)
                 report_data["schemes"][sc][lvl][st] = stat_summary
 
     # Scheme validity check (Order-Free Frequency Statistics)
@@ -867,7 +874,7 @@ def generate_markdown_report_7ep(data: dict[str, Any]) -> None:
             if diff <= combined_2se:
                 verdict = f"is less than two combined Monte Carlo standard errors ({combined_2se:.4f}), confirming S1 and S3 are consistent."
             else:
-                verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences."
+                verdict = f"exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred."
             A(f"- **{lbl}**: S1 $p = {p1:.4f}$ (MC SE $= {se1:.4f}$), S3 $p = {p3:.4f}$ (MC SE $= {se3:.4f}$); difference $|p_{{S1}} - p_{{S3}}| = {diff:.4f}$ {verdict}")
         A()
 

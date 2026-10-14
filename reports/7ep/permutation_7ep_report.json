@@ -197,7 +197,7 @@
           "b_permutations": 1000,
           "p_value": 0.23576423576423577,
           "mc_se": 0.013423094311623592,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2358)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         },
         "markov_minus_frequency_hit3": {
           "observed": -0.1368421052631579,
@@ -211,7 +211,7 @@
           "b_permutations": 1000,
           "p_value": 0.5474525474525475,
           "mc_se": 0.015740020830363084,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5475)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         }
       },
       "tactic_collapsed": {
@@ -311,7 +311,7 @@
           "b_permutations": 1000,
           "p_value": 0.04095904095904096,
           "mc_se": 0.0062674873691740745,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0410)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         },
         "markov_minus_frequency_hit3": {
           "observed": 0.0,
@@ -325,7 +325,7 @@
           "b_permutations": 1000,
           "p_value": 0.03896103896103896,
           "mc_se": 0.006119074799682985,
-          "conclusion": "observed exceeds the shuffled-order null (p=0.0390)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         }
       }
     },
@@ -427,7 +427,7 @@
           "b_permutations": 1000,
           "p_value": 0.21578421578421578,
           "mc_se": 0.013008512136390033,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2158)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         },
         "markov_minus_frequency_hit3": {
           "observed": -0.1368421052631579,
@@ -441,7 +441,7 @@
           "b_permutations": 1000,
           "p_value": 0.5544455544455544,
           "mc_se": 0.015717368787463,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5544)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         }
       },
       "tactic_collapsed": {
@@ -541,7 +541,7 @@
           "b_permutations": 1000,
           "p_value": 0.06393606393606394,
           "mc_se": 0.007736164661150089,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0639)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         },
         "markov_minus_frequency_hit3": {
           "observed": 0.0,
@@ -555,7 +555,7 @@
           "b_permutations": 1000,
           "p_value": 0.060939060939060936,
           "mc_se": 0.007564753253803217,
-          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0609)"
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
         }
       }
     }

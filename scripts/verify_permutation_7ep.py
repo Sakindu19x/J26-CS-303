@@ -44,7 +44,9 @@ def percentile_linear(data: list[float], p: float) -> float:
     return float(sorted_d[low] * (1.0 - weight) + sorted_d[high] * weight)
 
 
-def compute_summary_stats(observed: float, null_values: list[float], is_valid_null: bool = True) -> dict[str, Any]:
+def compute_summary_stats(
+    observed: float, null_values: list[float], is_valid_null: bool = True, stat_name: str = ""
+) -> dict[str, Any]:
     b = len(null_values)
     mean_val = sum(null_values) / b if b > 0 else 0.0
     var = sum((x - mean_val) ** 2 for x in null_values) / (b - 1) if b > 1 else 0.0
@@ -57,7 +59,12 @@ def compute_summary_stats(observed: float, null_values: list[float], is_valid_nu
     p_val = (1.0 + n_ge) / (1.0 + b)
     mc_se = math.sqrt(p_val * (1.0 - p_val) / b) if b > 0 else 0.0
 
-    if is_valid_null:
+    if stat_name in ("diff_hit1", "diff_hit3", "markov_minus_frequency_hit1", "markov_minus_frequency_hit3"):
+        if is_valid_null:
+            conclusion = "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        else:
+            conclusion = "INVALID NULL - do not cite: difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+    elif is_valid_null:
         if p_val < 0.05:
             conclusion = f"observed exceeds the shuffled-order null (p={p_val:.4f})"
         else:
@@ -200,7 +207,7 @@ def verify_permutation_7ep() -> bool:
                 obs_val = obs_from_csv[lvl][st]
                 null_vals = null_data[sc][lvl][st]
 
-                rec_stat = compute_summary_stats(obs_val, null_vals, is_valid_null=lvl_valid)
+                rec_stat = compute_summary_stats(obs_val, null_vals, is_valid_null=lvl_valid, stat_name=st)
 
                 # Assert precision matches
                 for k in ["null_mean", "null_sd", "null_p2_5", "null_p97_5", "null_min", "null_max", "p_value", "mc_se"]:

@@ -42,7 +42,7 @@ def percentile_linear(data: list[float], p: float) -> float:
     return float(sorted_d[low] * (1.0 - weight) + sorted_d[high] * weight)
 
 
-def compute_summary_stats(observed: float, null_values: list[float]) -> dict[str, Any]:
+def compute_summary_stats(observed: float, null_values: list[float], stat_name: str = "") -> dict[str, Any]:
     b = len(null_values)
     mean_val = sum(null_values) / b if b > 0 else 0.0
     var = sum((x - mean_val) ** 2 for x in null_values) / (b - 1) if b > 1 else 0.0
@@ -53,7 +53,10 @@ def compute_summary_stats(observed: float, null_values: list[float]) -> dict[str
     max_val = max(null_values) if b > 0 else 0.0
     n_ge = sum(1 for x in null_values if x >= observed - 1e-12)
     p_val = (1.0 + n_ge) / (1.0 + b)
-    if p_val < 0.05:
+
+    if stat_name in ("diff_hit1", "diff_hit3", "markov_minus_frequency_hit1", "markov_minus_frequency_hit3"):
+        conclusion = "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+    elif p_val < 0.05:
         conclusion = f"observed exceeds the shuffled-order null (p={p_val:.4f})"
     else:
         conclusion = f"not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p={p_val:.4f})"
@@ -168,7 +171,7 @@ def verify_permutation_test_v2() -> bool:
                 obs_val = obs_from_csv[lvl][st]
                 null_vals = null_data[sc][lvl][st]
 
-                rec_stat = compute_summary_stats(obs_val, null_vals)
+                rec_stat = compute_summary_stats(obs_val, null_vals, st)
 
                 # Check if scheme is invalid (order-free stat p < 0.05 at any level)
                 sc_invalid = any(

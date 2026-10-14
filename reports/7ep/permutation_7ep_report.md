@@ -62,8 +62,8 @@ A valid order-only null permutation must not perturb the performance of an **ord
 | Frequency Hit@3            | +0.1684 | 16 / 95   | +0.1582 | 0.0238 | +0.1053 | +0.1895 | 0.5624 | 0.0157 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5624) |
 | Markov Fallback Hit@1      | +0.0316 | 3 / 95    | +0.0422 | 0.0184 | +0.0105 | +0.0842 | 0.8012 | 0.0126 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.8012) |
 | Markov Fallback Hit@3      | +0.0421 | 4 / 95    | +0.0842 | 0.0259 | +0.0421 | +0.1368 | 0.9810 | 0.0043 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.9810) |
-| Markov - Frequency Hit@1   | -0.0421 | -4 / 95   | -0.0586 | 0.0169 | -0.0947 | -0.0211 | 0.2358 | 0.0134 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2358) |
-| Markov - Frequency Hit@3   | -0.1368 | -13 / 95  | -0.1346 | 0.0297 | -0.1789 | -0.0737 | 0.5475 | 0.0157 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5475) |
+| Markov - Frequency Hit@1   | -0.0421 | -4 / 95   | -0.0586 | 0.0169 | -0.0947 | -0.0211 | 0.2358 | 0.0134 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
+| Markov - Frequency Hit@3   | -0.1368 | -13 / 95  | -0.1346 | 0.0297 | -0.1789 | -0.0737 | 0.5475 | 0.0157 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
 
 ### Tactic Level (`tactic_collapsed`, N=76)
 
@@ -75,8 +75,8 @@ A valid order-only null permutation must not perturb the performance of an **ord
 | Frequency Hit@3            | +0.6316 | 48 / 76   | +0.6045 | 0.0392 | +0.5263 | +0.6711 | 0.3257 | 0.0148 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3257) |
 | Markov Fallback Hit@1      | +0.3158 | 24 / 76   | +0.1909 | 0.0521 | +0.1053 | +0.3026 | 0.0200 | 0.0044 | observed exceeds the shuffled-order null (p=0.0200) |
 | Markov Fallback Hit@3      | +0.6579 | 50 / 76   | +0.4911 | 0.0614 | +0.3684 | +0.6056 | 0.0020 | 0.0014 | observed exceeds the shuffled-order null (p=0.0020) |
-| Markov - Frequency Hit@1   | +0.1053 | +8 / 76   | -0.0173 | 0.0639 | -0.1316 | +0.1184 | 0.0410 | 0.0063 | observed exceeds the shuffled-order null (p=0.0410) |
-| Markov - Frequency Hit@3   | +0.0000 | +0 / 76   | -0.1269 | 0.0672 | -0.2500 | +0.0000 | 0.0390 | 0.0061 | observed exceeds the shuffled-order null (p=0.0390) |
+| Markov - Frequency Hit@1   | +0.1053 | +8 / 76   | -0.0173 | 0.0639 | -0.1316 | +0.1184 | 0.0410 | 0.0063 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
+| Markov - Frequency Hit@3   | +0.0000 | +0 / 76   | -0.1269 | 0.0672 | -0.2500 | +0.0000 | 0.0390 | 0.0061 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
 
 ---
 
@@ -92,8 +92,8 @@ A valid order-only null permutation must not perturb the performance of an **ord
 | Frequency Hit@3            | +0.1684 | 16 / 95   | +0.1570 | 0.0243 | +0.1053 | +0.1895 | 0.5405 | 0.0158 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5405) |
 | Markov Fallback Hit@1      | +0.0316 | 3 / 95    | +0.0414 | 0.0181 | +0.0105 | +0.0842 | 0.7872 | 0.0129 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7872) |
 | Markov Fallback Hit@3      | +0.0421 | 4 / 95    | +0.0837 | 0.0257 | +0.0421 | +0.1368 | 0.9770 | 0.0047 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.9770) |
-| Markov - Frequency Hit@1   | -0.0421 | -4 / 95   | -0.0594 | 0.0170 | -0.0947 | -0.0211 | 0.2158 | 0.0130 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2158) |
-| Markov - Frequency Hit@3   | -0.1368 | -13 / 95  | -0.1346 | 0.0298 | -0.1789 | -0.0737 | 0.5544 | 0.0157 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5544) |
+| Markov - Frequency Hit@1   | -0.0421 | -4 / 95   | -0.0594 | 0.0170 | -0.0947 | -0.0211 | 0.2158 | 0.0130 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
+| Markov - Frequency Hit@3   | -0.1368 | -13 / 95  | -0.1346 | 0.0298 | -0.1789 | -0.0737 | 0.5544 | 0.0157 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
 
 ### Tactic Level (`tactic_collapsed`, N=76)
 
@@ -105,8 +105,8 @@ A valid order-only null permutation must not perturb the performance of an **ord
 | Frequency Hit@3            | +0.6316 | 48 / 76   | +0.6016 | 0.0372 | +0.5263 | +0.6711 | 0.2767 | 0.0141 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2767) |
 | Markov Fallback Hit@1      | +0.3158 | 24 / 76   | +0.2073 | 0.0545 | +0.1053 | +0.3158 | 0.0400 | 0.0062 | observed exceeds the shuffled-order null (p=0.0400) |
 | Markov Fallback Hit@3      | +0.6579 | 50 / 76   | +0.5063 | 0.0605 | +0.3816 | +0.6184 | 0.0090 | 0.0030 | observed exceeds the shuffled-order null (p=0.0090) |
-| Markov - Frequency Hit@1   | +0.1053 | +8 / 76   | +0.0003 | 0.0621 | -0.1184 | +0.1316 | 0.0639 | 0.0077 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0639) |
-| Markov - Frequency Hit@3   | +0.0000 | +0 / 76   | -0.1095 | 0.0674 | -0.2500 | +0.0132 | 0.0609 | 0.0076 | not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0609) |
+| Markov - Frequency Hit@1   | +0.1053 | +8 / 76   | +0.0003 | 0.0621 | -0.1184 | +0.1316 | 0.0639 | 0.0077 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
+| Markov - Frequency Hit@3   | +0.0000 | +0 / 76   | -0.1095 | 0.0674 | -0.2500 | +0.0132 | 0.0609 | 0.0076 | difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report) |
 
 ### S1 vs S3 Monte Carlo Consistency
 
@@ -125,14 +125,14 @@ Monte Carlo permutation standard errors are given by $\text{SE}_{\text{MC}}(p) =
 
 #### Tactic Level (`tactic_collapsed`)
 
-- **Markov Hit@1**: S1 $p = 0.0430$ (MC SE $= 0.0064$), S3 $p = 0.0759$ (MC SE $= 0.0084$); difference $|p_{S1} - p_{S3}| = 0.0330$ exceeds two combined Monte Carlo standard errors (0.0211), reflecting sensitivity to the adjacency constraint on collapsed sequences.
+- **Markov Hit@1**: S1 $p = 0.0430$ (MC SE $= 0.0064$), S3 $p = 0.0759$ (MC SE $= 0.0084$); difference $|p_{S1} - p_{S3}| = 0.0330$ exceeds two combined Monte Carlo standard errors (0.0211); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.
 - **Markov Hit@3**: S1 $p = 0.0060$ (MC SE $= 0.0024$), S3 $p = 0.0110$ (MC SE $= 0.0033$); difference $|p_{S1} - p_{S3}| = 0.0050$ is less than two combined Monte Carlo standard errors (0.0082), confirming S1 and S3 are consistent.
 - **Frequency Hit@1**: S1 $p = 0.5425$ (MC SE $= 0.0158$), S3 $p = 0.5295$ (MC SE $= 0.0158$); difference $|p_{S1} - p_{S3}| = 0.0130$ is less than two combined Monte Carlo standard errors (0.0446), confirming S1 and S3 are consistent.
-- **Frequency Hit@3**: S1 $p = 0.3257$ (MC SE $= 0.0148$), S3 $p = 0.2767$ (MC SE $= 0.0141$); difference $|p_{S1} - p_{S3}| = 0.0490$ exceeds two combined Monte Carlo standard errors (0.0410), reflecting sensitivity to the adjacency constraint on collapsed sequences.
-- **Markov Fallback Hit@1**: S1 $p = 0.0200$ (MC SE $= 0.0044$), S3 $p = 0.0400$ (MC SE $= 0.0062$); difference $|p_{S1} - p_{S3}| = 0.0200$ exceeds two combined Monte Carlo standard errors (0.0152), reflecting sensitivity to the adjacency constraint on collapsed sequences.
-- **Markov Fallback Hit@3**: S1 $p = 0.0020$ (MC SE $= 0.0014$), S3 $p = 0.0090$ (MC SE $= 0.0030$); difference $|p_{S1} - p_{S3}| = 0.0070$ exceeds two combined Monte Carlo standard errors (0.0066), reflecting sensitivity to the adjacency constraint on collapsed sequences.
-- **Markov - Frequency Hit@1**: S1 $p = 0.0410$ (MC SE $= 0.0063$), S3 $p = 0.0639$ (MC SE $= 0.0077$); difference $|p_{S1} - p_{S3}| = 0.0230$ exceeds two combined Monte Carlo standard errors (0.0199), reflecting sensitivity to the adjacency constraint on collapsed sequences.
-- **Markov - Frequency Hit@3**: S1 $p = 0.0390$ (MC SE $= 0.0061$), S3 $p = 0.0609$ (MC SE $= 0.0076$); difference $|p_{S1} - p_{S3}| = 0.0220$ exceeds two combined Monte Carlo standard errors (0.0195), reflecting sensitivity to the adjacency constraint on collapsed sequences.
+- **Frequency Hit@3**: S1 $p = 0.3257$ (MC SE $= 0.0148$), S3 $p = 0.2767$ (MC SE $= 0.0141$); difference $|p_{S1} - p_{S3}| = 0.0490$ exceeds two combined Monte Carlo standard errors (0.0410); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.
+- **Markov Fallback Hit@1**: S1 $p = 0.0200$ (MC SE $= 0.0044$), S3 $p = 0.0400$ (MC SE $= 0.0062$); difference $|p_{S1} - p_{S3}| = 0.0200$ exceeds two combined Monte Carlo standard errors (0.0152); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.
+- **Markov Fallback Hit@3**: S1 $p = 0.0020$ (MC SE $= 0.0014$), S3 $p = 0.0090$ (MC SE $= 0.0030$); difference $|p_{S1} - p_{S3}| = 0.0070$ exceeds two combined Monte Carlo standard errors (0.0066); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.
+- **Markov - Frequency Hit@1**: S1 $p = 0.0410$ (MC SE $= 0.0063$), S3 $p = 0.0639$ (MC SE $= 0.0077$); difference $|p_{S1} - p_{S3}| = 0.0230$ exceeds two combined Monte Carlo standard errors (0.0199); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.
+- **Markov - Frequency Hit@3**: S1 $p = 0.0390$ (MC SE $= 0.0061$), S3 $p = 0.0609$ (MC SE $= 0.0076$); difference $|p_{S1} - p_{S3}| = 0.0220$ exceeds two combined Monte Carlo standard errors (0.0195); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.
 
 ---
 
