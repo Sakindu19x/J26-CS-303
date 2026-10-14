@@ -1,0 +1,1948 @@
+{
+  "audit_timestamp": "2026-10-14T07:36:56.150072+00:00",
+  "pre_declared_rules": {
+    "D1": "MD5 of each new zip equals the Zenodo MD5.",
+    "D2": "Each new zip contains attacker/logs/attackmate.json, and the set of top-level keys matches the schema of E1-E4.",
+    "D3": "Every labeled step has a parseable timestamp under Stage 1 UTC assumption.",
+    "D4": "Every technique ID exists in ATT&CK Enterprise v16.1 reference.",
+    "D5": "Each new episode yields at least 8 collapsed transitions (below 8 is flagged 'small', not failed).",
+    "D6": "The new episodes have unique collapsed technique sequences compared to E1-E4."
+  },
+  "archive_hashes": {
+    "scenario_1_sudo_pam": {
+      "episode_id": "E1",
+      "zip_file": "scenario_1_sudo_pam.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_1_sudo_pam.zip",
+      "md5": "e7e5bd19cda62a5bfb9a68525715cd78",
+      "expected_zenodo_md5": "e7e5bd19cda62a5bfb9a68525715cd78",
+      "md5_match": true,
+      "sha256": "0851d2cec590d3b56575fc385416190e12e258442023257d66879e19cb9e74fc",
+      "size_bytes": 175337707
+    },
+    "scenario_2_cron": {
+      "episode_id": "E2",
+      "zip_file": "scenario_2_cron.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_2_cron.zip",
+      "md5": "c33aca73d6962414bd6c2c3f82b934c4",
+      "expected_zenodo_md5": "c33aca73d6962414bd6c2c3f82b934c4",
+      "md5_match": true,
+      "sha256": "b2026121bdb035628b7536a042f01c3e92e36852b65cac9d69fd05c31ba98791",
+      "size_bytes": 160486494
+    },
+    "scenario_3_vnc_apt": {
+      "episode_id": "E3",
+      "zip_file": "scenario_3_vnc_apt.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_3_vnc_apt.zip",
+      "md5": "bfd7e44cdb2d038a9deab800350e4b98",
+      "expected_zenodo_md5": "bfd7e44cdb2d038a9deab800350e4b98",
+      "md5_match": true,
+      "sha256": "5c23b9d614689194f43cc844e4a25ed43568879ae83edc43df93336e0a33f911",
+      "size_bytes": 206560146
+    },
+    "scenario_4": {
+      "episode_id": "E4",
+      "zip_file": "scenario_4.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_4.zip",
+      "md5": "f1bf6ecd793c6c51f922ee43e33d7cf4",
+      "expected_zenodo_md5": "f1bf6ecd793c6c51f922ee43e33d7cf4",
+      "md5_match": true,
+      "sha256": "a79fefbfeebd25b163e57f9ec7b9581f8e6f0abed2f2775fba45cf55a004b637",
+      "size_bytes": 201474676
+    },
+    "scenario_5": {
+      "episode_id": "E5",
+      "zip_file": "scenario_5.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_5.zip",
+      "md5": "c56fce722a7b714eba004d6fd6319879",
+      "expected_zenodo_md5": "c56fce722a7b714eba004d6fd6319879",
+      "md5_match": true,
+      "sha256": "e54df7f4c2f8e12e374272544809cee42b2c7e68ac37d950934e4123364f7911",
+      "size_bytes": 202788200
+    },
+    "scenario_6_macro_binary": {
+      "episode_id": "E6",
+      "zip_file": "scenario_6_macro_binary.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_6_macro_binary.zip",
+      "md5": "aedd7c0b51700b16c04539f10784d5d4",
+      "expected_zenodo_md5": "aedd7c0b51700b16c04539f10784d5d4",
+      "md5_match": true,
+      "sha256": "73a31bf763c5a65ed1a14bb5919151dbbf324563d4f8eaabb0c58d9c0f67f3b1",
+      "size_bytes": 202319131
+    },
+    "scenario_7": {
+      "episode_id": "E7",
+      "zip_file": "scenario_7.zip",
+      "full_path": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\c4\\data\\raw\\scenario_7.zip",
+      "md5": "88122133a82079e07e7ed1b782bc203f",
+      "expected_zenodo_md5": "88122133a82079e07e7ed1b782bc203f",
+      "md5_match": true,
+      "sha256": "7f0ff0b5d939437b5ebad7f52eea69dc024775e5c73663c5b4ac7ba58f1b3a56",
+      "size_bytes": 160106901
+    }
+  },
+  "archive_structures": {
+    "scenario_1_sudo_pam": {
+      "episode_id": "E1",
+      "n_files": 10505,
+      "uncompressed_bytes": 1040315329,
+      "top_level_folders": [
+        "scenario_1_sudo_pam"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_1_sudo_pam/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "attacker",
+        "corpdns",
+        "inetfw",
+        "videoserver",
+        "wazuh"
+      ]
+    },
+    "scenario_2_cron": {
+      "episode_id": "E2",
+      "n_files": 10459,
+      "uncompressed_bytes": 697174408,
+      "top_level_folders": [
+        "scenario_2_cron"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_2_cron/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "attacker",
+        "corpdns",
+        "inetfw",
+        "videoserver",
+        "wazuh"
+      ]
+    },
+    "scenario_3_vnc_apt": {
+      "episode_id": "E3",
+      "n_files": 14402,
+      "uncompressed_bytes": 897111825,
+      "top_level_folders": [
+        "scenario_3_vnc_apt"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_3_vnc_apt/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "attacker",
+        "corpdns",
+        "inetfw",
+        "linuxshare",
+        "reposerver",
+        "wazuh"
+      ]
+    },
+    "scenario_4": {
+      "episode_id": "E4",
+      "n_files": 14398,
+      "uncompressed_bytes": 870580648,
+      "top_level_folders": [
+        "scenario_4"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_4/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "attacker",
+        "corpdns",
+        "inetfw",
+        "linuxshare",
+        "reposerver",
+        "wazuh"
+      ]
+    },
+    "scenario_5": {
+      "episode_id": "E5",
+      "n_files": 12939,
+      "uncompressed_bytes": 803737946,
+      "top_level_folders": [
+        "scenario_5"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_5/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "adminpc",
+        "attacker",
+        "corpdns",
+        "inetfw",
+        "videoserver",
+        "wazuh"
+      ]
+    },
+    "scenario_6_macro_binary": {
+      "episode_id": "E6",
+      "n_files": 13033,
+      "uncompressed_bytes": 966957209,
+      "top_level_folders": [
+        "scenario_6_macro_binary"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_6_macro_binary/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "attacker",
+        "client",
+        "corpdns",
+        "inetfw",
+        "videoserver",
+        "wazuh"
+      ]
+    },
+    "scenario_7": {
+      "episode_id": "E7",
+      "n_files": 10399,
+      "uncompressed_bytes": 629762251,
+      "top_level_folders": [
+        "scenario_7"
+      ],
+      "has_attackmate_json": true,
+      "attackmate_member_path": "scenario_7/attacker/logs/attackmate.json",
+      "subdirectories_under_root": [
+        "attacker",
+        "corpdns",
+        "docker",
+        "inetfw",
+        "wazuh"
+      ]
+    }
+  },
+  "episodes_profile": {
+    "E1": {
+      "episode_id": "E1",
+      "scenario_id": "scenario_1_sudo_pam",
+      "total_steps": 38,
+      "labeled_steps": 27,
+      "unlabeled_steps": 11,
+      "multi_technique_steps": 6,
+      "distinct_techniques_full": [
+        "T1003.008",
+        "T1007",
+        "T1016",
+        "T1033",
+        "T1049",
+        "T1057",
+        "T1059",
+        "T1059.006",
+        "T1069",
+        "T1070.004",
+        "T1082",
+        "T1083",
+        "T1087",
+        "T1105",
+        "T1120",
+        "T1124",
+        "T1190",
+        "T1201",
+        "T1218",
+        "T1497.001",
+        "T1518",
+        "T1548.003",
+        "T1556.003",
+        "T1590.002",
+        "T1591",
+        "T1592.002",
+        "T1595",
+        "T1595.002",
+        "T1595.003",
+        "T1614",
+        "T1615"
+      ],
+      "distinct_techniques_parent": [
+        "T1003",
+        "T1007",
+        "T1016",
+        "T1033",
+        "T1049",
+        "T1057",
+        "T1059",
+        "T1069",
+        "T1070",
+        "T1082",
+        "T1083",
+        "T1087",
+        "T1105",
+        "T1120",
+        "T1124",
+        "T1190",
+        "T1201",
+        "T1218",
+        "T1497",
+        "T1518",
+        "T1548",
+        "T1556",
+        "T1590",
+        "T1591",
+        "T1592",
+        "T1595",
+        "T1614",
+        "T1615"
+      ],
+      "distinct_tactics": [
+        "Command and Control",
+        "Credential Access",
+        "Defense Evasion",
+        "Discovery",
+        "Execution",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation",
+        "Reconnaissance"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2025-09-22T13:48:30.907163+00:00",
+      "last_timestamp": "2025-09-22T14:10:54.791711+00:00",
+      "duration_seconds": 1343.884548,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 27,
+      "collapsed_sequence_length": 19,
+      "next_technique_samples_raw": 26,
+      "next_technique_samples_collapsed": 18,
+      "tactic_level_samples_collapsed": 18,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "background",
+        "bin",
+        "clear_cache",
+        "command_shell",
+        "command_timeout",
+        "creates_session",
+        "end_str",
+        "error_if",
+        "error_if_not",
+        "exit_on_error",
+        "hostname",
+        "interactive",
+        "jmp_hostname",
+        "jmp_port",
+        "jmp_username",
+        "key_filename",
+        "kill_on_exit",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "metadata",
+        "min_sec",
+        "only_if",
+        "options",
+        "passphrase",
+        "password",
+        "payload",
+        "payload_options",
+        "port",
+        "prompts",
+        "random",
+        "read",
+        "save",
+        "seconds",
+        "session",
+        "stdapi",
+        "target",
+        "timeout",
+        "username",
+        "write"
+      ],
+      "metadata_keys": [
+        "tactics",
+        "technique_name",
+        "technique_name:\"Ingress Tool Transfer,Modify Authentication Process",
+        "techniques"
+      ]
+    },
+    "E2": {
+      "episode_id": "E2",
+      "scenario_id": "scenario_2_cron",
+      "total_steps": 29,
+      "labeled_steps": 21,
+      "unlabeled_steps": 8,
+      "multi_technique_steps": 7,
+      "distinct_techniques_full": [
+        "T1003",
+        "T1003.008",
+        "T1005",
+        "T1007",
+        "T1016",
+        "T1018",
+        "T1021.004",
+        "T1041",
+        "T1046",
+        "T1049",
+        "T1057",
+        "T1070.004",
+        "T1071.001",
+        "T1074.001",
+        "T1083",
+        "T1105",
+        "T1201",
+        "T1547",
+        "T1560.001",
+        "T1569",
+        "T1573.001"
+      ],
+      "distinct_techniques_parent": [
+        "T1003",
+        "T1005",
+        "T1007",
+        "T1016",
+        "T1018",
+        "T1021",
+        "T1041",
+        "T1046",
+        "T1049",
+        "T1057",
+        "T1070",
+        "T1071",
+        "T1074",
+        "T1083",
+        "T1105",
+        "T1201",
+        "T1547",
+        "T1560",
+        "T1569",
+        "T1573"
+      ],
+      "distinct_tactics": [
+        "Collection",
+        "Command and Control",
+        "Credential Access",
+        "Defense Evasion",
+        "Discovery",
+        "Execution",
+        "Exfiltration",
+        "Lateral Movement",
+        "Persistence"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2025-10-01T10:14:14.955559+00:00",
+      "last_timestamp": "2025-10-01T10:35:06.286635+00:00",
+      "duration_seconds": 1251.331076,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 21,
+      "collapsed_sequence_length": 20,
+      "next_technique_samples_raw": 20,
+      "next_technique_samples_collapsed": 19,
+      "tactic_level_samples_collapsed": 19,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "BeaconInterval",
+        "Evasion",
+        "IsBeacon",
+        "RunAtLoad",
+        "acme",
+        "args",
+        "background",
+        "beacon",
+        "bin",
+        "c2url",
+        "clear_cache",
+        "command_shell",
+        "command_timeout",
+        "creates_session",
+        "domain",
+        "enforce_otp",
+        "error_if",
+        "error_if_not",
+        "exe",
+        "exit",
+        "exit_on_error",
+        "filepath",
+        "force",
+        "format",
+        "host",
+        "hostname",
+        "input",
+        "interactive",
+        "ipv4",
+        "ipv6",
+        "is_ioc",
+        "jmp_hostname",
+        "jmp_port",
+        "jmp_username",
+        "key_filename",
+        "kill_on_exit",
+        "listening",
+        "local_path",
+        "long_poll_jitter",
+        "long_poll_timeout",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "metadata",
+        "min_sec",
+        "mode",
+        "name",
+        "only_if",
+        "output",
+        "passphrase",
+        "password",
+        "persistent",
+        "pid",
+        "port",
+        "prompts",
+        "random",
+        "randomize_jarm",
+        "read",
+        "recurse",
+        "recursive",
+        "remote_path",
+        "replace",
+        "save",
+        "seconds",
+        "session",
+        "target",
+        "tcp",
+        "timeout",
+        "udp",
+        "username",
+        "variable",
+        "varstore",
+        "wait_for_key",
+        "website"
+      ],
+      "metadata_keys": [
+        "tactics",
+        "technique_name",
+        "techniques"
+      ]
+    },
+    "E3": {
+      "episode_id": "E3",
+      "scenario_id": "scenario_3_vnc_apt",
+      "total_steps": 77,
+      "labeled_steps": 29,
+      "unlabeled_steps": 48,
+      "multi_technique_steps": 6,
+      "distinct_techniques_full": [
+        "T1003.008",
+        "T1018",
+        "T1021.005",
+        "T1036.005",
+        "T1039",
+        "T1053.003",
+        "T1059",
+        "T1059.004",
+        "T1071.001",
+        "T1072",
+        "T1083",
+        "T1087.001",
+        "T1105",
+        "T1110.001",
+        "T1213",
+        "T1485",
+        "T1486",
+        "T1489",
+        "T1490",
+        "T1531",
+        "T1564.001",
+        "T1565.001",
+        "T1574"
+      ],
+      "distinct_techniques_parent": [
+        "T1003",
+        "T1018",
+        "T1021",
+        "T1036",
+        "T1039",
+        "T1053",
+        "T1059",
+        "T1071",
+        "T1072",
+        "T1083",
+        "T1087",
+        "T1105",
+        "T1110",
+        "T1213",
+        "T1485",
+        "T1486",
+        "T1489",
+        "T1490",
+        "T1531",
+        "T1564",
+        "T1565",
+        "T1574"
+      ],
+      "distinct_tactics": [
+        "Collection",
+        "Command and Control",
+        "Credential Access",
+        "Defense Evasion",
+        "Discovery",
+        "Execution",
+        "Impact",
+        "Lateral Movement",
+        "Persistence"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2025-12-12T18:07:53.665927+00:00",
+      "last_timestamp": "2025-12-12T18:34:13.417531+00:00",
+      "duration_seconds": 1579.751604,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 29,
+      "collapsed_sequence_length": 21,
+      "next_technique_samples_raw": 28,
+      "next_technique_samples_collapsed": 20,
+      "tactic_level_samples_collapsed": 20,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "address",
+        "background",
+        "badchars",
+        "bin",
+        "break_if",
+        "command_shell",
+        "command_timeout",
+        "commands",
+        "connection_timeout",
+        "creates_session",
+        "display",
+        "encoder",
+        "end_str",
+        "error_if",
+        "error_if_not",
+        "exit_on_error",
+        "expect_timeout",
+        "filename",
+        "force_encode",
+        "format",
+        "hostname",
+        "input",
+        "interactive",
+        "iter",
+        "keep_template_working",
+        "key",
+        "kill_on_exit",
+        "local_path",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "maxrms",
+        "metadata",
+        "min_sec",
+        "nopsled_size",
+        "only_if",
+        "options",
+        "password",
+        "payload",
+        "payload_options",
+        "platform",
+        "port",
+        "random",
+        "read",
+        "save",
+        "seconds",
+        "session",
+        "stdapi",
+        "target",
+        "template",
+        "variable",
+        "write",
+        "x",
+        "y"
+      ],
+      "metadata_keys": [
+        "action",
+        "delayed_manifestation",
+        "tactics",
+        "technique_name",
+        "techniques"
+      ]
+    },
+    "E4": {
+      "episode_id": "E4",
+      "scenario_id": "scenario_4",
+      "total_steps": 46,
+      "labeled_steps": 22,
+      "unlabeled_steps": 24,
+      "multi_technique_steps": 3,
+      "distinct_techniques_full": [
+        "T1036.005",
+        "T1070.004",
+        "T1071.001",
+        "T1078.003",
+        "T1082",
+        "T1105",
+        "T1205.001",
+        "T1543.002",
+        "T1548.003",
+        "T1599"
+      ],
+      "distinct_techniques_parent": [
+        "T1036",
+        "T1070",
+        "T1071",
+        "T1078",
+        "T1082",
+        "T1105",
+        "T1205",
+        "T1543",
+        "T1548",
+        "T1599"
+      ],
+      "distinct_tactics": [
+        "Command and Control",
+        "Defense Evasion",
+        "Discovery",
+        "Initial Access",
+        "Lateral Movement",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2025-12-15T11:02:51.184731+00:00",
+      "last_timestamp": "2025-12-15T11:13:30.318178+00:00",
+      "duration_seconds": 639.133447,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 22,
+      "collapsed_sequence_length": 11,
+      "next_technique_samples_raw": 21,
+      "next_technique_samples_collapsed": 10,
+      "tactic_level_samples_collapsed": 10,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "BeaconInterval",
+        "Evasion",
+        "IsBeacon",
+        "RunAtLoad",
+        "acme",
+        "address",
+        "args",
+        "background",
+        "beacon",
+        "bin",
+        "c2url",
+        "clear_cache",
+        "command_shell",
+        "command_timeout",
+        "creates_session",
+        "domain",
+        "enforce_otp",
+        "error_if",
+        "error_if_not",
+        "exe",
+        "exit_on_error",
+        "filepath",
+        "format",
+        "host",
+        "hostname",
+        "interactive",
+        "jmp_hostname",
+        "jmp_port",
+        "jmp_username",
+        "key_filename",
+        "kill_on_exit",
+        "local_path",
+        "long_poll_jitter",
+        "long_poll_timeout",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "metadata",
+        "min_sec",
+        "name",
+        "only_if",
+        "output",
+        "passphrase",
+        "password",
+        "persistent",
+        "port",
+        "prompts",
+        "random",
+        "randomize_jarm",
+        "read",
+        "save",
+        "seconds",
+        "session",
+        "target",
+        "timeout",
+        "username",
+        "website"
+      ],
+      "metadata_keys": [
+        "tactics",
+        "technique_name",
+        "techniques"
+      ]
+    },
+    "E5": {
+      "episode_id": "E5",
+      "scenario_id": "scenario_5",
+      "total_steps": 7,
+      "labeled_steps": 3,
+      "unlabeled_steps": 4,
+      "multi_technique_steps": 2,
+      "distinct_techniques_full": [
+        "T1040",
+        "T1528",
+        "T1550.001",
+        "T1557.002"
+      ],
+      "distinct_techniques_parent": [
+        "T1040",
+        "T1528",
+        "T1550",
+        "T1557"
+      ],
+      "distinct_tactics": [
+        "Credential Access",
+        "Defense Evasion",
+        "Discovery",
+        "Lateral Movement"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2025-10-09T11:08:38.165282+00:00",
+      "last_timestamp": "2025-10-09T11:10:36.553295+00:00",
+      "duration_seconds": 118.388013,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 3,
+      "collapsed_sequence_length": 3,
+      "next_technique_samples_raw": 2,
+      "next_technique_samples_collapsed": 2,
+      "tactic_level_samples_collapsed": 2,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "background",
+        "bin",
+        "command_shell",
+        "command_timeout",
+        "cookies",
+        "creates_session",
+        "data",
+        "encoder",
+        "error_if",
+        "error_if_not",
+        "exit",
+        "exit_on_error",
+        "follow",
+        "headers",
+        "http2",
+        "interactive",
+        "kill_on_exit",
+        "local_path",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "metadata",
+        "min_sec",
+        "only_if",
+        "output_headers",
+        "random",
+        "read",
+        "save",
+        "seconds",
+        "session",
+        "url",
+        "useragent",
+        "variable",
+        "varstore",
+        "verify",
+        "wait_for_key"
+      ],
+      "metadata_keys": [
+        "tactic",
+        "technique_name",
+        "techniques"
+      ]
+    },
+    "E6": {
+      "episode_id": "E6",
+      "scenario_id": "scenario_6_macro_binary",
+      "total_steps": 51,
+      "labeled_steps": 23,
+      "unlabeled_steps": 28,
+      "multi_technique_steps": 2,
+      "distinct_techniques_full": [
+        "T1010",
+        "T1053.003",
+        "T1059.004",
+        "T1070.003",
+        "T1082",
+        "T1105",
+        "T1115",
+        "T1204.002",
+        "T1222.002",
+        "T1546",
+        "T1564.001",
+        "T1574.008"
+      ],
+      "distinct_techniques_parent": [
+        "T1010",
+        "T1053",
+        "T1059",
+        "T1070",
+        "T1082",
+        "T1105",
+        "T1115",
+        "T1204",
+        "T1222",
+        "T1546",
+        "T1564",
+        "T1574"
+      ],
+      "distinct_tactics": [
+        "Collection",
+        "Command and Control",
+        "Defense Evasion",
+        "Discovery",
+        "Execution",
+        "Persistence"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2025-12-09T10:46:25.607355+00:00",
+      "last_timestamp": "2025-12-09T10:59:08.871964+00:00",
+      "duration_seconds": 763.264609,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 23,
+      "collapsed_sequence_length": 15,
+      "next_technique_samples_raw": 22,
+      "next_technique_samples_collapsed": 14,
+      "tactic_level_samples_collapsed": 14,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "background",
+        "badchars",
+        "bin",
+        "command_shell",
+        "command_timeout",
+        "connection_timeout",
+        "creates_session",
+        "display",
+        "encoder",
+        "end_str",
+        "error_if",
+        "error_if_not",
+        "exit_on_error",
+        "expect_timeout",
+        "filename",
+        "force_encode",
+        "format",
+        "hostname",
+        "input",
+        "interactive",
+        "iter",
+        "keep_template_working",
+        "key",
+        "kill_on_exit",
+        "local_path",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "maxrms",
+        "metadata",
+        "min_sec",
+        "nopsled_size",
+        "only_if",
+        "password",
+        "payload_options",
+        "platform",
+        "port",
+        "random",
+        "read",
+        "save",
+        "seconds",
+        "session",
+        "stdapi",
+        "template",
+        "variable",
+        "write",
+        "x",
+        "y"
+      ],
+      "metadata_keys": [
+        "tactics",
+        "technique_name",
+        "techniques"
+      ]
+    },
+    "E7": {
+      "episode_id": "E7",
+      "scenario_id": "scenario_7",
+      "total_steps": 26,
+      "labeled_steps": 13,
+      "unlabeled_steps": 13,
+      "multi_technique_steps": 6,
+      "distinct_techniques_full": [
+        "T1003.008",
+        "T1016",
+        "T1033",
+        "T1041",
+        "T1053.003",
+        "T1057",
+        "T1059.004",
+        "T1071.001",
+        "T1078.002",
+        "T1083",
+        "T1095",
+        "T1110.001",
+        "T1133",
+        "T1190",
+        "T1210",
+        "T1525",
+        "T1573.001",
+        "T1589.002",
+        "T1590.002",
+        "T1591",
+        "T1592.002",
+        "T1610"
+      ],
+      "distinct_techniques_parent": [
+        "T1003",
+        "T1016",
+        "T1033",
+        "T1041",
+        "T1053",
+        "T1057",
+        "T1059",
+        "T1071",
+        "T1078",
+        "T1083",
+        "T1095",
+        "T1110",
+        "T1133",
+        "T1190",
+        "T1210",
+        "T1525",
+        "T1573",
+        "T1589",
+        "T1590",
+        "T1591",
+        "T1592",
+        "T1610"
+      ],
+      "distinct_tactics": [
+        "Collection",
+        "Command and Control",
+        "Credential Access",
+        "Defense Evasion",
+        "Discovery",
+        "Execution",
+        "Exfiltration",
+        "Initial Access",
+        "Lateral Movement",
+        "Persistence",
+        "Privilege Escalation",
+        "Reconnaissance"
+      ],
+      "timestamp_field_used": "start-datetime (ISO 8601 UTC assumption)",
+      "first_timestamp": "2026-01-21T10:10:08.725780+00:00",
+      "last_timestamp": "2026-01-21T10:45:55.222690+00:00",
+      "duration_seconds": 2146.49691,
+      "unparseable_or_missing_timestamps": 0,
+      "duplicate_timestamp_ties": 0,
+      "raw_sequence_length": 13,
+      "collapsed_sequence_length": 13,
+      "next_technique_samples_raw": 12,
+      "next_technique_samples_collapsed": 12,
+      "tactic_level_samples_collapsed": 12,
+      "top_level_keys": [
+        "cmd",
+        "parameters",
+        "start-datetime",
+        "type"
+      ],
+      "parameter_keys": [
+        "BeaconInterval",
+        "Evasion",
+        "IsBeacon",
+        "RunAtLoad",
+        "acme",
+        "address",
+        "background",
+        "beacon",
+        "bin",
+        "c2url",
+        "command_shell",
+        "command_timeout",
+        "cookies",
+        "creates_session",
+        "data",
+        "domain",
+        "end_str",
+        "enforce_otp",
+        "error_if",
+        "error_if_not",
+        "exit_on_error",
+        "filepath",
+        "follow",
+        "format",
+        "headers",
+        "host",
+        "http2",
+        "interactive",
+        "kill_on_exit",
+        "local_path",
+        "long_poll_jitter",
+        "long_poll_timeout",
+        "loop_count",
+        "loop_if",
+        "loop_if_not",
+        "metadata",
+        "min_sec",
+        "name",
+        "only_if",
+        "options",
+        "output_headers",
+        "payload",
+        "payload_options",
+        "persistent",
+        "port",
+        "random",
+        "randomize_jarm",
+        "read",
+        "recurse",
+        "remote_path",
+        "save",
+        "seconds",
+        "session",
+        "stdapi",
+        "target",
+        "timeout",
+        "url",
+        "useragent",
+        "variable",
+        "verify",
+        "website",
+        "write"
+      ],
+      "metadata_keys": [
+        "description",
+        "tactics",
+        "technique_name",
+        "techniques"
+      ]
+    }
+  },
+  "control_invariants_check": {
+    "total_events": 190,
+    "labeled_steps": 99,
+    "distinct_techniques": 64,
+    "raw_sequence_length": 99,
+    "collapsed_sequence_length": 71,
+    "reproduced": true
+  },
+  "technique_validity": {
+    "E5": {
+      "total_distinct_techniques": 4,
+      "valid_v16_1_techniques": 4,
+      "unknown_techniques": [],
+      "revoked_techniques": [],
+      "deprecated_techniques": [],
+      "all_techniques_valid": true
+    },
+    "E6": {
+      "total_distinct_techniques": 12,
+      "valid_v16_1_techniques": 12,
+      "unknown_techniques": [],
+      "revoked_techniques": [],
+      "deprecated_techniques": [],
+      "all_techniques_valid": true
+    },
+    "E7": {
+      "total_distinct_techniques": 22,
+      "valid_v16_1_techniques": 22,
+      "unknown_techniques": [],
+      "revoked_techniques": [],
+      "deprecated_techniques": [],
+      "all_techniques_valid": true
+    }
+  },
+  "tactic_discrepancies": {
+    "E5": {
+      "type_a_count": 0,
+      "type_a_events": [],
+      "type_b_count": 2,
+      "type_b_events": [
+        {
+          "event_id": "E5-S001",
+          "techniques": [
+            "T1040",
+            "T1557.002"
+          ],
+          "dataset_tactics": [
+            "Credential Access",
+            "Discovery"
+          ],
+          "official_tactics": [
+            "Collection",
+            "Credential Access",
+            "Discovery"
+          ],
+          "missing_official_tactics": [
+            "Collection"
+          ]
+        },
+        {
+          "event_id": "E5-S002",
+          "techniques": [
+            "T1040",
+            "T1528"
+          ],
+          "dataset_tactics": [
+            "Credential Access"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Discovery"
+          ],
+          "missing_official_tactics": [
+            "Discovery"
+          ]
+        }
+      ],
+      "exact_match_count": 1
+    },
+    "E6": {
+      "type_a_count": 0,
+      "type_a_events": [],
+      "type_b_count": 4,
+      "type_b_events": [
+        {
+          "event_id": "E6-S035",
+          "techniques": [
+            "T1546",
+            "T1574.008"
+          ],
+          "dataset_tactics": [
+            "Defense Evasion",
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Defense Evasion",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "missing_official_tactics": [
+            "Privilege Escalation"
+          ]
+        },
+        {
+          "event_id": "E6-S043",
+          "techniques": [
+            "T1053.003"
+          ],
+          "dataset_tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "missing_official_tactics": [
+            "Execution",
+            "Privilege Escalation"
+          ]
+        },
+        {
+          "event_id": "E6-S046",
+          "techniques": [
+            "T1053.003"
+          ],
+          "dataset_tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "missing_official_tactics": [
+            "Execution",
+            "Privilege Escalation"
+          ]
+        },
+        {
+          "event_id": "E6-S048",
+          "techniques": [
+            "T1053.003"
+          ],
+          "dataset_tactics": [
+            "Persistence"
+          ],
+          "official_tactics": [
+            "Execution",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "missing_official_tactics": [
+            "Execution",
+            "Privilege Escalation"
+          ]
+        }
+      ],
+      "exact_match_count": 19
+    },
+    "E7": {
+      "type_a_count": 1,
+      "type_a_events": [
+        {
+          "event_id": "E7-S025",
+          "techniques": [
+            "T1003.008",
+            "T1041"
+          ],
+          "dataset_tactics": [
+            "Collection",
+            "Credential Access",
+            "Exfiltration"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Exfiltration"
+          ],
+          "discrepancy_tactics": [
+            "Collection"
+          ]
+        }
+      ],
+      "type_b_count": 1,
+      "type_b_events": [
+        {
+          "event_id": "E7-S004",
+          "techniques": [
+            "T1078.002",
+            "T1110.001",
+            "T1133"
+          ],
+          "dataset_tactics": [
+            "Initial Access"
+          ],
+          "official_tactics": [
+            "Credential Access",
+            "Defense Evasion",
+            "Initial Access",
+            "Persistence",
+            "Privilege Escalation"
+          ],
+          "missing_official_tactics": [
+            "Credential Access",
+            "Defense Evasion",
+            "Persistence",
+            "Privilege Escalation"
+          ]
+        }
+      ],
+      "exact_match_count": 11
+    }
+  },
+  "counting_bounds_designs": {
+    "design_a_control": {
+      "design_name": "(a) 4-episode control",
+      "episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "n_episodes": 4,
+      "per_fold": {
+        "fold_1": {
+          "test_episode": "E1",
+          "training_episodes": [
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "n_samples": 18,
+          "covered": 7,
+          "coverage_rate": 0.3888888888888889,
+          "ceiling_hits": 7,
+          "ceiling_rate": 0.3888888888888889
+        },
+        "fold_2": {
+          "test_episode": "E2",
+          "training_episodes": [
+            "E1",
+            "E3",
+            "E4"
+          ],
+          "n_samples": 19,
+          "covered": 13,
+          "coverage_rate": 0.6842105263157895,
+          "ceiling_hits": 14,
+          "ceiling_rate": 0.7368421052631579
+        },
+        "fold_3": {
+          "test_episode": "E3",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E4"
+          ],
+          "n_samples": 20,
+          "covered": 8,
+          "coverage_rate": 0.4,
+          "ceiling_hits": 8,
+          "ceiling_rate": 0.4
+        },
+        "fold_4": {
+          "test_episode": "E4",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "n_samples": 10,
+          "covered": 6,
+          "coverage_rate": 0.6,
+          "ceiling_hits": 6,
+          "ceiling_rate": 0.6
+        }
+      },
+      "pooled": {
+        "n_samples": 67,
+        "covered": 34,
+        "coverage_rate": 0.5074626865671642,
+        "ceiling_hits": 35,
+        "ceiling_rate": 0.5223880597014925
+      }
+    },
+    "design_b_7episodes": {
+      "design_name": "(b) 7-episode design",
+      "episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "n_episodes": 7,
+      "per_fold": {
+        "fold_1": {
+          "test_episode": "E1",
+          "training_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "n_samples": 18,
+          "covered": 13,
+          "coverage_rate": 0.7222222222222222,
+          "ceiling_hits": 12,
+          "ceiling_rate": 0.6666666666666666
+        },
+        "fold_2": {
+          "test_episode": "E2",
+          "training_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "n_samples": 19,
+          "covered": 13,
+          "coverage_rate": 0.6842105263157895,
+          "ceiling_hits": 15,
+          "ceiling_rate": 0.7894736842105263
+        },
+        "fold_3": {
+          "test_episode": "E3",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "n_samples": 20,
+          "covered": 10,
+          "coverage_rate": 0.5,
+          "ceiling_hits": 9,
+          "ceiling_rate": 0.45
+        },
+        "fold_4": {
+          "test_episode": "E4",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E5",
+            "E6",
+            "E7"
+          ],
+          "n_samples": 10,
+          "covered": 6,
+          "coverage_rate": 0.6,
+          "ceiling_hits": 6,
+          "ceiling_rate": 0.6
+        },
+        "fold_5": {
+          "test_episode": "E5",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E6",
+            "E7"
+          ],
+          "n_samples": 2,
+          "covered": 0,
+          "coverage_rate": 0.0,
+          "ceiling_hits": 0,
+          "ceiling_rate": 0.0
+        },
+        "fold_6": {
+          "test_episode": "E6",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E7"
+          ],
+          "n_samples": 14,
+          "covered": 8,
+          "coverage_rate": 0.5714285714285714,
+          "ceiling_hits": 7,
+          "ceiling_rate": 0.5
+        },
+        "fold_7": {
+          "test_episode": "E7",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6"
+          ],
+          "n_samples": 12,
+          "covered": 11,
+          "coverage_rate": 0.9166666666666666,
+          "ceiling_hits": 10,
+          "ceiling_rate": 0.8333333333333334
+        }
+      },
+      "pooled": {
+        "n_samples": 95,
+        "covered": 61,
+        "coverage_rate": 0.6421052631578947,
+        "ceiling_hits": 59,
+        "ceiling_rate": 0.6210526315789474
+      }
+    },
+    "design_c1_plus_e5": {
+      "design_name": "(c1) E1-E4 + E5",
+      "episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "n_episodes": 5,
+      "per_fold": {
+        "fold_1": {
+          "test_episode": "E1",
+          "training_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E5"
+          ],
+          "n_samples": 18,
+          "covered": 7,
+          "coverage_rate": 0.3888888888888889,
+          "ceiling_hits": 7,
+          "ceiling_rate": 0.3888888888888889
+        },
+        "fold_2": {
+          "test_episode": "E2",
+          "training_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E5"
+          ],
+          "n_samples": 19,
+          "covered": 13,
+          "coverage_rate": 0.6842105263157895,
+          "ceiling_hits": 14,
+          "ceiling_rate": 0.7368421052631579
+        },
+        "fold_3": {
+          "test_episode": "E3",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E5"
+          ],
+          "n_samples": 20,
+          "covered": 8,
+          "coverage_rate": 0.4,
+          "ceiling_hits": 8,
+          "ceiling_rate": 0.4
+        },
+        "fold_4": {
+          "test_episode": "E4",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E5"
+          ],
+          "n_samples": 10,
+          "covered": 6,
+          "coverage_rate": 0.6,
+          "ceiling_hits": 6,
+          "ceiling_rate": 0.6
+        },
+        "fold_5": {
+          "test_episode": "E5",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "n_samples": 2,
+          "covered": 0,
+          "coverage_rate": 0.0,
+          "ceiling_hits": 0,
+          "ceiling_rate": 0.0
+        }
+      },
+      "pooled": {
+        "n_samples": 69,
+        "covered": 34,
+        "coverage_rate": 0.4927536231884058,
+        "ceiling_hits": 35,
+        "ceiling_rate": 0.5072463768115942
+      }
+    },
+    "design_c2_plus_e6": {
+      "design_name": "(c2) E1-E4 + E6",
+      "episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E6"
+      ],
+      "n_episodes": 5,
+      "per_fold": {
+        "fold_1": {
+          "test_episode": "E1",
+          "training_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E6"
+          ],
+          "n_samples": 18,
+          "covered": 7,
+          "coverage_rate": 0.3888888888888889,
+          "ceiling_hits": 7,
+          "ceiling_rate": 0.3888888888888889
+        },
+        "fold_2": {
+          "test_episode": "E2",
+          "training_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E6"
+          ],
+          "n_samples": 19,
+          "covered": 13,
+          "coverage_rate": 0.6842105263157895,
+          "ceiling_hits": 14,
+          "ceiling_rate": 0.7368421052631579
+        },
+        "fold_3": {
+          "test_episode": "E3",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E6"
+          ],
+          "n_samples": 20,
+          "covered": 9,
+          "coverage_rate": 0.45,
+          "ceiling_hits": 9,
+          "ceiling_rate": 0.45
+        },
+        "fold_4": {
+          "test_episode": "E4",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E6"
+          ],
+          "n_samples": 10,
+          "covered": 6,
+          "coverage_rate": 0.6,
+          "ceiling_hits": 6,
+          "ceiling_rate": 0.6
+        },
+        "fold_5": {
+          "test_episode": "E6",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "n_samples": 14,
+          "covered": 8,
+          "coverage_rate": 0.5714285714285714,
+          "ceiling_hits": 7,
+          "ceiling_rate": 0.5
+        }
+      },
+      "pooled": {
+        "n_samples": 81,
+        "covered": 43,
+        "coverage_rate": 0.5308641975308642,
+        "ceiling_hits": 43,
+        "ceiling_rate": 0.5308641975308642
+      }
+    },
+    "design_c3_plus_e7": {
+      "design_name": "(c3) E1-E4 + E7",
+      "episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E7"
+      ],
+      "n_episodes": 5,
+      "per_fold": {
+        "fold_1": {
+          "test_episode": "E1",
+          "training_episodes": [
+            "E2",
+            "E3",
+            "E4",
+            "E7"
+          ],
+          "n_samples": 18,
+          "covered": 13,
+          "coverage_rate": 0.7222222222222222,
+          "ceiling_hits": 12,
+          "ceiling_rate": 0.6666666666666666
+        },
+        "fold_2": {
+          "test_episode": "E2",
+          "training_episodes": [
+            "E1",
+            "E3",
+            "E4",
+            "E7"
+          ],
+          "n_samples": 19,
+          "covered": 13,
+          "coverage_rate": 0.6842105263157895,
+          "ceiling_hits": 15,
+          "ceiling_rate": 0.7894736842105263
+        },
+        "fold_3": {
+          "test_episode": "E3",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E4",
+            "E7"
+          ],
+          "n_samples": 20,
+          "covered": 10,
+          "coverage_rate": 0.5,
+          "ceiling_hits": 9,
+          "ceiling_rate": 0.45
+        },
+        "fold_4": {
+          "test_episode": "E4",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E7"
+          ],
+          "n_samples": 10,
+          "covered": 6,
+          "coverage_rate": 0.6,
+          "ceiling_hits": 6,
+          "ceiling_rate": 0.6
+        },
+        "fold_5": {
+          "test_episode": "E7",
+          "training_episodes": [
+            "E1",
+            "E2",
+            "E3",
+            "E4"
+          ],
+          "n_samples": 12,
+          "covered": 11,
+          "coverage_rate": 0.9166666666666666,
+          "ceiling_hits": 10,
+          "ceiling_rate": 0.8333333333333334
+        }
+      },
+      "pooled": {
+        "n_samples": 79,
+        "covered": 53,
+        "coverage_rate": 0.6708860759493671,
+        "ceiling_hits": 52,
+        "ceiling_rate": 0.6582278481012658
+      }
+    }
+  },
+  "decision_rules": {
+    "E5": {
+      "scenario_id": "scenario_5",
+      "D1_zenodo_md5": {
+        "result": "PASS",
+        "md5": "c56fce722a7b714eba004d6fd6319879",
+        "expected": "c56fce722a7b714eba004d6fd6319879"
+      },
+      "D2_schema": {
+        "result": "PASS",
+        "differences": [
+          "metadata uses singular 'tactic' key instead of 'tactics'"
+        ]
+      },
+      "D3_timestamps": {
+        "result": "PASS",
+        "unparseable_labeled": 0,
+        "ties": 0
+      },
+      "D4_attack_v16_1": {
+        "result": "PASS",
+        "unknown": [],
+        "revoked": [],
+        "deprecated": []
+      },
+      "D5_transitions_threshold": {
+        "result": "FLAG (small)",
+        "collapsed_transitions": 2,
+        "threshold": 8
+      },
+      "D6_sequence_uniqueness": {
+        "result": "PASS",
+        "identical_to": []
+      },
+      "eligibility": "ELIGIBLE"
+    },
+    "E6": {
+      "scenario_id": "scenario_6_macro_binary",
+      "D1_zenodo_md5": {
+        "result": "PASS",
+        "md5": "aedd7c0b51700b16c04539f10784d5d4",
+        "expected": "aedd7c0b51700b16c04539f10784d5d4"
+      },
+      "D2_schema": {
+        "result": "PASS",
+        "differences": []
+      },
+      "D3_timestamps": {
+        "result": "PASS",
+        "unparseable_labeled": 0,
+        "ties": 0
+      },
+      "D4_attack_v16_1": {
+        "result": "PASS",
+        "unknown": [],
+        "revoked": [],
+        "deprecated": []
+      },
+      "D5_transitions_threshold": {
+        "result": "PASS",
+        "collapsed_transitions": 14,
+        "threshold": 8
+      },
+      "D6_sequence_uniqueness": {
+        "result": "PASS",
+        "identical_to": []
+      },
+      "eligibility": "ELIGIBLE"
+    },
+    "E7": {
+      "scenario_id": "scenario_7",
+      "D1_zenodo_md5": {
+        "result": "PASS",
+        "md5": "88122133a82079e07e7ed1b782bc203f",
+        "expected": "88122133a82079e07e7ed1b782bc203f"
+      },
+      "D2_schema": {
+        "result": "PASS",
+        "differences": [
+          "metadata includes extra 'description' field"
+        ]
+      },
+      "D3_timestamps": {
+        "result": "PASS",
+        "unparseable_labeled": 0,
+        "ties": 0
+      },
+      "D4_attack_v16_1": {
+        "result": "PASS",
+        "unknown": [],
+        "revoked": [],
+        "deprecated": []
+      },
+      "D5_transitions_threshold": {
+        "result": "PASS",
+        "collapsed_transitions": 12,
+        "threshold": 8
+      },
+      "D6_sequence_uniqueness": {
+        "result": "PASS",
+        "identical_to": []
+      },
+      "eligibility": "ELIGIBLE"
+    }
+  },
+  "eligibility_summary": {
+    "E5": "ELIGIBLE",
+    "E6": "ELIGIBLE",
+    "E7": "ELIGIBLE"
+  }
+}

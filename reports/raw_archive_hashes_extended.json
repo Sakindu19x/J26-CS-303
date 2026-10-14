@@ -1,0 +1,67 @@
+{
+  "raw_archive_hashes_extended": [
+    {
+      "archive": "scenario_1_sudo_pam.zip",
+      "scenario": "scenario_1_sudo_pam",
+      "episode_id": "E1",
+      "md5": "e7e5bd19cda62a5bfb9a68525715cd78",
+      "sha256": "0851d2cec590d3b56575fc385416190e12e258442023257d66879e19cb9e74fc",
+      "size_bytes": 175337707,
+      "zenodo_md5_match": true
+    },
+    {
+      "archive": "scenario_2_cron.zip",
+      "scenario": "scenario_2_cron",
+      "episode_id": "E2",
+      "md5": "c33aca73d6962414bd6c2c3f82b934c4",
+      "sha256": "b2026121bdb035628b7536a042f01c3e92e36852b65cac9d69fd05c31ba98791",
+      "size_bytes": 160486494,
+      "zenodo_md5_match": true
+    },
+    {
+      "archive": "scenario_3_vnc_apt.zip",
+      "scenario": "scenario_3_vnc_apt",
+      "episode_id": "E3",
+      "md5": "bfd7e44cdb2d038a9deab800350e4b98",
+      "sha256": "5c23b9d614689194f43cc844e4a25ed43568879ae83edc43df93336e0a33f911",
+      "size_bytes": 206560146,
+      "zenodo_md5_match": true
+    },
+    {
+      "archive": "scenario_4.zip",
+      "scenario": "scenario_4",
+      "episode_id": "E4",
+      "md5": "f1bf6ecd793c6c51f922ee43e33d7cf4",
+      "sha256": "a79fefbfeebd25b163e57f9ec7b9581f8e6f0abed2f2775fba45cf55a004b637",
+      "size_bytes": 201474676,
+      "zenodo_md5_match": true
+    },
+    {
+      "archive": "scenario_5.zip",
+      "scenario": "scenario_5",
+      "episode_id": "E5",
+      "md5": "c56fce722a7b714eba004d6fd6319879",
+      "sha256": "e54df7f4c2f8e12e374272544809cee42b2c7e68ac37d950934e4123364f7911",
+      "size_bytes": 202788200,
+      "zenodo_md5_match": true
+    },
+    {
+      "archive": "scenario_6_macro_binary.zip",
+      "scenario": "scenario_6_macro_binary",
+      "episode_id": "E6",
+      "md5": "aedd7c0b51700b16c04539f10784d5d4",
+      "sha256": "73a31bf763c5a65ed1a14bb5919151dbbf324563d4f8eaabb0c58d9c0f67f3b1",
+      "size_bytes": 202319131,
+      "zenodo_md5_match": true
+    },
+    {
+      "archive": "scenario_7.zip",
+      "scenario": "scenario_7",
+      "episode_id": "E7",
+      "md5": "88122133a82079e07e7ed1b782bc203f",
+      "sha256": "7f0ff0b5d939437b5ebad7f52eea69dc024775e5c73663c5b4ac7ba58f1b3a56",
+      "size_bytes": 160106901,
+      "zenodo_md5_match": true
+    }
+  ]
+}
