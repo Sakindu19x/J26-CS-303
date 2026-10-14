@@ -254,3 +254,18 @@ Amendment 1 formally supersedes the following original sections and passages of 
 3. **Section 8**: Superseded regarding the statement that E5 has "zero test coverage"; replaced with the exact per-fold counts from `reports/new_episodes_intake_audit.json` (N=2, covered=0, ceiling=0).
 4. **Section 9**: Superseded in its entirety; replaced by the pre-declared A4 real-scale power analysis design and gates G8–G11 quoted verbatim from `reports/planted_realscale_report.md` and `reports/planted_realscale_report.json`.
 5. **Section 1**: Superseded regarding the unverified example `scenario_6_macro_library`, which is withdrawn as not verified.
+
+## Amendment 3 (2026-10-14, before any 7-episode model run)
+
+### 1. Verbatim Original Heading Titles for Supersession (Correcting Amendment 2, Section 2)
+To avoid any ambiguity in section referencing, the exact verbatim heading titles from the initial pre-registration document (commit `2cf7786`) superseded by Amendment 1 are recorded as follows:
+- **Section 1**: `## 1. Episodes and Archive Identification`
+- **Section 4**: `## 4. Models and Tuning Constraints`
+- **Section 5**: `## 5. Evaluation Metrics`
+- **Section 8**: `## 8. Handling of Episode E5 (Sensitivity Analysis)`
+- **Section 9**: `## 9. Real-Scale Planted Structure Power Analysis (A4 Re-Run)`
+
+### 2. Precise Repository Search Count for `"macro_library"` (Correcting Amendment 2, Section 1)
+- **Raw Match Count**: An exhaustive repository search across all text files (`.md`, `.json`, `.py`, `.txt`, excluding `.git`) returns exactly **1 matching file**: `reports/prereg_7episode_design.md` (which contains 8 occurrences across Section 1, Amendment 1, and Amendment 2).
+- **Explanation of Discrepancy**: Across all other repository files—including all source code (`src/c4/`), scripts (`scripts/`), test suites (`tests/`), data artifacts (`data/`), and intake audits (`reports/`)—there are **0 matches**. The string `"macro_library"` originated exclusively as an unverified narrative example within this pre-registration file itself and has never appeared anywhere in the repository's data pipeline, code, or intake audits.
+
