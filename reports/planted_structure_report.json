@@ -1,0 +1,4398 @@
+{
+  "vocabulary_size": 12,
+  "vocabulary": [
+    "T1003",
+    "T1003.008",
+    "T1005",
+    "T1007",
+    "T1016",
+    "T1018",
+    "T1021.004",
+    "T1021.005",
+    "T1033",
+    "T1036.005",
+    "T1039",
+    "T1041"
+  ],
+  "signal_levels": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "n_replicates": 20,
+  "n_episodes": 8,
+  "episode_length": 26,
+  "chance_top1": 0.09090909090909091,
+  "A1": {
+    "0.0": {
+      "s": 0.0,
+      "markov_top1_mean": 0.0835,
+      "markov_top1_se": 0.007300865125377086,
+      "frequency_top1_mean": 0.0875,
+      "oracle_top1": 0.09090909090909091,
+      "diff_from_oracle": 0.007409090909090907,
+      "replicate_summaries": [
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.075,
+            "top3": 0.24,
+            "hits1": 15,
+            "hits3": 48
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.245,
+            "hits1": 15,
+            "hits3": 49
+          },
+          "markov_fallback": {
+            "top1": 0.075,
+            "top3": 0.24,
+            "hits1": 15,
+            "hits3": 48
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.14,
+            "top3": 0.31,
+            "hits1": 28,
+            "hits3": 62
+          },
+          "frequency": {
+            "top1": 0.065,
+            "top3": 0.215,
+            "hits1": 13,
+            "hits3": 43
+          },
+          "markov_fallback": {
+            "top1": 0.14,
+            "top3": 0.31,
+            "hits1": 28,
+            "hits3": 62
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.075,
+            "top3": 0.28,
+            "hits1": 15,
+            "hits3": 56
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.215,
+            "hits1": 15,
+            "hits3": 43
+          },
+          "markov_fallback": {
+            "top1": 0.075,
+            "top3": 0.28,
+            "hits1": 15,
+            "hits3": 56
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.075,
+            "top3": 0.255,
+            "hits1": 15,
+            "hits3": 51
+          },
+          "frequency": {
+            "top1": 0.055,
+            "top3": 0.215,
+            "hits1": 11,
+            "hits3": 43
+          },
+          "markov_fallback": {
+            "top1": 0.075,
+            "top3": 0.255,
+            "hits1": 15,
+            "hits3": 51
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.07,
+            "top3": 0.18,
+            "hits1": 14,
+            "hits3": 36
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.235,
+            "hits1": 16,
+            "hits3": 47
+          },
+          "markov_fallback": {
+            "top1": 0.07,
+            "top3": 0.18,
+            "hits1": 14,
+            "hits3": 36
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.075,
+            "top3": 0.2,
+            "hits1": 15,
+            "hits3": 40
+          },
+          "frequency": {
+            "top1": 0.05,
+            "top3": 0.21,
+            "hits1": 10,
+            "hits3": 42
+          },
+          "markov_fallback": {
+            "top1": 0.075,
+            "top3": 0.2,
+            "hits1": 15,
+            "hits3": 40
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.07,
+            "top3": 0.21,
+            "hits1": 14,
+            "hits3": 42
+          },
+          "frequency": {
+            "top1": 0.055,
+            "top3": 0.215,
+            "hits1": 11,
+            "hits3": 43
+          },
+          "markov_fallback": {
+            "top1": 0.07,
+            "top3": 0.21,
+            "hits1": 14,
+            "hits3": 42
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.07,
+            "top3": 0.26,
+            "hits1": 14,
+            "hits3": 52
+          },
+          "frequency": {
+            "top1": 0.05,
+            "top3": 0.21,
+            "hits1": 10,
+            "hits3": 42
+          },
+          "markov_fallback": {
+            "top1": 0.07,
+            "top3": 0.26,
+            "hits1": 14,
+            "hits3": 52
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.02,
+            "top3": 0.235,
+            "hits1": 4,
+            "hits3": 47
+          },
+          "frequency": {
+            "top1": 0.06,
+            "top3": 0.205,
+            "hits1": 12,
+            "hits3": 41
+          },
+          "markov_fallback": {
+            "top1": 0.02,
+            "top3": 0.235,
+            "hits1": 4,
+            "hits3": 47
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.03,
+            "top3": 0.325,
+            "hits1": 6,
+            "hits3": 65
+          },
+          "frequency": {
+            "top1": 0.09,
+            "top3": 0.285,
+            "hits1": 18,
+            "hits3": 57
+          },
+          "markov_fallback": {
+            "top1": 0.03,
+            "top3": 0.325,
+            "hits1": 6,
+            "hits3": 65
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.08,
+            "top3": 0.27,
+            "hits1": 16,
+            "hits3": 54
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 0.08,
+            "top3": 0.27,
+            "hits1": 16,
+            "hits3": 54
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.115,
+            "top3": 0.325,
+            "hits1": 23,
+            "hits3": 65
+          },
+          "frequency": {
+            "top1": 0.105,
+            "top3": 0.285,
+            "hits1": 21,
+            "hits3": 57
+          },
+          "markov_fallback": {
+            "top1": 0.115,
+            "top3": 0.325,
+            "hits1": 23,
+            "hits3": 65
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.08,
+            "top3": 0.265,
+            "hits1": 16,
+            "hits3": 53
+          },
+          "frequency": {
+            "top1": 0.065,
+            "top3": 0.28,
+            "hits1": 13,
+            "hits3": 56
+          },
+          "markov_fallback": {
+            "top1": 0.08,
+            "top3": 0.265,
+            "hits1": 16,
+            "hits3": 53
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.095,
+            "top3": 0.31,
+            "hits1": 19,
+            "hits3": 62
+          },
+          "frequency": {
+            "top1": 0.13,
+            "top3": 0.27,
+            "hits1": 26,
+            "hits3": 54
+          },
+          "markov_fallback": {
+            "top1": 0.095,
+            "top3": 0.31,
+            "hits1": 19,
+            "hits3": 62
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.09,
+            "top3": 0.295,
+            "hits1": 18,
+            "hits3": 59
+          },
+          "frequency": {
+            "top1": 0.125,
+            "top3": 0.235,
+            "hits1": 25,
+            "hits3": 47
+          },
+          "markov_fallback": {
+            "top1": 0.09,
+            "top3": 0.295,
+            "hits1": 18,
+            "hits3": 59
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.075,
+            "top3": 0.19,
+            "hits1": 15,
+            "hits3": 38
+          },
+          "frequency": {
+            "top1": 0.125,
+            "top3": 0.21,
+            "hits1": 25,
+            "hits3": 42
+          },
+          "markov_fallback": {
+            "top1": 0.075,
+            "top3": 0.19,
+            "hits1": 15,
+            "hits3": 38
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.095,
+            "top3": 0.365,
+            "hits1": 19,
+            "hits3": 73
+          },
+          "frequency": {
+            "top1": 0.12,
+            "top3": 0.245,
+            "hits1": 24,
+            "hits3": 49
+          },
+          "markov_fallback": {
+            "top1": 0.095,
+            "top3": 0.365,
+            "hits1": 19,
+            "hits3": 73
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.17,
+            "top3": 0.345,
+            "hits1": 34,
+            "hits3": 69
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.23,
+            "hits1": 15,
+            "hits3": 46
+          },
+          "markov_fallback": {
+            "top1": 0.17,
+            "top3": 0.345,
+            "hits1": 34,
+            "hits3": 69
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.07,
+            "top3": 0.3,
+            "hits1": 14,
+            "hits3": 60
+          },
+          "frequency": {
+            "top1": 0.13,
+            "top3": 0.275,
+            "hits1": 26,
+            "hits3": 55
+          },
+          "markov_fallback": {
+            "top1": 0.07,
+            "top3": 0.3,
+            "hits1": 14,
+            "hits3": 60
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.1,
+            "top3": 0.265,
+            "hits1": 20,
+            "hits3": 53
+          },
+          "frequency": {
+            "top1": 0.14,
+            "top3": 0.31,
+            "hits1": 28,
+            "hits3": 62
+          },
+          "markov_fallback": {
+            "top1": 0.1,
+            "top3": 0.265,
+            "hits1": 20,
+            "hits3": 53
+          }
+        }
+      ]
+    },
+    "0.25": {
+      "s": 0.25,
+      "markov_top1_mean": 0.27875,
+      "markov_top1_se": 0.009360295485664295,
+      "frequency_top1_mean": 0.08325,
+      "oracle_top1": 0.3181818181818182,
+      "diff_from_oracle": 0.03943181818181818,
+      "replicate_summaries": [
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.27,
+            "top3": 0.405,
+            "hits1": 54,
+            "hits3": 81
+          },
+          "frequency": {
+            "top1": 0.065,
+            "top3": 0.23,
+            "hits1": 13,
+            "hits3": 46
+          },
+          "markov_fallback": {
+            "top1": 0.27,
+            "top3": 0.405,
+            "hits1": 54,
+            "hits3": 81
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.24,
+            "top3": 0.43,
+            "hits1": 48,
+            "hits3": 86
+          },
+          "frequency": {
+            "top1": 0.085,
+            "top3": 0.335,
+            "hits1": 17,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 0.24,
+            "top3": 0.43,
+            "hits1": 48,
+            "hits3": 86
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.285,
+            "top3": 0.425,
+            "hits1": 57,
+            "hits3": 85
+          },
+          "frequency": {
+            "top1": 0.055,
+            "top3": 0.275,
+            "hits1": 11,
+            "hits3": 55
+          },
+          "markov_fallback": {
+            "top1": 0.285,
+            "top3": 0.425,
+            "hits1": 57,
+            "hits3": 85
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.26,
+            "top3": 0.46,
+            "hits1": 52,
+            "hits3": 92
+          },
+          "frequency": {
+            "top1": 0.09,
+            "top3": 0.325,
+            "hits1": 18,
+            "hits3": 65
+          },
+          "markov_fallback": {
+            "top1": 0.26,
+            "top3": 0.46,
+            "hits1": 52,
+            "hits3": 92
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.26,
+            "top3": 0.44,
+            "hits1": 52,
+            "hits3": 88
+          },
+          "frequency": {
+            "top1": 0.045,
+            "top3": 0.2,
+            "hits1": 9,
+            "hits3": 40
+          },
+          "markov_fallback": {
+            "top1": 0.26,
+            "top3": 0.44,
+            "hits1": 52,
+            "hits3": 88
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.26,
+            "top3": 0.395,
+            "hits1": 52,
+            "hits3": 79
+          },
+          "frequency": {
+            "top1": 0.125,
+            "top3": 0.255,
+            "hits1": 25,
+            "hits3": 51
+          },
+          "markov_fallback": {
+            "top1": 0.26,
+            "top3": 0.395,
+            "hits1": 52,
+            "hits3": 79
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.3,
+            "top3": 0.42,
+            "hits1": 60,
+            "hits3": 84
+          },
+          "frequency": {
+            "top1": 0.055,
+            "top3": 0.205,
+            "hits1": 11,
+            "hits3": 41
+          },
+          "markov_fallback": {
+            "top1": 0.3,
+            "top3": 0.42,
+            "hits1": 60,
+            "hits3": 84
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.295,
+            "top3": 0.385,
+            "hits1": 59,
+            "hits3": 77
+          },
+          "frequency": {
+            "top1": 0.02,
+            "top3": 0.155,
+            "hits1": 4,
+            "hits3": 31
+          },
+          "markov_fallback": {
+            "top1": 0.295,
+            "top3": 0.385,
+            "hits1": 59,
+            "hits3": 77
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.37,
+            "top3": 0.505,
+            "hits1": 74,
+            "hits3": 101
+          },
+          "frequency": {
+            "top1": 0.09,
+            "top3": 0.22,
+            "hits1": 18,
+            "hits3": 44
+          },
+          "markov_fallback": {
+            "top1": 0.37,
+            "top3": 0.505,
+            "hits1": 74,
+            "hits3": 101
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.285,
+            "top3": 0.44,
+            "hits1": 57,
+            "hits3": 88
+          },
+          "frequency": {
+            "top1": 0.14,
+            "top3": 0.315,
+            "hits1": 28,
+            "hits3": 63
+          },
+          "markov_fallback": {
+            "top1": 0.285,
+            "top3": 0.44,
+            "hits1": 57,
+            "hits3": 88
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.29,
+            "top3": 0.425,
+            "hits1": 58,
+            "hits3": 85
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.22,
+            "hits1": 16,
+            "hits3": 44
+          },
+          "markov_fallback": {
+            "top1": 0.29,
+            "top3": 0.425,
+            "hits1": 58,
+            "hits3": 85
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.315,
+            "top3": 0.485,
+            "hits1": 63,
+            "hits3": 97
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.3,
+            "hits1": 19,
+            "hits3": 60
+          },
+          "markov_fallback": {
+            "top1": 0.315,
+            "top3": 0.485,
+            "hits1": 63,
+            "hits3": 97
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.25,
+            "top3": 0.41,
+            "hits1": 50,
+            "hits3": 82
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.285,
+            "hits1": 15,
+            "hits3": 57
+          },
+          "markov_fallback": {
+            "top1": 0.25,
+            "top3": 0.41,
+            "hits1": 50,
+            "hits3": 82
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.335,
+            "top3": 0.51,
+            "hits1": 67,
+            "hits3": 102
+          },
+          "frequency": {
+            "top1": 0.11,
+            "top3": 0.215,
+            "hits1": 22,
+            "hits3": 43
+          },
+          "markov_fallback": {
+            "top1": 0.335,
+            "top3": 0.51,
+            "hits1": 67,
+            "hits3": 102
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.32,
+            "top3": 0.51,
+            "hits1": 64,
+            "hits3": 102
+          },
+          "frequency": {
+            "top1": 0.115,
+            "top3": 0.295,
+            "hits1": 23,
+            "hits3": 59
+          },
+          "markov_fallback": {
+            "top1": 0.32,
+            "top3": 0.51,
+            "hits1": 64,
+            "hits3": 102
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.17,
+            "top3": 0.42,
+            "hits1": 34,
+            "hits3": 84
+          },
+          "frequency": {
+            "top1": 0.06,
+            "top3": 0.29,
+            "hits1": 12,
+            "hits3": 58
+          },
+          "markov_fallback": {
+            "top1": 0.17,
+            "top3": 0.42,
+            "hits1": 34,
+            "hits3": 84
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.28,
+            "top3": 0.495,
+            "hits1": 56,
+            "hits3": 99
+          },
+          "frequency": {
+            "top1": 0.125,
+            "top3": 0.265,
+            "hits1": 25,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.28,
+            "top3": 0.495,
+            "hits1": 56,
+            "hits3": 99
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.29,
+            "top3": 0.4,
+            "hits1": 58,
+            "hits3": 80
+          },
+          "frequency": {
+            "top1": 0.11,
+            "top3": 0.305,
+            "hits1": 22,
+            "hits3": 61
+          },
+          "markov_fallback": {
+            "top1": 0.29,
+            "top3": 0.4,
+            "hits1": 58,
+            "hits3": 80
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.27,
+            "top3": 0.465,
+            "hits1": 54,
+            "hits3": 93
+          },
+          "frequency": {
+            "top1": 0.06,
+            "top3": 0.225,
+            "hits1": 12,
+            "hits3": 45
+          },
+          "markov_fallback": {
+            "top1": 0.27,
+            "top3": 0.465,
+            "hits1": 54,
+            "hits3": 93
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.23,
+            "top3": 0.445,
+            "hits1": 46,
+            "hits3": 89
+          },
+          "frequency": {
+            "top1": 0.065,
+            "top3": 0.265,
+            "hits1": 13,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.23,
+            "top3": 0.445,
+            "hits1": 46,
+            "hits3": 89
+          }
+        }
+      ]
+    },
+    "0.5": {
+      "s": 0.5,
+      "markov_top1_mean": 0.536,
+      "markov_top1_se": 0.00711373763628479,
+      "frequency_top1_mean": 0.07075000000000001,
+      "oracle_top1": 0.5454545454545454,
+      "diff_from_oracle": 0.009454545454545382,
+      "replicate_summaries": [
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.465,
+            "top3": 0.6,
+            "hits1": 93,
+            "hits3": 120
+          },
+          "frequency": {
+            "top1": 0.035,
+            "top3": 0.185,
+            "hits1": 7,
+            "hits3": 37
+          },
+          "markov_fallback": {
+            "top1": 0.465,
+            "top3": 0.6,
+            "hits1": 93,
+            "hits3": 120
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.495,
+            "top3": 0.57,
+            "hits1": 99,
+            "hits3": 114
+          },
+          "frequency": {
+            "top1": 0.09,
+            "top3": 0.21,
+            "hits1": 18,
+            "hits3": 42
+          },
+          "markov_fallback": {
+            "top1": 0.495,
+            "top3": 0.57,
+            "hits1": 99,
+            "hits3": 114
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.535,
+            "top3": 0.6,
+            "hits1": 107,
+            "hits3": 120
+          },
+          "frequency": {
+            "top1": 0.05,
+            "top3": 0.22,
+            "hits1": 10,
+            "hits3": 44
+          },
+          "markov_fallback": {
+            "top1": 0.535,
+            "top3": 0.6,
+            "hits1": 107,
+            "hits3": 120
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.53,
+            "top3": 0.605,
+            "hits1": 106,
+            "hits3": 121
+          },
+          "frequency": {
+            "top1": 0.09,
+            "top3": 0.285,
+            "hits1": 18,
+            "hits3": 57
+          },
+          "markov_fallback": {
+            "top1": 0.53,
+            "top3": 0.605,
+            "hits1": 106,
+            "hits3": 121
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.58,
+            "top3": 0.645,
+            "hits1": 116,
+            "hits3": 129
+          },
+          "frequency": {
+            "top1": 0.05,
+            "top3": 0.185,
+            "hits1": 10,
+            "hits3": 37
+          },
+          "markov_fallback": {
+            "top1": 0.58,
+            "top3": 0.645,
+            "hits1": 116,
+            "hits3": 129
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.535,
+            "top3": 0.66,
+            "hits1": 107,
+            "hits3": 132
+          },
+          "frequency": {
+            "top1": 0.055,
+            "top3": 0.235,
+            "hits1": 11,
+            "hits3": 47
+          },
+          "markov_fallback": {
+            "top1": 0.535,
+            "top3": 0.66,
+            "hits1": 107,
+            "hits3": 132
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.54,
+            "top3": 0.61,
+            "hits1": 108,
+            "hits3": 122
+          },
+          "frequency": {
+            "top1": 0.1,
+            "top3": 0.265,
+            "hits1": 20,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.54,
+            "top3": 0.61,
+            "hits1": 108,
+            "hits3": 122
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.56,
+            "top3": 0.645,
+            "hits1": 112,
+            "hits3": 129
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.225,
+            "hits1": 15,
+            "hits3": 45
+          },
+          "markov_fallback": {
+            "top1": 0.56,
+            "top3": 0.645,
+            "hits1": 112,
+            "hits3": 129
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.595,
+            "top3": 0.695,
+            "hits1": 119,
+            "hits3": 139
+          },
+          "frequency": {
+            "top1": 0.055,
+            "top3": 0.18,
+            "hits1": 11,
+            "hits3": 36
+          },
+          "markov_fallback": {
+            "top1": 0.595,
+            "top3": 0.695,
+            "hits1": 119,
+            "hits3": 139
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.545,
+            "top3": 0.675,
+            "hits1": 109,
+            "hits3": 135
+          },
+          "frequency": {
+            "top1": 0.1,
+            "top3": 0.32,
+            "hits1": 20,
+            "hits3": 64
+          },
+          "markov_fallback": {
+            "top1": 0.545,
+            "top3": 0.675,
+            "hits1": 109,
+            "hits3": 135
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.555,
+            "top3": 0.655,
+            "hits1": 111,
+            "hits3": 131
+          },
+          "frequency": {
+            "top1": 0.02,
+            "top3": 0.18,
+            "hits1": 4,
+            "hits3": 36
+          },
+          "markov_fallback": {
+            "top1": 0.555,
+            "top3": 0.655,
+            "hits1": 111,
+            "hits3": 131
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.545,
+            "top3": 0.62,
+            "hits1": 109,
+            "hits3": 124
+          },
+          "frequency": {
+            "top1": 0.06,
+            "top3": 0.26,
+            "hits1": 12,
+            "hits3": 52
+          },
+          "markov_fallback": {
+            "top1": 0.545,
+            "top3": 0.62,
+            "hits1": 109,
+            "hits3": 124
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.525,
+            "top3": 0.605,
+            "hits1": 105,
+            "hits3": 121
+          },
+          "frequency": {
+            "top1": 0.04,
+            "top3": 0.23,
+            "hits1": 8,
+            "hits3": 46
+          },
+          "markov_fallback": {
+            "top1": 0.525,
+            "top3": 0.605,
+            "hits1": 105,
+            "hits3": 121
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.57,
+            "top3": 0.67,
+            "hits1": 114,
+            "hits3": 134
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.265,
+            "hits1": 19,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.57,
+            "top3": 0.67,
+            "hits1": 114,
+            "hits3": 134
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.48,
+            "top3": 0.58,
+            "hits1": 96,
+            "hits3": 116
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.265,
+            "hits1": 19,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.48,
+            "top3": 0.58,
+            "hits1": 96,
+            "hits3": 116
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.515,
+            "top3": 0.61,
+            "hits1": 103,
+            "hits3": 122
+          },
+          "frequency": {
+            "top1": 0.115,
+            "top3": 0.23,
+            "hits1": 23,
+            "hits3": 46
+          },
+          "markov_fallback": {
+            "top1": 0.515,
+            "top3": 0.61,
+            "hits1": 103,
+            "hits3": 122
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.525,
+            "top3": 0.69,
+            "hits1": 105,
+            "hits3": 138
+          },
+          "frequency": {
+            "top1": 0.05,
+            "top3": 0.235,
+            "hits1": 10,
+            "hits3": 47
+          },
+          "markov_fallback": {
+            "top1": 0.525,
+            "top3": 0.69,
+            "hits1": 105,
+            "hits3": 138
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.535,
+            "top3": 0.62,
+            "hits1": 107,
+            "hits3": 124
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.25,
+            "hits1": 19,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.535,
+            "top3": 0.62,
+            "hits1": 107,
+            "hits3": 124
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.525,
+            "top3": 0.675,
+            "hits1": 105,
+            "hits3": 135
+          },
+          "frequency": {
+            "top1": 0.07,
+            "top3": 0.235,
+            "hits1": 14,
+            "hits3": 47
+          },
+          "markov_fallback": {
+            "top1": 0.525,
+            "top3": 0.675,
+            "hits1": 105,
+            "hits3": 135
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.565,
+            "top3": 0.65,
+            "hits1": 113,
+            "hits3": 130
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.28,
+            "hits1": 15,
+            "hits3": 56
+          },
+          "markov_fallback": {
+            "top1": 0.565,
+            "top3": 0.65,
+            "hits1": 113,
+            "hits3": 130
+          }
+        }
+      ]
+    },
+    "0.75": {
+      "s": 0.75,
+      "markov_top1_mean": 0.775,
+      "markov_top1_se": 0.006639197795548879,
+      "frequency_top1_mean": 0.081,
+      "oracle_top1": 0.7727272727272727,
+      "diff_from_oracle": 0.002272727272727315,
+      "replicate_summaries": [
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.765,
+            "top3": 0.8,
+            "hits1": 153,
+            "hits3": 160
+          },
+          "frequency": {
+            "top1": 0.07,
+            "top3": 0.23,
+            "hits1": 14,
+            "hits3": 46
+          },
+          "markov_fallback": {
+            "top1": 0.765,
+            "top3": 0.8,
+            "hits1": 153,
+            "hits3": 160
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.76,
+            "top3": 0.795,
+            "hits1": 152,
+            "hits3": 159
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.225,
+            "hits1": 15,
+            "hits3": 45
+          },
+          "markov_fallback": {
+            "top1": 0.76,
+            "top3": 0.795,
+            "hits1": 152,
+            "hits3": 159
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.8,
+            "top3": 0.85,
+            "hits1": 160,
+            "hits3": 170
+          },
+          "frequency": {
+            "top1": 0.07,
+            "top3": 0.18,
+            "hits1": 14,
+            "hits3": 36
+          },
+          "markov_fallback": {
+            "top1": 0.8,
+            "top3": 0.85,
+            "hits1": 160,
+            "hits3": 170
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.735,
+            "top3": 0.765,
+            "hits1": 147,
+            "hits3": 153
+          },
+          "frequency": {
+            "top1": 0.065,
+            "top3": 0.25,
+            "hits1": 13,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.735,
+            "top3": 0.765,
+            "hits1": 147,
+            "hits3": 153
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.735,
+            "top3": 0.77,
+            "hits1": 147,
+            "hits3": 154
+          },
+          "frequency": {
+            "top1": 0.12,
+            "top3": 0.315,
+            "hits1": 24,
+            "hits3": 63
+          },
+          "markov_fallback": {
+            "top1": 0.735,
+            "top3": 0.77,
+            "hits1": 147,
+            "hits3": 154
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.755,
+            "top3": 0.81,
+            "hits1": 151,
+            "hits3": 162
+          },
+          "frequency": {
+            "top1": 0.065,
+            "top3": 0.22,
+            "hits1": 13,
+            "hits3": 44
+          },
+          "markov_fallback": {
+            "top1": 0.755,
+            "top3": 0.81,
+            "hits1": 151,
+            "hits3": 162
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.78,
+            "top3": 0.83,
+            "hits1": 156,
+            "hits3": 166
+          },
+          "frequency": {
+            "top1": 0.105,
+            "top3": 0.28,
+            "hits1": 21,
+            "hits3": 56
+          },
+          "markov_fallback": {
+            "top1": 0.78,
+            "top3": 0.83,
+            "hits1": 156,
+            "hits3": 166
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.78,
+            "top3": 0.815,
+            "hits1": 156,
+            "hits3": 163
+          },
+          "frequency": {
+            "top1": 0.045,
+            "top3": 0.19,
+            "hits1": 9,
+            "hits3": 38
+          },
+          "markov_fallback": {
+            "top1": 0.78,
+            "top3": 0.815,
+            "hits1": 156,
+            "hits3": 163
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.79,
+            "top3": 0.82,
+            "hits1": 158,
+            "hits3": 164
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.225,
+            "hits1": 15,
+            "hits3": 45
+          },
+          "markov_fallback": {
+            "top1": 0.79,
+            "top3": 0.82,
+            "hits1": 158,
+            "hits3": 164
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.79,
+            "top3": 0.82,
+            "hits1": 158,
+            "hits3": 164
+          },
+          "frequency": {
+            "top1": 0.085,
+            "top3": 0.265,
+            "hits1": 17,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.79,
+            "top3": 0.82,
+            "hits1": 158,
+            "hits3": 164
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.72,
+            "top3": 0.75,
+            "hits1": 144,
+            "hits3": 150
+          },
+          "frequency": {
+            "top1": 0.06,
+            "top3": 0.225,
+            "hits1": 12,
+            "hits3": 45
+          },
+          "markov_fallback": {
+            "top1": 0.72,
+            "top3": 0.75,
+            "hits1": 144,
+            "hits3": 150
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.78,
+            "top3": 0.84,
+            "hits1": 156,
+            "hits3": 168
+          },
+          "frequency": {
+            "top1": 0.06,
+            "top3": 0.205,
+            "hits1": 12,
+            "hits3": 41
+          },
+          "markov_fallback": {
+            "top1": 0.78,
+            "top3": 0.84,
+            "hits1": 156,
+            "hits3": 168
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.8,
+            "top3": 0.815,
+            "hits1": 160,
+            "hits3": 163
+          },
+          "frequency": {
+            "top1": 0.075,
+            "top3": 0.26,
+            "hits1": 15,
+            "hits3": 52
+          },
+          "markov_fallback": {
+            "top1": 0.8,
+            "top3": 0.815,
+            "hits1": 160,
+            "hits3": 163
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.8,
+            "top3": 0.805,
+            "hits1": 160,
+            "hits3": 161
+          },
+          "frequency": {
+            "top1": 0.11,
+            "top3": 0.235,
+            "hits1": 22,
+            "hits3": 47
+          },
+          "markov_fallback": {
+            "top1": 0.8,
+            "top3": 0.805,
+            "hits1": 160,
+            "hits3": 161
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.755,
+            "top3": 0.785,
+            "hits1": 151,
+            "hits3": 157
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.275,
+            "hits1": 19,
+            "hits3": 55
+          },
+          "markov_fallback": {
+            "top1": 0.755,
+            "top3": 0.785,
+            "hits1": 151,
+            "hits3": 157
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.76,
+            "top3": 0.82,
+            "hits1": 152,
+            "hits3": 164
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.27,
+            "hits1": 19,
+            "hits3": 54
+          },
+          "markov_fallback": {
+            "top1": 0.76,
+            "top3": 0.82,
+            "hits1": 152,
+            "hits3": 164
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.85,
+            "top3": 0.9,
+            "hits1": 170,
+            "hits3": 180
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 0.85,
+            "top3": 0.9,
+            "hits1": 170,
+            "hits3": 180
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.805,
+            "top3": 0.835,
+            "hits1": 161,
+            "hits3": 167
+          },
+          "frequency": {
+            "top1": 0.045,
+            "top3": 0.185,
+            "hits1": 9,
+            "hits3": 37
+          },
+          "markov_fallback": {
+            "top1": 0.805,
+            "top3": 0.835,
+            "hits1": 161,
+            "hits3": 167
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.78,
+            "top3": 0.785,
+            "hits1": 156,
+            "hits3": 157
+          },
+          "frequency": {
+            "top1": 0.11,
+            "top3": 0.24,
+            "hits1": 22,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 0.78,
+            "top3": 0.785,
+            "hits1": 156,
+            "hits3": 157
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 0.76,
+            "top3": 0.81,
+            "hits1": 152,
+            "hits3": 162
+          },
+          "frequency": {
+            "top1": 0.115,
+            "top3": 0.25,
+            "hits1": 23,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.76,
+            "top3": 0.81,
+            "hits1": 152,
+            "hits3": 162
+          }
+        }
+      ]
+    },
+    "1.0": {
+      "s": 1.0,
+      "markov_top1_mean": 1.0,
+      "markov_top1_se": 0.0,
+      "frequency_top1_mean": 0.08349999999999999,
+      "oracle_top1": 1.0,
+      "diff_from_oracle": 0.0,
+      "replicate_summaries": [
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.26,
+            "hits1": 16,
+            "hits3": 52
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.25,
+            "hits1": 16,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.255,
+            "hits1": 19,
+            "hits3": 51
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.105,
+            "top3": 0.265,
+            "hits1": 21,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.26,
+            "hits1": 16,
+            "hits3": 52
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.25,
+            "hits1": 16,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.25,
+            "hits1": 16,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.265,
+            "hits1": 19,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.25,
+            "hits1": 16,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.265,
+            "hits1": 16,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.095,
+            "top3": 0.255,
+            "hits1": 19,
+            "hits3": 51
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.25,
+            "hits1": 16,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.08,
+            "top3": 0.24,
+            "hits1": 16,
+            "hits3": 48
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        }
+      ]
+    }
+  },
+  "A2": {
+    "markov_top1_mean": 0.23467375385507375,
+    "frequency_top1_mean": 0.24584613597764618,
+    "difference": 0.011172382122572433
+  },
+  "A3": {
+    "0.0": {
+      "s": 0.0,
+      "markov_top1_mean": 0.2001635310705939,
+      "frequency_top1_mean": 0.17301382931753376,
+      "replicate_summaries": [
+        {
+          "n_samples": 184,
+          "markov": {
+            "top1": 0.2608695652173913,
+            "top3": 0.44565217391304346,
+            "hits1": 48,
+            "hits3": 82
+          },
+          "frequency": {
+            "top1": 0.21195652173913043,
+            "top3": 0.3641304347826087,
+            "hits1": 39,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 0.2608695652173913,
+            "top3": 0.44565217391304346,
+            "hits1": 48,
+            "hits3": 82
+          }
+        },
+        {
+          "n_samples": 184,
+          "markov": {
+            "top1": 0.1793478260869565,
+            "top3": 0.44021739130434784,
+            "hits1": 33,
+            "hits3": 81
+          },
+          "frequency": {
+            "top1": 0.1956521739130435,
+            "top3": 0.4076086956521739,
+            "hits1": 36,
+            "hits3": 75
+          },
+          "markov_fallback": {
+            "top1": 0.1793478260869565,
+            "top3": 0.44021739130434784,
+            "hits1": 33,
+            "hits3": 81
+          }
+        },
+        {
+          "n_samples": 183,
+          "markov": {
+            "top1": 0.16393442622950818,
+            "top3": 0.36065573770491804,
+            "hits1": 30,
+            "hits3": 66
+          },
+          "frequency": {
+            "top1": 0.21311475409836064,
+            "top3": 0.3825136612021858,
+            "hits1": 39,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 0.16393442622950818,
+            "top3": 0.36065573770491804,
+            "hits1": 30,
+            "hits3": 66
+          }
+        },
+        {
+          "n_samples": 183,
+          "markov": {
+            "top1": 0.2568306010928962,
+            "top3": 0.3442622950819672,
+            "hits1": 47,
+            "hits3": 63
+          },
+          "frequency": {
+            "top1": 0.16939890710382513,
+            "top3": 0.34972677595628415,
+            "hits1": 31,
+            "hits3": 64
+          },
+          "markov_fallback": {
+            "top1": 0.2568306010928962,
+            "top3": 0.3442622950819672,
+            "hits1": 47,
+            "hits3": 63
+          }
+        },
+        {
+          "n_samples": 179,
+          "markov": {
+            "top1": 0.19553072625698323,
+            "top3": 0.46368715083798884,
+            "hits1": 35,
+            "hits3": 83
+          },
+          "frequency": {
+            "top1": 0.1564245810055866,
+            "top3": 0.35195530726256985,
+            "hits1": 28,
+            "hits3": 63
+          },
+          "markov_fallback": {
+            "top1": 0.19553072625698323,
+            "top3": 0.46368715083798884,
+            "hits1": 35,
+            "hits3": 83
+          }
+        },
+        {
+          "n_samples": 186,
+          "markov": {
+            "top1": 0.13978494623655913,
+            "top3": 0.3709677419354839,
+            "hits1": 26,
+            "hits3": 69
+          },
+          "frequency": {
+            "top1": 0.17204301075268819,
+            "top3": 0.3978494623655914,
+            "hits1": 32,
+            "hits3": 74
+          },
+          "markov_fallback": {
+            "top1": 0.13978494623655913,
+            "top3": 0.3709677419354839,
+            "hits1": 26,
+            "hits3": 69
+          }
+        },
+        {
+          "n_samples": 185,
+          "markov": {
+            "top1": 0.16756756756756758,
+            "top3": 0.35135135135135137,
+            "hits1": 31,
+            "hits3": 65
+          },
+          "frequency": {
+            "top1": 0.12972972972972974,
+            "top3": 0.33513513513513515,
+            "hits1": 24,
+            "hits3": 62
+          },
+          "markov_fallback": {
+            "top1": 0.16756756756756758,
+            "top3": 0.35135135135135137,
+            "hits1": 31,
+            "hits3": 65
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.23529411764705882,
+            "top3": 0.48128342245989303,
+            "hits1": 44,
+            "hits3": 90
+          },
+          "frequency": {
+            "top1": 0.12834224598930483,
+            "top3": 0.26737967914438504,
+            "hits1": 24,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.23529411764705882,
+            "top3": 0.48128342245989303,
+            "hits1": 44,
+            "hits3": 90
+          }
+        },
+        {
+          "n_samples": 179,
+          "markov": {
+            "top1": 0.18435754189944134,
+            "top3": 0.3743016759776536,
+            "hits1": 33,
+            "hits3": 67
+          },
+          "frequency": {
+            "top1": 0.13966480446927373,
+            "top3": 0.27932960893854747,
+            "hits1": 25,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.18435754189944134,
+            "top3": 0.3743016759776536,
+            "hits1": 33,
+            "hits3": 67
+          }
+        },
+        {
+          "n_samples": 186,
+          "markov": {
+            "top1": 0.17204301075268819,
+            "top3": 0.3602150537634409,
+            "hits1": 32,
+            "hits3": 67
+          },
+          "frequency": {
+            "top1": 0.12903225806451613,
+            "top3": 0.3010752688172043,
+            "hits1": 24,
+            "hits3": 56
+          },
+          "markov_fallback": {
+            "top1": 0.17204301075268819,
+            "top3": 0.3602150537634409,
+            "hits1": 32,
+            "hits3": 67
+          }
+        },
+        {
+          "n_samples": 173,
+          "markov": {
+            "top1": 0.24277456647398843,
+            "top3": 0.42196531791907516,
+            "hits1": 42,
+            "hits3": 73
+          },
+          "frequency": {
+            "top1": 0.15606936416184972,
+            "top3": 0.3468208092485549,
+            "hits1": 27,
+            "hits3": 60
+          },
+          "markov_fallback": {
+            "top1": 0.24277456647398843,
+            "top3": 0.42196531791907516,
+            "hits1": 42,
+            "hits3": 73
+          }
+        },
+        {
+          "n_samples": 184,
+          "markov": {
+            "top1": 0.18478260869565216,
+            "top3": 0.32065217391304346,
+            "hits1": 34,
+            "hits3": 59
+          },
+          "frequency": {
+            "top1": 0.13043478260869565,
+            "top3": 0.32608695652173914,
+            "hits1": 24,
+            "hits3": 60
+          },
+          "markov_fallback": {
+            "top1": 0.18478260869565216,
+            "top3": 0.32065217391304346,
+            "hits1": 34,
+            "hits3": 59
+          }
+        },
+        {
+          "n_samples": 175,
+          "markov": {
+            "top1": 0.17714285714285713,
+            "top3": 0.4857142857142857,
+            "hits1": 31,
+            "hits3": 85
+          },
+          "frequency": {
+            "top1": 0.2057142857142857,
+            "top3": 0.3657142857142857,
+            "hits1": 36,
+            "hits3": 64
+          },
+          "markov_fallback": {
+            "top1": 0.17714285714285713,
+            "top3": 0.4857142857142857,
+            "hits1": 31,
+            "hits3": 85
+          }
+        },
+        {
+          "n_samples": 185,
+          "markov": {
+            "top1": 0.2648648648648649,
+            "top3": 0.4756756756756757,
+            "hits1": 49,
+            "hits3": 88
+          },
+          "frequency": {
+            "top1": 0.23243243243243245,
+            "top3": 0.3675675675675676,
+            "hits1": 43,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 0.2648648648648649,
+            "top3": 0.4756756756756757,
+            "hits1": 49,
+            "hits3": 88
+          }
+        },
+        {
+          "n_samples": 176,
+          "markov": {
+            "top1": 0.23295454545454544,
+            "top3": 0.38636363636363635,
+            "hits1": 41,
+            "hits3": 68
+          },
+          "frequency": {
+            "top1": 0.2159090909090909,
+            "top3": 0.3352272727272727,
+            "hits1": 38,
+            "hits3": 59
+          },
+          "markov_fallback": {
+            "top1": 0.23295454545454544,
+            "top3": 0.38636363636363635,
+            "hits1": 41,
+            "hits3": 68
+          }
+        },
+        {
+          "n_samples": 179,
+          "markov": {
+            "top1": 0.18435754189944134,
+            "top3": 0.31843575418994413,
+            "hits1": 33,
+            "hits3": 57
+          },
+          "frequency": {
+            "top1": 0.18435754189944134,
+            "top3": 0.3687150837988827,
+            "hits1": 33,
+            "hits3": 66
+          },
+          "markov_fallback": {
+            "top1": 0.18435754189944134,
+            "top3": 0.31843575418994413,
+            "hits1": 33,
+            "hits3": 57
+          }
+        },
+        {
+          "n_samples": 179,
+          "markov": {
+            "top1": 0.2122905027932961,
+            "top3": 0.44692737430167595,
+            "hits1": 38,
+            "hits3": 80
+          },
+          "frequency": {
+            "top1": 0.15083798882681565,
+            "top3": 0.39664804469273746,
+            "hits1": 27,
+            "hits3": 71
+          },
+          "markov_fallback": {
+            "top1": 0.2122905027932961,
+            "top3": 0.44692737430167595,
+            "hits1": 38,
+            "hits3": 80
+          }
+        },
+        {
+          "n_samples": 183,
+          "markov": {
+            "top1": 0.21311475409836064,
+            "top3": 0.41530054644808745,
+            "hits1": 39,
+            "hits3": 76
+          },
+          "frequency": {
+            "top1": 0.1092896174863388,
+            "top3": 0.30601092896174864,
+            "hits1": 20,
+            "hits3": 56
+          },
+          "markov_fallback": {
+            "top1": 0.21311475409836064,
+            "top3": 0.41530054644808745,
+            "hits1": 39,
+            "hits3": 76
+          }
+        },
+        {
+          "n_samples": 183,
+          "markov": {
+            "top1": 0.20765027322404372,
+            "top3": 0.34972677595628415,
+            "hits1": 38,
+            "hits3": 64
+          },
+          "frequency": {
+            "top1": 0.20765027322404372,
+            "top3": 0.37158469945355194,
+            "hits1": 38,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 0.20765027322404372,
+            "top3": 0.34972677595628415,
+            "hits1": 38,
+            "hits3": 64
+          }
+        },
+        {
+          "n_samples": 180,
+          "markov": {
+            "top1": 0.12777777777777777,
+            "top3": 0.4,
+            "hits1": 23,
+            "hits3": 72
+          },
+          "frequency": {
+            "top1": 0.2222222222222222,
+            "top3": 0.36666666666666664,
+            "hits1": 40,
+            "hits3": 66
+          },
+          "markov_fallback": {
+            "top1": 0.12777777777777777,
+            "top3": 0.4,
+            "hits1": 23,
+            "hits3": 72
+          }
+        }
+      ]
+    },
+    "0.25": {
+      "s": 0.25,
+      "markov_top1_mean": 0.40994957844173285,
+      "frequency_top1_mean": 0.1746978069889384,
+      "replicate_summaries": [
+        {
+          "n_samples": 183,
+          "markov": {
+            "top1": 0.4371584699453552,
+            "top3": 0.5846994535519126,
+            "hits1": 80,
+            "hits3": 107
+          },
+          "frequency": {
+            "top1": 0.15300546448087432,
+            "top3": 0.3989071038251366,
+            "hits1": 28,
+            "hits3": 73
+          },
+          "markov_fallback": {
+            "top1": 0.4371584699453552,
+            "top3": 0.5846994535519126,
+            "hits1": 80,
+            "hits3": 107
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.34759358288770054,
+            "top3": 0.5401069518716578,
+            "hits1": 65,
+            "hits3": 101
+          },
+          "frequency": {
+            "top1": 0.1711229946524064,
+            "top3": 0.40641711229946526,
+            "hits1": 32,
+            "hits3": 76
+          },
+          "markov_fallback": {
+            "top1": 0.34759358288770054,
+            "top3": 0.5401069518716578,
+            "hits1": 65,
+            "hits3": 101
+          }
+        },
+        {
+          "n_samples": 193,
+          "markov": {
+            "top1": 0.37305699481865284,
+            "top3": 0.5492227979274611,
+            "hits1": 72,
+            "hits3": 106
+          },
+          "frequency": {
+            "top1": 0.21761658031088082,
+            "top3": 0.3626943005181347,
+            "hits1": 42,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 0.37305699481865284,
+            "top3": 0.5492227979274611,
+            "hits1": 72,
+            "hits3": 106
+          }
+        },
+        {
+          "n_samples": 186,
+          "markov": {
+            "top1": 0.3655913978494624,
+            "top3": 0.5860215053763441,
+            "hits1": 68,
+            "hits3": 109
+          },
+          "frequency": {
+            "top1": 0.20430107526881722,
+            "top3": 0.3924731182795699,
+            "hits1": 38,
+            "hits3": 73
+          },
+          "markov_fallback": {
+            "top1": 0.3655913978494624,
+            "top3": 0.5860215053763441,
+            "hits1": 68,
+            "hits3": 109
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.37967914438502676,
+            "top3": 0.5294117647058824,
+            "hits1": 71,
+            "hits3": 99
+          },
+          "frequency": {
+            "top1": 0.16042780748663102,
+            "top3": 0.37967914438502676,
+            "hits1": 30,
+            "hits3": 71
+          },
+          "markov_fallback": {
+            "top1": 0.37967914438502676,
+            "top3": 0.5294117647058824,
+            "hits1": 71,
+            "hits3": 99
+          }
+        },
+        {
+          "n_samples": 185,
+          "markov": {
+            "top1": 0.3783783783783784,
+            "top3": 0.5243243243243243,
+            "hits1": 70,
+            "hits3": 97
+          },
+          "frequency": {
+            "top1": 0.20540540540540542,
+            "top3": 0.34054054054054056,
+            "hits1": 38,
+            "hits3": 63
+          },
+          "markov_fallback": {
+            "top1": 0.3783783783783784,
+            "top3": 0.5243243243243243,
+            "hits1": 70,
+            "hits3": 97
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.4385026737967914,
+            "top3": 0.5721925133689839,
+            "hits1": 82,
+            "hits3": 107
+          },
+          "frequency": {
+            "top1": 0.17647058823529413,
+            "top3": 0.34759358288770054,
+            "hits1": 33,
+            "hits3": 65
+          },
+          "markov_fallback": {
+            "top1": 0.4385026737967914,
+            "top3": 0.5721925133689839,
+            "hits1": 82,
+            "hits3": 107
+          }
+        },
+        {
+          "n_samples": 186,
+          "markov": {
+            "top1": 0.40860215053763443,
+            "top3": 0.5752688172043011,
+            "hits1": 76,
+            "hits3": 107
+          },
+          "frequency": {
+            "top1": 0.0967741935483871,
+            "top3": 0.23655913978494625,
+            "hits1": 18,
+            "hits3": 44
+          },
+          "markov_fallback": {
+            "top1": 0.40860215053763443,
+            "top3": 0.5752688172043011,
+            "hits1": 76,
+            "hits3": 107
+          }
+        },
+        {
+          "n_samples": 190,
+          "markov": {
+            "top1": 0.4842105263157895,
+            "top3": 0.5947368421052631,
+            "hits1": 92,
+            "hits3": 113
+          },
+          "frequency": {
+            "top1": 0.18421052631578946,
+            "top3": 0.39473684210526316,
+            "hits1": 35,
+            "hits3": 75
+          },
+          "markov_fallback": {
+            "top1": 0.4842105263157895,
+            "top3": 0.5947368421052631,
+            "hits1": 92,
+            "hits3": 113
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.43315508021390375,
+            "top3": 0.5882352941176471,
+            "hits1": 81,
+            "hits3": 110
+          },
+          "frequency": {
+            "top1": 0.24064171122994651,
+            "top3": 0.42780748663101603,
+            "hits1": 45,
+            "hits3": 80
+          },
+          "markov_fallback": {
+            "top1": 0.43315508021390375,
+            "top3": 0.5882352941176471,
+            "hits1": 81,
+            "hits3": 110
+          }
+        },
+        {
+          "n_samples": 185,
+          "markov": {
+            "top1": 0.31351351351351353,
+            "top3": 0.5567567567567567,
+            "hits1": 58,
+            "hits3": 103
+          },
+          "frequency": {
+            "top1": 0.11891891891891893,
+            "top3": 0.2810810810810811,
+            "hits1": 22,
+            "hits3": 52
+          },
+          "markov_fallback": {
+            "top1": 0.31351351351351353,
+            "top3": 0.5567567567567567,
+            "hits1": 58,
+            "hits3": 103
+          }
+        },
+        {
+          "n_samples": 188,
+          "markov": {
+            "top1": 0.44148936170212766,
+            "top3": 0.5585106382978723,
+            "hits1": 83,
+            "hits3": 105
+          },
+          "frequency": {
+            "top1": 0.15425531914893617,
+            "top3": 0.3191489361702128,
+            "hits1": 29,
+            "hits3": 60
+          },
+          "markov_fallback": {
+            "top1": 0.44148936170212766,
+            "top3": 0.5585106382978723,
+            "hits1": 83,
+            "hits3": 105
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.41711229946524064,
+            "top3": 0.5935828877005348,
+            "hits1": 78,
+            "hits3": 111
+          },
+          "frequency": {
+            "top1": 0.13903743315508021,
+            "top3": 0.2994652406417112,
+            "hits1": 26,
+            "hits3": 56
+          },
+          "markov_fallback": {
+            "top1": 0.41711229946524064,
+            "top3": 0.5935828877005348,
+            "hits1": 78,
+            "hits3": 111
+          }
+        },
+        {
+          "n_samples": 186,
+          "markov": {
+            "top1": 0.478494623655914,
+            "top3": 0.6774193548387096,
+            "hits1": 89,
+            "hits3": 126
+          },
+          "frequency": {
+            "top1": 0.20430107526881722,
+            "top3": 0.3387096774193548,
+            "hits1": 38,
+            "hits3": 63
+          },
+          "markov_fallback": {
+            "top1": 0.478494623655914,
+            "top3": 0.6774193548387096,
+            "hits1": 89,
+            "hits3": 126
+          }
+        },
+        {
+          "n_samples": 188,
+          "markov": {
+            "top1": 0.44148936170212766,
+            "top3": 0.6329787234042553,
+            "hits1": 83,
+            "hits3": 119
+          },
+          "frequency": {
+            "top1": 0.19148936170212766,
+            "top3": 0.3723404255319149,
+            "hits1": 36,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 0.44148936170212766,
+            "top3": 0.6329787234042553,
+            "hits1": 83,
+            "hits3": 119
+          }
+        },
+        {
+          "n_samples": 184,
+          "markov": {
+            "top1": 0.358695652173913,
+            "top3": 0.5217391304347826,
+            "hits1": 66,
+            "hits3": 96
+          },
+          "frequency": {
+            "top1": 0.06521739130434782,
+            "top3": 0.21195652173913043,
+            "hits1": 12,
+            "hits3": 39
+          },
+          "markov_fallback": {
+            "top1": 0.358695652173913,
+            "top3": 0.5217391304347826,
+            "hits1": 66,
+            "hits3": 96
+          }
+        },
+        {
+          "n_samples": 182,
+          "markov": {
+            "top1": 0.43956043956043955,
+            "top3": 0.5879120879120879,
+            "hits1": 80,
+            "hits3": 107
+          },
+          "frequency": {
+            "top1": 0.2087912087912088,
+            "top3": 0.34065934065934067,
+            "hits1": 38,
+            "hits3": 62
+          },
+          "markov_fallback": {
+            "top1": 0.43956043956043955,
+            "top3": 0.5879120879120879,
+            "hits1": 80,
+            "hits3": 107
+          }
+        },
+        {
+          "n_samples": 183,
+          "markov": {
+            "top1": 0.3879781420765027,
+            "top3": 0.5901639344262295,
+            "hits1": 71,
+            "hits3": 108
+          },
+          "frequency": {
+            "top1": 0.1912568306010929,
+            "top3": 0.2896174863387978,
+            "hits1": 35,
+            "hits3": 53
+          },
+          "markov_fallback": {
+            "top1": 0.3879781420765027,
+            "top3": 0.5901639344262295,
+            "hits1": 71,
+            "hits3": 108
+          }
+        },
+        {
+          "n_samples": 188,
+          "markov": {
+            "top1": 0.425531914893617,
+            "top3": 0.5638297872340425,
+            "hits1": 80,
+            "hits3": 106
+          },
+          "frequency": {
+            "top1": 0.19680851063829788,
+            "top3": 0.4148936170212766,
+            "hits1": 37,
+            "hits3": 78
+          },
+          "markov_fallback": {
+            "top1": 0.425531914893617,
+            "top3": 0.5638297872340425,
+            "hits1": 80,
+            "hits3": 106
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.44919786096256686,
+            "top3": 0.6096256684491979,
+            "hits1": 84,
+            "hits3": 114
+          },
+          "frequency": {
+            "top1": 0.21390374331550802,
+            "top3": 0.40106951871657753,
+            "hits1": 40,
+            "hits3": 75
+          },
+          "markov_fallback": {
+            "top1": 0.44919786096256686,
+            "top3": 0.6096256684491979,
+            "hits1": 84,
+            "hits3": 114
+          }
+        }
+      ]
+    },
+    "0.5": {
+      "s": 0.5,
+      "markov_top1_mean": 0.6156776551121679,
+      "frequency_top1_mean": 0.16147769869042658,
+      "replicate_summaries": [
+        {
+          "n_samples": 192,
+          "markov": {
+            "top1": 0.5416666666666666,
+            "top3": 0.671875,
+            "hits1": 104,
+            "hits3": 129
+          },
+          "frequency": {
+            "top1": 0.14583333333333334,
+            "top3": 0.359375,
+            "hits1": 28,
+            "hits3": 69
+          },
+          "markov_fallback": {
+            "top1": 0.5416666666666666,
+            "top3": 0.671875,
+            "hits1": 104,
+            "hits3": 129
+          }
+        },
+        {
+          "n_samples": 193,
+          "markov": {
+            "top1": 0.5699481865284974,
+            "top3": 0.6787564766839378,
+            "hits1": 110,
+            "hits3": 131
+          },
+          "frequency": {
+            "top1": 0.21761658031088082,
+            "top3": 0.38341968911917096,
+            "hits1": 42,
+            "hits3": 74
+          },
+          "markov_fallback": {
+            "top1": 0.5699481865284974,
+            "top3": 0.6787564766839378,
+            "hits1": 110,
+            "hits3": 131
+          }
+        },
+        {
+          "n_samples": 188,
+          "markov": {
+            "top1": 0.5957446808510638,
+            "top3": 0.6861702127659575,
+            "hits1": 112,
+            "hits3": 129
+          },
+          "frequency": {
+            "top1": 0.20212765957446807,
+            "top3": 0.35106382978723405,
+            "hits1": 38,
+            "hits3": 66
+          },
+          "markov_fallback": {
+            "top1": 0.5957446808510638,
+            "top3": 0.6861702127659575,
+            "hits1": 112,
+            "hits3": 129
+          }
+        },
+        {
+          "n_samples": 193,
+          "markov": {
+            "top1": 0.5958549222797928,
+            "top3": 0.7202072538860104,
+            "hits1": 115,
+            "hits3": 139
+          },
+          "frequency": {
+            "top1": 0.16580310880829016,
+            "top3": 0.40414507772020725,
+            "hits1": 32,
+            "hits3": 78
+          },
+          "markov_fallback": {
+            "top1": 0.5958549222797928,
+            "top3": 0.7202072538860104,
+            "hits1": 115,
+            "hits3": 139
+          }
+        },
+        {
+          "n_samples": 194,
+          "markov": {
+            "top1": 0.634020618556701,
+            "top3": 0.711340206185567,
+            "hits1": 123,
+            "hits3": 138
+          },
+          "frequency": {
+            "top1": 0.16494845360824742,
+            "top3": 0.3402061855670103,
+            "hits1": 32,
+            "hits3": 66
+          },
+          "markov_fallback": {
+            "top1": 0.634020618556701,
+            "top3": 0.711340206185567,
+            "hits1": 123,
+            "hits3": 138
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.6310160427807486,
+            "top3": 0.679144385026738,
+            "hits1": 118,
+            "hits3": 127
+          },
+          "frequency": {
+            "top1": 0.10695187165775401,
+            "top3": 0.26737967914438504,
+            "hits1": 20,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.6310160427807486,
+            "top3": 0.679144385026738,
+            "hits1": 118,
+            "hits3": 127
+          }
+        },
+        {
+          "n_samples": 191,
+          "markov": {
+            "top1": 0.6073298429319371,
+            "top3": 0.6387434554973822,
+            "hits1": 116,
+            "hits3": 122
+          },
+          "frequency": {
+            "top1": 0.17277486910994763,
+            "top3": 0.31413612565445026,
+            "hits1": 33,
+            "hits3": 60
+          },
+          "markov_fallback": {
+            "top1": 0.6073298429319371,
+            "top3": 0.6387434554973822,
+            "hits1": 116,
+            "hits3": 122
+          }
+        },
+        {
+          "n_samples": 192,
+          "markov": {
+            "top1": 0.625,
+            "top3": 0.7552083333333334,
+            "hits1": 120,
+            "hits3": 145
+          },
+          "frequency": {
+            "top1": 0.18229166666666666,
+            "top3": 0.3645833333333333,
+            "hits1": 35,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 0.625,
+            "top3": 0.7552083333333334,
+            "hits1": 120,
+            "hits3": 145
+          }
+        },
+        {
+          "n_samples": 196,
+          "markov": {
+            "top1": 0.6530612244897959,
+            "top3": 0.7346938775510204,
+            "hits1": 128,
+            "hits3": 144
+          },
+          "frequency": {
+            "top1": 0.12755102040816327,
+            "top3": 0.2755102040816326,
+            "hits1": 25,
+            "hits3": 54
+          },
+          "markov_fallback": {
+            "top1": 0.6530612244897959,
+            "top3": 0.7346938775510204,
+            "hits1": 128,
+            "hits3": 144
+          }
+        },
+        {
+          "n_samples": 194,
+          "markov": {
+            "top1": 0.6082474226804123,
+            "top3": 0.7010309278350515,
+            "hits1": 118,
+            "hits3": 136
+          },
+          "frequency": {
+            "top1": 0.15463917525773196,
+            "top3": 0.3247422680412371,
+            "hits1": 30,
+            "hits3": 63
+          },
+          "markov_fallback": {
+            "top1": 0.6082474226804123,
+            "top3": 0.7010309278350515,
+            "hits1": 118,
+            "hits3": 136
+          }
+        },
+        {
+          "n_samples": 190,
+          "markov": {
+            "top1": 0.6,
+            "top3": 0.7052631578947368,
+            "hits1": 114,
+            "hits3": 134
+          },
+          "frequency": {
+            "top1": 0.10526315789473684,
+            "top3": 0.28421052631578947,
+            "hits1": 20,
+            "hits3": 54
+          },
+          "markov_fallback": {
+            "top1": 0.6,
+            "top3": 0.7052631578947368,
+            "hits1": 114,
+            "hits3": 134
+          }
+        },
+        {
+          "n_samples": 187,
+          "markov": {
+            "top1": 0.6417112299465241,
+            "top3": 0.7112299465240641,
+            "hits1": 120,
+            "hits3": 133
+          },
+          "frequency": {
+            "top1": 0.13903743315508021,
+            "top3": 0.37967914438502676,
+            "hits1": 26,
+            "hits3": 71
+          },
+          "markov_fallback": {
+            "top1": 0.6417112299465241,
+            "top3": 0.7112299465240641,
+            "hits1": 120,
+            "hits3": 133
+          }
+        },
+        {
+          "n_samples": 188,
+          "markov": {
+            "top1": 0.6276595744680851,
+            "top3": 0.75,
+            "hits1": 118,
+            "hits3": 141
+          },
+          "frequency": {
+            "top1": 0.1702127659574468,
+            "top3": 0.324468085106383,
+            "hits1": 32,
+            "hits3": 61
+          },
+          "markov_fallback": {
+            "top1": 0.6276595744680851,
+            "top3": 0.75,
+            "hits1": 118,
+            "hits3": 141
+          }
+        },
+        {
+          "n_samples": 188,
+          "markov": {
+            "top1": 0.6542553191489362,
+            "top3": 0.723404255319149,
+            "hits1": 123,
+            "hits3": 136
+          },
+          "frequency": {
+            "top1": 0.18085106382978725,
+            "top3": 0.3617021276595745,
+            "hits1": 34,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 0.6542553191489362,
+            "top3": 0.723404255319149,
+            "hits1": 123,
+            "hits3": 136
+          }
+        },
+        {
+          "n_samples": 190,
+          "markov": {
+            "top1": 0.5789473684210527,
+            "top3": 0.7315789473684211,
+            "hits1": 110,
+            "hits3": 139
+          },
+          "frequency": {
+            "top1": 0.1631578947368421,
+            "top3": 0.3368421052631579,
+            "hits1": 31,
+            "hits3": 64
+          },
+          "markov_fallback": {
+            "top1": 0.5789473684210527,
+            "top3": 0.7315789473684211,
+            "hits1": 110,
+            "hits3": 139
+          }
+        },
+        {
+          "n_samples": 191,
+          "markov": {
+            "top1": 0.6335078534031413,
+            "top3": 0.7015706806282722,
+            "hits1": 121,
+            "hits3": 134
+          },
+          "frequency": {
+            "top1": 0.14659685863874344,
+            "top3": 0.3403141361256545,
+            "hits1": 28,
+            "hits3": 65
+          },
+          "markov_fallback": {
+            "top1": 0.6335078534031413,
+            "top3": 0.7015706806282722,
+            "hits1": 121,
+            "hits3": 134
+          }
+        },
+        {
+          "n_samples": 191,
+          "markov": {
+            "top1": 0.6282722513089005,
+            "top3": 0.7225130890052356,
+            "hits1": 120,
+            "hits3": 138
+          },
+          "frequency": {
+            "top1": 0.20418848167539266,
+            "top3": 0.32460732984293195,
+            "hits1": 39,
+            "hits3": 62
+          },
+          "markov_fallback": {
+            "top1": 0.6282722513089005,
+            "top3": 0.7225130890052356,
+            "hits1": 120,
+            "hits3": 138
+          }
+        },
+        {
+          "n_samples": 189,
+          "markov": {
+            "top1": 0.6243386243386243,
+            "top3": 0.7142857142857143,
+            "hits1": 118,
+            "hits3": 135
+          },
+          "frequency": {
+            "top1": 0.14814814814814814,
+            "top3": 0.32275132275132273,
+            "hits1": 28,
+            "hits3": 61
+          },
+          "markov_fallback": {
+            "top1": 0.6243386243386243,
+            "top3": 0.7142857142857143,
+            "hits1": 118,
+            "hits3": 135
+          }
+        },
+        {
+          "n_samples": 189,
+          "markov": {
+            "top1": 0.6137566137566137,
+            "top3": 0.7301587301587301,
+            "hits1": 116,
+            "hits3": 138
+          },
+          "frequency": {
+            "top1": 0.164021164021164,
+            "top3": 0.3439153439153439,
+            "hits1": 31,
+            "hits3": 65
+          },
+          "markov_fallback": {
+            "top1": 0.6137566137566137,
+            "top3": 0.7301587301587301,
+            "hits1": 116,
+            "hits3": 138
+          }
+        },
+        {
+          "n_samples": 191,
+          "markov": {
+            "top1": 0.6492146596858639,
+            "top3": 0.7277486910994765,
+            "hits1": 124,
+            "hits3": 139
+          },
+          "frequency": {
+            "top1": 0.16753926701570682,
+            "top3": 0.38219895287958117,
+            "hits1": 32,
+            "hits3": 73
+          },
+          "markov_fallback": {
+            "top1": 0.6492146596858639,
+            "top3": 0.7277486910994765,
+            "hits1": 124,
+            "hits3": 139
+          }
+        }
+      ]
+    },
+    "0.75": {
+      "s": 0.75,
+      "markov_top1_mean": 0.8145512624441104,
+      "frequency_top1_mean": 0.16305843142184007,
+      "replicate_summaries": [
+        {
+          "n_samples": 197,
+          "markov": {
+            "top1": 0.817258883248731,
+            "top3": 0.8984771573604061,
+            "hits1": 161,
+            "hits3": 177
+          },
+          "frequency": {
+            "top1": 0.16243654822335024,
+            "top3": 0.36548223350253806,
+            "hits1": 32,
+            "hits3": 72
+          },
+          "markov_fallback": {
+            "top1": 0.817258883248731,
+            "top3": 0.8984771573604061,
+            "hits1": 161,
+            "hits3": 177
+          }
+        },
+        {
+          "n_samples": 199,
+          "markov": {
+            "top1": 0.8040201005025126,
+            "top3": 0.8592964824120602,
+            "hits1": 160,
+            "hits3": 171
+          },
+          "frequency": {
+            "top1": 0.16080402010050251,
+            "top3": 0.31155778894472363,
+            "hits1": 32,
+            "hits3": 62
+          },
+          "markov_fallback": {
+            "top1": 0.8040201005025126,
+            "top3": 0.8592964824120602,
+            "hits1": 160,
+            "hits3": 171
+          }
+        },
+        {
+          "n_samples": 194,
+          "markov": {
+            "top1": 0.845360824742268,
+            "top3": 0.9123711340206185,
+            "hits1": 164,
+            "hits3": 177
+          },
+          "frequency": {
+            "top1": 0.13917525773195877,
+            "top3": 0.30412371134020616,
+            "hits1": 27,
+            "hits3": 59
+          },
+          "markov_fallback": {
+            "top1": 0.845360824742268,
+            "top3": 0.9123711340206185,
+            "hits1": 164,
+            "hits3": 177
+          }
+        },
+        {
+          "n_samples": 199,
+          "markov": {
+            "top1": 0.7487437185929648,
+            "top3": 0.8040201005025126,
+            "hits1": 149,
+            "hits3": 160
+          },
+          "frequency": {
+            "top1": 0.16080402010050251,
+            "top3": 0.33668341708542715,
+            "hits1": 32,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 0.7487437185929648,
+            "top3": 0.8040201005025126,
+            "hits1": 149,
+            "hits3": 160
+          }
+        },
+        {
+          "n_samples": 196,
+          "markov": {
+            "top1": 0.7755102040816326,
+            "top3": 0.8520408163265306,
+            "hits1": 152,
+            "hits3": 167
+          },
+          "frequency": {
+            "top1": 0.12755102040816327,
+            "top3": 0.25510204081632654,
+            "hits1": 25,
+            "hits3": 50
+          },
+          "markov_fallback": {
+            "top1": 0.7755102040816326,
+            "top3": 0.8520408163265306,
+            "hits1": 152,
+            "hits3": 167
+          }
+        },
+        {
+          "n_samples": 192,
+          "markov": {
+            "top1": 0.8229166666666666,
+            "top3": 0.859375,
+            "hits1": 158,
+            "hits3": 165
+          },
+          "frequency": {
+            "top1": 0.19791666666666666,
+            "top3": 0.3854166666666667,
+            "hits1": 38,
+            "hits3": 74
+          },
+          "markov_fallback": {
+            "top1": 0.8229166666666666,
+            "top3": 0.859375,
+            "hits1": 158,
+            "hits3": 165
+          }
+        },
+        {
+          "n_samples": 198,
+          "markov": {
+            "top1": 0.8080808080808081,
+            "top3": 0.8535353535353535,
+            "hits1": 160,
+            "hits3": 169
+          },
+          "frequency": {
+            "top1": 0.1414141414141414,
+            "top3": 0.30303030303030304,
+            "hits1": 28,
+            "hits3": 60
+          },
+          "markov_fallback": {
+            "top1": 0.8080808080808081,
+            "top3": 0.8535353535353535,
+            "hits1": 160,
+            "hits3": 169
+          }
+        },
+        {
+          "n_samples": 198,
+          "markov": {
+            "top1": 0.8131313131313131,
+            "top3": 0.8787878787878788,
+            "hits1": 161,
+            "hits3": 174
+          },
+          "frequency": {
+            "top1": 0.19696969696969696,
+            "top3": 0.35858585858585856,
+            "hits1": 39,
+            "hits3": 71
+          },
+          "markov_fallback": {
+            "top1": 0.8131313131313131,
+            "top3": 0.8787878787878788,
+            "hits1": 161,
+            "hits3": 174
+          }
+        },
+        {
+          "n_samples": 195,
+          "markov": {
+            "top1": 0.8205128205128205,
+            "top3": 0.8615384615384616,
+            "hits1": 160,
+            "hits3": 168
+          },
+          "frequency": {
+            "top1": 0.14871794871794872,
+            "top3": 0.3282051282051282,
+            "hits1": 29,
+            "hits3": 64
+          },
+          "markov_fallback": {
+            "top1": 0.8205128205128205,
+            "top3": 0.8615384615384616,
+            "hits1": 160,
+            "hits3": 168
+          }
+        },
+        {
+          "n_samples": 197,
+          "markov": {
+            "top1": 0.8121827411167513,
+            "top3": 0.8527918781725888,
+            "hits1": 160,
+            "hits3": 168
+          },
+          "frequency": {
+            "top1": 0.15736040609137056,
+            "top3": 0.3401015228426396,
+            "hits1": 31,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 0.8121827411167513,
+            "top3": 0.8527918781725888,
+            "hits1": 160,
+            "hits3": 168
+          }
+        },
+        {
+          "n_samples": 194,
+          "markov": {
+            "top1": 0.7577319587628866,
+            "top3": 0.7989690721649485,
+            "hits1": 147,
+            "hits3": 155
+          },
+          "frequency": {
+            "top1": 0.17010309278350516,
+            "top3": 0.35051546391752575,
+            "hits1": 33,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 0.7577319587628866,
+            "top3": 0.7989690721649485,
+            "hits1": 147,
+            "hits3": 155
+          }
+        },
+        {
+          "n_samples": 191,
+          "markov": {
+            "top1": 0.8534031413612565,
+            "top3": 0.8691099476439791,
+            "hits1": 163,
+            "hits3": 166
+          },
+          "frequency": {
+            "top1": 0.16230366492146597,
+            "top3": 0.35602094240837695,
+            "hits1": 31,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 0.8534031413612565,
+            "top3": 0.8691099476439791,
+            "hits1": 163,
+            "hits3": 166
+          }
+        },
+        {
+          "n_samples": 196,
+          "markov": {
+            "top1": 0.8367346938775511,
+            "top3": 0.8418367346938775,
+            "hits1": 164,
+            "hits3": 165
+          },
+          "frequency": {
+            "top1": 0.15816326530612246,
+            "top3": 0.35714285714285715,
+            "hits1": 31,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 0.8367346938775511,
+            "top3": 0.8418367346938775,
+            "hits1": 164,
+            "hits3": 165
+          }
+        },
+        {
+          "n_samples": 196,
+          "markov": {
+            "top1": 0.8367346938775511,
+            "top3": 0.8673469387755102,
+            "hits1": 164,
+            "hits3": 170
+          },
+          "frequency": {
+            "top1": 0.19387755102040816,
+            "top3": 0.33163265306122447,
+            "hits1": 38,
+            "hits3": 65
+          },
+          "markov_fallback": {
+            "top1": 0.8367346938775511,
+            "top3": 0.8673469387755102,
+            "hits1": 164,
+            "hits3": 170
+          }
+        },
+        {
+          "n_samples": 196,
+          "markov": {
+            "top1": 0.7959183673469388,
+            "top3": 0.8622448979591837,
+            "hits1": 156,
+            "hits3": 169
+          },
+          "frequency": {
+            "top1": 0.15816326530612246,
+            "top3": 0.3520408163265306,
+            "hits1": 31,
+            "hits3": 69
+          },
+          "markov_fallback": {
+            "top1": 0.7959183673469388,
+            "top3": 0.8622448979591837,
+            "hits1": 156,
+            "hits3": 169
+          }
+        },
+        {
+          "n_samples": 191,
+          "markov": {
+            "top1": 0.8115183246073299,
+            "top3": 0.8638743455497382,
+            "hits1": 155,
+            "hits3": 165
+          },
+          "frequency": {
+            "top1": 0.14659685863874344,
+            "top3": 0.3193717277486911,
+            "hits1": 28,
+            "hits3": 61
+          },
+          "markov_fallback": {
+            "top1": 0.8115183246073299,
+            "top3": 0.8638743455497382,
+            "hits1": 155,
+            "hits3": 165
+          }
+        },
+        {
+          "n_samples": 199,
+          "markov": {
+            "top1": 0.8693467336683417,
+            "top3": 0.9346733668341709,
+            "hits1": 173,
+            "hits3": 186
+          },
+          "frequency": {
+            "top1": 0.1457286432160804,
+            "top3": 0.35678391959798994,
+            "hits1": 29,
+            "hits3": 71
+          },
+          "markov_fallback": {
+            "top1": 0.8693467336683417,
+            "top3": 0.9346733668341709,
+            "hits1": 173,
+            "hits3": 186
+          }
+        },
+        {
+          "n_samples": 197,
+          "markov": {
+            "top1": 0.8375634517766497,
+            "top3": 0.883248730964467,
+            "hits1": 165,
+            "hits3": 174
+          },
+          "frequency": {
+            "top1": 0.1319796954314721,
+            "top3": 0.3096446700507614,
+            "hits1": 26,
+            "hits3": 61
+          },
+          "markov_fallback": {
+            "top1": 0.8375634517766497,
+            "top3": 0.883248730964467,
+            "hits1": 165,
+            "hits3": 174
+          }
+        },
+        {
+          "n_samples": 198,
+          "markov": {
+            "top1": 0.8131313131313131,
+            "top3": 0.8686868686868687,
+            "hits1": 161,
+            "hits3": 172
+          },
+          "frequency": {
+            "top1": 0.1919191919191919,
+            "top3": 0.35353535353535354,
+            "hits1": 38,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 0.8131313131313131,
+            "top3": 0.8686868686868687,
+            "hits1": 161,
+            "hits3": 172
+          }
+        },
+        {
+          "n_samples": 196,
+          "markov": {
+            "top1": 0.8112244897959183,
+            "top3": 0.8826530612244898,
+            "hits1": 159,
+            "hits3": 173
+          },
+          "frequency": {
+            "top1": 0.20918367346938777,
+            "top3": 0.40816326530612246,
+            "hits1": 41,
+            "hits3": 80
+          },
+          "markov_fallback": {
+            "top1": 0.8112244897959183,
+            "top3": 0.8826530612244898,
+            "hits1": 159,
+            "hits3": 173
+          }
+        }
+      ]
+    },
+    "1.0": {
+      "s": 1.0,
+      "markov_top1_mean": 1.0,
+      "frequency_top1_mean": 0.16525,
+      "replicate_summaries": [
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.36,
+            "hits1": 32,
+            "hits3": 72
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.48,
+            "hits1": 32,
+            "hits3": 96
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.175,
+            "top3": 0.335,
+            "hits1": 35,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.335,
+            "hits1": 32,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.335,
+            "hits1": 32,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.335,
+            "hits1": 32,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.185,
+            "top3": 0.345,
+            "hits1": 37,
+            "hits3": 69
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.34,
+            "hits1": 32,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.175,
+            "top3": 0.395,
+            "hits1": 35,
+            "hits3": 79
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.36,
+            "hits1": 32,
+            "hits3": 72
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.35,
+            "hits1": 32,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.35,
+            "hits1": 32,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.33,
+            "hits1": 32,
+            "hits3": 66
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.18,
+            "top3": 0.34,
+            "hits1": 36,
+            "hits3": 68
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.175,
+            "top3": 0.345,
+            "hits1": 35,
+            "hits3": 69
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.36,
+            "hits1": 32,
+            "hits3": 72
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.335,
+            "hits1": 32,
+            "hits3": 67
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.35,
+            "hits1": 32,
+            "hits3": 70
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.175,
+            "top3": 0.395,
+            "hits1": 35,
+            "hits3": 79
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        },
+        {
+          "n_samples": 200,
+          "markov": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          },
+          "frequency": {
+            "top1": 0.16,
+            "top3": 0.32,
+            "hits1": 32,
+            "hits3": 64
+          },
+          "markov_fallback": {
+            "top1": 1.0,
+            "top3": 1.0,
+            "hits1": 200,
+            "hits3": 200
+          }
+        }
+      ]
+    }
+  },
+  "negative_control": {
+    "broken_markov_top1": 0.0825,
+    "g1_failed_as_expected": true
+  },
+  "gates": {
+    "G1": {
+      "description": "A1, s=1.0: Markov Top-1 >= 0.98",
+      "threshold": 0.98,
+      "measured": 1.0,
+      "passed": true
+    },
+    "G2": {
+      "description": "A1, s=0.0: |Markov Top-1 - chance| <= max(0.02, 3*SE) (0.0219)",
+      "threshold": 0.021902595376131255,
+      "measured": 0.007409090909090907,
+      "chance": 0.09090909090909091,
+      "passed": true
+    },
+    "G3": {
+      "description": "A1: Markov Top-1 is non-decreasing across five s levels",
+      "measured_trajectory": [
+        0.0835,
+        0.27875,
+        0.536,
+        0.775,
+        1.0
+      ],
+      "passed": true
+    },
+    "G4": {
+      "description": "A1, s >= 0.25: Markov Top-1 within 0.05 of oracle value",
+      "max_difference": 0.03943181818181818,
+      "differences": {
+        "0.25": 0.03943181818181818,
+        "0.5": 0.009454545454545382,
+        "0.75": 0.002272727272727315,
+        "1.0": 0.0
+      },
+      "passed": true
+    },
+    "G5": {
+      "description": "A1, s >= 0.5: Markov Top-1 exceeds Frequency Top-1 by >= 0.20",
+      "min_excess": 0.46525000000000005,
+      "excesses": {
+        "0.5": 0.46525000000000005,
+        "0.75": 0.6940000000000001,
+        "1.0": 0.9165
+      },
+      "passed": true
+    },
+    "G6": {
+      "description": "A2: |Markov Top-1 - Frequency Top-1| <= 0.03 (no order signal)",
+      "measured_markov": 0.23467375385507375,
+      "measured_frequency": 0.24584613597764618,
+      "difference": 0.011172382122572433,
+      "threshold": 0.03,
+      "passed": true
+    },
+    "G7": {
+      "description": "A3, s=1.0: Markov Top-1 >= 0.98 and non-decreasing across s",
+      "s_1_measured": 1.0,
+      "measured_trajectory": [
+        0.2001635310705939,
+        0.40994957844173285,
+        0.6156776551121679,
+        0.8145512624441104,
+        1.0
+      ],
+      "passed": true
+    },
+    "Negative_Control": {
+      "description": "Negative control: A1 at s=1.0 with broken Markov FAILS G1",
+      "broken_markov_top1": 0.0825,
+      "passed": true
+    }
+  }
+}

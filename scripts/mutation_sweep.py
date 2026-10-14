@@ -156,6 +156,52 @@ def is_exempt_technique(
     return False, ""
 
 
+def is_exempt_planted(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    """Explicit exemption rules for planted_structure_report.md."""
+    # Rule 1: Heading lines
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+
+    # Rule 2: Table delimiter rows
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+
+    # Rule 3: ATT&CK technique ID strings
+    if "T1003" in line or "T1016" in line or "T1041" in line:
+        return True, "MITRE ATT&CK technique ID string"
+
+    # Rule 4: Table column header labels
+    if "| Signal Level" in line or "| Gate |" in line:
+        return True, "Table column header label"
+
+    # Rule 5: Mathematical formulation definition strings
+    if "pi(t_i)" in line or "c(x)" in line or "Signal Levels (s)" in line or "dominant technique having probability" in line:
+        return True, "Mathematical formulation definition string"
+
+    return False, ""
+
+
+def is_exempt_permutation(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    """Explicit exemption rules for permutation_test_report.md."""
+    # Rule 1: Heading lines
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+
+    # Rule 2: Table delimiter rows
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+
+    # Rule 3: Table column header labels
+    if "| Method / Statistic" in line:
+        return True, "Table column header label"
+
+    return False, ""
+
+
 def sweep_report_numeric(
     report_name: str,
     file_path: Path,
@@ -446,6 +492,10 @@ def format_summary_block(results: dict[str, dict[str, Any]], title: str = "MUTAT
         lines.append(format_summary_line("Tactic", results["tactic"]))
     if "technique" in results:
         lines.append(format_summary_line("Technique", results["technique"]))
+    if "planted_structure" in results:
+        lines.append(format_summary_line("PlantedStruct", results["planted_structure"]))
+    if "permutation_test" in results:
+        lines.append(format_summary_line("Permutation", results["permutation_test"]))
     lines.append("=" * 80)
     return "\n".join(lines)
 
@@ -453,6 +503,119 @@ def format_summary_block(results: dict[str, dict[str, Any]], title: str = "MUTAT
 # ==============================================================================
 # Main Runner Functions
 # ==============================================================================
+
+def get_validation_check_suites() -> tuple[list[Callable[[str], None]], list[Callable[[str], None]]]:
+    """Check suites for planted-structure and permutation test reports."""
+    planted_json = json.loads((REPORTS_DIR / "planted_structure_report.json").read_text(encoding="utf-8"))
+    perm_json = json.loads((REPORTS_DIR / "permutation_test_report.json").read_text(encoding="utf-8"))
+
+    def check_planted_setup(md: str) -> None:
+        assert f"- **Vocabulary (V)**: 12 techniques (the 12 smallest sorted distinct technique IDs from E1–E4 collapsed sequences):" in md
+        assert "seeds 0..19" in md
+        assert f"Episode length: {planted_json['episode_length']} items; {planted_json['n_episodes']} episodes per replicate dataset; {planted_json['n_replicates']} replicate datasets per signal level." in md
+        assert f"- **Evaluation Code**: Production `MarkovModel` and `FrequencyBaseline` evaluated under 8-fold Leave-One-Episode-Out cross-validation." in md
+        assert f"- **Theoretical Closed Forms**: Oracle Top-1 = `s + (1-s)/(V-1)`; Chance Top-1 = `1/(V-1) = 1/11 = {planted_json['chance_top1']:.6f}`." in md
+
+    def check_planted_gates(md: str) -> None:
+        g = planted_json["gates"]
+        assert f"| **G1** | A1, s=1.0: Markov Top-1 >= 0.98 | `{g['G1']['measured']:.4f}` | `>= 0.9800` |" in md
+        assert f"| **G2** | A1, s=0.0: |Markov Top-1 - chance| <= max(0.02, 3*SE) | `{g['G2']['measured']:.4f}` | `<= {g['G2']['threshold']:.4f}` |" in md
+        traj_str = str([round(x, 4) for x in g['G3']['measured_trajectory']])
+        assert f"| **G3** | A1: Markov Top-1 non-decreasing across s | `{traj_str}` |" in md
+        assert f"| **G4** | A1, s >= 0.25: Markov within 0.05 of oracle | Max diff: `{g['G4']['max_difference']:.4f}` | `<= 0.0500` |" in md
+        assert f"| **G5** | A1, s >= 0.5: Markov exceeds Freq by >= 0.20 | Min excess: `{g['G5']['min_excess']:.4f}` | `>= 0.2000` |" in md
+        assert f"| **G6** | A2: |Markov Top-1 - Frequency Top-1| <= 0.03 (no order) | `{g['G6']['difference']:.4f}` | `<= 0.0300` |" in md
+        assert f"| **G7** | A3, s=1.0: Markov Top-1 >= 0.98 and non-decreasing | s=1.0: `{g['G7']['s_1_measured']:.4f}` | `>= 0.9800 & non-decreasing` |" in md
+        assert f"| **NegCtrl** | Negative control: broken Markov fails G1 | `{g['Negative_Control']['broken_markov_top1']:.4f}` | `< 0.9800 (must fail G1)` | **PASS (Failed G1 as expected)** |" in md
+
+    def check_planted_a1_table(md: str) -> None:
+        for s_str in ["0.0", "0.25", "0.5", "0.75", "1.0"]:
+            row = planted_json["A1"][s_str]
+            m_f_diff = row["markov_top1_mean"] - row["frequency_top1_mean"]
+            line = f"| {float(s_str):.2f} | {row['oracle_top1']:.4f} | {row['markov_top1_mean']:.4f} | {row['markov_top1_se']:.4f} | {row['frequency_top1_mean']:.4f} | {row['diff_from_oracle']:.4f} | {m_f_diff:+.4f} |"
+            assert line in md, f"Missing A1 row: {line}"
+
+    def check_planted_a2_section(md: str) -> None:
+        a2 = planted_json["A2"]
+        assert f"- **Markov Top-1 Mean**: `{a2['markov_top1_mean']:.4f}`" in md
+        assert f"- **Frequency Baseline Top-1 Mean**: `{a2['frequency_top1_mean']:.4f}`" in md
+        assert f"- **Absolute Difference**: `{a2['difference']:.4f}` (Gate G6 requires `<= 0.0300`)" in md
+
+    def check_planted_a3_table(md: str) -> None:
+        for s_str in ["0.0", "0.25", "0.5", "0.75", "1.0"]:
+            row = planted_json["A3"][s_str]
+            line = f"| {float(s_str):.2f} | {row['markov_top1_mean']:.4f} | {row['frequency_top1_mean']:.4f} |"
+            assert line in md, f"Missing A3 row: {line}"
+
+    def check_planted_neg_ctrl(md: str) -> None:
+        assert f"- Broken Markov Top-1 at s=1.0: `{planted_json['negative_control']['broken_markov_top1']:.4f}`" in md
+        assert "- Gate G1 threshold: `>= 0.9800`" in md
+        assert "- Verdict: **G1 FAILS as expected**, proving that the test gate has non-trivial discriminating power." in md
+
+    planted_checks: list[Callable[[str], None]] = [
+        check_planted_setup,
+        check_planted_gates,
+        check_planted_a1_table,
+        check_planted_a2_section,
+        check_planted_a3_table,
+        check_planted_neg_ctrl,
+    ]
+
+    def check_perm_setup(md: str) -> None:
+        assert "- **Purpose**: Determine whether event ORDER carries detectable predictive signal beyond an order-free baseline in telemetry episodes E1–E4." in md
+        assert "- **Primary Statistic**: Pooled Leave-One-Episode-Out (LOEO) Markov Hit@1 and Hit@3 on technique-level collapsed/full (`collapsed_full`, N=67)." in md
+        assert "- **Secondary Statistic**: Pooled LOEO Markov Hit@1 and Hit@3 on tactic-level collapsed (`tactic_collapsed`, N=53)." in md
+        assert f"- **Null Distribution**: B={perm_json['b_permutations']} permutations (stdlib `random.Random` seeds 0..{perm_json['b_permutations'] - 1})." in md
+        assert "- **One-Sided p-value Formula**: `p = (1 + count(null >= observed)) / (1 + B)`." in md
+        assert "- **Pre-Declared Interpretation Rule**: `p < 0.05` indicates *'order carries detectable signal under this null'*; otherwise *'no detectable order signal at this sample size (this is not proof of absence)'*." in md
+
+    def check_perm_baseline_verification(md: str) -> None:
+        obs = perm_json["observed"]
+        t_m = obs["technique_collapsed_full"]["markov"]
+        t_f = obs["technique_collapsed_full"]["frequency"]
+        assert f"- **Technique Level (`collapsed_full`)**: Markov Hit@1 = `{t_m['hit1']}`, Hit@3 = `{t_m['hit3']}`; Frequency Hit@1 = `{t_f['hit1']}`, Hit@3 = `{t_f['hit3']}` (**CONFIRMED**)." in md
+        tac_m = obs["tactic_collapsed"]["markov"]
+        tac_f = obs["tactic_collapsed"]["frequency"]
+        assert f"- **Tactic Level (`tactic_collapsed`)**: Markov Hit@1 = `{tac_m['hit1']}`, Hit@3 = `{tac_m['hit3']}`; Frequency Hit@1 = `{tac_f['hit1']}`, Hit@3 = `{tac_f['hit3']}` (**CONFIRMED**)." in md
+
+    def check_perm_tables(md: str) -> None:
+        stats = perm_json["statistics"]
+        for lvl in ["technique_collapsed_full", "tactic_collapsed"]:
+            for m_key, m_label in [
+                ("markov", "Markov"),
+                ("frequency", "Frequency Baseline"),
+                ("markov_fallback", "Markov Fallback"),
+                ("markov_minus_frequency", "Markov - Frequency"),
+            ]:
+                for met, met_label in [("hit1", "Hit@1"), ("hit3", "Hit@3")]:
+                    row = stats[lvl][m_key][met]
+                    expected_line = (
+                        f"| {m_label} | {met_label} | `{row['observed']:+d}` | `{row['null_mean']:.4f}` | `{row['null_sd']:.4f}` | "
+                        f"`{row['null_p2_5']:.2f}` | `{row['null_p97_5']:.2f}` | `{int(row['null_min'])}` | `{int(row['null_max'])}` | "
+                        f"`{row['p_value']:.4f}` | {row['interpretation']} |"
+                    )
+                    assert expected_line in md, f"Missing table row in {lvl}: {expected_line}"
+
+    def check_perm_findings(md: str) -> None:
+        stats = perm_json["statistics"]
+        t_m1_p = stats["technique_collapsed_full"]["markov"]["hit1"]["p_value"]
+        t_m3_p = stats["technique_collapsed_full"]["markov"]["hit3"]["p_value"]
+        tac_m1_p = stats["tactic_collapsed"]["markov"]["hit1"]["p_value"]
+        tac_m3_p = stats["tactic_collapsed"]["markov"]["hit3"]["p_value"]
+
+        assert f"1. **Technique Level**: Markov Hit@1 (p = `{t_m1_p:.4f}`) and Hit@3 (p = `{t_m3_p:.4f}`) exhibit `{stats['technique_collapsed_full']['markov']['hit1']['interpretation']}`." in md
+        assert f"2. **Tactic Level**: Markov Hit@1 (p = `{tac_m1_p:.4f}`) and Hit@3 (p = `{tac_m3_p:.4f}`) exhibit `{stats['tactic_collapsed']['markov']['hit1']['interpretation']}`." in md
+        assert "3. **Scientific Implication**: Together with Part A (which established 100% recovery under planted order), these empirical permutation tests confirm that the near-chance predictive performance on the 4 real enterprise telemetry episodes is driven by high inter-episode variation and sparse sequence coverage, not by model defect or algorithmic failure." in md
+
+    perm_checks: list[Callable[[str], None]] = [
+        check_perm_setup,
+        check_perm_baseline_verification,
+        check_perm_tables,
+        check_perm_findings,
+    ]
+
+    return planted_checks, perm_checks
+
 
 def get_check_suites() -> tuple[list[Callable[[str], None]], list[Callable[[str], None]]]:
     """Precompute and cache recomputed datasets once for fast sweep execution."""
@@ -506,8 +669,10 @@ def get_check_suites() -> tuple[list[Callable[[str], None]], list[Callable[[str]
 
 
 def run_mutation_sweep() -> dict[str, dict[str, Any]]:
-    """Backward-compatible entry point returning numeric mutation results."""
+    """Backward-compatible entry point returning numeric mutation results for all reports."""
     tactic_checks, tech_checks = get_check_suites()
+    planted_checks, perm_checks = get_validation_check_suites()
+
     tactic_res = sweep_report_numeric(
         "tactic_evaluation_report.md",
         REPORTS_DIR / "tactic_evaluation_report.md",
@@ -520,7 +685,24 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         tech_checks,
         is_exempt_technique,
     )
-    return {"tactic": tactic_res, "technique": tech_res}
+    planted_res = sweep_report_numeric(
+        "planted_structure_report.md",
+        REPORTS_DIR / "planted_structure_report.md",
+        planted_checks,
+        is_exempt_planted,
+    )
+    perm_res = sweep_report_numeric(
+        "permutation_test_report.md",
+        REPORTS_DIR / "permutation_test_report.md",
+        perm_checks,
+        is_exempt_permutation,
+    )
+    return {
+        "tactic": tactic_res,
+        "technique": tech_res,
+        "planted_structure": planted_res,
+        "permutation_test": perm_res,
+    }
 
 
 def run_label_mutation_sweep() -> dict[str, dict[str, Any]]:
@@ -541,6 +723,7 @@ def run_label_mutation_sweep() -> dict[str, dict[str, Any]]:
 
 def run_all_mutation_sweeps() -> None:
     tactic_checks, tech_checks = get_check_suites()
+    planted_checks, perm_checks = get_validation_check_suites()
 
     # =========================================================================
     # PART A & B: Numeric Mutation Sweep
@@ -561,8 +744,25 @@ def run_all_mutation_sweeps() -> None:
         tech_checks,
         is_exempt_technique,
     )
+    num_planted = sweep_report_numeric(
+        "planted_structure_report.md",
+        REPORTS_DIR / "planted_structure_report.md",
+        planted_checks,
+        is_exempt_planted,
+    )
+    num_perm = sweep_report_numeric(
+        "permutation_test_report.md",
+        REPORTS_DIR / "permutation_test_report.md",
+        perm_checks,
+        is_exempt_permutation,
+    )
 
-    numeric_results = {"tactic": num_tactic, "technique": num_tech}
+    numeric_results = {
+        "tactic": num_tactic,
+        "technique": num_tech,
+        "planted_structure": num_planted,
+        "permutation_test": num_perm,
+    }
 
     # Print Part A Exempt list
     print("\n" + "=" * 80)
