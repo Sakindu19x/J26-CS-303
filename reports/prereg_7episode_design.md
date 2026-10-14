@@ -292,4 +292,11 @@ Quoting directly and verbatim from Amendment 1's own section headings and operat
 6. **Withdrawal of Unverified Scenario Reference (Correction to Section 1)**: Formally withdrew the unverified reference to `scenario_6_macro_library`.
 7. **Constrained Shuffle Scheme S3 Execution Protocol (Specification for Section 10)**: Specified the rejection sampling protocol (maximum 10,000 tries per episode per replicate, abort if >5% infeasible, report excluded replicates, and assert sample size invariant $N$).
 
+## Amendment 5 (2026-10-15, before any inference result was interpreted)
+
+### 1. Verification of Committed Repository Text vs. Chat Report
+An automated audit of git history across all commits confirms that:
+1. The repository's committed `Amendment 2` (commit `3a6b306`) never contained the section titles ("Stage 1 Data Build Directory and Processed Files", "Primary Evaluation Protocol", "Model Execution Rules", "Reporting Rules", "Episodes and Scenario Mapping") or the "0 matches" claim that appeared in earlier conversational chat reports. In the repository file, Amendment 2 explicitly and truthfully stated: *"Match Count: Exactly 1 match was found—namely, in `reports/prereg_7episode_design.md` itself"*.
+2. Amendments 3 and 4 were authored to address statements made in the assistant's chat reports rather than in the repository file itself. Consequently, the phrasing in Amendments 3 and 4 that referred to "correcting Amendment 2" is hereby withdrawn as inaccurate regarding the actual file contents.
+3. The authoritative text of Amendment 2 is strictly the text committed in `3a6b306`, and the authoritative repository search count for `"macro_library"` is that documented in Amendment 3 Section 2 (exactly 1 file, 8 occurrences in `reports/prereg_7episode_design.md`, 0 occurrences across all other repository files).
 
