@@ -300,3 +300,34 @@ An automated audit of git history across all commits confirms that:
 2. Amendments 3 and 4 were authored to address statements made in the assistant's chat reports rather than in the repository file itself. Consequently, the phrasing in Amendments 3 and 4 that referred to "correcting Amendment 2" is hereby withdrawn as inaccurate regarding the actual file contents.
 3. The authoritative text of Amendment 2 is strictly the text committed in `3a6b306`, and the authoritative repository search count for `"macro_library"` is that documented in Amendment 3 Section 2 (exactly 1 file, 8 occurrences in `reports/prereg_7episode_design.md`, 0 occurrences across all other repository files).
 
+## Amendment 6 (2026-10-15, wording and verification only; no numbers change)
+
+### 1. Motivation and Purpose
+This amendment records wording-only neutralizations in permutation test reporting scripts and verifiers, closes verification limits on the technique evaluation report, and expands mutation sweep coverage. No experimental numbers, statistical formulas, seed trajectories, or hypothesis outcomes change.
+
+### 2. Exact Old -> New String Replacements
+1. **Adjacency Sensitivity Neutralization (Permutation Test Scripts)**:
+   - *Target Files*: `scripts/run_permutation_test_v2.py` (line 979) and `scripts/run_permutation_test_7ep.py` (line 870).
+   - *Old String*:
+     `exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences.`
+   - *New String*:
+     `exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.`
+
+2. **Markov - Frequency Row Conclusion Neutralization**:
+   - *Target Files*: `scripts/run_permutation_test_v2.py`, `scripts/run_permutation_test_7ep.py`, `scripts/verify_permutation_test_v2.py`, `scripts/verify_permutation_7ep.py`.
+   - *Scope*: All schemes (S1, S2, S3) and levels (technique and tactic), 4-episode and 7-episode runs.
+   - *Old Generated Conclusion (for p >= 0.05)*:
+     `not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=...)`
+   - *New Generated Conclusion*:
+     `difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)`
+   - *(Note: for invalid null schemes such as S2 in 4-episode, the pre-declared prefix `INVALID NULL - do not cite: ` continues to apply to the row per 12c Rule C).*
+
+3. **Label Mutation Sweep Vocabulary Expansion**:
+   - *Target File*: `scripts/mutation_sweep.py`.
+   - *Addition*: The 14 MITRE ATT&CK Enterprise tactic names (`initial-access`, `execution`, `persistence`, `privilege-escalation`, `defense-evasion`, `credential-access`, `discovery`, `lateral-movement`, `collection`, `command-and-control`, `exfiltration`, `impact`, `reconnaissance`, `resource-development`) added to `LABEL_VOCABULARY` and `LABEL_REPLACEMENTS`.
+
+4. **Independent CSV Recomputation Closures**:
+   - *Target File*: `scripts/verify_evaluation.py`.
+   - *Scope*: Independent CSV-only recomputation of technique report Section 5.2 (per-fold ceiling and coverage), Section 11 (most frequent Top-1 error pairs, abstentions by target, parent confusion matrix metrics), and Section 12 (rule-based example selection: Top-1 hits, Frequency-only hits with Markov ok, abstentions).
+   - *Completeness*: All data elements are 100% reconstructible from `data/processed/evaluation_predictions.csv` without missing fields.
+
