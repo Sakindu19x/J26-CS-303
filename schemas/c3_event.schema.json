@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "C3NormalizedEvent",
+  "description": "Component 3 Telemetry Ingestion Event Schema for Component 4 (FR8, NFR5). Proposed by C4, pending C3 owner agreement.",
+  "type": "object",
+  "required": ["timestamp", "episode_id"],
+  "properties": {
+    "event_id": {
+      "type": ["string", "null"],
+      "description": "Unique identifier for the telemetry event."
+    },
+    "episode_id": {
+      "type": "string",
+      "description": "Scenario / episode boundary identifier required for FR2 chronological segmentation."
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO-8601 UTC timestamp of occurrence."
+    },
+    "technique": {
+      "type": ["string", "array", "null"],
+      "items": {"type": "string"},
+      "description": "ATT&CK technique ID or list of IDs."
+    },
+    "tactic": {
+      "type": ["string", "array", "null"],
+      "items": {"type": "string"},
+      "description": "ATT&CK tactic name or list of tactic names."
+    },
+    "incident_stage": {
+      "type": ["string", "null"],
+      "description": "Operational incident stage if assigned."
+    },
+    "affected_asset": {
+      "type": ["string", "null"],
+      "description": "Host, hostname, or impacted system identifier."
+    },
+    "asset_criticality": {
+      "type": ["string", "null"],
+      "description": "Business or infrastructure criticality rating."
+    },
+    "ioc": {
+      "type": ["string", "null"],
+      "description": "Indicator of Compromise (IP, hash, domain, URI)."
+    },
+    "ioc_type": {
+      "type": ["string", "null"],
+      "description": "Type classification of the IoC."
+    },
+    "local_occurrence": {
+      "type": ["integer", "object", "null"],
+      "description": "Local observation count or mapping."
+    },
+    "cti_confidence": {
+      "type": ["number", "null"],
+      "description": "Cyber Threat Intelligence confidence score [0.0, 1.0]."
+    },
+    "freshness": {
+      "type": ["number", "null"],
+      "description": "Telemetry freshness or observation age metric."
+    },
+    "threat_score": {
+      "type": ["number", "null"],
+      "description": "C3 automated threat score."
+    },
+    "investigation_priority": {
+      "type": ["string", "null"],
+      "enum": ["Low", "Medium", "High", "Critical", null],
+      "description": "C3 triage priority rank (C3 FR-04)."
+    }
+  },
+  "additionalProperties": true
+}
