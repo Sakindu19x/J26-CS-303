@@ -1,0 +1,133 @@
+{
+  "telemetry": {
+    "cpu_model": "13th Gen Intel(R) Core(TM) i5-13420H",
+    "machine": "AMD64",
+    "os": "Windows 11 (10.0.26300)",
+    "python_version": "3.12.10",
+    "python_executable": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "python": "3.12.10",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1",
+      "jsonschema": "4.26.0"
+    }
+  },
+  "criteria": {
+    "warm_median_threshold_seconds": 2.0,
+    "warm_p95_threshold_seconds": 5.0,
+    "cold_start_threshold_seconds": 10.0
+  },
+  "summary_warm": {
+    "total_repetitions": 210,
+    "mean_seconds": 0.0053,
+    "median_seconds": 0.0043,
+    "p95_seconds": 0.0131,
+    "pass_median": true,
+    "pass_p95": true
+  },
+  "cold_start": {
+    "cold_start_seconds": 0.1649,
+    "pass_cold_start": true
+  },
+  "episodes": {
+    "E1": {
+      "events_count": 38,
+      "repetitions": 30,
+      "mean_seconds": 0.0013,
+      "median_seconds": 0.0013,
+      "p95_seconds": 0.0014,
+      "min_seconds": 0.0013,
+      "max_seconds": 0.002,
+      "std_seconds": 0.0001
+    },
+    "E2": {
+      "events_count": 29,
+      "repetitions": 30,
+      "mean_seconds": 0.0031,
+      "median_seconds": 0.0038,
+      "p95_seconds": 0.0054,
+      "min_seconds": 0.001,
+      "max_seconds": 0.0058,
+      "std_seconds": 0.0017
+    },
+    "E3": {
+      "events_count": 77,
+      "repetitions": 30,
+      "mean_seconds": 0.0131,
+      "median_seconds": 0.0126,
+      "p95_seconds": 0.0177,
+      "min_seconds": 0.0105,
+      "max_seconds": 0.0188,
+      "std_seconds": 0.0021
+    },
+    "E4": {
+      "events_count": 46,
+      "repetitions": 30,
+      "mean_seconds": 0.0074,
+      "median_seconds": 0.0072,
+      "p95_seconds": 0.0089,
+      "min_seconds": 0.0062,
+      "max_seconds": 0.0094,
+      "std_seconds": 0.0009
+    },
+    "E5": {
+      "events_count": 7,
+      "repetitions": 30,
+      "mean_seconds": 0.0011,
+      "median_seconds": 0.001,
+      "p95_seconds": 0.0018,
+      "min_seconds": 0.0009,
+      "max_seconds": 0.0021,
+      "std_seconds": 0.0003
+    },
+    "E6": {
+      "events_count": 51,
+      "repetitions": 30,
+      "mean_seconds": 0.0075,
+      "median_seconds": 0.0074,
+      "p95_seconds": 0.0093,
+      "min_seconds": 0.0044,
+      "max_seconds": 0.0096,
+      "std_seconds": 0.0012
+    },
+    "E7": {
+      "events_count": 26,
+      "repetitions": 30,
+      "mean_seconds": 0.0038,
+      "median_seconds": 0.0036,
+      "p95_seconds": 0.005,
+      "min_seconds": 0.0026,
+      "max_seconds": 0.0053,
+      "std_seconds": 0.0007
+    }
+  },
+  "scaling_benchmark": {
+    "base_episode": "E3",
+    "results": {
+      "1x": {
+        "multiplier": 1,
+        "event_count": 77,
+        "timeline_length": 77,
+        "elapsed_seconds": 0.0065,
+        "throughput_events_per_sec": 11825.8
+      },
+      "10x": {
+        "multiplier": 10,
+        "event_count": 770,
+        "timeline_length": 770,
+        "elapsed_seconds": 0.1347,
+        "throughput_events_per_sec": 5718.4
+      },
+      "100x": {
+        "multiplier": 100,
+        "event_count": 7700,
+        "timeline_length": 7700,
+        "elapsed_seconds": 1.4925,
+        "throughput_events_per_sec": 5159.0
+      }
+    }
+  },
+  "verdict": "PASS"
+}
