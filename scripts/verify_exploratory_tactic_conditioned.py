@@ -163,14 +163,37 @@ def verify_exploratory_tactic_conditioned() -> bool:
 
     print(f"[Step 5] Tie-sensitivity metrics verified (Tied Top-1: {t1_tied}, Tied Top-3: {t3_tied}) [PASS]")
 
-    # Step 6: Markdown tokens and integrity statements
+    # Step 6: Independent CSV-only recomputation of E5-removed McNemar
+    e5_rows = [r for r in rows if r["test_episode"] != "E5"]
+    assert len(e5_rows) == 93, f"Expected 93 E5-removed rows, got {len(e5_rows)}"
+    b1_e5 = sum(1 for r in e5_rows if int(r["variant_hit1"]) == 1 and int(r["frequency_hit1"]) == 0)
+    c1_e5 = sum(1 for r in e5_rows if int(r["variant_hit1"]) == 0 and int(r["frequency_hit1"]) == 1)
+    b3_e5 = sum(1 for r in e5_rows if int(r["variant_hit3"]) == 1 and int(r["frequency_hit3"]) == 0)
+    c3_e5 = sum(1 for r in e5_rows if int(r["variant_hit3"]) == 0 and int(r["frequency_hit3"]) == 1)
+    p1_e5 = exact_mcnemar(b1_e5, c1_e5)
+    p3_e5 = exact_mcnemar(b3_e5, c3_e5)
+
+    re5_json = res_json["runs"]["e5_removed"]
+    assert b1_e5 == re5_json["mcnemar_vs_frequency"]["top1"]["b"]
+    assert c1_e5 == re5_json["mcnemar_vs_frequency"]["top1"]["c"]
+    assert abs(p1_e5 - re5_json["mcnemar_vs_frequency"]["top1"]["p_value"]) < 1e-9
+    assert b3_e5 == re5_json["mcnemar_vs_frequency"]["top3"]["b"]
+    assert c3_e5 == re5_json["mcnemar_vs_frequency"]["top3"]["c"]
+    assert abs(p3_e5 - re5_json["mcnemar_vs_frequency"]["top3"]["p_value"]) < 1e-9
+
+    print(f"[Step 6] E5-removed McNemar independently recomputed from CSV: Top-1 p={p1_e5:.4f}, Top-3 p={p3_e5:.4f} [PASS]")
+
+    # Step 7: Markdown tokens, exact McNemar strings, and integrity statements
     assert "> **EXPLORATORY, POST HOC, NOT A PRE-REGISTERED RESULT**" in md_text
-    assert "The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant." in md_text
+    assert 'The pre-registered primary evaluation verdict ("improvement over baseline not demonstrated") is finalized and cannot be modified or overturned by this exploratory variant.' in md_text
+    assert f"- **Top-1**: Variant hits and Frequency misses ($b={b1}$); Frequency hits and Variant misses ($c={c1}$); Exact McNemar $p = {p1:.4f}$ (descriptive, raw p)." in md_text
+    assert f"- **Top-3**: Variant hits and Frequency misses ($b={b3}$); Frequency hits and Variant misses ($c={c3}$); Exact McNemar $p = {p3:.4f}$ (descriptive, raw p)." in md_text
+    assert f"- **McNemar vs Frequency (E5-Removed)**: Top-1 $p = {p1_e5:.4f}$; Top-3 $p = {p3_e5:.4f}$ (descriptive, raw p)." in md_text
     assert f"| Exploratory Variant (Tactic-Conditioned) | {v_h1} | {v_h3} | {v_h1/95*100:.2f}% |" in md_text
     assert f"| Frequency Baseline | {f_h1} | {f_h3} | {f_h1/95*100:.2f}% |" in md_text
     assert f"| Markov Model (Technique) | {m_h1} | {m_h3} | {m_h1/95*100:.2f}% |" in md_text
 
-    print("[Step 6] Markdown report tokens and disclaimer banners verified [PASS]")
+    print("[Step 7] Markdown report tokens, exact McNemar strings, and disclaimer banners verified [PASS]")
 
     print("\n" + "=" * 80)
     print("ALL EXPLORATORY TACTIC-CONDITIONED VERIFICATIONS PASSED SUCCESSFULLY")

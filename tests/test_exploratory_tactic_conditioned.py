@@ -63,4 +63,5 @@ def test_exploratory_verifier_passes() -> None:
 def test_exploratory_disclaimer_and_verdict() -> None:
     md_text = MD_PATH.read_text(encoding="utf-8")
     assert "EXPLORATORY, POST HOC, NOT A PRE-REGISTERED RESULT" in md_text
-    assert "The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant." in md_text
+    assert 'The pre-registered primary evaluation verdict ("improvement over baseline not demonstrated") is finalized and cannot be modified or overturned by this exploratory variant.' in md_text
+

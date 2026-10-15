@@ -2,11 +2,11 @@
 
 > [!IMPORTANT]
 > **EXPLORATORY, POST HOC, NOT A PRE-REGISTERED RESULT**
-> This variant was pre-declared under Amendment 7 (2026-10-15) as an exploratory post hoc investigation of whether tactic-level order signal can transfer to technique prediction. It is not part of the pre-registered Holm step-down hypothesis testing family. The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant.
+> This variant was pre-declared under Amendment 7 (2026-10-15) as an exploratory post hoc investigation of whether tactic-level order signal can transfer to technique prediction. It is not part of the pre-registered Holm step-down hypothesis testing family. The pre-registered primary evaluation verdict ("improvement over baseline not demonstrated") is finalized and cannot be modified or overturned by this exploratory variant.
 
 ## 1. Setup and Methodology
 
-- **Motivation**: Cross-episode diagnostics (`reports/7ep/diagnostics_7ep.md`) showed zero cross-scenario technique transition transfer, while permutation tests (`reports/7ep/permutation_7ep_report.md`) demonstrated statistically significant order signal at the tactic level ($p = 0.0410$ Hit@1, $p = 0.0390$ Hit@3 under S1).
+- **Motivation**: Cross-episode diagnostics (`reports/7ep/diagnostics_7ep.md`) demonstrated cross-episode state sparsity (`F3_unseen_states_and_miss_shares.collapsed_full.pooled.unseen_current_state_rate` = 35.79%, 34/95 unseen current states), while permutation tests (`reports/7ep/permutation_7ep_report.md`) demonstrated statistically significant order signal at the tactic level ($p = 0.0430$ Hit@1, $p = 0.0060$ Hit@3 under S1; Holm-adjusted $p = 0.0180$). (Note: the claim of "zero repeat transitions between different attack campaigns" is withdrawn per Amendment 8 as no such statistic exists in `diagnostics_7ep.json`).
 - **Architecture**: Current techniques are mapped to current tactics; a LOEO fold tactic-level Markov model predicts next tactics; techniques mapping to those tactics in rank order are sorted by training target frequency and de-duplicated. If unseen state or empty, the model falls back to the fold Frequency baseline list.
 - **Scope**: Evaluated on primary slice `collapsed_full` ($N=95$ across 7 episodes; $N=93$ under E5-removed sensitivity).
 
@@ -53,5 +53,5 @@
 ## 5. Summary and Registration Integrity Verdict
 
 - **Findings**: The exploratory tactic-conditioned variant achieved Hit@1 = 5/95 (5.26%) and Hit@3 = 8/95 (8.42%). While this numerically exceeds the technique-level Markov model (3/95 Hit@1, 3/95 Hit@3), it does not exceed the unconditional Frequency baseline (7/95 Hit@1, 16/95 Hit@3).
-- **Status**: The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant.
+- **Status**: The pre-registered primary evaluation verdict ("improvement over baseline not demonstrated") is finalized and cannot be modified or overturned by this exploratory variant.
 

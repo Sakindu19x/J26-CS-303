@@ -363,3 +363,65 @@ This amendment pre-declares exactly ONE exploratory post hoc variant before exec
    - Descriptive paired exact McNemar test versus the Frequency baseline (raw $p$-value only, descriptive).
    - E5-removed sensitivity slice repeat ($N=83$).
    - Tie sensitivity computed using the P2 machinery.
+
+## Amendment 8 (2026-10-15, correction and clarification of Amendment 7 text; append-only)
+
+### 1. Motivation and Purpose
+This amendment corrects four textual and numerical inaccuracies identified in Amendment 7 and harmonizes the wording across pre-registration documents and exploratory reporting. As established in Section 2 of Amendment 7, the pre-registered evaluation verdict remains immutable ("improvement over baseline not demonstrated"). All corrections in this amendment are derived directly by code from the underlying authoritative evaluation, permutation, diagnostic, and sensitivity artifacts.
+
+### 2. Specific Corrections to Amendment 7 Text
+
+1. **Order-Signal Permutation P-Values (Section 1)**:
+   - *Amendment 7 text*: cited $p = 0.0410$ at Hit@1 and $p = 0.0390$ at Hit@3.
+   - *Correction*: Those values corresponded to the difference statistic row (`markov_minus_frequency`) under S1. The authoritative order-signal permutation tests under the pre-registered S1 scheme (`reports/7ep/permutation_7ep_report.json`) are the Markov tactic rows:
+     - S1 Markov Tactic Hit@1: raw $p = 0.0430$ (observed = 0.2895, null mean = 0.1772).
+     - S1 Markov Tactic Hit@3: raw $p = 0.0060$, Holm-adjusted $p = 0.0180$ (family rank 2, multiplier 3).
+   - *Reference*: `reports/7ep/permutation_7ep_report.json` (`S1_collapsed_order.tactic_collapsed.markov_hit1` and `markov_hit3`) and `reports/7ep/holm_claim_rule_results.json` (P3 family entry).
+
+2. **Pre-Registered Verdict Reference (Section 2, Item 3)**:
+   - *Amendment 7 text*: stated "FAIL on P1, Markov does not outperform Frequency baseline at technique level".
+   - *Correction*: Under the pre-registered testing family (`reports/7ep/evaluation_7ep_results.json`), P1 is the tactic-level comparison (paired exact McNemar on `tactic_collapsed` Hit@3, $b=12, c=12, p=1.0000$) and P2 is the technique-level comparison (paired exact McNemar on `collapsed_full` Hit@3, $b=2, c=15, p=0.0023$, Holm-adjusted $p=0.0094$). The authoritative pre-registered verdict wording is strictly:
+     "improvement over baseline not demonstrated" (as defined in `reports/7ep/holm_claim_rule_results.json` and `reports/prereg_7episode_design.md` Section 12).
+
+3. **E5-Removed Sensitivity Sample Size (Section 3, Item 6)**:
+   - *Amendment 7 text*: cited $N = 83$ for the E5-removed sensitivity slice.
+   - *Correction*: The authoritative sample sizes extracted from `reports/7ep/e5_removed_results.json` are:
+     - Primary technique slice (`technique_collapsed_full`): $N = 93$ test samples (compared to $N = 95$ test samples for all 7 episodes).
+     - Secondary tactic slice (`tactic_collapsed`): $N = 74$ test samples (compared to $N = 76$ test samples for all 7 episodes).
+     The citation of $N=83$ was an error and is superseded by $N=93$ for technique evaluations.
+
+4. **Cross-Campaign Transition Recurrence Claim (Section 1)**:
+   - *Amendment 7 text*: claimed "zero repeat transitions between different attack campaigns".
+   - *Correction*: No statistic measuring cross-campaign transition recurrence exists in `reports/7ep/diagnostics_7ep.json`. That sentence is hereby formally withdrawn. The authoritative statistic present in `reports/7ep/diagnostics_7ep.json` characterizing cross-episode state sparsity is:
+     - Key: `F3_unseen_states_and_miss_shares.collapsed_full.pooled.unseen_current_state_rate` = 0.3579 (34/95 evaluation samples on `collapsed_full` have current states never observed in training episodes).
+
+## Amendment 8 (2026-10-15, correction and clarification of Amendment 7 text; append-only)
+
+### 1. Motivation and Purpose
+This amendment corrects four textual and numerical inaccuracies identified in Amendment 7 and harmonizes the wording across pre-registration documents and exploratory reporting. As established in Section 2 of Amendment 7, the pre-registered evaluation verdict remains immutable ("improvement over baseline not demonstrated"). All corrections in this amendment are derived directly by code from the underlying authoritative evaluation, permutation, diagnostic, and sensitivity artifacts.
+
+### 2. Specific Corrections to Amendment 7 Text
+
+1. **Order-Signal Permutation P-Values (Section 1)**:
+   - *Amendment 7 text*: cited $p = 0.0410$ at Hit@1 and $p = 0.0390$ at Hit@3.
+   - *Correction*: Those values corresponded to the difference statistic row (`markov_minus_frequency`) under S1. The authoritative order-signal permutation tests under the pre-registered S1 scheme (`reports/7ep/permutation_7ep_report.json`) are the Markov tactic rows:
+     - S1 Markov Tactic Hit@1: raw $p = 0.0430$ (observed = 0.2895, null mean = 0.1772).
+     - S1 Markov Tactic Hit@3: raw $p = 0.0060$, Holm-adjusted $p = 0.0180$ (family rank 2, multiplier 3).
+   - *Reference*: `reports/7ep/permutation_7ep_report.json` (`S1_collapsed_order.tactic_collapsed.markov_hit1` and `markov_hit3`) and `reports/7ep/holm_claim_rule_results.json` (P3 family entry).
+
+2. **Pre-Registered Verdict Reference (Section 2, Item 3)**:
+   - *Amendment 7 text*: stated "FAIL on P1, Markov does not outperform Frequency baseline at technique level".
+   - *Correction*: Under the pre-registered testing family (`reports/7ep/evaluation_7ep_results.json`), P1 is the tactic-level comparison (paired exact McNemar on `tactic_collapsed` Hit@3, $b=12, c=12, p=1.0000$) and P2 is the technique-level comparison (paired exact McNemar on `collapsed_full` Hit@3, $b=2, c=15, p=0.0023$, Holm-adjusted $p=0.0094$). The authoritative pre-registered verdict wording is strictly:
+     "improvement over baseline not demonstrated" (as defined in `reports/7ep/holm_claim_rule_results.json` and `reports/prereg_7episode_design.md` Section 12).
+
+3. **E5-Removed Sensitivity Sample Size (Section 3, Item 6)**:
+   - *Amendment 7 text*: cited $N = 83$ for the E5-removed sensitivity slice.
+   - *Correction*: The authoritative sample sizes extracted from `reports/7ep/e5_removed_results.json` are:
+     - Primary technique slice (`technique_collapsed_full`): $N = 93$ test samples (compared to $N = 95$ test samples for all 7 episodes).
+     - Secondary tactic slice (`tactic_collapsed`): $N = 74$ test samples (compared to $N = 76$ test samples for all 7 episodes).
+     The citation of $N=83$ was an error and is superseded by $N=93$ for technique evaluations.
+
+4. **Cross-Campaign Transition Recurrence Claim (Section 1)**:
+   - *Amendment 7 text*: claimed "zero repeat transitions between different attack campaigns".
+   - *Correction*: No statistic measuring cross-campaign transition recurrence exists in `reports/7ep/diagnostics_7ep.json`. That sentence is hereby formally withdrawn. The authoritative statistic present in `reports/7ep/diagnostics_7ep.json` characterizing cross-episode state sparsity is:
+     - Key: `F3_unseen_states_and_miss_shares.collapsed_full.pooled.unseen_current_state_rate` = 0.3579 (34/95 evaluation samples on `collapsed_full` have current states never observed in training episodes).
