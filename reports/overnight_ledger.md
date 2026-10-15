@@ -41,3 +41,4 @@ Note on Q0 and Ledger HEAD column semantics (Prompt 15 R5):
   | Q0 | `996bd71102c8d87c8190d0617766b382f1051eb5` | 0 | 184 | 0 | PASS | 2026-10-15T06:00:00Z |
 - As established across Prompt 13 and Prompt 14, the 'Git HEAD (SHA)' column records the repository HEAD commit immediately BEFORE each part's own commit is created.
 
+| R7 | `8f0870fcce1b83045818544dd90eea426f158897` | 0 | 209 | 0 | PASS | 2026-10-15T13:23:06Z |

@@ -1,0 +1,36 @@
+================================================================================
+GIT LOG (Latest 25 Commits):
+================================================================================
+8f0870f R6: true clean-clone double rebuild proof and baseline scope verification
+3af318e R5: untrack scratch directory, document ledger semantics and Q0 row, and update known limitations register
+e33e008 R4: update viva pack reproduction guide, demo script verification tests, remove duplicate pngs, and execute live captures
+f494c01 R2: update claims map with per-claim test relevance, gate immutability evidence, reachability ceilings, and low-support cautions
+c6efee4 R3: update requirements trace with dataset demonstration status, partial NFR5, Hit@3 limits, and module grep validation
+fff7595 R1: rewrite record_baseline_change tool, generate q15_baseline_changes register, and add regression tests
+6e58efc R0: record starting state and save prompt15 instructions
+d859fcb Q10: final audit verification, coverage reconciliation, lockfile and release readiness
+f00c217 Q2: true clean-clone rebuild from raw archives and full hash verification
+5921908 Q2a: update reproduce_all.py pipeline steps and record rebuild scope
+e567b8a Q8: create dashboard launcher script, document static render protocol, re-capture renders
+8779338 Q6: rebuild overnight summary from ledger and JSON sources with independent verifier
+68908c4 Q5: rebuild viva claims map with code-substituted values and independent anchor verifier
+4fc004b Q4: rebuild requirements trace from proposal JSON with strict enum and independent verifier
+cf6e5db Q9: measure NFR1 with parent-timed cold start, Streamlit ready time and strict JSON-MD verification
+c7b3d5e Q9a: append cold start and informational criteria to nfr_criteria.md
+53a5f15 Q7: prediction records schema 1.1.0, support metrics and contract alignment
+4f8d0c8 Q3: Amendment 8 append-only and exploratory report corrections
+3dab166 Q1: commit .gitattributes, line_ending_audit.md, proof and ledger
+5a53d68 Q0: baseline audit and G7 update_ledger compliance
+996bd71 P11: finalize overnight execution ledger and summary
+f1f1db4 P11: overnight master execution summary and decisions log
+577de13 P10: clean-clone reproduction automation and pipeline steps
+8d879ca P10: record P10 PASS in overnight ledger and final audit report
+f7ff50d P10: final audit, hash coverage, prereg compliance map, claims map, known limitations, and final audit report
+
+================================================================================
+GIT TAGS:
+================================================================================
+c4-7ep-verified c4-7ep-verified: 184 tests passed, 9677 mutations detected across all sweeps (8328 numeric + 1349 label, 100% detection), 61 protected baseline hashes verified
+c4-7ep-verified-v2 Component 4 Verification v2: 202 passed tests, 61 byte-identical baseline hashes verified
+stage2-verified Stage 1 and Stage 2 verified baseline (105 tests, 16 hashes fixed)
+

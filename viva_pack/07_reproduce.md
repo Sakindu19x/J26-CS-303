@@ -11,7 +11,7 @@ To re-run all 18 deterministic verifiers, hash verifications, and the complete p
 ..\.venv\Scripts\python.exe scripts/reproduce_all.py --verify-only
 ```
 
-Exit code 0 indicates 100% hash parity and passing verification.
+Exit code 0 indicates 100% hash parity and passing verification. Measured full verification duration: 220.88s.
 
 ---
 

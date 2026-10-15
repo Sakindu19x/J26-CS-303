@@ -10,11 +10,11 @@
 
 | Category | Count | Percentage | Status |
 |:---|:---:|:---:|:---|
-| **Baseline Covered Artifacts (Audit Matched)** | 63 | 30.9% | Accounted in baseline hash files |
+| **Baseline Covered Artifacts (Audit Matched)** | 63 | 29.0% | Accounted in baseline hash files |
 | **Strict Exact Baseline Files** | 61 | -- | Verified by `verify_all_hashes.py` |
-| **Declared Transient Measurements** | 11 | 5.4% | Runtime Timing & Screenshots (`reports/measurements/`) |
-| **Documented Exceptions (Uncovered)** | 130 | 63.7% | Accounted for with Explicit Rationale |
-| **Total Tracked Target Files** | 204 | 100.0% | Complete Coverage Accounted |
+| **Declared Transient Measurements** | 12 | 5.5% | Runtime Timing & Screenshots (`reports/measurements/`) |
+| **Documented Exceptions (Uncovered)** | 142 | 65.4% | Accounted for with Explicit Rationale |
+| **Total Tracked Target Files** | 217 | 100.0% | Complete Coverage Accounted |
 
 ---
 
@@ -33,7 +33,7 @@ Both files are independently verified: the fold models are verified via internal
 
 ---
 
-## 3. Exceptions Catalog by Functional Group (130 Files)
+## 3. Exceptions Catalog by Functional Group (142 Files)
 
 ### Archived Historical Analyses (11 files)
 
@@ -60,7 +60,7 @@ Both files are independently verified: the fold models are verified via internal
 | `reports/overnight_ledger.md` | Live tracking ledger, engineering criteria, and decisions log updated per part |
 | `reports/test_coverage_map.md` | Live tracking ledger, engineering criteria, and decisions log updated per part |
 
-### Audit & Verification Reports (Prompt 14 / Repair Run) (25 files)
+### Audit & Verification Reports (Prompt 14 / Repair Run) (36 files)
 
 | Tracked Path | Rationale |
 |:---|:---|
@@ -68,6 +68,7 @@ Both files are independently verified: the fold models are verified via internal
 | `reports/audit/exempt_exploratory.txt` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/exempt_overnight_summary.txt` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/exempt_requirements_trace.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/exempt_viva_pack.txt` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/hash_coverage_exceptions.md` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/known_limitations.json` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/known_limitations.md` | Repair run verification logs, decision records, and per-token exempt registries |
@@ -76,6 +77,7 @@ Both files are independently verified: the fold models are verified via internal
 | `reports/audit/prereg_compliance_map.json` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/prereg_compliance_map.md` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/q14_Q0_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q14_Q10_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/q14_Q1_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/q14_Q2_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/q14_Q3_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
@@ -88,6 +90,15 @@ Both files are independently verified: the fold models are verified via internal
 | `reports/audit/q14_baseline_changes.md` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/q14_decisions.md` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/q14_determinism_log.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R0_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R1_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R2_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R3_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R4_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R5_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_R6_output.txt` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/q15_baseline_changes.md` | Repair run verification logs, decision records, and per-token exempt registries |
+| `reports/audit/rebuild_scope.json` | Repair run verification logs, decision records, and per-token exempt registries |
 | `reports/audit/rebuild_scope.md` | Repair run verification logs, decision records, and per-token exempt registries |
 
 ### Derivative Tabular CSV Exports (4 files)
@@ -147,7 +158,7 @@ Both files are independently verified: the fold models are verified via internal
 | `data/processed/technique_tactic_reference_v19_2.json` | Legacy 4-episode dataset superseded by 7-episode campaign (data/processed_7ep/) |
 | `data/processed/wazuh_alerts_normalized.csv` | Legacy 4-episode dataset superseded by 7-episode campaign (data/processed_7ep/) |
 
-### Interface Contracts & Documentation (7 files)
+### Interface Contracts & Documentation (8 files)
 
 | Tracked Path | Rationale |
 |:---|:---|
@@ -157,6 +168,7 @@ Both files are independently verified: the fold models are verified via internal
 | `docs/data_provenance.md` | Analyst forms, C3 interface contracts, and data provenance documentation |
 | `docs/demo_script.md` | Analyst forms, C3 interface contracts, and data provenance documentation |
 | `docs/models.md` | Analyst forms, C3 interface contracts, and data provenance documentation |
+| `docs/prompts/prompt15.md` | Analyst forms, C3 interface contracts, and data provenance documentation |
 | `docs/proposal_requirements.json` | Analyst forms, C3 interface contracts, and data provenance documentation |
 
 ### JSON Schema Specifications (2 files)

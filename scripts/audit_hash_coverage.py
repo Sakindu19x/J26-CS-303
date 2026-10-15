@@ -55,6 +55,7 @@ DEDICATED_VERIFIERS = {
     "reports/measurements/nfr1_timing.json": "scripts/verify_nfr1.py / tests/test_nfr1.py",
     "reports/measurements/nfr1_criteria_verification.md": "scripts/verify_nfr1.py",
     "reports/audit/rebuild_scope.md": "scripts/verify_all_hashes.py / tests/test_q1_proof.py",
+    "reports/audit/rebuild_scope.json": "scripts/verify_all_hashes.py / tests/test_q1_proof.py",
     "reports/audit/q14_Q2_output.txt": "scripts/run_q2_clean_clone.py",
     "reports/audit/q14_determinism_log.txt": "scripts/verify_prediction_records.py",
     "schemas/c4_prediction_record.schema.json": "scripts/verify_prediction_records.py / tests/test_c3_adapter.py",

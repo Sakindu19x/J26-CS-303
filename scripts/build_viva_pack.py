@@ -350,7 +350,9 @@ The following claims are **strictly forbidden** and contradicted by empirical ev
     duration_notice = ""
     if r7_path.is_file():
         r7_text = r7_path.read_text(encoding="utf-8")
-        m_dur = re.search(r"(\d+(?:\.\d+)?s|\d+(?:\.\d+)?\s*(?:seconds|minutes))", r7_text)
+        m_dur = re.search(r"ALL \d+ VERIFICATION CHECKS PASSED[^(]*\((\d+(?:\.\d+)?s)\)", r7_text)
+        if not m_dur:
+            m_dur = re.search(r"(\d+(?:\.\d+)?s|\d+(?:\.\d+)?\s*(?:seconds|minutes))", r7_text)
         if m_dur:
             duration_notice = f" Measured full verification duration: {m_dur.group(1)}."
 
