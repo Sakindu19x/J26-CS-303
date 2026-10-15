@@ -15,7 +15,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "enum": ["1.0.0"]
+      "enum": ["1.1.0"]
     },
     "record_id": {
       "type": "string",
@@ -142,6 +142,7 @@
           "items": {"$ref": "#/definitions/baseline_candidate"}
         },
         "measured_reliability_banner": {"$ref": "#/definitions/reliability_banner"},
+        "support": {"$ref": "#/definitions/support"},
         "explanation": {"type": "string"}
       },
       "required": [
@@ -151,6 +152,7 @@
         "tie_flags",
         "frequency_baseline_candidates",
         "measured_reliability_banner",
+        "support",
         "explanation"
       ],
       "additionalProperties": false
@@ -176,6 +178,7 @@
           "items": {"$ref": "#/definitions/baseline_candidate"}
         },
         "measured_reliability_banner": {"$ref": "#/definitions/reliability_banner"},
+        "support": {"$ref": "#/definitions/support"},
         "explanation": {"type": "string"}
       },
       "required": [
@@ -185,6 +188,7 @@
         "tie_flags",
         "frequency_baseline_candidates",
         "measured_reliability_banner",
+        "support",
         "explanation"
       ],
       "additionalProperties": false
@@ -200,22 +204,41 @@
   },
   "additionalProperties": false,
   "definitions": {
+    "support": {
+      "type": "object",
+      "required": [
+        "n_supporting_training_episodes",
+        "n_transitions_from_state",
+        "caution",
+        "caution_text"
+      ],
+      "properties": {
+        "n_supporting_training_episodes": {"type": "integer"},
+        "n_transitions_from_state": {"type": "number"},
+        "caution": {"type": "boolean"},
+        "caution_text": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
     "prediction_candidate": {
       "type": "object",
       "required": [
         "candidate_id",
         "candidate_name",
+        "name_source",
         "score",
         "score_type",
         "numerator",
         "denominator",
         "supporting_episodes_count",
         "supporting_episode_ids",
-        "tactics"
+        "tactics",
+        "tactic_display"
       ],
       "properties": {
         "candidate_id": {"type": "string"},
         "candidate_name": {"type": ["string", "null"]},
+        "name_source": {"type": ["string", "null"]},
         "score": {"type": "number"},
         "score_type": {
           "type": "string",
@@ -229,6 +252,10 @@
           "items": {"type": "string"}
         },
         "tactics": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "tactic_display": {
           "type": "array",
           "items": {"type": "string"}
         }

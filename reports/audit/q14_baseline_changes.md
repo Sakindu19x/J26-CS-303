@@ -28,3 +28,29 @@ Records all modifications to baseline files permitted under Prompt 14 allow-list
 | E5-Removed Sample Size N | 93 | 93 | IDENTICAL |
 | Primary Sample Size N | 95 | 95 | IDENTICAL |
 
+## Baseline Change: `data/processed_7ep/prediction_records_loeo.jsonl` (Q7, 2026-10-15T06:42:00Z)
+
+- **Part**: Q7
+- **Rationale**: Prediction records Schema 1.1.0 update: candidate tactics, non-placeholder alternatives, support object with caution metrics
+- **Baseline File**: `_baseline_hashes_7ep_inference.json`
+- **Old SHA-256**: `9b68c7204d0d28cb9dd45c0df1c5541c330663449c7be193a34f4cd732602e05`
+- **New SHA-256**: `373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421`
+- **Numeric Leaves Extracted**: Old=11986, New=13435
+
+| Metric | Old Value (HEAD) | New Value (Working Tree) | Status |
+|:---|:---|:---|:---|
+| Extracted Numeric Count | 11986 | 13435 | VERIFIED |
+
+## Baseline Change: `reports/7ep/prediction_record_examples.md` (Q7, 2026-10-15T06:42:05Z)
+
+- **Part**: Q7
+- **Rationale**: Worked examples report updated for Schema 1.1.0: 7 distinct exemplars including single-episode, set-valued, and tactic-level
+- **Baseline File**: `_baseline_hashes_7ep_inference.json`
+- **Old SHA-256**: `759dd7c83594e8087e1a8c94eb49efccdf795bbb5185e380a0295774ecaf57f4`
+- **New SHA-256**: `c3b05890c87390524c2027a8b2fe6f74be9ae64d1a85ae7d2d95f1654eb2a6c5`
+- **Numeric Leaves Extracted**: Old=510, New=905
+
+| Metric | Old Value (HEAD) | New Value (Working Tree) | Status |
+|:---|:---|:---|:---|
+| Extracted Numeric Count | 510 | 905 | VERIFIED |
+

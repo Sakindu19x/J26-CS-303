@@ -152,3 +152,58 @@ def test_gp5_6_requirements_trace():
     for i in range(1, 7):
         assert f"NFR{i}" in text, f"Missing NFR{i} in trace matrix"
     assert "null until C3 integration" in text, "Missing 'null until C3 integration' marker"
+
+
+def test_schema_1_1_0_support_and_caution_counts(loaded_records):
+    """Q7: Verify schema 1.1.0 fields, support metrics, and exactly 92 cautioned records."""
+    assert len(loaded_records) == 171
+    caution_count = 0
+    for r in loaded_records:
+        assert r["schema_version"] == "1.1.0"
+        lvl = r["prediction_type"]
+        p_obj = r["technique_prediction"] if lvl == "technique" else r["tactic_prediction"]
+        assert "support" in p_obj
+        sup = p_obj["support"]
+        assert isinstance(sup["caution"], bool)
+        assert isinstance(sup["n_supporting_training_episodes"], int)
+        assert isinstance(sup["n_transitions_from_state"], (int, float))
+        if sup["caution"]:
+            caution_count += 1
+            assert sup["caution_text"] is not None
+
+    assert caution_count == 92, f"Expected 92 cautioned records, got {caution_count}"
+
+
+def test_alternatives_no_placeholders_and_tactics(loaded_records):
+    """Q7: Verify alternatives ranks 4..k have non-placeholder numerator > 0 when score > 0."""
+    checked_alts = 0
+    for r in loaded_records:
+        lvl = r["prediction_type"]
+        p_obj = r["technique_prediction"] if lvl == "technique" else r["tactic_prediction"]
+        for a in p_obj.get("alternatives", []):
+            checked_alts += 1
+            assert len(a["tactics"]) > 0
+            assert len(a["tactic_display"]) > 0
+            if a["score"] > 0:
+                assert a["numerator"] > 0, f"Alternative {a['candidate_id']} has score {a['score']} but numerator {a['numerator']} <= 0"
+
+    assert checked_alts > 0, "No alternative candidates were checked"
+
+
+def test_tie_break_rule_identical_across_records(loaded_records):
+    """Q7: Verify tie_break_rule enum is identical across all records and matches schema."""
+    for r in loaded_records:
+        assert r["model"]["tie_break_rule"] == "lexicographical_ascending"
+
+
+def test_exemplars_seven_distinct_sample_ids():
+    """Q7: Verify prediction_record_examples.md has exactly 7 distinct exemplar sample IDs."""
+    examples_path = REPO_ROOT / "reports" / "7ep" / "prediction_record_examples.md"
+    assert examples_path.is_file()
+    text = examples_path.read_text(encoding="utf-8")
+    import re
+    # Extract sample IDs from exemplar headers e.g. ## Exemplar: 1. First Hit (`E1-col-ful-K01`)
+    matches = re.findall(r"## Exemplar: [^\n]+ \(`([^`]+)`\)", text)
+    assert len(matches) == 7, f"Expected 7 exemplar sections, found {len(matches)}: {matches}"
+    assert len(set(matches)) == 7, f"Duplicate exemplar sample IDs found: {matches}"
+

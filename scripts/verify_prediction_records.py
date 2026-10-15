@@ -201,15 +201,45 @@ def verify_prediction_records() -> bool:
 
     print(f"[Step 6] Gate G-P5-2: Independent transition recount matched all probabilities within 1e-9 [PASS]")
 
-    # 7. Examples Markdown verification
+    # 7. Field completeness for schema 1.1.0
+    for idx, r in enumerate(records):
+        assert r["schema_version"] == "1.1.0", f"Record {idx} has schema_version {r['schema_version']} != 1.1.0"
+        lvl = r["prediction_type"]
+        p_obj = r["technique_prediction"] if lvl == "technique" else r["tactic_prediction"]
+        
+        # Support check
+        assert "support" in p_obj, f"Record {idx} missing support object"
+        sup = p_obj["support"]
+        assert "caution" in sup and isinstance(sup["caution"], bool)
+        assert "n_supporting_training_episodes" in sup
+        assert "n_transitions_from_state" in sup
+
+        # Candidate tactics and non-placeholder alternatives
+        for c in p_obj["ranked_candidates"]:
+            assert "tactics" in c and isinstance(c["tactics"], list)
+            assert "tactic_display" in c and isinstance(c["tactic_display"], list)
+            if c["score"] > 0:
+                assert c["numerator"] > 0, f"Ranked candidate {c['candidate_id']} has score {c['score']} but numerator {c['numerator']}"
+
+        for c in p_obj.get("alternatives", []):
+            assert "tactics" in c and isinstance(c["tactics"], list)
+            assert "tactic_display" in c and isinstance(c["tactic_display"], list)
+            if c["score"] > 0:
+                assert c["numerator"] > 0, f"Alternative {c['candidate_id']} has score {c['score']} but numerator {c['numerator']}"
+
+    print(f"[Step 7] Schema 1.1.0 field completeness, support metrics, and non-placeholder alternatives verified [PASS]")
+
+    # 8. Examples Markdown verification
     md_text = EXAMPLES_MD_PATH.read_text(encoding="utf-8")
-    assert "# Explainable Prediction Record Worked Examples (7 Episodes)" in md_text
+    assert "# Explainable Prediction Record Worked Examples (7 Episodes, Schema 1.1.0)" in md_text
     assert "## Exemplar: 1. First Hit" in md_text
     assert "## Exemplar: 2. First Miss" in md_text
-    assert "## Exemplar: 3. First Fallback" in md_text
-    assert "## Exemplar: 4. First Unseen State" in md_text
-    assert "## Exemplar: 5. First Tied Boundary" in md_text
-    print(f"[Step 7] Worked examples report structure verified [PASS]")
+    assert "## Exemplar: 3. Frequency Fallback (Unseen State)" in md_text
+    assert "## Exemplar: 4. Tied Rank Boundary" in md_text
+    assert "## Exemplar: 5. Tactic-Level Prediction" in md_text
+    assert "## Exemplar: 6. Single-Episode Support State" in md_text
+    assert "## Exemplar: 7. Set-Valued State" in md_text
+    print(f"[Step 8] Worked examples report structure (7 distinct categories) verified [PASS]")
 
     print("\n" + "=" * 80)
     print("ALL PREDICTION RECORD VERIFICATIONS PASSED SUCCESSFULLY (Exit 0)")

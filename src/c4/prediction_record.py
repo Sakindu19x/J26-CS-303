@@ -46,6 +46,7 @@ def generate_explanation_text(
     training_episodes: list[str],
     reliability_banner: str,
     tie_flags: dict[str, Any],
+    support: dict[str, Any] | None = None,
 ) -> str:
     """Build deterministic template explanation strictly from record fields."""
     cur_str = ", ".join(sorted(current_set)) if current_set else "EMPTY"
@@ -78,6 +79,9 @@ def generate_explanation_text(
         )
     else:
         parts.append(f"State [{cur_str}] resulted in status '{status}'.")
+
+    if support and support.get("caution"):
+        parts.append(f"Support Context: {support.get('caution_text')}")
 
     if tie_flags.get("tie_at_top1"):
         parts.append(f"Notice: Top-1 boundary is tied among candidates: {tie_flags.get('tied_candidates', [])}.")

@@ -43,8 +43,8 @@
 ---
 
 ### Question 7: Duplicate Telemetry Handling Policy
-- **Current C4 Assumption**: Duplicate events sharing identical timestamps, episode IDs, and technique sets represent sensor retransmissions; C4 keeps them on the timeline but flags them as duplicates.
-- **Question for C3 Owner**: Should duplicate events with differing `threat_score` values update the existing event or append a new revision?
+- **Authoritative C4 Implementation (`src/c4/c3_adapter.py`)**: Events sharing identical `(episode_id, timestamp, sorted(techniques))` are detected, recorded in the `duplicates` return list with reason code `DUPLICATE_EVENT`, and flagged with `duplicate_flag = True`. They are retained on the chronological timeline and in raw sequences; during collapsing, consecutive identical technique sets are merged into a single state with aggregated `event_ids`. Duplicate events are never dropped or quarantined.
+- **Question for C3 Owner**: When duplicate events arrive with differing `threat_score` or C3 contextual values, should C4 retain the first observation, the last observation, or merge contextual metadata?
 
 ---
 

@@ -1,0 +1,6 @@
+# Q14 Determinism Log (PYTHONHASHSEED=0, 1, 4242) - Generated 2026-10-15T06:41:51.916075+00:00
+Target file: C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\data\processed_7ep\prediction_records_loeo.jsonl
+PYTHONHASHSEED=0     SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421 (size: 986082 bytes)
+PYTHONHASHSEED=1     SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421 (size: 986082 bytes)
+PYTHONHASHSEED=4242  SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421 (size: 986082 bytes)
+VERDICT: PASS - 100% deterministic across all hashseeds.

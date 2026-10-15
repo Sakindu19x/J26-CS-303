@@ -143,6 +143,16 @@ def test_duplicates_detected_and_reported():
     assert len(res["episodes"]["E1"]["timeline"]) == 2
     assert res["episodes"]["E1"]["timeline"][1]["duplicate_flag"] is True
 
+    # Both are included in raw sequence
+    assert len(res["episodes"]["E1"]["raw"]) == 2
+    assert [e["event_id"] for e in res["episodes"]["E1"]["raw"]] == ["EV-DUP", "EV-DUP"]
+
+    # Collapsed sequence merges them into 1 transition state, aggregating event_ids
+    assert len(res["episodes"]["E1"]["collapsed"]) == 1
+    assert res["episodes"]["E1"]["collapsed"][0]["event_ids"] == ["EV-DUP", "EV-DUP"]
+    assert res["episodes"]["E1"]["collapsed"][0]["techniques"] == ["T1059.004"]
+
+
 
 def test_unlabeled_event_stays_on_timeline_excluded_from_sequence():
     """Rule 7: Event with no technique stays on timeline, excluded from sequence with reason code UNLABELED_STEP."""

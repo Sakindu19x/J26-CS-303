@@ -88,6 +88,9 @@ def extract_panel_view_data(record: dict[str, Any]) -> dict[str, Any]:
         "tie_notice": tie_notice,
         "reliability_banner": p_obj.get("measured_reliability_banner", {}).get("banner_text", ""),
         "explanation": p_obj.get("explanation", ""),
+        "support": p_obj.get("support", {}),
+        "caution": p_obj.get("support", {}).get("caution", False),
+        "caution_text": p_obj.get("support", {}).get("caution_text"),
         "record_id": record["record_id"],
         "model_file_sha256": record["model"]["model_file_sha256"],
         "input_events_sha256": record["input_events_sha256"],
@@ -102,7 +105,7 @@ def render_prediction_panel_html(record: dict[str, Any]) -> str:
     cand_rows = []
     for idx, c in enumerate(d["ranked_candidates"], start=1):
         ep_ids = ", ".join(c.get("supporting_episode_ids", [])) if c.get("supporting_episode_ids") else "none"
-        tactics_str = ", ".join(c.get("tactics", []))
+        t_disp = ", ".join(c.get("tactic_display", [])) if c.get("tactic_display") else ", ".join(c.get("tactics", []))
         cand_rows.append(
             f"<tr>"
             f"<td><b>{idx}</b></td>"
@@ -112,20 +115,23 @@ def render_prediction_panel_html(record: dict[str, Any]) -> str:
             f"<td><code>{c['score_type']}</code></td>"
             f"<td>{c['numerator']:.2f} / {c['denominator']:.2f}</td>"
             f"<td>[{ep_ids}]</td>"
-            f"<td>{tactics_str}</td>"
+            f"<td>{t_disp}</td>"
             f"</tr>"
         )
 
     alt_rows = []
     for idx, a in enumerate(d["alternatives"], start=4):
-        tactics_str = ", ".join(a.get("tactics", []))
+        ep_ids = ", ".join(a.get("supporting_episode_ids", [])) if a.get("supporting_episode_ids") else "none"
+        t_disp = ", ".join(a.get("tactic_display", [])) if a.get("tactic_display") else ", ".join(a.get("tactics", []))
         alt_rows.append(
             f"<tr>"
             f"<td>{idx}</td>"
             f"<td><code>{a['candidate_id']}</code></td>"
             f"<td>{a.get('candidate_name') or 'N/A'}</td>"
             f"<td>{a['score']:.4f}</td>"
-            f"<td>{tactics_str}</td>"
+            f"<td>{a.get('numerator', 0.0):.2f} / {a.get('denominator', 1.0):.2f}</td>"
+            f"<td>[{ep_ids}]</td>"
+            f"<td>{t_disp}</td>"
             f"</tr>"
         )
 
@@ -168,6 +174,10 @@ def render_prediction_panel_html(record: dict[str, Any]) -> str:
     <div class="banner">
       <b>Empirical Reliability Benchmark:</b> {d['reliability_banner']}
     </div>
+
+    {f'''<div class="banner-caution" style="background: #451a03; border-left: 4px solid #f59e0b; padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.875rem;">
+      <b>Statistical Support Caution:</b> {d["caution_text"]} (Supporting Episodes: {d["support"].get("n_supporting_training_episodes", 0)}, Historical Transitions: {d["support"].get("n_transitions_from_state", 0.0):.2f})
+    </div>''' if d.get('caution') else ''}
 
     <div class="explanation">
       <b>Model Rationale & Explainability:</b> {d['explanation']}
@@ -289,6 +299,8 @@ def render_prediction_panel_streamlit(record: dict[str, Any]) -> None:
     )
 
     st.info(f"📊 **Empirical Reliability Benchmark (LOEO Evaluation):** {d['reliability_banner']}")
+    if d.get("caution"):
+        st.warning(f"⚠️ **Statistical Support Caution:** {d['caution_text']} (Supporting Episodes: {d['support'].get('n_supporting_training_episodes', 0)}, Historical Transitions: {d['support'].get('n_transitions_from_state', 0.0):.2f})")
     st.success(f"🔍 **Model Rationale:** {d['explanation']}")
 
     col1, col2 = st.columns(2)
