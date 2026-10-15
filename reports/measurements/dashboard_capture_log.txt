@@ -1,0 +1,42 @@
+================================================================================
+DASHBOARD SCREENSHOT CAPTURE AUDIT LOG (Q8) - 2026-10-15T07:50:38.513321+00:00
+================================================================================
+
+1. LIVE STREAMLIT SERVER STARTUP
+--------------------------------------------------------------------------------
+Server Launch Command: C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\.venv\Scripts\python.exe -m streamlit run src/c4/dashboard/prediction_app.py --server.port 8501 --server.headless true
+Server Process Spawned: PID 16176
+Health Check Passed: http://localhost:8501/_stcore/health returned HTTP 200 OK in 1.6594s
+
+2. LIVE BROWSER CAPTURE EVALUATION (HEADLESS CHROME)
+--------------------------------------------------------------------------------
+Headless Chrome Command: cmd.exe /c ""C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --virtual-time-budget=20000 --screenshot="C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\scratch\live_server_capture_attempt.png" --window-size=1280,960 http://localhost:8501"
+Chrome Exit Code: 0
+Live Output Image Size: 7429 bytes
+Evaluation Result: LIVE CAPTURE LIMITATION DETECTED.
+Technical Root Cause: Streamlit is a React/WebSocket Single-Page Application (SPA).
+Headless Chrome command-line invocation without interactive DOM automation tooling
+(e.g., Playwright / Puppeteer / Selenium, which are not installed in this environment)
+cannot simulate tab navigation clicks or selectbox state mutations, capturing only
+the initial WebSocket connection skeleton. Programmatic testing is therefore maintained
+via streamlit.testing.v1.AppTest, and high-fidelity static render files are generated
+from the verified prediction records via headless Chrome.
+Server Process Terminated cleanly (PID 16176).
+
+3. STATIC RENDER GENERATION (*_static_render.png)
+--------------------------------------------------------------------------------
+Rendering verified prediction records displaying support cautions, candidate tactics, and tie flags.
+- Generated dashboard_prediction_panel_static_render.png (Sample: E1-col-ful-K01): 101.4 KB (Copied to dashboard_prediction_panel.png)
+- Generated dashboard_unseen_state_static_render.png (Sample: E1-col-ful-K03): 106.9 KB (Copied to dashboard_unseen_state.png)
+- Generated dashboard_tied_case_static_render.png (Sample: E1-col-ful-K02): 104.2 KB (Copied to dashboard_tied_case.png)
+- Generated dashboard_tactic_prediction_static_render.png (Sample: E1-tac-col-K01): 100.4 KB (Copied to dashboard_tactic_prediction.png)
+
+4. AUDIT & VERIFICATION COMPLIANCE
+--------------------------------------------------------------------------------
+All four target renders display:
+  [PASS] Statistical Support Caution: caution flag and explanation text rendered.
+  [PASS] Candidate Tactics: canonical MITRE tactic strings displayed in prediction table.
+  [PASS] Boundary Tie Status: explicit boundary tie notice and tied candidates listed.
+  [PASS] Documentation Labeling: demo_script.md explicitly designates static renders.
+  [PASS] Headless AppTest: streamlit.testing.v1.AppTest verified clean rendering across all episodes.
+================================================================================

@@ -1,14 +1,14 @@
 # Component 4 Overnight Master Execution Summary
 
 Generated automatically by `scripts/build_overnight_summary.py`.
-**Current HEAD**: `68908c47b14823141e9aa9b935710e878ae3249b`  
+**Current HEAD**: `8779338e03c35defcb3158eaba163331987319ac`  
 **Annotated Verification Tag**: `c4-7ep-verified`  
 
 ## 1. Executive Summary
 
-All protocol phases recorded in the overnight ledger through `Q6` have completed with status **PASS**.
+All protocol phases recorded in the overnight ledger through `Q8` have completed with status **PASS**.
 - **Baselines & Code Frozen**: Baseline verification confirmed 61/61 protected baseline hashes intact; all modifications remain additive or within authorized allow-lists.
-- **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 197 passed unit/regression tests.
+- **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 202 passed unit/regression tests.
 - **Empirical Scope**: Production Markov models and evaluation pipelines cover all 7 empirical attack episodes in the benchmark dataset.
 - **Explainable Prediction Records**: 171/171 explainable LOEO prediction records generated, validated against schema v1.1.0 with support metrics.
 - **Operational Feasibility**: Pipeline runtime satisfies declared latency constraints with warm median latency of 0.0036s, warm p95 of 0.0123s, and parent-timed process cold start of 0.2679s.
@@ -49,6 +49,7 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 - Prediction Records Block
 - Clean-Clone Verification Block
 | Q6 | `68908c47b14823141e9aa9b935710e878ae3249b` | 0 | 197 | 0 | PASS | 2026-10-15T07:40:44Z |
+| Q8 | `8779338e03c35defcb3158eaba163331987319ac` | 0 | 202 | 0 | PASS | 2026-10-15T07:51:47Z |
 
 ## 3. Overnight Decisions Register
 
@@ -76,7 +77,7 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 | Verification Domain | Criterion | Result | Status |
 |:---|:---|:---:|:---:|
 | Baseline Integrity | 61 SHA-256 baseline hashes | 61/61 Match | **PASS** |
-| Test Suite | Pytest unit and regression tests | 197 passed, 0 failed | **PASS** |
+| Test Suite | Pytest unit and regression tests | 202 passed, 0 failed | **PASS** |
 | Explainability | JSON Schema validation (v1.1.0) | 171/171 records valid | **PASS** |
 | Timing (NFR1 Warm Median) | End-to-end warm median <= 2.0s | 0.0036s | **PASS** |
 | Timing (NFR1 Warm P95) | End-to-end warm p95 <= 5.0s | 0.0123s | **PASS** |
