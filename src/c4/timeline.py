@@ -244,7 +244,7 @@ def export_timelines(
     for col in ["techniques", "tactics", "official_tactics", "local_occurrence"]:
         if col in df.columns:
             df[col] = df[col].apply(lambda x: json.dumps(x) if isinstance(x, (list, dict)) else x)
-    df.to_csv(output_csv_path, index=False, encoding="utf-8")
+    df.to_csv(output_csv_path, index=False, encoding="utf-8", lineterminator="\n")
 
 
 # Backward-compatibility helper for test_basic.py

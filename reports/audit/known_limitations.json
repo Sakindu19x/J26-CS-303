@@ -4,6 +4,7 @@
     "title": "Small Initial Sample Size (4 Episodes)",
     "category": "Dataset Scope",
     "status": "CLOSED",
+    "evidence_file": "reports/7ep/evaluation_7ep_results.json",
     "resolution_commit": "2cf7786",
     "description": "The initial 4-episode evaluation (N=67) had limited statistical power to differentiate fine-grained sequence dynamics.",
     "resolution": "Expanded to 7 episodes (E1-E7, N=95) with formal pre-registration, LOEO cross-validation, and power analysis."
@@ -12,9 +13,10 @@
     "id": "LIM-02",
     "title": "Cross-Scenario Technique Vocabulary Isolation",
     "category": "Domain Generalization",
-    "status": "CLOSED",
+    "status": "EXPLAINED",
+    "evidence_file": "reports/7ep/evaluation_7ep_results.json",
     "resolution_commit": "d6f3764",
-    "description": "Technique-level attack patterns exhibit zero repeat transitions across disparate campaigns, causing severe coverage and reachability bottlenecks.",
+    "description": "Technique-level attack patterns exhibit cross-scenario vocabulary isolation across disparate campaigns, causing severe coverage and reachability bottlenecks.",
     "resolution": "Quantified via Target Reachability Ceiling (62.11%) and Perfect-Order Prediction Cap (64.98%), formally explaining the performance gap."
   },
   {
@@ -22,15 +24,17 @@
     "title": "Episode E5 Sample Imbalance",
     "category": "Data Quality",
     "status": "CLOSED",
+    "evidence_file": "reports/7ep/e5_removed_results.json",
     "resolution_commit": "3a6b306",
     "description": "Episode E5 contains only 3 labeled events (2 collapsed transitions), resulting in zero coverage under LOEO cross-validation.",
-    "resolution": "Conducted full side-by-side sensitivity analysis with E5 removed (6-fold LOEO, N=83) confirming all conclusions hold independently of E5."
+    "resolution": "Conducted full side-by-side sensitivity analysis with E5 removed (6-fold LOEO, N=93 technique and 74 tactic, read from e5_removed_results.json) confirming all conclusions hold independently of E5."
   },
   {
     "id": "LIM-04",
     "title": "Artificial Duplicates in Permutation Scheme S2",
     "category": "Statistical Methodology",
     "status": "CLOSED",
+    "evidence_file": "reports/prereg_7episode_design.md",
     "resolution_commit": "14f3b89",
     "description": "Unconstrained adjacent shuffling in Scheme S2 generated consecutive identical transitions that never occur in collapsed empirical sequences.",
     "resolution": "Formally excluded S2 from 7-episode design in pre-registration; adopted Scheme S1 (headline) and Scheme S3 (rejection-sampled constrained shuffle)."
@@ -40,6 +44,7 @@
     "title": "Speculative Wording in Permutation Test Scripts",
     "category": "Reporting Neutrality",
     "status": "CLOSED",
+    "evidence_file": "reports/7ep/permutation_7ep_report.md",
     "resolution_commit": "14f3b89",
     "description": "Reporting scripts included causal speculation regarding adjacency constraints and ambiguous wording on Markov-minus-Frequency rows.",
     "resolution": "Neutralized under Amendment 6 to factual difference statistic descriptions and explicit disclaimers regarding hypothesis test boundaries."
@@ -49,6 +54,7 @@
     "title": "Synthetic Planted Structure Gate G8 Bound Sensitivity",
     "category": "Simulation Validation",
     "status": "CLOSED",
+    "evidence_file": "reports/7ep/planted_realscale_7ep_report.json",
     "resolution_commit": "14f3b89",
     "description": "At small sample sizes with V=82, estimator recovery bound for G8 was loose relative to large-sample asymptotics.",
     "resolution": "Documented in planted real-scale report; G9 (monotonicity) and G10 (reachability recovery) passed unconditionally."
@@ -58,6 +64,7 @@
     "title": "Historical Intermediary A2 Scratch Run Reproducibility",
     "category": "Provenance Integrity",
     "status": "CLOSED",
+    "evidence_file": "reports/audit/history/overnight_ledger_old.md",
     "resolution_commit": "d4557f4",
     "description": "Intermediary files from early exploratory 4-episode A2 scratch exploration lacked fixed seeds in exploratory scripts.",
     "resolution": "Isolated strictly to early scratch exploration history; all benchmark code, final reports, and baseline hashes are frozen and verified."
@@ -67,6 +74,7 @@
     "title": "Absence of Live Operational C3 Metadata in CAM-LDS",
     "category": "Interface Contract",
     "status": "OPEN",
+    "evidence_file": null,
     "resolution_commit": null,
     "description": "The open-source CAM-LDS benchmark lacks operational SOC telemetry fields (threat score, investigation priority, asset criticality, CTI confidence, IoCs).",
     "resolution": "C4 prediction record and C3 adapter support pass-through with explicit null semantics pending live integration agreement with C3 owner."
@@ -76,6 +84,7 @@
     "title": "Real-Time Streaming Ingestion and Dynamic Episode Demarcation",
     "category": "Operational Deployment",
     "status": "OPEN",
+    "evidence_file": null,
     "resolution_commit": null,
     "description": "Benchmark operates on demarcated retrospective episodes; real-time SOC deployment requires automated session boundary detection and sliding window aggregation.",
     "resolution": "Marked as an open research/engineering question in docs/c3_open_questions.md for Stage 3 production deployment."
@@ -85,6 +94,7 @@
     "title": "Higher-Order Context Memory ($k \\ge 2$ Markov Dynamics)",
     "category": "Model Expressiveness",
     "status": "OPEN",
+    "evidence_file": null,
     "resolution_commit": null,
     "description": "First-order Markov chains only condition on the immediate previous transition state, ignoring multi-step attack history.",
     "resolution": "Exploratory analysis showed severe state space sparsity even at order 1; higher-order models require substantially larger cross-enterprise corpora."
@@ -94,6 +104,7 @@
     "title": "Clean Clone Shares Parent Virtual Environment",
     "category": "Environment Isolation",
     "status": "OPEN",
+    "evidence_file": null,
     "resolution_commit": null,
     "description": "Clean-clone reproduction scripts run in an isolated clone directory but execute using the parent workspace's Python virtual environment (`..\\.venv\\Scripts\\python.exe`), rather than provisioning a fresh venv from scratch each time.",
     "resolution": "Environment parity is verified by comparing `pip freeze` against `requirements.lock.txt`."
@@ -103,6 +114,7 @@
     "title": "Dashboard Visual Artifacts Static Renders vs Live Captures",
     "category": "Visualization Telemetry",
     "status": "CLOSED",
+    "evidence_file": "reports/measurements/live_capture_log.txt",
     "resolution_commit": "e33e008",
     "description": "Headless Chrome CLI captures only the initial WebSocket SPA skeleton. Dashboard captures rely on high-fidelity static renders unless live interactive Playwright automation succeeds.",
     "resolution": "Prompt 15 R4(d) successfully executed interactive Playwright live capture in a dedicated venv (C:\\c4_capture_venv) with channel='chrome', producing reports/measurements/live_*.png alongside static renders."
@@ -112,6 +124,7 @@
     "title": "C3 Interface Contract Unagreed by Component 3",
     "category": "Integration Governance",
     "status": "OPEN",
+    "evidence_file": null,
     "resolution_commit": null,
     "description": "The C3-C4 interface format (src/c4/c3_adapter.py, docs/c3_c4_interface_contract.md) was proposed and implemented by Component 4, but has not been formally agreed or ratified by the Component 3 team.",
     "resolution": "Status recorded as PARTIAL in requirements trace; adapter tested and validated against C4 internal fixtures only."
@@ -120,16 +133,18 @@
     "id": "LIM-14",
     "title": "High Proportion of Low-Support Predictions (92/171 Cautioned)",
     "category": "Statistical Support",
-    "status": "CLOSED",
+    "status": "MITIGATED",
+    "evidence_file": "data/processed_7ep/prediction_records_loeo.jsonl",
     "resolution_commit": "c6efee4",
     "description": "92 out of 171 LOEO prediction records (53.80%) rest on low historical support (<2 supporting episodes or <3 state transitions), reflecting benchmark state space sparsity.",
-    "resolution": "Schema v1.1.0 enforces mandatory support caution flags and narrative warnings on all 92 low-support records, preventing over-confident claims."
+    "resolution": "Schema v1.1.0 enforces mandatory support caution flags and narrative warnings on all 92 low-support records, preventing over-confident claims; 92/171 records remain low-support due to benchmark dataset constraints."
   },
   {
     "id": "LIM-15",
     "title": "Streamlit Readiness Metric Measures Health Endpoint, Not First Render",
     "category": "Performance Measurement",
     "status": "OPEN",
+    "evidence_file": null,
     "resolution_commit": null,
     "description": "Reported Streamlit startup/ready times measure HTTP 200 response latency on the `_stcore/health` endpoint rather than client-side first DOM paint or WebSocket handshake completion.",
     "resolution": "Clarified in measurement documentation and known limitations; AppTest used for full headless DOM and component validation."
@@ -138,9 +153,10 @@
     "id": "LIM-16",
     "title": "Prompt 14 Unattended Agent Log Access Procedural Violation",
     "category": "Agentic Execution Governance",
-    "status": "CLOSED",
+    "status": "EXPLAINED",
+    "evidence_file": "docs/prompts/prompt15.md",
     "resolution_commit": "6e58efc",
     "description": "During Prompt 14 unattended execution, the coding assistant accessed conversation transcript and task log files directly, violating procedural constraints on state contamination.",
-    "resolution": "Strictly forbidden in Prompt 15 Rules (NEVER open transcript files, task logs, or brain\\ logs); verified zero access throughout Prompt 15 repair run."
+    "resolution": "Incident recorded in project governance; rules for Prompt 15 and Prompt 16 strictly forbid opening conversation transcript files, task logs, or brain\\ logs."
   }
 ]

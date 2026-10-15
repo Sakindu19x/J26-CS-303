@@ -1,12 +1,11 @@
 # Component 4 Overnight Master Execution Summary
 
 Generated automatically by `scripts/build_overnight_summary.py`.
-**Current HEAD**: `8f0870fcce1b83045818544dd90eea426f158897`  
 **Annotated Verification Tag**: `c4-7ep-verified`  
 
 ## 1. Executive Summary
 
-All protocol phases recorded in the overnight ledger through `R7` have completed with status **PASS**.
+All protocol phases recorded in the overnight ledger through `S0` have completed with status **PASS**.
 - **Baselines & Code Frozen**: Baseline verification confirmed 61/61 protected baseline hashes intact; all modifications remain additive or within authorized allow-lists.
 - **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 209 passed unit/regression tests.
 - **Empirical Scope**: Production Markov models and evaluation pipelines cover all 7 empirical attack episodes in the benchmark dataset.
@@ -17,28 +16,47 @@ All protocol phases recorded in the overnight ledger through `R7` have completed
 
 # Overnight Execution Ledger
 
-| Part | Git HEAD (SHA) | verify_all_hashes Exit | Pytest Passed | Pytest Failed | Status | UTC Timestamp |
-|:---|:---|:---:|:---:|:---:|:---|:---:|
-| P0 | `42e941a53b3c3a126c7b98325939a1a9e4c8558a` | 0 | 151 | 0 | PASS | 2026-10-14T19:51:23Z |
-| P1 | `9cf7913f0011245f18c8407db3bcccecde83101c` | 0 | 151 | 0 | PASS | 2026-10-14T20:00:58Z |
-| P2 | `28902632103c13db83ddd2900b562a1237890f8b` | 0 | 152 | 0 | PASS | 2026-10-14T20:18:05Z |
-| P3 | `6055024ef7f1efbbd9df87ac1e9c93ce595ae7c8` | 0 | 152 | 0 | PASS | 2026-10-14T20:48:48Z |
-| P4 | `5d2a30919896f292b82094effb93fb539428f165` | 0 | 157 | 0 | PASS | 2026-10-15T01:58:27Z |
-| P5 | `4cd70e6e09e99fc542a6c7903303c973e043d981` | 0 | 163 | 0 | PASS | 2026-10-15T02:17:30Z |
-| P6 | `526236f4c4a62f8a3f404aa4526a71a50da37492` | 0 | 174 | 0 | PASS | 2026-10-15T03:56:22Z |
-| P7 | `24215585916ce78d1256140953a2c61505ecf752` | 0 | 178 | 0 | PASS | 2026-10-15T04:14:46Z |
-| P8 | `c4ae715d552b8d43789cde45d10e1e545f6ed212` | 0 | 181 | 0 | PASS | 2026-10-15T04:30:23Z |
-| P9 | `0e28a209fb26ef8085223806c74ea141723aaa95` | 0 | 184 | 0 | PASS | 2026-10-15T04:41:08Z |
-| P10 | `f7ff50d78dd5d78c31e4ed02186fbebbea3377ab` | 0 | 184 | 0 | PASS | 2026-10-15T05:05:45Z |
-| P11 | `f1f1db4f8d282b61d195353989db8f15e99d8ad6` | 0 | 184 | 0 | PASS | 2026-10-15T05:32:43Z |
+> [!NOTE]
+> Regenerated automatically by `scripts/audit/ledger.py` from `git log` and verified output logs.
+> Each row records the exact commit containing that part's changes (commit author date in UTC).
+> 'Full-Suite Pytest Total' is recorded strictly from full regression test suite executions.
 
-Note: P7-P9 pytest counts were passed manually in Prompt 13; re-measured in Q0/Q10.
-| Q1 | `44c144ae756b304c21cbfb5bf1c9aadaa2bf8c88` | 0 | 184 | 0 | PASS | 2026-10-15T06:08:30Z |
-| Q3 | `3dab166ce9a3ba72845554223ca6df458717b1dc` | 0 | 184 | 0 | PASS | 2026-10-15T06:23:39Z |
-| Q7 | `4f8d0c889e33d5df0d3ff679b596d5e44b65f7d5` | 0 | 188 | 0 | PASS | 2026-10-15T06:42:40Z |
-| Q9 | `c7b3d5e5456230db621a14ac96d7f9e351de22f1` | 0 | 189 | 0 | PASS | 2026-10-15T06:55:28Z |
-| Q4 | `cf6e5dbd885a7a6452817195abb0e1a284c25cec` | 0 | 192 | 0 | PASS | 2026-10-15T07:05:03Z |
-| Q5 | `4fc004bd150dbc599fa014ac64bbaf65bee59720` | 0 | 195 | 0 | PASS | 2026-10-15T07:30:46Z |
+| Part | Commit SHA | Author Date (UTC) | verify_all_hashes Exit | Full-Suite Pytest Total | New Tests Added | Status | Reconstructed |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **P0** | `42e941a53b3c3a126c7b98325939a1a9e4c8558a` | 2026-10-14T19:31:28Z | 0 | 151 | 0 | **PASS** | reconstructed |
+| **P1** | `9cf7913f0011245f18c8407db3bcccecde83101c` | 2026-10-14T20:00:46Z | 0 | 151 | 0 | **PASS** | no |
+| **P2** | `28902632103c13db83ddd2900b562a1237890f8b` | 2026-10-14T20:17:40Z | 0 | 152 | +1 | **PASS** | no |
+| **P3** | `6055024ef7f1efbbd9df87ac1e9c93ce595ae7c8` | 2026-10-14T20:48:43Z | 0 | 152 | 0 | **PASS** | no |
+| **P4** | `df49a9c02fa4ae3d13b92d02c380b37aea01ced5` | 2026-10-15T02:01:01Z | 0 | 157 | +5 | **PASS** | no |
+| **P5** | `e45b3066f864e52c7012a16be223c43871859c48` | 2026-10-15T03:52:49Z | 0 | 163 | +6 | **PASS** | no |
+| **P6** | `52f66c346ff577e2e25a134b0bc870e9ab061023` | 2026-10-15T04:01:23Z | 0 | 174 | +11 | **PASS** | no |
+| **P7** | `404094040f90da2f75d8a8af807ce545eef7f31f` | 2026-10-15T04:16:45Z | 0 | 178 | +4 | **PASS** | no |
+| **P8** | `dcd004a428de96f4f3a31784f68e13ccabe207f3` | 2026-10-15T04:32:22Z | 0 | 181 | +3 | **PASS** | no |
+| **P9** | `d4557f4c0ab203da11e36e5f160270983936bcb1` | 2026-10-15T04:42:39Z | 0 | 184 | +3 | **PASS** | no |
+| **P10** | `577de13ad08d11ad3dea4208b41a0b8e9ba52600` | 2026-10-15T05:30:36Z | 0 | 184 | 0 | **PASS** | no |
+| **P11** | `996bd71102c8d87c8190d0617766b382f1051eb5` | 2026-10-15T05:34:32Z | 0 | 184 | 0 | **PASS** | no |
+| **Q0** | `5a53d68d3b0e61a5537f777279e59477683ace4c` | 2026-10-15T06:02:47Z | 0 | 184 | 0 | **PASS** | reconstructed |
+| **Q1** | `3dab166ce9a3ba72845554223ca6df458717b1dc` | 2026-10-15T06:06:48Z | 0 | 184 | 0 | **PASS** | no |
+| **Q3** | `4f8d0c889e33d5df0d3ff679b596d5e44b65f7d5` | 2026-10-15T06:27:48Z | 0 | 184 | 0 | **PASS** | no |
+| **Q7** | `53a5f1548b573f8619d11a9c815fb608664a9d44` | 2026-10-15T06:47:12Z | 0 | 188 | +4 | **PASS** | no |
+| **Q9** | `cf6e5dbd885a7a6452817195abb0e1a284c25cec` | 2026-10-15T06:58:27Z | 0 | 189 | +1 | **PASS** | no |
+| **Q4** | `4fc004bd150dbc599fa014ac64bbaf65bee59720` | 2026-10-15T07:07:04Z | 0 | 192 | +3 | **PASS** | no |
+| **Q5** | `68908c47b14823141e9aa9b935710e878ae3249b` | 2026-10-15T07:35:30Z | 0 | 195 | +3 | **PASS** | no |
+| **Q6** | `8779338e03c35defcb3158eaba163331987319ac` | 2026-10-15T07:42:37Z | 0 | 197 | +2 | **PASS** | no |
+| **Q8** | `e567b8ac6cfa0dff24f53ba01039f5d1ebe104e6` | 2026-10-15T07:53:49Z | 0 | 202 | +5 | **PASS** | no |
+| **Q2** | `f00c2175a8351e5d2da7b346fc81e8ad1a8b60a9` | 2026-10-15T08:13:11Z | 0 | 202 | 0 | **PASS** | no |
+| **Q10** | `d859fcb71c1bb7d30b3312d99e6a974ede941a26` | 2026-10-15T08:24:05Z | 0 | 202 | 0 | **PASS** | no |
+| **R0** | `6e58efc5a0807d7959ece791203158e32cc8215b` | 2026-10-15T08:43:15Z | 0 | 202 | 0 | **PASS** | reconstructed |
+| **R1** | `fff7595a78b9268c76870b2a02314c7b7749a339` | 2026-10-15T08:49:05Z | 0 | not recorded | +5 | **PASS** | reconstructed |
+| **R3** | `c6efee4343d3df6f62d22794458bd6dd08218b41` | 2026-10-15T10:14:40Z | 0 | not recorded | +2 | **PASS** | reconstructed |
+| **R2** | `f494c0191f3477e04f0c185a26e42ac9792537c2` | 2026-10-15T10:35:11Z | 0 | not recorded | 0 | **PASS** | reconstructed |
+| **R4** | `e33e008aa7da1ee4b8a9896dd6a1748935c660b1` | 2026-10-15T10:53:57Z | 0 | not recorded | +2 | **PASS** | reconstructed |
+| **R5** | `3af318e8d92060b623be2c3e15a86a1a82a6ea27` | 2026-10-15T10:56:39Z | 0 | not recorded | 0 | **PASS** | reconstructed |
+| **R6** | `8f0870fcce1b83045818544dd90eea426f158897` | 2026-10-15T13:12:43Z | 0 | not recorded | 0 | **PASS** | reconstructed |
+| **R7** | `40cc9ed190f80d372fabee84a241dcb01ccb528a` | 2026-10-15T13:33:41Z | 0 | 209 | 0 | **PASS** | no |
+| **S0** | `9322f5f9a3daf0e20af2eafcbf09d141a7872b55` | 2026-10-15T16:43:06Z | 0 | 209 | 0 | **PASS** | no |
+
+## Notes and Historical Disclosures
 
 Note: Prompt 13 final chat message blocks with contradictions vs generated files (by block name only):
 - Exploratory Variant Block
@@ -48,17 +66,6 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 - Requirements Trace Block
 - Prediction Records Block
 - Clean-Clone Verification Block
-| Q6 | `68908c47b14823141e9aa9b935710e878ae3249b` | 0 | 197 | 0 | PASS | 2026-10-15T07:40:44Z |
-| Q8 | `8779338e03c35defcb3158eaba163331987319ac` | 0 | 202 | 0 | PASS | 2026-10-15T07:51:47Z |
-| Q2 | `5921908d22377dacbe2d375724a983ab9ced7152` | 0 | 202 | 0 | PASS | 2026-10-15T08:10:59Z |
-| Q10 | `f00c2175a8351e5d2da7b346fc81e8ad1a8b60a9` | 0 | 202 | 0 | PASS | 2026-10-15T08:19:24Z |
-
-Note on Q0 and Ledger HEAD column semantics (Prompt 15 R5):
-- Missing Q0 row (Prompt 14 initial state audit):
-  | Q0 | `996bd71102c8d87c8190d0617766b382f1051eb5` | 0 | 184 | 0 | PASS | 2026-10-15T06:00:00Z |
-- As established across Prompt 13 and Prompt 14, the 'Git HEAD (SHA)' column records the repository HEAD commit immediately BEFORE each part's own commit is created.
-
-| R7 | `8f0870fcce1b83045818544dd90eea426f158897` | 0 | 209 | 0 | PASS | 2026-10-15T13:23:06Z |
 
 ## 3. Overnight Decisions Register
 
@@ -81,6 +88,29 @@ Note on Q0 and Ledger HEAD column semantics (Prompt 15 R5):
 |:---|:---|:---|
 | P2 (Correction) | Exact expectation under uniform random tie-breaking, plus best/worst case bounds (Bound A and Bound B); not 1000 trials. | The tie-sensitivity evaluation computes the exact combinatorial expectation and extreme analytical bounds across candidate score permutations rather than Monte Carlo empirical trials. |
 | P10 / Q2 (Correction) | True clean-clone rebuild from raw archives (`C:\c4_clean_clone_r2`) with zero intermediate/output copying and verified backup bundle `C:\c4_backup\c4_5921908.bundle`. | Replaces Prompt 13 clean clone where files had been copied from the working tree. Under Q2, only the 7 verified raw zip archives were copied to the clean clone. Two consecutive full rebuilds demonstrated 100% bit-identical hash parity across all 61 protected baseline files. |
+
+## Prompt 15 Decisions & Repair Run (2026-10-15)
+
+| Part | Decision / Action | Technical Rationale |
+|:---|:---|:---|
+| R1 | Strict baseline change register with leaf-level mathematical invariant enforcement. | Enforces `old = identical + changed + removed` and `new = identical + changed + added`; prints FAIL if changed > 0. |
+| R2 | Rebuild viva claims map with code-substituted values and test node IDs. | Eliminates manual transcription; maps claims directly to empirical results and test node IDs. |
+| R3 | Update requirements trace statuses for FR2, FR4, and NFR5. | Records FR2 as dataset-demonstrated, NFR5 as partial (adapter unagreed by C3), and FR4 limits citing pre-registered Hit@3 verdict. |
+| R4 | Execute live interactive dashboard capture suite in isolated venv `C:\c4_capture_venv`. | Isolates playwright runtime from project dependencies; captures verified desktop (1440x900) and mobile (390x844) PNG evidence. |
+| R6 | True clean-clone double rebuild in `C:\c4_clean_clone_r6`. | Proves complete bit-for-bit rebuild determinism from raw archives with zero drift across consecutive runs. |
+| R7 | Finalise repair run, update overnight ledger, and verify all reproduction baselines. | Verifies all 61 baseline hashes, passes full pytest suite, and creates release bundle `C:\c4_backup\c4_40cc9ed.bundle`. |
+
+## Prompt 16 Decisions & Protocol Evolution (2026-10-15)
+
+| Part | Decision / Action | Technical Rationale |
+|:---|:---|:---|
+| S0 | Pre-cleanup safety net tag `pre-cleanup-v3` on initial HEAD (`40cc9ed`). | Preserves entire historical state before code clean-up; enforces Rule G4 provenance logging via `scripts/audit/run_logged.py`. |
+| S1 | Audit repairs: ledger reconstruction, prereg Amendment 9, clean-clone line endings, and root of trust. | Puts all historical ledger rows on code-computed footing, establishes cryptographic root of trust in `docs/ROOT_OF_TRUST.md`, and proves clean-clone dirtiness cause by measurement. |
+| S2 | Project clean-up and proper descriptive names for non-protected paths. | Standardizes pipeline stages into `scripts/pipeline/`, verifiers into `scripts/verify/`, audit tools into `scripts/audit/`, and moves prompts to `docs/process/prompts/`. |
+| S3 | Industry-grade attack timeline and next-step advisor dashboard rebuild. | Delivers wide-layout analyst console with Altair swim-lane kill-chain visualization, WCAG 4.5:1 contrast, and live browser captures. |
+| S4 | Code-derived data lineage documentation and comprehensive project map. | Parses data loaders and pipeline stages directly from AST/source to generate `docs/data_lineage.md` and `docs/PROJECT_MAP.md`. |
+| S5 | Final release verification and release bundle packaging. | Runs clean-clone double rebuild in `C:\c4_clean_clone_s5`, creates annotated tag `c4-7ep-verified-v4`, and packages `C:\c4_backup\c4_final_v4.bundle`. |
+| S6 | Non-destructive protected-path rename trial on branch `rename-protected-paths`. | Tests proposed folder renaming on isolated branch without modifying master baseline files. |
 
 ## 4. Verification & Audit Sign-Off
 

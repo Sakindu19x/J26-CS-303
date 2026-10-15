@@ -80,40 +80,67 @@ def test_compare_and_verification_rule():
     # Unjustified addition fails
     ok, msg = verify_diff(diff, added_rationales={}, removed_rationales={})
     assert not ok
-    assert "UNVERIFIED" in msg
+    assert "FAIL" in msg
 
     # Justified addition passes
     ok, msg = verify_diff(diff, added_rationales={"c": "Added new feature count"}, removed_rationales={})
     assert ok
     assert msg == "VERIFIED"
 
-    # Changed leaf fails even with rationale
+    # Changed leaf fails even with rationale (Prompt 16 S1a: prints FAIL, never VERIFIED)
     new_changed = {"a": 15, "b": 20}
     diff_changed = compare_leaves(old, new_changed)
     ok, msg = verify_diff(diff_changed, added_rationales={}, removed_rationales={})
     assert not ok
-    assert "UNVERIFIED" in msg
+    assert "FAIL" in msg
 
 
-def test_q15_baseline_changes_file_contents():
-    path = REPO_ROOT / "reports" / "audit" / "q15_baseline_changes.md"
+def test_invariants_enforcement():
+    """Assert mathematical invariants old=id+ch+rm and new=id+ch+ad."""
+    old = {"x": 1, "y": 2, "z": 3}
+    new = {"x": 1, "y": 20, "w": 4}
+    diff = compare_leaves(old, new)
+    assert diff["inv_old_satisfied"] is True
+    assert diff["inv_new_satisfied"] is True
+    assert diff["old_count"] == len(diff["identical"]) + len(diff["changed"]) + len(diff["removed"])
+    assert diff["new_count"] == len(diff["identical"]) + len(diff["changed"]) + len(diff["added"])
+
+
+def test_q16_baseline_changes_file_contents():
+    path = REPO_ROOT / "reports" / "audit" / "q16_baseline_changes.md"
     assert path.is_file(), f"Missing {path}"
     content = path.read_text(encoding="utf-8")
 
-    # 1. Verification verdicts
+    # 1. Verification verdicts (VERIFIED where policy met, FAIL where changed > 0)
     assert "**VERIFIED**" in content
+    assert "**FAIL" in content
 
-    # 2. Recomputed McNemar contingency from CSV
-    assert "b=3, c=11" in content
-    assert "0.0574" in content
+    # 2. Invariants explicitly asserted and passed in every entry
+    assert "Invariant 1 (`old = identical + changed + removed`)" in content
+    assert "Invariant 2 (`new = identical + changed + added`)" in content
+    assert content.count("(**PASS**)") >= 10
+
+    # 3. Raw git blob vs working tree SHA-256 and line ending measurements
+    assert "Old SHA-256 (Git Blob)" in content
+    assert "Old SHA-256 (Working Tree)" in content
+    assert "New SHA-256 (Git Blob)" in content
+    assert "New SHA-256 (Working Tree)" in content
+    assert "CRLF line breaks" in content
+
+    # 4. Author dates present (never 'now' for past parts)
+    assert "Author Date:" in content
+    assert "2026-10-15T" in content
+
+    # 5. Recomputed McNemar contingency and post-hoc disclosures
     assert "b=5, c=7" in content
-
-    # 3. Post hoc disclosure for exploratory report
+    assert "b=3, c=11" in content
     assert "added post hoc after results were seen" in content
     assert "F3_unseen_state_rate" in content
     assert "35.79%" in content
 
-    # 4. All three Prompt 14 changes
+    # 6. All five changes documented
     assert "reports/7ep/exploratory_tactic_conditioned_report.md" in content
     assert "data/processed_7ep/prediction_records_loeo.jsonl" in content
+    assert "reports/7ep/prediction_record_examples.md" in content
     assert "reports/7ep/requirements_trace.md" in content
+

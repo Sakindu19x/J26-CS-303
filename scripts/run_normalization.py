@@ -126,14 +126,14 @@ def run_pipeline(
     events_csv_path = processed_dir / "normalized_events.csv"
     events_json_path = processed_dir / "normalized_events.json"
 
-    events_df.to_csv(events_csv_path, index=False, encoding="utf-8")
+    events_df.to_csv(events_csv_path, index=False, encoding="utf-8", lineterminator="\n")
     with open(events_json_path, "w", encoding="utf-8") as f:
         json.dump(all_events, f, indent=2, ensure_ascii=False)
 
     # Write normalized Wazuh alerts
     wazuh_df = pd.DataFrame(all_wazuh_alerts)
     wazuh_csv_path = processed_dir / "wazuh_alerts_normalized.csv"
-    wazuh_df.to_csv(wazuh_csv_path, index=False, encoding="utf-8")
+    wazuh_df.to_csv(wazuh_csv_path, index=False, encoding="utf-8", lineterminator="\n")
 
     # Build and write Data Quality Report
     dq_report = build_data_quality_report(

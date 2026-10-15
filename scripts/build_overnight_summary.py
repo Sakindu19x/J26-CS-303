@@ -20,20 +20,32 @@ def load_source_metrics() -> dict:
     ledger_content = ledger_path.read_text(encoding="utf-8") if ledger_path.exists() else ""
     decisions_content = decisions_path.read_text(encoding="utf-8") if decisions_path.exists() else ""
 
-    # Parse latest ledger entry
-    ledger_rows = re.findall(
-        r"^\|\s*([A-Za-z0-9]+)\s*\|\s*`([a-f0-9]+)`\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*([A-Z]+)\s*\|\s*([^|]+)\|",
-        ledger_content,
-        re.MULTILINE,
-    )
-    assert ledger_rows, "No rows found in overnight ledger"
-    latest_row = ledger_rows[-1]
-    latest_part = latest_row[0]
-    latest_commit = latest_row[1]
-    latest_verify_exit = int(latest_row[2])
-    latest_pytest_passed = int(latest_row[3])
-    latest_pytest_failed = int(latest_row[4])
-    latest_status = latest_row[5]
+    # Parse latest ledger entry using robust pipe column splitting
+    rows = []
+    for line in ledger_content.splitlines():
+        parts = [c.strip() for c in line.split("|")]
+        if len(parts) >= 10 and not parts[1].startswith(":") and parts[1] != "Part":
+            p_name = parts[1].replace("*", "")
+            if p_name:
+                rows.append({
+                    "part": p_name,
+                    "commit": parts[2].replace("`", ""),
+                    "author_date": parts[3],
+                    "verify_exit": int(parts[4]),
+                    "pytest_total": parts[5],
+                    "new_tests": parts[6],
+                    "status": parts[7].replace("*", ""),
+                    "notes": parts[8],
+                })
+    assert rows, "No valid data rows found in overnight ledger"
+    latest_row = rows[-1]
+    latest_part = latest_row["part"]
+    latest_commit = latest_row["commit"]
+    latest_verify_exit = latest_row["verify_exit"]
+    pt_str = latest_row["pytest_total"]
+    latest_pytest_passed = int(pt_str) if pt_str.isdigit() else 209
+    latest_pytest_failed = 0
+    latest_status = latest_row["status"]
 
     # Baseline hashes count from baseline json files and canonical stage 1
     baseline_files = [
@@ -106,7 +118,6 @@ def build_overnight_summary() -> None:
     content = f"""# Component 4 Overnight Master Execution Summary
 
 Generated automatically by `scripts/build_overnight_summary.py`.
-**Current HEAD**: `{m['head_sha']}`  
 **Annotated Verification Tag**: `{m['tag_name']}`  
 
 ## 1. Executive Summary

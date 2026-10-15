@@ -849,6 +849,17 @@ def generate_worked_examples_report(
 
     total_caution = technique_caution_count + tactic_caution_count
 
+    req_path = REPO_ROOT / "docs" / "proposal_requirements.json"
+    with open(req_path, "r", encoding="utf-8") as f:
+        req_doc = json.load(f)
+    req_title_map = {r["id"]: r["proposal_title"] for r in req_doc.get("requirements", [])}
+    fr5_t = req_title_map.get("FR5", "Probability Output")
+    fr6_t = req_title_map.get("FR6", "Alternative Predictions")
+    fr7_t = req_title_map.get("FR7", "Explainable Prediction")
+    nfr2_t = req_title_map.get("NFR2", "Reliability").split("(")[0].strip()
+    nfr3_t = req_title_map.get("NFR3", "Security").split("(")[0].strip()
+    nfr6_t = req_title_map.get("NFR6", "Explainability").split("(")[0].strip()
+
     lines: list[str] = [
         "# Explainable Prediction Record Worked Examples (7 Episodes, Schema 1.1.0)",
         "",
@@ -856,9 +867,7 @@ def generate_worked_examples_report(
         "> This report presents seven full, worked, representative prediction records generated",
         "> by Component 4 under Leave-One-Episode-Out (LOEO) evaluation across 7 episodes.",
         "> Every record conforms to `schemas/c4_prediction_record.schema.json` (version 1.1.0) and satisfies",
-        "> requirements FR4 (candidate ranking), FR5 (evidence support), FR6 (explainability surface),",
-        "> FR7 (confidence scoring and reliability context), NFR2 (reproducibility), NFR3 (provenance),",
-        "> and NFR6 (schema compliance).",
+        f"> requirements FR5 {fr5_t}, FR6 {fr6_t}, FR7 {fr7_t}, NFR2 {nfr2_t}, NFR3 {nfr3_t}, and NFR6 {nfr6_t}.",
         "",
         "## Support Caution Summary",
         "",
@@ -866,6 +875,7 @@ def generate_worked_examples_report(
         f"- **Cautioned Records**: {total_caution}/{len(records)} ({technique_caution_count}/95 technique records, {tactic_caution_count}/76 tactic records)",
         "- **Caution Threshold Policy**: A prediction record is flagged with `caution=True` when the current attack state has fewer than 2 supporting training episodes or fewer than 3 total historical transitions from that state. In the evaluation dataset, all 34 unobserved states (which trigger unconditional frequency fallback) are flagged with caution.",
         "- **Fallback Mechanism**: The evaluation dataset contains exactly one fallback reason: unobserved historical state (zero outgoing training transitions). No secondary fallback modes exist in the data.",
+        '- **Transition Weights Representation**: Transition weights are shown as "weighted count (fractional because set-valued steps share weight)". When an empirical step contains |S| simultaneous techniques, each transition distributes uniform 1/|S| weight across the outgoing edges.',
         "",
         "## Summary of Exemplars (7 Distinct Sample IDs)",
         "",
@@ -917,7 +927,7 @@ def generate_worked_examples_report(
             "",
             "### Ranked Top Candidates",
             "",
-            "| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |",
+            "| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |",
             "|:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|",
         ])
 
@@ -934,7 +944,7 @@ def generate_worked_examples_report(
                 "",
                 "### Alternative Candidates (Ranks 4..k)",
                 "",
-                "| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes |",
+                "| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes |",
                 "|:---:|:---|:---|:---:|:---|:---:|:---:|:---|",
             ])
             for r_idx, c in enumerate(p_obj["alternatives"], start=4):

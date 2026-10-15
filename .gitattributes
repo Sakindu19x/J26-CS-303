@@ -72,4 +72,14 @@ reports/_baseline_hashes_stage2.json text eol=crlf
 reports/_baseline_hashes_tactic.json text eol=crlf
 reports/_baseline_hashes_7ep_stage1.json text eol=crlf
 reports/_baseline_hashes_7ep_eval.json text eol=lf
-reports/_baseline_hashes_7ep_inference.json text eol=crlf
+reports/_baseline_hashes_7ep_inference.json text eol=lf
+
+# Pipeline Output CSVs Pinned Line Endings (Clean-Clone & Rebuild Parity)
+data/processed/attack_timelines.csv text eol=lf
+data/processed/normalized_events.csv text eol=lf
+data/processed/wazuh_alerts_normalized.csv text eol=lf
+data/processed_7ep/attack_timelines.csv text eol=lf
+data/processed_7ep/normalized_events.csv text eol=lf
+data/processed_7ep/wazuh_alerts_normalized.csv text eol=lf
+reports/confusion_matrix_parent.csv text eol=lf
+

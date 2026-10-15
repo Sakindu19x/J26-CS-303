@@ -142,6 +142,10 @@ def main() -> None:
 
     # Read exact raw disk bytes before modification
     head_disk_bytes = PREREG_PATH.read_bytes()
+    current_text = head_disk_bytes.decode("utf-8", errors="replace")
+    if "## Amendment 8" in current_text:
+        print("Amendment 8 already present in reports/prereg_7episode_design.md (idempotent skip). [PASS]")
+        return
 
     # Convert amendment text to CRLF bytes
     amendment8_bytes = amendment8_text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8")

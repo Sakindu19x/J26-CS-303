@@ -425,3 +425,23 @@ This amendment corrects four textual and numerical inaccuracies identified in Am
    - *Amendment 7 text*: claimed "zero repeat transitions between different attack campaigns".
    - *Correction*: No statistic measuring cross-campaign transition recurrence exists in `reports/7ep/diagnostics_7ep.json`. That sentence is hereby formally withdrawn. The authoritative statistic present in `reports/7ep/diagnostics_7ep.json` characterizing cross-episode state sparsity is:
      - Key: `F3_unseen_states_and_miss_shares.collapsed_full.pooled.unseen_current_state_rate` = 0.3579 (34/95 evaluation samples on `collapsed_full` have current states never observed in training episodes).
+
+## Amendment 9 (2026-10-15, audit corrections: Amendment 8 duplication, citation reconciliation, and chronological precedence proof; append-only)
+
+This amendment formally documents three archival audit findings established from git history:
+
+1. **Amendment 8 Duplication Disclosure**:
+   - During the Prompt 14 Q3 execution, Amendment 8 text was appended twice in `reports/prereg_7episode_design.md`.
+   - Both occurrences are byte-for-byte identical; the first occurrence (line 367) is authoritative.
+   - Under the strict append-only immutability invariant, the second occurrence is preserved as-is rather than deleted, and is superseded by the first.
+
+2. **Reconciliation of 'Section 12' Citation**:
+   - Amendment 8 Section 1 references 'Section 12' as containing the primary decision rule.
+   - However, `reports/prereg_7episode_design.md` comprises Sections 1 through 10 (with amendments appended sequentially); no Section 12 exists in the document.
+   - The authoritative pre-registered decision rule is defined in **Section 6** (*Hypothesis Testing Protocol & Confirmatory Decisions*) and mathematically operationalized by `reports/7ep/holm_claim_rule_results.json` and `scripts/run_holm_claim_rule.py`.
+
+3. **Chronological Precedence of Amendment 7 Relative to Exploratory Run**:
+   - Empirical audit of repository commit history verifies that Amendment 7 (declaring the exploratory tactic-conditioned variant) strictly preceded the execution and results commit of that run:
+     - **Amendment 7 Commit**: `e867bfe03fe50546f54c9180b6c9abbb22064279` (Author Date: `2026-10-14 20:51:25Z`, `P4a: prereg amendment 7: exploratory post hoc variant declared before execution`).
+     - **Exploratory Run Commit**: `5d2a30919896f292b82094effb93fb539428f165` (Author Date: `2026-10-15 01:58:23Z`, `P4: exploratory tactic-conditioned technique prediction variant`).
+     - **Precedence Verification**: Amendment 7 preceded the exploratory run commit by exactly 18,418 seconds (5.12 hours), confirming that the exploratory protocol was formally committed prior to recording its experimental outcomes.
