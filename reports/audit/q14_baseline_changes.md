@@ -54,3 +54,16 @@ Records all modifications to baseline files permitted under Prompt 14 allow-list
 |:---|:---|:---|:---|
 | Extracted Numeric Count | 510 | 905 | VERIFIED |
 
+## Baseline Change: `reports/7ep/requirements_trace.md` (Q4, 2026-10-15T07:04:26Z)
+
+- **Part**: Q4
+- **Rationale**: Rebuilt requirements trace matrix strictly from docs/proposal_requirements.json with fixed status enum and verified evidence
+- **Baseline File**: `_baseline_hashes_7ep_inference.json`
+- **Old SHA-256**: `4bf4fdfb544763fd6e632def9eb859faffb8429170071ab7e5fb7a69ab344870`
+- **New SHA-256**: `af7dd4bcd84c16f3ef3e0f7754cfde54b29eeecc155bd1642f35dd814f6bc9d7`
+- **Numeric Leaves Extracted**: Old=31, New=24
+
+| Metric | Old Value (HEAD) | New Value (Working Tree) | Status |
+|:---|:---|:---|:---|
+| Extracted Numeric Count | 31 | 24 | VERIFIED |
+

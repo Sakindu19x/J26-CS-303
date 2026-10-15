@@ -1,0 +1,85 @@
+{
+  "_metadata": {
+    "source": "Research Proposal IT23348370",
+    "transcription_note": "Transcribed by Claude from IT23348370; mark: confirm against PDF",
+    "component": "Component 4 (C4)",
+    "status": "DRAFT_TRANSCRIPTION"
+  },
+  "requirements": [
+    {
+      "id": "FR1",
+      "proposal_title": "Attack Timeline Reconstruction",
+      "proposal_wording": "Reconstruct chronological attack timeline from ingested normalized security events."
+    },
+    {
+      "id": "FR2",
+      "proposal_title": "Attack Episode Separation",
+      "proposal_wording": "Separate attack activity into distinct attack simulation episodes."
+    },
+    {
+      "id": "FR3",
+      "proposal_title": "ATT&CK Sequence Representation",
+      "proposal_wording": "Represent attack progression as sequences of MITRE ATT&CK techniques and tactics."
+    },
+    {
+      "id": "FR4",
+      "proposal_title": "Next-Technique Prediction (First-Order Markov)",
+      "proposal_wording": "Predict the most likely next attack technique using a first-order Markov model."
+    },
+    {
+      "id": "FR5",
+      "proposal_title": "Probability Output",
+      "proposal_wording": "Output transition probabilities and ranked candidates for next-step predictions."
+    },
+    {
+      "id": "FR6",
+      "proposal_title": "Alternative Predictions",
+      "proposal_wording": "Provide alternative candidate predictions beyond the top prediction."
+    },
+    {
+      "id": "FR7",
+      "proposal_title": "Explainable Prediction",
+      "proposal_wording": "Provide structured explanations and supporting empirical evidence for predictions."
+    },
+    {
+      "id": "FR8",
+      "proposal_title": "Context Integration (C3 information)",
+      "proposal_wording": "Integrate contextual intelligence and incident priority signals from Component 3 (C3)."
+    },
+    {
+      "id": "FR9",
+      "proposal_title": "Incident Information Display",
+      "proposal_wording": "Display incident progression, prediction results, and explanation summaries for forensic analysts."
+    },
+    {
+      "id": "NFR1",
+      "proposal_title": "Performance (\"acceptable response time\", the proposal gives no number)",
+      "proposal_wording": "Achieve acceptable response time for digital forensic investigation."
+    },
+    {
+      "id": "NFR2",
+      "proposal_title": "Reliability (consistent predictions)",
+      "proposal_wording": "Produce consistent and reliable predictions across repeated evaluations."
+    },
+    {
+      "id": "NFR3",
+      "proposal_title": "Security (shall not modify original event records from C3)",
+      "proposal_wording": "Shall not modify original event records from C3 during ingestion and processing."
+    },
+    {
+      "id": "NFR4",
+      "proposal_title": "Usability",
+      "proposal_wording": "Provide an intuitive and interpretable interface for forensic triage."
+    },
+    {
+      "id": "NFR5",
+      "proposal_title": "Interoperability (accept C3 structured event format)",
+      "proposal_wording": "Accept and process structured event records conforming to C3 interface specifications."
+    },
+    {
+      "id": "NFR6",
+      "proposal_title": "Explainability",
+      "proposal_wording": "Ensure model outputs and reasoning are transparent and verifiable by forensic experts."
+    }
+  ]
+}
