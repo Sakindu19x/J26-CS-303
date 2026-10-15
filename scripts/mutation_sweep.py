@@ -437,6 +437,48 @@ def is_exempt_tie_sensitivity_7ep(
     return False, ""
 
 
+def is_exempt_exploratory_tactic_conditioned(
+    line: str, line_no: int, tok: str, start_in_line: int, end_in_line: int
+) -> tuple[bool, str]:
+    if line.startswith("#"):
+        return True, "Heading outline / section index in markdown header"
+    if line.strip().startswith("|---") or line.strip().startswith("|:---") or line.strip().startswith("| :---"):
+        return True, "Table delimiter row syntax"
+    if "| Model" in line or "| Metric" in line:
+        return True, "Table column header label"
+    if "Amendment 7" in line and tok in ("7", "2026", "10", "15"):
+        return True, "Amendment 7 pre-registration date reference"
+    if "N=95" in line and tok == "95":
+        return True, "Sample count reference N=95"
+    if "N=93" in line and tok == "93":
+        return True, "Sample count reference N=93"
+    if "7 episodes" in line and tok == "7":
+        return True, "7 episodes count reference"
+    if "7-episode" in line and tok == "7":
+        return True, "7-episode design reference"
+    if "E5" in line and tok == "5":
+        return True, "E5 episode reference"
+    if "Hit@1" in line and tok == "1":
+        return True, "Metric name Hit@1 token"
+    if "Hit@3" in line and tok == "3":
+        return True, "Metric name Hit@3 token"
+    if "Top-1" in line and tok == "1":
+        return True, "Metric name Top-1 token"
+    if "Top-3" in line and tok == "3":
+        return True, "Metric name Top-3 token"
+    if "P1" in line and tok == "1":
+        return True, "Pre-registered hypothesis P1 token"
+    if "S1" in line and tok == "1":
+        return True, "Permutation scheme S1 token"
+    if "reports/7ep/" in line and tok == "7":
+        return True, "7ep directory path reference"
+    if "p = 0.0410" in line and tok in ("0.0410", "1"):
+        return True, "Lead-in permutation p-value"
+    if "p = 0.0390" in line and tok in ("0.0390", "3"):
+        return True, "Lead-in permutation p-value"
+    return False, ""
+
+
 
 def sweep_report_numeric(
     report_name: str,
@@ -781,6 +823,10 @@ def format_summary_block(results: dict[str, dict[str, Any]], title: str = "MUTAT
         lines.append(format_summary_line("Diag7Ep", results["diagnostics_7ep"]))
     if "e5_hit1_change_diagnostic" in results:
         lines.append(format_summary_line("E5Hit1Diag", results["e5_hit1_change_diagnostic"]))
+    if "tie_sensitivity_7ep" in results:
+        lines.append(format_summary_line("TieSens7Ep", results["tie_sensitivity_7ep"]))
+    if "exploratory_tactic_conditioned" in results:
+        lines.append(format_summary_line("Exploratory", results["exploratory_tactic_conditioned"]))
     lines.append("=" * 80)
     return "\n".join(lines)
 
@@ -1893,7 +1939,63 @@ def get_check_suites_7ep_inference():
         assert line_a in md, f"Missing Bound A line: {line_a}"
         assert line_b in md, f"Missing Bound B line: {line_b}"
 
-    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag], [check_e5_hit1_diag], [check_tie_sensitivity]
+    def check_exploratory(md: str) -> None:
+        assert "# Exploratory Tactic-Conditioned Technique Prediction Report" in md
+        assert "> **EXPLORATORY, POST HOC, NOT A PRE-REGISTERED RESULT**" in md
+        assert "The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant." in md
+        exp_json = json.loads((REPORTS_DIR / "7ep" / "exploratory_tactic_conditioned_results.json").read_text(encoding="utf-8"))
+        r7 = exp_json["runs"]["7ep"]
+        assert f"- **Coverage**: {r7['coverage']['covered_samples']}/{r7['n_samples']} ({r7['coverage']['coverage_rate']*100:.2f}%) samples had tactic Markov status `ok`." in md
+        assert f"- **Ceiling**: {r7['ceiling']['ceiling_samples']}/{r7['n_samples']} ({r7['ceiling']['ceiling_rate']*100:.2f}%) samples had at least one target technique seen in training." in md
+        var_m = r7["models"]["variant"]
+        freq_m = r7["models"]["frequency"]
+        mar_m = r7["models"]["markov"]
+        line_var = f"| Exploratory Variant (Tactic-Conditioned) | {var_m['hit1']} | {var_m['hit3']} | {var_m['pooled_top1']*100:.2f}% | [{var_m['wilson95_top1'][0]*100:.2f}%, {var_m['wilson95_top1'][1]*100:.2f}%] | {var_m['pooled_top3']*100:.2f}% | [{var_m['wilson95_top3'][0]*100:.2f}%, {var_m['wilson95_top3'][1]*100:.2f}%] | {var_m['fold_mean_top1']*100:.2f}% | {var_m['fold_mean_top3']*100:.2f}% |"
+        line_freq = f"| Frequency Baseline | {freq_m['hit1']} | {freq_m['hit3']} | {freq_m['pooled_top1']*100:.2f}% | [{freq_m['wilson95_top1'][0]*100:.2f}%, {freq_m['wilson95_top1'][1]*100:.2f}%] | {freq_m['pooled_top3']*100:.2f}% | [{freq_m['wilson95_top3'][0]*100:.2f}%, {freq_m['wilson95_top3'][1]*100:.2f}%] | {freq_m['fold_mean_top1']*100:.2f}% | {freq_m['fold_mean_top3']*100:.2f}% |"
+        line_mar = f"| Markov Model (Technique) | {mar_m['hit1']} | {mar_m['hit3']} | {mar_m['pooled_top1']*100:.2f}% | [{mar_m['wilson95_top1'][0]*100:.2f}%, {mar_m['wilson95_top1'][1]*100:.2f}%] | {mar_m['pooled_top3']*100:.2f}% | [{mar_m['wilson95_top3'][0]*100:.2f}%, {mar_m['wilson95_top3'][1]*100:.2f}%] | {mar_m['fold_mean_top1']*100:.2f}% | {mar_m['fold_mean_top3']*100:.2f}% |"
+        assert line_var in md, f"Missing variant line: {line_var}"
+        assert line_freq in md, f"Missing frequency line: {line_freq}"
+        assert line_mar in md, f"Missing markov line: {line_mar}"
+        m1 = r7["mcnemar_vs_frequency"]["top1"]
+        m3 = r7["mcnemar_vs_frequency"]["top3"]
+        line_mc1 = f"- **Top-1**: Variant hits and Frequency misses ($b={m1['b']}$); Frequency hits and Variant misses ($c={m1['c']}$); Exact McNemar $p = {m1['p_value']:.4f}$ (descriptive, raw p)."
+        line_mc3 = f"- **Top-3**: Variant hits and Frequency misses ($b={m3['b']}$); Frequency hits and Variant misses ($c={m3['c']}$); Exact McNemar $p = {m3['p_value']:.4f}$ (descriptive, raw p)."
+        assert line_mc1 in md, f"Missing McNemar top1 line: {line_mc1}"
+        assert line_mc3 in md, f"Missing McNemar top3 line: {line_mc3}"
+        ts = r7["tie_sensitivity"]
+        assert f"- **Tied Samples**: {ts['tied_samples_top1']}/{r7['n_samples']} samples tied at Top-1 boundary; {ts['tied_samples_top3']}/{r7['n_samples']} samples tied at Top-3 boundary." in md
+        t1 = ts["top1"]
+        t3 = ts["top3"]
+        line_ts1 = f"| Hit@1 | {t1['observed']} ({t1['observed_rate']*100:.2f}%) | {t1['expected']:.2f} ({t1['expected_rate']*100:.2f}%) | {t1['best']} ({t1['best_rate']*100:.2f}%) | {t1['worst']} ({t1['worst_rate']*100:.2f}%) | {t1['fold_mean_observed']*100:.2f}% / {t1['fold_mean_expected']*100:.2f}% / {t1['fold_mean_best']*100:.2f}% / {t1['fold_mean_worst']*100:.2f}% |"
+        line_ts3 = f"| Hit@3 | {t3['observed']} ({t3['observed_rate']*100:.2f}%) | {t3['expected']:.2f} ({t3['expected_rate']*100:.2f}%) | {t3['best']} ({t3['best_rate']*100:.2f}%) | {t3['worst']} ({t3['worst_rate']*100:.2f}%) | {t3['fold_mean_observed']*100:.2f}% / {t3['fold_mean_expected']*100:.2f}% / {t3['fold_mean_best']*100:.2f}% / {t3['fold_mean_worst']*100:.2f}% |"
+        assert line_ts1 in md, f"Missing ts1 line: {line_ts1}"
+        assert line_ts3 in md, f"Missing ts3 line: {line_ts3}"
+        r_e5 = exp_json["runs"]["e5_removed"]
+        assert f"- **Coverage**: {r_e5['coverage']['covered_samples']}/{r_e5['n_samples']} ({r_e5['coverage']['coverage_rate']*100:.2f}%)." in md
+        assert f"- **Ceiling**: {r_e5['ceiling']['ceiling_samples']}/{r_e5['n_samples']} ({r_e5['ceiling']['ceiling_rate']*100:.2f}%)." in md
+        v_e5 = r_e5["models"]["variant"]
+        f_e5 = r_e5["models"]["frequency"]
+        m_e5 = r_e5["models"]["markov"]
+        line_e5_v = f"| Exploratory Variant (Tactic-Conditioned) | {v_e5['hit1']} | {v_e5['hit3']} | {v_e5['pooled_top1']*100:.2f}% | {v_e5['pooled_top3']*100:.2f}% | {v_e5['fold_mean_top1']*100:.2f}% | {v_e5['fold_mean_top3']*100:.2f}% |"
+        line_e5_f = f"| Frequency Baseline | {f_e5['hit1']} | {f_e5['hit3']} | {f_e5['pooled_top1']*100:.2f}% | {f_e5['pooled_top3']*100:.2f}% | {f_e5['fold_mean_top1']*100:.2f}% | {f_e5['fold_mean_top3']*100:.2f}% |"
+        line_e5_m = f"| Markov Model (Technique) | {m_e5['hit1']} | {m_e5['hit3']} | {m_e5['pooled_top1']*100:.2f}% | {m_e5['pooled_top3']*100:.2f}% | {m_e5['fold_mean_top1']*100:.2f}% | {m_e5['fold_mean_top3']*100:.2f}% |"
+        assert line_e5_v in md, f"Missing e5 variant line: {line_e5_v}"
+        assert line_e5_f in md, f"Missing e5 frequency line: {line_e5_f}"
+        assert line_e5_m in md, f"Missing e5 markov line: {line_e5_m}"
+        m1_e5 = r_e5["mcnemar_vs_frequency"]["top1"]
+        m3_e5 = r_e5["mcnemar_vs_frequency"]["top3"]
+        assert f"- **McNemar vs Frequency (E5-Removed)**: Top-1 $p = {m1_e5['p_value']:.4f}$; Top-3 $p = {m3_e5['p_value']:.4f}$ (descriptive, raw p)." in md
+
+        line_findings = (
+            "- **Findings**: The exploratory tactic-conditioned variant achieved "
+            f"Hit@1 = {var_m['hit1']}/{r7['n_samples']} ({var_m['pooled_top1']*100:.2f}%) and "
+            f"Hit@3 = {var_m['hit3']}/{r7['n_samples']} ({var_m['pooled_top3']*100:.2f}%). "
+            f"While this numerically exceeds the technique-level Markov model ({mar_m['hit1']}/{r7['n_samples']} Hit@1, {mar_m['hit3']}/{r7['n_samples']} Hit@3), "
+            f"it does not exceed the unconditional Frequency baseline ({freq_m['hit1']}/{r7['n_samples']} Hit@1, {freq_m['hit3']}/{r7['n_samples']} Hit@3)."
+        )
+        assert line_findings in md, f"Missing findings line: {line_findings}"
+
+    return [check_lc_table], [check_perm_7ep], [check_pr_7ep], [check_e5_removed], [check_holm], [check_diag], [check_e5_hit1_diag], [check_tie_sensitivity], [check_exploratory]
 
 
 
@@ -1948,6 +2050,7 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         diag_checks,
         e5_hit1_checks,
         tie_checks,
+        exp_checks,
     ) = get_check_suites_7ep_inference()
     lc_res = sweep_report_numeric(
         "learning_curve_7ep_report.md",
@@ -1997,6 +2100,12 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         tie_checks,
         is_exempt_tie_sensitivity_7ep,
     )
+    exp_res = sweep_report_numeric(
+        "exploratory_tactic_conditioned_report.md",
+        REPORTS_DIR / "7ep" / "exploratory_tactic_conditioned_report.md",
+        exp_checks,
+        is_exempt_exploratory_tactic_conditioned,
+    )
     return {
         "tactic": tactic_res,
         "technique": tech_res,
@@ -2013,6 +2122,7 @@ def run_mutation_sweep() -> dict[str, dict[str, Any]]:
         "diagnostics_7ep": diag_res,
         "e5_hit1_change_diagnostic": e5_hit1_res,
         "tie_sensitivity_7ep": tie_res,
+        "exploratory_tactic_conditioned": exp_res,
     }
 
 
@@ -2051,6 +2161,7 @@ def run_all_mutation_sweeps() -> None:
         diag_checks,
         e5_hit1_checks,
         tie_checks,
+        exp_checks,
     ) = get_check_suites_7ep_inference()
 
     # =========================================================================
@@ -2144,6 +2255,12 @@ def run_all_mutation_sweeps() -> None:
         tie_checks,
         is_exempt_tie_sensitivity_7ep,
     )
+    num_exp = sweep_report_numeric(
+        "exploratory_tactic_conditioned_report.md",
+        REPORTS_DIR / "7ep" / "exploratory_tactic_conditioned_report.md",
+        exp_checks,
+        is_exempt_exploratory_tactic_conditioned,
+    )
 
     numeric_results = {
         "tactic": num_tactic,
@@ -2160,6 +2277,7 @@ def run_all_mutation_sweeps() -> None:
         "diagnostics_7ep": num_diag,
         "e5_hit1_change_diagnostic": num_e5_hit1,
         "tie_sensitivity_7ep": num_tie,
+        "exploratory_tactic_conditioned": num_exp,
     }
 
     # Print Part A Exempt list

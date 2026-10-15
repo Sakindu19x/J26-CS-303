@@ -1,0 +1,96 @@
+sample_id,slice,test_episode,input_history,target_set,current_tactic_set,tactic_markov_status,predicted_candidates_top3,variant_hit1,variant_hit3,frequency_hit1,frequency_hit3,markov_hit1,markov_hit3,top1_tied,top3_boundary_tied,top1_expected_hit,top3_expected_hit,top1_best_hit,top3_best_hit,top1_worst_hit,top3_worst_hit
+E1-col-ful-K01,collapsed_full,E1,"[""T1590.002"", ""T1591""]","[""T1592.002"", ""T1595""]","[""reconnaissance""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E1-col-ful-K02,collapsed_full,E1,"[""T1592.002"", ""T1595""]","[""T1595.002""]","[""reconnaissance""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E1-col-ful-K03,collapsed_full,E1,"[""T1595.002""]","[""T1595.003""]","[""reconnaissance""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E1-col-ful-K04,collapsed_full,E1,"[""T1595.003""]","[""T1059.006"", ""T1190""]","[""reconnaissance""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E1-col-ful-K05,collapsed_full,E1,"[""T1059.006"", ""T1190""]","[""T1105""]","[""execution"", ""initial-access""]",ok,"[""T1057"", ""T1083"", ""T1016""]",0,0,1,1,0,0,True,True,0.0,0.0,0,0,0,0
+E1-col-ful-K06,collapsed_full,E1,"[""T1105""]","[""T1059""]","[""command-and-control""]",ok,"[""T1059.004"", ""T1053.003"", ""T1059""]",0,1,0,0,0,0,False,False,0.0,1.0,0,1,0,1
+E1-col-ful-K07,collapsed_full,E1,"[""T1059""]","[""T1007"", ""T1016"", ""T1033"", ""T1049"", ""T1057"", ""T1069"", ""T1082"", ""T1083"", ""T1087"", ""T1201"", ""T1518"", ""T1614"", ""T1615""]","[""execution""]",ok,"[""T1057"", ""T1083"", ""T1016""]",1,1,0,1,0,0,True,True,1.0,1.0,1,1,1,1
+E1-col-ful-K08,collapsed_full,E1,"[""T1007"", ""T1016"", ""T1033"", ""T1049"", ""T1057"", ""T1069"", ""T1082"", ""T1083"", ""T1087"", ""T1201"", ""T1518"", ""T1614"", ""T1615""]","[""T1033""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E1-col-ful-K09,collapsed_full,E1,"[""T1033""]","[""T1548.003""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E1-col-ful-K10,collapsed_full,E1,"[""T1548.003""]","[""T1033""]","[""defense-evasion"", ""privilege-escalation""]",ok,"[""T1078.003"", ""T1070.004"", ""T1222.002""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E1-col-ful-K11,collapsed_full,E1,"[""T1033""]","[""T1105"", ""T1556.003""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1040""]",0,0,1,1,0,0,False,True,0.0,0.0,0,0,0,0
+E1-col-ful-K12,collapsed_full,E1,"[""T1105"", ""T1556.003""]","[""T1218"", ""T1556.003""]","[""command-and-control"", ""credential-access"", ""defense-evasion"", ""persistence""]",ok,"[""T1057"", ""T1083"", ""T1016""]",0,0,0,0,0,0,True,True,0.0,0.0,0,0,0,0
+E1-col-ful-K13,collapsed_full,E1,"[""T1218"", ""T1556.003""]","[""T1070.004""]","[""credential-access"", ""defense-evasion"", ""persistence""]",ok,"[""T1057"", ""T1083"", ""T1016""]",0,0,0,0,0,0,True,True,0.0,0.0,0,0,0,0
+E1-col-ful-K14,collapsed_full,E1,"[""T1070.004""]","[""T1033""]","[""defense-evasion""]",ok,"[""T1078.003"", ""T1070.004"", ""T1222.002""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E1-col-ful-K15,collapsed_full,E1,"[""T1033""]","[""T1003.008""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1040""]",1,1,0,1,0,0,False,True,1.0,1.0,1,1,1,1
+E1-col-ful-K16,collapsed_full,E1,"[""T1003.008""]","[""T1120""]","[""credential-access""]",ok,"[""T1057"", ""T1083"", ""T1016""]",0,0,0,0,0,0,True,True,0.0,0.0,0,0,0,0
+E1-col-ful-K17,collapsed_full,E1,"[""T1120""]","[""T1124""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E1-col-ful-K18,collapsed_full,E1,"[""T1124""]","[""T1497.001""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K01,collapsed_full,E2,"[""T1021.004""]","[""T1071.001"", ""T1573.001""]","[""lateral-movement""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K02,collapsed_full,E2,"[""T1071.001"", ""T1573.001""]","[""T1105""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,1,1,0,0,False,False,0.0,0.0,0,0,0,0
+E2-col-ful-K03,collapsed_full,E2,"[""T1105""]","[""T1547"", ""T1569""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E2-col-ful-K04,collapsed_full,E2,"[""T1547"", ""T1569""]","[""T1083""]","[""execution"", ""persistence"", ""privilege-escalation""]",ok,"[""T1078.003"", ""T1070.004"", ""T1222.002""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K05,collapsed_full,E2,"[""T1083""]","[""T1057""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",0,0,0,0,1,1,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K06,collapsed_full,E2,"[""T1057""]","[""T1007""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K07,collapsed_full,E2,"[""T1007""]","[""T1003""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K08,collapsed_full,E2,"[""T1003""]","[""T1049""]","[""credential-access""]",ok,"[""T1033"", ""T1057"", ""T1082""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K09,collapsed_full,E2,"[""T1049""]","[""T1016""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K10,collapsed_full,E2,"[""T1016""]","[""T1003.008"", ""T1041""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",1,1,0,1,0,0,False,True,1.0,1.0,1,1,1,1
+E2-col-ful-K11,collapsed_full,E2,"[""T1003.008"", ""T1041""]","[""T1074.001"", ""T1560.001""]","[""credential-access"", ""exfiltration""]",ok,"[""T1033"", ""T1057"", ""T1082""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K12,collapsed_full,E2,"[""T1074.001"", ""T1560.001""]","[""T1041""]","[""collection""]",ok,"[""T1033"", ""T1057"", ""T1082""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K13,collapsed_full,E2,"[""T1041""]","[""T1070.004""]","[""exfiltration""]",insufficient_evidence,"[""T1105"", ""T1033"", ""T1003.008""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K14,collapsed_full,E2,"[""T1070.004""]","[""T1005""]","[""defense-evasion""]",ok,"[""T1033"", ""T1057"", ""T1082""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K15,collapsed_full,E2,"[""T1005""]","[""T1201""]","[""collection""]",ok,"[""T1033"", ""T1057"", ""T1082""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K16,collapsed_full,E2,"[""T1201""]","[""T1003.008""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",1,1,0,1,0,0,False,True,1.0,1.0,1,1,1,1
+E2-col-ful-K17,collapsed_full,E2,"[""T1003.008""]","[""T1201""]","[""credential-access""]",ok,"[""T1033"", ""T1057"", ""T1082""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K18,collapsed_full,E2,"[""T1201""]","[""T1018"", ""T1046"", ""T1105""]","[""discovery""]",ok,"[""T1003.008"", ""T1556.003"", ""T1040""]",0,0,1,1,0,0,False,True,0.0,0.0,0,0,0,0
+E2-col-ful-K19,collapsed_full,E2,"[""T1018"", ""T1046"", ""T1105""]","[""T1018"", ""T1046""]","[""command-and-control"", ""discovery""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K01,collapsed_full,E3,"[""T1021.005"", ""T1110.001""]","[""T1021.005""]","[""credential-access"", ""lateral-movement""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K02,collapsed_full,E3,"[""T1021.005""]","[""T1003.008""]","[""lateral-movement""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K03,collapsed_full,E3,"[""T1003.008""]","[""T1213""]","[""credential-access""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K04,collapsed_full,E3,"[""T1213""]","[""T1039""]","[""collection""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K05,collapsed_full,E3,"[""T1039""]","[""T1083""]","[""collection""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,0,0,0,0,False,True,0.0,0.25,0,1,0,0
+E3-col-ful-K06,collapsed_full,E3,"[""T1083""]","[""T1059.004""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K07,collapsed_full,E3,"[""T1059.004""]","[""T1036.005"", ""T1564.001""]","[""execution""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K08,collapsed_full,E3,"[""T1036.005"", ""T1564.001""]","[""T1574""]","[""defense-evasion""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K09,collapsed_full,E3,"[""T1574""]","[""T1059"", ""T1574""]","[""defense-evasion"", ""persistence"", ""privilege-escalation""]",ok,"[""T1070.004"", ""T1078.003"", ""T1222.002""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K10,collapsed_full,E3,"[""T1059"", ""T1574""]","[""T1053.003"", ""T1071.001"", ""T1105""]","[""defense-evasion"", ""execution"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,1,1,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K11,collapsed_full,E3,"[""T1053.003"", ""T1071.001"", ""T1105""]","[""T1072""]","[""command-and-control"", ""execution"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K12,collapsed_full,E3,"[""T1072""]","[""T1059""]","[""execution"", ""lateral-movement""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K13,collapsed_full,E3,"[""T1059""]","[""T1105"", ""T1486""]","[""execution""]",ok,"[""T1033"", ""T1057"", ""T1016""]",0,0,1,1,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K14,collapsed_full,E3,"[""T1105"", ""T1486""]","[""T1486"", ""T1565.001""]","[""command-and-control"", ""impact""]",ok,"[""T1059.004"", ""T1053.003"", ""T1059""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K15,collapsed_full,E3,"[""T1486"", ""T1565.001""]","[""T1018""]","[""impact""]",insufficient_evidence,"[""T1105"", ""T1033"", ""T1057""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K16,collapsed_full,E3,"[""T1018""]","[""T1087.001""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K17,collapsed_full,E3,"[""T1087.001""]","[""T1531""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E3-col-ful-K18,collapsed_full,E3,"[""T1531""]","[""T1485""]","[""impact""]",insufficient_evidence,"[""T1105"", ""T1033"", ""T1057""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K19,collapsed_full,E3,"[""T1485""]","[""T1490""]","[""impact""]",insufficient_evidence,"[""T1105"", ""T1033"", ""T1057""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E3-col-ful-K20,collapsed_full,E3,"[""T1490""]","[""T1489""]","[""impact""]",insufficient_evidence,"[""T1105"", ""T1033"", ""T1057""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E4-col-ful-K01,collapsed_full,E4,"[""T1071.001""]","[""T1078.003"", ""T1105"", ""T1205.001""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,1,1,1,1,False,False,0.0,0.0,0,0,0,0
+E4-col-ful-K02,collapsed_full,E4,"[""T1078.003"", ""T1105"", ""T1205.001""]","[""T1078.003""]","[""command-and-control"", ""defense-evasion"", ""initial-access"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K03,collapsed_full,E4,"[""T1078.003""]","[""T1548.003""]","[""defense-evasion"", ""initial-access"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K04,collapsed_full,E4,"[""T1548.003""]","[""T1036.005"", ""T1205.001""]","[""defense-evasion"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K05,collapsed_full,E4,"[""T1036.005"", ""T1205.001""]","[""T1070.004""]","[""command-and-control"", ""defense-evasion"", ""persistence""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K06,collapsed_full,E4,"[""T1070.004""]","[""T1543.002""]","[""defense-evasion""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K07,collapsed_full,E4,"[""T1543.002""]","[""T1036.005"", ""T1071.001"", ""T1205.001""]","[""persistence"", ""privilege-escalation""]",ok,"[""T1070.004"", ""T1222.002"", ""T1564.001""]",0,0,0,0,0,0,True,True,0.0,0.0,0,0,0,0
+E4-col-ful-K08,collapsed_full,E4,"[""T1036.005"", ""T1071.001"", ""T1205.001""]","[""T1599""]","[""command-and-control"", ""defense-evasion"", ""persistence""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K09,collapsed_full,E4,"[""T1599""]","[""T1078.003""]","[""defense-evasion""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E4-col-ful-K10,collapsed_full,E4,"[""T1078.003""]","[""T1082""]","[""defense-evasion"", ""initial-access"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E5-col-ful-K01,collapsed_full,E5,"[""T1040"", ""T1557.002""]","[""T1040"", ""T1528""]","[""collection"", ""credential-access"", ""discovery""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E5-col-ful-K02,collapsed_full,E5,"[""T1040"", ""T1528""]","[""T1550.001""]","[""credential-access"", ""discovery""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K01,collapsed_full,E6,"[""T1105"", ""T1204.002""]","[""T1204.002""]","[""command-and-control"", ""execution""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K02,collapsed_full,E6,"[""T1204.002""]","[""T1082""]","[""execution""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K03,collapsed_full,E6,"[""T1082""]","[""T1105""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,1,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K04,collapsed_full,E6,"[""T1105""]","[""T1059.004""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1072""]",0,1,0,0,0,0,False,False,0.0,1.0,0,1,0,1
+E6-col-ful-K05,collapsed_full,E6,"[""T1059.004""]","[""T1105""]","[""execution""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,1,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K06,collapsed_full,E6,"[""T1105""]","[""T1546"", ""T1574.008""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1072""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E6-col-ful-K07,collapsed_full,E6,"[""T1546"", ""T1574.008""]","[""T1222.002""]","[""defense-evasion"", ""persistence"", ""privilege-escalation""]",ok,"[""T1070.004"", ""T1078.003"", ""T1548.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E6-col-ful-K08,collapsed_full,E6,"[""T1222.002""]","[""T1105""]","[""defense-evasion""]",ok,"[""T1070.004"", ""T1078.003"", ""T1548.003""]",0,0,0,1,0,0,False,False,0.0,0.0,0,0,0,0
+E6-col-ful-K09,collapsed_full,E6,"[""T1105""]","[""T1115""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1072""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E6-col-ful-K10,collapsed_full,E6,"[""T1115""]","[""T1564.001""]","[""collection""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K11,collapsed_full,E6,"[""T1564.001""]","[""T1222.002""]","[""defense-evasion""]",ok,"[""T1070.004"", ""T1078.003"", ""T1548.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E6-col-ful-K12,collapsed_full,E6,"[""T1222.002""]","[""T1010""]","[""defense-evasion""]",ok,"[""T1070.004"", ""T1078.003"", ""T1548.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E6-col-ful-K13,collapsed_full,E6,"[""T1010""]","[""T1053.003""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E6-col-ful-K14,collapsed_full,E6,"[""T1053.003""]","[""T1070.003""]","[""execution"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1057"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K01,collapsed_full,E7,"[""T1590.002"", ""T1591""]","[""T1589.002""]","[""reconnaissance""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E7-col-ful-K02,collapsed_full,E7,"[""T1589.002""]","[""T1078.002"", ""T1110.001"", ""T1133""]","[""reconnaissance""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E7-col-ful-K03,collapsed_full,E7,"[""T1078.002"", ""T1110.001"", ""T1133""]","[""T1592.002""]","[""credential-access"", ""defense-evasion"", ""initial-access"", ""persistence"", ""privilege-escalation""]",ok,"[""T1033"", ""T1082"", ""T1083""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K04,collapsed_full,E7,"[""T1592.002""]","[""T1071.001"", ""T1573.001""]","[""reconnaissance""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,0,0,0,0,0,False,False,0.0,0.0,0,0,0,0
+E7-col-ful-K05,collapsed_full,E7,"[""T1071.001"", ""T1573.001""]","[""T1059.004"", ""T1095"", ""T1190""]","[""command-and-control""]",ok,"[""T1059"", ""T1059.004"", ""T1053.003""]",0,1,0,0,0,0,False,False,0.0,1.0,0,1,0,1
+E7-col-ful-K06,collapsed_full,E7,"[""T1059.004"", ""T1095"", ""T1190""]","[""T1033""]","[""command-and-control"", ""execution"", ""initial-access""]",ok,"[""T1105"", ""T1071.001"", ""T1205.001""]",0,0,0,1,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K07,collapsed_full,E7,"[""T1033""]","[""T1057""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K08,collapsed_full,E7,"[""T1057""]","[""T1016""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K09,collapsed_full,E7,"[""T1016""]","[""T1053.003"", ""T1210"", ""T1525"", ""T1610""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K10,collapsed_full,E7,"[""T1053.003"", ""T1210"", ""T1525"", ""T1610""]","[""T1083""]","[""defense-evasion"", ""execution"", ""lateral-movement"", ""persistence"", ""privilege-escalation""]",ok,"[""T1070.004"", ""T1078.003"", ""T1222.002""]",0,0,0,0,0,0,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K11,collapsed_full,E7,"[""T1083""]","[""T1057""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",0,0,0,0,1,1,False,True,0.0,0.0,0,0,0,0
+E7-col-ful-K12,collapsed_full,E7,"[""T1057""]","[""T1003.008"", ""T1041""]","[""discovery""]",ok,"[""T1003.008"", ""T1003"", ""T1556.003""]",1,1,0,1,0,0,False,True,1.0,1.0,1,1,1,1
