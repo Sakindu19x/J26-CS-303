@@ -5,7 +5,7 @@
 > **Verification Rule**: `VERIFIED` status is granted only when `CHANGED = 0` (zero unapproved leaf mutations) and every added/removed leaf is explicitly enumerated and justified by an authorized technical rationale.
 
 
-## Baseline Change: `reports/7ep/exploratory_tactic_conditioned_report.md` (Q3, 2026-10-15T08:48:01Z)
+## Baseline Change: `reports/7ep/exploratory_tactic_conditioned_report.md` (Q3, 2026-10-15T08:59:44Z)
 
 - **Part**: Q3
 - **Rationale**: Amendment 8 corrections: standardized verdict statement, corrected permutation p-values from difference to Markov tactic, withdrew cross-campaign claim, and added F3 unseen state rate.
@@ -42,7 +42,7 @@
 
 ---
 
-## Baseline Change: `data/processed_7ep/prediction_records_loeo.jsonl` (Q7, 2026-10-15T08:48:01Z)
+## Baseline Change: `data/processed_7ep/prediction_records_loeo.jsonl` (Q7, 2026-10-15T08:59:44Z)
 
 - **Part**: Q7
 - **Rationale**: Prediction records Schema 1.1.0 upgrade: support metrics, caution flags, candidate tactics, and empirical alternative counts.
@@ -75,7 +75,7 @@
 
 ---
 
-## Baseline Change: `reports/7ep/prediction_record_examples.md` (Q7, 2026-10-15T08:48:01Z)
+## Baseline Change: `reports/7ep/prediction_record_examples.md` (Q7, 2026-10-15T08:59:44Z)
 
 - **Part**: Q7
 - **Rationale**: Worked examples report updated for Schema 1.1.0 with 7 distinct exemplars and caution annotations.
@@ -104,7 +104,7 @@
 
 ---
 
-## Baseline Change: `reports/7ep/requirements_trace.md` (Q4, 2026-10-15T08:48:01Z)
+## Baseline Change: `reports/7ep/requirements_trace.md` (Q4, 2026-10-15T08:59:44Z)
 
 - **Part**: Q4
 - **Rationale**: Rebuilt requirements trace strictly from proposal requirements JSON with standardized status enum.
@@ -130,4 +130,50 @@
 | Removed Leaf Identifier / Path | Value | Rationale |
 |:---|:---|:---|
 | `redundant_row_numbering_tokens` | `7` | Removed redundant manual index numbering tokens; requirements table now keys strictly on canonical proposal IDs (FR1-FR9, NFR1-NFR6). |
+
+
+---
+
+## Baseline Change: `reports/7ep/requirements_trace.md` (R3, 2026-10-15T08:59:44Z)
+
+- **Part**: R3
+- **Rationale**: Update requirements trace: dataset demonstration status, partial NFR5, Hit@3 limits via JSON pointers, and module grep validation.
+- **Old SHA-256**: `af7dd4bcd84c16f3ef3e0f7754cfde54b29eeecc155bd1642f35dd814f6bc9d7`
+- **New SHA-256**: `fa4c437c50b54f92724c589daa5076ed5a5795c35d47af505c5f8c9bea4c8576`
+- **Leaf Counts**: Old=31, New=38, Identical=9, Changed=0, Added=7, Removed=2
+- **Verification Verdict**: **VERIFIED**
+
+### Technical Notes & Disclosures
+
+- **Dataset Demonstration**: FR2 status set to `IMPLEMENTED_DEMONSTRATED_ON_DATASET` (episodes are dataset labels).
+- **Verified by Test**: FR2 limits cites `verified by test tests/test_timeline_and_sequences.py::test_events_from_different_episodes_never_in_one_sequence` (replacing 'cryptographically verified').
+- **Partial NFR5**: NFR5 status set to `PARTIAL` with note that format was proposed by C4, not agreed by C3, and tested only against C4 fixtures.
+- **Hit@3 Primacy**: FR4 limits cite Hit@3 pre-registered verdict numbers (P1/P2 read via JSON pointers), with Hit@1 citations removed.
+- **Module / Evidence Grep Enforcement**: Every `IMPLEMENTED_AND_TESTED` row verified by grep against cited test files.
+
+| Category | Count | Status | Policy / Constraint |
+|:---|:---:|:---:|:---|
+| **Identical Leaves** | 9 | IDENTICAL | Core empirical values preserved |
+| **Changed Leaves** | 0 | NONE | Must be 0 for VERIFIED status |
+| **Added Leaves** | 7 | ADDED | Each justified by caller rationale |
+| **Removed Leaves** | 2 | REMOVED | Each justified by caller rationale |
+
+### Added Leaves
+
+| Added Leaf Identifier / Path | Value | Rationale |
+|:---|:---|:---|
+| `fr4_hit3_endpoint_citations` | `2` | R3: Citing pre-registered primary Hit@3 endpoints for P1 and P2 per Prompt 15 instructions. |
+| `fr4_p1_tactic_freq_hit3` | `48` | R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/tactic_collapsed/7ep/frequency_hit3. |
+| `fr4_p1_tactic_holm_p` | `1.0` | R3: Read directly from holm_claim_rule_results.json#/family/P1/adjusted_p. |
+| `fr4_p1_tactic_markov_hit3` | `48` | R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/tactic_collapsed/7ep/markov_hit3. |
+| `fr4_p2_technique_freq_hit3` | `16` | R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/technique_collapsed_full/7ep/frequency_hit3. |
+| `fr4_p2_technique_holm_p` | `0.0094` | R3: Read directly from holm_claim_rule_results.json#/family/P2/adjusted_p. |
+| `fr4_p2_technique_markov_hit3` | `3` | R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/technique_collapsed_full/7ep/markov_hit3. |
+
+### Removed Leaves
+
+| Removed Leaf Identifier / Path | Value | Rationale |
+|:---|:---|:---|
+| `fr4_hit1_frequency_baseline_hits` | `7` | R3: Removed Hit@1 frequency baseline hits per Prompt 15 instructions. |
+| `fr4_hit1_rank_token` | `1` | R3: Removed Hit@1 exploratory baseline citation per Prompt 15 instructions. |
 

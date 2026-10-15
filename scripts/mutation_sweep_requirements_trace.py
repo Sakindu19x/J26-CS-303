@@ -63,10 +63,16 @@ def run_sweep() -> None:
 
         if rid == "NFR4":
             row_mutations.append((f"`{status}`", "`IMPLEMENTED_AND_TESTED`", "Mutated NFR4 status to IMPLEMENTED_AND_TESTED (rule violation)"))
-        if rid in {"FR8", "FR9"}:
+        if rid in {"FR8", "FR9", "NFR5"}:
             row_mutations.append((f"`{status}`", "`IMPLEMENTED_AND_TESTED`", f"Mutated {rid} status to IMPLEMENTED_AND_TESTED (rule violation)"))
         if rid == "FR2":
+            row_mutations.append((f"`{status}`", "`IMPLEMENTED_AND_TESTED`", "Mutated FR2 status to IMPLEMENTED_AND_TESTED (rule violation)"))
             row_mutations.append(("dataset labels", "algorithmic clustering", "Mutated FR2 limits removing dataset labels"))
+            row_mutations.append(("verified by test", "cryptographically verified", "Mutated FR2 limits to cryptographically verified (rule violation)"))
+        if rid == "NFR5":
+            row_mutations.append(("Format proposed by C4, not agreed by C3", "Agreed standard format", "Mutated NFR5 limits removing unagreed note"))
+        if rid == "FR4":
+            row_mutations.append(("Hit@3", "Hit@1", "Mutated FR4 limits citing Hit@1 (rule violation)"))
         if rid == "NFR1":
             row_mutations.append(("declared by C4, proposal has none", "proposal requirement", "Mutated NFR1 limits removing proposal declaration note"))
 

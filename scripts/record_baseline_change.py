@@ -414,6 +414,73 @@ def generate_q15_baseline_changes() -> Path:
         extra_notes=notes_tr,
     ))
 
+    # -------------------------------------------------------------------------
+    # 4. Requirements trace (R3 Update)
+    # -------------------------------------------------------------------------
+    rel_tr_r3 = "reports/7ep/requirements_trace.md"
+    old_h_tr_r3 = "af7dd4bcd84c16f3ef3e0f7754cfde54b29eeecc155bd1642f35dd814f6bc9d7"
+    new_h_tr_r3 = "fa4c437c50b54f92724c589daa5076ed5a5795c35d47af505c5f8c9bea4c8576"
+    diff_tr_r3 = {
+        "old_count": 31,
+        "new_count": 38,
+        "identical": {
+            "fr1_fr3_definitions": 3,
+            "fr4_episodes_samples": 3,
+            "fr5_probability_sum": 1,
+            "fr6_rank_4": 1,
+            "fr7_caution_counts": 2,
+            "fr9_record_count": 1,
+            "nfr1_threshold_seconds": 3,
+            "nfr2_determinism_hashseeds": 5,
+            "nfr3_security_digest": 1,
+        },
+        "changed": {},
+        "added": {
+            "fr4_p2_technique_markov_hit3": 3,
+            "fr4_p2_technique_freq_hit3": 16,
+            "fr4_p2_technique_holm_p": 0.0094,
+            "fr4_p1_tactic_markov_hit3": 48,
+            "fr4_p1_tactic_freq_hit3": 48,
+            "fr4_p1_tactic_holm_p": 1.0000,
+            "fr4_hit3_endpoint_citations": 2,
+        },
+        "removed": {
+            "fr4_hit1_rank_token": 1,
+            "fr4_hit1_frequency_baseline_hits": 7,
+        },
+    }
+    added_rat_tr_r3 = {
+        "fr4_p2_technique_markov_hit3": "R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/technique_collapsed_full/7ep/markov_hit3.",
+        "fr4_p2_technique_freq_hit3": "R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/technique_collapsed_full/7ep/frequency_hit3.",
+        "fr4_p2_technique_holm_p": "R3: Read directly from holm_claim_rule_results.json#/family/P2/adjusted_p.",
+        "fr4_p1_tactic_markov_hit3": "R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/tactic_collapsed/7ep/markov_hit3.",
+        "fr4_p1_tactic_freq_hit3": "R3: Read directly from evaluation_7ep_results.json#/comparison_with_4ep/tactic_collapsed/7ep/frequency_hit3.",
+        "fr4_p1_tactic_holm_p": "R3: Read directly from holm_claim_rule_results.json#/family/P1/adjusted_p.",
+        "fr4_hit3_endpoint_citations": "R3: Citing pre-registered primary Hit@3 endpoints for P1 and P2 per Prompt 15 instructions.",
+    }
+    removed_rat_tr_r3 = {
+        "fr4_hit1_rank_token": "R3: Removed Hit@1 exploratory baseline citation per Prompt 15 instructions.",
+        "fr4_hit1_frequency_baseline_hits": "R3: Removed Hit@1 frequency baseline hits per Prompt 15 instructions.",
+    }
+    notes_tr_r3 = [
+        "**Dataset Demonstration**: FR2 status set to `IMPLEMENTED_DEMONSTRATED_ON_DATASET` (episodes are dataset labels).",
+        "**Verified by Test**: FR2 limits cites `verified by test tests/test_timeline_and_sequences.py::test_events_from_different_episodes_never_in_one_sequence` (replacing 'cryptographically verified').",
+        "**Partial NFR5**: NFR5 status set to `PARTIAL` with note that format was proposed by C4, not agreed by C3, and tested only against C4 fixtures.",
+        "**Hit@3 Primacy**: FR4 limits cite Hit@3 pre-registered verdict numbers (P1/P2 read via JSON pointers), with Hit@1 citations removed.",
+        "**Module / Evidence Grep Enforcement**: Every `IMPLEMENTED_AND_TESTED` row verified by grep against cited test files.",
+    ]
+    entries.append(format_change_markdown(
+        rel_path=rel_tr_r3,
+        part="R3",
+        rationale="Update requirements trace: dataset demonstration status, partial NFR5, Hit@3 limits via JSON pointers, and module grep validation.",
+        old_hash=old_h_tr_r3,
+        new_hash=new_h_tr_r3,
+        diff=diff_tr_r3,
+        added_rationales=added_rat_tr_r3,
+        removed_rationales=removed_rat_tr_r3,
+        extra_notes=notes_tr_r3,
+    ))
+
     full_md = "\n".join(header) + "\n\n" + "\n\n---\n\n".join(entries) + "\n"
     CHANGES_MD_PATH.write_text(full_md, encoding="utf-8")
     print(f"Generated {CHANGES_MD_PATH}")
