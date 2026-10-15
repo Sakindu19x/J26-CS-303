@@ -1,16 +1,17 @@
 # Component 4 Overnight Master Execution Summary
 
 Generated automatically by `scripts/build_overnight_summary.py`.
-**Final Commit**: `f1f1db4f8d282b61d195353989db8f15e99d8ad6`  
+**Current HEAD**: `68908c47b14823141e9aa9b935710e878ae3249b`  
 **Annotated Verification Tag**: `c4-7ep-verified`  
 
 ## 1. Executive Summary
 
-All twelve phases (P0 through P11) of the Prompt 13 Master unattended protocol completed with status **PASS**.
-- **Baselines & Code Frozen**: Zero existing code in `src/c4/` or data in `data/processed/` was mutated; all modifications were additive or isolated to verified scripts and schemas.
-- **Integrity Verifiers**: 14/14 automated verification suites exited 0, verifying 61 protected baseline hashes and 184 unit/regression tests.
-- **Mutation Sensitivity**: 100.00% detection rate across 9,677 test mutations (8,328 numeric + 1,349 label substitutions).
-- **Deliverables Completed**: Production Markov model fitted across all 7 episodes; 171 explainable prediction records built and schema-validated; C3 adapter contract with alias mapping; non-invasive dashboard prediction panel; NFR1 timing benchmarks; comprehensive viva pack; and clean-clone external reproduction verified.
+All protocol phases recorded in the overnight ledger through `Q6` have completed with status **PASS**.
+- **Baselines & Code Frozen**: Baseline verification confirmed 61/61 protected baseline hashes intact; all modifications remain additive or within authorized allow-lists.
+- **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 197 passed unit/regression tests.
+- **Empirical Scope**: Production Markov models and evaluation pipelines cover all 7 empirical attack episodes in the benchmark dataset.
+- **Explainable Prediction Records**: 171/171 explainable LOEO prediction records generated, validated against schema v1.1.0 with support metrics.
+- **Operational Feasibility**: Pipeline runtime satisfies declared latency constraints with warm median latency of 0.0036s, warm p95 of 0.0123s, and parent-timed process cold start of 0.2679s.
 
 ## 2. Overnight Execution Ledger
 
@@ -31,6 +32,24 @@ All twelve phases (P0 through P11) of the Prompt 13 Master unattended protocol c
 | P10 | `f7ff50d78dd5d78c31e4ed02186fbebbea3377ab` | 0 | 184 | 0 | PASS | 2026-10-15T05:05:45Z |
 | P11 | `f1f1db4f8d282b61d195353989db8f15e99d8ad6` | 0 | 184 | 0 | PASS | 2026-10-15T05:32:43Z |
 
+Note: P7-P9 pytest counts were passed manually in Prompt 13; re-measured in Q0/Q10.
+| Q1 | `44c144ae756b304c21cbfb5bf1c9aadaa2bf8c88` | 0 | 184 | 0 | PASS | 2026-10-15T06:08:30Z |
+| Q3 | `3dab166ce9a3ba72845554223ca6df458717b1dc` | 0 | 184 | 0 | PASS | 2026-10-15T06:23:39Z |
+| Q7 | `4f8d0c889e33d5df0d3ff679b596d5e44b65f7d5` | 0 | 188 | 0 | PASS | 2026-10-15T06:42:40Z |
+| Q9 | `c7b3d5e5456230db621a14ac96d7f9e351de22f1` | 0 | 189 | 0 | PASS | 2026-10-15T06:55:28Z |
+| Q4 | `cf6e5dbd885a7a6452817195abb0e1a284c25cec` | 0 | 192 | 0 | PASS | 2026-10-15T07:05:03Z |
+| Q5 | `4fc004bd150dbc599fa014ac64bbaf65bee59720` | 0 | 195 | 0 | PASS | 2026-10-15T07:30:46Z |
+
+Note: Prompt 13 final chat message blocks with contradictions vs generated files (by block name only):
+- Exploratory Variant Block
+- Hypothesis Test P2 / Tie Counts Block
+- NFR1 Performance / CPU Telemetry Block
+- Claims Map Block
+- Requirements Trace Block
+- Prediction Records Block
+- Clean-Clone Verification Block
+| Q6 | `68908c47b14823141e9aa9b935710e878ae3249b` | 0 | 197 | 0 | PASS | 2026-10-15T07:40:44Z |
+
 ## 3. Overnight Decisions Register
 
 # Overnight Decisions Log
@@ -46,16 +65,22 @@ All twelve phases (P0 through P11) of the Prompt 13 Master unattended protocol c
 | P9 | Document raw archive SHA-256 and Zenodo provenance | Establishes raw data provenance; licence marked "licence text not found locally - student to confirm". |
 | P10 | Use Git bundle for clean-clone reproduction | Bypasses OneDrive file-locking in clean external directory `C:\c4_clean_clone` while verifying bundle integrity. |
 
+## Prompt 14 Decisions & Corrections (2026-10-15)
+
+| Part | Decision / Correction | Technical Rationale |
+|:---|:---|:---|
+| P2 (Correction) | Exact expectation under uniform random tie-breaking, plus best/worst case bounds (Bound A and Bound B); not 1000 trials. | The tie-sensitivity evaluation computes the exact combinatorial expectation and extreme analytical bounds across candidate score permutations rather than Monte Carlo empirical trials. |
+
 ## 4. Verification & Audit Sign-Off
 
 | Verification Domain | Criterion | Result | Status |
 |:---|:---|:---:|:---:|
 | Baseline Integrity | 61 SHA-256 baseline hashes | 61/61 Match | **PASS** |
-| Test Suite | Pytest unit and regression tests | 184 passed, 0 failed | **PASS** |
-| Mutation Sweeps | Numeric & label mutation detection | 9,677 / 9,677 (100.0%) | **PASS** |
-| Explainability | JSON Schema validation (v1.0.0) | 171/171 records valid | **PASS** |
-| Timing (NFR1) | End-to-end warm median <= 2.0s | 0.0051s median, 0.0150s p95 | **PASS** |
+| Test Suite | Pytest unit and regression tests | 197 passed, 0 failed | **PASS** |
+| Explainability | JSON Schema validation (v1.1.0) | 171/171 records valid | **PASS** |
+| Timing (NFR1 Warm Median) | End-to-end warm median <= 2.0s | 0.0036s | **PASS** |
+| Timing (NFR1 Warm P95) | End-to-end warm p95 <= 5.0s | 0.0123s | **PASS** |
+| Timing (NFR1 Cold Start) | Parent-timed process cold start <= 10.0s | 0.2679s | **PASS** |
 | Determinism (NFR2) | Multi-process PYTHONHASHSEED parity | Identical SHA-256 | **PASS** |
 | Immutability (NFR3) | Deep-frozen event objects | Bit-identical SHA-256 | **PASS** |
-| Clean Reproduction | Rebuild from raw archives in C:/c4_clean_clone | Exact hash match (5.63s) | **PASS** |
 

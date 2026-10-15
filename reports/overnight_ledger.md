@@ -22,3 +22,13 @@ Note: P7-P9 pytest counts were passed manually in Prompt 13; re-measured in Q0/Q
 | Q9 | `c7b3d5e5456230db621a14ac96d7f9e351de22f1` | 0 | 189 | 0 | PASS | 2026-10-15T06:55:28Z |
 | Q4 | `cf6e5dbd885a7a6452817195abb0e1a284c25cec` | 0 | 192 | 0 | PASS | 2026-10-15T07:05:03Z |
 | Q5 | `4fc004bd150dbc599fa014ac64bbaf65bee59720` | 0 | 195 | 0 | PASS | 2026-10-15T07:30:46Z |
+
+Note: Prompt 13 final chat message blocks with contradictions vs generated files (by block name only):
+- Exploratory Variant Block
+- Hypothesis Test P2 / Tie Counts Block
+- NFR1 Performance / CPU Telemetry Block
+- Claims Map Block
+- Requirements Trace Block
+- Prediction Records Block
+- Clean-Clone Verification Block
+| Q6 | `68908c47b14823141e9aa9b935710e878ae3249b` | 0 | 197 | 0 | PASS | 2026-10-15T07:40:44Z |

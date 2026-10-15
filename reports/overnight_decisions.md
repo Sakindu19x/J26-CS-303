@@ -10,3 +10,9 @@
 | P8 | Declare response time defaults (warm median <= 2.0s, p95 <= 5.0s, cold <= 10.0s) | Proposal specified "acceptable response time"; defaults formally committed prior to timing benchmark. |
 | P9 | Document raw archive SHA-256 and Zenodo provenance | Establishes raw data provenance; licence marked "licence text not found locally - student to confirm". |
 | P10 | Use Git bundle for clean-clone reproduction | Bypasses OneDrive file-locking in clean external directory `C:\c4_clean_clone` while verifying bundle integrity. |
+
+## Prompt 14 Decisions & Corrections (2026-10-15)
+
+| Part | Decision / Correction | Technical Rationale |
+|:---|:---|:---|
+| P2 (Correction) | Exact expectation under uniform random tie-breaking, plus best/worst case bounds (Bound A and Bound B); not 1000 trials. | The tie-sensitivity evaluation computes the exact combinatorial expectation and extreme analytical bounds across candidate score permutations rather than Monte Carlo empirical trials. |
