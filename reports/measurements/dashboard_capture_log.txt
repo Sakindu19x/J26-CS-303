@@ -26,10 +26,10 @@ Server Process Terminated cleanly (PID 16176).
 3. STATIC RENDER GENERATION (*_static_render.png)
 --------------------------------------------------------------------------------
 Rendering verified prediction records displaying support cautions, candidate tactics, and tie flags.
-- Generated dashboard_prediction_panel_static_render.png (Sample: E1-col-ful-K01): 101.4 KB (Copied to dashboard_prediction_panel.png)
-- Generated dashboard_unseen_state_static_render.png (Sample: E1-col-ful-K03): 106.9 KB (Copied to dashboard_unseen_state.png)
-- Generated dashboard_tied_case_static_render.png (Sample: E1-col-ful-K02): 104.2 KB (Copied to dashboard_tied_case.png)
-- Generated dashboard_tactic_prediction_static_render.png (Sample: E1-tac-col-K01): 100.4 KB (Copied to dashboard_tactic_prediction.png)
+- Generated dashboard_prediction_panel_static_render.png (Sample: E1-col-ful-K01): 101.4 KB (Static render)
+- Generated dashboard_unseen_state_static_render.png (Sample: E1-col-ful-K03): 106.9 KB (Static render)
+- Generated dashboard_tied_case_static_render.png (Sample: E1-col-ful-K02): 104.2 KB (Static render)
+- Generated dashboard_tactic_prediction_static_render.png (Sample: E1-tac-col-K01): 100.4 KB (Static render)
 
 4. AUDIT & VERIFICATION COMPLIANCE
 --------------------------------------------------------------------------------

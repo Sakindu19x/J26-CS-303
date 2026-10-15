@@ -33,7 +33,7 @@ Launch the dashboard prototypes using the unified PowerShell runner `scripts/run
 
 ### Step 2: Select an Episode Boundary
 - In the sidebar episode selector, select **Episode 1 (E1 - Scenario 1 Sudo PAM)**.
-- Note that all 19 chronological timeline events for E1 load instantly without cross-episode contamination (FR2).
+- Note that all 38 chronological timeline events for E1 load instantly without cross-episode contamination (FR2).
 
 ### Step 3: Inspect the Chronological Forensic Timeline
 - Review the main timeline panel. Confirm events display timestamp, host, MITRE ATT&CK techniques, and tactics.

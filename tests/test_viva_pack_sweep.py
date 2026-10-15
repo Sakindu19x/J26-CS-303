@@ -75,3 +75,26 @@ def test_viva_pack_dataset_hash_mutation_sweep():
         assert exit_code != 0, "Mutation in 01_dataset.md was not detected!"
     finally:
         d01_path.write_text(orig_d01, encoding="utf-8")
+
+
+def test_viva_pack_reproduce_mutation_sweep():
+    """Mutate verifier count and script path in 07_reproduce.md and verify detection."""
+    d07_path = VIVA_DIR / "07_reproduce.md"
+    orig_d07 = d07_path.read_text(encoding="utf-8")
+
+    # 1. Mutate verifier count
+    mutated_count = orig_d07.replace("all 18 deterministic verifiers", "all 99 deterministic verifiers")
+    d07_path.write_text(mutated_count, encoding="utf-8")
+    try:
+        assert verify_viva_pack() != 0, "Mutation of verifier count in 07_reproduce.md was not detected!"
+    finally:
+        d07_path.write_text(orig_d07, encoding="utf-8")
+
+    # 2. Mutate script path
+    mutated_script = orig_d07.replace("`scripts/run_normalization.py`", "`scripts/nonexistent_step.py`")
+    d07_path.write_text(mutated_script, encoding="utf-8")
+    try:
+        assert verify_viva_pack() != 0, "Mutation of script path in 07_reproduce.md was not detected!"
+    finally:
+        d07_path.write_text(orig_d07, encoding="utf-8")
+

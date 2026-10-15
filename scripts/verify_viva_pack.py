@@ -110,13 +110,40 @@ def verify_viva_pack() -> int:
         if tok not in d03_text:
             errors.append(f"Expected score token '{tok}' not found in 03_scores.md")
 
+    # Check 07_reproduce.md (Prompt 15 R4(a))
+    d07_text = (VIVA_DIR / "07_reproduce.md").read_text(encoding="utf-8")
+    if str(REPO_ROOT / "scripts") not in sys.path:
+        sys.path.insert(0, str(REPO_ROOT / "scripts"))
+    from reproduce_all import VERIFIERS, PIPELINE_STEPS
+
+    # 1. Verifier count must equal real count
+    expected_v_count = len(VERIFIERS)
+    if f"all {expected_v_count} deterministic verifiers" not in d07_text:
+        errors.append(f"Verifier count mismatch in 07_reproduce.md: expected {expected_v_count}")
+
+    # 2. Every named script path in 07_reproduce.md must exist
+    import re
+    script_paths = re.findall(r"`(scripts/[^`]+\.py)`", d07_text)
+    for sp in script_paths:
+        if not (REPO_ROOT / sp).is_file():
+            errors.append(f"Named script path in 07_reproduce.md does not exist: {sp}")
+
+    # 3. Duration check
+    r7_path = REPO_ROOT / "reports" / "audit" / "q15_R7_output.txt"
+    if not r7_path.is_file():
+        if "Expected duration" in d07_text or "Measured full verification duration" in d07_text:
+            errors.append("Duration must be omitted from 07_reproduce.md when q15_R7_output.txt is absent")
+    else:
+        if "Measured full verification duration" not in d07_text:
+            errors.append("Duration from q15_R7_output.txt missing in 07_reproduce.md")
+
     if errors:
         print("\n[FAIL] Viva pack verification encountered errors:")
         for e in errors:
             print(f"  - {e}")
         return 1
 
-    print("\n[PASS] All viva pack documents, figures, and tokens verified successfully!")
+    print("\n[PASS] All viva pack documents, figures, tokens, and 07_reproduce.md verified successfully!")
     return 0
 
 

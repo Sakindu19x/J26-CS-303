@@ -1,0 +1,5 @@
+# Exempt Tokens for viva_pack/
+# Specific markdown formatting / section numbering tokens that are decorative headings
+HEADING_SECTION_NUMBER: # 07. Independent Reproduction Guide
+HEADING_SECTION_NUMBER: ## 1. Verification-Only Reproduction
+HEADING_SECTION_NUMBER: ## 2. Full Pipeline Rebuild from Raw Archives

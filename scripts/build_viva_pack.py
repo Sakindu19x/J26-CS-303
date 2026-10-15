@@ -13,9 +13,15 @@ Generates viva_pack/ deterministically from JSON artifacts:
 from __future__ import annotations
 
 import json
+import re
 import shutil
+import sys
 from pathlib import Path
 from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import matplotlib
 matplotlib.use("Agg")
@@ -336,21 +342,40 @@ The following claims are **strictly forbidden** and contradicted by empirical ev
 """
     (VIVA_DIR / "06_claims_and_limits.md").write_text(d06_content, encoding="utf-8")
 
-    # 7. 07_reproduce.md
-    d07_content = """# 07. Independent Reproduction Guide
+    # 7. 07_reproduce.md (Prompt 15 R4(a))
+    from reproduce_all import PIPELINE_STEPS, VERIFIERS
+
+    # Measured duration from reports/audit/q15_R7_output.txt if present else omitted
+    r7_path = REPO_ROOT / "reports" / "audit" / "q15_R7_output.txt"
+    duration_notice = ""
+    if r7_path.is_file():
+        r7_text = r7_path.read_text(encoding="utf-8")
+        m_dur = re.search(r"(\d+(?:\.\d+)?s|\d+(?:\.\d+)?\s*(?:seconds|minutes))", r7_text)
+        if m_dur:
+            duration_notice = f" Measured full verification duration: {m_dur.group(1)}."
+
+    verifier_count = len(VERIFIERS)
+    step_lines = []
+    for step_title, cmd in PIPELINE_STEPS:
+        script_arg = next((arg for arg in cmd if arg.endswith(".py")), cmd[-1])
+        step_lines.append(f"{step_title} (`{script_arg}`)")
+
+    steps_text = "\n".join(step_lines)
+
+    d07_content = f"""# 07. Independent Reproduction Guide
 
 ---
 
 ## 1. Verification-Only Reproduction (Fast, Non-Destructive)
 
-To re-run all 13 deterministic verifiers, hash verifications, and the complete pytest test suite without regenerating data:
+To re-run all {verifier_count} deterministic verifiers, hash verifications, and the complete pytest test suite without regenerating data:
 
 ```powershell
 # From repository root
 ..\\.venv\\Scripts\\python.exe scripts/reproduce_all.py --verify-only
 ```
 
-Expected duration: ~2.5 minutes. Exit code 0 indicates 100% hash parity and passing verification.
+Exit code 0 indicates 100% hash parity and passing verification.{duration_notice}
 
 ---
 
@@ -362,15 +387,8 @@ To execute the entire forensic pipeline from the raw ZIP archives to all process
 ..\\.venv\\Scripts\\python.exe scripts/reproduce_all.py --rebuild
 ```
 
-Pipeline execution order:
-1. Stage 1 Extraction & Normalization (`scripts/run_stage1_pipeline_7ep.py`)
-2. LOEO Cross-Validation & Model Training (`scripts/run_7ep_evaluation.py`)
-3. Inference Suite, Diagnostics & Permutation Tests (`scripts/run_inference_7ep.py`)
-4. Production Model Fitting (`scripts/train_production_model.py`)
-5. Explainable Prediction Records Build (`scripts/build_prediction_records.py`)
-6. Requirements Trace Generation (`scripts/build_requirements_trace.py`)
-7. Viva Pack Generation (`scripts/build_viva_pack.py`)
-8. Baseline Hash Verification (`scripts/verify_all_hashes.py`)
+Pipeline execution order ({len(PIPELINE_STEPS)} steps):
+{steps_text}
 
 All outputs are compared against baseline hashes upon completion.
 """
