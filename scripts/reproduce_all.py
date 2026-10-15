@@ -33,14 +33,15 @@ VERIFIERS = [
 ]
 
 PIPELINE_STEPS = [
-    ("1. Stage 1 Ingestion (7 Episodes)", [PYTHON, "scripts/run_stage1_pipeline_7ep.py"]),
-    ("2. LOEO Model Training & Evaluation", [PYTHON, "scripts/run_7ep_evaluation.py"]),
-    ("3. Inference & Diagnostics Suite", [PYTHON, "scripts/run_inference_7ep.py"]),
-    ("4. Production Model Fitting", [PYTHON, "scripts/train_production_model.py"]),
-    ("5. Explainable Prediction Records Build", [PYTHON, "scripts/build_prediction_records.py"]),
-    ("6. Requirements Trace Generation", [PYTHON, "scripts/build_requirements_trace.py"]),
-    ("7. Viva Pack Generation", [PYTHON, "scripts/build_viva_pack.py"]),
-    ("8. Baseline Hash Verification", [PYTHON, "scripts/verify_all_hashes.py"]),
+    ("1. Stage 1 Normalization (7 Episodes)", [PYTHON, "scripts/run_normalization.py", "--episodes", "7", "--processed-dir", "data/processed_7ep", "--reports-dir", "reports/7ep"]),
+    ("2. Timeline & ATT&CK Sequences (7 Episodes)", [PYTHON, "scripts/run_timeline_pipeline.py", "--processed-dir", "data/processed_7ep", "--reports-dir", "reports/7ep"]),
+    ("3. Samples & Statistics (7 Episodes)", [PYTHON, "scripts/run_samples_and_stats.py", "--processed-dir", "data/processed_7ep", "--reports-dir", "reports/7ep"]),
+    ("4. LOEO Model Training & Evaluation (7 Episodes)", [PYTHON, "scripts/run_evaluation_7ep.py"]),
+    ("5. Production Model Fitting", [PYTHON, "scripts/train_production_model.py"]),
+    ("6. Explainable Prediction Records Build", [PYTHON, "scripts/build_prediction_records.py"]),
+    ("7. Requirements Trace Generation", [PYTHON, "scripts/build_requirements_trace.py"]),
+    ("8. Viva Pack Generation", [PYTHON, "scripts/build_viva_pack.py"]),
+    ("9. Baseline Hash Verification", [PYTHON, "scripts/verify_all_hashes.py"]),
 ]
 
 
