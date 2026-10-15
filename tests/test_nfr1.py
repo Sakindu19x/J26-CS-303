@@ -95,10 +95,20 @@ def test_nfr1_timing_markdown_structure():
     text = MD_PATH.read_text(encoding="utf-8")
     assert "# NFR1 Timing & Response Time Verification Report" in text
     assert "## 1. Executive Summary & Verdict" in text
-    assert "## 2. Per-Episode Latency Breakdown" in text
-    assert "## 3. Scaling Benchmark" in text
-    assert "## 4. Platform and Environment Telemetry" in text
+    assert "## 2. Timed Region Definitions" in text
+    assert "Per-Episode Latency Breakdown" in text
+    assert "Scaling Benchmark" in text
+    assert "Platform and Environment Telemetry" in text
     for ep in ["E1", "E2", "E3", "E4", "E5", "E6", "E7"]:
         assert f"`{ep}`" in text
     for scale in ["1x", "10x", "100x"]:
         assert f"| {scale} |" in text
+
+
+def test_verify_nfr1_script():
+    """Verify scripts/verify_nfr1.py passes independently."""
+    import subprocess
+    import sys
+    script = REPO_ROOT / "scripts" / "verify_nfr1.py"
+    res = subprocess.run([sys.executable, str(script)], capture_output=True, text=True)
+    assert res.returncode == 0, f"verify_nfr1.py failed:\n{res.stdout}\n{res.stderr}"

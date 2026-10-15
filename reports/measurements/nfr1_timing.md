@@ -2,7 +2,8 @@
 
 > [!NOTE]
 > **Measurement Standard**: Evaluated according to declared engineering defaults documented in `reports/nfr_criteria.md`:
-> Warm end-to-end median $\le$ 2.00 s, warm p95 $\le$ 5.00 s, cold-start latency $\le$ 10.00 s.
+> Warm end-to-end median $\le$ 2.00 s, warm p95 $\le$ 5.00 s, process-level cold-start latency $\le$ 10.00 s.
+> In-process first-record latency and Streamlit server ready time are INFORMATIONAL (no proposal threshold).
 
 ---
 
@@ -10,42 +11,56 @@
 
 | Criterion | Target Threshold | Measured Value | Result |
 |:---|:---:|:---:|:---:|
-| **Warm End-to-End Latency (Median)** | $\le$ 2.00 s | **0.0043 s** | **PASS** |
-| **Warm End-to-End Latency (p95)** | $\le$ 5.00 s | **0.0131 s** | **PASS** |
-| **Cold-Start Pipeline Latency** | $\le$ 10.00 s | **0.1649 s** | **PASS** |
-| **Overall NFR1 Compliance** | All Criteria Satisfied | — | **PASS** |
+| **Warm End-to-End Latency (Median)** | $\le$ 2.00 s | **0.0036 s** | **PASS** |
+| **Warm End-to-End Latency (p95)** | $\le$ 5.00 s | **0.0123 s** | **PASS** |
+| **Process-Level Cold Start (Parent-Timed)** | $\le$ 10.00 s | **0.2679 s** | **PASS** |
+| **In-Process First-Record Latency** | Informational (None) | **0.1723 s** | **INFORMATIONAL** |
+| **Streamlit Server Ready Time (Port 8765)** | Informational (None) | **2.4087 s** | **INFORMATIONAL** |
+| **Overall NFR1 Compliance** | All Gated Criteria Satisfied | — | **PASS** |
 
 ---
 
-## 2. Per-Episode Latency Breakdown (30 Repetitions / Episode)
+## 2. Timed Region Definitions
+
+Formal timing boundaries implemented in measurement code:
+
+- **Warm End-to-End Pipeline Latency**: Ingestion of raw events via C3 adapter, chronological timeline reconstruction, sequence extraction, production Markov technique and tactic inference, and explainable prediction record generation over 30 repetitions following 3 warm-ups.
+- **Process-Level Cold Start (Parent-Timed)**: Fresh Python subprocess invocation from parent process, complete interpreter initialization, package imports, model deserialization from disk, and emission of first explainable prediction record, timed externally by the parent.
+- **In-Process First-Record Latency**: Elapsed duration within an initialized Python environment to load production models into memory and emit the first prediction record (informational).
+- **Streamlit Server Ready Time**: Duration from launching `python -m streamlit run` headless on port 8765 to receiving HTTP 200 OK from the `/_stcore/health` endpoint (informational).
+- **Synthetic Scaling Stress Benchmark**: Throughput and latency scaling under synthetic 1x, 10x, and 100x event volume expansion on the longest observed episode (informational).
+
+---
+
+## 3. Per-Episode Latency Breakdown (30 Repetitions / Episode)
 
 End-to-end pipeline execution includes C3 adapter ingestion, timeline reconstruction, sequence extraction, Markov technique and tactic inference, and full explainable prediction record serialization.
 
 | Episode | Raw Events | Median Latency | p95 Latency | Mean Latency | [Min, Max] Range |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| `E1` | 38 | 0.0013 s | 0.0014 s | 0.0013 s | [0.0013, 0.0020] s |
-| `E2` | 29 | 0.0038 s | 0.0054 s | 0.0031 s | [0.0010, 0.0058] s |
-| `E3` | 77 | 0.0126 s | 0.0177 s | 0.0131 s | [0.0105, 0.0188] s |
-| `E4` | 46 | 0.0072 s | 0.0089 s | 0.0074 s | [0.0062, 0.0094] s |
-| `E5` | 7 | 0.0010 s | 0.0018 s | 0.0011 s | [0.0009, 0.0021] s |
-| `E6` | 51 | 0.0074 s | 0.0093 s | 0.0075 s | [0.0044, 0.0096] s |
-| `E7` | 26 | 0.0036 s | 0.0050 s | 0.0038 s | [0.0026, 0.0053] s |
+| `E1` | 38 | 0.0014 s | 0.0016 s | 0.0014 s | [0.0013, 0.0019] s |
+| `E2` | 29 | 0.0011 s | 0.0016 s | 0.0011 s | [0.0010, 0.0019] s |
+| `E3` | 77 | 0.0115 s | 0.0185 s | 0.0124 s | [0.0095, 0.0200] s |
+| `E4` | 46 | 0.0068 s | 0.0082 s | 0.0070 s | [0.0054, 0.0084] s |
+| `E5` | 7 | 0.0009 s | 0.0013 s | 0.0010 s | [0.0008, 0.0014] s |
+| `E6` | 51 | 0.0078 s | 0.0119 s | 0.0082 s | [0.0060, 0.0141] s |
+| `E7` | 26 | 0.0036 s | 0.0051 s | 0.0035 s | [0.0011, 0.0067] s |
 
 ---
 
-## 3. Scaling Benchmark (Informational)
+## 4. Scaling Benchmark (Informational)
 
 Synthetic volume stress testing derived from the longest observed episode (`E3`, 77 raw events) across $1\times$, $10\times$, and $100\times$ event multipliers:
 
 | Scaling Factor | Ingested Events | Valid Timeline Events | Elapsed Time | Processing Throughput |
 |:---:|:---:|:---:|:---:|:---:|
-| 1x | 77 | 77 | 0.0065 s | 11825.8 events/s |
-| 10x | 770 | 770 | 0.1347 s | 5718.4 events/s |
-| 100x | 7700 | 7700 | 1.4925 s | 5159.0 events/s |
+| 1x | 77 | 77 | 0.0117 s | 6569.9 events/s |
+| 10x | 770 | 770 | 0.1155 s | 6666.3 events/s |
+| 100x | 7700 | 7700 | 1.2455 s | 6182.5 events/s |
 
 ---
 
-## 4. Platform and Environment Telemetry
+## 5. Platform and Environment Telemetry
 
 - **Processor**: `13th Gen Intel(R) Core(TM) i5-13420H` (AMD64)
 - **Operating System**: `Windows 11 (10.0.26300)`
