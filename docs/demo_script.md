@@ -8,17 +8,17 @@
 
 ## How to Launch
 
-Launch the dashboard prototypes using the unified PowerShell runner `scripts/run_dashboard.ps1`:
+Launch the dashboard prototypes using the unified PowerShell runner `scripts/dashboard/run_dashboard.ps1`:
 
 - **Prediction Dashboard (Port 8501)**:
   ```powershell
-  .\scripts\run_dashboard.ps1 -App prediction
+  .\scripts\dashboard\run_dashboard.ps1 -App prediction
   ```
   Runs `python -m streamlit run src\c4\dashboard\prediction_app.py` on port 8501 with `PYTHONPATH=src`.
 
 - **Timeline Dashboard (Port 8502)**:
   ```powershell
-  .\scripts\run_dashboard.ps1 -App timeline
+  .\scripts\dashboard\run_dashboard.ps1 -App timeline
   ```
   Runs `python -m streamlit run src\c4\dashboard\app.py` on port 8502 with `PYTHONPATH=src`.
 
@@ -27,7 +27,7 @@ Launch the dashboard prototypes using the unified PowerShell runner `scripts/run
 ### Step 1: Launch the Prototype Dashboard
 - Open a terminal in the repository root and start the prediction dashboard interface:
   ```powershell
-  .\scripts\run_dashboard.ps1 -App prediction
+  .\scripts\dashboard\run_dashboard.ps1 -App prediction
   ```
 - Verify the browser opens to the interactive C4 Investigation Dashboard (http://localhost:8501).
 

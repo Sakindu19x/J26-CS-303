@@ -11,14 +11,14 @@
 
 | Category | Count | Percentage | Status |
 |:---|:---:|:---:|:---|
-| **Baseline Covered Artifacts (Exact Path)** | 61 | 27.5% | Verified by `scripts/verify_all_hashes.py` |
-| **Declared Transient Measurements** | 12 | 5.4% | Runtime Timing & Screenshots (`reports/measurements/`) |
-| **Documented Exceptions (Uncovered)** | 149 | 67.1% | Accounted for with Explicit Rationale |
-| **Total Tracked Target Files** | 222 | 100.0% | Complete Coverage Accounted |
+| **Baseline Covered Artifacts (Exact Path)** | 61 | 26.9% | Verified by `scripts/verify_all_hashes.py` |
+| **Declared Transient Measurements** | 12 | 5.3% | Runtime Timing & Screenshots (`reports/measurements/`) |
+| **Documented Exceptions (Uncovered)** | 154 | 67.8% | Accounted for with Explicit Rationale |
+| **Total Tracked Target Files** | 227 | 100.0% | Complete Coverage Accounted |
 
 ---
 
-## 2. Exceptions Catalog by Functional Group (149 Files)
+## 2. Exceptions Catalog by Functional Group (154 Files)
 
 ### Archived Historical Analyses (11 files)
 
@@ -47,7 +47,7 @@
 | `reports/overnight_summary.md` | Overnight execution master summary verified deterministically by scripts/verify_overnight_summary.py |
 | `reports/test_coverage_map.md` | Test mapping documentation linking requirements to unit and integration test nodes |
 
-### Audit & Verification Reports (40 files)
+### Audit & Verification Reports (44 files)
 
 | Tracked Path | Rationale |
 |:---|:---|
@@ -57,40 +57,50 @@
 | `reports/audit/exempt_requirements_trace.txt` | Verification logs, decision records, or change register |
 | `reports/audit/exempt_viva_pack.txt` | Verification logs, decision records, or change register |
 | `reports/audit/hash_coverage_exceptions.md` | Verification logs, decision records, or change register |
+| `reports/audit/history/overnight_ledger_old.md` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q0_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q10_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q1_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q3_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q4_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q5_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q6_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q8_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q14_Q9_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R0_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R1_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R2_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R3_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R4_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R5_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R6_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R7_git.txt` | Verification logs, decision records, or change register |
+| `reports/audit/history/q15_R7_sweeps.txt` | Verification logs, decision records, or change register |
 | `reports/audit/known_limitations.json` | Verification logs, decision records, or change register |
 | `reports/audit/known_limitations.md` | Verification logs, decision records, or change register |
 | `reports/audit/line_ending_audit.md` | Verification logs, decision records, or change register |
 | `reports/audit/p1_findings.md` | Verification logs, decision records, or change register |
 | `reports/audit/prereg_compliance_map.json` | Verification logs, decision records, or change register |
 | `reports/audit/prereg_compliance_map.md` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q0_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q10_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q1_output.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q14_Q2_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q3_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q4_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q5_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q6_output.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q14_Q7_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q8_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q14_Q9_output.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q14_baseline_changes.md` | Verification logs, decision records, or change register |
 | `reports/audit/q14_decisions.md` | Verification logs, decision records, or change register |
 | `reports/audit/q14_determinism_log.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R0_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R1_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R2_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R3_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R4_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R5_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R6_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R7_git.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q15_R7_output.txt` | Verification logs, decision records, or change register |
-| `reports/audit/q15_R7_sweeps.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q15_baseline_changes.md` | Verification logs, decision records, or change register |
 | `reports/audit/q16_S0_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/q16_S1_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/q16_baseline_changes.md` | Verification logs, decision records, or change register |
+| `reports/audit/q16_s1_recheck.md` | Verification logs, decision records, or change register |
 | `reports/audit/rebuild_scope.json` | Verification logs, decision records, or change register |
 | `reports/audit/rebuild_scope.md` | Verification logs, decision records, or change register |
+
+### Cryptographic Root of Trust (1 files)
+
+| Tracked Path | Rationale |
+|:---|:---|
+| `docs/ROOT_OF_TRUST.md` | Cryptographic root of trust manifest defining baseline hash digests across all five baseline JSONs |
 
 ### Derivative Tabular CSV Exports (4 files)
 
@@ -160,8 +170,8 @@
 | `docs/data_provenance.md` | Specification, interface contract, or requirements specification document |
 | `docs/demo_script.md` | Specification, interface contract, or requirements specification document |
 | `docs/models.md` | Specification, interface contract, or requirements specification document |
-| `docs/prompts/prompt15.md` | Specification, interface contract, or requirements specification document |
-| `docs/prompts/prompt16.md` | Specification, interface contract, or requirements specification document |
+| `docs/process/prompts/prompt15.md` | Specification, interface contract, or requirements specification document |
+| `docs/process/prompts/prompt16.md` | Specification, interface contract, or requirements specification document |
 | `docs/proposal_requirements.json` | Specification, interface contract, or requirements specification document |
 
 ### JSON Schema Specifications (2 files)

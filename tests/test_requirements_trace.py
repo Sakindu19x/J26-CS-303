@@ -34,7 +34,9 @@ def test_proposal_requirements_json_schema():
 
 
 def test_verify_requirements_trace_independent_script():
-    script = REPO_ROOT / "scripts" / "verify_requirements_trace.py"
+    script = REPO_ROOT / "scripts" / "verify" / "verify_requirements_trace.py"
+    if not script.is_file():
+        script = REPO_ROOT / "scripts" / "verify_requirements_trace.py"
     res = subprocess.run([sys.executable, str(script)], cwd=str(REPO_ROOT), capture_output=True, text=True)
     assert res.returncode == 0, f"verify_requirements_trace.py failed:\n{res.stdout}\n{res.stderr}"
 

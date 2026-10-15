@@ -11,9 +11,13 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "scripts" / "verify"))
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from verify_requirements_trace import verify_requirements_trace
+try:
+    from verify_requirements_trace import verify_requirements_trace
+except ImportError:
+    from scripts.verify.verify_requirements_trace import verify_requirements_trace
 
 TRACE_MD_PATH = REPO_ROOT / "reports" / "7ep" / "requirements_trace.md"
 EXEMPT_TXT_PATH = REPO_ROOT / "reports" / "audit" / "exempt_requirements_trace.txt"

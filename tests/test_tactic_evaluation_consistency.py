@@ -32,7 +32,7 @@ from typing import Any
 
 import pytest
 
-from scripts.verify_tactic_evaluation import (
+from scripts.verify.verify_tactic_evaluation import (
     recompute_from_csv,
     verify_tactic_sample_reconstruction,
     wilson_interval,

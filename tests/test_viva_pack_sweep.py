@@ -9,7 +9,10 @@ import re
 from pathlib import Path
 import pytest
 
-from scripts.verify_viva_pack import verify_viva_pack
+try:
+    from scripts.verify.verify_viva_pack import verify_viva_pack
+except ImportError:
+    from scripts.verify_viva_pack import verify_viva_pack
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 VIVA_DIR = REPO_ROOT / "viva_pack"
@@ -91,7 +94,7 @@ def test_viva_pack_reproduce_mutation_sweep():
         d07_path.write_text(orig_d07, encoding="utf-8")
 
     # 2. Mutate script path
-    mutated_script = orig_d07.replace("`scripts/run_normalization.py`", "`scripts/nonexistent_step.py`")
+    mutated_script = orig_d07.replace("`scripts/pipeline/s01_normalize_events.py`", "`scripts/nonexistent_step.py`")
     d07_path.write_text(mutated_script, encoding="utf-8")
     try:
         assert verify_viva_pack() != 0, "Mutation of script path in 07_reproduce.md was not detected!"

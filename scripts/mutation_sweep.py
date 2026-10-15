@@ -41,7 +41,7 @@ if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
 # Import tactic recompute & check functions
-from scripts.verify_tactic_evaluation import recompute_from_csv as recompute_tactic
+from scripts.verify.verify_tactic_evaluation import recompute_from_csv as recompute_tactic
 from tests.test_tactic_evaluation_consistency import (
     check_headline_counts,
     check_headline_percentages,

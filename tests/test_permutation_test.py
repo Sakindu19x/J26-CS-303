@@ -17,7 +17,7 @@ import pytest
 from src.c4.attack_sequence import collapse_sequence
 from src.c4.evaluation import evaluate_loeo_slice
 from src.c4.tactic_evaluation import evaluate_tactic_slice
-from scripts.verify_permutation_test import verify_permutation_test
+from scripts.verify.verify_permutation_test import verify_permutation_test
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 JSON_PATH = BASE_DIR / "reports" / "archive" / "permutation_test_report_v1_counts_superseded.json"

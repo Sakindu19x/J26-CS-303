@@ -109,6 +109,8 @@ def test_verify_nfr1_script():
     """Verify scripts/verify_nfr1.py passes independently."""
     import subprocess
     import sys
-    script = REPO_ROOT / "scripts" / "verify_nfr1.py"
+    script = REPO_ROOT / "scripts" / "verify" / "verify_nfr1.py"
+    if not script.is_file():
+        script = REPO_ROOT / "scripts" / "verify_nfr1.py"
     res = subprocess.run([sys.executable, str(script)], capture_output=True, text=True)
     assert res.returncode == 0, f"verify_nfr1.py failed:\n{res.stdout}\n{res.stderr}"

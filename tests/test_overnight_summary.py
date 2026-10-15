@@ -6,9 +6,13 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "scripts" / "verify"))
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from verify_overnight_summary import verify_overnight_summary
+try:
+    from verify_overnight_summary import verify_overnight_summary
+except ImportError:
+    from scripts.verify.verify_overnight_summary import verify_overnight_summary
 
 
 def test_verify_overnight_summary_independent_verifier():

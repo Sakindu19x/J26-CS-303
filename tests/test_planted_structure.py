@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 import pytest
 
-from scripts.verify_planted_structure import verify_planted_structure
+from scripts.verify.verify_planted_structure import verify_planted_structure
 from scripts.run_planted_structure import (
     generate_a1_dataset,
     evaluate_dataset_loeo,

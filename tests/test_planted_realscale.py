@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 import pytest
 
-from scripts.verify_planted_realscale import verify_planted_realscale
+from scripts.verify.verify_planted_realscale import verify_planted_realscale
 from scripts.run_planted_realscale import FOLDS
 
 BASE_DIR = Path(__file__).resolve().parents[1]

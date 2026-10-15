@@ -18,8 +18,8 @@
     "forbidden_use": "Claiming pipeline non-reproducibility or alleging manual intervention was required for artifact generation.",
     "evidence_file": "reports/audit/rebuild_scope.json",
     "script": "scripts/reproduce_all.py",
-    "verifier": "scripts/verify_all_hashes.py",
-    "test_node": "none (verified by scripts/verify_all_hashes.py)"
+    "verifier": "scripts/verify/verify_all_hashes.py",
+    "test_node": "none (verified by scripts/verify/verify_all_hashes.py)"
   },
   {
     "id": "CLAIM-02",
@@ -50,7 +50,7 @@
     "forbidden_use": "Claiming Markov superiority at tactic level or ignoring the pre-registered non-demonstration verdict.",
     "evidence_file": "reports/7ep/holm_claim_rule_results.json",
     "script": "scripts/run_holm_claim_rule.py",
-    "verifier": "scripts/verify_holm_claim_rule.py",
+    "verifier": "scripts/verify/verify_holm_claim_rule.py",
     "test_node": "tests/test_inference_7ep.py::test_claim_rule_logic"
   },
   {
@@ -82,7 +82,7 @@
     "forbidden_use": "Claiming Markov model outperforms baseline at technique level.",
     "evidence_file": "reports/7ep/holm_claim_rule_results.json",
     "script": "scripts/run_holm_claim_rule.py",
-    "verifier": "scripts/verify_holm_claim_rule.py",
+    "verifier": "scripts/verify/verify_holm_claim_rule.py",
     "test_node": "tests/test_inference_7ep.py::test_claim_rule_logic"
   },
   {
@@ -137,8 +137,8 @@
     "allowed_use": "Demonstrating mathematical robustness of verdict across extreme tie-break assignments.",
     "forbidden_use": "Describing tie bounds as empirical Monte Carlo simulation trials rather than exact mathematical bounds.",
     "evidence_file": "reports/7ep/tie_sensitivity_7ep.json",
-    "script": "scripts/run_tie_sensitivity_7ep.py",
-    "verifier": "scripts/verify_tie_sensitivity_7ep.py",
+    "script": "scripts/pipeline/s14_tie_sensitivity_7ep.py",
+    "verifier": "scripts/verify/verify_tie_sensitivity_7ep.py",
     "test_node": "tests/test_inference_7ep.py::test_tie_sensitivity_diagnostic"
   },
   {
@@ -167,8 +167,8 @@
     "allowed_use": "Discussing negative exploratory findings and architecture limitations in discussion/future work.",
     "forbidden_use": "Claiming exploratory tactic conditioning resolves the technique-level performance gap.",
     "evidence_file": "reports/7ep/exploratory_tactic_conditioned_results.json",
-    "script": "scripts/run_exploratory_tactic_conditioned.py",
-    "verifier": "scripts/verify_exploratory_tactic_conditioned.py",
+    "script": "scripts/pipeline/s15_exploratory_tactic_conditioned.py",
+    "verifier": "scripts/verify/verify_exploratory_tactic_conditioned.py",
     "test_node": "tests/test_exploratory_tactic_conditioned.py::test_exploratory_mcnemar_and_wilson"
   },
   {
@@ -198,8 +198,8 @@
     "allowed_use": "Explaining reachability ceilings across technique and tactic levels under LOEO.",
     "forbidden_use": "Claiming 75% accuracy is attainable on this benchmark dataset.",
     "evidence_file": "reports/7ep/evaluation_7ep_results.json",
-    "script": "scripts/run_evaluation_7ep.py",
-    "verifier": "scripts/verify_evaluation_7ep.py",
+    "script": "scripts/pipeline/s06_evaluation_7ep.py",
+    "verifier": "scripts/verify/verify_evaluation_7ep.py",
     "test_node": "tests/test_evaluation_7ep.py::test_byte_identical_rerun"
   },
   {
@@ -222,8 +222,8 @@
     "allowed_use": "Demonstrating data-scaling dynamics across subsets k=1..6.",
     "forbidden_use": "Extrapolating learning curves beyond observed 7 simulation episodes.",
     "evidence_file": "reports/7ep/learning_curve_7ep_results.json",
-    "script": "scripts/run_learning_curve_7ep.py",
-    "verifier": "scripts/verify_learning_curve_7ep.py",
+    "script": "scripts/pipeline/s07_learning_curve_7ep.py",
+    "verifier": "scripts/verify/verify_learning_curve_7ep.py",
     "test_node": "tests/test_inference_7ep.py::test_learning_curve_outputs"
   },
   {
@@ -249,7 +249,7 @@
     "forbidden_use": "Claiming meeting proposal-specified numerical thresholds (proposal provides qualitative criteria only).",
     "evidence_file": "reports/measurements/nfr1_timing.json",
     "script": "scripts/measure_nfr1.py",
-    "verifier": "scripts/verify_nfr1.py",
+    "verifier": "scripts/verify/verify_nfr1.py",
     "test_node": "tests/test_nfr1.py::test_verify_nfr1_script"
   },
   {
@@ -267,8 +267,8 @@
     "forbidden_use": "Claiming determinism without canonical serialization and explicit tie-break ordering.",
     "evidence_file": "reports/audit/q14_determinism_log.txt",
     "script": "scripts/run_q7_gates.py",
-    "verifier": "scripts/verify_prediction_records.py",
-    "test_node": "none (verified by scripts/verify_prediction_records.py)"
+    "verifier": "scripts/verify/verify_prediction_records.py",
+    "test_node": "none (verified by scripts/verify/verify_prediction_records.py)"
   },
   {
     "id": "CLAIM-11",
@@ -285,8 +285,8 @@
     "forbidden_use": "Claiming forensic immutability without canonical SHA-256 validation.",
     "evidence_file": "reports/audit/q14_Q7_output.txt",
     "script": "scripts/run_q7_gates.py",
-    "verifier": "scripts/verify_prediction_records.py",
-    "test_node": "none (verified by scripts/verify_prediction_records.py)"
+    "verifier": "scripts/verify/verify_prediction_records.py",
+    "test_node": "none (verified by scripts/verify/verify_prediction_records.py)"
   },
   {
     "id": "CLAIM-12",
@@ -307,7 +307,7 @@
     "forbidden_use": "Asserting high confidence on records marked with low-support cautions.",
     "evidence_file": "data/processed_7ep/prediction_records_loeo.jsonl",
     "script": "scripts/build_prediction_records.py",
-    "verifier": "scripts/verify_prediction_records.py",
+    "verifier": "scripts/verify/verify_prediction_records.py",
     "test_node": "tests/test_prediction_record.py::test_gp5_5_schema_validation_100_percent"
   },
   {

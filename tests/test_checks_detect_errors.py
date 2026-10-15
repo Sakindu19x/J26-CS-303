@@ -18,7 +18,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.verify_tactic_evaluation import recompute_from_csv
+from scripts.verify.verify_tactic_evaluation import recompute_from_csv
 from tests.test_tactic_evaluation_consistency import (
     check_headline_counts,
     check_headline_percentages,

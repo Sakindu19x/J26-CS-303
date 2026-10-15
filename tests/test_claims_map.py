@@ -6,9 +6,13 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "scripts" / "verify"))
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from verify_claims_map import verify_claims_map
+try:
+    from verify_claims_map import verify_claims_map
+except ImportError:
+    from scripts.verify.verify_claims_map import verify_claims_map
 
 
 def test_verify_claims_map_independent_verifier():

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import pytest
 
-from scripts.verify_exploratory_tactic_conditioned import (
+from scripts.verify.verify_exploratory_tactic_conditioned import (
     verify_exploratory_tactic_conditioned,
     wilson_interval,
     exact_mcnemar,

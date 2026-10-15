@@ -206,13 +206,19 @@ def test_e5_hit1_change_diagnostic():
     assert len(d["markov_differing_samples"]) == 7
     assert len(d["frequency_differing_samples"]) == 0
 
-    from scripts.verify_e5_hit1_diagnostic import verify_e5_hit1_diagnostic
+    try:
+        from scripts.verify.verify_e5_hit1_diagnostic import verify_e5_hit1_diagnostic
+    except ImportError:
+        from scripts.verify_e5_hit1_diagnostic import verify_e5_hit1_diagnostic
     assert verify_e5_hit1_diagnostic() is True
 
 
 def test_tie_sensitivity_diagnostic() -> None:
     """Test tie sensitivity calculation on toy cases (including 3-way tie) and report invariants."""
-    from scripts.run_tie_sensitivity_7ep import evaluate_sample_ties
+    try:
+        from scripts.pipeline.s14_tie_sensitivity_7ep import evaluate_sample_ties
+    except ImportError:
+        from scripts.run_tie_sensitivity_7ep import evaluate_sample_ties
 
     # Toy Case 1: 3-way tie straddling top-3 boundary (positions 2, 3, 4; g=3, slots=2, 1 target)
     cands_3way = [("A", 0.5), ("B", 0.2), ("C", 0.2), ("D", 0.2), ("E", 0.1)]

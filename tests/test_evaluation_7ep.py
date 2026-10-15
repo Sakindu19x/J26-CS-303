@@ -25,7 +25,7 @@ sys.path.insert(0, str(BASE_DIR))
 sys.path.insert(0, str(BASE_DIR / "src"))
 
 from scripts.check_regression_gate import run_regression_gate
-from scripts.run_evaluation_7ep import exact_mcnemar, run_evaluation_7ep
+from scripts.pipeline.s06_evaluation_7ep import exact_mcnemar, run_evaluation_7ep
 
 
 def sha256_file(path: Path) -> str:

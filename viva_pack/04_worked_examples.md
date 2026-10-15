@@ -4,9 +4,7 @@
 > This report presents seven full, worked, representative prediction records generated
 > by Component 4 under Leave-One-Episode-Out (LOEO) evaluation across 7 episodes.
 > Every record conforms to `schemas/c4_prediction_record.schema.json` (version 1.1.0) and satisfies
-> requirements FR4 (candidate ranking), FR5 (evidence support), FR6 (explainability surface),
-> FR7 (confidence scoring and reliability context), NFR2 (reproducibility), NFR3 (provenance),
-> and NFR6 (schema compliance).
+> requirements FR5 Probability Output, FR6 Alternative Predictions, FR7 Explainable Prediction, NFR2 Reliability, NFR3 Security, and NFR6 Explainability.
 
 ## Support Caution Summary
 
@@ -14,6 +12,7 @@
 - **Cautioned Records**: 92/171 (83/95 technique records, 9/76 tactic records)
 - **Caution Threshold Policy**: A prediction record is flagged with `caution=True` when the current attack state has fewer than 2 supporting training episodes or fewer than 3 total historical transitions from that state. In the evaluation dataset, all 34 unobserved states (which trigger unconditional frequency fallback) are flagged with caution.
 - **Fallback Mechanism**: The evaluation dataset contains exactly one fallback reason: unobserved historical state (zero outgoing training transitions). No secondary fallback modes exist in the data.
+- **Transition Weights Representation**: Transition weights are shown as "weighted count (fractional because set-valued steps share weight)". When an empirical step contains |S| simultaneous techniques, each transition distributes uniform 1/|S| weight across the outgoing edges.
 
 ## Summary of Exemplars (7 Distinct Sample IDs)
 
@@ -43,7 +42,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `T1057` | Process Discovery | 0.4815 | `transition_probability` | 1.00 | 2.08 | [E7] | Discovery |
 | 2 | `T1059.004` | Unix Shell | 0.4815 | `transition_probability` | 1.00 | 2.08 | [E3] | Execution |
@@ -244,7 +243,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `T1589.002` | Email Addresses | 1.0000 | `transition_probability` | 1.00 | 1.00 | [E7] | Reconnaissance |
 
@@ -398,7 +397,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `T1105` | Ingress Tool Transfer | 0.0714 | `training_frequency_share` | 5.50 | 77.00 | [E2, E3, E4, E6] | Command and Control |
 | 2 | `T1003.008` | /etc/passwd and /etc/shadow | 0.0390 | `training_frequency_share` | 3.00 | 77.00 | [E2, E3, E7] | Credential Access |
@@ -406,7 +405,7 @@
 
 ### Alternative Candidates (Ranks 4..k)
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|
 | 4 | `T1083` | File and Directory Discovery | 0.0390 | `training_frequency_share` | 3.00 | 77.00 | [E2, E3, E7] |
 | 5 | `T1059.004` | Unix Shell | 0.0303 | `training_frequency_share` | 2.33 | 77.00 | [E3, E6, E7] |
@@ -721,7 +720,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `T1071.001` | Web Protocols | 0.5000 | `transition_probability` | 0.50 | 0.50 | [E7] | Command and Control |
 | 2 | `T1573.001` | Symmetric Cryptography | 0.5000 | `transition_probability` | 0.50 | 0.50 | [E7] | Command and Control |
@@ -900,7 +899,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `command-and-control` | Command and Control | 0.5000 | `transition_probability` | 1.00 | 1.20 | [E7] | Command and Control |
 | 2 | `credential-access` | Credential Access | 0.1000 | `transition_probability` | 0.20 | 1.20 | [E7] | Credential Access |
@@ -908,7 +907,7 @@
 
 ### Alternative Candidates (Ranks 4..k)
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|
 | 4 | `initial-access` | Initial Access | 0.1000 | `transition_probability` | 0.20 | 1.20 | [E7] |
 | 5 | `persistence` | Persistence | 0.1000 | `transition_probability` | 0.20 | 1.20 | [E7] |
@@ -1157,7 +1156,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `T1033` | System Owner/User Discovery | 1.0000 | `transition_probability` | 0.33 | 0.33 | [E7] | Discovery |
 
@@ -1316,7 +1315,7 @@
 
 ### Ranked Top Candidates
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes | Tactics (Display) |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes | Tactics (Display) |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|:---|
 | 1 | `T1057` | Process Discovery | 0.2083 | `transition_probability` | 3.00 | 11.58 | [E2, E7] | Discovery |
 | 2 | `T1016` | System Network Configuration Discovery | 0.1667 | `transition_probability` | 2.00 | 11.58 | [E2, E7] | Discovery |
@@ -1324,7 +1323,7 @@
 
 ### Alternative Candidates (Ranks 4..k)
 
-| Rank | Candidate | Name | Score | Score Type | Numerator | Denominator | Supporting Episodes |
+| Rank | Candidate | Name | Score | Score Type | Numerator (weighted count) | Denominator (weighted count) | Supporting Episodes |
 |:---:|:---|:---|:---:|:---|:---:|:---:|:---|
 | 4 | `T1003` | OS Credential Dumping | 0.0769 | `transition_probability` | 1.00 | 11.58 | [E2] |
 | 5 | `T1003.008` | /etc/passwd and /etc/shadow | 0.0705 | `transition_probability` | 2.00 | 11.58 | [E2, E7] |
