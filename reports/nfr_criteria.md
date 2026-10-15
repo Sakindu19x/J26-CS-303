@@ -51,4 +51,23 @@ Performance measurements are recorded alongside full host environment telemetry:
 
 ---
 
-*Declared Criteria Version: 1.0.0 (October 2026)*
+## 4. Refined Cold-Start and Informational Latency Specifications (Prompt 14 Q9a)
+
+As clarified under Prompt 14 Q9a, performance criteria are formally delineated between gated thresholds and informational telemetry:
+
+1. **Process-Level Cold Start (Gated Acceptance Threshold)**:
+   - **Definition**: Cold process execution comprising fresh Python subprocess invocation, interpreter initialization, all required module imports, production model deserialization, and generation of the first explainable prediction record.
+   - **Timing Scope**: Monotonically timed by the parent process from `subprocess.Popen` / `subprocess.run` dispatch to child process termination.
+   - **Acceptance Threshold**: **$\le$ 10.0 s** (Existing threshold unchanged).
+
+2. **In-Process First-Record Latency (Informational Telemetry)**:
+   - **Definition**: Time elapsed within an existing Python process to load production models into memory and emit the first prediction record.
+   - **Threshold**: **INFORMATIONAL** (no threshold; research proposal specifies none).
+
+3. **Streamlit Server Ready Time (Informational Telemetry)**:
+   - **Definition**: Time elapsed from spawning the Streamlit web application process (`python -m streamlit run ... --server.port 8765 --server.headless true`) until the health endpoint `/_stcore/health` returns HTTP 200 OK.
+   - **Threshold**: **INFORMATIONAL** (no threshold; research proposal specifies none).
+
+---
+
+*Declared Criteria Version: 1.1.0 (Prompt 14 Q9a, October 2026)*
