@@ -49,17 +49,17 @@ def main() -> None:
     head = get_git_head()
     utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+    if args.pytest_passed is not None or args.pytest_failed is not None:
+        raise ValueError("G7 compliance error: --pytest-passed/--pytest-failed is disabled. update_ledger must run the tests itself.")
+
     if args.blocked:
         hashes_code = args.hashes_exit if args.hashes_exit is not None else 1
-        passed = args.pytest_passed if args.pytest_passed is not None else 0
-        failed = args.pytest_failed if args.pytest_failed is not None else 1
+        passed = 0
+        failed = 1
         status_str = f"BLOCKED: {args.blocked}"
     else:
         hashes_code = args.hashes_exit if args.hashes_exit is not None else run_verify_hashes()
-        if args.pytest_passed is not None and args.pytest_failed is not None:
-            passed, failed = args.pytest_passed, args.pytest_failed
-        else:
-            passed, failed = run_pytest_counts()
+        passed, failed = run_pytest_counts()
         status_str = "PASS" if hashes_code == 0 and failed == 0 else f"FAIL (hashes={hashes_code}, failed={failed})"
 
     # Ensure ledger file exists

@@ -14,3 +14,5 @@
 | P9 | `0e28a209fb26ef8085223806c74ea141723aaa95` | 0 | 184 | 0 | PASS | 2026-10-15T04:41:08Z |
 | P10 | `f7ff50d78dd5d78c31e4ed02186fbebbea3377ab` | 0 | 184 | 0 | PASS | 2026-10-15T05:05:45Z |
 | P11 | `f1f1db4f8d282b61d195353989db8f15e99d8ad6` | 0 | 184 | 0 | PASS | 2026-10-15T05:32:43Z |
+
+Note: P7-P9 pytest counts were passed manually in Prompt 13; re-measured in Q0/Q10.
