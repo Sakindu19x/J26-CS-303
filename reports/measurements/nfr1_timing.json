@@ -44,27 +44,27 @@
   },
   "summary_warm": {
     "total_repetitions": 210,
-    "mean_seconds": 0.0049,
-    "median_seconds": 0.0036,
-    "p95_seconds": 0.0123,
+    "mean_seconds": 0.0016,
+    "median_seconds": 0.0015,
+    "p95_seconds": 0.0035,
     "pass_median": true,
     "pass_p95": true
   },
   "cold_start": {
-    "cold_start_seconds": 0.2679,
+    "cold_start_seconds": 0.3176,
     "pass_cold_start": true
   },
   "process_cold_start": {
-    "parent_timed_seconds": 0.2679,
+    "parent_timed_seconds": 0.3176,
     "threshold_seconds": 10.0,
     "pass": true
   },
   "in_process_cold_start": {
-    "first_record_latency_seconds": 0.1723,
+    "first_record_latency_seconds": 0.2141,
     "informational": true
   },
   "streamlit_server_ready": {
-    "ready_time_seconds": 2.4087,
+    "ready_time_seconds": 2.7908,
     "endpoint": "http://localhost:8765/_stcore/health",
     "port": 8765,
     "status_code": 200,
@@ -75,71 +75,71 @@
       "events_count": 38,
       "repetitions": 30,
       "mean_seconds": 0.0014,
-      "median_seconds": 0.0014,
-      "p95_seconds": 0.0016,
+      "median_seconds": 0.0013,
+      "p95_seconds": 0.0022,
       "min_seconds": 0.0013,
-      "max_seconds": 0.0019,
-      "std_seconds": 0.0001
+      "max_seconds": 0.0023,
+      "std_seconds": 0.0003
     },
     "E2": {
       "events_count": 29,
       "repetitions": 30,
-      "mean_seconds": 0.0011,
-      "median_seconds": 0.0011,
-      "p95_seconds": 0.0016,
+      "mean_seconds": 0.0012,
+      "median_seconds": 0.001,
+      "p95_seconds": 0.0019,
       "min_seconds": 0.001,
-      "max_seconds": 0.0019,
-      "std_seconds": 0.0002
+      "max_seconds": 0.0027,
+      "std_seconds": 0.0004
     },
     "E3": {
       "events_count": 77,
       "repetitions": 30,
-      "mean_seconds": 0.0124,
-      "median_seconds": 0.0115,
-      "p95_seconds": 0.0185,
-      "min_seconds": 0.0095,
-      "max_seconds": 0.02,
-      "std_seconds": 0.0026
+      "mean_seconds": 0.0031,
+      "median_seconds": 0.0029,
+      "p95_seconds": 0.0049,
+      "min_seconds": 0.0025,
+      "max_seconds": 0.0051,
+      "std_seconds": 0.0007
     },
     "E4": {
       "events_count": 46,
       "repetitions": 30,
-      "mean_seconds": 0.007,
-      "median_seconds": 0.0068,
-      "p95_seconds": 0.0082,
-      "min_seconds": 0.0054,
-      "max_seconds": 0.0084,
-      "std_seconds": 0.0008
+      "mean_seconds": 0.0017,
+      "median_seconds": 0.0015,
+      "p95_seconds": 0.0029,
+      "min_seconds": 0.0015,
+      "max_seconds": 0.0035,
+      "std_seconds": 0.0005
     },
     "E5": {
       "events_count": 7,
       "repetitions": 30,
-      "mean_seconds": 0.001,
-      "median_seconds": 0.0009,
-      "p95_seconds": 0.0013,
-      "min_seconds": 0.0008,
-      "max_seconds": 0.0014,
-      "std_seconds": 0.0001
+      "mean_seconds": 0.0003,
+      "median_seconds": 0.0002,
+      "p95_seconds": 0.0005,
+      "min_seconds": 0.0002,
+      "max_seconds": 0.0012,
+      "std_seconds": 0.0002
     },
     "E6": {
       "events_count": 51,
       "repetitions": 30,
-      "mean_seconds": 0.0082,
-      "median_seconds": 0.0078,
-      "p95_seconds": 0.0119,
-      "min_seconds": 0.006,
-      "max_seconds": 0.0141,
-      "std_seconds": 0.0018
+      "mean_seconds": 0.0025,
+      "median_seconds": 0.0019,
+      "p95_seconds": 0.0043,
+      "min_seconds": 0.0016,
+      "max_seconds": 0.006,
+      "std_seconds": 0.0011
     },
     "E7": {
       "events_count": 26,
       "repetitions": 30,
-      "mean_seconds": 0.0035,
-      "median_seconds": 0.0036,
-      "p95_seconds": 0.0051,
-      "min_seconds": 0.0011,
-      "max_seconds": 0.0067,
-      "std_seconds": 0.0011
+      "mean_seconds": 0.0012,
+      "median_seconds": 0.0009,
+      "p95_seconds": 0.0027,
+      "min_seconds": 0.0008,
+      "max_seconds": 0.0036,
+      "std_seconds": 0.0007
     }
   },
   "scaling_benchmark": {
@@ -149,22 +149,22 @@
         "multiplier": 1,
         "event_count": 77,
         "timeline_length": 77,
-        "elapsed_seconds": 0.0117,
-        "throughput_events_per_sec": 6569.9
+        "elapsed_seconds": 0.0049,
+        "throughput_events_per_sec": 15617.7
       },
       "10x": {
         "multiplier": 10,
         "event_count": 770,
         "timeline_length": 770,
-        "elapsed_seconds": 0.1155,
-        "throughput_events_per_sec": 6666.3
+        "elapsed_seconds": 0.0488,
+        "throughput_events_per_sec": 15778.1
       },
       "100x": {
         "multiplier": 100,
         "event_count": 7700,
         "timeline_length": 7700,
-        "elapsed_seconds": 1.2455,
-        "throughput_events_per_sec": 6182.5
+        "elapsed_seconds": 0.387,
+        "throughput_events_per_sec": 19895.4
       }
     }
   },

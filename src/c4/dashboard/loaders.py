@@ -7,14 +7,7 @@ from typing import Any
 
 import pandas as pd
 
-PROCESSED_DIR = Path(__file__).resolve().parents[3] / "data" / "processed"
-REPORTS_DIR = Path(__file__).resolve().parents[3] / "reports"
-
-TIMELINES_PATH = PROCESSED_DIR / "attack_timelines.json"
-SEQUENCES_PATH = PROCESSED_DIR / "attack_sequences.json"
-DATA_QUALITY_PATH = REPORTS_DIR / "data_quality_report.json"
-TACTIC_DISCREPANCY_PATH = REPORTS_DIR / "tactic_discrepancy_report.json"
-WAZUH_CSV_PATH = PROCESSED_DIR / "wazuh_alerts_normalized.csv"
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class MissingArtifactError(FileNotFoundError):
@@ -22,52 +15,76 @@ class MissingArtifactError(FileNotFoundError):
     pass
 
 
-def check_required_artifacts() -> list[str]:
+def check_required_artifacts(episodes: int = 4) -> list[str]:
     """Check existence of essential preprocessed artifacts and return missing filenames."""
+    if episodes == 7:
+        processed_dir = REPO_ROOT / "data" / "processed_7ep"
+        reports_dir = REPO_ROOT / "reports" / "7ep"
+    else:
+        processed_dir = REPO_ROOT / "data" / "processed"
+        reports_dir = REPO_ROOT / "reports"
+
+    timelines_path = processed_dir / "attack_timelines.json"
+    sequences_path = processed_dir / "attack_sequences.json"
+    data_quality_path = reports_dir / "data_quality_report.json"
+
     missing = []
-    if not TIMELINES_PATH.is_file():
-        missing.append(str(TIMELINES_PATH.name))
-    if not SEQUENCES_PATH.is_file():
-        missing.append(str(SEQUENCES_PATH.name))
-    if not DATA_QUALITY_PATH.is_file():
-        missing.append(str(DATA_QUALITY_PATH.name))
+    if not timelines_path.is_file():
+        missing.append(str(timelines_path.name))
+    if not sequences_path.is_file():
+        missing.append(str(sequences_path.name))
+    if not data_quality_path.is_file():
+        missing.append(str(data_quality_path.name))
     return missing
 
 
-def load_dashboard_data() -> dict[str, Any]:
+def load_dashboard_data(episodes: int = 4) -> dict[str, Any]:
     """Load preprocessed artifacts for the dashboard without performing any preprocessing.
 
     Raises MissingArtifactError with actionable instructions if files are absent.
     """
-    missing = check_required_artifacts()
+    if episodes == 7:
+        processed_dir = REPO_ROOT / "data" / "processed_7ep"
+        reports_dir = REPO_ROOT / "reports" / "7ep"
+    else:
+        processed_dir = REPO_ROOT / "data" / "processed"
+        reports_dir = REPO_ROOT / "reports"
+
+    timelines_path = processed_dir / "attack_timelines.json"
+    sequences_path = processed_dir / "attack_sequences.json"
+    data_quality_path = reports_dir / "data_quality_report.json"
+    tactic_discrepancy_path = reports_dir / "tactic_discrepancy_report.json"
+    wazuh_csv_path = processed_dir / "wazuh_alerts_normalized.csv"
+
+    missing = check_required_artifacts(episodes=episodes)
     if missing:
         missing_str = ", ".join(missing)
         raise MissingArtifactError(
             f"Required processed files missing: [{missing_str}].\n"
             f"Please run the pipeline first by executing:\n"
-            f"  python scripts/run_normalization.py\n"
-            f"  python scripts/run_timeline_pipeline.py\n"
-            f"  python scripts/run_samples_and_stats.py"
+            f"  python scripts/pipeline/s01_normalize_events.py\n"
+            f"  python scripts/pipeline/s02_timeline_pipeline.py\n"
+            f"  python scripts/pipeline/s03_samples_and_stats.py"
         )
 
-    with open(TIMELINES_PATH, encoding="utf-8") as f:
+    with open(timelines_path, encoding="utf-8") as f:
         timelines = json.load(f)
 
-    with open(SEQUENCES_PATH, encoding="utf-8") as f:
+    with open(sequences_path, encoding="utf-8") as f:
         sequences = json.load(f)
 
-    with open(DATA_QUALITY_PATH, encoding="utf-8") as f:
+    with open(data_quality_path, encoding="utf-8") as f:
         data_quality = json.load(f)
 
     tactic_discrepancies = {}
-    if TACTIC_DISCREPANCY_PATH.is_file():
-        with open(TACTIC_DISCREPANCY_PATH, encoding="utf-8") as f:
+    if tactic_discrepancy_path.is_file():
+        with open(tactic_discrepancy_path, encoding="utf-8") as f:
             tactic_discrepancies = json.load(f)
 
     wazuh_alerts_df = pd.DataFrame()
-    if WAZUH_CSV_PATH.is_file():
+    if wazuh_csv_path.is_file():
         try:
-            wazuh_alerts_df = pd.read_csv(WAZUH_CSV_PATH)
+            wazuh_alerts_df = pd.read_csv(wazuh_csv_path)
         except Exception:
             wazuh_alerts_df = pd.DataFrame()
 

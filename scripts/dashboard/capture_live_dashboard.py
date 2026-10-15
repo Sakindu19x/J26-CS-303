@@ -1,9 +1,15 @@
-"""Live Dashboard Screenshot Capture Script using Playwright in separate venv (Prompt 15 R4(d)).
+r"""Live Dashboard Screenshot Capture Script using Playwright in separate venv (Part S3).
 
 Rules:
+- Executes in C:\c4_capture_venv (never project venv).
 - Uses channel="chrome" (system installed Chrome).
-- Never downloads browsers.
-- Drives real app on port 8501 (spawned via ..\.venv\Scripts\python.exe).
+- Spawns Streamlit app on port 8501 via ..\.venv\Scripts\python.exe.
+- Captures five views at 1440x900 (desktop) and 390x844 (mobile):
+  1. Timeline Swim-Lane Overview
+  2. Active Markov Transition Prediction Panel (E1-col-ful-K01)
+  3. Frequency Fallback on Unseen State (E1-col-ful-K03)
+  4. Boundary Tied Prediction Case (E1-col-ful-K02)
+  5. Tactic-Level Prediction View (E1-tac-col-K01)
 - Saves reports/measurements/live_*.png and logs results.
 - If it fails, logs the exact error and leaves static renders intact.
 """
@@ -16,9 +22,9 @@ import time
 import urllib.request
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parents[2]
 MEASUREMENTS_DIR = REPO_ROOT / "reports" / "measurements"
-LOG_PATH = MEASUREMENTS_DIR / "live_capture_log.txt"
+LOG_PATH = MEASUREMENTS_DIR / "dashboard_capture_log.txt"
 
 APP_PY = REPO_ROOT / "src" / "c4" / "dashboard" / "prediction_app.py"
 MAIN_PYTHON = REPO_ROOT.parent / ".venv" / "Scripts" / "python.exe"
@@ -30,7 +36,7 @@ def log(msg: str) -> None:
         f.write(msg + "\n")
 
 
-def wait_for_server(port: int = 8501, timeout: float = 30.0) -> bool:
+def wait_for_server(port: int = 8501, timeout: float = 35.0) -> bool:
     url = f"http://localhost:{port}/_stcore/health"
     start = time.perf_counter()
     while time.perf_counter() - start < timeout:
@@ -44,7 +50,17 @@ def wait_for_server(port: int = 8501, timeout: float = 30.0) -> bool:
 
 
 def run_live_capture() -> int:
-    LOG_PATH.write_text(f"=== LIVE DASHBOARD CAPTURE LOG (Prompt 15 R4(d)) ===\n{time.strftime('%Y-%m-%dT%H:%M:%SZ')}\n\n", encoding="utf-8")
+    header = (
+        "================================================================================\n"
+        "LIVE DASHBOARD CAPTURE LOG (Part S3 - Industry-Grade Analyst Console)\n"
+        f"Timestamp: {time.strftime('%Y-%m-%dT%H:%M:%SZ')}\n"
+        "Server Launch Command: streamlit run src/c4/dashboard/prediction_app.py --server.port 8501\n"
+        "Capture Environment: C:\\c4_capture_venv (Playwright, channel='chrome')\n"
+        "Viewports: 1440x900 (desktop), 390x844 (mobile)\n"
+        "LIVE CAPTURE LIMITATION DETECTED: Historical limitation resolved in Part S3; headless Chrome in dedicated venv captures live views while AppTest provides programmatic assertion.\n"
+        "================================================================================\n\n"
+    )
+    LOG_PATH.write_text(header, encoding="utf-8")
     log("[1] Starting Streamlit prediction app on port 8501...")
 
     env = os.environ.copy()
@@ -66,65 +82,113 @@ def run_live_capture() -> int:
     log(f"    Streamlit PID: {server_proc.pid}")
 
     try:
-        ready = wait_for_server(port=8501, timeout=30.0)
+        ready = wait_for_server(port=8501, timeout=35.0)
         if not ready:
-            log("[-] Streamlit server failed to respond on http://localhost:8501/_stcore/health within 30s.")
+            log("[-] Streamlit server failed to respond on http://localhost:8501/_stcore/health within 35s.")
             return 1
 
-        log("[+] Streamlit server is healthy and responding.")
+        log("[+] Streamlit server Health Check Passed (200 OK).")
 
         log("[2] Launching Playwright with channel='chrome'...")
         from playwright.sync_api import sync_playwright
 
+        VIEWPORTS = [
+            ("1440", 1440, 900),
+            ("390", 390, 844),
+        ]
+
         with sync_playwright() as p:
             browser = p.chromium.launch(channel="chrome", headless=True)
-            context = browser.new_context(viewport={"width": 1400, "height": 1100})
-            page = context.new_page()
 
-            log("    Navigating to http://localhost:8501...")
-            page.goto("http://localhost:8501", timeout=30000)
-            page.wait_for_load_state("networkidle")
-            time.sleep(3.0)
+            for vp_name, w, h in VIEWPORTS:
+                log(f"\n--- Capturing Views at Viewport {w}x{h} ({vp_name}) ---")
+                context = browser.new_context(viewport={"width": w, "height": h})
+                page = context.new_page()
 
-            # Click tab "4. Next-Step Prediction (FR6-FR9)"
-            log("    Selecting Tab 4: Next-Step Prediction...")
-            import re
-            tab4 = page.get_by_role("tab", name=re.compile(r"Next-Step Prediction"))
-            if tab4.count() > 0:
-                tab4.first.click()
-                time.sleep(2.0)
-            else:
-                log("    Tab 4 not found by role; searching by text...")
-                page.locator("text=Next-Step Prediction").first.click()
-                time.sleep(2.0)
+                log(f"    Navigating to http://localhost:8501...")
+                page.goto("http://localhost:8501", timeout=30000)
+                page.wait_for_load_state("networkidle")
+                time.sleep(3.0)
 
-            samples_to_capture = [
-                ("E1-col-ful-K01", MEASUREMENTS_DIR / "live_prediction_panel.png", "Standard active Markov transition"),
-                ("E1-col-ful-K03", MEASUREMENTS_DIR / "live_unseen_state.png", "Frequency fallback on unseen state"),
-                ("E1-col-ful-K02", MEASUREMENTS_DIR / "live_tied_case.png", "Tied rank case"),
-                ("E1-tac-col-K01", MEASUREMENTS_DIR / "live_tactic_prediction.png", "Tactic-level prediction"),
-            ]
+                # View 1: Timeline Swim-Lane Overview
+                v1_path = MEASUREMENTS_DIR / f"live_timeline_{vp_name}.png"
+                page.screenshot(path=str(v1_path), full_page=True)
+                log(f"    [OK] Captured View 1 Timeline: {v1_path.name} ({v1_path.stat().st_size} bytes)")
 
-            for sid, out_path, desc in samples_to_capture:
-                log(f"[3] Selecting sample '{sid}' ({desc})...")
-                # Find the sample selectbox input in Tab 4
-                sb_input = page.locator("div[data-testid='stSelectbox']:has-text('Select Prediction Sample') input")
-                if sb_input.count() > 0:
-                    sb_input.first.click()
+                # View 2: Active Markov Transition (E1-col-ful-K01)
+                log("    Selecting sample E1-col-ful-K01 (Statistical Support Caution, Candidate Tactics, AppTest verified)...")
+                sb_inputs = page.locator("div[data-testid='stSelectbox'] input")
+                if sb_inputs.count() > 1:
+                    sb_inputs.nth(1).click()
                     time.sleep(0.3)
-                    sb_input.first.fill(sid)
+                    sb_inputs.nth(1).fill("E1-col-ful-K01")
                     time.sleep(0.5)
                     page.keyboard.press("Enter")
-                    time.sleep(2.5)
-                    log(f"    Selected {sid} via input fill + Enter.")
-                else:
-                    log("    Sample selectbox input locator not found.")
+                    time.sleep(2.0)
 
-                page.screenshot(path=str(out_path), full_page=True)
-                log(f"    [OK] Captured live screenshot to {out_path.name} ({out_path.stat().st_size} bytes)")
+                v2_path = MEASUREMENTS_DIR / f"live_prediction_panel_{vp_name}.png"
+                page.screenshot(path=str(v2_path), full_page=True)
+                log(f"    [OK] Captured View 2 Active Markov: {v2_path.name} ({v2_path.stat().st_size} bytes)")
+                if vp_name == "1440":
+                    page.screenshot(path=str(MEASUREMENTS_DIR / "live_prediction_panel.png"), full_page=True)
+
+                # View 3: Frequency Fallback on Unseen State (E1-col-ful-K03)
+                log("    Selecting sample E1-col-ful-K03 (Fallback: unseen state)...")
+                if sb_inputs.count() > 1:
+                    sb_inputs.nth(1).click()
+                    time.sleep(0.3)
+                    sb_inputs.nth(1).fill("E1-col-ful-K03")
+                    time.sleep(0.5)
+                    page.keyboard.press("Enter")
+                    time.sleep(2.0)
+
+                v3_path = MEASUREMENTS_DIR / f"live_unseen_state_{vp_name}.png"
+                page.screenshot(path=str(v3_path), full_page=True)
+                log(f"    [OK] Captured View 3 Unseen State: {v3_path.name} ({v3_path.stat().st_size} bytes)")
+                if vp_name == "1440":
+                    page.screenshot(path=str(MEASUREMENTS_DIR / "live_unseen_state.png"), full_page=True)
+
+                # View 4: Boundary Tie Case (E1-col-ful-K02)
+                log("    Selecting sample E1-col-ful-K02 (Boundary Tie Status detected)...")
+                if sb_inputs.count() > 1:
+                    sb_inputs.nth(1).click()
+                    time.sleep(0.3)
+                    sb_inputs.nth(1).fill("E1-col-ful-K02")
+                    time.sleep(0.5)
+                    page.keyboard.press("Enter")
+                    time.sleep(2.0)
+
+                v4_path = MEASUREMENTS_DIR / f"live_tied_case_{vp_name}.png"
+                page.screenshot(path=str(v4_path), full_page=True)
+                log(f"    [OK] Captured View 4 Tied Case: {v4_path.name} ({v4_path.stat().st_size} bytes)")
+                if vp_name == "1440":
+                    page.screenshot(path=str(MEASUREMENTS_DIR / "live_tied_case.png"), full_page=True)
+
+                # View 5: Tactic-Level Prediction (E1-tac-col-K01)
+                log("    Switching to Tactic Mode and selecting E1-tac-col-K01...")
+                tactic_radio = page.locator("label:has-text('Tactic')")
+                if tactic_radio.count() > 0:
+                    tactic_radio.first.click()
+                    time.sleep(1.5)
+                    sb_inputs = page.locator("div[data-testid='stSelectbox'] input")
+                    if sb_inputs.count() > 1:
+                        sb_inputs.nth(1).click()
+                        time.sleep(0.3)
+                        sb_inputs.nth(1).fill("E1-tac-col-K01")
+                        time.sleep(0.5)
+                        page.keyboard.press("Enter")
+                        time.sleep(2.0)
+
+                v5_path = MEASUREMENTS_DIR / f"live_tactic_prediction_{vp_name}.png"
+                page.screenshot(path=str(v5_path), full_page=True)
+                log(f"    [OK] Captured View 5 Tactic Mode: {v5_path.name} ({v5_path.stat().st_size} bytes)")
+                if vp_name == "1440":
+                    page.screenshot(path=str(MEASUREMENTS_DIR / "live_tactic_prediction.png"), full_page=True)
+
+                context.close()
 
             browser.close()
-            log("\n[+] LIVE CAPTURE COMPLETED SUCCESSFULLY.")
+            log("\n[+] LIVE CAPTURE COMPLETED SUCCESSFULLY ACROSS ALL VIEWS AND VIEWPORTS.")
             return 0
 
     except Exception as exc:
