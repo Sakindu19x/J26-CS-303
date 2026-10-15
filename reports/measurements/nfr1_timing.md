@@ -11,11 +11,11 @@
 
 | Criterion | Target Threshold | Measured Value | Result |
 |:---|:---:|:---:|:---:|
-| **Warm End-to-End Latency (Median)** | $\le$ 2.00 s | **0.0015 s** | **PASS** |
-| **Warm End-to-End Latency (p95)** | $\le$ 5.00 s | **0.0035 s** | **PASS** |
-| **Process-Level Cold Start (Parent-Timed)** | $\le$ 10.00 s | **0.3176 s** | **PASS** |
-| **In-Process First-Record Latency** | Informational (None) | **0.2141 s** | **INFORMATIONAL** |
-| **Streamlit Server Ready Time (Port 8765)** | Informational (None) | **2.7908 s** | **INFORMATIONAL** |
+| **Warm End-to-End Latency (Median)** | $\le$ 2.00 s | **0.0014 s** | **PASS** |
+| **Warm End-to-End Latency (p95)** | $\le$ 5.00 s | **0.0026 s** | **PASS** |
+| **Process-Level Cold Start (Parent-Timed)** | $\le$ 10.00 s | **0.2013 s** | **PASS** |
+| **In-Process First-Record Latency** | Informational (None) | **0.1383 s** | **INFORMATIONAL** |
+| **Streamlit Server Ready Time (Port 8765)** | Informational (None) | **1.8590 s** | **INFORMATIONAL** |
 | **Overall NFR1 Compliance** | All Gated Criteria Satisfied | — | **PASS** |
 
 ---
@@ -38,13 +38,13 @@ End-to-end pipeline execution includes C3 adapter ingestion, timeline reconstruc
 
 | Episode | Raw Events | Median Latency | p95 Latency | Mean Latency | [Min, Max] Range |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| `E1` | 38 | 0.0013 s | 0.0022 s | 0.0014 s | [0.0013, 0.0023] s |
-| `E2` | 29 | 0.0010 s | 0.0019 s | 0.0012 s | [0.0010, 0.0027] s |
-| `E3` | 77 | 0.0029 s | 0.0049 s | 0.0031 s | [0.0025, 0.0051] s |
-| `E4` | 46 | 0.0015 s | 0.0029 s | 0.0017 s | [0.0015, 0.0035] s |
-| `E5` | 7 | 0.0002 s | 0.0005 s | 0.0003 s | [0.0002, 0.0012] s |
-| `E6` | 51 | 0.0019 s | 0.0043 s | 0.0025 s | [0.0016, 0.0060] s |
-| `E7` | 26 | 0.0009 s | 0.0027 s | 0.0012 s | [0.0008, 0.0036] s |
+| `E1` | 38 | 0.0014 s | 0.0016 s | 0.0014 s | [0.0013, 0.0017] s |
+| `E2` | 29 | 0.0010 s | 0.0017 s | 0.0011 s | [0.0010, 0.0018] s |
+| `E3` | 77 | 0.0026 s | 0.0029 s | 0.0027 s | [0.0025, 0.0031] s |
+| `E4` | 46 | 0.0016 s | 0.0020 s | 0.0016 s | [0.0015, 0.0022] s |
+| `E5` | 7 | 0.0003 s | 0.0004 s | 0.0003 s | [0.0002, 0.0005] s |
+| `E6` | 51 | 0.0017 s | 0.0021 s | 0.0018 s | [0.0016, 0.0024] s |
+| `E7` | 26 | 0.0009 s | 0.0010 s | 0.0009 s | [0.0009, 0.0011] s |
 
 ---
 
@@ -54,9 +54,9 @@ Synthetic volume stress testing derived from the longest observed episode (`E3`,
 
 | Scaling Factor | Ingested Events | Valid Timeline Events | Elapsed Time | Processing Throughput |
 |:---:|:---:|:---:|:---:|:---:|
-| 1x | 77 | 77 | 0.0049 s | 15617.7 events/s |
-| 10x | 770 | 770 | 0.0488 s | 15778.1 events/s |
-| 100x | 7700 | 7700 | 0.3870 s | 19895.4 events/s |
+| 1x | 77 | 77 | 0.0082 s | 9349.4 events/s |
+| 10x | 770 | 770 | 0.0333 s | 23096.3 events/s |
+| 100x | 7700 | 7700 | 0.3316 s | 23220.9 events/s |
 
 ---
 

@@ -231,9 +231,9 @@
     "name": "nfr1_timing_performance",
     "template": "End-to-end pipeline execution satisfies declared NFR1 timing criteria: warm median latency is {warm_med:.4f} s (threshold <= 2.00 s), p95 latency is {warm_p95:.4f} s (threshold <= 5.00 s), and parent-timed process cold start is {cold_start:.4f} s (threshold <= 10.00 s).",
     "placeholders": {
-      "warm_med": 0.0015,
-      "warm_p95": 0.0035,
-      "cold_start": 0.3176
+      "warm_med": 0.0014,
+      "warm_p95": 0.0026,
+      "cold_start": 0.2013
     },
     "sources": [
       {

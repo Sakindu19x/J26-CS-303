@@ -61,7 +61,10 @@ def load_limitations() -> list[dict[str, Any]]:
     if LIMITATIONS_PATH.is_file():
         with open(LIMITATIONS_PATH, "r", encoding="utf-8") as f:
             d = json.load(f)
-            return d.get("limitations", [])
+            if isinstance(d, list):
+                return d
+            if isinstance(d, dict):
+                return d.get("limitations", [])
     return []
 
 
@@ -135,7 +138,7 @@ def render_dashboard() -> None:
         selected_rec = None
 
     ep_meta = ep_summaries.get(selected_ep, {})
-    st.sidebar.markdown("---")
+    st.sidebar.markdown(f"**Events:** {len(ep_events)}")
     st.sidebar.caption(f"Scenario: {ep_meta.get('scenario_id', 'N/A')}")
     st.sidebar.caption(f"Source: {ep_meta.get('source_archive', 'N/A')}")
     st.sidebar.info("🔒 Strict Isolation: Episodes represent independent CAM-LDS replay simulations.")
@@ -225,8 +228,14 @@ def render_dashboard() -> None:
         active_ev_id = selected_rec["input"].get("event_id") if selected_rec else None
         timeline_chart = create_kill_chain_swimlane_chart(ep_events, active_event_id=active_ev_id)
         st.altair_chart(timeline_chart, use_container_width=True)
+        st.dataframe(pd.DataFrame(ep_events))
 
         st.markdown("---")
+
+        all_ep_sample_ids = [r["input"]["sample_id"] for r in ep_records] if ep_records else []
+        selected_demo_sample = st.selectbox("Select Prediction Sample / Position", all_ep_sample_ids, index=0) if all_ep_sample_ids else None
+        if selected_demo_sample and selected_demo_sample in records_by_sample:
+            selected_rec = records_by_sample[selected_demo_sample]
 
         # 2. Next-Step Advisor Card
         st.subheader("Next-Step Attack Advisor")
@@ -423,6 +432,10 @@ def render_dashboard() -> None:
                 """,
                 unsafe_allow_html=True,
             )
+
+            st.markdown("---")
+            st.markdown("### Forensic Evidence & Provenance Verification")
+            render_prediction_panel_streamlit(selected_rec)
 
     # =======================================================================
     # Tab 2: Data Lineage

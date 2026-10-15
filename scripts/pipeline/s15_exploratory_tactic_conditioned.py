@@ -45,11 +45,18 @@ from src.c4.tactic_evaluation import (
     to_shortnames,
     wilson_interval,
 )
-from scripts.run_tie_sensitivity_7ep import (
-    load_fold_model_from_disk,
-    evaluate_sample_ties,
-    exact_mcnemar,
-)
+try:
+    from scripts.pipeline.s14_tie_sensitivity_7ep import (
+        load_fold_model_from_disk,
+        evaluate_sample_ties,
+        exact_mcnemar,
+    )
+except ImportError:
+    from scripts.run_tie_sensitivity_7ep import (
+        load_fold_model_from_disk,
+        evaluate_sample_ties,
+        exact_mcnemar,
+    )
 
 DATA_7EP = REPO_ROOT / "data" / "processed_7ep"
 REPORTS_7EP = REPO_ROOT / "reports" / "7ep"

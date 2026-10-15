@@ -44,27 +44,27 @@
   },
   "summary_warm": {
     "total_repetitions": 210,
-    "mean_seconds": 0.0016,
-    "median_seconds": 0.0015,
-    "p95_seconds": 0.0035,
+    "mean_seconds": 0.0014,
+    "median_seconds": 0.0014,
+    "p95_seconds": 0.0026,
     "pass_median": true,
     "pass_p95": true
   },
   "cold_start": {
-    "cold_start_seconds": 0.3176,
+    "cold_start_seconds": 0.2013,
     "pass_cold_start": true
   },
   "process_cold_start": {
-    "parent_timed_seconds": 0.3176,
+    "parent_timed_seconds": 0.2013,
     "threshold_seconds": 10.0,
     "pass": true
   },
   "in_process_cold_start": {
-    "first_record_latency_seconds": 0.2141,
+    "first_record_latency_seconds": 0.1383,
     "informational": true
   },
   "streamlit_server_ready": {
-    "ready_time_seconds": 2.7908,
+    "ready_time_seconds": 1.859,
     "endpoint": "http://localhost:8765/_stcore/health",
     "port": 8765,
     "status_code": 200,
@@ -75,71 +75,71 @@
       "events_count": 38,
       "repetitions": 30,
       "mean_seconds": 0.0014,
-      "median_seconds": 0.0013,
-      "p95_seconds": 0.0022,
+      "median_seconds": 0.0014,
+      "p95_seconds": 0.0016,
       "min_seconds": 0.0013,
-      "max_seconds": 0.0023,
-      "std_seconds": 0.0003
+      "max_seconds": 0.0017,
+      "std_seconds": 0.0001
     },
     "E2": {
       "events_count": 29,
       "repetitions": 30,
-      "mean_seconds": 0.0012,
+      "mean_seconds": 0.0011,
       "median_seconds": 0.001,
-      "p95_seconds": 0.0019,
+      "p95_seconds": 0.0017,
       "min_seconds": 0.001,
-      "max_seconds": 0.0027,
-      "std_seconds": 0.0004
+      "max_seconds": 0.0018,
+      "std_seconds": 0.0002
     },
     "E3": {
       "events_count": 77,
       "repetitions": 30,
-      "mean_seconds": 0.0031,
-      "median_seconds": 0.0029,
-      "p95_seconds": 0.0049,
+      "mean_seconds": 0.0027,
+      "median_seconds": 0.0026,
+      "p95_seconds": 0.0029,
       "min_seconds": 0.0025,
-      "max_seconds": 0.0051,
-      "std_seconds": 0.0007
+      "max_seconds": 0.0031,
+      "std_seconds": 0.0002
     },
     "E4": {
       "events_count": 46,
       "repetitions": 30,
-      "mean_seconds": 0.0017,
-      "median_seconds": 0.0015,
-      "p95_seconds": 0.0029,
+      "mean_seconds": 0.0016,
+      "median_seconds": 0.0016,
+      "p95_seconds": 0.002,
       "min_seconds": 0.0015,
-      "max_seconds": 0.0035,
-      "std_seconds": 0.0005
+      "max_seconds": 0.0022,
+      "std_seconds": 0.0002
     },
     "E5": {
       "events_count": 7,
       "repetitions": 30,
       "mean_seconds": 0.0003,
-      "median_seconds": 0.0002,
-      "p95_seconds": 0.0005,
+      "median_seconds": 0.0003,
+      "p95_seconds": 0.0004,
       "min_seconds": 0.0002,
-      "max_seconds": 0.0012,
-      "std_seconds": 0.0002
+      "max_seconds": 0.0005,
+      "std_seconds": 0.0
     },
     "E6": {
       "events_count": 51,
       "repetitions": 30,
-      "mean_seconds": 0.0025,
-      "median_seconds": 0.0019,
-      "p95_seconds": 0.0043,
+      "mean_seconds": 0.0018,
+      "median_seconds": 0.0017,
+      "p95_seconds": 0.0021,
       "min_seconds": 0.0016,
-      "max_seconds": 0.006,
-      "std_seconds": 0.0011
+      "max_seconds": 0.0024,
+      "std_seconds": 0.0002
     },
     "E7": {
       "events_count": 26,
       "repetitions": 30,
-      "mean_seconds": 0.0012,
+      "mean_seconds": 0.0009,
       "median_seconds": 0.0009,
-      "p95_seconds": 0.0027,
-      "min_seconds": 0.0008,
-      "max_seconds": 0.0036,
-      "std_seconds": 0.0007
+      "p95_seconds": 0.001,
+      "min_seconds": 0.0009,
+      "max_seconds": 0.0011,
+      "std_seconds": 0.0001
     }
   },
   "scaling_benchmark": {
@@ -149,22 +149,22 @@
         "multiplier": 1,
         "event_count": 77,
         "timeline_length": 77,
-        "elapsed_seconds": 0.0049,
-        "throughput_events_per_sec": 15617.7
+        "elapsed_seconds": 0.0082,
+        "throughput_events_per_sec": 9349.4
       },
       "10x": {
         "multiplier": 10,
         "event_count": 770,
         "timeline_length": 770,
-        "elapsed_seconds": 0.0488,
-        "throughput_events_per_sec": 15778.1
+        "elapsed_seconds": 0.0333,
+        "throughput_events_per_sec": 23096.3
       },
       "100x": {
         "multiplier": 100,
         "event_count": 7700,
         "timeline_length": 7700,
-        "elapsed_seconds": 0.387,
-        "throughput_events_per_sec": 19895.4
+        "elapsed_seconds": 0.3316,
+        "throughput_events_per_sec": 23220.9
       }
     }
   },

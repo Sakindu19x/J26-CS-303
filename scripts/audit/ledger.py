@@ -107,6 +107,11 @@ def main() -> int:
         ("R7", {"hashes": 0, "full_pytest": "209", "new_tests": 0, "reconstructed": "no"}),
         # S-series (Prompt 16)
         ("S0", {"hashes": 0, "full_pytest": "209", "new_tests": 0, "reconstructed": "no"}),
+        ("S1", {"hashes": 0, "full_pytest": "210", "new_tests": 1, "reconstructed": "no"}),
+        ("S2", {"hashes": 0, "full_pytest": "210", "new_tests": 0, "reconstructed": "no"}),
+        ("S3", {"hashes": 0, "full_pytest": "215", "new_tests": 5, "reconstructed": "no"}),
+        ("S4", {"hashes": 0, "full_pytest": "217", "new_tests": 2, "reconstructed": "no"}),
+        ("S5", {"hashes": 0, "full_pytest": "217", "new_tests": 0, "reconstructed": "no"}),
     ]
 
     headers = [

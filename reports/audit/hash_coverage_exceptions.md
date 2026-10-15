@@ -11,14 +11,14 @@
 
 | Category | Count | Percentage | Status |
 |:---|:---:|:---:|:---|
-| **Baseline Covered Artifacts (Exact Path)** | 61 | 26.9% | Verified by `scripts/verify_all_hashes.py` |
-| **Declared Transient Measurements** | 12 | 5.3% | Runtime Timing & Screenshots (`reports/measurements/`) |
-| **Documented Exceptions (Uncovered)** | 154 | 67.8% | Accounted for with Explicit Rationale |
-| **Total Tracked Target Files** | 227 | 100.0% | Complete Coverage Accounted |
+| **Baseline Covered Artifacts (Exact Path)** | 61 | 25.0% | Verified by `scripts/verify_all_hashes.py` |
+| **Declared Transient Measurements** | 22 | 9.0% | Runtime Timing & Screenshots (`reports/measurements/`) |
+| **Documented Exceptions (Uncovered)** | 161 | 66.0% | Accounted for with Explicit Rationale |
+| **Total Tracked Target Files** | 244 | 100.0% | Complete Coverage Accounted |
 
 ---
 
-## 2. Exceptions Catalog by Functional Group (154 Files)
+## 2. Exceptions Catalog by Functional Group (161 Files)
 
 ### Archived Historical Analyses (11 files)
 
@@ -47,7 +47,7 @@
 | `reports/overnight_summary.md` | Overnight execution master summary verified deterministically by scripts/verify_overnight_summary.py |
 | `reports/test_coverage_map.md` | Test mapping documentation linking requirements to unit and integration test nodes |
 
-### Audit & Verification Reports (44 files)
+### Audit & Verification Reports (47 files)
 
 | Tracked Path | Rationale |
 |:---|:---|
@@ -91,6 +91,9 @@
 | `reports/audit/q15_baseline_changes.md` | Verification logs, decision records, or change register |
 | `reports/audit/q16_S0_output.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q16_S1_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/q16_S2_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/q16_S3_output.txt` | Verification logs, decision records, or change register |
+| `reports/audit/q16_S4_output.txt` | Verification logs, decision records, or change register |
 | `reports/audit/q16_baseline_changes.md` | Verification logs, decision records, or change register |
 | `reports/audit/q16_s1_recheck.md` | Verification logs, decision records, or change register |
 | `reports/audit/rebuild_scope.json` | Verification logs, decision records, or change register |
@@ -160,16 +163,20 @@
 | `data/processed/technique_tactic_reference_v19_2.json` | Legacy 4-episode dataset representation superseded by 7-episode campaign |
 | `data/processed/wazuh_alerts_normalized.csv` | Legacy 4-episode dataset representation superseded by 7-episode campaign |
 
-### Interface Contracts & Documentation (9 files)
+### Interface Contracts & Documentation (13 files)
 
 | Tracked Path | Rationale |
 |:---|:---|
+| `docs/PROJECT_MAP.md` | Specification, interface contract, or requirements specification document |
 | `docs/analyst_feedback_form.md` | Specification, interface contract, or requirements specification document |
+| `docs/architecture.md` | Specification, interface contract, or requirements specification document |
 | `docs/c3_c4_interface_contract.md` | Specification, interface contract, or requirements specification document |
 | `docs/c3_open_questions.md` | Specification, interface contract, or requirements specification document |
+| `docs/data_lineage.md` | Specification, interface contract, or requirements specification document |
 | `docs/data_provenance.md` | Specification, interface contract, or requirements specification document |
 | `docs/demo_script.md` | Specification, interface contract, or requirements specification document |
 | `docs/models.md` | Specification, interface contract, or requirements specification document |
+| `docs/process/cleanup_map.md` | Specification, interface contract, or requirements specification document |
 | `docs/process/prompts/prompt15.md` | Specification, interface contract, or requirements specification document |
 | `docs/process/prompts/prompt16.md` | Specification, interface contract, or requirements specification document |
 | `docs/proposal_requirements.json` | Specification, interface contract, or requirements specification document |

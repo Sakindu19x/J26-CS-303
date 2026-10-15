@@ -39,6 +39,11 @@
 | **R6** | `8f0870fcce1b83045818544dd90eea426f158897` | 2026-10-15T13:12:43Z | 0 | not recorded | 0 | **PASS** | reconstructed |
 | **R7** | `40cc9ed190f80d372fabee84a241dcb01ccb528a` | 2026-10-15T13:33:41Z | 0 | 209 | 0 | **PASS** | no |
 | **S0** | `9322f5f9a3daf0e20af2eafcbf09d141a7872b55` | 2026-10-15T16:43:06Z | 0 | 209 | 0 | **PASS** | no |
+| **S1** | `b4e963501d9668030ae86648ad3aacbbd465d13e` | 2026-10-15T17:38:58Z | 0 | 210 | +1 | **PASS** | no |
+| **S2** | `621d24c9a1e0dbd608e1b6c37521b5f14750df21` | 2026-10-15T18:30:17Z | 0 | 210 | 0 | **PASS** | no |
+| **S3** | `f7805177a1fd484302a6ba7405e89d694cf91ec9` | 2026-10-15T18:44:51Z | 0 | 215 | +5 | **PASS** | no |
+| **S4** | `22b7eb65ce7b6d7c4b1c5cd320141fe5755f45eb` | 2026-10-15T18:47:44Z | 0 | 217 | +2 | **PASS** | no |
+| **S5** | `0c73d0fcbdcf546be9fb90f7e0037d85e0481254` | 2026-10-15T19:16:58Z | 0 | 217 | 0 | **PASS** | no |
 
 ## Notes and Historical Disclosures
 
