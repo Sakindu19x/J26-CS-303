@@ -36,7 +36,7 @@ from c4.dashboard.theme import get_custom_css
 
 EVAL_RESULTS_PATH = REPO_ROOT / "reports" / "7ep" / "evaluation_7ep_results.json"
 HOLM_RESULTS_PATH = REPO_ROOT / "reports" / "7ep" / "holm_claim_rule_results.json"
-LIMITATIONS_PATH = REPO_ROOT / "reports" / "7ep" / "known_limitations.json"
+LIMITATIONS_PATH = REPO_ROOT / "reports" / "audit" / "known_limitations.json"
 
 st.set_page_config(
     page_title="C4 Attack Timeline and Next-Step Advisor",

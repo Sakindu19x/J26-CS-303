@@ -5,6 +5,7 @@ Derived directly from repository filesystem structure.
 
 ## Top-Level Directories and Root Files
 
+- [`.streamlit/`](file:///C:/Users/Lenovo/OneDrive - EGUARDIAN/Documents/Dataset/c4/.streamlit): Streamlit configuration and UI theme settings
 - [`artifacts/`](file:///C:/Users/Lenovo/OneDrive - EGUARDIAN/Documents/Dataset/c4/artifacts): Workspace directory
 - [`data/`](file:///C:/Users/Lenovo/OneDrive - EGUARDIAN/Documents/Dataset/c4/data): Dataset archives, raw logs, and processed pipeline artifacts
 - [`docs/`](file:///C:/Users/Lenovo/OneDrive - EGUARDIAN/Documents/Dataset/c4/docs): System architecture, specifications, requirements, and process logs

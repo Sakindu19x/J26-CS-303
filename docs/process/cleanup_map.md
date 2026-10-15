@@ -47,7 +47,7 @@ Per Rule G6, scripts embedded in protected baselines are preserved in-place.
 | `scripts/build_requirements_trace.py` | `scripts/build_requirements_trace.py` | **KEPT** | KEPT - name embedded in output (reports/7ep/requirements_trace.md) |
 | `scripts/build_viva_pack.py` | `scripts/pipeline/s18_build_viva_pack.py` | **MOVED** | Standardized pipeline stage script |
 | `scripts/capture_dashboard_screenshots.py` | `scripts/dashboard/capture_dashboard_screenshots.py` | **MOVED** | Reorganized into dashboard runner directory |
-| `scripts/capture_live_dashboard.py` | `scripts/dashboard/capture_live_dashboard.py` | **MOVED** | Reorganized into dashboard runner directory |
+| `scripts/capture_live_dashboard.py` | `-` | **REMOVED** | Obsolete one-off prompt runner removed (recoverable from pre-cleanup-v3) |
 | `scripts/check_full_b_reproducibility.py` | `-` | **REMOVED** | Obsolete one-off prompt runner removed (recoverable from pre-cleanup-v3) |
 | `scripts/check_planted_realscale_7ep_reproducibility.py` | `-` | **REMOVED** | Obsolete one-off prompt runner removed (recoverable from pre-cleanup-v3) |
 | `scripts/check_regression_gate.py` | `scripts/check_regression_gate.py` | **KEPT** | KEPT - used by tests/test_evaluation_7ep.py |
