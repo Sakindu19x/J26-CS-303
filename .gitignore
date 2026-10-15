@@ -19,3 +19,7 @@ data/raw/*.tgz
 
 # Conversation transcripts
 docs/c4_full_conversation_history.md
+
+# Scratch directory (Prompt 15 R5)
+scratch/
+

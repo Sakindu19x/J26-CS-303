@@ -88,5 +88,59 @@
     "resolution_commit": null,
     "description": "First-order Markov chains only condition on the immediate previous transition state, ignoring multi-step attack history.",
     "resolution": "Exploratory analysis showed severe state space sparsity even at order 1; higher-order models require substantially larger cross-enterprise corpora."
+  },
+  {
+    "id": "LIM-11",
+    "title": "Clean Clone Shares Parent Virtual Environment",
+    "category": "Environment Isolation",
+    "status": "OPEN",
+    "resolution_commit": null,
+    "description": "Clean-clone reproduction scripts run in an isolated clone directory but execute using the parent workspace's Python virtual environment (`..\\.venv\\Scripts\\python.exe`), rather than provisioning a fresh venv from scratch each time.",
+    "resolution": "Environment parity is verified by comparing `pip freeze` against `requirements.lock.txt`."
+  },
+  {
+    "id": "LIM-12",
+    "title": "Dashboard Visual Artifacts Static Renders vs Live Captures",
+    "category": "Visualization Telemetry",
+    "status": "CLOSED",
+    "resolution_commit": "e33e008",
+    "description": "Headless Chrome CLI captures only the initial WebSocket SPA skeleton. Dashboard captures rely on high-fidelity static renders unless live interactive Playwright automation succeeds.",
+    "resolution": "Prompt 15 R4(d) successfully executed interactive Playwright live capture in a dedicated venv (C:\\c4_capture_venv) with channel='chrome', producing reports/measurements/live_*.png alongside static renders."
+  },
+  {
+    "id": "LIM-13",
+    "title": "C3 Interface Contract Unagreed by Component 3",
+    "category": "Integration Governance",
+    "status": "OPEN",
+    "resolution_commit": null,
+    "description": "The C3-C4 interface format (src/c4/c3_adapter.py, docs/c3_c4_interface_contract.md) was proposed and implemented by Component 4, but has not been formally agreed or ratified by the Component 3 team.",
+    "resolution": "Status recorded as PARTIAL in requirements trace; adapter tested and validated against C4 internal fixtures only."
+  },
+  {
+    "id": "LIM-14",
+    "title": "High Proportion of Low-Support Predictions (92/171 Cautioned)",
+    "category": "Statistical Support",
+    "status": "CLOSED",
+    "resolution_commit": "c6efee4",
+    "description": "92 out of 171 LOEO prediction records (53.80%) rest on low historical support (<2 supporting episodes or <3 state transitions), reflecting benchmark state space sparsity.",
+    "resolution": "Schema v1.1.0 enforces mandatory support caution flags and narrative warnings on all 92 low-support records, preventing over-confident claims."
+  },
+  {
+    "id": "LIM-15",
+    "title": "Streamlit Readiness Metric Measures Health Endpoint, Not First Render",
+    "category": "Performance Measurement",
+    "status": "OPEN",
+    "resolution_commit": null,
+    "description": "Reported Streamlit startup/ready times measure HTTP 200 response latency on the `_stcore/health` endpoint rather than client-side first DOM paint or WebSocket handshake completion.",
+    "resolution": "Clarified in measurement documentation and known limitations; AppTest used for full headless DOM and component validation."
+  },
+  {
+    "id": "LIM-16",
+    "title": "Prompt 14 Unattended Agent Log Access Procedural Violation",
+    "category": "Agentic Execution Governance",
+    "status": "CLOSED",
+    "resolution_commit": "6e58efc",
+    "description": "During Prompt 14 unattended execution, the coding assistant accessed conversation transcript and task log files directly, violating procedural constraints on state contamination.",
+    "resolution": "Strictly forbidden in Prompt 15 Rules (NEVER open transcript files, task logs, or brain\\ logs); verified zero access throughout Prompt 15 repair run."
   }
 ]

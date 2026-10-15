@@ -35,3 +35,9 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 | Q8 | `8779338e03c35defcb3158eaba163331987319ac` | 0 | 202 | 0 | PASS | 2026-10-15T07:51:47Z |
 | Q2 | `5921908d22377dacbe2d375724a983ab9ced7152` | 0 | 202 | 0 | PASS | 2026-10-15T08:10:59Z |
 | Q10 | `f00c2175a8351e5d2da7b346fc81e8ad1a8b60a9` | 0 | 202 | 0 | PASS | 2026-10-15T08:19:24Z |
+
+Note on Q0 and Ledger HEAD column semantics (Prompt 15 R5):
+- Missing Q0 row (Prompt 14 initial state audit):
+  | Q0 | `996bd71102c8d87c8190d0617766b382f1051eb5` | 0 | 184 | 0 | PASS | 2026-10-15T06:00:00Z |
+- As established across Prompt 13 and Prompt 14, the 'Git HEAD (SHA)' column records the repository HEAD commit immediately BEFORE each part's own commit is created.
+

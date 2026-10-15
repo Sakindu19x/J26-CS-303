@@ -3,7 +3,7 @@
 Generated automatically by `scripts/build_known_limitations.py` from `reports/audit/known_limitations.json`.
 Documents all identified project limitations, tracking resolution status across development phases.
 
-**Summary**: 10 total limitations recorded (7 CLOSED, 3 OPEN).
+**Summary**: 16 total limitations recorded (10 CLOSED, 6 OPEN).
 
 ## 1. Limitations Summary Table
 
@@ -19,6 +19,12 @@ Documents all identified project limitations, tracking resolution status across 
 | **LIM-08** | Absence of Live Operational C3 Metadata in CAM-LDS | Interface Contract | *OPEN* | Pending C3 / Live Deploy |
 | **LIM-09** | Real-Time Streaming Ingestion and Dynamic Episode Demarcation | Operational Deployment | *OPEN* | Pending C3 / Live Deploy |
 | **LIM-10** | Higher-Order Context Memory ($k \ge 2$ Markov Dynamics) | Model Expressiveness | *OPEN* | Pending C3 / Live Deploy |
+| **LIM-11** | Clean Clone Shares Parent Virtual Environment | Environment Isolation | *OPEN* | Pending C3 / Live Deploy |
+| **LIM-12** | Dashboard Visual Artifacts Static Renders vs Live Captures | Visualization Telemetry | **CLOSED** | `e33e008` |
+| **LIM-13** | C3 Interface Contract Unagreed by Component 3 | Integration Governance | *OPEN* | Pending C3 / Live Deploy |
+| **LIM-14** | High Proportion of Low-Support Predictions (92/171 Cautioned) | Statistical Support | **CLOSED** | `c6efee4` |
+| **LIM-15** | Streamlit Readiness Metric Measures Health Endpoint, Not First Render | Performance Measurement | *OPEN* | Pending C3 / Live Deploy |
+| **LIM-16** | Prompt 14 Unattended Agent Log Access Procedural Violation | Agentic Execution Governance | **CLOSED** | `6e58efc` |
 
 ## 2. Detailed Register Entries
 
@@ -98,4 +104,49 @@ Documents all identified project limitations, tracking resolution status across 
 - **Status**: `OPEN`
 - **Description**: First-order Markov chains only condition on the immediate previous transition state, ignoring multi-step attack history.
 - **Resolution / Mitigation**: Exploratory analysis showed severe state space sparsity even at order 1; higher-order models require substantially larger cross-enterprise corpora.
+
+### LIM-11: Clean Clone Shares Parent Virtual Environment
+
+- **Category**: Environment Isolation
+- **Status**: `OPEN`
+- **Description**: Clean-clone reproduction scripts run in an isolated clone directory but execute using the parent workspace's Python virtual environment (`..\.venv\Scripts\python.exe`), rather than provisioning a fresh venv from scratch each time.
+- **Resolution / Mitigation**: Environment parity is verified by comparing `pip freeze` against `requirements.lock.txt`.
+
+### LIM-12: Dashboard Visual Artifacts Static Renders vs Live Captures
+
+- **Category**: Visualization Telemetry
+- **Status**: `CLOSED`
+- **Resolution Commit**: `e33e008`
+- **Description**: Headless Chrome CLI captures only the initial WebSocket SPA skeleton. Dashboard captures rely on high-fidelity static renders unless live interactive Playwright automation succeeds.
+- **Resolution / Mitigation**: Prompt 15 R4(d) successfully executed interactive Playwright live capture in a dedicated venv (C:\c4_capture_venv) with channel='chrome', producing reports/measurements/live_*.png alongside static renders.
+
+### LIM-13: C3 Interface Contract Unagreed by Component 3
+
+- **Category**: Integration Governance
+- **Status**: `OPEN`
+- **Description**: The C3-C4 interface format (src/c4/c3_adapter.py, docs/c3_c4_interface_contract.md) was proposed and implemented by Component 4, but has not been formally agreed or ratified by the Component 3 team.
+- **Resolution / Mitigation**: Status recorded as PARTIAL in requirements trace; adapter tested and validated against C4 internal fixtures only.
+
+### LIM-14: High Proportion of Low-Support Predictions (92/171 Cautioned)
+
+- **Category**: Statistical Support
+- **Status**: `CLOSED`
+- **Resolution Commit**: `c6efee4`
+- **Description**: 92 out of 171 LOEO prediction records (53.80%) rest on low historical support (<2 supporting episodes or <3 state transitions), reflecting benchmark state space sparsity.
+- **Resolution / Mitigation**: Schema v1.1.0 enforces mandatory support caution flags and narrative warnings on all 92 low-support records, preventing over-confident claims.
+
+### LIM-15: Streamlit Readiness Metric Measures Health Endpoint, Not First Render
+
+- **Category**: Performance Measurement
+- **Status**: `OPEN`
+- **Description**: Reported Streamlit startup/ready times measure HTTP 200 response latency on the `_stcore/health` endpoint rather than client-side first DOM paint or WebSocket handshake completion.
+- **Resolution / Mitigation**: Clarified in measurement documentation and known limitations; AppTest used for full headless DOM and component validation.
+
+### LIM-16: Prompt 14 Unattended Agent Log Access Procedural Violation
+
+- **Category**: Agentic Execution Governance
+- **Status**: `CLOSED`
+- **Resolution Commit**: `6e58efc`
+- **Description**: During Prompt 14 unattended execution, the coding assistant accessed conversation transcript and task log files directly, violating procedural constraints on state contamination.
+- **Resolution / Mitigation**: Strictly forbidden in Prompt 15 Rules (NEVER open transcript files, task logs, or brain\ logs); verified zero access throughout Prompt 15 repair run.
 
