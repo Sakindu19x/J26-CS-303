@@ -124,6 +124,11 @@ def load_all_metrics() -> dict[str, Any]:
     ceiling_rate = eval_json["primary_slice_technique_collapsed_full"]["headline"]["ceiling"]["ceiling_rate"]
     assert ceiling_hits == 59 and round(ceiling_rate * 100, 2) == 62.11
 
+    # Tactic level ceiling computed from evaluation_7ep_predictions.csv using same definition
+    tactic_ceiling_hits = sum(1 for r in tac_rows if r["ceiling"] == "True")
+    tactic_ceiling_rate = tactic_ceiling_hits / tac_n
+    assert tactic_ceiling_hits == 73 and round(tactic_ceiling_rate * 100, 2) == 96.05
+
     with open(REPO_ROOT / "reports" / "7ep" / "planted_realscale_7ep_report.json", "r", encoding="utf-8") as f:
         planted_json = json.load(f)
     perfect_cap = planted_json["results_by_signal"]["1.0"]["markov_top1_mean"] * 100
@@ -186,6 +191,8 @@ def load_all_metrics() -> dict[str, Any]:
         "exp_mcnemar_top3_p": exp_p3,
         "ceiling_hits": ceiling_hits,
         "ceiling_pct": round(ceiling_rate * 100, 2),
+        "tactic_ceiling_hits": tactic_ceiling_hits,
+        "tactic_ceiling_pct": round(tactic_ceiling_rate * 100, 2),
         "perfect_cap_pct": round(perfect_cap, 2),
         "lc_k6_m1": round(lc_k6_m1, 2),
         "lc_k6_m3": round(lc_k6_m3, 2),
@@ -201,15 +208,40 @@ def load_all_metrics() -> dict[str, Any]:
 def build_claims_data() -> list[dict[str, Any]]:
     m = load_all_metrics()
 
+    # CLAIM-01 is generated from reports/audit/rebuild_scope.json written by R6;
+    # if R6 fails or has not run, claim text must say 'not proven'.
+    rebuild_scope_path = REPO_ROOT / "reports" / "audit" / "rebuild_scope.json"
+    rebuild_verified = False
+    if rebuild_scope_path.is_file():
+        try:
+            with open(rebuild_scope_path, "r", encoding="utf-8") as f:
+                scope_json = json.load(f)
+            if scope_json.get("status") == "PASS" and scope_json.get("rebuilt_count") == 61:
+                rebuild_verified = True
+        except Exception:
+            pass
+
+    if rebuild_verified:
+        c1_template = (
+            "Pipeline reproducibility from raw archives through clean clone rebuild is verified: "
+            "all 61 protected baseline files match bit-identically across two independent full rebuilds in a true clean clone."
+        )
+        c1_evidence = "reports/audit/rebuild_scope.json"
+    else:
+        c1_template = (
+            "Pipeline reproducibility from raw archives through clean clone rebuild is not proven."
+        )
+        c1_evidence = "reports/audit/q14_Q2_output.txt"
+
     claims = [
         {
             "id": "CLAIM-01",
             "name": "pipeline_reproducibility",
-            "template": "Pipeline reproducibility from raw archives through clean clone rebuild is verified: all 61 protected baseline files match bit-identically across two independent full rebuilds in a true clean clone.",
+            "template": c1_template,
             "placeholders": {},
             "sources": [
                 {
-                    "file": "reports/audit/rebuild_scope.md",
+                    "file": "reports/audit/rebuild_scope.json",
                     "description": "Baseline rebuild scope and hash verification register",
                 },
                 {
@@ -219,10 +251,10 @@ def build_claims_data() -> list[dict[str, Any]]:
             ],
             "allowed_use": "Stating that full pipeline reproducibility from raw simulation archives has been independently proven in an isolated clean clone without copying any intermediate or output files.",
             "forbidden_use": "Claiming pipeline non-reproducibility or alleging manual intervention was required for artifact generation.",
-            "evidence_file": "reports/audit/q14_Q2_output.txt",
+            "evidence_file": c1_evidence,
             "script": "scripts/reproduce_all.py",
             "verifier": "scripts/verify_all_hashes.py",
-            "test_node": "tests/test_timeline_and_sequences.py::test_pipeline_hash_stability_double_run",
+            "test_node": "none (verified by scripts/verify_all_hashes.py)",
         },
         {
             "id": "CLAIM-02",
@@ -246,9 +278,9 @@ def build_claims_data() -> list[dict[str, Any]]:
             "allowed_use": "Citing exact McNemar equality and Holm-adjusted p = 1.0000 proving that tactic Markov does not outperform Frequency baseline.",
             "forbidden_use": "Claiming Markov superiority at tactic level or ignoring the pre-registered non-demonstration verdict.",
             "evidence_file": "reports/7ep/holm_claim_rule_results.json",
-            "script": "scripts/run_evaluation_7ep.py",
+            "script": "scripts/run_holm_claim_rule.py",
             "verifier": "scripts/verify_holm_claim_rule.py",
-            "test_node": "tests/test_tactic_evaluation_consistency.py::test_paired_2x2_and_frequency_only_split_match_recomputed",
+            "test_node": "tests/test_inference_7ep.py::test_claim_rule_logic",
         },
         {
             "id": "CLAIM-03",
@@ -272,9 +304,9 @@ def build_claims_data() -> list[dict[str, Any]]:
             "allowed_use": "Citing significant baseline superiority where Frequency baseline exceeds Markov model by 13 paired hits (b=2 vs c=15).",
             "forbidden_use": "Claiming Markov model outperforms baseline at technique level.",
             "evidence_file": "reports/7ep/holm_claim_rule_results.json",
-            "script": "scripts/run_evaluation_7ep.py",
+            "script": "scripts/run_holm_claim_rule.py",
             "verifier": "scripts/verify_holm_claim_rule.py",
-            "test_node": "tests/test_tactic_evaluation_consistency.py::test_results_json_matches_recomputed",
+            "test_node": "tests/test_inference_7ep.py::test_claim_rule_logic",
         },
         {
             "id": "CLAIM-04",
@@ -299,7 +331,7 @@ def build_claims_data() -> list[dict[str, Any]]:
             "evidence_file": "reports/7ep/permutation_7ep_report.json",
             "script": "scripts/run_permutation_test_7ep.py",
             "verifier": "scripts/verify_permutation_7ep.py",
-            "test_node": "tests/test_permutation_test_v2.py::test_observed_values_equal_reports",
+            "test_node": "tests/test_inference_7ep.py::test_permutation_7ep_invariants",
         },
         {
             "id": "CLAIM-05",
@@ -321,7 +353,7 @@ def build_claims_data() -> list[dict[str, Any]]:
             "evidence_file": "reports/7ep/tie_sensitivity_7ep.json",
             "script": "scripts/run_tie_sensitivity_7ep.py",
             "verifier": "scripts/verify_tie_sensitivity_7ep.py",
-            "test_node": "tests/test_tactic_evaluation_consistency.py::test_tie_diagnostic_matches_recomputed",
+            "test_node": "tests/test_inference_7ep.py::test_tie_sensitivity_diagnostic",
         },
         {
             "id": "CLAIM-06",
@@ -345,33 +377,36 @@ def build_claims_data() -> list[dict[str, Any]]:
             "evidence_file": "reports/7ep/exploratory_tactic_conditioned_results.json",
             "script": "scripts/run_exploratory_tactic_conditioned.py",
             "verifier": "scripts/verify_exploratory_tactic_conditioned.py",
-            "test_node": "tests/test_tactic_evaluation_consistency.py::test_results_json_matches_recomputed",
+            "test_node": "tests/test_exploratory_tactic_conditioned.py::test_exploratory_mcnemar_and_wilson",
         },
         {
             "id": "CLAIM-07",
             "name": "ceilings_reachability_and_cap",
-            "template": "Cross-scenario vocabulary isolation restricts technique-level LOEO performance: target reachability ceiling is {ceiling_pct:.2f}% ({ceiling_hits}/{technique_n}) and perfect-order prediction cap is {perfect_cap_pct:.2f}%, both mathematically and empirically capping performance below 75%.",
+            "template": "Cross-scenario vocabulary isolation restricts LOEO performance: technique level: ceiling {ceiling_pct:.2f}% ({ceiling_hits}/{technique_n} targets inside training vocabulary) and perfect-order cap {perfect_cap_pct:.2f}% (A4 planted report) are below 75%; tactic level: ceiling {tactic_ceiling_pct:.2f}% ({tactic_ceiling_hits}/{tactic_n}).",
             "placeholders": {
                 "ceiling_pct": m["ceiling_pct"],
                 "ceiling_hits": m["ceiling_hits"],
                 "technique_n": m["technique_n"],
                 "perfect_cap_pct": m["perfect_cap_pct"],
+                "tactic_ceiling_pct": m["tactic_ceiling_pct"],
+                "tactic_ceiling_hits": m["tactic_ceiling_hits"],
+                "tactic_n": m["tactic_n"],
             },
             "sources": [
                 {"file": "reports/7ep/evaluation_7ep_results.json", "json_pointer": "/primary_slice_technique_collapsed_full/headline/ceiling"},
-                {"file": "reports/7ep/planted_realscale_7ep_report.json", "json_pointer": "/results_by_signal/1.0/markov_top1_mean"},
+                {"file": "reports/7ep/planted_realscale_7ep_report.json", "json_pointer": "/results_by_signal/1.0/markov_top1_mean", "description": "A4 planted structure real-scale simulation report for perfect-order prediction cap"},
             ],
-            "allowed_use": "Explaining the mathematical reachability gap imposed by LOEO cross-validation.",
-            "forbidden_use": "Claiming 75% accuracy is attainable on this benchmark dataset under LOEO.",
+            "allowed_use": "Explaining reachability ceilings across technique and tactic levels under LOEO.",
+            "forbidden_use": "Claiming 75% accuracy is attainable on this benchmark dataset.",
             "evidence_file": "reports/7ep/evaluation_7ep_results.json",
             "script": "scripts/run_evaluation_7ep.py",
             "verifier": "scripts/verify_evaluation_7ep.py",
-            "test_node": "tests/test_stage1_7ep.py::test_sample_counts_and_bounds",
+            "test_node": "tests/test_evaluation_7ep.py::test_byte_identical_rerun",
         },
         {
             "id": "CLAIM-08",
             "name": "learning_curve_k6_episode_mean",
-            "template": "In combinatorial subset cross-validation (441 evaluations across k=1..6), at full k=6 training size the unweighted episode-mean tactic Hit@1 is {lc_k6_m1:.2f}% (Markov) vs {lc_k6_f1:.2f}% (Frequency), and Hit@3 is {lc_k6_m3:.2f}% (Markov) vs {lc_k6_f3:.2f}% (Frequency), with {lc_k6_cov:.2f}% state coverage.",
+            "template": "In combinatorial subset cross-validation (441 evaluations across k=1..6), at full k=6 training size the unweighted episode-mean tactic Hit@1 (descriptive, not a headline) is {lc_k6_m1:.2f}% (Markov) vs {lc_k6_f1:.2f}% (Frequency), and Hit@3 is {lc_k6_m3:.2f}% (Markov) vs {lc_k6_f3:.2f}% (Frequency), with {lc_k6_cov:.2f}% state coverage.",
             "placeholders": {
                 "lc_k6_m1": m["lc_k6_m1"],
                 "lc_k6_m3": m["lc_k6_m3"],
@@ -387,7 +422,7 @@ def build_claims_data() -> list[dict[str, Any]]:
             "evidence_file": "reports/7ep/learning_curve_7ep_results.json",
             "script": "scripts/run_learning_curve_7ep.py",
             "verifier": "scripts/verify_learning_curve_7ep.py",
-            "test_node": "tests/test_tactic_evaluation_consistency.py::test_per_fold_breakdown_matches_recomputed",
+            "test_node": "tests/test_inference_7ep.py::test_learning_curve_outputs",
         },
         {
             "id": "CLAIM-09",
@@ -422,7 +457,7 @@ def build_claims_data() -> list[dict[str, Any]]:
             "evidence_file": "reports/audit/q14_determinism_log.txt",
             "script": "scripts/run_q7_gates.py",
             "verifier": "scripts/verify_prediction_records.py",
-            "test_node": "tests/test_prediction_record.py::test_gp5_3_hashseed_determinism",
+            "test_node": "none (verified by scripts/verify_prediction_records.py)",
         },
         {
             "id": "CLAIM-11",
@@ -430,19 +465,19 @@ def build_claims_data() -> list[dict[str, Any]]:
             "template": "Input audit event immutability is cryptographically guaranteed (NFR3): input SHA-256 is bit-identical before and after record building, and sorted event timelines are 100% invariant across 100 random input permutations.",
             "placeholders": {},
             "sources": [
-                {"file": "data/processed_7ep/normalized_events.json", "description": "Canonical normalized audit events"}
+                {"file": "reports/audit/q14_Q7_output.txt", "description": "Q7 gate execution log verifying input audit event immutability (G-P5-4)"}
             ],
             "allowed_use": "Proving digital evidence preservation and forensic integrity.",
             "forbidden_use": "Claiming forensic immutability without canonical SHA-256 validation.",
-            "evidence_file": "data/processed_7ep/normalized_events.json",
+            "evidence_file": "reports/audit/q14_Q7_output.txt",
             "script": "scripts/run_q7_gates.py",
             "verifier": "scripts/verify_prediction_records.py",
-            "test_node": "tests/test_prediction_record.py::test_gp5_4_deep_frozen_inputs_non_modification",
+            "test_node": "none (verified by scripts/verify_prediction_records.py)",
         },
         {
             "id": "CLAIM-12",
             "name": "prediction_records_schema_171",
-            "template": "Explainable prediction record completeness (FR4-FR7, NFR6): 100% of LOEO prediction records (171 total: 95 technique, 76 tactic) validate against JSON Schema v1.1.0, contain non-placeholder transition evidence, Wilson reliability intervals, and support caution flags (92/171 cautioned).",
+            "template": "Explainable prediction record completeness (FR4-FR7, NFR6): 100% of LOEO prediction records (171 total: 95 technique, 76 tactic) validate against JSON Schema v1.1.0, contain non-placeholder transition evidence, Wilson reliability intervals, and support caution flags (92/171 cautioned); the share of cautioned records (92/171, from the records) means most predictions rest on <2 supporting episodes or <3 transitions.",
             "placeholders": {},
             "sources": [
                 {"file": "schemas/c4_prediction_record.schema.json", "description": "Draft-07 prediction record schema"},
@@ -517,7 +552,7 @@ def build_claims_map() -> None:
         "|:---|:---|",
         "| **\"Markov beats the baseline\"** | Empirically contradicted: at technique level (N=95), Frequency baseline Hit@3 (16.84%) significantly outperforms Markov (3.16%, paired McNemar b=2, c=15, raw p=0.0023, Holm p=0.0094). At tactic level (N=76), both tie at 63.16% (p=1.0000). The pre-registered primary verdict is strictly 'improvement over baseline not demonstrated'. |",
         "| **\"Tactic Hit@1 order signal robustness\"** | While S1 permutation yields p=0.0430, under conservative family-wise corrections and constrained S3 permutation (p=0.0759) the signal does not survive uniformly; the pre-registered primary endpoint was Hit@3. |",
-        "| **\"75% accuracy achieved\"** | Mathematically and empirically impossible under LOEO cross-validation: cross-scenario vocabulary isolation restricts target reachability to a ceiling of 62.11% (59/95) and an A4 simulation cap of 64.98%. |",
+        "| **\"75% accuracy achieved\"** | technique level: ceiling 62.11% (59/95 targets inside training vocabulary) and perfect-order cap 64.98% (A4 planted report) are below 75%; tactic level: ceiling 96.05% (73/76). |",
         "| **\"Using Markov-minus-Frequency permutation rows as evidence of Markov superiority\"** | The difference row is an exploratory statistic evaluated against its own shuffled null, not a hypothesis test of model superiority (governed by McNemar P1/P2). |",
         "| **\"Claims about real C3 data\"** | All evaluations use the open-source CAM-LDS benchmark. The C3 adapter is a technical specification contract; C3 fields in prediction records are passed through and null where CAM-LDS lacks them. |",
         "",

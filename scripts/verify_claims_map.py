@@ -156,13 +156,23 @@ def verify_claims_map(claims_json_override: list[dict] | None = None, md_overrid
     # ANCHOR 7: ceiling 59/95
     assert c_hits == 59, f"Anchor failure: ceiling hits {c_hits} != 59"
 
+    # Recompute tactic level ceiling from CSV (Prompt 15 R2(c))
+    tac_ceiling_hits = sum(1 for r in tac_rows if r["ceiling"] == "True")
+    tac_ceiling_rate = tac_ceiling_hits / tac_n
+    assert tac_ceiling_hits == 73, f"Anchor failure: tactic ceiling hits {tac_ceiling_hits} != 73"
+    assert round(tac_ceiling_rate * 100, 2) == 96.05, f"Anchor failure: tactic ceiling rate {tac_ceiling_rate * 100:.2f} != 96.05"
+
     with open(REPO_ROOT / "reports" / "7ep" / "planted_realscale_7ep_report.json", "r", encoding="utf-8") as f:
         planted_json = json.load(f)
     cap = planted_json["results_by_signal"]["1.0"]["markov_top1_mean"] * 100
     assert round(cap, 2) == 64.98, f"Anchor failure: perfect order cap {cap:.2f} != 64.98"
 
+    # Prohibited phrasing check: "mathematically and empirically impossible under LOEO" must be deleted
+    assert "mathematically and empirically impossible under LOEO" not in md_text, "Prohibited phrase 'mathematically and empirically impossible under LOEO' found in MD!"
+    assert "mathematically and empirically impossible under LOEO" not in json.dumps(claims), "Prohibited phrase found in claims.json!"
+
     if verbose:
-        print("[Step 3] Ceilings 59/95 (62.11%) and 64.98% verified [PASS]")
+        print("[Step 3] Ceilings 59/95 (62.11%), 73/76 (96.05%), and cap 64.98% verified; forbidden phrasing absent [PASS]")
 
     # --------------------------------------------------------------------------
     # Step 4: Exploratory recompute
@@ -247,10 +257,34 @@ def verify_claims_map(claims_json_override: list[dict] | None = None, md_overrid
         sc_file = REPO_ROOT / c["script"]
         assert sc_file.exists(), f"Missing script for {c['id']}: {c['script']}"
 
-        # Check test node
-        t_node = c.get("test_node")
-        if t_node:
+        # Check verifier
+        vr_file = REPO_ROOT / c["verifier"]
+        assert vr_file.exists(), f"Missing verifier for {c['id']}: {c['verifier']}"
+
+        # Check test node (Prompt 15 R2(a))
+        t_node = c.get("test_node", "")
+        assert t_node, f"Missing test_node for {c['id']}"
+        if t_node.startswith("none (verified by "):
+            m_sc = re.match(r"none \(verified by ([\w./\\]+)\)", t_node)
+            assert m_sc, f"Invalid 'none (verified by ...)' format in {c['id']}: {t_node}"
+            verified_by_script = REPO_ROOT / m_sc.group(1)
+            assert verified_by_script.is_file(), f"Script cited in test_node does not exist for {c['id']}: {verified_by_script}"
+        else:
             assert t_node in collected_tests, f"Test node {t_node} for {c['id']} not collected in pytest!"
+            # Verifier checks the cited test file text mentions the claim's evidence file or builder/verifier script name
+            test_file_path = REPO_ROOT / t_node.split("::")[0]
+            assert test_file_path.is_file(), f"Test file {test_file_path} does not exist"
+            test_file_text = test_file_path.read_text(encoding="utf-8")
+            ev_name = Path(c["evidence_file"]).name
+            sc_name = Path(c["script"]).name
+            vr_name = Path(c["verifier"]).name
+            assert (
+                ev_name in test_file_text
+                or sc_name in test_file_text
+                or vr_name in test_file_text
+                or Path(c["script"]).stem in test_file_text
+                or Path(c["verifier"]).stem in test_file_text
+            ), f"Test node {t_node} for {c['id']} in {test_file_path.name} does not mention evidence ({ev_name}), script ({sc_name}), or verifier ({vr_name})"
 
     # Check git tags resolve
     for tag in ["c4-7ep-verified", "stage2-verified"]:
@@ -258,7 +292,7 @@ def verify_claims_map(claims_json_override: list[dict] | None = None, md_overrid
         assert res_git.returncode == 0, f"Git tag {tag} failed to resolve!"
 
     if verbose:
-        print("[Step 7] All cited files exist, test nodes collect, and git tags resolve [PASS]")
+        print("[Step 7] All cited files exist, test nodes verified for relevance, and git tags resolve [PASS]")
 
     # --------------------------------------------------------------------------
     # Step 8: Claims structure and required claims list
@@ -284,7 +318,19 @@ def verify_claims_map(claims_json_override: list[dict] | None = None, md_overrid
 
     # Check reproducibility claim wording
     c1 = next(c for c in claims if c["name"] == "pipeline_reproducibility")
-    assert "verified" in c1["template"] or "not yet proven" in c1["template"], "Claim 1 must reflect verified or not yet proven"
+    assert "verified" in c1["template"] or "not proven" in c1["template"], "Claim 1 must reflect verified or not proven"
+
+    # Check CLAIM-08 labels Hit@1 as descriptive, not a headline
+    c8 = next(c for c in claims if c["name"] == "learning_curve_k6_episode_mean")
+    assert "descriptive, not a headline" in c8["template"], "Claim 8 must label Hit@1 as descriptive, not a headline"
+
+    # Check CLAIM-11 evidence file is q14_Q7_output.txt
+    c11 = next(c for c in claims if c["name"] == "nfr3_security_non_modification")
+    assert c11["evidence_file"] == "reports/audit/q14_Q7_output.txt", f"Claim 11 evidence file must be q14_Q7_output.txt, got {c11['evidence_file']}"
+
+    # Check CLAIM-12 mentions cautioned records and low-support explanation
+    c12 = next(c for c in claims if c["name"] == "prediction_records_schema_171")
+    assert "92/171" in c12["template"] and "<2 supporting episodes or <3 transitions" in c12["template"], "Claim 12 must explain low-support caution share"
 
     # Check not-claimed section in MD
     assert "Markov beats the baseline" in md_text
@@ -356,6 +402,9 @@ def verify_claims_map(claims_json_override: list[dict] | None = None, md_overrid
             "technique_n": tech_n,
             "ceiling_hits": c_hits,
             "perfect_cap_pct": round(cap, 2),
+            "tactic_ceiling_pct": round(tac_ceiling_rate * 100, 2),
+            "tactic_ceiling_hits": tac_ceiling_hits,
+            "tactic_n": tac_n,
         },
         "CLAIM-08": {
             "lc_k6_m1": round(lc_k6["markov_hit1"] * 100, 2),

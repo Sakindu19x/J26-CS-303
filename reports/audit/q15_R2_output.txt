@@ -1,0 +1,58 @@
+=== R2 CLAIMS MAP REPAIR AUDIT LOG ===
+2026-10-15T10:35:00.000000+00:00
+
+--- 1. build_claims_map.py ---
+Generated C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\viva\claims.json (13 claims)
+Generated C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\viva\claims_to_evidence_map.md
+
+--- 2. verify_claims_map.py ---
+================================================================================
+INDEPENDENT CLAIMS MAP VERIFICATION (scripts/verify_claims_map.py)
+================================================================================
+[Step 1] Eval CSV recomputations and anchors (technique N=95, tactic N=76, P1, P2) [PASS]
+[Step 2] Permutation S1 p-values from JSON and MD [PASS]
+[Step 3] Ceilings 59/95 (62.11%), 73/76 (96.05%), and cap 64.98% verified; forbidden phrasing absent [PASS]
+[Step 4] Exploratory counts and McNemar p-values [PASS]
+[Step 5] Tie bounds A and B exact verification [PASS]
+[Step 6] Forbidden set check (23 forbidden p-values checked; none present) [PASS]
+[Step 7] All cited files exist, test nodes verified for relevance, and git tags resolve [PASS]
+[Step 8] All 13 required claims present and properly formatted [PASS]
+[Step 9] All placeholders match recomputed metrics and all rendered statements present in MD [PASS]
+================================================================================
+ALL CLAIMS MAP VERIFICATIONS PASSED SUCCESSFULLY (Exit 0)
+================================================================================
+
+--- 3. mutation_sweep_claims_map.py ---
+================================================================================
+MUTATION SWEEP: reports/viva/claims.json AND claims_to_evidence_map.md
+================================================================================
+--- Part 1: claims.json Mutations ---
+claims.json mutations: 119 tested, 119 detected.
+
+--- Part 2: claims_to_evidence_map.md Mutations ---
+Total mutations evaluated: 361
+Detected or explicitly exempted: 361
+Undetected non-exempt mutations: 0
+Wrote exempt list to C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\audit\exempt_claims_map.txt
+================================================================================
+ALL MUTATIONS DETECTED (100% Detection Rate).
+
+--- 4. pytest tests/test_claims_map.py ---
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 3 items
+
+tests\test_claims_map.py ...                                             [100%]
+
+============================== 3 passed in 2.25s ==============================
+
+--- 5. Full test suite (pytest) ---
+======================= 207 passed in 255.79s (0:04:15) =======================
+
+--- 6. verify_all_hashes.py ---
+================================================================================
+ALL BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED (61/61 MATCH)
+================================================================================
