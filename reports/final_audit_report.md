@@ -20,7 +20,7 @@ Summarizes verification gate results, baseline integrity, test coverage, ledger 
 | `python scripts/verify_tie_sensitivity_7ep.py` | `0` | **PASS** | `ALL TIE-SENSITIVITY CHECKS PASSED (EXIT CODE 0).` |
 | `python scripts/verify_exploratory_tactic_conditioned.py` | `0` | **PASS** | `================================================================================` |
 | `python scripts/verify_viva_pack.py` | `0` | **PASS** | `[PASS] All viva pack documents, figures, and tokens verified successfully!` |
-| `pytest tests/` | `0` | **PASS** | `======================= 184 passed in 92.40s (0:01:32) ========================` |
+| `pytest tests/` | `0` | **PASS** | `======================= 184 passed in 110.02s (0:01:50) =======================` |
 
 ## 2. Key Verified Counts
 
@@ -49,6 +49,7 @@ The current overnight execution ledger (`reports/overnight_ledger.md`):
 | P7 | `24215585916ce78d1256140953a2c61505ecf752` | 0 | 178 | 0 | PASS | 2026-10-15T04:14:46Z |
 | P8 | `c4ae715d552b8d43789cde45d10e1e545f6ed212` | 0 | 181 | 0 | PASS | 2026-10-15T04:30:23Z |
 | P9 | `0e28a209fb26ef8085223806c74ea141723aaa95` | 0 | 184 | 0 | PASS | 2026-10-15T04:41:08Z |
+| P10 | `f7ff50d78dd5d78c31e4ed02186fbebbea3377ab` | 0 | 184 | 0 | PASS | 2026-10-15T05:05:45Z |
 ```
 
 ## 4. Git Diff Summary (`git diff --stat 42e941a`)
@@ -74,7 +75,13 @@ artifacts/7ep/production_model/collapsed_full.json |  969 +++++++++++++++++++
  reports/7ep/tie_sensitivity_7ep.json               |  649 +++++++++++++
  reports/7ep/tie_sensitivity_7ep.md                 |  132 +++
  reports/_baseline_hashes_7ep_inference.json        |   18 +-
+ reports/audit/hash_coverage_exceptions.md          |  179 ++++
+ reports/audit/known_limitations.json               |   92 ++
+ reports/audit/known_limitations.md                 |  101 ++
  reports/audit/p1_findings.md                       |  127 +++
+ reports/audit/prereg_compliance_map.json           |  618 ++++++++++++
+ reports/audit/prereg_compliance_map.md             |   52 +
+ reports/final_audit_report.md                      |  166 ++++
  .../measurements/dashboard_prediction_panel.png    |  Bin 0 -> 91554 bytes
  .../measurements/dashboard_tactic_prediction.png   |  Bin 0 -> 96618 bytes
  reports/measurements/dashboard_tied_case.png       |  Bin 0 -> 97610 bytes
@@ -83,18 +90,25 @@ artifacts/7ep/production_model/collapsed_full.json |  969 +++++++++++++++++++
  reports/measurements/nfr1_timing.md                |   61 ++
  reports/nfr_criteria.md                            |   54 ++
  reports/overnight_decisions.md                     |    4 +
- reports/overnight_ledger.md                        |   14 +
+ reports/overnight_ledger.md                        |   15 +
  reports/permutation_test_v2_report.json            |   24 +-
  reports/permutation_test_v2_report.md              |   32 +-
  reports/prereg_7episode_design.md                  |   63 ++
+ reports/viva/claims.json                           |  132 +++
+ reports/viva/claims_to_evidence_map.md             |   35 +
  schemas/c3_event.schema.json                       |   73 ++
  schemas/c4_prediction_record.schema.json           |  298 ++++++
+ scripts/audit_hash_coverage.py                     |  190 ++++
  scripts/audit_lc_k6.py                             |   90 ++
  scripts/audit_png_anomaly.py                       |   84 ++
  scripts/audit_prereg_strings.py                    |  112 +++
  scripts/audit_s1s3_unchanged.py                    |  152 +++
  scripts/audit_tie_handling_code.py                 |   61 ++
+ scripts/build_claims_map.py                        |  165 ++++
+ scripts/build_final_audit_report.py                |  142 +++
+ scripts/build_known_limitations.py                 |   52 +
  scripts/build_prediction_records.py                |  679 +++++++++++++
+ scripts/build_prereg_compliance_map.py             |  451 +++++++++
  scripts/build_requirements_trace.py                |  296 ++++++
  scripts/build_viva_pack.py                         |  383 ++++++++
  scripts/capture_dashboard_screenshots.py           |   79 ++
@@ -142,7 +156,7 @@ artifacts/7ep/production_model/collapsed_full.json |  969 +++++++++++++++++++
  viva_pack/06_claims_and_limits.md                  |   35 +
  viva_pack/07_reproduce.md                          |   36 +
  viva_pack/README.md                                |   23 +
- 88 files changed, 15188 insertions(+), 70 deletions(-)
+ 101 files changed, 17564 insertions(+), 70 deletions(-)
 
 warning: in the working copy of 'reports/confusion_matrix_parent.csv', LF will be replaced by CRLF the next time Git touches it
 warning: in the working copy of 'reports/evaluation_report.md', LF will be replaced by CRLF the next time Git touches it
