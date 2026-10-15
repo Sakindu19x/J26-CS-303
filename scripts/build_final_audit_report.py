@@ -32,6 +32,10 @@ INTEGRITY_COMMANDS = [
     ("python scripts/verify_tie_sensitivity_7ep.py", "scripts/verify_tie_sensitivity_7ep.py"),
     ("python scripts/verify_exploratory_tactic_conditioned.py", "scripts/verify_exploratory_tactic_conditioned.py"),
     ("python scripts/verify_viva_pack.py", "scripts/verify_viva_pack.py"),
+    ("python scripts/verify_requirements_trace.py", "scripts/verify_requirements_trace.py"),
+    ("python scripts/verify_claims_map.py", "scripts/verify_claims_map.py"),
+    ("python scripts/verify_overnight_summary.py", "scripts/verify_overnight_summary.py"),
+    ("python scripts/verify_nfr1.py", "scripts/verify_nfr1.py"),
     ("pytest tests/", None),
 ]
 

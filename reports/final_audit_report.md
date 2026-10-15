@@ -20,11 +20,15 @@ Summarizes verification gate results, baseline integrity, test coverage, ledger 
 | `python scripts/verify_tie_sensitivity_7ep.py` | `0` | **PASS** | `ALL TIE-SENSITIVITY CHECKS PASSED (EXIT CODE 0).` |
 | `python scripts/verify_exploratory_tactic_conditioned.py` | `0` | **PASS** | `================================================================================` |
 | `python scripts/verify_viva_pack.py` | `0` | **PASS** | `[PASS] All viva pack documents, figures, and tokens verified successfully!` |
-| `pytest tests/` | `0` | **PASS** | `======================= 184 passed in 110.02s (0:01:50) =======================` |
+| `python scripts/verify_requirements_trace.py` | `0` | **PASS** | `Independent verification of requirements trace PASSED (15 requirements verified)` |
+| `python scripts/verify_claims_map.py` | `0` | **PASS** | `================================================================================` |
+| `python scripts/verify_overnight_summary.py` | `0` | **PASS** | `================================================================================` |
+| `python scripts/verify_nfr1.py` | `0` | **PASS** | `================================================================================` |
+| `pytest tests/` | `0` | **PASS** | `======================= 202 passed in 92.23s (0:01:32) ========================` |
 
 ## 2. Key Verified Counts
 
-- **Total Unit / Integration Tests**: 184 passed
+- **Total Unit / Integration Tests**: 202 passed
 - **Total Protected Baseline Hashes**: 61 SHA-256 digests verified
 - **Evaluated LOEO Prediction Records**: 171 records (95 technique + 76 tactic) across 7 episodes
 - **Schema Validation**: 100% compliant with JSON Schema `v1.0.0`
@@ -50,117 +54,194 @@ The current overnight execution ledger (`reports/overnight_ledger.md`):
 | P8 | `c4ae715d552b8d43789cde45d10e1e545f6ed212` | 0 | 181 | 0 | PASS | 2026-10-15T04:30:23Z |
 | P9 | `0e28a209fb26ef8085223806c74ea141723aaa95` | 0 | 184 | 0 | PASS | 2026-10-15T04:41:08Z |
 | P10 | `f7ff50d78dd5d78c31e4ed02186fbebbea3377ab` | 0 | 184 | 0 | PASS | 2026-10-15T05:05:45Z |
+| P11 | `f1f1db4f8d282b61d195353989db8f15e99d8ad6` | 0 | 184 | 0 | PASS | 2026-10-15T05:32:43Z |
+
+Note: P7-P9 pytest counts were passed manually in Prompt 13; re-measured in Q0/Q10.
+| Q1 | `44c144ae756b304c21cbfb5bf1c9aadaa2bf8c88` | 0 | 184 | 0 | PASS | 2026-10-15T06:08:30Z |
+| Q3 | `3dab166ce9a3ba72845554223ca6df458717b1dc` | 0 | 184 | 0 | PASS | 2026-10-15T06:23:39Z |
+| Q7 | `4f8d0c889e33d5df0d3ff679b596d5e44b65f7d5` | 0 | 188 | 0 | PASS | 2026-10-15T06:42:40Z |
+| Q9 | `c7b3d5e5456230db621a14ac96d7f9e351de22f1` | 0 | 189 | 0 | PASS | 2026-10-15T06:55:28Z |
+| Q4 | `cf6e5dbd885a7a6452817195abb0e1a284c25cec` | 0 | 192 | 0 | PASS | 2026-10-15T07:05:03Z |
+| Q5 | `4fc004bd150dbc599fa014ac64bbaf65bee59720` | 0 | 195 | 0 | PASS | 2026-10-15T07:30:46Z |
+
+Note: Prompt 13 final chat message blocks with contradictions vs generated files (by block name only):
+- Exploratory Variant Block
+- Hypothesis Test P2 / Tie Counts Block
+- NFR1 Performance / CPU Telemetry Block
+- Claims Map Block
+- Requirements Trace Block
+- Prediction Records Block
+- Clean-Clone Verification Block
+| Q6 | `68908c47b14823141e9aa9b935710e878ae3249b` | 0 | 197 | 0 | PASS | 2026-10-15T07:40:44Z |
+| Q8 | `8779338e03c35defcb3158eaba163331987319ac` | 0 | 202 | 0 | PASS | 2026-10-15T07:51:47Z |
+| Q2 | `5921908d22377dacbe2d375724a983ab9ced7152` | 0 | 202 | 0 | PASS | 2026-10-15T08:10:59Z |
 ```
 
 ## 4. Git Diff Summary (`git diff --stat 42e941a`)
 
 ```text
-artifacts/7ep/production_model/collapsed_full.json |  969 +++++++++++++++++++
+.gitattributes                                     |   75 +
+ artifacts/7ep/production_model/collapsed_full.json |  969 ++++++++++++
  artifacts/7ep/production_model/manifest.json       |   50 +
- .../7ep/production_model/tactic_collapsed.json     |  305 ++++++
+ .../7ep/production_model/tactic_collapsed.json     |  305 ++++
  .../exploratory_tactic_conditioned_predictions.csv |   96 ++
- data/processed_7ep/prediction_records_loeo.jsonl   |  171 ++++
- data/processed_7ep/tie_sensitivity_7ep_samples.csv | 1015 ++++++++++++++++++++
+ data/processed_7ep/prediction_records_loeo.jsonl   |  171 ++
+ data/processed_7ep/tie_sensitivity_7ep_samples.csv | 1015 ++++++++++++
  docs/analyst_feedback_form.md                      |   41 +
- docs/c3_c4_interface_contract.md                   |   62 ++
+ docs/c3_c4_interface_contract.md                   |   62 +
  docs/c3_open_questions.md                          |   53 +
  docs/data_provenance.md                            |   37 +
- docs/demo_script.md                                |   51 +
- .../7ep/exploratory_tactic_conditioned_report.md   |   57 ++
- .../exploratory_tactic_conditioned_results.json    |  457 +++++++++
+ docs/demo_script.md                                |   85 +
+ docs/proposal_requirements.json                    |   85 +
+ .../7ep/exploratory_tactic_conditioned_report.md   |   57 +
+ .../exploratory_tactic_conditioned_results.json    |  457 ++++++
  reports/7ep/permutation_7ep_report.json            |   16 +-
  reports/7ep/permutation_7ep_report.md              |   28 +-
- reports/7ep/prediction_record_examples.md          |  959 ++++++++++++++++++
- reports/7ep/requirements_trace.md                  |  186 ++++
- reports/7ep/tie_sensitivity_7ep.json               |  649 +++++++++++++
- reports/7ep/tie_sensitivity_7ep.md                 |  132 +++
- reports/_baseline_hashes_7ep_inference.json        |   18 +-
- reports/audit/hash_coverage_exceptions.md          |  179 ++++
+ reports/7ep/prediction_record_examples.md          | 1639 ++++++++++++++++++++
+ reports/7ep/requirements_trace.md                  |   31 +
+ reports/7ep/tie_sensitivity_7ep.json               |  649 ++++++++
+ reports/7ep/tie_sensitivity_7ep.md                 |  132 ++
+ reports/_baseline_hashes_7ep_inference.json        |   20 +-
+ reports/audit/exempt_claims_map.txt                |   21 +
+ reports/audit/exempt_exploratory.txt               |   57 +
+ reports/audit/exempt_overnight_summary.txt         |    7 +
+ reports/audit/exempt_requirements_trace.txt        |   29 +
+ reports/audit/hash_coverage_exceptions.md          |  238 +++
  reports/audit/known_limitations.json               |   92 ++
  reports/audit/known_limitations.md                 |  101 ++
- reports/audit/p1_findings.md                       |  127 +++
- reports/audit/prereg_compliance_map.json           |  618 ++++++++++++
+ reports/audit/line_ending_audit.md                 |   73 +
+ reports/audit/p1_findings.md                       |  127 ++
+ reports/audit/prereg_compliance_map.json           |  618 ++++++++
  reports/audit/prereg_compliance_map.md             |   52 +
- reports/final_audit_report.md                      |  166 ++++
- .../measurements/dashboard_prediction_panel.png    |  Bin 0 -> 91554 bytes
- .../measurements/dashboard_tactic_prediction.png   |  Bin 0 -> 96618 bytes
- reports/measurements/dashboard_tied_case.png       |  Bin 0 -> 97610 bytes
- reports/measurements/dashboard_unseen_state.png    |  Bin 0 -> 105272 bytes
- reports/measurements/nfr1_timing.json              |  133 +++
- reports/measurements/nfr1_timing.md                |   61 ++
- reports/nfr_criteria.md                            |   54 ++
- reports/overnight_decisions.md                     |    4 +
- reports/overnight_ledger.md                        |   15 +
+ reports/audit/q14_Q0_output.txt                    |   67 +
+ reports/audit/q14_Q1_output.txt                    |  170 ++
+ reports/audit/q14_Q2_output.txt                    |  217 +++
+ reports/audit/q14_Q3_output.txt                    |  124 ++
+ reports/audit/q14_Q4_output.txt                    |   53 +
+ reports/audit/q14_Q5_output.txt                    |   77 +
+ reports/audit/q14_Q6_output.txt                    |   69 +
+ reports/audit/q14_Q7_output.txt                    |   38 +
+ reports/audit/q14_Q8_output.txt                    |   68 +
+ reports/audit/q14_Q9_output.txt                    |   44 +
+ reports/audit/q14_baseline_changes.md              |   69 +
+ reports/audit/q14_decisions.md                     |   14 +
+ reports/audit/q14_determinism_log.txt              |    6 +
+ reports/audit/rebuild_scope.md                     |  112 ++
+ reports/final_audit_report.md                      |  180 +++
+ reports/measurements/dashboard_capture_log.txt     |   42 +
+ .../measurements/dashboard_prediction_panel.png    |  Bin 0 -> 103864 bytes
+ .../dashboard_prediction_panel_static_render.png   |  Bin 0 -> 103864 bytes
+ .../measurements/dashboard_tactic_prediction.png   |  Bin 0 -> 102801 bytes
+ .../dashboard_tactic_prediction_static_render.png  |  Bin 0 -> 102801 bytes
+ reports/measurements/dashboard_tied_case.png       |  Bin 0 -> 106737 bytes
+ .../dashboard_tied_case_static_render.png          |  Bin 0 -> 106737 bytes
+ reports/measurements/dashboard_unseen_state.png    |  Bin 0 -> 109436 bytes
+ .../dashboard_unseen_state_static_render.png       |  Bin 0 -> 109436 bytes
+ reports/measurements/nfr1_timing.json              |  172 ++
+ reports/measurements/nfr1_timing.md                |   76 +
+ reports/nfr_criteria.md                            |   73 +
+ reports/overnight_decisions.md                     |   19 +
+ reports/overnight_ledger.md                        |   36 +
+ reports/overnight_summary.md                       |   89 ++
  reports/permutation_test_v2_report.json            |   24 +-
  reports/permutation_test_v2_report.md              |   32 +-
- reports/prereg_7episode_design.md                  |   63 ++
- reports/viva/claims.json                           |  132 +++
- reports/viva/claims_to_evidence_map.md             |   35 +
- schemas/c3_event.schema.json                       |   73 ++
- schemas/c4_prediction_record.schema.json           |  298 ++++++
- scripts/audit_hash_coverage.py                     |  190 ++++
+ reports/prereg_7episode_design.md                  |  125 ++
+ reports/viva/claims.json                           |  327 ++++
+ reports/viva/claims_to_evidence_map.md             |   42 +
+ schemas/c3_event.schema.json                       |   73 +
+ schemas/c4_prediction_record.schema.json           |  325 ++++
+ scripts/append_q6_corrections.py                   |   47 +
+ scripts/audit_and_fix_line_endings.py              |  271 ++++
+ scripts/audit_hash_coverage.py                     |  340 ++++
  scripts/audit_lc_k6.py                             |   90 ++
- scripts/audit_png_anomaly.py                       |   84 ++
- scripts/audit_prereg_strings.py                    |  112 +++
- scripts/audit_s1s3_unchanged.py                    |  152 +++
- scripts/audit_tie_handling_code.py                 |   61 ++
- scripts/build_claims_map.py                        |  165 ++++
- scripts/build_final_audit_report.py                |  142 +++
+ scripts/audit_png_anomaly.py                       |   84 +
+ scripts/audit_prereg_strings.py                    |  112 ++
+ scripts/audit_s1s3_unchanged.py                    |  152 ++
+ scripts/audit_tie_handling_code.py                 |   61 +
+ scripts/build_amendment8.py                        |  166 ++
+ scripts/build_claims_map.py                        |  538 +++++++
+ scripts/build_final_audit_report.py                |  146 ++
  scripts/build_known_limitations.py                 |   52 +
- scripts/build_prediction_records.py                |  679 +++++++++++++
- scripts/build_prereg_compliance_map.py             |  451 +++++++++
- scripts/build_requirements_trace.py                |  296 ++++++
- scripts/build_viva_pack.py                         |  383 ++++++++
- scripts/capture_dashboard_screenshots.py           |   79 ++
+ scripts/build_overnight_summary.py                 |  149 ++
+ scripts/build_prediction_records.py                |  970 ++++++++++++
+ scripts/build_prereg_compliance_map.py             |  451 ++++++
+ scripts/build_requirements_trace.py                |  181 +++
+ scripts/build_viva_pack.py                         |  383 +++++
+ scripts/capture_dashboard_screenshots.py           |  192 +++
  scripts/generate_baseline_hashes_7ep_inference.py  |    3 +
- scripts/measure_nfr1.py                            |  641 ++++++++++++
- scripts/mutation_sweep.py                          |  261 ++++-
- scripts/print_exempt_tokens.py                     |  118 +++
+ scripts/measure_nfr1.py                            |  815 ++++++++++
+ scripts/mutation_sweep.py                          |  271 +++-
+ scripts/mutation_sweep_claims_map.py               |  230 +++
+ scripts/mutation_sweep_overnight_summary.py        |  111 ++
+ scripts/mutation_sweep_requirements_trace.py       |  131 ++
+ scripts/print_exempt_tokens.py                     |  118 ++
  scripts/print_file.py                              |   33 +
- scripts/reproduce_all.py                           |  134 +++
- scripts/run_exploratory_tactic_conditioned.py      |  557 +++++++++++
+ scripts/record_baseline_change.py                  |  141 ++
+ scripts/record_q14_decision.py                     |   33 +
+ scripts/reproduce_all.py                           |  155 ++
+ scripts/reproduce_clean_clone.py                   |   88 ++
+ scripts/run_dashboard.ps1                          |   15 +
+ scripts/run_exploratory_tactic_conditioned.py      |  564 +++++++
  scripts/run_permutation_test_7ep.py                |   15 +-
  scripts/run_permutation_test_v2.py                 |   10 +-
- scripts/run_tie_sensitivity_7ep.py                 |  783 +++++++++++++++
- scripts/train_production_model.py                  |  184 ++++
+ scripts/run_q0_baseline.py                         |   85 +
+ scripts/run_q2_clean_clone.py                      |  250 +++
+ scripts/run_q3_pipeline.py                         |   70 +
+ scripts/run_q4_trace.py                            |   61 +
+ scripts/run_q5_claims.py                           |   70 +
+ scripts/run_q6_summary.py                          |   79 +
+ scripts/run_q7_gates.py                            |  167 ++
+ scripts/run_q8_dashboard.py                        |   52 +
+ scripts/run_q9_nfr1.py                             |   56 +
+ scripts/run_tie_sensitivity_7ep.py                 |  783 ++++++++++
+ scripts/test_q1_proof.py                           |   72 +
+ scripts/train_production_model.py                  |  184 +++
  scripts/update_ledger.py                           |   88 ++
- scripts/verify_evaluation.py                       |  170 ++++
- scripts/verify_exploratory_tactic_conditioned.py   |  187 ++++
+ scripts/verify_claims_map.py                       |  401 +++++
+ scripts/verify_evaluation.py                       |  170 ++
+ scripts/verify_exploratory_tactic_conditioned.py   |  210 +++
+ scripts/verify_nfr1.py                             |  153 ++
+ scripts/verify_overnight_summary.py                |  137 ++
  scripts/verify_permutation_7ep.py                  |   13 +-
  scripts/verify_permutation_test_v2.py              |    9 +-
- scripts/verify_prediction_records.py               |  226 +++++
- scripts/verify_tie_sensitivity_7ep.py              |  120 +++
- scripts/verify_viva_pack.py                        |  124 +++
- scripts/write_p1_findings.py                       |  355 +++++++
- src/c4/c3_adapter.py                               |  289 ++++++
- src/c4/dashboard/prediction_app.py                 |  259 +++++
- src/c4/dashboard/prediction_panel.py               |  350 +++++++
- src/c4/prediction_record.py                        |  175 ++++
+ scripts/verify_prediction_records.py               |  256 +++
+ scripts/verify_requirements_trace.py               |  124 ++
+ scripts/verify_tie_sensitivity_7ep.py              |  120 ++
+ scripts/verify_viva_pack.py                        |  124 ++
+ scripts/write_p1_findings.py                       |  355 +++++
+ src/c4/c3_adapter.py                               |  289 ++++
+ src/c4/dashboard/prediction_app.py                 |  259 ++++
+ src/c4/dashboard/prediction_panel.py               |  362 +++++
+ src/c4/prediction_record.py                        |  179 +++
  tests/fixtures/c3/malformed_invalid_priority.json  |    7 +
  tests/fixtures/c3/malformed_missing_episode.json   |    4 +
  tests/fixtures/c3/valid_event.json                 |   19 +
- tests/test_c3_adapter.py                           |  238 +++++
- tests/test_exploratory_tactic_conditioned.py       |   66 ++
+ tests/test_c3_adapter.py                           |  248 +++
+ tests/test_claims_map.py                           |   50 +
+ tests/test_dashboard_q8.py                         |   82 +
+ tests/test_exploratory_tactic_conditioned.py       |   67 +
  tests/test_inference_7ep.py                        |   37 +
- tests/test_nfr1.py                                 |  104 ++
- tests/test_prediction_panel.py                     |  120 +++
- tests/test_prediction_record.py                    |  154 +++
- tests/test_viva_pack_sweep.py                      |   77 ++
+ tests/test_nfr1.py                                 |  114 ++
+ tests/test_overnight_summary.py                    |   27 +
+ tests/test_prediction_panel.py                     |  120 ++
+ tests/test_prediction_record.py                    |  209 +++
+ tests/test_requirements_trace.py                   |   47 +
+ tests/test_viva_pack_sweep.py                      |   77 +
  viva_pack/01_dataset.md                            |   33 +
  viva_pack/02_split_and_training.md                 |   33 +
  viva_pack/03_scores.md                             |   38 +
- viva_pack/04_worked_examples.md                    |  959 ++++++++++++++++++
+ viva_pack/04_worked_examples.md                    |  959 ++++++++++++
  viva_pack/05_figures/a4_power_curve.png            |  Bin 0 -> 222031 bytes
  viva_pack/05_figures/learning_curve_7ep.png        |  Bin 0 -> 374522 bytes
  .../05_figures/loeo_performance_bar_chart.png      |  Bin 0 -> 139000 bytes
  viva_pack/06_claims_and_limits.md                  |   35 +
  viva_pack/07_reproduce.md                          |   36 +
  viva_pack/README.md                                |   23 +
- 101 files changed, 17564 insertions(+), 70 deletions(-)
+ 157 files changed, 24741 insertions(+), 71 deletions(-)
 
 warning: in the working copy of 'reports/confusion_matrix_parent.csv', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'reports/evaluation_report.md', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'reports/tactic_evaluation_report.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/audit_hash_coverage.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/build_final_audit_report.py', LF will be replaced by CRLF the next time Git touches it
 ```
 
 ## 5. Open Items Register
