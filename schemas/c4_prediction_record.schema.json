@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "C4ExplainablePredictionRecord",
+  "description": "Component 4 Explainable Next-Step Attack Prediction Record satisfying FR4-FR7, NFR2, NFR3, and NFR6.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_id",
+    "prediction_type",
+    "input",
+    "model",
+    "input_events_sha256",
+    "record_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["1.0.0"]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 digest of canonical input + model configuration."
+    },
+    "prediction_type": {
+      "type": "string",
+      "enum": ["technique", "tactic"]
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "sample_id",
+        "episode_id",
+        "event_index",
+        "last_timestamp",
+        "previous_supporting_techniques",
+        "current_technique_set",
+        "current_tactic_set",
+        "incident_stage",
+        "affected_asset",
+        "c3_fields"
+      ],
+      "properties": {
+        "sample_id": {"type": "string"},
+        "episode_id": {"type": "string"},
+        "event_index": {"type": ["integer", "null"]},
+        "last_timestamp": {"type": ["string", "null"]},
+        "previous_supporting_techniques": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "current_technique_set": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "current_tactic_set": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "incident_stage": {"type": ["string", "null"]},
+        "affected_asset": {"type": ["string", "null"]},
+        "c3_fields": {
+          "type": "object",
+          "required": [
+            "threat_score",
+            "investigation_priority",
+            "asset_criticality",
+            "cti_confidence",
+            "freshness",
+            "ioc",
+            "ioc_type"
+          ],
+          "properties": {
+            "threat_score": {"type": ["number", "null"]},
+            "investigation_priority": {
+              "type": ["string", "null"],
+              "enum": ["Low", "Medium", "High", "Critical", null]
+            },
+            "asset_criticality": {"type": ["string", "null"]},
+            "cti_confidence": {"type": ["number", "null"]},
+            "freshness": {"type": ["number", "null"]},
+            "ioc": {"type": ["string", "null"]},
+            "ioc_type": {"type": ["string", "null"]}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "model": {
+      "type": "object",
+      "required": [
+        "model_type",
+        "model_file_sha256",
+        "model_file_relpath",
+        "training_episodes",
+        "transition_count",
+        "set_weighting_rule",
+        "tie_break_rule"
+      ],
+      "properties": {
+        "model_type": {"type": "string"},
+        "model_file_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "model_file_relpath": {"type": "string"},
+        "training_episodes": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "transition_count": {"type": "number"},
+        "set_weighting_rule": {
+          "type": "string",
+          "enum": ["uniform_1_over_cardinality"]
+        },
+        "tie_break_rule": {
+          "type": "string",
+          "enum": ["lexicographical_ascending"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "technique_prediction": {
+      "type": ["object", "null"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["ok", "unseen_state", "fallback"]
+        },
+        "ranked_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/prediction_candidate"}
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/prediction_candidate"}
+        },
+        "tie_flags": {"$ref": "#/definitions/tie_flags"},
+        "frequency_baseline_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/baseline_candidate"}
+        },
+        "measured_reliability_banner": {"$ref": "#/definitions/reliability_banner"},
+        "explanation": {"type": "string"}
+      },
+      "required": [
+        "status",
+        "ranked_candidates",
+        "alternatives",
+        "tie_flags",
+        "frequency_baseline_candidates",
+        "measured_reliability_banner",
+        "explanation"
+      ],
+      "additionalProperties": false
+    },
+    "tactic_prediction": {
+      "type": ["object", "null"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["ok", "unseen_state", "fallback"]
+        },
+        "ranked_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/prediction_candidate"}
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/prediction_candidate"}
+        },
+        "tie_flags": {"$ref": "#/definitions/tie_flags"},
+        "frequency_baseline_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/baseline_candidate"}
+        },
+        "measured_reliability_banner": {"$ref": "#/definitions/reliability_banner"},
+        "explanation": {"type": "string"}
+      },
+      "required": [
+        "status",
+        "ranked_candidates",
+        "alternatives",
+        "tie_flags",
+        "frequency_baseline_candidates",
+        "measured_reliability_banner",
+        "explanation"
+      ],
+      "additionalProperties": false
+    },
+    "input_events_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "record_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "prediction_candidate": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "candidate_name",
+        "score",
+        "score_type",
+        "numerator",
+        "denominator",
+        "supporting_episodes_count",
+        "supporting_episode_ids",
+        "tactics"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string"},
+        "candidate_name": {"type": ["string", "null"]},
+        "score": {"type": "number"},
+        "score_type": {
+          "type": "string",
+          "enum": ["transition_probability", "training_frequency_share"]
+        },
+        "numerator": {"type": "number"},
+        "denominator": {"type": "number"},
+        "supporting_episodes_count": {"type": "integer"},
+        "supporting_episode_ids": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "tactics": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "baseline_candidate": {
+      "type": "object",
+      "required": ["candidate_id", "candidate_name", "score"],
+      "properties": {
+        "candidate_id": {"type": "string"},
+        "candidate_name": {"type": ["string", "null"]},
+        "score": {"type": "number"}
+      },
+      "additionalProperties": false
+    },
+    "tie_flags": {
+      "type": "object",
+      "required": ["tie_at_top1", "tie_at_top3_boundary", "tied_candidates"],
+      "properties": {
+        "tie_at_top1": {"type": "boolean"},
+        "tie_at_top3_boundary": {"type": "boolean"},
+        "tied_candidates": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "reliability_banner": {
+      "type": "object",
+      "required": [
+        "metric",
+        "slice",
+        "sample_count",
+        "markov_hit3_pooled",
+        "markov_hit3_wilson95",
+        "frequency_hit3_pooled",
+        "frequency_hit3_wilson95",
+        "coverage_rate",
+        "banner_text"
+      ],
+      "properties": {
+        "metric": {"type": "string"},
+        "slice": {"type": "string"},
+        "sample_count": {"type": "integer"},
+        "markov_hit3_pooled": {"type": "number"},
+        "markov_hit3_wilson95": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "frequency_hit3_pooled": {"type": "number"},
+        "frequency_hit3_wilson95": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "coverage_rate": {"type": "number"},
+        "banner_text": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}
