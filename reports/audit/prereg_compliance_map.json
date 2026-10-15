@@ -1,0 +1,618 @@
+{
+  "prereg_sections": [
+    {
+      "section": "Section 1",
+      "title": "Episodes and Archive Identification",
+      "files": [
+        {
+          "path": "reports/raw_archive_hashes.json",
+          "exists": true,
+          "sha256": "bf61aeb3b13ae4ed633f4b14852a6d99e4a5e3be9ded2723f8180c078495f15b",
+          "in_baseline": false,
+          "hash_matches": null
+        },
+        {
+          "path": "reports/raw_archive_hashes_extended.json",
+          "exists": true,
+          "sha256": "234018445d7577a5c85f86529ef18524127ec419f3f40c63184004cf2a7f49c6",
+          "in_baseline": false,
+          "hash_matches": null
+        },
+        {
+          "path": "docs/data_provenance.md",
+          "exists": true,
+          "sha256": "e621f86dec4456b248473d122a032b9620e3774a665e5a859b48620fb4d48712",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "scripts/build_data_provenance.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_all_hashes.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 2",
+      "title": "Folds and Partitioning",
+      "files": [
+        {
+          "path": "data/processed_7ep/attack_sequences.json",
+          "exists": true,
+          "sha256": "f835cee2c0272fd0fcf1b17c0bb72bd1396059fb108a1bbce0bcbad40a959d82",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/evaluation_7ep_results.json",
+          "exists": true,
+          "sha256": "61888fcb4824705a9b46c4699a8d698145a18d28170f482b89960a5ec2070b32",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/build_processed_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_stage1_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 3",
+      "title": "Evaluation Slices",
+      "files": [
+        {
+          "path": "data/processed_7ep/attack_sequences.json",
+          "exists": true,
+          "sha256": "f835cee2c0272fd0fcf1b17c0bb72bd1396059fb108a1bbce0bcbad40a959d82",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/evaluation_7ep_results.json",
+          "exists": true,
+          "sha256": "61888fcb4824705a9b46c4699a8d698145a18d28170f482b89960a5ec2070b32",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_evaluation_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_evaluation_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 4",
+      "title": "Models and Tuning Constraints",
+      "files": [
+        {
+          "path": "artifacts/7ep/production_model/manifest.json",
+          "exists": true,
+          "sha256": "b2dd54c51b41e6c69280d2b532ecde3f3d46e26cdd499375cba8ca9db39e1bd3",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/evaluation_7ep_results.json",
+          "exists": true,
+          "sha256": "61888fcb4824705a9b46c4699a8d698145a18d28170f482b89960a5ec2070b32",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/train_production_model.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_prediction_records.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 5",
+      "title": "Evaluation Metrics",
+      "files": [
+        {
+          "path": "reports/7ep/evaluation_7ep_results.json",
+          "exists": true,
+          "sha256": "61888fcb4824705a9b46c4699a8d698145a18d28170f482b89960a5ec2070b32",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/evaluation_7ep_report.md",
+          "exists": true,
+          "sha256": "d358af27b4d2787fee8f2135648b05796263e5ebdd1ce557089d5da350f2f5b4",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_evaluation_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_evaluation_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 6",
+      "title": "Primary Hypotheses and Statistical Comparisons",
+      "files": [
+        {
+          "path": "reports/7ep/evaluation_7ep_results.json",
+          "exists": true,
+          "sha256": "61888fcb4824705a9b46c4699a8d698145a18d28170f482b89960a5ec2070b32",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/evaluation_7ep_report.md",
+          "exists": true,
+          "sha256": "d358af27b4d2787fee8f2135648b05796263e5ebdd1ce557089d5da350f2f5b4",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_evaluation_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_holm_claim_rule.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 7",
+      "title": "Learning Curve Protocol",
+      "files": [
+        {
+          "path": "reports/7ep/learning_curve_7ep_results.json",
+          "exists": true,
+          "sha256": "826b964dfe0c9661372e5ec72dac8b32b8d16b61854552eee7774f53964e6324",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/learning_curve_7ep_report.md",
+          "exists": true,
+          "sha256": "00a5947ec909691c4d5b3ff4f4911e578db89ae6cbfe061bcad48a09a6b2ec99",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_learning_curve_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_learning_curve_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 8",
+      "title": "Handling of Episode E5 (Sensitivity Analysis)",
+      "files": [
+        {
+          "path": "reports/7ep/e5_removed_results.json",
+          "exists": true,
+          "sha256": "40582dee4d868410cd2ff855f19c309ab9327d715cea7d14c8e48bc7a7ccc88c",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/e5_removed_report.md",
+          "exists": true,
+          "sha256": "95c4b223b4ed7136493af9a19bf6af6ec2ac8591fba555db263ad159517afcfc",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_sensitivity_analysis_e5.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_e5_removed.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 9",
+      "title": "Real-Scale Planted Structure Power Analysis (A4 Re-Run)",
+      "files": [
+        {
+          "path": "reports/7ep/planted_realscale_7ep_report.json",
+          "exists": true,
+          "sha256": "b3268be7fb131bb453db0f60ef187e12752ae4c01f31818cec48209f0f10b50d",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/planted_realscale_7ep_report.md",
+          "exists": true,
+          "sha256": "a8545dc96a78cb4f6411b11144bed1cb07830855bd289e11a61325cce8954d9a",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_planted_realscale_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_planted_realscale_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 10",
+      "title": "Permutation Null Hypotheses at 7 Episodes",
+      "files": [
+        {
+          "path": "reports/7ep/permutation_7ep_report.json",
+          "exists": true,
+          "sha256": "81344d37636d88026fb64fe6d43f22ffd1dbda02077fb7e5e6ecc2dea5f1bf93",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/permutation_7ep_report.md",
+          "exists": true,
+          "sha256": "ae3f1bdc75408820122c6e25ff8165c8add4cb21e2162a77dbd544ce99723458",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_permutation_test_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_permutation_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "section": "Section 11",
+      "title": "Immutability and Pre-Registration Protocol",
+      "files": [
+        {
+          "path": "reports/prereg_7episode_design.md",
+          "exists": true,
+          "sha256": "bc0edca18d766a515f04bd355bdc4627f11dba38ea7053383b7162a8e14d6c10",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "Committed prior to 7-ep inference (commit 2cf7786)",
+      "verifier_result": {
+        "verifier": null,
+        "exit_code": null,
+        "status": "N/A"
+      },
+      "status": "COMPLIANT"
+    }
+  ],
+  "amendments": [
+    {
+      "amendment": "Amendment 1",
+      "title": "Corrections to Sec 1, 4, 5, 8, 9, 6, 10 before inference",
+      "files": [
+        {
+          "path": "reports/prereg_7episode_design.md",
+          "exists": true,
+          "sha256": "bc0edca18d766a515f04bd355bdc4627f11dba38ea7053383b7162a8e14d6c10",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "Committed prior to 7-ep inference (commit d6f3764)",
+      "verifier_result": {
+        "verifier": null,
+        "exit_code": null,
+        "status": "N/A"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "amendment": "Amendment 2",
+      "title": "Scope & correction of scenario_6_macro_library and supersession",
+      "files": [
+        {
+          "path": "reports/prereg_7episode_design.md",
+          "exists": true,
+          "sha256": "bc0edca18d766a515f04bd355bdc4627f11dba38ea7053383b7162a8e14d6c10",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "Committed prior to 7-ep inference (commit 3a6b306)",
+      "verifier_result": {
+        "verifier": null,
+        "exit_code": null,
+        "status": "N/A"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "amendment": "Amendment 3",
+      "title": "Verbatim original heading titles & repository search count",
+      "files": [
+        {
+          "path": "reports/prereg_7episode_design.md",
+          "exists": true,
+          "sha256": "bc0edca18d766a515f04bd355bdc4627f11dba38ea7053383b7162a8e14d6c10",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "Committed prior to 7-ep inference (commit ad25883)",
+      "verifier_result": {
+        "verifier": null,
+        "exit_code": null,
+        "status": "N/A"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "amendment": "Amendment 4",
+      "title": "Retraction of informal titles & record of Amendment 1 changes",
+      "files": [
+        {
+          "path": "reports/prereg_7episode_design.md",
+          "exists": true,
+          "sha256": "bc0edca18d766a515f04bd355bdc4627f11dba38ea7053383b7162a8e14d6c10",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "Committed prior to 7-ep inference (commit 3ffba13)",
+      "verifier_result": {
+        "verifier": null,
+        "exit_code": null,
+        "status": "N/A"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "amendment": "Amendment 5",
+      "title": "Verification of committed repository text vs chat report",
+      "files": [
+        {
+          "path": "reports/prereg_7episode_design.md",
+          "exists": true,
+          "sha256": "bc0edca18d766a515f04bd355bdc4627f11dba38ea7053383b7162a8e14d6c10",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "Committed prior to result interpretation (commit 2d68ae5)",
+      "verifier_result": {
+        "verifier": null,
+        "exit_code": null,
+        "status": "N/A"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "amendment": "Amendment 6",
+      "title": "Wording and verification only; no numbers change",
+      "files": [
+        {
+          "path": "reports/7ep/permutation_7ep_report.md",
+          "exists": true,
+          "sha256": "ae3f1bdc75408820122c6e25ff8165c8add4cb21e2162a77dbd544ce99723458",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/permutation_test_v2_report.md",
+          "exists": true,
+          "sha256": "afe4a60cda1bb2b9c77958de3bd8397777d5d262f945e94dc4c518475f39c85d",
+          "in_baseline": false,
+          "hash_matches": null
+        },
+        {
+          "path": "scripts/mutation_sweep.py",
+          "exists": true,
+          "sha256": "4e7d8b8451229c580e639ceadc6765ccb031dcdfd32dba8ab7b2a30721e3820e",
+          "in_baseline": false,
+          "hash_matches": null
+        },
+        {
+          "path": "scripts/verify_evaluation.py",
+          "exists": true,
+          "sha256": "6595b41958093a1d47000d09919e03d26c7b5910d062345334a6134f692f76c7",
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "scripts/verify_evaluation.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_evaluation.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    },
+    {
+      "amendment": "Amendment 7",
+      "title": "Exploratory post hoc variant (Tactic-Conditioned Technique Prediction)",
+      "files": [
+        {
+          "path": "reports/7ep/exploratory_tactic_conditioned_results.json",
+          "exists": true,
+          "sha256": "72ce8ad8cc7c12b3467ba7312673de341fd44976e98e94b99a8913bc7aedf914",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/exploratory_tactic_conditioned_report.md",
+          "exists": true,
+          "sha256": "38a36586d12dcd5f1814389287fdf7c15e457a04cca45d62a5e0b35cc4f8f819",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "data/processed_7ep/exploratory_tactic_conditioned_predictions.csv",
+          "exists": true,
+          "sha256": "a2fb5f358b08a5b97ebd22e76075fee269b35ea39fe5c26b95223538495949e0",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_exploratory_variant.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_exploratory_tactic_conditioned.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "COMPLIANT"
+    }
+  ],
+  "non_prereg_analyses": [
+    {
+      "name": "diagnostics_7ep",
+      "type": "POST HOC",
+      "description": "Cross-episode vocabulary overlap and transition diagnostic analyzing zero repeat transitions between different attack campaigns.",
+      "files": [
+        {
+          "path": "reports/7ep/diagnostics_7ep.json",
+          "exists": true,
+          "sha256": "a370e03f002571fa5641f110864f5544e14da933a2d3a918eedc96e8c93c5cf5",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/diagnostics_7ep.md",
+          "exists": true,
+          "sha256": "78141dffb359f877ddc1b116f7f3826a78446649901b138b47b3b2a1fa0ed778",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_diagnostics_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_all_hashes.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "VERIFIED_POST_HOC"
+    },
+    {
+      "name": "e5_hit1_change_diagnostic",
+      "type": "POST HOC",
+      "description": "Diagnostic investigation of Episode E5 Hit@1 score behavior under LOEO cross-validation.",
+      "files": [
+        {
+          "path": "reports/audit/e5_hit1_change_diagnostic.md",
+          "exists": false,
+          "sha256": null,
+          "in_baseline": false,
+          "hash_matches": null
+        }
+      ],
+      "script": "scripts/run_e5_hit1_change_diagnostic.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_e5_hit1_diagnostic.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "NON_COMPLIANT"
+    },
+    {
+      "name": "tie_sensitivity_7ep",
+      "type": "POST HOC",
+      "description": "Systematic tie-sensitivity analysis of Markov and Frequency predictions across all 171 LOEO prediction records under min, max, and random tie-breaking.",
+      "files": [
+        {
+          "path": "reports/7ep/tie_sensitivity_7ep.json",
+          "exists": true,
+          "sha256": "a7f9263237440954e0ef29c97d41597008053f9d6e057f752fb0d2a928959bcd",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/tie_sensitivity_7ep.md",
+          "exists": true,
+          "sha256": "125d0b5c31e85d2c3ede87b473a28b11aebabd5fc5d87155956d24e507254488",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_tie_sensitivity_7ep.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_tie_sensitivity_7ep.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "VERIFIED_POST_HOC"
+    },
+    {
+      "name": "exploratory_tactic_conditioned",
+      "type": "POST HOC",
+      "description": "Tactic-conditioned technique prediction variant pre-declared under Amendment 7 to evaluate whether tactic order signals project onto technique candidates.",
+      "files": [
+        {
+          "path": "reports/7ep/exploratory_tactic_conditioned_results.json",
+          "exists": true,
+          "sha256": "72ce8ad8cc7c12b3467ba7312673de341fd44976e98e94b99a8913bc7aedf914",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "reports/7ep/exploratory_tactic_conditioned_report.md",
+          "exists": true,
+          "sha256": "38a36586d12dcd5f1814389287fdf7c15e457a04cca45d62a5e0b35cc4f8f819",
+          "in_baseline": true,
+          "hash_matches": true
+        },
+        {
+          "path": "data/processed_7ep/exploratory_tactic_conditioned_predictions.csv",
+          "exists": true,
+          "sha256": "a2fb5f358b08a5b97ebd22e76075fee269b35ea39fe5c26b95223538495949e0",
+          "in_baseline": true,
+          "hash_matches": true
+        }
+      ],
+      "script": "scripts/run_exploratory_variant.py",
+      "verifier_result": {
+        "verifier": "scripts/verify_exploratory_tactic_conditioned.py",
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      "status": "VERIFIED_POST_HOC"
+    }
+  ],
+  "deviations_and_limits": [
+    {
+      "id": "G8 loose",
+      "category": "Pre-registration Gate Limit",
+      "description": "In synthetic real-scale planted structure analysis (reports/7ep/planted_realscale_7ep_report.md), gate G8 bound |Markov Top-1 - 1/(V-1)| <= max(0.02, 3*SE) was loose at small sample sizes (V=82), though recovered consistency at larger sequence lengths.",
+      "impact": "Documented in planted real-scale report; G9 and G10 passed unconditionally."
+    },
+    {
+      "id": "A2 history not reproducible",
+      "category": "Historical Reproducibility Limit",
+      "description": "Historical intermediary files from early 4-episode A2 exploration cannot be recreated bit-for-bit identically due to missing random seeds in initial exploratory scratch scripts. All final reports and baselines remain frozen and verified.",
+      "impact": "Confined strictly to early scratch exploration history; does not affect any 4-episode or 7-episode benchmark conclusions."
+    },
+    {
+      "id": "S2 excluded at 7 episodes",
+      "category": "Null Hypothesis Protocol Modification",
+      "description": "Scheme S2 (unconstrained adjacent shuffle) was excluded in the 7-episode pre-registration design because 4-episode analysis proved it produces artificial adjacent identical transitions absent in collapsed sequences. Replaced by S1 (headline) and S3 (constrained).",
+      "impact": "Pre-registered and adhered to; S2 rows in 4-episode reports are marked as invalid nulls per 12c Rule C."
+    },
+    {
+      "id": "Amendment 6 wording changes",
+      "category": "Reporting Neutralization",
+      "description": "Speculative causal statements in permutation test reporting scripts were neutralized to factual difference statistic statements; Markov-minus-Frequency conclusion strings updated to explicitly state they do not test Markov vs Frequency (which is P1/P2).",
+      "impact": "Purely wording and verifier enhancements; zero experimental numbers or test results were modified."
+    }
+  ]
+}

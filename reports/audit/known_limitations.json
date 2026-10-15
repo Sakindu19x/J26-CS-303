@@ -1,0 +1,92 @@
+[
+  {
+    "id": "LIM-01",
+    "title": "Small Initial Sample Size (4 Episodes)",
+    "category": "Dataset Scope",
+    "status": "CLOSED",
+    "resolution_commit": "2cf7786",
+    "description": "The initial 4-episode evaluation (N=67) had limited statistical power to differentiate fine-grained sequence dynamics.",
+    "resolution": "Expanded to 7 episodes (E1-E7, N=95) with formal pre-registration, LOEO cross-validation, and power analysis."
+  },
+  {
+    "id": "LIM-02",
+    "title": "Cross-Scenario Technique Vocabulary Isolation",
+    "category": "Domain Generalization",
+    "status": "CLOSED",
+    "resolution_commit": "d6f3764",
+    "description": "Technique-level attack patterns exhibit zero repeat transitions across disparate campaigns, causing severe coverage and reachability bottlenecks.",
+    "resolution": "Quantified via Target Reachability Ceiling (62.11%) and Perfect-Order Prediction Cap (64.98%), formally explaining the performance gap."
+  },
+  {
+    "id": "LIM-03",
+    "title": "Episode E5 Sample Imbalance",
+    "category": "Data Quality",
+    "status": "CLOSED",
+    "resolution_commit": "3a6b306",
+    "description": "Episode E5 contains only 3 labeled events (2 collapsed transitions), resulting in zero coverage under LOEO cross-validation.",
+    "resolution": "Conducted full side-by-side sensitivity analysis with E5 removed (6-fold LOEO, N=83) confirming all conclusions hold independently of E5."
+  },
+  {
+    "id": "LIM-04",
+    "title": "Artificial Duplicates in Permutation Scheme S2",
+    "category": "Statistical Methodology",
+    "status": "CLOSED",
+    "resolution_commit": "14f3b89",
+    "description": "Unconstrained adjacent shuffling in Scheme S2 generated consecutive identical transitions that never occur in collapsed empirical sequences.",
+    "resolution": "Formally excluded S2 from 7-episode design in pre-registration; adopted Scheme S1 (headline) and Scheme S3 (rejection-sampled constrained shuffle)."
+  },
+  {
+    "id": "LIM-05",
+    "title": "Speculative Wording in Permutation Test Scripts",
+    "category": "Reporting Neutrality",
+    "status": "CLOSED",
+    "resolution_commit": "14f3b89",
+    "description": "Reporting scripts included causal speculation regarding adjacency constraints and ambiguous wording on Markov-minus-Frequency rows.",
+    "resolution": "Neutralized under Amendment 6 to factual difference statistic descriptions and explicit disclaimers regarding hypothesis test boundaries."
+  },
+  {
+    "id": "LIM-06",
+    "title": "Synthetic Planted Structure Gate G8 Bound Sensitivity",
+    "category": "Simulation Validation",
+    "status": "CLOSED",
+    "resolution_commit": "14f3b89",
+    "description": "At small sample sizes with V=82, estimator recovery bound for G8 was loose relative to large-sample asymptotics.",
+    "resolution": "Documented in planted real-scale report; G9 (monotonicity) and G10 (reachability recovery) passed unconditionally."
+  },
+  {
+    "id": "LIM-07",
+    "title": "Historical Intermediary A2 Scratch Run Reproducibility",
+    "category": "Provenance Integrity",
+    "status": "CLOSED",
+    "resolution_commit": "d4557f4",
+    "description": "Intermediary files from early exploratory 4-episode A2 scratch exploration lacked fixed seeds in exploratory scripts.",
+    "resolution": "Isolated strictly to early scratch exploration history; all benchmark code, final reports, and baseline hashes are frozen and verified."
+  },
+  {
+    "id": "LIM-08",
+    "title": "Absence of Live Operational C3 Metadata in CAM-LDS",
+    "category": "Interface Contract",
+    "status": "OPEN",
+    "resolution_commit": null,
+    "description": "The open-source CAM-LDS benchmark lacks operational SOC telemetry fields (threat score, investigation priority, asset criticality, CTI confidence, IoCs).",
+    "resolution": "C4 prediction record and C3 adapter support pass-through with explicit null semantics pending live integration agreement with C3 owner."
+  },
+  {
+    "id": "LIM-09",
+    "title": "Real-Time Streaming Ingestion and Dynamic Episode Demarcation",
+    "category": "Operational Deployment",
+    "status": "OPEN",
+    "resolution_commit": null,
+    "description": "Benchmark operates on demarcated retrospective episodes; real-time SOC deployment requires automated session boundary detection and sliding window aggregation.",
+    "resolution": "Marked as an open research/engineering question in docs/c3_open_questions.md for Stage 3 production deployment."
+  },
+  {
+    "id": "LIM-10",
+    "title": "Higher-Order Context Memory ($k \\ge 2$ Markov Dynamics)",
+    "category": "Model Expressiveness",
+    "status": "OPEN",
+    "resolution_commit": null,
+    "description": "First-order Markov chains only condition on the immediate previous transition state, ignoring multi-step attack history.",
+    "resolution": "Exploratory analysis showed severe state space sparsity even at order 1; higher-order models require substantially larger cross-enterprise corpora."
+  }
+]
