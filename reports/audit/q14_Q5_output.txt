@@ -1,0 +1,77 @@
+================================================================================
+Q5 CLAIMS MAP REBUILD & VERIFICATION (2026-10-15T07:29:19.938177+00:00)
+================================================================================
+
+--- [Step 1] Running scripts/build_claims_map.py ---
+Generated C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\viva\claims.json (13 claims)
+Generated C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\viva\claims_to_evidence_map.md
+
+--- [Step 2] Running scripts/verify_claims_map.py ---
+================================================================================
+INDEPENDENT CLAIMS MAP VERIFICATION (scripts/verify_claims_map.py)
+================================================================================
+[Step 1] Eval CSV recomputations and anchors (technique N=95, tactic N=76, P1, P2) [PASS]
+[Step 2] Permutation S1 p-values from JSON and MD [PASS]
+[Step 3] Ceilings 59/95 (62.11%) and 64.98% verified [PASS]
+[Step 4] Exploratory counts and McNemar p-values [PASS]
+[Step 5] Tie bounds A and B exact verification [PASS]
+[Step 6] Forbidden set check (23 forbidden p-values checked; none present) [PASS]
+[Step 7] All cited files exist, test nodes collect, and git tags resolve [PASS]
+[Step 8] All 13 required claims present and properly formatted [PASS]
+[Step 9] All placeholders match recomputed metrics and all rendered statements present in MD [PASS]
+================================================================================
+ALL CLAIMS MAP VERIFICATIONS PASSED SUCCESSFULLY (Exit 0)
+================================================================================
+
+--- [Step 3] Running scripts/mutation_sweep_claims_map.py ---
+================================================================================
+MUTATION SWEEP: reports/viva/claims.json AND claims_to_evidence_map.md
+================================================================================
+================================================================================
+INDEPENDENT CLAIMS MAP VERIFICATION (scripts/verify_claims_map.py)
+================================================================================
+[Step 1] Eval CSV recomputations and anchors (technique N=95, tactic N=76, P1, P2) [PASS]
+[Step 2] Permutation S1 p-values from JSON and MD [PASS]
+[Step 3] Ceilings 59/95 (62.11%) and 64.98% verified [PASS]
+[Step 4] Exploratory counts and McNemar p-values [PASS]
+[Step 5] Tie bounds A and B exact verification [PASS]
+[Step 6] Forbidden set check (23 forbidden p-values checked; none present) [PASS]
+[Step 7] All cited files exist, test nodes collect, and git tags resolve [PASS]
+[Step 8] All 13 required claims present and properly formatted [PASS]
+[Step 9] All placeholders match recomputed metrics and all rendered statements present in MD [PASS]
+================================================================================
+ALL CLAIMS MAP VERIFICATIONS PASSED SUCCESSFULLY (Exit 0)
+================================================================================
+
+--- Part 1: claims.json Mutations ---
+claims.json mutations: 116 tested, 116 detected.
+
+--- Part 2: claims_to_evidence_map.md Mutations ---
+
+================================================================================
+Total mutations evaluated: 347
+Detected or explicitly exempted: 347
+Undetected non-exempt mutations: 0
+Wrote exempt list to C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\audit\exempt_claims_map.txt
+================================================================================
+
+ALL MUTATIONS DETECTED (100% Detection Rate).
+
+--- [Step 4] Running pytest tests/test_claims_map.py ---
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collecting ... collected 3 items
+
+tests/test_claims_map.py::test_verify_claims_map_independent_verifier PASSED [ 33%]
+tests/test_claims_map.py::test_claims_required_set_and_placeholders PASSED [ 66%]
+tests/test_claims_map.py::test_forbidden_permutation_p_values_guard PASSED [100%]
+
+============================== 3 passed in 2.74s ==============================
+
+================================================================================
+Q5 CLAIMS MAP VERIFICATION & MUTATION SWEEPS ALL PASSED (EXIT 0)
+================================================================================

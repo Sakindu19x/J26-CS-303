@@ -1,0 +1,21 @@
+# Exempt Tokens for reports/viva/claims.json and claims_to_evidence_map.md
+# Specific markdown formatting / section numbering tokens that are decorative headings
+HEADING_SECTION_NUMBER: 4 in line '# Viva Claims to Evidence Map (Component 4)' (markdown document structure heading)
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 95 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 3 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 16.84 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 3.16 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 2 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 15 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 0.0023 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 0.0094 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 76 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 63.16 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 1.0000 in narrative explanation: '| **"Markov beats the baseline"** | Empirically contradicted...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 0.0430 in narrative explanation: '| **"Tactic Hit@1 order signal robustness"** | While S1 perm...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 0.0759 in narrative explanation: '| **"Tactic Hit@1 order signal robustness"** | While S1 perm...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 3 in narrative explanation: '| **"Tactic Hit@1 order signal robustness"** | While S1 perm...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 62.11 in narrative explanation: '| **"75% accuracy achieved"** | Mathematically and empirical...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 59 in narrative explanation: '| **"75% accuracy achieved"** | Mathematically and empirical...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 95 in narrative explanation: '| **"75% accuracy achieved"** | Mathematically and empirical...'
+PROHIBITED_SECTION_NARRATIVE_NUMBER: 64.98 in narrative explanation: '| **"75% accuracy achieved"** | Mathematically and empirical...'

@@ -21,3 +21,4 @@ Note: P7-P9 pytest counts were passed manually in Prompt 13; re-measured in Q0/Q
 | Q7 | `4f8d0c889e33d5df0d3ff679b596d5e44b65f7d5` | 0 | 188 | 0 | PASS | 2026-10-15T06:42:40Z |
 | Q9 | `c7b3d5e5456230db621a14ac96d7f9e351de22f1` | 0 | 189 | 0 | PASS | 2026-10-15T06:55:28Z |
 | Q4 | `cf6e5dbd885a7a6452817195abb0e1a284c25cec` | 0 | 192 | 0 | PASS | 2026-10-15T07:05:03Z |
+| Q5 | `4fc004bd150dbc599fa014ac64bbaf65bee59720` | 0 | 195 | 0 | PASS | 2026-10-15T07:30:46Z |

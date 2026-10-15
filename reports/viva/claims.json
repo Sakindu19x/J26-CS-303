@@ -1,132 +1,323 @@
 [
   {
     "id": "CLAIM-01",
-    "name": "pipeline_reproducible",
-    "template": "The entire 7-episode pipeline reproduces deterministically from raw archives to evaluation outputs and prediction records with identical SHA-256 baselines across all platforms.",
-    "evidence_file": "reports/reproduction_audit.json",
+    "name": "pipeline_reproducibility",
+    "template": "Pipeline reproducibility from raw archives through clean clone rebuild is not yet proven (pending Q2 execution).",
+    "placeholders": {},
+    "sources": [
+      {
+        "file": "reports/audit/rebuild_scope.md",
+        "description": "Baseline rebuild scope and hash verification register"
+      }
+    ],
+    "allowed_use": "Stating that pipeline reproduces deterministically in the local working tree, noting fresh clean clone verification is in progress under Q2.",
+    "forbidden_use": "Claiming full clean clone reproduction before Q2 clean clone rebuild passes.",
+    "evidence_file": "scripts/reproduce_all.py",
     "script": "scripts/reproduce_all.py",
     "verifier": "scripts/verify_all_hashes.py",
-    "baseline_entry": "reports/_baseline_hashes_7ep_stage1.json",
-    "data_source": "reports/7ep/evaluation_7ep_results.json"
+    "test_node": "tests/test_timeline_and_sequences.py::test_pipeline_hash_stability_double_run"
   },
   {
     "id": "CLAIM-02",
-    "name": "preregistered_verdict",
-    "template": "The pre-registered primary hypothesis test verdict is '{verdict}': pooled Markov Hit@3 ({markov_hit3:.2%}) does not exceed Frequency baseline Hit@3 ({freq_hit3:.2%}) at the primary technique level (Holm-adjusted p = {holm_p:.4f}).",
-    "evidence_file": "reports/7ep/evaluation_7ep_results.json",
+    "name": "p1_tactic_baseline_tie",
+    "template": "Pre-registered hypothesis test P1 at tactic level (N={tactic_n}): Markov Hit@3 ({tac_m3}/{tactic_n}, {tac_m3_pct:.2f}%) ties Frequency Hit@3 ({tac_f3}/{tactic_n}, {tac_f3_pct:.2f}%), paired McNemar b={p1_b}, c={p1_c}, exact raw p = {p1_raw_p:.4f}, Holm-adjusted p = {p1_holm_p:.4f}; verdict: improvement over baseline not demonstrated.",
+    "placeholders": {
+      "tactic_n": 76,
+      "tac_m3": 48,
+      "tac_m3_pct": 63.1578947368421,
+      "tac_f3": 48,
+      "tac_f3_pct": 63.1578947368421,
+      "p1_b": 12,
+      "p1_c": 12,
+      "p1_raw_p": 1.0,
+      "p1_holm_p": 1.0
+    },
+    "sources": [
+      {
+        "file": "data/processed_7ep/evaluation_7ep_predictions.csv",
+        "method": "csv_recompute"
+      },
+      {
+        "file": "reports/7ep/holm_claim_rule_results.json",
+        "json_pointer": "/family/P1"
+      }
+    ],
+    "allowed_use": "Citing exact McNemar equality and Holm-adjusted p = 1.0000 proving that tactic Markov does not outperform Frequency baseline.",
+    "forbidden_use": "Claiming Markov superiority at tactic level or ignoring the pre-registered non-demonstration verdict.",
+    "evidence_file": "reports/7ep/holm_claim_rule_results.json",
     "script": "scripts/run_evaluation_7ep.py",
     "verifier": "scripts/verify_holm_claim_rule.py",
-    "baseline_entry": "reports/7ep/evaluation_7ep_results.json",
-    "data_source": "reports/7ep/evaluation_7ep_results.json"
+    "test_node": "tests/test_tactic_evaluation_consistency.py::test_paired_2x2_and_frequency_only_split_match_recomputed"
   },
   {
     "id": "CLAIM-03",
-    "name": "p2_baseline_superiority",
-    "template": "At the technique level (collapsed_full, N=95), the Frequency baseline (Hit@3 = {freq_hit3:.2%}) significantly outperforms the first-order Markov model (Hit@3 = {markov_hit3:.2%}, paired McNemar p = {mcnemar_p:.4f}).",
-    "evidence_file": "reports/7ep/evaluation_7ep_results.json",
+    "name": "p2_technique_baseline_superiority",
+    "template": "Pre-registered hypothesis test P2 at technique level (N={technique_n}): Frequency baseline Hit@3 ({tech_f3}/{technique_n}, {tech_f3_pct:.2f}%) significantly outperforms Markov Hit@3 ({tech_m3}/{technique_n}, {tech_m3_pct:.2f}%), paired McNemar b={p2_b}, c={p2_c}, exact raw p = {p2_raw_p:.4f}, Holm-adjusted p = {p2_holm_p:.4f}; verdict: improvement over baseline not demonstrated.",
+    "placeholders": {
+      "technique_n": 95,
+      "tech_m3": 3,
+      "tech_m3_pct": 3.1578947368421053,
+      "tech_f3": 16,
+      "tech_f3_pct": 16.842105263157894,
+      "p2_b": 2,
+      "p2_c": 15,
+      "p2_raw_p": 0.002349853515625,
+      "p2_holm_p": 0.0093994140625
+    },
+    "sources": [
+      {
+        "file": "data/processed_7ep/evaluation_7ep_predictions.csv",
+        "method": "csv_recompute"
+      },
+      {
+        "file": "reports/7ep/holm_claim_rule_results.json",
+        "json_pointer": "/family/P2"
+      }
+    ],
+    "allowed_use": "Citing significant baseline superiority where Frequency baseline exceeds Markov model by 13 paired hits (b=2 vs c=15).",
+    "forbidden_use": "Claiming Markov model outperforms baseline at technique level.",
+    "evidence_file": "reports/7ep/holm_claim_rule_results.json",
     "script": "scripts/run_evaluation_7ep.py",
-    "verifier": "scripts/verify_evaluation_7ep.py",
-    "baseline_entry": "reports/7ep/evaluation_7ep_results.json",
-    "data_source": "reports/7ep/evaluation_7ep_results.json"
+    "verifier": "scripts/verify_holm_claim_rule.py",
+    "test_node": "tests/test_tactic_evaluation_consistency.py::test_results_json_matches_recomputed"
   },
   {
     "id": "CLAIM-04",
-    "name": "p3_tactic_order_signal",
-    "template": "At the tactic level (tactic_collapsed, N=76), attack sequence temporal order carries detectable signal against shuffled-order null S1 (Markov Hit@1 p = {s1_tactic_hit1_p:.4f}, Hit@3 p = {s1_tactic_hit3_p:.4f}).",
+    "name": "p3_p4_order_signal",
+    "template": "Attack sequence order hypothesis tests against unconstrained shuffled null S1: Tactic level (P3, N={tactic_n}) exhibits detectable order signal (Markov Hit@1 p = {s1_tac_m1_p:.4f}, Hit@3 raw p = {s1_tac_m3_p:.4f}, Holm p = {s1_tac_m3_holm_p:.4f}); Technique level (P4, N={technique_n}) exhibits no detectable order signal (Markov Hit@1 p = {s1_tech_m1_p:.4f}, Hit@3 raw p = {s1_tech_m3_p:.4f}, Holm p = {s1_tech_m3_holm_p:.4f}).",
+    "placeholders": {
+      "tactic_n": 76,
+      "technique_n": 95,
+      "s1_tac_m1_p": 0.04295704295704296,
+      "s1_tac_m3_p": 0.005994005994005994,
+      "s1_tac_m3_holm_p": 0.017982017982017984,
+      "s1_tech_m1_p": 0.15484515484515485,
+      "s1_tech_m3_p": 0.3856143856143856,
+      "s1_tech_m3_holm_p": 0.7712287712287712
+    },
+    "sources": [
+      {
+        "file": "reports/7ep/permutation_7ep_report.json",
+        "json_pointer": "/schemes/S1_collapsed_order"
+      },
+      {
+        "file": "reports/7ep/permutation_7ep_report.md",
+        "method": "text_parse"
+      }
+    ],
+    "allowed_use": "Citing tactical-level order signal presence alongside technique-level lack of order signal.",
+    "forbidden_use": "Citing Markov-minus-Frequency difference permutation rows as statistical evidence of Markov superiority.",
     "evidence_file": "reports/7ep/permutation_7ep_report.json",
     "script": "scripts/run_permutation_test_7ep.py",
     "verifier": "scripts/verify_permutation_7ep.py",
-    "baseline_entry": "reports/7ep/permutation_7ep_report.json",
-    "data_source": "reports/7ep/permutation_7ep_report.json"
+    "test_node": "tests/test_permutation_test_v2.py::test_observed_values_equal_reports"
   },
   {
     "id": "CLAIM-05",
-    "name": "p4_technique_no_order_signal",
-    "template": "At the technique level (collapsed_full, N=95), attack sequence temporal order carries no detectable signal against shuffled-order null S1 (Markov Hit@1 p = {s1_tech_hit1_p:.4f}, Hit@3 p = {s1_tech_hit3_p:.4f}).",
-    "evidence_file": "reports/7ep/permutation_7ep_report.json",
-    "script": "scripts/run_permutation_test_7ep.py",
-    "verifier": "scripts/verify_permutation_7ep.py",
-    "baseline_entry": "reports/7ep/permutation_7ep_report.json",
-    "data_source": "reports/7ep/permutation_7ep_report.json"
-  },
-  {
-    "id": "CLAIM-06",
-    "name": "ceiling_and_cap_bounds",
-    "template": "Cross-scenario vocabulary isolation restricts technique-level LOEO performance: target reachability ceiling is {ceiling_pct:.2f}% ({ceiling_num}/{ceiling_den}) and perfect-order prediction cap is {perfect_cap_pct:.2f}%, both strictly below 75%.",
-    "evidence_file": "reports/7ep/evaluation_7ep_results.json",
-    "script": "scripts/run_evaluation_7ep.py",
-    "verifier": "scripts/verify_evaluation_7ep.py",
-    "baseline_entry": "reports/7ep/evaluation_7ep_results.json",
-    "data_source": "reports/7ep/evaluation_7ep_results.json"
-  },
-  {
-    "id": "CLAIM-07",
-    "name": "learning_curve_behavior",
-    "template": "In combinatorial subset cross-validation (441 evaluations across k=1..6), Frequency baseline exceeds or matches Markov model in episode-mean tactic Hit@3 at every training subset size k.",
-    "evidence_file": "reports/7ep/learning_curve_7ep_results.json",
-    "script": "scripts/run_learning_curve_7ep.py",
-    "verifier": "scripts/verify_learning_curve_7ep.py",
-    "baseline_entry": "reports/7ep/learning_curve_7ep_results.json",
-    "data_source": "reports/7ep/learning_curve_7ep_results.json"
-  },
-  {
-    "id": "CLAIM-08",
-    "name": "tactic_hit1_tie_sensitivity",
-    "template": "Under systematic tie-breaking evaluation (min, max, random over 1000 trials), tactic Hit@1 spans [{m_min:.2%}, {m_max:.2%}] for Markov and [{f_min:.2%}, {f_max:.2%}] for Frequency baseline, confirming stability of conclusions.",
+    "name": "tie_bounds_exact",
+    "template": "Under exact expectation under uniform random tie-breaking (not a simulation): Bound A (Markov-favoured) yields technique P2 b={bound_a_b}, c={bound_a_c}, Holm p = {bound_a_holm_p:.4f}; Bound B (Frequency-favoured) yields technique P2 b={bound_b_b}, c={bound_b_c}, Holm p = {bound_b_holm_p:.4f}; pre-registered non-demonstration verdict holds across all tie configurations.",
+    "placeholders": {
+      "bound_a_b": 2,
+      "bound_a_c": 12,
+      "bound_a_holm_p": 0.038818359375,
+      "bound_b_b": 2,
+      "bound_b_c": 15,
+      "bound_b_holm_p": 0.0093994140625
+    },
+    "sources": [
+      {
+        "file": "reports/7ep/tie_sensitivity_7ep.json",
+        "json_pointer": "/pre_registered_conclusion_bounds"
+      }
+    ],
+    "allowed_use": "Demonstrating mathematical robustness of verdict across extreme tie-break assignments.",
+    "forbidden_use": "Describing tie bounds as empirical Monte Carlo simulation trials rather than exact mathematical bounds.",
     "evidence_file": "reports/7ep/tie_sensitivity_7ep.json",
     "script": "scripts/run_tie_sensitivity_7ep.py",
     "verifier": "scripts/verify_tie_sensitivity_7ep.py",
-    "baseline_entry": "reports/7ep/tie_sensitivity_7ep.json",
-    "data_source": "reports/7ep/tie_sensitivity_7ep.json"
+    "test_node": "tests/test_tactic_evaluation_consistency.py::test_tie_diagnostic_matches_recomputed"
+  },
+  {
+    "id": "CLAIM-06",
+    "name": "exploratory_negative_result",
+    "template": "The post-hoc exploratory tactic-conditioned technique prediction variant achieves Top-1 = {exp_top1_count}/{exp_n} ({exp_top1_pct:.2f}%) and Top-3 = {exp_top3_count}/{exp_n} ({exp_top3_pct:.2f}%), with descriptive McNemar vs Frequency p = {exp_mcnemar_top1_p:.4f} (Top-1) and p = {exp_mcnemar_top3_p:.4f} (Top-3), confirming a negative result and leaving the pre-registered verdict unchanged.",
+    "placeholders": {
+      "exp_n": 95,
+      "exp_top1_count": 5,
+      "exp_top3_count": 8,
+      "exp_top1_pct": 5.26,
+      "exp_top3_pct": 8.42,
+      "exp_mcnemar_top1_p": 0.7744140625,
+      "exp_mcnemar_top3_p": 0.057373046875
+    },
+    "sources": [
+      {
+        "file": "data/processed_7ep/exploratory_tactic_conditioned_predictions.csv",
+        "method": "csv_recompute"
+      },
+      {
+        "file": "reports/7ep/exploratory_tactic_conditioned_results.json",
+        "json_pointer": "/runs/7ep"
+      }
+    ],
+    "allowed_use": "Discussing negative exploratory findings and architecture limitations in discussion/future work.",
+    "forbidden_use": "Claiming exploratory tactic conditioning resolves the technique-level performance gap.",
+    "evidence_file": "reports/7ep/exploratory_tactic_conditioned_results.json",
+    "script": "scripts/run_exploratory_tactic_conditioned.py",
+    "verifier": "scripts/verify_exploratory_tactic_conditioned.py",
+    "test_node": "tests/test_tactic_evaluation_consistency.py::test_results_json_matches_recomputed"
+  },
+  {
+    "id": "CLAIM-07",
+    "name": "ceilings_reachability_and_cap",
+    "template": "Cross-scenario vocabulary isolation restricts technique-level LOEO performance: target reachability ceiling is {ceiling_pct:.2f}% ({ceiling_hits}/{technique_n}) and perfect-order prediction cap is {perfect_cap_pct:.2f}%, both mathematically and empirically capping performance below 75%.",
+    "placeholders": {
+      "ceiling_pct": 62.11,
+      "ceiling_hits": 59,
+      "technique_n": 95,
+      "perfect_cap_pct": 64.98
+    },
+    "sources": [
+      {
+        "file": "reports/7ep/evaluation_7ep_results.json",
+        "json_pointer": "/primary_slice_technique_collapsed_full/headline/ceiling"
+      },
+      {
+        "file": "reports/7ep/planted_realscale_7ep_report.json",
+        "json_pointer": "/results_by_signal/1.0/markov_top1_mean"
+      }
+    ],
+    "allowed_use": "Explaining the mathematical reachability gap imposed by LOEO cross-validation.",
+    "forbidden_use": "Claiming 75% accuracy is attainable on this benchmark dataset under LOEO.",
+    "evidence_file": "reports/7ep/evaluation_7ep_results.json",
+    "script": "scripts/run_evaluation_7ep.py",
+    "verifier": "scripts/verify_evaluation_7ep.py",
+    "test_node": "tests/test_stage1_7ep.py::test_sample_counts_and_bounds"
+  },
+  {
+    "id": "CLAIM-08",
+    "name": "learning_curve_k6_episode_mean",
+    "template": "In combinatorial subset cross-validation (441 evaluations across k=1..6), at full k=6 training size the unweighted episode-mean tactic Hit@1 is {lc_k6_m1:.2f}% (Markov) vs {lc_k6_f1:.2f}% (Frequency), and Hit@3 is {lc_k6_m3:.2f}% (Markov) vs {lc_k6_f3:.2f}% (Frequency), with {lc_k6_cov:.2f}% state coverage.",
+    "placeholders": {
+      "lc_k6_m1": 30.93,
+      "lc_k6_m3": 62.52,
+      "lc_k6_f1": 22.69,
+      "lc_k6_f3": 69.73,
+      "lc_k6_cov": 98.1
+    },
+    "sources": [
+      {
+        "file": "reports/7ep/learning_curve_7ep_results.json",
+        "json_pointer": "/learning_curve/k_6/unweighted_episode_mean"
+      }
+    ],
+    "allowed_use": "Demonstrating data-scaling dynamics across subsets k=1..6.",
+    "forbidden_use": "Extrapolating learning curves beyond observed 7 simulation episodes.",
+    "evidence_file": "reports/7ep/learning_curve_7ep_results.json",
+    "script": "scripts/run_learning_curve_7ep.py",
+    "verifier": "scripts/verify_learning_curve_7ep.py",
+    "test_node": "tests/test_tactic_evaluation_consistency.py::test_per_fold_breakdown_matches_recomputed"
   },
   {
     "id": "CLAIM-09",
-    "name": "exploratory_variant_posthoc",
-    "template": "The exploratory tactic-conditioned technique prediction variant (POST HOC, Amendment 7) achieves pooled Top-1 = {top1:.2%} and Top-3 = {top3:.2%} (descriptive McNemar vs Frequency p = {mcnemar_p:.4f}), which does not overturn the pre-registered verdict.",
-    "evidence_file": "reports/7ep/exploratory_tactic_conditioned_results.json",
-    "script": "scripts/run_exploratory_variant.py",
-    "verifier": "scripts/verify_exploratory_tactic_conditioned.py",
-    "baseline_entry": "reports/7ep/exploratory_tactic_conditioned_results.json",
-    "data_source": "reports/7ep/exploratory_tactic_conditioned_results.json"
+    "name": "nfr1_timing_performance",
+    "template": "End-to-end pipeline execution satisfies declared NFR1 timing criteria: warm median latency is {warm_med:.4f} s (threshold <= 2.00 s), p95 latency is {warm_p95:.4f} s (threshold <= 5.00 s), and parent-timed process cold start is {cold_start:.4f} s (threshold <= 10.00 s).",
+    "placeholders": {
+      "warm_med": 0.0036,
+      "warm_p95": 0.0123,
+      "cold_start": 0.2679
+    },
+    "sources": [
+      {
+        "file": "reports/measurements/nfr1_timing.json",
+        "json_pointer": "/summary_warm"
+      },
+      {
+        "file": "reports/measurements/nfr1_timing.json",
+        "json_pointer": "/process_cold_start"
+      }
+    ],
+    "allowed_use": "Confirming operational feasibility under declared latency criteria.",
+    "forbidden_use": "Claiming meeting proposal-specified numerical thresholds (proposal provides qualitative criteria only).",
+    "evidence_file": "reports/measurements/nfr1_timing.json",
+    "script": "scripts/measure_nfr1.py",
+    "verifier": "scripts/verify_nfr1.py",
+    "test_node": "tests/test_nfr1.py::test_verify_nfr1_script"
   },
   {
     "id": "CLAIM-10",
-    "name": "nfr1_timing_performance",
-    "template": "End-to-end pipeline execution meets declared NFR1 timing criteria: warm median per episode is {warm_median:.4f} s (<= 2.0 s), p95 is {warm_p95:.4f} s (<= 5.0 s), and cold start is {cold_start:.4f} s (<= 10.0 s).",
-    "evidence_file": "reports/measurements/nfr1_timing.json",
-    "script": "scripts/measure_nfr1.py",
-    "verifier": "tests/test_nfr1.py",
-    "baseline_entry": "Declared transient measurement",
-    "data_source": "reports/measurements/nfr1_timing.json"
+    "name": "nfr2_reliability_determinism",
+    "template": "Prediction record generation is 100% deterministic (NFR2): building all 171 records across 3 independent processes with PYTHONHASHSEED=0, 1, and 4242 produces identical SHA-256 JSONL digests.",
+    "placeholders": {},
+    "sources": [
+      {
+        "file": "reports/audit/q14_determinism_log.txt",
+        "description": "Three subprocess SHA-256 execution log"
+      }
+    ],
+    "allowed_use": "Demonstrating strict numerical repeatability across hashseed environments.",
+    "forbidden_use": "Claiming determinism without canonical serialization and explicit tie-break ordering.",
+    "evidence_file": "reports/audit/q14_determinism_log.txt",
+    "script": "scripts/run_q7_gates.py",
+    "verifier": "scripts/verify_prediction_records.py",
+    "test_node": "tests/test_prediction_record.py::test_gp5_3_hashseed_determinism"
   },
   {
     "id": "CLAIM-11",
-    "name": "nfr2_determinism",
-    "template": "Prediction record generation is 100% deterministic (NFR2): building all 171 records across 3 independent processes with PYTHONHASHSEED=0, 1, and 4242 produces identical SHA-256 JSONL digests.",
-    "evidence_file": "reports/7ep/requirements_trace.md",
-    "script": "tests/test_prediction_records.py",
-    "verifier": "tests/test_prediction_records.py",
-    "baseline_entry": "reports/7ep/requirements_trace.md",
-    "data_source": "reports/7ep/requirements_trace.md"
+    "name": "nfr3_security_non_modification",
+    "template": "Input audit event immutability is cryptographically guaranteed (NFR3): input SHA-256 is bit-identical before and after record building, and sorted event timelines are 100% invariant across 100 random input permutations.",
+    "placeholders": {},
+    "sources": [
+      {
+        "file": "data/processed_7ep/normalized_events.json",
+        "description": "Canonical normalized audit events"
+      }
+    ],
+    "allowed_use": "Proving digital evidence preservation and forensic integrity.",
+    "forbidden_use": "Claiming forensic immutability without canonical SHA-256 validation.",
+    "evidence_file": "data/processed_7ep/normalized_events.json",
+    "script": "scripts/run_q7_gates.py",
+    "verifier": "scripts/verify_prediction_records.py",
+    "test_node": "tests/test_prediction_record.py::test_gp5_4_deep_frozen_inputs_non_modification"
   },
   {
     "id": "CLAIM-12",
-    "name": "nfr3_non_modification",
-    "template": "Pipeline non-modification guarantee holds (NFR3): input event objects are deep-frozen, timestamps ties broken deterministically by input index, and input SHA-256 before and after record generation is bit-identical across 100 permutations.",
-    "evidence_file": "reports/7ep/requirements_trace.md",
-    "script": "tests/test_prediction_records.py",
-    "verifier": "tests/test_prediction_records.py",
-    "baseline_entry": "reports/7ep/requirements_trace.md",
-    "data_source": "reports/7ep/requirements_trace.md"
+    "name": "prediction_records_schema_171",
+    "template": "Explainable prediction record completeness (FR4-FR7, NFR6): 100% of LOEO prediction records (171 total: 95 technique, 76 tactic) validate against JSON Schema v1.1.0, contain non-placeholder transition evidence, Wilson reliability intervals, and support caution flags (92/171 cautioned).",
+    "placeholders": {},
+    "sources": [
+      {
+        "file": "schemas/c4_prediction_record.schema.json",
+        "description": "Draft-07 prediction record schema"
+      },
+      {
+        "file": "data/processed_7ep/prediction_records_loeo.jsonl",
+        "description": "171 LOEO prediction records"
+      }
+    ],
+    "allowed_use": "Demonstrating full compliance with explainability and schema requirements.",
+    "forbidden_use": "Asserting high confidence on records marked with low-support cautions.",
+    "evidence_file": "data/processed_7ep/prediction_records_loeo.jsonl",
+    "script": "scripts/build_prediction_records.py",
+    "verifier": "scripts/verify_prediction_records.py",
+    "test_node": "tests/test_prediction_record.py::test_gp5_5_schema_validation_100_percent"
   },
   {
     "id": "CLAIM-13",
-    "name": "explainability_completeness",
-    "template": "Explainability completeness (FR4-FR7, NFR6) is verified: 100% of LOEO prediction records (95 technique, 76 tactic) validate against JSON Schema v1.0.0, contain candidate transition evidence and Wilson reliability banners, and render deterministically without UI computation.",
-    "evidence_file": "reports/7ep/prediction_records_loeo.jsonl",
-    "script": "scripts/build_prediction_records.py",
-    "verifier": "scripts/verify_prediction_records.py",
-    "baseline_entry": "reports/audit/hash_coverage_exceptions.md",
-    "data_source": "reports/7ep/requirements_trace.md"
+    "name": "c3_round_trip_contract",
+    "template": "Component 3 ingestion adapter round-trip consistency (FR8, NFR5): raw C3 event feeds adapt to timelines and sequences matching processed attack sequences, and duplicate audit events are flagged and aggregated without event dropping.",
+    "placeholders": {},
+    "sources": [
+      {
+        "file": "docs/c3_c4_interface_contract.md",
+        "description": "C3/C4 interface contract specification"
+      }
+    ],
+    "allowed_use": "Confirming technical feasibility of C3 event intake.",
+    "forbidden_use": "Claiming live system deployment with Component 3.",
+    "evidence_file": "docs/c3_c4_interface_contract.md",
+    "script": "src/c4/c3_adapter.py",
+    "verifier": "tests/test_c3_adapter.py",
+    "test_node": "tests/test_c3_adapter.py::test_round_trip_gate_matches_attack_sequences_7ep"
   }
 ]
