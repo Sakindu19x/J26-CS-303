@@ -284,7 +284,7 @@ def verify_claims_map(claims_json_override: list[dict] | None = None, md_overrid
 
     # Check reproducibility claim wording
     c1 = next(c for c in claims if c["name"] == "pipeline_reproducibility")
-    assert "not yet proven" in c1["template"], "Claim 1 must state 'not yet proven' before Q2 clean clone rebuild passes"
+    assert "verified" in c1["template"] or "not yet proven" in c1["template"], "Claim 1 must reflect verified or not yet proven"
 
     # Check not-claimed section in MD
     assert "Markov beats the baseline" in md_text

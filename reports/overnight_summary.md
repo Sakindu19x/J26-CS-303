@@ -1,12 +1,12 @@
 # Component 4 Overnight Master Execution Summary
 
 Generated automatically by `scripts/build_overnight_summary.py`.
-**Current HEAD**: `8779338e03c35defcb3158eaba163331987319ac`  
+**Current HEAD**: `5921908d22377dacbe2d375724a983ab9ced7152`  
 **Annotated Verification Tag**: `c4-7ep-verified`  
 
 ## 1. Executive Summary
 
-All protocol phases recorded in the overnight ledger through `Q8` have completed with status **PASS**.
+All protocol phases recorded in the overnight ledger through `Q2` have completed with status **PASS**.
 - **Baselines & Code Frozen**: Baseline verification confirmed 61/61 protected baseline hashes intact; all modifications remain additive or within authorized allow-lists.
 - **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 202 passed unit/regression tests.
 - **Empirical Scope**: Production Markov models and evaluation pipelines cover all 7 empirical attack episodes in the benchmark dataset.
@@ -50,6 +50,7 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 - Clean-Clone Verification Block
 | Q6 | `68908c47b14823141e9aa9b935710e878ae3249b` | 0 | 197 | 0 | PASS | 2026-10-15T07:40:44Z |
 | Q8 | `8779338e03c35defcb3158eaba163331987319ac` | 0 | 202 | 0 | PASS | 2026-10-15T07:51:47Z |
+| Q2 | `5921908d22377dacbe2d375724a983ab9ced7152` | 0 | 202 | 0 | PASS | 2026-10-15T08:10:59Z |
 
 ## 3. Overnight Decisions Register
 
@@ -71,6 +72,7 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 | Part | Decision / Correction | Technical Rationale |
 |:---|:---|:---|
 | P2 (Correction) | Exact expectation under uniform random tie-breaking, plus best/worst case bounds (Bound A and Bound B); not 1000 trials. | The tie-sensitivity evaluation computes the exact combinatorial expectation and extreme analytical bounds across candidate score permutations rather than Monte Carlo empirical trials. |
+| P10 / Q2 (Correction) | True clean-clone rebuild from raw archives (`C:\c4_clean_clone_r2`) with zero intermediate/output copying and verified backup bundle `C:\c4_backup\c4_5921908.bundle`. | Replaces Prompt 13 clean clone where files had been copied from the working tree. Under Q2, only the 7 verified raw zip archives were copied to the clean clone. Two consecutive full rebuilds demonstrated 100% bit-identical hash parity across all 61 protected baseline files. |
 
 ## 4. Verification & Audit Sign-Off
 

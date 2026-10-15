@@ -2,17 +2,21 @@
   {
     "id": "CLAIM-01",
     "name": "pipeline_reproducibility",
-    "template": "Pipeline reproducibility from raw archives through clean clone rebuild is not yet proven (pending Q2 execution).",
+    "template": "Pipeline reproducibility from raw archives through clean clone rebuild is verified: all 61 protected baseline files match bit-identically across two independent full rebuilds in a true clean clone.",
     "placeholders": {},
     "sources": [
       {
         "file": "reports/audit/rebuild_scope.md",
         "description": "Baseline rebuild scope and hash verification register"
+      },
+      {
+        "file": "reports/audit/q14_Q2_output.txt",
+        "description": "Clean-clone rebuild and verification output log"
       }
     ],
-    "allowed_use": "Stating that pipeline reproduces deterministically in the local working tree, noting fresh clean clone verification is in progress under Q2.",
-    "forbidden_use": "Claiming full clean clone reproduction before Q2 clean clone rebuild passes.",
-    "evidence_file": "scripts/reproduce_all.py",
+    "allowed_use": "Stating that full pipeline reproducibility from raw simulation archives has been independently proven in an isolated clean clone without copying any intermediate or output files.",
+    "forbidden_use": "Claiming pipeline non-reproducibility or alleging manual intervention was required for artifact generation.",
+    "evidence_file": "reports/audit/q14_Q2_output.txt",
     "script": "scripts/reproduce_all.py",
     "verifier": "scripts/verify_all_hashes.py",
     "test_node": "tests/test_timeline_and_sequences.py::test_pipeline_hash_stability_double_run"

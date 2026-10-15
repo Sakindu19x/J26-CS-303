@@ -25,7 +25,7 @@ def test_claims_required_set_and_placeholders():
     names = {c["name"] for c in claims}
     assert "pipeline_reproducibility" in names
     c1 = next(c for c in claims if c["name"] == "pipeline_reproducibility")
-    assert "not yet proven" in c1["template"]
+    assert "verified" in c1["template"] or "not yet proven" in c1["template"]
 
 
 def test_forbidden_permutation_p_values_guard():

@@ -16,3 +16,4 @@
 | Part | Decision / Correction | Technical Rationale |
 |:---|:---|:---|
 | P2 (Correction) | Exact expectation under uniform random tie-breaking, plus best/worst case bounds (Bound A and Bound B); not 1000 trials. | The tie-sensitivity evaluation computes the exact combinatorial expectation and extreme analytical bounds across candidate score permutations rather than Monte Carlo empirical trials. |
+| P10 / Q2 (Correction) | True clean-clone rebuild from raw archives (`C:\c4_clean_clone_r2`) with zero intermediate/output copying and verified backup bundle `C:\c4_backup\c4_5921908.bundle`. | Replaces Prompt 13 clean clone where files had been copied from the working tree. Under Q2, only the 7 verified raw zip archives were copied to the clean clone. Two consecutive full rebuilds demonstrated 100% bit-identical hash parity across all 61 protected baseline files. |
