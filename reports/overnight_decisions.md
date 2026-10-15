@@ -2,3 +2,11 @@
 
 | Part | Decision | Reason |
 |:---|:---|:---|
+| P0 | Use virtual environment at `..\.venv\Scripts\python.exe` | Standard workspace python environment containing all required scientific packages. |
+| P2 | Full tie-sensitivity evaluation across min, max, random over 1000 trials | Exhaustive diagnostic check on all 171 LOEO prediction records to prove robustness to tie-breaking rules. |
+| P5 | Train 7-episode production model on all 7 episodes | Deliverable required single production model covering all available empirical episodes with verified manifest. |
+| P6 | Implement C3-C4 interface adapter with alias table | Allows seamless field renaming upon C3 owner agreement while maintaining CAM-LDS backwards compatibility. |
+| P7 | Dashboard prediction panel built via decoupled modular component | Preserves FR1-FR3 timeline behavior without mutating existing dashboard files. |
+| P8 | Declare response time defaults (warm median <= 2.0s, p95 <= 5.0s, cold <= 10.0s) | Proposal specified "acceptable response time"; defaults formally committed prior to timing benchmark. |
+| P9 | Document raw archive SHA-256 and Zenodo provenance | Establishes raw data provenance; licence marked "licence text not found locally - student to confirm". |
+| P10 | Use Git bundle for clean-clone reproduction | Bypasses OneDrive file-locking in clean external directory `C:\c4_clean_clone` while verifying bundle integrity. |
