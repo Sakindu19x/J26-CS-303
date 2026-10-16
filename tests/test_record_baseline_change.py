@@ -86,9 +86,9 @@ def test_compare_and_verification_rule():
     # Justified addition passes
     ok, msg = verify_diff(diff, added_rationales={"c": "Added new feature count"}, removed_rationales={})
     assert ok
-    assert msg == "VERIFIED"
+    assert msg == "AUTHORISED_CHANGE"
 
-    # Changed leaf fails even with rationale (Prompt 16 S1a: prints FAIL, never VERIFIED)
+    # Changed leaf fails even with rationale
     new_changed = {"a": 15, "b": 20}
     diff_changed = compare_leaves(old, new_changed)
     ok, msg = verify_diff(diff_changed, added_rationales={}, removed_rationales={})
@@ -112,9 +112,9 @@ def test_q16_baseline_changes_file_contents():
     assert path.is_file(), f"Missing {path}"
     content = path.read_text(encoding="utf-8")
 
-    # 1. Verification verdicts (VERIFIED where policy met, FAIL where changed > 0)
-    assert "**VERIFIED**" in content
-    assert "**FAIL" in content
+    # 1. Verification verdicts (AUTHORISED_CHANGE for authorized changes passing invariants)
+    assert "**AUTHORISED_CHANGE**" in content
+    assert content.count("**AUTHORISED_CHANGE**") == 5
 
     # 2. Invariants explicitly asserted and passed in every entry
     assert "Invariant 1 (`old = identical + changed + removed`)" in content
@@ -132,14 +132,25 @@ def test_q16_baseline_changes_file_contents():
     assert "Author Date:" in content
     assert "2026-10-15T" in content
 
-    # 5. Recomputed McNemar contingency and post-hoc disclosures
+    # 5. Recomputed McNemar contingency and endpoint attribution
     assert "b=5, c=7" in content
     assert "b=3, c=11" in content
+    assert "Hit@1 Endpoint" in content
+    assert "Hit@3 Endpoint" in content
+    assert "$b=5, c=7$ belongs strictly to **Hit@1**" in content
+    assert "$b=3, c=11$ belongs strictly to **Hit@3**" in content
     assert "added post hoc after results were seen" in content
     assert "F3_unseen_state_rate" in content
     assert "35.79%" in content
 
-    # 6. All five changes documented
+    # 6. Core prediction records code check (171 / 171 identical)
+    assert "Core Prediction Invariant Check (171 Records)" in content
+    assert "171 / 171" in content
+
+    # 7. Real line diffs for .md files
+    assert "Real Line Diff (`git diff --stat` & Changed Line Numbers)" in content
+
+    # 8. All five changes documented
     assert "reports/7ep/exploratory_tactic_conditioned_report.md" in content
     assert "data/processed_7ep/prediction_records_loeo.jsonl" in content
     assert "reports/7ep/prediction_record_examples.md" in content
