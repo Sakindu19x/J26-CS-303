@@ -1,0 +1,165 @@
+"""scripts/audit/build_project_map.py
+
+Generates docs/PROJECT_MAP.md with:
+- Relative links using forward slashes (e.g., [src/](../src))
+- Real one-line descriptions for all top-level directories
+- Root scripts classified as ACTIVE or LEGACY-4EP with reference details
+- Removal of any '(embedded in ...)' phrases
+"""
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+FOLDER_DESCRIPTIONS: dict[str, str] = {
+    ".streamlit": "Streamlit configuration, theme definitions, and server port settings",
+    "artifacts": "Trained model bundles, manifest metadata, and serialized prediction checkpoints",
+    "data": "Raw attack simulation archives, intermediate normalization records, and processed timelines",
+    "docs": "System specifications, requirements traceability, architecture diagrams, and process documentation",
+    "reports": "Pre-registered experimental outcomes, baseline hashes, audit ledgers, and evaluation results",
+    "schemas": "JSON Schema definitions for C3 event validation and C4 prediction record serialization",
+    "scratch": "Transient analysis scripts, intake audits, and experimental scratchpads",
+    "scripts": "Pipeline execution stages, verification harnesses, audit tooling, and dashboard automation",
+    "src": "Production C4 Python library encompassing data ingestion, ML models, evaluation, and dashboard",
+    "stage1_4episode": "Archived 4-episode pilot stage 1 extraction scratch folder",
+    "stage1_7episode": "Archived 7-episode stage 1 extraction scratch folder",
+    "tests": "Automated regression suites, invariant verifiers, and component-level unit tests",
+    "viva_pack": "Viva presentation materials, worked prediction examples, and reproduction walkthroughs",
+}
+
+SUBFOLDER_DESCRIPTIONS: dict[str, str] = {
+    "scripts/audit": "Audit provenance, hash coverage, baseline changes, and ledger verification scripts",
+    "scripts/dashboard": "Streamlit dashboard launch scripts and automated browser screenshot capture tools",
+    "scripts/pipeline": "Numbered sequential pipeline stages (s01 to s20) executing end-to-end data processing and evaluation",
+    "scripts/verify": "Independent single-purpose verifier scripts checking baseline outputs and reports",
+}
+
+SCRIPT_DESCRIPTIONS: dict[str, str] = {
+    "build_prediction_records.py": "Pipeline runner generating explainable prediction JSON records",
+    "build_requirements_trace.py": "Pipeline runner generating requirements trace matrix",
+    "check_regression_gate.py": "Regression gate validator for LOEO evaluation metrics",
+    "measure_nfr1.py": "NFR1 dashboard warm render latency benchmark harness",
+    "mutation_sweep.py": "Mutation testing harness validating verifier test-suite sensitivity",
+    "mutation_sweep_requirements_trace.py": "Mutation testing harness validating requirements trace verifier",
+    "reproduce_all.py": "Canonical full reproduction and verify-only entrypoint",
+    "run_holm_claim_rule.py": "Stage runner executing Holm-Bonferroni family-wise error control",
+    "run_permutation_test_7ep.py": "Stage runner executing 7-episode order permutation test",
+    "run_permutation_test_v2.py": "Stage runner executing 4-episode pilot order permutation test",
+    "run_planted_realscale.py": "Planted structure power analysis validation runner",
+    "run_planted_structure.py": "Planted Markov transition structure power test runner",
+    "run_q7_gates.py": "Gate verification script supporting claim validation",
+    "verify_evaluation.py": "Independent verifier for 4-episode pilot LOEO evaluation",
+    "verify_permutation_7ep.py": "Independent verifier for 7-episode permutation test",
+    "verify_permutation_test_v2.py": "Independent verifier for 4-episode pilot permutation test",
+}
+
+LEGACY_4EP_SCRIPTS = {
+    "run_permutation_test_v2.py",
+    "verify_permutation_test_v2.py",
+    "verify_evaluation.py",
+}
+
+
+def find_script_references(script_name: str) -> list[str]:
+    """Search reproduce_all.py and tests/ for references to script_name."""
+    refs: list[str] = []
+    stem = Path(script_name).stem
+
+    # 1. Check reproduce_all.py
+    reproduce_py = REPO_ROOT / "scripts" / "reproduce_all.py"
+    if reproduce_py.is_file():
+        rep_text = reproduce_py.read_text(encoding="utf-8")
+        if script_name in rep_text or stem in rep_text:
+            refs.append("scripts/reproduce_all.py")
+
+    # 2. Check tests/
+    tests_dir = REPO_ROOT / "tests"
+    if tests_dir.is_dir():
+        for tf in sorted(tests_dir.glob("*.py")):
+            try:
+                t_text = tf.read_text(encoding="utf-8")
+                if script_name in t_text or stem in t_text:
+                    refs.append(f"tests/{tf.name}")
+            except Exception:
+                pass
+
+    return refs
+
+
+def build_project_map() -> str:
+    lines = [
+        "# C4 Project Map",
+        "",
+        "> [!NOTE]",
+        "> This document is automatically generated by `scripts/audit/build_project_map.py` (Prompt 17 Part T2).",
+        "> All links use relative paths with forward slashes and are verified by `tests/test_generated_docs.py`.",
+        "",
+        "## Top-Level Directories and Root Files",
+        "",
+    ]
+
+    # Top level directories
+    top_items = sorted(REPO_ROOT.iterdir(), key=lambda p: (not p.is_dir(), p.name.lower()))
+    for item in top_items:
+        if item.name.startswith(".git") and item.name != ".streamlit":
+            continue
+        if item.name in (".pytest_cache", "__pycache__"):
+            continue
+
+        rel_link = f"../{item.name}"
+        if item.is_dir():
+            desc = FOLDER_DESCRIPTIONS.get(item.name, "Repository workspace directory")
+            lines.append(f"- [`{item.name}/`]({rel_link}): {desc}")
+        elif item.is_file() and not item.name.startswith("."):
+            lines.append(f"- [`{item.name}`]({rel_link}): Root project configuration and metadata file")
+
+    lines.extend([
+        "",
+        "## Scripts Subsystems (`scripts/`)",
+        "",
+    ])
+
+    for sub_rel, desc in sorted(SUBFOLDER_DESCRIPTIONS.items()):
+        rel_link = f"../{sub_rel}"
+        lines.append(f"- [`{sub_rel}/`]({rel_link}): {desc}")
+
+    lines.extend([
+        "",
+        "## Root Scripts (`scripts/*.py`)",
+        "",
+    ])
+
+    scripts_dir = REPO_ROOT / "scripts"
+    root_scripts = sorted(scripts_dir.glob("*.py"))
+    for s in root_scripts:
+        s_name = s.name
+        rel_link = f"../scripts/{s_name}"
+        desc = SCRIPT_DESCRIPTIONS.get(s_name, "Repository automation script")
+        # Ensure no (embedded in ...) phrases
+        desc = re.sub(r"\s*\(embedded in [^)]+\)", "", desc)
+
+        label = "LEGACY-4EP" if s_name in LEGACY_4EP_SCRIPTS else "ACTIVE"
+        refs = find_script_references(s_name)
+        if refs:
+            ref_str = ", ".join(f"`{r}`" for r in refs)
+            ref_note = f"referenced by {ref_str}"
+        else:
+            ref_note = "standalone CLI runner"
+
+        lines.append(f"- [`scripts/{s_name}`]({rel_link}) **[{label}]**: {desc} ({ref_note})")
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+def main() -> None:
+    content = build_project_map()
+    out_path = REPO_ROOT / "docs" / "PROJECT_MAP.md"
+    out_path.write_text(content, encoding="utf-8")
+    print(f"Generated {out_path} ({len(content.splitlines())} lines)")
+
+
+if __name__ == "__main__":
+    main()
