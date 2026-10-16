@@ -1,20 +1,56 @@
-# Deliverables Re-Verification Report (Prompt 16 S1i Recheck)
+# Deliverables Re-Verification Report (Prompt 16 S1 / Prompt 17 T4 Recheck)
 
 > [!IMPORTANT]
-> Comprehensive re-verification of R2, R3, and R4 deliverables in the master repository.
-> Every item is tested programmatically with explicit PASS/FAIL gate results and empirical evidence.
+> Empirical re-verification of all deliverables generated dynamically by `scripts/audit/build_q16_s1_recheck.py`.
+> Every metric, status cell, test result, and image dimension is measured directly from active repository code and files.
 
-## Deliverables Verification Summary
+## 1. CLAIM-07 Empirical Content Check
 
-| Deliverable Item | Evaluation Criterion | Status | Evidence Summary |
-|:---|:---|:---:|:---|
-| R2 Deliverable: Viva Claims Map | Relevant test nodes, CLAIM-07 tactic ceiling computed by code, no 'mathematically impossible' | **PASS** | CLAIM-07 tactic ceiling = 96.05%, 13 test nodes, 0 occurrences of 'mathematically impossible', verify_claims_map exit 0 |
-| R3 Deliverable: Requirements Trace Matrix | FR2 demonstrated on dataset, NFR5 PARTIAL, verify_requirements_trace exit 0 | **PASS** | FR2 status = `IMPLEMENTED_DEMONSTRATED_ON_DATASET`, NFR5 status = `PARTIAL`, verify_requirements_trace exit 0 |
-| R4 Deliverable: Analyst Demo Script & Verification Test | docs/demo_script.md present, tests/test_demo_script_steps.py exits 0 | **PASS** | docs/demo_script.md (5022 bytes), test_demo_script_steps exit 0 (1 passed) |
-| R4 Deliverable: Live Dashboard Browser Evidence | live_capture_log.txt and live_*.png exist and non-empty | **PASS** | live_capture_log.txt present, 4 live screenshot files verified (min size 248529 bytes) |
-| Viva Pack: 07_reproduce.md & Suite | viva_pack/07_reproduce.md present, scripts/verify_viva_pack.py exits 0 | **PASS** | viva_pack/07_reproduce.md (2789 bytes), verify_viva_pack exit 0 |
-| Repository Hygiene: Scratch Directory Isolation | scratch/ in .gitignore and zero files tracked by git | **PASS** | scratch/ in .gitignore = True, git ls-files scratch/ count = 0 |
+- **Ceiling Definition**: A sample satisfies the vocabulary ceiling if at least one target in `target_set` was observed in training episodes for that LOEO fold (`target_set & training_vocabulary != empty`).
+- **Technique Ceiling (N=95)**:
+  - Numerator (samples with target in training vocab): **59**
+  - Denominator (total evaluation samples): **95**
+  - Computed Percentage: **62.11%** (62.1053%)
+- **Tactic Ceiling (N=76)**:
+  - Numerator (samples with target in training vocab): **73**
+  - Denominator (total evaluation samples): **76**
+  - Computed Percentage: **96.05%** (96.0526%)
+- **Evaluation**: Technique ceiling 62.11% and perfect-order cap 64.98% are below 75%; tactic ceiling reaches 96.05%.
+- **Status**: **PASS**
 
-## Overall Verdict
+## 2. Requirements Trace Status Cells (FR2 & NFR5)
 
-**Master S1 Recheck Verdict**: **ALL GATES PASSED**
+| Requirement ID | Actual Status Cell in `reports/7ep/requirements_trace.md` | Verification Gate | Status |
+|:---|:---|:---|:---:|
+| **FR2** (Attack Episode Separation) | ``IMPLEMENTED_DEMONSTRATED_ON_DATASET`` | Expected `IMPLEMENTED_DEMONSTRATED_ON_DATASET` | **PASS** |
+| **NFR5** (C3 Interoperability) | ``PARTIAL`` | Expected `PARTIAL` | **PASS** |
+
+## 3. Analyst Demo Script Test Suite Execution
+
+- **Test Script Executed**: `tests/test_demo_script_steps.py`
+- **Pytest Exit Code**: `0` (PASS)
+- **Executed Test Names**:
+  - `tests/test_demo_script_steps.py::test_demo_script_steps_2_to_10_execution` (**PASSED**)
+
+## 4. Live Dashboard Screenshot Telemetry (PIL Verification)
+
+| Screenshot File Name | Pixel Width | Pixel Height | Size (Bytes) | SHA-256 Checksum |
+|:---|:---:|:---:|:---:|:---|
+| `reports/measurements/live_prediction_panel.png` | 1440 px | 900 px | 155,267 B | `b35a3b095da3cc9909209da60b074cc1c8892fb8d6dc7874a5a258f087016ab2` |
+| `reports/measurements/live_prediction_panel_1440.png` | 1440 px | 900 px | 155,267 B | `b35a3b095da3cc9909209da60b074cc1c8892fb8d6dc7874a5a258f087016ab2` |
+| `reports/measurements/live_prediction_panel_390.png` | 390 px | 844 px | 37,726 B | `3e20b6b05405e511e53216b0c411a58bbc5673dc4cc4942edf6cbf0f863d9c81` |
+| `reports/measurements/live_tactic_prediction.png` | 1440 px | 900 px | 156,083 B | `7a53b21ce54a71908f6ff4d4e287e08d4a833e446eb9c9540882565ea05074e1` |
+| `reports/measurements/live_tactic_prediction_1440.png` | 1440 px | 900 px | 156,083 B | `7a53b21ce54a71908f6ff4d4e287e08d4a833e446eb9c9540882565ea05074e1` |
+| `reports/measurements/live_tactic_prediction_390.png` | 390 px | 844 px | 37,834 B | `bfeed261fbe3e86f0baeb81097cde5ac6a2e11be056222d26b1256409cd3d674` |
+| `reports/measurements/live_tied_case.png` | 1440 px | 900 px | 155,329 B | `ae0c3dc0c581b5414d47b0cfedcb2ce51a0cee3a34bb25510e587f1029957ce9` |
+| `reports/measurements/live_tied_case_1440.png` | 1440 px | 900 px | 155,329 B | `ae0c3dc0c581b5414d47b0cfedcb2ce51a0cee3a34bb25510e587f1029957ce9` |
+| `reports/measurements/live_tied_case_390.png` | 390 px | 844 px | 37,788 B | `a4d74a5e2841318597189d3f14e16c3b441d46d0cef7c90103eb980feff1777e` |
+| `reports/measurements/live_timeline_1440.png` | 1440 px | 900 px | 154,447 B | `2b037d4e525d5be8491e323ff76d19a170c7d09344171a5d08f4108b26dfaadf` |
+| `reports/measurements/live_timeline_390.png` | 390 px | 844 px | 37,573 B | `f8e41ca7e6f26fb0a2643998c4c4e775a869292d96428b637df2b89e3f55d37b` |
+| `reports/measurements/live_unseen_state.png` | 1440 px | 900 px | 155,343 B | `18722995353fbea3bf89125b6ef23a17fb4e36f29a8152469b4eac560faa5977` |
+| `reports/measurements/live_unseen_state_1440.png` | 1440 px | 900 px | 155,343 B | `18722995353fbea3bf89125b6ef23a17fb4e36f29a8152469b4eac560faa5977` |
+| `reports/measurements/live_unseen_state_390.png` | 390 px | 844 px | 37,801 B | `5d03a30b0cb44069e2cbd74139c9a2f8ec07a2884e053b79a85b2d8dbfe965f3` |
+
+## 5. Overall Recheck Verdict
+
+**Master T4 Recheck Verdict**: **ALL CONTENT CHECKS PASSED**
