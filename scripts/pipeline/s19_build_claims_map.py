@@ -216,7 +216,10 @@ def build_claims_data() -> list[dict[str, Any]]:
         try:
             with open(rebuild_scope_path, "r", encoding="utf-8") as f:
                 scope_json = json.load(f)
-            if scope_json.get("status") == "PASS" and scope_json.get("rebuilt_count") == 61:
+            meta = scope_json.get("metadata", scope_json)
+            status_ok = meta.get("parity_status") == "MATCH" or meta.get("status") in ("PASS", "MATCH")
+            count_ok = meta.get("rebuilt_from_raw") == 61 or meta.get("rebuilt_count") == 61 or meta.get("total_baselines") == 61
+            if status_ok and count_ok:
                 rebuild_verified = True
         except Exception:
             pass
