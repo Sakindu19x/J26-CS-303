@@ -1,0 +1,39 @@
+Attribute,Missing_Count,Missing_Percentage,Data_Type
+request_do_not_track,907110,99.92234100560135,float64
+request_origin,906206,99.82276124540793,str
+request_accept_language,891955,98.2529480125356,str
+request_body,881072,97.05413547914497,str
+request_content_type,879271,96.855747040972,str
+request_referer,616421,67.901609909508,str
+request_accept_encoding,541515,59.65036929330315,str
+request_accept,526032,57.94484559078666,str
+request_cookie,462553,50.952341611451665,str
+request_connection,424955,46.81074888606159,str
+request_user_agent,3834,0.42233274400621273,str
+response_content_length,3292,0.3626289497309474,float64
+request_host,34,0.003745256467452069,str
+timestamp,2,0.00022030920396776875,str
+request_http_method,2,0.00022030920396776875,str
+dst_port,2,0.00022030920396776875,float64
+dst_ip,2,0.00022030920396776875,str
+src_port,2,0.00022030920396776875,float64
+src_ip,2,0.00022030920396776875,str
+request_http_protocol,2,0.00022030920396776875,str
+response_http_protocol,2,0.00022030920396776875,str
+request_http_request,2,0.00022030920396776875,str
+response_http_status_code,2,0.00022030920396776875,float64
+response_http_status_message,2,0.00022030920396776875,str
+000 - Normal,0,0.0,int64
+272 - Protocol Manipulation,0,0.0,int64
+242 - Code Injection,0,0.0,int64
+88 - OS Command Injection,0,0.0,int64
+126 - Path Traversal,0,0.0,int64
+66 - SQL Injection,0,0.0,int64
+16 - Dictionary-based Password Attack,0,0.0,int64
+310 - Scanning for Vulnerable Software,0,0.0,int64
+153 - Input Data Manipulation,0,0.0,int64
+248 - Command Injection,0,0.0,int64
+274 - HTTP Verb Tampering,0,0.0,int64
+194 - Fake the Source of Data,0,0.0,int64
+34 - HTTP Response Splitting,0,0.0,int64
+33 - HTTP Request Smuggling,0,0.0,int64

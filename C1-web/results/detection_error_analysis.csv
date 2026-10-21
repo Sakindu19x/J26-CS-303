@@ -1,0 +1,14 @@
+Attack Category,Actual Positives (Ground Truth),Predicted Positives,Difference (Pred - Actual)
+000 - Normal,104352,104988,636
+66 - SQL Injection,50109,50109,0
+194 - Fake the Source of Data,11173,11192,19
+126 - Path Traversal,4265,4062,-203
+34 - HTTP Response Splitting,3915,3941,26
+242 - Code Injection,3210,3147,-63
+272 - Protocol Manipulation,1804,1173,-631
+88 - OS Command Injection,1554,1022,-532
+274 - HTTP Verb Tampering,1132,1132,0
+310 - Scanning for Vulnerable Software,534,538,4
+153 - Input Data Manipulation,453,456,3
+16 - Dictionary-based Password Attack,382,382,0
+33 - HTTP Request Smuggling,210,102,-108

@@ -1,0 +1,14 @@
+Attack Label,Probability (%),Predicted,Actual
+000 - Normal,0.3499,0,0
+272 - Protocol Manipulation,0.1392,0,0
+242 - Code Injection,0.0237,0,0
+88 - OS Command Injection,0.0589,0,0
+126 - Path Traversal,0.0615,0,0
+66 - SQL Injection,0.1482,0,0
+16 - Dictionary-based Password Attack,0.0002,0,0
+310 - Scanning for Vulnerable Software,0.0006,0,0
+153 - Input Data Manipulation,0.0008,0,0
+274 - HTTP Verb Tampering,0.0008,0,0
+194 - Fake the Source of Data,0.0038,0,0
+34 - HTTP Response Splitting,99.3553,1,1
+33 - HTTP Request Smuggling,9.0948,0,1

@@ -1,0 +1,7 @@
+request_http_request,request_body,request_http_method,request_http_protocol,request_host,request_user_agent,request_referer,request_origin,request_cookie,request_content_type,request_accept,request_accept_language,request_accept_encoding,request_connection,timestamp,src_ip,src_port,dst_ip,dst_port
+/blog/index.php/2020/03/22/hello-world/,,GET,HTTP/1.1,,Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0,http://test-site.com/blog/,,,,,,,,21/Jul/2020:22:53:19 +0100,203.0.113.10,,,
+/blog/index.php?p=1,,GET,HTTP/1.1,,Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0,,,,,,,,,21/Jul/2020:22:53:21 +0100,203.0.113.10,,,
+/blog/index.php?id=1%27+UNION+ALL+SELECT+username%2Cpassword+FROM+users--+-,,GET,HTTP/1.1,,sqlmap/1.4.7#stable (http://sqlmap.org),,,,,,,,,21/Jul/2020:22:54:02 +0100,198.51.100.23,,,
+/blog/index.php?page=..%2F..%2F..%2F..%2Fetc%2Fpasswd,,GET,HTTP/1.1,,sqlmap/1.4.7#stable (http://sqlmap.org),,,,,,,,,21/Jul/2020:22:54:05 +0100,198.51.100.23,,,
+/blog/wp-login.php,,POST,HTTP/1.1,,Mozilla/5.0 (X11; Linux x86_64; rv:70.0) Gecko/20100101 Firefox/70.0,http://test-site.com/blog/wp-login.php,,,,,,,,21/Jul/2020:22:55:40 +0100,192.0.2.55,,,
+/blog/feed/,,GET,HTTP/1.1,,,,,,,,,,,21/Jul/2020:22:55:41 +0100,192.0.2.55,,,

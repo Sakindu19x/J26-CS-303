@@ -1,0 +1,1144 @@
+=== PAGE 1 ===
+1 
+ 
+CTI-Assisted Digital Forensic Investigation Tool for SMEs 
+ 
+Adaptive Web Attack Detection & Correlation Model 
+ 
+ 
+J26-CS-303 
+ 
+ 
+Project Proposal Report 
+Weerasinghe W.G.O.N – IT23378148 
+ 
+ 
+ 
+ 
+B.Sc. (Hons) Degree in Information Technology Specialized in  
+Cyber Security 
+ 
+ 
+ 
+ 
+Department of Computer System Engineering 
+Sri Lanka Institute of Information Technology, Sri Lanka 
+ 
+ 
+September 2026 
+
+=== PAGE 2 ===
+2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+=== PAGE 3 ===
+3 
+ABSTRACT 
+Small and medium enterprises (SMEs) are relying more on web applications and digital services that are 
+connected. They usually have very limited security operations and digital -forensic resources. When a 
+cyber incident happens web-attack detections can come in as events. This makes it hard for a small team 
+to see which detections are connected. Current methods for detecting web attacks and analyzing logs 
+can. Show suspicious events. The way they connect events usually use fixed or set rules. This research 
+introduces an Adaptive Web Attack Detection and Correlation Model. This is the part of a tool that helps 
+with digital forensic investigations for SMEs. The model uses the SR -BH 2020 dataset that has labels 
+for web attacks. It applies steps like preprocessin g, TF -IDF for text fields One -Hot Encoding for 
+categories and One -vs-Rest Logistic Regression for detecting attacks. The events that are found keep 
+details like time, source, target, attack labels and confidence levels. Then the events are compared using 
+how similar they are in context. Conditional Rough Entropy and Knowledge Granularity are used from 
+research to create weights for similarity. These weights are added together to make a score. Events that 
+meet a level are grouped as related attacks. The model will be tested using measurements like Precision, 
+Recall, F1-score, averages and Hamming Loss. The adaptive correlation approach will be compared with 
+a fixed/equal-weight correlation baseline to evaluate the effect of data -derived adaptive weighting. The 
+model creates attack findings that can be used in the bigger forensic framework. 
+Keywords: Multi -Label Web Attack Detection; Adaptive Event Correlation; Logistic Regression; 
+Conditional Rough Entropy; Knowledge Granularity. 
+ 
+ACKNOWLEDGEMENT 
+I would like to express my sincere gratitude to my supervisor for the continuous guidance, valuable 
+feedback, and support provided throughout the preparation of this research proposal. The advice and 
+direction received have been greatly helpful in refining the research problem, methodology, and overall 
+technical approach of the study. 
+I would also like to thank the lecturers and academic staff of the department for the knowledge, guidance, 
+and support provided throughout my academic studies and during the development of this research. 
+My sincere appreciation is extended to my fellow research group members for their cooperation, 
+discussions, exchange of ideas, and contribution towards coordinating the different components of the 
+overall research project. 
+Finally, I would like to thank my family and friends for their continued encouragement, patience, and 
+support throughout the preparation of this research proposal. 
+ 
+
+=== PAGE 4 ===
+4 
+TABLE OF CONTENT 
+Contents 
+ .................................................................................................................................................................. 2 
+ABSTRACT ............................................................................................................................................. 3 
+ACKNOWLEDGEMENT ........................................................................................................................ 3 
+TABLE OF CONTENT ............................................................................................................................ 4 
+LIST OF TABLES .................................................................................................................................... 6 
+LIST OF FIGURES .................................................................................................................................. 7 
+LIST OF ABBREVIATIONS................................................................................................................... 8 
+LIST OF APPENDICES........................................................................................................................... 9 
+1. INTRODUCTION .............................................................................................................................. 10 
+1.1 Background and Context ............................................................................................................... 10 
+Existing Solutions and Their Limitations ........................................................................................ 10 
+Overall Proposed Solution and the Role .......................................................................................... 11 
+SDG Alignment ............................................................................................................................... 11 
+Research Cluster Alignment ............................................................................................................ 11 
+1.2 Literature Review .......................................................................................................................... 12 
+1.2.1 Multi-Label Web Attack Detection ........................................................................................ 12 
+1.2.2 Security Event and Alert Correlation ..................................................................................... 12 
+1.2.3 Contextual Correlation and Web-Attack Reconstruction ....................................................... 13 
+1.2.4 Adaptive Attribute Weighting for Correlation ....................................................................... 13 
+1.2.5 Existing Solutions and Limitations ......................................................................................... 13 
+1.3 Research Gap ................................................................................................................................ 14 
+2. OBJECTIVE ....................................................................................................................................... 15 
+2.1 Main Objective .............................................................................................................................. 15 
+2.2 Specific Objectives ........................................................................................................................ 15 
+3. METHODOLOGY ............................................................................................................................. 16 
+3.1 Research Methodology / Design ................................................................................................... 16 
+3.2 Data / Experimental Inputs ............................................................................................................ 17 
+3.2.1 Dataset ........................................................................................................................................ 17 
+3.2.2 Data Preprocessing and Feature Representation ........................................................................ 17 
+3.3 Detection Stage ............................................................................................................................. 17 
+3.4 Adaptive Contextual Correlation .................................................................................................. 18 
+
+=== PAGE 5 ===
+5 
+3.5 Baseline / Benchmark ................................................................................................................... 19 
+3.6 Evaluation Metrics ........................................................................................................................ 19 
+3.7 Validation Strategy ........................................................................................................................ 19 
+3.8 Development Approach ................................................................................................................ 19 
+3.8.1 Output ......................................................................................................................................... 20 
+3.9 Overall C1 Mechanism ................................................................................................................. 21 
+4. HIGH-LEVEL SYSTEM ARCHITECTURE .................................................................................... 22 
+4.1 Overview ....................................................................................................................................... 22 
+4.2 Overall Integration ........................................................................................................................ 22 
+4.3 High-Level Architecture of the Adaptive Web Attack Detection and Correlation Model ........... 23 
+4.4 Integration Boundary .................................................................................................................... 24 
+4.3 Individual Responsibility Boundary ............................................................................................. 25 
+5. USER REQUIREMENTS .................................................................................................................. 26 
+5.1 Preliminary Functional Requirements ........................................................................................... 26 
+5.2 Preliminary Non-Functional Requirements .................................................................................. 26 
+6. COMMERCIALIZATION PLAN...................................................................................................... 27 
+6.1 Target Market and Customer Persona ........................................................................................... 27 
+6.2 Value Proposition .......................................................................................................................... 27 
+6.3 Revenue Model ............................................................................................................................. 27 
+6.4 Cost Estimation ............................................................................................................................. 27 
+6.5 Pricing Strategy ............................................................................................................................. 28 
+6.6 Competitive Advantage ................................................................................................................. 28 
+6.7 Intellectual Property Considerations ............................................................................................. 28 
+7. BUDGET AND JUSTIFICATION .................................................................................................... 29 
+8. WORK BREAKDOWN STRUCTURE (WBS) ................................................................................ 30 
+9. GANTT CHART ................................................................................................................................ 32 
+10. REFERENCES LIST ........................................................................................................................ 33 
+11. APPENDICES .................................................................................................................................. 34 
+Appendix 1 – Mandatory Proposal Evidence and Decision Log ........................................................ 34 
+Appendix 2 – AI Use Disclosure ........................................................................................................ 35 
+ 
+
+=== PAGE 6 ===
+6 
+LIST OF TABLES 
+Table 1: List of Abbreviations ................................................................................................... 8 
+Table 2: Evaluation Metrics ..................................................................................................... 19 
+Table 3: Individual Responsibility Boundary .......................................................................... 25 
+Table 4: Budget and Justification ............................................................................................ 30 
+Table 5: Work Breakdown Structure (WBS) ........................................................................... 31 
+Table 6: Gantt Chart ................................................................................................................ 33 
+Table 7: Mandatory Proposal Evidence and Decision Log ..................................................... 35 
+Table 8: AI Use Disclosure...................................................................................................... 36 
+
+=== PAGE 7 ===
+7 
+LIST OF FIGURES 
+Figure 1: Component 1 Research Processing Pipeline ............................................................ 16 
+Figure 2: Overall Component 1 Mechanism ........................................................................... 21 
+Figure 3: High-Level Architecture of the Adaptive Web Attack Detection and Correlation Model 23 
+
+=== PAGE 8 ===
+8 
+LIST OF ABBREVIATIONS 
+Table 1: List of Abbreviations 
+Abbreviation Meaning 
+CAPEC Common Attack Pattern Enumeration and Classification 
+CTI Cyber Threat Intelligence 
+DFIR Digital Forensics and Incident Response 
+HTTP Hypertext Transfer Protocol 
+ML Machine Learning 
+OvR One-vs-Rest 
+SME Small and Medium Enterprise 
+TF-IDF Term Frequency-Inverse Document Frequency 
+
+=== PAGE 9 ===
+9 
+LIST OF APPENDICES 
+Appendix 1 – Mandatory Proposal Evidence and Decision Log ............................................. 35 
+Appendix 2 – AI Use Disclosure ............................................................................................. 36 
+
+=== PAGE 10 ===
+10 
+1. INTRODUCTION 
+1.1 Background and Context 
+Web applications and online services have become parts of how modern organizations run. Because they 
+are on the Internet web applications also face types of web attacks. A single web attack can send bad 
+HTTP requests, which create many security events that look separate even though they come from the 
+same web attack. 
+Machine‑learning can help spot web attacks by finding HTTP requests and telling what kind of web 
+attack they are.  Looking at each bad request alone does not show whether several web attacks are 
+connected. Web attacks may share details such as when they happened, where they came from what web 
+resource they targeted and how the attack behaved. Linking those details give s a picture of web attack 
+activity than looking at each event alone. 
+This problem is especially important for Medium Enterprises or SMEs which often have less security 
+monitoring and fewer people to do digital forensic investigation. When a cyber incident happens the 
+many security events can make the investigation harder. Giving security staff a list of related web attacks 
+helps them understand and investigate suspicious web activity faster. 
+The whole research project, which is called "CTI‑Assisted Digital Forensic Investigation Tool for SMEs 
+" wants to help forensic investigators. It combines web attack analysis, network attack analysis, 
+CTI‑assisted prioritisation and attack timeline analysis. Inside the project Component 1 – Adaptive Web 
+Attack Detection & Correlation Model , it focuses on finding web attacks from HTTP request data and 
+linking events 
+Component 1 first uses multi‑label machine learning to spot web attacks. Keeps the important context 
+for each event of treating each bad request as a single event the component uses an adaptive contextual 
+correlation approach. This approach looks at time, source or identity, target and attack behavior to decide 
+which web attacks belong together. The grouped events are then given as findings, for the rest of the 
+digital forensic investigation. 
+Existing Solutions and Their Limitations 
+Existing security and web -log analysis solutions provide capabilities for monitoring, analysing , and 
+correlating security -related events. Splunk Enterprise Security supports event correlation through 
+correlation searches and provides capabilities for identifying related security events for investigation [8]. 
+Elastic Security provides SIEM capabilities for detecting and investigating security threats and supports 
+different detection rule types, including event correlation rules [9]. GoAccess is an open -source, real-
+time web-log analyser that processes web -server logs and provides HTTP statistics and visual reports 
+for monitoring web activity [10]. 
+Although these solutions provide useful capabilities for web-log analysis, security monitoring, detection, 
+and event correlation, the research problem addressed by Component 1 is more specific. The proposed 
+research investigates the correlation of multi -label machine-learning-detected HTTP web attacks using 
+contextual information retained from the detected events. It considers temporal, source/identity, target, 
+and attack/behaviour  context and applies data -derived adaptive weighting using Conditional Rough 
+Entropy and Knowledge Granularity [4] when calculating relationships among detected events. 
+
+=== PAGE 11 ===
+11 
+Therefore, Component 1 is not intended to replace existing SIEM or web-log analysis platforms. Instead, 
+it investigates an adaptive contextual correlation mechanism for multi -label ML-detected web attacks, 
+with the objective of grouping related web-attack detections rather than treating each detected malicious 
+HTTP request independently. 
+Overall Proposed Solution and the Role 
+The overall proposed solution is a CTI-Assisted Digital Forensic Investigation Tool for SMEs. This tool 
+is designed to help teams analyze and investigate incidents. It does this by combining the outputs of 
+research components. The whole system brings together web‑attack analysis, network security findings, 
+CTI‑assisted prioritization and attack timeline analysis. All of these parts give forensic investigation 
+teams clearer more structured information. 
+Within the system Component 1 – Adaptive Web Attack Detection & Correlation Model is in charge of 
+the web‑attack detection and correlation stage. This component reads HTTP request data. Uses 
+multi‑label machine learning to spot one or more web‑attack types. It then keeps contextual information 
+that comes with the detected events, such as time, source identity, target and attack behaviour so that this 
+information can be used for correlation. 
+The detected events are compared by using similarity. Conditional Rough Entropy and Knowledge 
+Granularity are adapted to produce data‑driven weights that show how important each chosen correlation 
+criterion is. These weights are added to the contextual sim ilarity values to compute a correlation score. 
+Any detected events that reach the chosen correlation threshold are grouped together related web‑attack 
+events. 
+The resulting correlated web‑attack findings, including event context detected attack labels and 
+correlation information are provided in a structured form for integration, with the subsequent 
+components of the overall forensic investigation framework. Comp onent 1 is therefore limited to 
+web‑attack detection and adaptive contextual correlation. All other tasks – network analysis, CTI‑based 
+prioritization and later attack analysis – are carried out by research components. 
+SDG Alignment 
+The proposed research aligns with the United Nations Sustainable Development Goal 9 Industry, 
+Innovation and Infrastructure which promotes infrastructure, sustainable industrialization and new ideas. 
+This component contributes to this goal by investigating an approach for detecting and correlating web 
+attacks to support cybersecurity analysis and digital forensic investigation particularly within the context 
+of SMEs. By providing correlated web-attack findings rather than presenting detected malicious HTTP 
+requests only as isolated events the research aims to contribute towards more effective and accessible 
+cybersecurity capabilities for organizations, with limited security resources. 
+Research Cluster Alignment 
+This component fits well with the Cyber Security / Intelligent Computing research cluster. It focuses on 
+using machine learning to detect types of web attacks at the same time. The work looks at how different 
+security events relate to one another by analyz ing their context. It uses machine learning models on 
+HTTP request data to find patterns. By applying data-driven weighting it groups related attack detections. 
+This helps improve the accuracy of identifying attacks and supports forensic investigations. The goal is 
+to make cyber security analysis more effective by understanding connections, between security events. 
+
+=== PAGE 12 ===
+12 
+1.2 Literature Review 
+1.2.1 Multi-Label Web Attack Detection 
+Sureda Riera et al. Introduced the SR -BH 2020 -label web attack dataset for classifying web attacks 
+based on the Common Attack Pattern Enumeration and Classification (CAPEC) taxonomy [1]. The 
+dataset is publicly available via Harvard Dataverse [2]. Include s HTTP request data along with 
+contextual information and multi -label attack annotations. In contrast to single -label classification the 
+multi-label setup allows one HTTP request to have than one attack label. This makes the dataset well -
+suited for studying web attacks that combine attack behaviors. 
+The SR -BH 2020 dataset contains 907,814 HTTP requests, each represented by 24 request and 
+contextual features [1] [2]. These features keep details from web requests that help machine -learning 
+models detect attacks. They also include data that can be used later in analysis. This is especially relevant 
+to the proposed research because Component 1 needs both a -label detection step and contextual details 
+that can help identify connections between detected events. 
+The work of Sureda Riera et al. Shows that machine-learning methods can be used effectively for -label 
+CAPEC-based classification of web attacks [1].. Their focus is mainly, on classifying individual web 
+requests. It does not address whether multiple malic ious requests are related and should be grouped as 
+part of an attack activity. So even if individual requests are classified correctly it does not solve the 
+event-correlation problem that Component 1 is focused on. 
+ 
+1.2.2 Security Event and Alert Correlation 
+Security monitoring systems often produce separate alerts, which makes it hard to see which alerts 
+belong to the same attack.. Colleagues [3] examined alert -correlation techniques that are used with 
+Network Intrusion Detection Systems (NIDS). They describe d how correlation helps combine and 
+analyse security alerts to aid in cyber -attack analysis and prediction. Their survey shows that it is 
+important to move past alerts and instead find connections among security events. 
+Colleagues [6] offered an attribute-focused correlation method. They suggested an alert-fusion technique 
+that uses grey relation and attribute -similarity correlation. This method looks at alert attributes such as 
+attack type, timestamp, source IP address, destination IP address and port details. It measures similarity 
+by examining each attribute’s characteristic then mixes the attribute similarit ies and their weights to 
+compute a similarity between alerts [6]. 
+This work matters for Component 1 because it shows that relationships between security events can be 
+judged by comparing contextual attributes instead of just one. In the proposed research the same general 
+idea is used for web-attack detection. It looks at time, source/identity, target and attack/behaviour context 
+to decide whether detected HTTP events are linked. 
+However Component 1 does not use the grey -relation weighting method from Liang and colleagues. 
+Instead the research uses a weighting approach that relies on Conditional Rough Entropy and Knowledge 
+Granularity [4]. Thus Liang and colleagues mainly support the idea of multi -attribute similarity and 
+correlation while Sun, Gu and Chen [4] supply the method, for the adaptive attribute-weighting part. 
+ 
+
+=== PAGE 13 ===
+13 
+1.2.3 Contextual Correlation and Web-Attack Reconstruction 
+Utomo Studiawan and Pratomo looked into forensic event reconstruction of web attacks using timeline 
+generation log decoding and rule-based event correlation [7]. Their method brings together server -side 
+web and system log artifacts to build a timeline of security events and uses correlation rules to reconstruct 
+-stage attack activities, such as reconnaissance, exploitation and privilege escalation. Their testing using 
+the AIT Log Data Set V2.0 shows how correlated log evidence can be used to reconstruct relationships 
+between events that happen during a web attack [7]. 
+This study is important for the proposed research because it shows the value of looking at relationships 
+between web  security events instead of looking at individual log records on their own. Connecting 
+contextual evidence can give an organized view of attack activity and help in understanding how multiple 
+events are connected. 
+However the correlation method used  by Utomo et al. Is rule -based [7]. Component 1 looks at an 
+approach to correlation where contextual similarities among multi -label machine -learning-detected 
+HTTP attacks are combined using data-derived adaptive weights. Therefore the study strongly supports 
+the importance of web-event correlation and reconstruction while also showing the difference, between 
+rule-based correlation and the adaptive contextual correlation approach being studied in this research. 
+1.2.4 Adaptive Attribute Weighting for Correlation 
+Sun, Gu and Chen proposed an alert aggregation method based on Conditional Rough Entropy and 
+Knowledge Granularity to address the problem of determining the importance of different alert attributes 
+during correlation [4]. Their approach derives attribute weights from the characteristics of the alert data 
+rather than depending entirely on manually assigned fixed weights. These weights are subsequently 
+combined with attribute similarity values to calculate a similarity between security alerts [4]. 
+In their approach  Conditional Rough Entropy and Knowledge Granularity are used to evaluate the 
+importance of alert attributes. The resulting attribute weights influence how strongly each similarity 
+criterion contributes to the alert similarity. Alerts whose calculated simi larity satisfies the defined 
+threshold can then be aggregated as related alerts [4]. The method was evaluated using security -alert 
+data derived from CIC-IDS 2018 and DARPA 98 [4]. 
+This method provides the foundation for the adaptive weighting mechanism proposed in Component 1. 
+However the present research does not claim Conditional Rough Entropy, Knowledge Granularity or the 
+underlying weighting method as a contribution. Instead Component 1 investigates the adaptation of this 
+data-driven weighting concept, to the correlation of -label machine-learning-detected HTTP web attacks. 
+The selected web-event context includes source/identity, target and attack/behaviour  information, with 
+the resulting adaptive weights used when calculating the overall contextual correlation score. 
+This allows the proposed research to examine whether data -derived adaptive weighting can provide an 
+advantage over a fixed/equal-weight correlation baseline when grouping related web-attack detections. 
+1.2.5 Existing Solutions and Limitations 
+Existing security and web -log analysis solutions offer features for watching and looking into security 
+events. Splunk works with security-event analysis. Matching [8] while Elastic Security offers SIEM and 
+
+=== PAGE 14 ===
+14 
+event-matching abilities through rules that can be changed [9]. GoAccess gives real -time analysis and 
+showing of web-server logs [10]. 
+Even though these solutions help with log analysis, watching and matching events Component 1 looks 
+into a specific way: the adaptive contextual matching of multi -label ML-detected HTTP web attacks. 
+The new method uses time, source and identity, target and attack and behavior context, with Conditional 
+Rough Entropy and Knowledge Granularity [4] used to creat e data -driven weights for the matching 
+criteria. 
+1.3 Research Gap 
+Existing research has shown that machine -learning methods can be used to find and sort web attacks 
+based on HTTP request data [1] while studies on security event correlation have proven that connections 
+between alerts can be found by looking at event detai ls and how similar they are [3] [6]. Research on 
+web attack reconstruction has also shown that connecting web and system events helps understand attack 
+activities; however these methods often depend on rules that are set in advance [7]. 
+Security-analysis platforms like Splunk [8] and Elastic Security [9] also have features for connecting 
+events while web-log analysis tools like GoAccess [10] help watch and study web-server activity. So the 
+problem is not that there is no way to connect events or look at web logs. The real problem this research 
+is trying to solve is how to combine -label machine-learning-based HTTP attack detection with smart 
+ways of connecting events. 
+Even though Sun, Gu and Chen show that Conditional Rough Entropy and Knowledge Granularity can 
+help find out how important different alert features are when grouping alerts [4] their method is not made 
+for connecting -label machine -learning-based HTTP web -attack detections using the web request 
+information that is kept. Also most research on webattack detection focuses on finding or sorting out bad 
+requests instead of figuring out how to weigh the relationships between different detected attacks in a 
+smart way [1]. 
+So this research looks at using data-based ways to connect multi-label ML-detected web attacks. Time, 
+source or identity, target and attack or behavior context are used to look at how the detected eventsre  
+connected. Conditional Rough Entropy and Knowledge Granularity are used to find out how important 
+the different connection factors are. The new smart way of connecting events is compared with a method 
+that gives weight to all factors to see how much bette r the smart weighting is, at grouping similar web -
+attack detections.The specific research gap is therefore the limited investigation of data-derived adaptive 
+contextual weighting for correlating multi -label ML -detected web attacks. The proposed adaptive 
+weighting mechanism will be compared with a fixed/equal -weight correlation baseline under the same 
+contextual criteria and similarity functions. 
+The research gap is the limited investigation of adaptive, data -derived contextual weighting for 
+correlating multi-label machine-learning-detected HTTP web attacks. 
+ 
+
+=== PAGE 15 ===
+15 
+2. OBJECTIVE 
+2.1 Main Objective 
+To develop and evaluate an adaptive approach for detecting multi-label web attacks from HTTP request 
+data and correlating related detected events using data-derived contextual criterion weights. 
+2.2 Specific Objectives 
+• To preprocess and encode the SR-BH 2020 HTTP request data using appropriate text and categorical 
+feature representations. 
+• To develop and evaluate a One -vs-Rest Logistic Regression model for multi -label CAPEC-based 
+web-attack detection. 
+• To retain and use relevant contextual information from detected events, including temporal, 
+source/identity, target, attack-related information, and detection probabilities where appropriate. 
+• To adapt Conditional Rough Entropy and Knowledge Granularity to determine the relative 
+importance of correlation criteria from data. 
+• To calculate an overall weighted correlation score and group sufficiently related detected events 
+using a tuned threshold. 
+• To evaluate the detection stage using multi -label classification metrics and compare adaptive 
+correlation weighting with a fixed/equal-weight correlation baseline. 
+
+=== PAGE 16 ===
+16 
+3. METHODOLOGY 
+3.1 Research Methodology / Design 
+This research will adopt an experimental research design to develop and evaluate the Adaptive Web 
+Attack Detection and Correlation Model. A quantitative approach is appropriate because the research 
+uses a labelled webattack dataset develops a supervised multi‑label machine‑learning model calculates 
+numerical contextual similarity and correlation scores and evaluates the resulting outputs using 
+quantitative measures. 
+The experimental process consists of two stages. The first stage focuses on multi‑label web‑attack 
+detection, where HTTP request data are preprocessed and used to train and evaluate a Logistic 
+Regression model. The second stage focuses on adaptive contextu al correlation, where contextual 
+information retained from detected events is used to calculate similarities and derive data‑driven criterion 
+weights, for correlation. 
+Development will follow an iterative prototyping approach allowing the preprocessing, detection, 
+similarity, adaptive weighting, correlation scoring, threshold selection and event‑grouping stages to be 
+implemented and tested incrementally. This approach en ables each stage to be evaluated and refined 
+before integration into the Component 1 pipeline. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PAGE 17 ===
+17 
+3.2 Data / Experimental Inputs 
+3.2.1 Dataset 
+The study will use the SR-BH 2020 multi -label web attack dataset , specifically the 
+data_capec_multilabel.csv file, as the primary experimental dataset [1], [2]. The dataset contains 907,814 
+HTTP requests represented by 24 request and contextual features and provides CAPEC -based multi-
+label annotations for web-attack classification [1], [2]. 
+The dataset is suitable for Component 1 because it provides both the labelled HTTP request data required 
+for supervised multi-label web-attack detection and contextual information that can be retained for the 
+subsequent correlation stage. Relevant fields include info rmation associated with the request, source, 
+target, timestamp, URI, and other HTTP-related characteristics available within the selected dataset [1], 
+[2]. 
+3.2.2 Data Preprocessing and Feature Representation 
+Before model development, the dataset will undergo data cleaning, missing-value handling, and relevant 
+feature selection. Textual HTTP fields selected for the detection model, such as the URI and request -
+body information where available, will be transforme d using Term Frequency -Inverse Document 
+Frequency (TF-IDF). Selected categorical features, such as HTTP method and status-related information 
+where applicable, will be represented using One-Hot Encoding. 
+The prepared dataset will then be divided into training and held -out test data. The training data will be 
+used to develop the One-vs-Rest Logistic Regression classifiers, while the held-out test data will be used 
+to evaluate detection performance on requests that were not used to fit the classifiers. 
+3.3 Detection Stage 
+The detection stage will use Logistic Regression with a One-vs-Rest (OvR) approach for classifying web 
+attacks that involve labels. Logistic Regression is chosen because it works with high -dimensional and 
+sparse data like the kind generated by TF -IDF. It is also efficient enough for the experimental setup 
+being used. Another r eason for selecting it is that it gives probability estimates for each attack label, 
+which helps in understanding how confident the model is about a prediction. 
+Under the One-vs-Rest strategy one binary Logistic Regression classifier will be trained for every attack 
+label. Each classifier learns to decide whether an HTTP request belongs to its attack category or not. 
+Since these classifiers are trained separately and do 
+ not influence each other an HTTP request can get than one attack label assigned. This supports the -
+label nature of the SR-BH 2020 dataset [1] [2]. 
+For every HTTP request the detection stage will output the predicted attack label or labels along with 
+the confidence scores or probabilities. At the time important contextual details, from the original HTTP 
+request will be kept. This preserved context ens ures that detected events can be properly passed on to 
+the stage. The adaptive contextual correlation stage. Where further analysis can take place. 
+ 
+
+=== PAGE 18 ===
+18 
+3.4 Adaptive Contextual Correlation 
+After the label detection stage  we will keep the contextual information that belongs to each detected 
+web-attack event so that we can do correlation. The correlation dimensions we choose are context 
+source/identity context, target context and attack/behaviour context. We will also keep detection 
+probabilities or confidence values as supporting information. These values will be used in the correlation 
+calculation only if we can show experimentally that they help. 
+When we have two detected events, A and B we will compute a similarity value S_i(A,B) for each chosen 
+contextual criterion i. The similarity function changes with the type of information we compare. 
+Temporal similarity shows how close the event timestamps are. Source/identity similarity shows links 
+such as a shared source IP or session when we can find one. Target similarity compares the web resources 
+or URIs that the attacks targeted. Attack/behaviour similarity shows how the predicted attack labels or 
+behaviours are related. 
+We will not set the importance of the selected correlation criteria with fixed weights. Instead the adaptive 
+weighting stage will use the method described by Sun, Gu and Chen [4]. That method uses Conditional 
+Rough Entropy and Knowledge Granularity to find  how important each alert attribute is from the data. 
+Component 1 will adapt that weighting idea to the attributes of the detected HTTP web-attack events. 
+The adaptive weight w_i  for each criterion will be multiplied by its contextual similarity value. This 
+gives us a correlation score between two detected events: 
+ 
+We will then use a correlation threshold θ to decide if the detected events are sufficiently related: 
+ 
+If two events meet this threshold we will group them together. We will choose the threshold after  
+experiments not by guessing. 
+The correlation stage will be made as a Python module that comes after the multi -label detection stage. 
+It will output a group or scenario identifier the member events that belong to that group, the detected 
+attack labels and the correlation information th at will be needed for analysis and, for tying it into the 
+larger forensic investigation framework. 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PAGE 19 ===
+19 
+3.5 Baseline / Benchmark 
+To evaluate the effect of the proposed weighting mechanism the adaptive contextual correlation 
+approach will be compared with a fixed or equal -weight correlation baseline. Both methods will work 
+on the set of detected web -attack events. They will also use the contextual criteria, similarity functions 
+and threshold-testing procedure. 
+In the baseline method every selected contextual criterion will be given the fixed weight. In the proposed 
+method the weights for each criterion will instead be determined from data using Conditional Rough 
+Entropy and Knowledge Granularity [4]. The correlation score in both cases will then be computed using 
+the weighted similarity formula. 
+By keeping all correlation criteria and similarity calculations the same across both approaches the 
+comparison is designed to focus on the impact of the weighting method. This setup allows the study to 
+check whether adjusting the importance of criteria bas ed on data provides an advantage, over giving 
+each criterion the same fixed importance when linking detected web-attack events. 
+3.6 Evaluation Metrics 
+Table 2: Evaluation Metrics 
+Stage Metric / Comparison Purpose 
+Detection Precision Correctness of predicted labels 
+Detection Recall Ability to identify relevant attack labels 
+Detection F1-score per label Balances Precision and Recall for each label 
+Detection Micro / Macro averages Summarises overall multi-label performance 
+Detection Hamming Loss Measures incorrectly predicted labels 
+Correlation Adaptive vs fixed/equal-weight comparison Tests the effect of data-derived weighting using the same contextual criteria 
+Correlation Threshold analysis Supports selection of the score threshold used for event grouping 
+3.7 Validation Strategy 
+We will validate the detection stage with held-out test data that were not used during the training of the 
+Logistic Regression classifiers. Detection performance will be measured by Precision, Recall F1 -score 
+per label Micro and Macro averages and Hamming Loss as defined in Section 3.6. 
+In the correlation stage we will compare the proposed weighting approach with the fixed/equal -weight 
+correlation baseline. Both approaches will use the detected events, contextual criteria, similarity 
+functions and threshold-testing procedure so that the effect of the adaptive weighting mechanism can be 
+examined under consistent experimental conditions. 
+We will analyse correlation threshold values to find an appropriate threshold for grouping sufficiently 
+related detected events. The final criterion,  for assessing the quality of the resulting correlated event 
+groups will be set based on the dataset evidence and the finalized experimental validation strategy. 
+3.8 Development Approach 
+Iterative prototyping will be used in the development of Component 1. This method is fitting because 
+Component 1 has linked stages, such as data preprocessing, feature encoding, multi -label web attack 
+
+=== PAGE 20 ===
+20 
+detection, contextual similarity analysis, adaptive attribute weighting and correlation -based event 
+grouping. Each stage can be. Tested on its own before it is joined into the full pipeline. 
+Development will proceed iteratively:The development process will consist of five prototypes: 
+Prototype 1 – Data Preprocessing and Feature Encoding 
+The SR-BH 2020 dataset will be prepared through data cleaning, missing-value handling, relevant 
+feature selection, TF-IDF transformation of selected textual features, and One-Hot Encoding of 
+selected categorical features. 
+Prototype 2 – Multi-Label Web-Attack Detection 
+A One-vs-Rest Logistic Regression model will be developed to detect one or more web-attack labels 
+from the preprocessed HTTP request data. Detection probabilities and relevant contextual information 
+will also be retained for subsequent correlation. 
+Prototype 3 – Contextual Similarity Calculation 
+Similarity functions will be implemented to compare detected events using the selected contextual 
+criteria: temporal, source/identity, target, and attack/behaviour information. 
+Prototype 4 – Adaptive Attribute Weighting 
+Conditional Rough Entropy and Knowledge Granularity will be implemented and adapted to derive 
+data-driven weights representing the relative importance of the selected correlation criteria. 
+Prototype 5 – Correlation, Event Grouping and Evaluation 
+The derived adaptive weights and contextual similarity values will be combined to calculate weighted 
+correlation scores. Threshold-based grouping will then be applied to identify sufficiently related 
+events. The completed approach will be integrated and evaluated against the fixed/equal-weight 
+correlation baseline. 
+threshold-based event grouping, integration and evaluation against the fixed/equal-weight baseline 
+This approach allows implementation issues,  within stages to be identified and corrected before 
+evaluating the complete Component 1 pipeline. 
+3.8.1 Output 
+The final component will generate a structured output containing: 
+• detected web-attack label(s);  
+• detection probability/confidence information;  
+• retained temporal, source/identity, target, and attack/behaviour context;  
+• correlation score;  
+• group/scenario identifier; and  
+• related member events and correlation information.  
+This structured output will be provided for integration with the subsequent components of the overall 
+CTI-Assisted Digital Forensic Investigation Tool for SMEs. 
+  
+
+=== PAGE 21 ===
+21 
+3.9 Overall C1 Mechanism 
+ 
+Figure 2: Overall Component 1 Mechanism 
+ 
+
+
+=== PAGE 22 ===
+22 
+4. HIGH-LEVEL SYSTEM ARCHITECTURE 
+4.1 Overview 
+Component 1 is an Adaptive Web Attack Detection and Correlation Model. It works with HTTP request 
+data to detect types of web attacks. It keeps contextual details and connects related attack events using 
+adaptive weights that come from the data itself. 
+The process starts with HTTP web -server logs taken from the SR -BH 2020 dataset [1] [2]. These logs 
+go through a preprocessing step. This includes cleaning the data dealing with missing values selecting 
+features transforming certain text-based features using TF-IDF and converting some categorical features 
+using One-Hot Encoding. 
+After preprocessing the data is fed into a One -vs-Rest Logistic Regression model. This model detects 
+types of web attacks at once. It gives out predicted attack labels, the probability for each label. Keeps 
+important contextual information such as the time stamp, the source or identity of the request the target 
+or URI and details about the attack or behavior. 
+The detected events are then processed in two steps: contextual similarity calculation and adaptive 
+weight calculation. Contextual similarities are calculated based on four criteria: time, source or identity, 
+target and attack or behavior. At the time Cond itional Rough Entropy and Knowledge Granularity [4] 
+are used to derive data-driven weights for each of these criteria. 
+These similarities and weights are combined to compute a weighted correlation score, for each pair of 
+events. This score is compared to a correlation threshold. If the score is high enough the events are 
+grouped together into event groups or scenarios. The final output includes the grouped events their attack 
+labels, the grouping information and the relevant context that led to the correlation. 
+4.2 Overall Integration 
+Component 1 is one part of a four‑piece CTI‑Assisted Digital Forensic Investigation Tool that small and 
+medium businesses can use. Component 1 looks for web attacks. Links them together based on the 
+context using data from HTTP requests. 
+Inside the system Component 1 creates organized correlated findings about web attacks. These findings 
+can be combined with the results and analysis from the parts of the research. The organized output from 
+Component 1 will contain: 
+• detected web‑attack label(s). Associated probability/confidence information; 
+• relevant temporal source/identity, target and attack/behaviour context; 
+• correlation score; 
+• group/scenario identifier; and 
+related member events and correlation information. 
+Component 1 supplies the part of the research that finds and links web attacks. The other parts handle 
+network analysis, CTI‑assisted analysis and forensic investigation. When the outputs from all parts are 
+combined the entire system gives more organized i nformation, for investigating cyber incidents and 
+digital forensics.  
+ 
+
+=== PAGE 23 ===
+23 
+4.3 High-Level Architecture of the Adaptive Web Attack Detection and Correlation Model 
+ 
+Figure 3: High-Level Architecture of the Adaptive Web Attack Detection and Correlation Model 
+ 
+
+
+=== PAGE 24 ===
+24 
+4.4 Integration Boundary 
+Component 1 operates as the web-attack detection and adaptive contextual correlation component  
+within the overall research system. Its integration boundary is defined by the data received for processing 
+and the structured findings generated for use within the overall forensic investigation framework. 
+Inputs to Component 1 
+• HTTP request / web-server log data  
+• SR-BH 2020 dataset during model development and experimental evaluation  
+• Relevant HTTP request and contextual fields required for detection and correlation  
+Outputs from Component 1 
+• Predicted web-attack label(s)  
+• Detection probability/confidence information  
+• Retained temporal, source/identity, target, and attack/behaviour context  
+• Correlation score  
+• Group/scenario identifier  
+• Related member events and correlation information 
+ 
+ 
+ 
+ 
+ 
+  
+
+=== PAGE 25 ===
+25 
+4.3 Individual Responsibility Boundary 
+Table 3: Individual Responsibility Boundary 
+Activity / Deliverable My Responsibility Shared Responsibility Other Member 
+SR-BH 2020 preprocessing and 
+feature encoding ✓   
+OvR Logistic Regression web-
+attack detection ✓   
+Context extraction for web 
+detections ✓   
+Conditional Rough Entropy + 
+Knowledge Granularity 
+weighting 
+✓   
+Contextual similarity and 
+correlation score ✓   
+Threshold-based correlated event 
+grouping ✓   
+Component 1 evaluation ✓   
+Overall system integration  ✓ Group 
+Network attack analysis   Component 2 
+CTI confidence/prioritization   Component 3 
+Attack timeline / next-stage 
+analysis   Component 4 
+
+=== PAGE 26 ===
+26 
+5. USER REQUIREMENTS 
+The user requirements for the proposed component are currently defined as requirements. These 
+preliminary requirements are based on the research objectives the proposed methodology and the 
+expected integration with the system. These requirements are not ye t confirmed. They do not reflect 
+inputs from stakeholders or domain experts. Validation through stakeholder or domain -expert 
+involvement will take place during the development and evaluation stages. Therefore the requirements 
+presented in this section should not be interpreted as validated requirements. They are still in a stage and 
+may change based on further feedback. 
+5.1 Preliminary Functional Requirements 
+• FR1: The component shall preprocess HTTP request records using the selected fields from the SR -
+BH 2020 dataset. 
+• FR2: The component shall generate multi -label web-attack predictions using One-vs-Rest Logistic 
+Regression and provide probability or confidence information for each predicted attack label. 
+• FR3: The component shall retain temporal, source/identity, target, and attack/behaviour contextual 
+information from detected events for subsequent correlation. 
+• FR4: The component shall calculate contextual similarities between detected events using four 
+criteria: temporal, source/identity, target, and attack/behaviour similarity. 
+• FR5: The component shall derive adaptive criterion weights using Conditional Rough Entropy and 
+Knowledge Granularity. 
+• FR6: The component shall calculate a weighted correlation score using the contextual similarity 
+values and their corresponding adaptive weights. Detected events that satisfy the selected correlation 
+threshold shall be grouped as related events. 
+• FR7: The component shall generate correlated web -attack findings containing the information 
+required for integration with the overall system. 
+ 
+5.2 Preliminary Non-Functional Requirements 
+The following non -functional requirement categories are considered relevant, to the proposed 
+component: 
+Reproducibility: The processing and evaluation procedures should be clearly documented. This 
+documentation must support reproduction of the research results. 
+Reliability: The component should process the selected data consistently. It should produce outputs 
+without unexpected processing failures. 
+Security: Experimental data and generated outputs should be handled securely. They should also be 
+stored securely during development and evaluation. 
+Usability: The generated correlated web -attack findings should be presented in an understandable 
+format. This format should support analysis and system integration. 
+Performance: The component should provide processing performance on the available development 
+hardware. 
+
+=== PAGE 27 ===
+27 
+6. COMMERCIALIZATION PLAN 
+ 
+6.1 Target Market and Customer Persona 
+Target market: 
+• medium‑sized businesses (SMEs). 
+• Organizations operating web. Web‑based services. 
+• Organizations without Security Operations Center (SOC) or specialized security teams. 
+Customer persona: 
+An SME IT or security administrator who needs to detect web requests and identify related web attack 
+events without deploying complex and costly enterprise‑level security infrastructure. 
+6.2 Value Proposition 
+The component provides multi‑label web attack detection and adaptive contextual correlation of 
+malicious HTTP events.Of presenting detected web attacks only as isolated events the component uses 
+contextual information such as time, source identity, target resource and attack behaviour to determine 
+whether detected events are related. 
+The adaptive correlation mechanism uses Conditional Rough Entropy and Knowledge Granularity to 
+derive data‑driven attribute weights reducing dependence on fixed correlation weights. 
+This provides SMEs with structured and explainable information about related web attack activity for 
+security analysis and investigation. 
+6.3 Revenue Model 
+Potential revenue models include: 
+• Subscription‑based web security monitoring. 
+• Software‑as‑a‑Service (SaaS). 
+• Licensing to SME‑focused IT and cybersecurity service providers. 
+• Integration with managed security services. 
+• Integration as a security analysis component within the CTI‑assisted digital forensic investigation 
+tool. 
+6.4 Cost Estimation 
+The component will primarily use existing computing resources, open‑source technologies such as 
+Python, Pandas, Scikit‑learn and Jupyter Notebook or a suitable IDE with the publicly available SR‑BH 
+2020 multi‑label web attack dataset. 
+Therefore no significant hardware, software licensing or dataset acquisition costs are expected during 
+the research and development stage.Potential future cost areas may include cloud or server infrastructure, 
+additional storage, deployment infrastructure, security  testing and maintenance if the solution is 
+deployed at a scale. However these resources are not essential for the implementation and evaluation of 
+Component 1. Where possible open‑source technologies and existing resources will be used to minimize 
+development costs. 
+
+=== PAGE 28 ===
+28 
+6.5 Pricing Strategy 
+If commercialized subscription‑based pricing could be structured according to factors such as the scale 
+of web activity being analyzed required analysis functionality and deployment requirements. 
+A basic plan could provide web attack detection and correlation functionality suitable for organizations 
+while more advanced plans could provide additional capabilities through integration with the complete 
+CTI‑assisted digital forensic investigation platform. 
+Specific monetary pricing is not proposed at this research stage as deployment and operational costs 
+have not yet been established. 
+6.6 Competitive Advantage 
+The component aims to differentiate itself through: 
+• Multi‑label detection of web attacks using HTTP request data. 
+• Adaptive correlation of detected web attacks. 
+• Use of contex clues such as time, source identity, target and attack behaviour. 
+• Data‑driven weighting of attributes with Conditional Rough Entropy and Knowledge Granularity 
+of fixed manual weights. 
+• Creation of groups of web attacks rather than showing each detection alone. 
+• A lightweight implementation built on open‑source tools so SMEs with limited resources can use 
+it. 
+6.7 Intellectual Property Considerations 
+The software implementation, system architecture, preprocessing pipeline machine‑learning detection 
+module, contextual correlation implementation and integration mechanisms may constitute 
+project‑developed software intellectual property, subject to applicable university and project intellectual 
+property policies. 
+The SR‑BH 2020 dataset, external research methodologies, open‑source libraries and other third‑party 
+resources remain subject to their licenses, terms and attribution requirements. 
+The project will appropriately reference the research supporting the use of Conditional Rough Entropy 
+and Knowledge Granularity rather than claiming the underlying mathematical method itself, as newly 
+developed intellectual property. 
+
+=== PAGE 29 ===
+29 
+7. BUDGET AND JUSTIFICATION 
+The proposed Component 1 is designed to reduce development and infrastructure costs by using existing 
+computing resources, open-source software and the publicly available SR-BH 2020 dataset. 
+Item Estimated Cost Justification 
+Development 
+computer Existing Required for preprocessing, model development, correlation implementation, testing, and evaluation. 
+SR-BH 2020 
+Dataset 
+Free / Publicly 
+Available 
+Used as the primary multi-label web attack dataset for model 
+development and evaluation. 
+Python Free Primary programming language used to implement the detection and correlation pipeline. 
+Pandas Free Used for dataset preprocessing, manipulation, and analysis. 
+Scikit-learn Free Used for TF-IDF, One-Hot Encoding, One-vs-Rest Logistic Regression, and detection evaluation. 
+Jupyter Notebook 
+/ IDE Free Used for development, experimentation, testing, and analysis. 
+Matplotlib Free Used where required for evaluation results and visual analysis. 
+Cloud / Server 
+Resources 0 / As required 
+Not essential for initial development; may be considered if 
+future experiments or deployment exceed local computing 
+capabilities. 
+Additional 
+Storage 
+Existing / As 
+required 
+Existing storage is expected to be sufficient for initial 
+development and experimentation. 
+Human Effort Student project effort Covers research, development, implementation, testing, evaluation, integration, and documentation. 
+Table 4: Budget and Justification 
+Budget Justification 
+• No significant additional budget is expected for the development of Component 1. 
+• Existing computing hardware and infrastructure will be used. 
+• Open-source technologies remove most software licensing costs. 
+• The available SR-BH 2020 dataset removes dataset acquisition costs. 
+• Initial model development and correlation experiments can be carried out with computing resources. 
+• Cloud or server infrastructure is optional. Would mainly become relevant for larger experiments or 
+future deployment. 
+• The main development cost is the research and implementation effort contributed as part of the research 
+project. 
+ 
+ 
+ 
+ 
+
+=== PAGE 30 ===
+30 
+8. WORK BREAKDOWN STRUCTURE (WBS) 
+Table 5: Work Breakdown Structure (WBS) 
+Phase Task Responsibility Timeline 
+Phase 1 – Research Literature review Individual Jul–Aug 2026 
+ SR-BH 2020 dataset analysis Individual Jul–Aug 2026 
+ Research-gap refinement Individual Aug 2026 
+ Detection and correlation methodology 
+selection Individual Aug–Sep 2026 
+Phase 2 – Data 
+Preparation SR-BH 2020 dataset preparation Individual Sep 2026 
+ Data cleaning and missing-value 
+handling Individual Sep–Oct 2026 
+ Relevant feature selection Individual Oct 2026 
+ TF-IDF and One-Hot Encoding Individual Oct 2026 
+Phase 3 – Detection & 
+Correlation 
+Development 
+One-vs-Rest Logistic Regression 
+implementation Individual Oct–Nov 2026 
+ Multi-label web attack detection 
+experiments Individual Nov 2026 
+ Detection evaluation Individual Nov–Dec 2026 
+ Contextual similarity implementation Individual Dec 2026–Jan 2027 
+ 
+Conditional Rough Entropy and 
+Knowledge Granularity 
+implementation 
+Individual Jan 2027 
+ Adaptive weight calculation Individual Jan–Feb 2027 
+ Weighted correlation score and 
+threshold implementation Individual Feb 2027 
+Phase 4 – System 
+Development Correlated event grouping Individual Feb–Mar 2027 
+ Component 1 structured output Individual Mar 2027 
+ Component 2 integration interface Shared Mar 2027 
+Phase 5 – Evaluation Fixed/equal-weight baseline comparison Individual Mar–Apr 2027 
+ Detection performance evaluation Individual Mar–Apr 2027 
+ Correlation results analysis Individual Apr 2027 
+ Error and result analysis Individual Apr 2027 
+Phase 6 – Finalization Overall system integration Shared Apr 2027 
+ Results analysis Individual Apr 2027 
+
+=== PAGE 31 ===
+31 
+Phase Task Responsibility Timeline 
+ Documentation Individual Apr–May 2027 
+ Final report Individual May 2027 
+
+=== PAGE 32 ===
+32 
+9. GANTT CHART 
+Table 6: Gantt Chart 
+Activity Jul 26 Aug 26 Sep 26 Oct 26 Nov 26 Dec 26 Jan 27 Feb 27 Mar 27 Apr 27 May 27 
+Literature review ✓ ✓          
+Research 
+design/methodology ✓ ✓ ✓         
+SR-BH 2020 dataset 
+analysis ✓ ✓          
+Data preparation   ✓ ✓        
+Feature 
+preprocessing/encoding 
+   ✓        
+OvR Logistic Regression 
+development 
+   ✓ ✓       
+Multi-label detection 
+experiments 
+    ✓ ✓      
+Detection evaluation     ✓ ✓      
+Contextual similarity 
+implementation 
+     ✓ ✓     
+Adaptive weighting 
+implementation 
+      ✓ ✓    
+Correlation score & 
+threshold 
+       ✓    
+Correlated event 
+grouping 
+       ✓ ✓   
+Component 2 integration         ✓   
+Evaluation/baseline 
+comparison 
+        ✓ ✓  
+Results/error analysis          ✓  
+Report preparation          ✓ ✓ 
+ 
+
+=== PAGE 33 ===
+33 
+10. REFERENCES LIST 
+[1] T. Sureda Riera, J. R. Bermejo Higuera, J. Bermejo-Higuera, J.-J. Martínez Herráiz, and J. A. Sicilia 
+Montalvo, “A new multi-label dataset for Web attacks CAPEC classification using machine learning 
+techniques,” Computers & Security, vol. 120, Art. no.  102788, 2022, doi: 
+10.1016/j.cose.2022.102788. 
+[2] T. Sureda Riera, J. R. Bermejo Higuera, J. Bermejo-Higuera, J.-J. Martínez Herráiz, and J. A. Sicilia 
+Montalvo, “SR -BH 2020 multi -label dataset,” Harvard Dataverse, ver. 1.2, 2022, doi : 
+10.7910/DVN/OGOIXX. 
+[3] H. Albasheer et al., “Cyber -Attack Prediction Based on Network Intrusion Detection Systems for 
+Alert Correlation Techniques: A Survey,” Sensors, vol. 22, no. 4, Art. no. 1494, 2022, doi: 
+10.3390/s22041494. 
+[4] J. Sun, L. Gu, and K. Chen, “An Efficient Alert Aggregation Method Based on Conditional Rough 
+Entropy and Knowledge Granularity,” Entropy, vol. 22, no. 3, Art. no. 324, 2020, doi: 
+10.3390/e22030324. 
+[5] United Nations, “Goal 9: Industry, Innovation and Infrastructure,” Sustainable Development Goals. 
+[Online]. Available: https://sdgs.un.org/goals/goal9. [Accessed: Sep. 5, 2026]. 
+[6] W. Liang, Z. Chen, Y. Wen, and W. Xiao, “An Alert Fusion Method Based on Grey Relation and 
+Attribute Similarity Correlation,” International Journal of Online and Biomedical Engineering 
+(iJOE), vol. 12, no. 8, pp. 25–30, 2016, doi: 10.3991/ijoe.v12i08.5958. 
+[7] M. N. Y. Utomo, H. Studiawan, and B. A. Pratomo, “Forensic Event Reconstruction of Web Attacks 
+Using Log Decoder and Rule-Based Correlation,” in Proc. 14th International Symposium on Digital 
+Forensics and Security (ISDFS), 2026, doi: 10.1109/ISDFS69419.2026.11458968. 
+[8] Splunk Inc., “About event grouping and correlation,” Splunk Enterprise Search Manual. [Online]. 
+Available: https://help.splunk.com/en/splunk -enterprise/search/search-manual/9.4/group-and-
+correlate-events/about-event-grouping-and-correlation. [Accessed: Sep. 1, 2026]. 
+[9] Elasticsearch B.V., “Create a detection rule using the UI,” Elastic Security Documentation. [Online]. 
+Available: https://www.elastic.co/docs/solutions/security/detect -and-alert/using-the-rule-ui. 
+[Accessed: Sep. 1, 2026]. 
+[10] GoAccess, “GoAccess – Visual Web Log Analyzer.” [Online]. Available: https://goaccess.io/. 
+[Accessed: Sep. 12, 2026]. 
+
+=== PAGE 34 ===
+34 
+11. APPENDICES 
+Appendix 1 – Mandatory Proposal Evidence and Decision Log 
+Table 7: Mandatory Proposal Evidence and Decision Log 
+Date Claim / 
+Problem 
+Evidence 
+Collected 
+Alternatives 
+Considered Decision Made Supervisor Discussion 
+July 
+2026 Need HTTP-
+level multi-
+label data 
+SR-BH 2020 
+paper and 
+Harvard 
+Dataverse [1], 
+[2] 
+Earlier 
+candidate 
+datasets 
+Use SR-BH 2020 
+data_capec_multilabel.csv Discussed 
+August 
+2026 Need efficient 
+multi-label 
+detector 
+Dataset 
+characteristics 
++ project 
+design 
+Other 
+classifiers 
+considered 
+during 
+planning 
+OvR Logistic Regression 
+as detection baseline Discussed 
+August 
+2026 
+Need 
+adaptive 
+correlation 
+weighting 
+Sun et al. [4] 
+Fixed/equal 
+manual 
+weights 
+Adapt Conditional Rough 
+Entropy + Knowledge 
+Granularity 
+Discussed 
+ 
+Need a direct 
+correlation 
+baseline 
+Research 
+contribution 
+focuses on 
+adaptive 
+weighting 
+Separate 
+SIEM/Wazuh 
+implementation 
+Compare against 
+fixed/equal-weight 
+correlation 
+ 
+  
+
+=== PAGE 35 ===
+35 
+Appendix 2 – AI Use Disclosure 
+Table 8: AI Use Disclosure 
+AI Tool Purpose of Use What Was Generated / Assisted How Output Was Verified Final Student Contribution 
+ChatGPT 
+Research 
+concept 
+clarification 
+Assisted in clarifying the 
+research gap, novelty, 
+objectives, and scope of 
+the adaptive contextual 
+correlation component. 
+Compared with the 
+selected literature, 
+project scope, and 
+supervisor guidance. 
+Student defined the 
+final research scope, 
+objectives, and 
+contribution. 
+Claude 
+Correlation 
+method 
+exploration 
+Assisted in 
+understanding 
+contextual similarity 
+measures and the use of 
+adaptive weighting. 
+Verified against the 
+original alert-
+aggregation and 
+correlation research 
+papers. 
+Student evaluated 
+the methods and 
+decided how they 
+would be adapted for 
+web-attack 
+correlation. 
+ChatGPT 
+Detection 
+model 
+planning 
+Assisted in explaining 
+the use of TF-IDF, One-
+Hot Encoding, One-vs-
+Rest classification, and 
+Logistic Regression 
+within the detection 
+stage. 
+Checked against 
+relevant technical 
+documentation and 
+the characteristics of 
+the selected dataset. 
+Student selected and 
+finalized the 
+detection pipeline 
+for the proposed 
+component. 
+ChatGPT 
+Language and 
+presentation 
+support 
+Assisted with improving 
+clarity, academic 
+phrasing, section 
+organization, and 
+presentation of technical 
+concepts. 
+All generated 
+wording was 
+manually reviewed 
+against the intended 
+meaning of the 
+research. 
+Student edited and 
+finalized the written 
+proposal. 
+ 
+

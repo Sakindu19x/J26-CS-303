@@ -1,0 +1,6 @@
+# Large generated files (rebuild with the scripts)
+results/correlation_input.csv
+results/detection_output.csv
+PP2 - Starter/data/
+PP2 - Starter/results/full/correlated_events_*.csv
+PP2 - Starter/results/test/correlated_events_*.csv

@@ -1,0 +1,10 @@
+Method,Typed Request,Model Detection
+GET,/blog/index.php/2020/03/22/hello-world/,000 - Normal (68.0%)
+GET,/blog/index.php?p=1,000 - Normal (97.3%)
+GET,"/blog/index.php?id=1' UNION ALL SELECT username,password FROM users-- -",66 - SQL Injection (84.6%)
+GET,/blog/index.php?id=1) AND SLEEP(5)#,66 - SQL Injection (99.5%)
+GET,/blog/index.php?page=../../../../etc/passwd,126 - Path Traversal (80.6%)
+GET,/blog/index.php?q=${@print(chr(122).chr(97))},242 - Code Injection (99.8%)
+GET,"/blog/index.php?url=any
+Set-cookie: Tamper=1",34 - HTTP Response Splitting (100.0%)
+GET,/blog/index.php?ver=1';cat /etc/passwd,000 - Normal (100.0%)

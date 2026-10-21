@@ -1,0 +1,14 @@
+Attack Label,Probability (%),Predicted,Actual,Correct
+000 - Normal,0.0112,0,0,True
+272 - Protocol Manipulation,0.0046,0,0,True
+242 - Code Injection,0.0006,0,0,True
+88 - OS Command Injection,0.0003,0,0,True
+126 - Path Traversal,0.0008,0,0,True
+66 - SQL Injection,99.9843,1,1,True
+16 - Dictionary-based Password Attack,0.0004,0,0,True
+310 - Scanning for Vulnerable Software,0.0002,0,0,True
+153 - Input Data Manipulation,0.001,0,0,True
+274 - HTTP Verb Tampering,0.0006,0,0,True
+194 - Fake the Source of Data,0.0,0,0,True
+34 - HTTP Response Splitting,0.0015,0,0,True
+33 - HTTP Request Smuggling,0.0004,0,0,True

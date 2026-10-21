@@ -1,0 +1,8 @@
+Metric,Value
+Micro Precision,0.9877
+Micro Recall,0.9831
+Micro F1-Score,0.9854
+Macro Precision,0.98
+Macro Recall,0.8893
+Macro F1-Score,0.9227
+Hamming Loss,0.0023

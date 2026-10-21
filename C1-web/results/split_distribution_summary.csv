@@ -1,0 +1,14 @@
+Attack_Label,Total_Clean_Positives,Train_Positives,Test_Positives,Test_Ratio_%
+000 - Normal,522734,418382,104352,19.96
+66 - SQL Injection,250230,200121,50109,20.03
+194 - Fake the Source of Data,56120,44947,11173,19.91
+126 - Path Traversal,20950,16685,4265,20.36
+34 - HTTP Response Splitting,19738,15823,3915,19.83
+242 - Code Injection,15827,12617,3210,20.28
+272 - Protocol Manipulation,9011,7207,1804,20.02
+88 - OS Command Injection,7482,5928,1554,20.77
+274 - HTTP Verb Tampering,5437,4305,1132,20.82
+310 - Scanning for Vulnerable Software,2718,2184,534,19.65
+153 - Input Data Manipulation,2272,1819,453,19.94
+16 - Dictionary-based Password Attack,1847,1465,382,20.68
+33 - HTTP Request Smuggling,1059,849,210,19.83
