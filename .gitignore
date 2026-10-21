@@ -1,0 +1,12 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pkl
+*.joblib
+*.parquet
+*.zip
+data/
+Dataset/
+outputs/
+.env

@@ -1,0 +1,116 @@
+{
+ "signature_event_process_parent": {
+  "distinct_signatures": 34,
+  "share_of_rows_whose_signature_has_one_label": 0.9141535450582688
+ },
+ "lookup_table_on_windows_apt_test": {
+  "n": 1172,
+  "accuracy": 0.9556313993174061,
+  "signatures_unseen_in_training": 0.0
+ },
+ "ablation": {
+  "full_core": {
+   "cv_macro_f1": 1.0,
+   "cv_accuracy": 1.0,
+   "test_Windows-APT-2025_accuracy": 1.0,
+   "test_Windows-APT-2025_macro_f1": 1.0,
+   "test_OTRF_accuracy": 0.88,
+   "test_OTRF_macro_f1": 0.0841433891499314
+  },
+  "no_process_names": {
+   "cv_macro_f1": 0.9630544972171492,
+   "cv_accuracy": 0.9804817453711767,
+   "test_Windows-APT-2025_accuracy": 0.9428327645051194,
+   "test_Windows-APT-2025_macro_f1": 0.955560198659088,
+   "test_OTRF_accuracy": 0.8775,
+   "test_OTRF_macro_f1": 0.09250176090158162
+  },
+  "no_process_names_no_event_id": {
+   "cv_macro_f1": 0.9630544972171492,
+   "cv_accuracy": 0.9804817453711767,
+   "test_Windows-APT-2025_accuracy": 0.9428327645051194,
+   "test_Windows-APT-2025_macro_f1": 0.955560198659088,
+   "test_OTRF_accuracy": 0.7658333333333334,
+   "test_OTRF_macro_f1": 0.08042831264892222
+  }
+ },
+ "otrf_malicious_true_vs_pred": {
+  "BENIGN": {
+   "T1021.006": 48,
+   "T1047": 54,
+   "T1069.001": 5,
+   "T1087.001": 5
+  },
+  "T1021.006": {
+   "T1021.006": 6,
+   "T1047": 0,
+   "T1069.001": 0,
+   "T1087.001": 0
+  },
+  "T1059.001": {
+   "T1021.006": 1,
+   "T1047": 0,
+   "T1069.001": 0,
+   "T1087.001": 0
+  },
+  "T1059.005": {
+   "T1021.006": 1,
+   "T1047": 0,
+   "T1069.001": 0,
+   "T1087.001": 0
+  },
+  "T1070.004": {
+   "T1021.006": 0,
+   "T1047": 1,
+   "T1069.001": 0,
+   "T1087.001": 0
+  },
+  "T1087": {
+   "T1021.006": 0,
+   "T1047": 0,
+   "T1069.001": 1,
+   "T1087.001": 1
+  },
+  "T1087;T1059.001": {
+   "T1021.006": 1,
+   "T1047": 0,
+   "T1069.001": 1,
+   "T1087.001": 1
+  },
+  "T1087;T1059.003": {
+   "T1021.006": 1,
+   "T1047": 0,
+   "T1069.001": 0,
+   "T1087.001": 0
+  },
+  "T1110": {
+   "T1021.006": 1,
+   "T1047": 0,
+   "T1069.001": 0,
+   "T1087.001": 0
+  }
+ },
+ "otrf_benign_flagged_as_attack": 22,
+ "otrf_benign_total": 1072,
+ "network_only_by_source": {
+  "OTRF": {
+   "n": 232,
+   "accuracy": 0.9008620689655172,
+   "majority_accuracy": 0.9612068965517241,
+   "classes": {
+    "BENIGN": 223,
+    "T1021.006": 7,
+    "T1047": 2
+   }
+  },
+  "Windows-APT-2025": {
+   "n": 14,
+   "accuracy": 1.0,
+   "majority_accuracy": 0.7142857142857143,
+   "classes": {
+    "T1095": 10,
+    "T1110": 4
+   }
+  }
+ }
+}

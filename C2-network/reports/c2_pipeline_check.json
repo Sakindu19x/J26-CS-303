@@ -1,0 +1,12 @@
+{
+ "events": 1278,
+ "detected": 1178,
+ "not_detected": 100,
+ "by_source_detected": {
+  "OTRF": 12,
+  "Windows-APT-2025": 1166
+ },
+ "rows_compared_with_stage3": 1172,
+ "mismatches_with_stage3": 0,
+ "events_where_stage1_state_differs_from_true_state": 6
+}

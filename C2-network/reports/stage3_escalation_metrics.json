@@ -1,0 +1,149 @@
+{
+ "constant_baseline_rate_train_val": 0.29717575103435867,
+ "tactic_map_used": {
+  "T1021.006": [
+   "Lateral Movement"
+  ],
+  "T1021.002": [
+   "Lateral Movement"
+  ],
+  "T1047": [
+   "Execution"
+  ],
+  "T1059.001": [
+   "Execution"
+  ],
+  "T1059.003": [
+   "Execution"
+  ],
+  "T1059.005": [
+   "Execution"
+  ],
+  "T1574.001": [
+   "Persistence",
+   "Privilege Escalation",
+   "Defense Evasion"
+  ],
+  "T1070.004": [
+   "Defense Evasion"
+  ],
+  "T1562.004": [
+   "Defense Evasion"
+  ],
+  "T1110": [
+   "Credential Access"
+  ],
+  "T1087": [
+   "Discovery"
+  ],
+  "T1087.001": [
+   "Discovery"
+  ],
+  "T1069.001": [
+   "Discovery"
+  ],
+  "T1201": [
+   "Discovery"
+  ],
+  "T1016": [
+   "Discovery"
+  ],
+  "T1049": [
+   "Discovery"
+  ],
+  "T1033": [
+   "Discovery"
+  ],
+  "T1095": [
+   "Command and Control"
+  ],
+  "T1105": [
+   "Command and Control"
+  ]
+ },
+ "test_all": {
+  "n": 1278,
+  "actual_escalation_rate": 0.3544600938967136,
+  "mean_predicted": 0.3884769239765141,
+  "brier": 0.07688443401164739,
+  "brier_constant_baseline": 0.2320996316686184,
+  "ece": 0.05049021217372064,
+  "auc": 0.9307431935246505
+ },
+ "test_by_source": {
+  "OTRF": {
+   "n": 112,
+   "actual_escalation_rate": 0.0,
+   "mean_predicted": 0.5038901387326584,
+   "brier": 0.48305612881067034,
+   "brier_constant_baseline": 0.08831342700283516,
+   "ece": 0.5038901387326584,
+   "auc": null
+  },
+  "Windows-APT-2025": {
+   "n": 1166,
+   "actual_escalation_rate": 0.38850771869639794,
+   "mean_predicted": 0.37739092050079526,
+   "brier": 0.0378696571527361,
+   "brier_constant_baseline": 0.24591099952673826,
+   "ece": 0.01111679819560267,
+   "auc": 0.9620792039357378
+  }
+ },
+ "windows_apt_per_scenario": {
+  "APT2025-2024.12.12": {
+   "n": 320,
+   "actual_escalation_rate": 0.4375,
+   "mean_predicted": 0.4122577541167008,
+   "brier": 0.049723717403011625,
+   "brier_constant_baseline": 0.2657846448477713,
+   "ece": 0.025242245883299194,
+   "auc": 0.9532738095238095
+  },
+  "APT2025-2024.12.13": {
+   "n": 505,
+   "actual_escalation_rate": 0.46534653465346537,
+   "mean_predicted": 0.44212523172014095,
+   "brier": 0.04777373026382678,
+   "brier_constant_baseline": 0.2770805498025409,
+   "ece": 0.0232213029333244,
+   "auc": 0.9638376674546887
+  },
+  "APT2025-2024.12.14": {
+   "n": 125,
+   "actual_escalation_rate": 0.472,
+   "mean_predicted": 0.4674913523440495,
+   "brier": 0.022772843004389833,
+   "brier_constant_baseline": 0.27977951802640055,
+   "ece": 0.004508647655950437,
+   "auc": 0.979969183359014
+  },
+  "APT2025-2024.12.15": {
+   "n": 57,
+   "actual_escalation_rate": 0.12280701754385964,
+   "mean_predicted": 0.14333068853037115,
+   "brier": 0.017670638891953087,
+   "brier_constant_baseline": 0.1381299092049225,
+   "ece": 0.020523670986511512,
+   "auc": 0.9285714285714286
+  },
+  "APT2025-2024.12.16": {
+   "n": 69,
+   "actual_escalation_rate": 0.10144927536231885,
+   "mean_predicted": 0.1394116850476701,
+   "brier": 0.001608708047292139,
+   "brier_constant_baseline": 0.12946617316977682,
+   "ece": 0.03796240968535127,
+   "auc": 1.0
+  },
+  "APT2025-2024.12.22": {
+   "n": 90,
+   "actual_escalation_rate": 0.05555555555555555,
+   "mean_predicted": 0.09573794900428065,
+   "brier": 0.0017096026693427437,
+   "brier_constant_baseline": 0.11084945466568417,
+   "ece": 0.04018239344872511,
+   "auc": 1.0
+  }
+ }
+}

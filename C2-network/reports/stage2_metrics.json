@@ -1,0 +1,205 @@
+{
+ "data_checks": {
+  "rows_in_file": 6897,
+  "rows_used": 6837,
+  "scenarios": 33,
+  "sessions": 33,
+  "scenarios_in_more_than_one_split": 0,
+  "sessions_with_decreasing_timestamps": 0,
+  "states": 13,
+  "next_classes": 12,
+  "self_transition_share": 0.11627906976744186,
+  "rows_by_split": {
+   "train": 3453,
+   "validation": 2106,
+   "test": 1278
+  },
+  "scenarios_by_split": {
+   "test": 8,
+   "train": 22,
+   "validation": 3
+  }
+ },
+ "alpha_cv": [
+  {
+   "alpha": 0.0,
+   "cv_log_loss": 1.251078694377722,
+   "cv_top1": 0.5312268593240004
+  },
+  {
+   "alpha": 0.01,
+   "cv_log_loss": 1.2295678317096803,
+   "cv_top1": 0.5312268593240004
+  },
+  {
+   "alpha": 0.1,
+   "cv_log_loss": 1.218904137368155,
+   "cv_top1": 0.5312268593240004
+  },
+  {
+   "alpha": 1.0,
+   "cv_log_loss": 1.2154823914698327,
+   "cv_top1": 0.5312268593240004
+  }
+ ],
+ "selected_alpha": 1.0,
+ "test_all_events": {
+  "n": 1278,
+  "state_unseen_in_training": 0.04225352112676056,
+  "target_unseen_in_training": 0.04225352112676056,
+  "markov": {
+   "top1": 0.4694835680751174,
+   "top3": 0.863849765258216,
+   "top5": 0.9241001564945227
+  },
+  "frequency_baseline": {
+   "top1": 0.2699530516431925,
+   "top3": 0.6924882629107981,
+   "top5": 0.8834115805946792
+  },
+  "repeat_current_top1": 0.11737089201877934,
+  "markov_log_loss": 1.7860189467407621,
+  "frequency_log_loss": 2.3024325643929084,
+  "markov_top1_ece": 0.07246964732864272
+ },
+ "test_non_self_transitions": {
+  "n": 1128,
+  "state_unseen_in_training": 0.0,
+  "target_unseen_in_training": 0.0,
+  "markov": {
+   "top1": 0.4521276595744681,
+   "top3": 0.8962765957446809,
+   "top5": 0.9645390070921985
+  },
+  "frequency_baseline": {
+   "top1": 0.3058510638297872,
+   "top3": 0.7845744680851063,
+   "top5": 0.9210992907801419
+  },
+  "repeat_current_top1": 0.0,
+  "markov_log_loss": 1.3326053377110088,
+  "frequency_log_loss": 1.7334884737373994,
+  "markov_top1_ece": 0.07414816681342633
+ },
+ "test_by_source": {
+  "OTRF": {
+   "n": 112,
+   "state_unseen_in_training": 0.48214285714285715,
+   "target_unseen_in_training": 0.48214285714285715,
+   "markov": {
+    "top1": 0.5178571428571429,
+    "top3": 0.5178571428571429,
+    "top5": 0.5178571428571429
+   },
+   "frequency_baseline": {
+    "top1": 0.0,
+    "top3": 0.0,
+    "top5": 0.5178571428571429
+   },
+   "repeat_current_top1": 1.0,
+   "markov_log_loss": 6.741784694358486,
+   "frequency_log_loss": 8.063897944716755,
+   "markov_top1_ece": 0.2045107046762782
+  },
+  "Windows-APT-2025": {
+   "n": 1166,
+   "state_unseen_in_training": 0.0,
+   "target_unseen_in_training": 0.0,
+   "markov": {
+    "top1": 0.4648370497427101,
+    "top3": 0.8970840480274442,
+    "top5": 0.9631217838765008
+   },
+   "frequency_baseline": {
+    "top1": 0.29588336192109777,
+    "top3": 0.7590051457975986,
+    "top5": 0.91852487135506
+   },
+   "repeat_current_top1": 0.032590051457975985,
+   "markov_log_loss": 1.3099934203829706,
+   "frequency_log_loss": 1.7490156496448204,
+   "markov_top1_ece": 0.06768137315623991
+  }
+ },
+ "second_order_comparison_windows_apt_test": {
+  "top1": 0.5668953687821612,
+  "top3": 0.9245283018867925
+ },
+ "windows_apt_test_scenarios": {
+  "n_scenarios": 6,
+  "markov_top1_mean_std": [
+   0.49894265886352174,
+   0.06099181376460764
+  ],
+  "markov_top3_mean_std": [
+   0.9244220263464181,
+   0.05209272409688801
+  ],
+  "bootstrap_top1": {
+   "markov_95ci": [
+    0.44377708518602094,
+    0.5424043966416993
+   ],
+   "difference_vs_frequency_95ci": [
+    0.15360000000000001,
+    0.20729366602687144
+   ]
+  },
+  "bootstrap_top3": {
+   "markov_95ci": [
+    0.88,
+    0.9467213114754098
+   ],
+   "difference_vs_frequency_95ci": [
+    0.0614697480096998,
+    0.174852652259332
+   ]
+  }
+ },
+ "supplementary_leave_one_scenario_out_windows_apt": {
+  "n_scenarios": 31,
+  "markov_top1_pooled": 0.5180669144981412,
+  "markov_top3_pooled": 0.907360594795539,
+  "frequency_top1_pooled": 0.2740520446096654,
+  "frequency_top3_pooled": 0.6994795539033457,
+  "markov_top1_scenario_std": 0.07191560307293993,
+  "note": "supplementary only; not the headline test result"
+ },
+ "end_to_end": {
+  "test_rows": 1278,
+  "rows_without_stage1_prediction": 0,
+  "all": {
+   "true_malicious_events": 1278,
+   "detected_by_stage1": 1178,
+   "detection_coverage": 0.9217527386541471,
+   "top1_on_detected": 0.46519524617996605,
+   "top3_on_detected": 0.8930390492359932,
+   "top1_overall_missed_counted_wrong": 0.4287949921752739,
+   "top3_overall_missed_counted_wrong": 0.8231611893583725,
+   "oracle_top1": 0.4694835680751174,
+   "oracle_top3": 0.863849765258216
+  },
+  "Windows-APT-2025": {
+   "true_malicious_events": 1166,
+   "detected_by_stage1": 1166,
+   "detection_coverage": 1.0,
+   "top1_on_detected": 0.4648370497427101,
+   "top3_on_detected": 0.8970840480274442,
+   "top1_overall_missed_counted_wrong": 0.4648370497427101,
+   "top3_overall_missed_counted_wrong": 0.8970840480274442,
+   "oracle_top1": 0.4648370497427101,
+   "oracle_top3": 0.8970840480274442
+  },
+  "OTRF": {
+   "true_malicious_events": 112,
+   "detected_by_stage1": 12,
+   "detection_coverage": 0.10714285714285714,
+   "top1_on_detected": 0.5,
+   "top3_on_detected": 0.5,
+   "top1_overall_missed_counted_wrong": 0.05357142857142857,
+   "top3_overall_missed_counted_wrong": 0.05357142857142857,
+   "oracle_top1": 0.5178571428571429,
+   "oracle_top3": 0.5178571428571429
+  }
+ }
+}

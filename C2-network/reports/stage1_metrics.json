@@ -1,0 +1,168 @@
+{
+ "n_train_val": 11241,
+ "n_test": 2372,
+ "selected_feature_set": "core",
+ "malicious_rows_without_technique_excluded": 60,
+ "classes_in_training": [
+  "BENIGN",
+  "T1021.006",
+  "T1059.001",
+  "T1059.003;T1574.001",
+  "T1059.005",
+  "T1070.004",
+  "T1087",
+  "T1087;T1059.001",
+  "T1087;T1059.003",
+  "T1095",
+  "T1105",
+  "T1110",
+  "T1562.004"
+ ],
+ "test_classes_never_seen_in_training": [
+  "T1047",
+  "T1069.001",
+  "T1087.001"
+ ],
+ "share_test_rows_with_unseen_class": 0.02908937605396289,
+ "test_overall": {
+  "random_forest": {
+   "accuracy": 0.93929173693086,
+   "macro_precision": 0.7029721777880233,
+   "macro_recall": 0.7550732829496585,
+   "macro_f1": 0.7177167411485923,
+   "weighted_f1": 0.9192907306433844,
+   "top3_accuracy": 0.9418212478920742,
+   "top1_accuracy": 0.93929173693086
+  },
+  "hist_gradient_boosting": {
+   "accuracy": 0.943929173693086,
+   "macro_precision": 0.7573249533256934,
+   "macro_recall": 0.7557146075765242,
+   "macro_f1": 0.7293084856002676,
+   "weighted_f1": 0.9216822279707514,
+   "top3_accuracy": 0.9477234401349073
+  },
+  "majority_baseline": {
+   "accuracy": 0.45193929173693087,
+   "macro_precision": 0.02824620573355818,
+   "macro_recall": 0.0625,
+   "macro_f1": 0.038908246225319396,
+   "weighted_f1": 0.2813466438687514
+  }
+ },
+ "test_seen_classes_only": {
+  "n": 2303,
+  "random_forest": {
+   "accuracy": 0.9674337820234477,
+   "macro_precision": 0.8734904237993307,
+   "macro_recall": 0.9293209636303489,
+   "macro_f1": 0.8877027455201496,
+   "weighted_f1": 0.9607939292554233
+  },
+  "majority_baseline": {
+   "accuracy": 0.4654798089448545,
+   "macro_precision": 0.03580613914960419,
+   "macro_recall": 0.07692307692307693,
+   "macro_f1": 0.04886609686609687,
+   "weighted_f1": 0.29570035863044986
+  },
+  "rf_top3_accuracy": 0.9700390794615719
+ },
+ "by_source": {
+  "Windows-APT-2025": {
+   "n": 1172,
+   "random_forest": {
+    "accuracy": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "macro_f1": 1.0,
+    "weighted_f1": 1.0
+   },
+   "majority_baseline": {
+    "accuracy": 0.0,
+    "macro_precision": 0.0,
+    "macro_recall": 0.0,
+    "macro_f1": 0.0,
+    "weighted_f1": 0.0
+   },
+   "rf_top3_accuracy": 1.0
+  },
+  "OTRF": {
+   "n": 1200,
+   "random_forest": {
+    "accuracy": 0.88,
+    "macro_precision": 0.09380030242427198,
+    "macro_recall": 0.08316711747650275,
+    "macro_f1": 0.0841433891499314,
+    "weighted_f1": 0.8473134311227418
+   },
+   "majority_baseline": {
+    "accuracy": 0.8933333333333333,
+    "macro_precision": 0.17866666666666667,
+    "macro_recall": 0.2,
+    "macro_f1": 0.18873239436619718,
+    "weighted_f1": 0.8430046948356807
+   },
+   "rf_top3_accuracy": 0.885
+  }
+ },
+ "network_events_only": {
+  "n": 246,
+  "random_forest": {
+   "accuracy": 0.9065040650406504,
+   "macro_precision": 0.5039417179596898,
+   "macro_recall": 0.7534913516976297,
+   "macro_f1": 0.5790172850311006,
+   "weighted_f1": 0.918395703430044
+  },
+  "majority_baseline": {
+   "accuracy": 0.9065040650406504,
+   "macro_precision": 0.18130081300813009,
+   "macro_recall": 0.2,
+   "macro_f1": 0.19019189765458422,
+   "weighted_f1": 0.8620486418083797
+  },
+  "classes_present": [
+   "BENIGN",
+   "T1021.006",
+   "T1047",
+   "T1095",
+   "T1110"
+  ]
+ },
+ "binary_detection_test": {
+  "precision": 0.9801980198019802,
+  "recall": 0.9138461538461539,
+  "f1": 0.945859872611465,
+  "roc_auc": 0.9639118111366245,
+  "brier": 0.0602239061601215,
+  "ece_10bins": 0.05303986546468716,
+  "accuracy": 0.9426644182124789
+ },
+ "binary_detection_by_source": {
+  "Windows-APT-2025": {
+   "n": 1172,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "OTRF": {
+   "n": 1200,
+   "precision": 0.4,
+   "recall": 0.125,
+   "f1": 0.19047619047619047
+  }
+ },
+ "top_features_permutation": {
+  "image_basename": 0.1391,
+  "parent_image_basename": 0.1244,
+  "cmd_length": 0.0752,
+  "cmd_has_iex": 0.0316,
+  "cmd_has_download": 0.0117,
+  "is_system_user": 0.0091,
+  "is_private_dest_ip": 0.0083,
+  "dest_port_num": 0.0026,
+  "image_dir_depth": 0.001,
+  "cmd_has_bypass": 0.0
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "checks": [
+  {
+   "id": "A1",
+   "check": "all 7 scripts present with the audited md5",
+   "result": "PASS",
+   "detail": "{'c2_pipeline.py': 'c2\\\\pipeline\\\\c2_pipeline.py', 'stage1_sensitivity.py': 'c2\\\\stage1\\\\stage1_sensitivity.py', 'stage1_shap.py': 'c2\\\\stage1\\\\stage1_shap.py', 'stage2_markov.py': 'c2\\\\stage2\\\\stage2_markov.py', 'stage3_escalation.py': 'c2\\\\stage3\\\\stage3_escalation.py', 'stage1_diagnostics.py': 'reference\\\\files\\\\stage1_diagnostics.py', 'stage1_task_a.py': 'reference\\\\files\\\\stage1_task_a.py'}"
+  },
+  {
+   "id": "A2",
+   "check": "every step exited 0",
+   "result": "PASS",
+   "detail": "{'1_stage1': 248.0, '2_stage1_diagnostics': 29.4, '3_stage1_shap': 13.4, '4_sensitivity': 24.6, '5_stage2': 5.1, '6_stage3': 2.6, '7_pipeline': 1.5}"
+  },
+  {
+   "id": "A3",
+   "check": "re-running stage 2, stage 3 and the pipeline gives byte-identical outputs (NFR-03)",
+   "result": "PASS",
+   "detail": "[]"
+  },
+  {
+   "id": "A4",
+   "check": "input data files unchanged by the run (NFR-07)",
+   "result": "PASS",
+   "detail": "task_A, task_B sha256 compared before/after"
+  },
+  {
+   "id": "A5",
+   "check": "task A: no scenario appears in more than one split",
+   "result": "PASS",
+   "detail": "35 scenarios, overlap=0"
+  },
+  {
+   "id": "A5",
+   "check": "task B: no scenario appears in more than one split",
+   "result": "PASS",
+   "detail": "33 scenarios, overlap=0"
+  },
+  {
+   "id": "A6",
+   "check": "Stage 1 model uses only allowed behavioural features (no scenario/session/source/label/raw-IP columns)",
+   "result": "PASS",
+   "detail": "62 features; unexpected=[]; feature_set=core"
+  },
+  {
+   "id": "A7",
+   "check": "S1 test_overall.random_forest.accuracy = 0.93929",
+   "result": "PASS",
+   "detail": "got 0.93929173693086"
+  },
+  {
+   "id": "A7",
+   "check": "S1 test_overall.random_forest.macro_f1 = 0.71772",
+   "result": "PASS",
+   "detail": "got 0.7177167411485923"
+  },
+  {
+   "id": "A7",
+   "check": "S1 by_source.Windows-APT-2025.random_forest.accuracy = 1.0",
+   "result": "PASS",
+   "detail": "got 1.0"
+  },
+  {
+   "id": "A7",
+   "check": "S1 by_source.OTRF.random_forest.accuracy = 0.88",
+   "result": "PASS",
+   "detail": "got 0.88"
+  },
+  {
+   "id": "A7",
+   "check": "S1 by_source.OTRF.majority_baseline.accuracy = 0.89333",
+   "result": "PASS",
+   "detail": "got 0.8933333333333333"
+  },
+  {
+   "id": "A7",
+   "check": "S2 selected_alpha = 1.0",
+   "result": "PASS",
+   "detail": "got 1.0"
+  },
+  {
+   "id": "A7",
+   "check": "S2 test_by_source.Windows-APT-2025.markov.top1 = 0.4648370497427101",
+   "result": "PASS",
+   "detail": "got 0.4648370497427101"
+  },
+  {
+   "id": "A7",
+   "check": "S2 test_by_source.Windows-APT-2025.markov.top3 = 0.8970840480274442",
+   "result": "PASS",
+   "detail": "got 0.8970840480274442"
+  },
+  {
+   "id": "A7",
+   "check": "S2 test_by_source.Windows-APT-2025.frequency_baseline.top1 = 0.29588336192109777",
+   "result": "PASS",
+   "detail": "got 0.29588336192109777"
+  },
+  {
+   "id": "A7",
+   "check": "S2 test_by_source.Windows-APT-2025.frequency_baseline.top3 = 0.7590051457975986",
+   "result": "PASS",
+   "detail": "got 0.7590051457975986"
+  },
+  {
+   "id": "A7",
+   "check": "S3 test_all.auc = 0.9307431935246505",
+   "result": "PASS",
+   "detail": "got 0.9307431935246505"
+  },
+  {
+   "id": "A7",
+   "check": "S3 test_by_source.Windows-APT-2025.auc = 0.9620792039357378",
+   "result": "PASS",
+   "detail": "got 0.9620792039357378"
+  },
+  {
+   "id": "A7",
+   "check": "PIPE events = 1278",
+   "result": "PASS",
+   "detail": "got 1278"
+  },
+  {
+   "id": "A7",
+   "check": "PIPE detected = 1178",
+   "result": "PASS",
+   "detail": "got 1178"
+  },
+  {
+   "id": "A7",
+   "check": "PIPE mismatches_with_stage3 = 0",
+   "result": "PASS",
+   "detail": "got 0"
+  },
+  {
+   "id": "A7",
+   "check": "sensitivity A_train_WAPT_test_OTRF/V_full/rf AUC = 0.678594",
+   "result": "PASS",
+   "detail": "got 0.678594"
+  },
+  {
+   "id": "A7",
+   "check": "sensitivity A_train_WAPT_test_OTRF/V_full/hgb AUC = 0.770945",
+   "result": "PASS",
+   "detail": "got 0.770945"
+  },
+  {
+   "id": "A7",
+   "check": "sensitivity A_train_WAPT_test_OTRF/V_minimal/hgb AUC = 0.716207",
+   "result": "PASS",
+   "detail": "got 0.716207"
+  },
+  {
+   "id": "A7",
+   "check": "sensitivity B_leave_one_OTRF_capture_out/V_full/rf AUC = 0.519881",
+   "result": "PASS",
+   "detail": "got 0.519881"
+  },
+  {
+   "id": "A8",
+   "check": "handoff file: 1,278 unique events, CSV and JSON agree on count, schema_version 1.0",
+   "result": "PASS",
+   "detail": "csv=1278 json=1278"
+  },
+  {
+   "id": "A8",
+   "check": "all probabilities lie in [0,1]",
+   "result": "PASS",
+   "detail": "['classification_probability', 'malicious_probability', 'next_1_prob', 'next_2_prob', 'next_3_prob', 'escalation_probability']"
+  },
+  {
+   "id": "A8",
+   "check": "next_1 >= next_2 >= next_3 and the three sum to <= 1",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "A8",
+   "check": "undetected events have empty detection/prediction fields; detected events have all of them",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "A8",
+   "check": "observed_sequence of a detected event ends with its detected technique",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "id": "A8",
+   "check": "events are in time order within each session (FR-04)",
+   "result": "PASS",
+   "detail": ""
+  }
+ ],
+ "findings": [
+  "Windows-APT test split contains 0 benign rows (OTRF: 1072); false-positive behaviour cannot be measured on Windows-APT.",
+  "Windows-APT Stage 1 accuracy 1.000: labels come from Wazuh rules, so this is rule re-learning, not detection capability.",
+  "OTRF Stage 1 accuracy 0.880 is BELOW the majority baseline 0.893; end-to-end only 12 of 112 OTRF malicious test events are flagged.",
+  "All-rows Stage 1 accuracy 0.939 mixes both sources and must not be the headline.",
+  "Test classes never seen in training: ['T1047', 'T1069.001', 'T1087.001'] (2.909% of test rows).",
+  "Stage 2 OTRF test: 48.2% of states unseen in training; OTRF results there are not meaningful. All OTRF test transitions are self-transitions, so escalation has no positive cases there.",
+  "Task A/B labels come from the dataset audit; tactic order (stage 3) is the official ATT&CK order with the 'latest tactic' rule for multi-tactic techniques (author's assumption).",
+  "Stage 1 itself was not re-run twice here; its reproducibility rests on the two independent runs already compared (0 of 2,372 predictions differ).",
+  "NFR-05 (scalability to additional records) was not tested."
+ ],
+ "timings": {
+  "1_stage1": 248.0,
+  "2_stage1_diagnostics": 29.4,
+  "3_stage1_shap": 13.4,
+  "4_sensitivity": 24.6,
+  "5_stage2": 5.1,
+  "6_stage3": 2.6,
+  "7_pipeline": 1.5,
+  "8_rerun_stage2": 7.0,
+  "9_rerun_stage3": 4.0,
+  "10_rerun_pipeline": 1.6
+ }
+}
