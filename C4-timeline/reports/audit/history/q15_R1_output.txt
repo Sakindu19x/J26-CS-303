@@ -1,0 +1,15 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collecting ... collected 5 items
+
+tests/test_record_baseline_change.py::test_extract_json_leaves PASSED    [ 20%]
+tests/test_record_baseline_change.py::test_extract_csv_leaves PASSED     [ 40%]
+tests/test_record_baseline_change.py::test_extract_md_leaves PASSED      [ 60%]
+tests/test_record_baseline_change.py::test_compare_and_verification_rule PASSED [ 80%]
+tests/test_record_baseline_change.py::test_q15_baseline_changes_file_contents PASSED [100%]
+
+============================== 5 passed in 0.02s ==============================

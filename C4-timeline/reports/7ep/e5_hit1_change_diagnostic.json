@@ -1,0 +1,262 @@
+{
+  "metadata": {
+    "label": "diagnostic, not a pre-registered test",
+    "slice": "tactic_collapsed",
+    "all_episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7"
+    ],
+    "evaluated_episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E6",
+      "E7"
+    ],
+    "n_evaluation_samples": 74,
+    "n_e5_test_samples": 2,
+    "summary_accounting": {
+      "markov_total_hits_7ep": 22,
+      "markov_total_samples_7ep": 76,
+      "markov_e5_test_hits": 1,
+      "markov_e5_test_samples": 2,
+      "markov_hits_6ep_in_7ep_run": 21,
+      "markov_hits_6ep_in_e5_removed_run": 18,
+      "markov_hits_difference_in_6ep": -3,
+      "frequency_total_hits_7ep": 14,
+      "frequency_total_samples_7ep": 76,
+      "frequency_e5_test_hits": 1,
+      "frequency_e5_test_samples": 2,
+      "frequency_hits_6ep_in_7ep_run": 13,
+      "frequency_hits_6ep_in_e5_removed_run": 13,
+      "frequency_hits_difference_in_6ep": 0
+    }
+  },
+  "markov_differing_samples": [
+    {
+      "sample_id": "E2-tac-col-K05",
+      "episode_id": "E2",
+      "current_tactics": [
+        "credential-access"
+      ],
+      "target_tactics": [
+        "discovery"
+      ],
+      "pred_7ep": "discovery",
+      "hit1_7ep": 1,
+      "pred_no_e5": "collection",
+      "hit1_no_e5": 0,
+      "transition_counts_7ep": {
+        "collection": 1.0,
+        "credential-access": 0.25,
+        "defense-evasion": 0.6667,
+        "discovery": 1.1667,
+        "lateral-movement": 0.75,
+        "persistence": 0.0833,
+        "reconnaissance": 0.2
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "collection": 1.0,
+        "credential-access": 0.0833,
+        "defense-evasion": 0.4167,
+        "discovery": 1.0,
+        "lateral-movement": 0.5,
+        "persistence": 0.0833,
+        "reconnaissance": 0.2
+      },
+      "tied_no_e5": "yes"
+    },
+    {
+      "sample_id": "E2-tac-col-K07",
+      "episode_id": "E2",
+      "current_tactics": [
+        "credential-access",
+        "exfiltration"
+      ],
+      "target_tactics": [
+        "collection"
+      ],
+      "pred_7ep": "discovery",
+      "hit1_7ep": 0,
+      "pred_no_e5": "collection",
+      "hit1_no_e5": 1,
+      "transition_counts_7ep": {
+        "credential-access->collection": 1.0,
+        "credential-access->credential-access": 0.25,
+        "credential-access->defense-evasion": 0.6667,
+        "credential-access->discovery": 1.1667,
+        "credential-access->lateral-movement": 0.75,
+        "credential-access->persistence": 0.0833,
+        "credential-access->reconnaissance": 0.2
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "credential-access->collection": 1.0,
+        "credential-access->credential-access": 0.0833,
+        "credential-access->defense-evasion": 0.4167,
+        "credential-access->discovery": 1.0,
+        "credential-access->lateral-movement": 0.5,
+        "credential-access->persistence": 0.0833,
+        "credential-access->reconnaissance": 0.2
+      },
+      "tied_no_e5": "yes"
+    },
+    {
+      "sample_id": "E2-tac-col-K08",
+      "episode_id": "E2",
+      "current_tactics": [
+        "collection"
+      ],
+      "target_tactics": [
+        "exfiltration"
+      ],
+      "pred_7ep": "discovery",
+      "hit1_7ep": 0,
+      "pred_no_e5": "defense-evasion",
+      "hit1_no_e5": 0,
+      "transition_counts_7ep": {
+        "credential-access": 0.1667,
+        "defense-evasion": 1.0,
+        "discovery": 1.1667
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "defense-evasion": 1.0,
+        "discovery": 1.0
+      },
+      "tied_no_e5": "yes"
+    },
+    {
+      "sample_id": "E2-tac-col-K11",
+      "episode_id": "E2",
+      "current_tactics": [
+        "collection"
+      ],
+      "target_tactics": [
+        "discovery"
+      ],
+      "pred_7ep": "discovery",
+      "hit1_7ep": 1,
+      "pred_no_e5": "defense-evasion",
+      "hit1_no_e5": 0,
+      "transition_counts_7ep": {
+        "credential-access": 0.1667,
+        "defense-evasion": 1.0,
+        "discovery": 1.1667
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "defense-evasion": 1.0,
+        "discovery": 1.0
+      },
+      "tied_no_e5": "yes"
+    },
+    {
+      "sample_id": "E2-tac-col-K13",
+      "episode_id": "E2",
+      "current_tactics": [
+        "credential-access"
+      ],
+      "target_tactics": [
+        "discovery"
+      ],
+      "pred_7ep": "discovery",
+      "hit1_7ep": 1,
+      "pred_no_e5": "collection",
+      "hit1_no_e5": 0,
+      "transition_counts_7ep": {
+        "collection": 1.0,
+        "credential-access": 0.25,
+        "defense-evasion": 0.6667,
+        "discovery": 1.1667,
+        "lateral-movement": 0.75,
+        "persistence": 0.0833,
+        "reconnaissance": 0.2
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "collection": 1.0,
+        "credential-access": 0.0833,
+        "defense-evasion": 0.4167,
+        "discovery": 1.0,
+        "lateral-movement": 0.5,
+        "persistence": 0.0833,
+        "reconnaissance": 0.2
+      },
+      "tied_no_e5": "yes"
+    },
+    {
+      "sample_id": "E3-tac-col-K01",
+      "episode_id": "E3",
+      "current_tactics": [
+        "credential-access",
+        "lateral-movement"
+      ],
+      "target_tactics": [
+        "lateral-movement"
+      ],
+      "pred_7ep": "command-and-control",
+      "hit1_7ep": 0,
+      "pred_no_e5": "discovery",
+      "hit1_no_e5": 0,
+      "transition_counts_7ep": {
+        "credential-access->collection": 0.5,
+        "credential-access->credential-access": 0.25,
+        "credential-access->defense-evasion": 0.6667,
+        "credential-access->discovery": 3.1667,
+        "credential-access->lateral-movement": 0.25,
+        "credential-access->persistence": 0.0833,
+        "credential-access->reconnaissance": 0.2,
+        "lateral-movement->command-and-control": 1.0,
+        "lateral-movement->discovery": 0.2
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "credential-access->collection": 0.5,
+        "credential-access->credential-access": 0.0833,
+        "credential-access->defense-evasion": 0.4167,
+        "credential-access->discovery": 3.0,
+        "credential-access->persistence": 0.0833,
+        "credential-access->reconnaissance": 0.2,
+        "lateral-movement->command-and-control": 1.0,
+        "lateral-movement->discovery": 0.2
+      },
+      "tied_no_e5": "no"
+    },
+    {
+      "sample_id": "E3-tac-col-K04",
+      "episode_id": "E3",
+      "current_tactics": [
+        "collection"
+      ],
+      "target_tactics": [
+        "discovery"
+      ],
+      "pred_7ep": "discovery",
+      "hit1_7ep": 1,
+      "pred_no_e5": "defense-evasion",
+      "hit1_no_e5": 0,
+      "transition_counts_7ep": {
+        "credential-access": 0.1667,
+        "defense-evasion": 1.0,
+        "discovery": 1.1667,
+        "exfiltration": 1.0
+      },
+      "tied_7ep": "no",
+      "transition_counts_no_e5": {
+        "defense-evasion": 1.0,
+        "discovery": 1.0,
+        "exfiltration": 1.0
+      },
+      "tied_no_e5": "yes"
+    }
+  ],
+  "frequency_differing_samples": []
+}

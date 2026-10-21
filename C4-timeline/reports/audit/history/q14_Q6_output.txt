@@ -1,0 +1,69 @@
+================================================================================
+Q6 OVERNIGHT SUMMARY & DECISIONS REBUILD (2026-10-15T07:42:16.675720+00:00)
+================================================================================
+
+--- [Step 1] Running scripts/append_q6_corrections.py ---
+
+
+--- [Step 2] Running scripts/build_overnight_summary.py ---
+Generated C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\overnight_summary.md with strict code-extracted values
+
+--- [Step 3] Running scripts/verify_overnight_summary.py ---
+================================================================================
+VERIFYING OVERNIGHT SUMMARY (scripts/verify_overnight_summary.py)
+================================================================================
+[Step 1] Section 2 matches overnight_ledger.md exactly [PASS]
+[Step 2] Section 3 matches overnight_decisions.md exactly [PASS]
+[Step 3] Baseline hashes count (61) verified in summary text and sign-off table [PASS]
+[Step 4] Latest test counts (197 passed, 0 failed) verified [PASS]
+[Step 5] Prediction records count (171) verified [PASS]
+[Step 6] Episodes count (7) verified [PASS]
+[Step 7] NFR1 timing metrics (0.0036s, 0.0123s, 0.2679s) verified [PASS]
+================================================================================
+ALL OVERNIGHT SUMMARY VERIFICATIONS PASSED (Exit 0)
+================================================================================
+
+--- [Step 4] Running scripts/mutation_sweep_overnight_summary.py ---
+================================================================================
+MUTATION SWEEP: reports/overnight_summary.md
+================================================================================
+================================================================================
+VERIFYING OVERNIGHT SUMMARY (scripts/verify_overnight_summary.py)
+================================================================================
+[Step 1] Section 2 matches overnight_ledger.md exactly [PASS]
+[Step 2] Section 3 matches overnight_decisions.md exactly [PASS]
+[Step 3] Baseline hashes count (61) verified in summary text and sign-off table [PASS]
+[Step 4] Latest test counts (197 passed, 0 failed) verified [PASS]
+[Step 5] Prediction records count (171) verified [PASS]
+[Step 6] Episodes count (7) verified [PASS]
+[Step 7] NFR1 timing metrics (0.0036s, 0.0123s, 0.2679s) verified [PASS]
+================================================================================
+ALL OVERNIGHT SUMMARY VERIFICATIONS PASSED (Exit 0)
+================================================================================
+
+================================================================================
+Total mutations evaluated: 171
+Detected or explicitly exempted: 171
+Undetected non-exempt mutations: 0
+Wrote exempt list to C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\audit\exempt_overnight_summary.txt
+================================================================================
+
+ALL MUTATIONS DETECTED (100% Detection Rate).
+
+--- [Step 5] Running pytest tests/test_overnight_summary.py ---
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collecting ... collected 2 items
+
+tests/test_overnight_summary.py::test_verify_overnight_summary_independent_verifier PASSED [ 50%]
+tests/test_overnight_summary.py::test_overnight_summary_contains_required_sections PASSED [100%]
+
+============================== 2 passed in 0.02s ==============================
+
+================================================================================
+Q6 SUMMARY & DECISIONS VERIFICATION ALL PASSED (EXIT 0)
+================================================================================

@@ -1,0 +1,44 @@
+================================================================================
+Q9 NFR1 MEASUREMENT AND VERIFICATION RUN (2026-10-15T06:54:56.752397+00:00)
+================================================================================
+
+--- [Step 1] Running scripts/measure_nfr1.py ---
+--- Measuring NFR1 Timing Across 7 Episodes ---
+  E1 (38 events): median=0.0014s, p95=0.0016s
+  E2 (29 events): median=0.0011s, p95=0.0016s
+  E3 (77 events): median=0.0115s, p95=0.0185s
+  E4 (46 events): median=0.0068s, p95=0.0082s
+  E5 (7 events): median=0.0009s, p95=0.0013s
+  E6 (51 events): median=0.0078s, p95=0.0119s
+  E7 (26 events): median=0.0036s, p95=0.0051s
+
+Measuring parent-timed process cold start and in-process latency...
+Parent-timed process cold start: 0.2679s
+In-process first-record latency: 0.1723s
+
+Measuring Streamlit server ready time on port 8765...
+Streamlit server ready time: 2.4087s
+
+Measuring scaling benchmark on longest episode E3 (77 events)...
+
+Wrote C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\measurements\nfr1_timing.json
+Wrote C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\measurements\nfr1_timing.md
+
+Final Verdict: PASS
+
+--- [Step 2] Running scripts/verify_nfr1.py ---
+================================================================================
+INDEPENDENT NFR1 VERIFICATION (scripts/verify_nfr1.py)
+================================================================================
+[Step 1] Platform telemetry strings match JSON block exactly [PASS]
+[Step 2] Executive summary and verdict rows match JSON exactly [PASS]
+[Step 3] All timed region definitions verified in MD [PASS]
+[Step 4] All per-episode latency rows match JSON exactly [PASS]
+[Step 5] Scaling benchmark rows match JSON exactly [PASS]
+================================================================================
+ALL NFR1 TIMING VERIFICATIONS PASSED SUCCESSFULLY (Exit 0)
+================================================================================
+
+================================================================================
+Q9 NFR1 RUN COMPLETED SUCCESSFULLY (ALL CRITERIA SATISFIED)
+================================================================================

@@ -1,0 +1,67 @@
+================================================================================
+Q0 BASELINE AUDIT OUTPUT
+================================================================================
+
+1. Git HEAD:
+996bd71102c8d87c8190d0617766b382f1051eb5
+
+2. Git Status:
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   reports/overnight_ledger.md
+	modified:   scripts/update_ledger.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	scripts/record_q14_decision.py
+	scripts/run_q0_baseline.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+3. verify_all_hashes.py Exit Code: 0
+Output snippet:
+           0be8c4b5e8115756c381f2ff5a26c372f2bfdb84f5f6f29e60a38c61d6da76d9  [MATCH]
+
+================================================================================
+ALL BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED
+================================================================================
+
+4. Pytest Exit Code: 0
+Pytest summary line:
+184 passed in 222.28s (0:03:42)
+
+5. git config core.autocrlf:
+file:C:/Program Files/Git/etc/gitconfig	true
+
+6. .gitattributes exists: False
+
+7. git tag -n:
+c4-7ep-verified c4-7ep-verified: 184 tests passed, 9677 mutations detected across all sweeps (8328 numeric + 1349 label, 100% detection), 61 protected baseline hashes verified
+stage2-verified Stage 1 and Stage 2 verified baseline (105 tests, 16 hashes fixed)
+
+8. Untracked / Ignored Files and Dirs:
+M reports/overnight_ledger.md
+ M scripts/update_ledger.py
+?? scripts/record_q14_decision.py
+?? scripts/run_q0_baseline.py
+!! .pytest_cache/
+!! data/raw/scenario_1_sudo_pam.zip
+!! data/raw/scenario_2_cron.zip
+!! data/raw/scenario_3_vnc_apt.zip
+!! data/raw/scenario_4.zip
+!! data/raw/scenario_5.zip
+!! data/raw/scenario_6_macro_binary.zip
+!! data/raw/scenario_7.zip
+!! docs/c4_full_conversation_history.md
+!! scratch/__pycache__/
+!! scripts/__pycache__/
+!! src/c4/__pycache__/
+!! src/c4/dashboard/__pycache__/
+!! src/c4/models/__pycache__/
+!! tests/__pycache__/
+
+9. Is data/raw tracked?: True
+Tracked data/raw files:
+data/raw/.gitkeep

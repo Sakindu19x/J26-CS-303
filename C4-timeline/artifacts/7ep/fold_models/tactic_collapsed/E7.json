@@ -1,0 +1,277 @@
+{
+  "frequency": {
+    "counts": {
+      "collection": 4.0,
+      "command-and-control": 7.366666666666666,
+      "credential-access": 5.583333333333333,
+      "defense-evasion": 12.866666666666665,
+      "discovery": 15.5,
+      "execution": 7.166666666666666,
+      "exfiltration": 1.5,
+      "impact": 2.5,
+      "initial-access": 1.2,
+      "lateral-movement": 2.0,
+      "persistence": 4.283333333333333,
+      "privilege-escalation": 4.033333333333333
+    },
+    "probabilities": {
+      "collection": 0.058823529411764705,
+      "command-and-control": 0.10833333333333332,
+      "credential-access": 0.0821078431372549,
+      "defense-evasion": 0.1892156862745098,
+      "discovery": 0.22794117647058823,
+      "execution": 0.10539215686274508,
+      "exfiltration": 0.022058823529411766,
+      "impact": 0.03676470588235294,
+      "initial-access": 0.01764705882352941,
+      "lateral-movement": 0.029411764705882353,
+      "persistence": 0.06299019607843137,
+      "privilege-escalation": 0.059313725490196076
+    }
+  },
+  "markov": {
+    "counts": {
+      "collection": {
+        "credential-access": 0.16666666666666666,
+        "defense-evasion": 1.0,
+        "discovery": 2.1666666666666665,
+        "exfiltration": 1.0
+      },
+      "command-and-control": {
+        "collection": 1.0,
+        "command-and-control": 0.2,
+        "credential-access": 0.08333333333333333,
+        "defense-evasion": 1.3333333333333333,
+        "discovery": 0.5,
+        "execution": 2.958333333333333,
+        "impact": 0.5,
+        "initial-access": 0.25,
+        "lateral-movement": 0.125,
+        "persistence": 1.0,
+        "privilege-escalation": 0.9166666666666667
+      },
+      "credential-access": {
+        "collection": 1.5,
+        "credential-access": 0.25,
+        "defense-evasion": 0.6666666666666666,
+        "discovery": 3.1666666666666665,
+        "lateral-movement": 0.75,
+        "persistence": 0.08333333333333333
+      },
+      "defense-evasion": {
+        "collection": 1.0,
+        "command-and-control": 1.2291666666666667,
+        "credential-access": 0.08333333333333333,
+        "defense-evasion": 2.4250000000000003,
+        "discovery": 2.75,
+        "execution": 0.14583333333333331,
+        "initial-access": 0.3,
+        "persistence": 1.5291666666666668,
+        "privilege-escalation": 1.4041666666666668
+      },
+      "discovery": {
+        "command-and-control": 1.75,
+        "credential-access": 3.9166666666666665,
+        "defense-evasion": 1.5,
+        "discovery": 1.6666666666666667,
+        "execution": 1.3333333333333333,
+        "exfiltration": 0.5,
+        "impact": 1.0,
+        "lateral-movement": 0.25,
+        "persistence": 0.5833333333333333,
+        "privilege-escalation": 0.8333333333333333
+      },
+      "execution": {
+        "command-and-control": 2.0625,
+        "defense-evasion": 1.3333333333333333,
+        "discovery": 2.333333333333333,
+        "execution": 1.1875,
+        "impact": 0.5,
+        "lateral-movement": 0.125,
+        "persistence": 0.0625,
+        "privilege-escalation": 0.0625
+      },
+      "exfiltration": {
+        "collection": 0.5,
+        "defense-evasion": 1.0
+      },
+      "impact": {
+        "discovery": 1.0,
+        "impact": 0.5
+      },
+      "initial-access": {
+        "command-and-control": 0.5,
+        "defense-evasion": 0.175,
+        "discovery": 0.25,
+        "initial-access": 0.05,
+        "persistence": 0.05,
+        "privilege-escalation": 0.175
+      },
+      "lateral-movement": {
+        "command-and-control": 1.0,
+        "credential-access": 1.0,
+        "execution": 0.5,
+        "lateral-movement": 0.5
+      },
+      "persistence": {
+        "command-and-control": 0.22916666666666666,
+        "credential-access": 0.08333333333333333,
+        "defense-evasion": 2.175,
+        "discovery": 0.5833333333333333,
+        "execution": 0.2708333333333333,
+        "initial-access": 0.05,
+        "lateral-movement": 0.125,
+        "persistence": 0.4458333333333333,
+        "privilege-escalation": 0.3208333333333333
+      },
+      "privilege-escalation": {
+        "command-and-control": 0.3958333333333333,
+        "defense-evasion": 1.258333333333333,
+        "discovery": 1.0833333333333333,
+        "execution": 0.2708333333333333,
+        "initial-access": 0.05,
+        "lateral-movement": 0.125,
+        "persistence": 0.5291666666666666,
+        "privilege-escalation": 0.3208333333333333
+      },
+      "reconnaissance": {
+        "execution": 0.5,
+        "initial-access": 0.5
+      }
+    },
+    "n_step_transitions": {
+      "collection": 5,
+      "command-and-control": 14,
+      "credential-access": 10,
+      "defense-evasion": 19,
+      "discovery": 15,
+      "execution": 12,
+      "exfiltration": 2,
+      "impact": 2,
+      "initial-access": 4,
+      "lateral-movement": 4,
+      "persistence": 14,
+      "privilege-escalation": 12,
+      "reconnaissance": 1
+    },
+    "probabilities": {
+      "collection": {
+        "credential-access": 0.038461538461538464,
+        "defense-evasion": 0.23076923076923078,
+        "discovery": 0.5,
+        "exfiltration": 0.23076923076923078
+      },
+      "command-and-control": {
+        "collection": 0.11278195488721804,
+        "command-and-control": 0.022556390977443608,
+        "credential-access": 0.009398496240601503,
+        "defense-evasion": 0.15037593984962405,
+        "discovery": 0.05639097744360902,
+        "execution": 0.33364661654135336,
+        "impact": 0.05639097744360902,
+        "initial-access": 0.02819548872180451,
+        "lateral-movement": 0.014097744360902255,
+        "persistence": 0.11278195488721804,
+        "privilege-escalation": 0.10338345864661655
+      },
+      "credential-access": {
+        "collection": 0.2337662337662338,
+        "credential-access": 0.03896103896103897,
+        "defense-evasion": 0.1038961038961039,
+        "discovery": 0.4935064935064935,
+        "lateral-movement": 0.1168831168831169,
+        "persistence": 0.012987012987012988
+      },
+      "defense-evasion": {
+        "collection": 0.09202453987730061,
+        "command-and-control": 0.11311349693251534,
+        "credential-access": 0.007668711656441717,
+        "defense-evasion": 0.223159509202454,
+        "discovery": 0.25306748466257667,
+        "execution": 0.013420245398773003,
+        "initial-access": 0.02760736196319018,
+        "persistence": 0.14072085889570551,
+        "privilege-escalation": 0.12921779141104295
+      },
+      "discovery": {
+        "command-and-control": 0.13125,
+        "credential-access": 0.29375,
+        "defense-evasion": 0.11250000000000002,
+        "discovery": 0.12500000000000003,
+        "execution": 0.1,
+        "exfiltration": 0.037500000000000006,
+        "impact": 0.07500000000000001,
+        "lateral-movement": 0.018750000000000003,
+        "persistence": 0.04375,
+        "privilege-escalation": 0.0625
+      },
+      "execution": {
+        "command-and-control": 0.2690217391304348,
+        "defense-evasion": 0.17391304347826086,
+        "discovery": 0.3043478260869565,
+        "execution": 0.1548913043478261,
+        "impact": 0.06521739130434782,
+        "lateral-movement": 0.016304347826086956,
+        "persistence": 0.008152173913043478,
+        "privilege-escalation": 0.008152173913043478
+      },
+      "exfiltration": {
+        "collection": 0.3333333333333333,
+        "defense-evasion": 0.6666666666666666
+      },
+      "impact": {
+        "discovery": 0.6666666666666666,
+        "impact": 0.3333333333333333
+      },
+      "initial-access": {
+        "command-and-control": 0.4166666666666667,
+        "defense-evasion": 0.14583333333333334,
+        "discovery": 0.20833333333333334,
+        "initial-access": 0.04166666666666667,
+        "persistence": 0.04166666666666667,
+        "privilege-escalation": 0.14583333333333334
+      },
+      "lateral-movement": {
+        "command-and-control": 0.3333333333333333,
+        "credential-access": 0.3333333333333333,
+        "execution": 0.16666666666666666,
+        "lateral-movement": 0.16666666666666666
+      },
+      "persistence": {
+        "command-and-control": 0.053501945525291826,
+        "credential-access": 0.019455252918287938,
+        "defense-evasion": 0.5077821011673151,
+        "discovery": 0.13618677042801555,
+        "execution": 0.0632295719844358,
+        "initial-access": 0.011673151750972763,
+        "lateral-movement": 0.029182879377431907,
+        "persistence": 0.10408560311284046,
+        "privilege-escalation": 0.07490272373540856
+      },
+      "privilege-escalation": {
+        "command-and-control": 0.09814049586776859,
+        "defense-evasion": 0.3119834710743801,
+        "discovery": 0.26859504132231404,
+        "execution": 0.06714876033057851,
+        "initial-access": 0.012396694214876033,
+        "lateral-movement": 0.030991735537190084,
+        "persistence": 0.131198347107438,
+        "privilege-escalation": 0.07954545454545454
+      },
+      "reconnaissance": {
+        "execution": 0.5,
+        "initial-access": 0.5
+      }
+    }
+  },
+  "slice": "tactic_collapsed",
+  "test_episode": "E7",
+  "training_episodes": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6"
+  ]
+}

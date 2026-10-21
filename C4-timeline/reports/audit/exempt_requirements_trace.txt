@@ -1,0 +1,12 @@
+# Exempt Tokens for reports/7ep/requirements_trace.md
+# Tokens that are purely informative narrative within limits descriptions and do not affect trace logic
+NUMERIC_TOKEN: 1 at offset 2913:2914 (narrative count within table description)
+NUMERIC_TOKEN: 0 at offset 2915:2916 (narrative count within table description)
+NUMERIC_TOKEN: 4 at offset 3327:3328 (narrative count within table description)
+NUMERIC_TOKEN: 3 at offset 4151:4152 (narrative count within table description)
+NUMERIC_TOKEN: 100 at offset 5522:5525 (narrative count within table description)
+NUMERIC_TOKEN: 0 at offset 5609:5610 (narrative count within table description)
+NUMERIC_TOKEN: 1 at offset 5612:5613 (narrative count within table description)
+NUMERIC_TOKEN: 4242 at offset 5615:5619 (narrative count within table description)
+NUMERIC_TOKEN: 256 at offset 5644:5647 (narrative count within table description)
+NUMERIC_TOKEN: 256 at offset 6072:6075 (narrative count within table description)

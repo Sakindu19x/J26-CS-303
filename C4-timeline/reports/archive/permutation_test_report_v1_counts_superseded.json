@@ -1,0 +1,272 @@
+{
+  "b_permutations": 1000,
+  "elapsed_seconds": 20.18394684791565,
+  "observed": {
+    "technique_collapsed_full": {
+      "markov": {
+        "hit1": 1,
+        "hit3": 2
+      },
+      "frequency": {
+        "hit1": 4,
+        "hit3": 8
+      },
+      "markov_fallback": {
+        "hit1": 2,
+        "hit3": 5
+      },
+      "markov_minus_frequency": {
+        "hit1": -3,
+        "hit3": -6
+      }
+    },
+    "tactic_collapsed": {
+      "markov": {
+        "hit1": 11,
+        "hit3": 28
+      },
+      "frequency": {
+        "hit1": 9,
+        "hit3": 33
+      },
+      "markov_fallback": {
+        "hit1": 13,
+        "hit3": 30
+      },
+      "markov_minus_frequency": {
+        "hit1": 2,
+        "hit3": -5
+      }
+    }
+  },
+  "statistics": {
+    "technique_collapsed_full": {
+      "markov": {
+        "hit1": {
+          "observed": 1,
+          "null_mean": 0.629,
+          "null_sd": 0.95197965590934,
+          "null_p2_5": 0.0,
+          "null_p97_5": 3.0,
+          "null_min": 0,
+          "null_max": 7,
+          "n_ge_observed": 388,
+          "b_permutations": 1000,
+          "p_value": 0.3886113886113886,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": 2,
+          "null_mean": 1.487,
+          "null_sd": 1.460809694985957,
+          "null_p2_5": 0.0,
+          "null_p97_5": 5.0,
+          "null_min": 0,
+          "null_max": 7,
+          "n_ge_observed": 446,
+          "b_permutations": 1000,
+          "p_value": 0.44655344655344653,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      },
+      "frequency": {
+        "hit1": {
+          "observed": 4,
+          "null_mean": 5.73,
+          "null_sd": 4.492135269477009,
+          "null_p2_5": 0.0,
+          "null_p97_5": 13.0,
+          "null_min": 0,
+          "null_max": 13,
+          "n_ge_observed": 704,
+          "b_permutations": 1000,
+          "p_value": 0.7042957042957043,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": 8,
+          "null_mean": 10.572,
+          "null_sd": 2.747792999184321,
+          "null_p2_5": 4.0,
+          "null_p97_5": 14.0,
+          "null_min": 0,
+          "null_max": 16,
+          "n_ge_observed": 877,
+          "b_permutations": 1000,
+          "p_value": 0.8771228771228772,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      },
+      "markov_fallback": {
+        "hit1": {
+          "observed": 2,
+          "null_mean": 4.324,
+          "null_sd": 3.2480107101999485,
+          "null_p2_5": 0.0,
+          "null_p97_5": 11.0,
+          "null_min": 0,
+          "null_max": 14,
+          "n_ge_observed": 766,
+          "b_permutations": 1000,
+          "p_value": 0.7662337662337663,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": 5,
+          "null_mean": 8.385,
+          "null_sd": 2.5599469385767213,
+          "null_p2_5": 2.9750000000000014,
+          "null_p97_5": 13.0,
+          "null_min": 0,
+          "null_max": 16,
+          "n_ge_observed": 920,
+          "b_permutations": 1000,
+          "p_value": 0.9200799200799201,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      },
+      "markov_minus_frequency": {
+        "hit1": {
+          "observed": -3,
+          "null_mean": -5.101,
+          "null_sd": 4.585174241271843,
+          "null_p2_5": -12.0,
+          "null_p97_5": 2.0,
+          "null_min": -13,
+          "null_max": 5,
+          "n_ge_observed": 392,
+          "b_permutations": 1000,
+          "p_value": 0.3926073926073926,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": -6,
+          "null_mean": -9.085,
+          "null_sd": 3.126267510714422,
+          "null_p2_5": -13.0,
+          "null_p97_5": -1.0,
+          "null_min": -15,
+          "null_max": 2,
+          "n_ge_observed": 152,
+          "b_permutations": 1000,
+          "p_value": 0.15284715284715283,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      }
+    },
+    "tactic_collapsed": {
+      "markov": {
+        "hit1": {
+          "observed": 11,
+          "null_mean": 8.383,
+          "null_sd": 3.3721925631082637,
+          "null_p2_5": 3.0,
+          "null_p97_5": 16.0,
+          "null_min": 0,
+          "null_max": 20,
+          "n_ge_observed": 235,
+          "b_permutations": 1000,
+          "p_value": 0.23576423576423577,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": 28,
+          "null_mean": 22.467,
+          "null_sd": 5.32834892835504,
+          "null_p2_5": 12.0,
+          "null_p97_5": 34.0,
+          "null_min": 9,
+          "null_max": 38,
+          "n_ge_observed": 172,
+          "b_permutations": 1000,
+          "p_value": 0.17282717282717283,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      },
+      "frequency": {
+        "hit1": {
+          "observed": 9,
+          "null_mean": 10.688,
+          "null_sd": 1.6838917695301832,
+          "null_p2_5": 8.0,
+          "null_p97_5": 15.0,
+          "null_min": 6,
+          "null_max": 20,
+          "n_ge_observed": 930,
+          "b_permutations": 1000,
+          "p_value": 0.9300699300699301,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": 33,
+          "null_mean": 45.841,
+          "null_sd": 5.451002883179611,
+          "null_p2_5": 33.0,
+          "null_p97_5": 56.0,
+          "null_min": 23,
+          "null_max": 59,
+          "n_ge_observed": 978,
+          "b_permutations": 1000,
+          "p_value": 0.978021978021978,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      },
+      "markov_fallback": {
+        "hit1": {
+          "observed": 13,
+          "null_mean": 10.116,
+          "null_sd": 3.440985961085047,
+          "null_p2_5": 4.0,
+          "null_p97_5": 18.0,
+          "null_min": 2,
+          "null_max": 22,
+          "n_ge_observed": 220,
+          "b_permutations": 1000,
+          "p_value": 0.22077922077922077,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": 30,
+          "null_mean": 27.728,
+          "null_sd": 5.430792714651288,
+          "null_p2_5": 18.0,
+          "null_p97_5": 39.0,
+          "null_min": 12,
+          "null_max": 43,
+          "n_ge_observed": 343,
+          "b_permutations": 1000,
+          "p_value": 0.3436563436563437,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        }
+      },
+      "markov_minus_frequency": {
+        "hit1": {
+          "observed": 2,
+          "null_mean": -2.305,
+          "null_sd": 3.49545321713697,
+          "null_p2_5": -8.024999999999999,
+          "null_p97_5": 6.0,
+          "null_min": -13,
+          "null_max": 10,
+          "n_ge_observed": 124,
+          "b_permutations": 1000,
+          "p_value": 0.12487512487512488,
+          "interpretation": "no detectable order signal at this sample size (this is not proof of absence)"
+        },
+        "hit3": {
+          "observed": -5,
+          "null_mean": -23.374,
+          "null_sd": 6.977880395565319,
+          "null_p2_5": -37.0,
+          "null_p97_5": -9.0,
+          "null_min": -43,
+          "null_max": 5,
+          "n_ge_observed": 9,
+          "b_permutations": 1000,
+          "p_value": 0.00999000999000999,
+          "interpretation": "order carries detectable signal under this null"
+        }
+      }
+    }
+  }
+}

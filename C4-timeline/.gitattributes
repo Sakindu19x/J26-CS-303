@@ -1,0 +1,85 @@
+# Auto-generated .gitattributes pinning exact baseline line endings (Prompt 14 Q1)
+# Explicitly preserves binary files and pinned LF/CRLF text files regardless of core.autocrlf
+* text=auto
+
+# Binary files (-text)
+*.png -text
+reports/7ep/learning_curve_7ep.png -text
+
+# Protected Baseline Files Pinned Line Endings
+reports/evaluation_report.md text eol=lf
+reports/evaluation_results.json text eol=crlf
+data/processed/evaluation_predictions.csv text eol=crlf
+data/processed/attack_sequences.json text eol=crlf
+data/processed/attack_timelines.json text eol=crlf
+data/processed/loeo_folds.json text eol=crlf
+data/processed/next_technique_samples.json text eol=crlf
+data/processed/normalized_events.json text eol=crlf
+data/processed/technique_tactic_reference.json text eol=crlf
+reports/data_quality_report.json text eol=crlf
+reports/timeline_validation_report.json text eol=crlf
+reports/tactic_discrepancy_report.json text eol=crlf
+reports/sequence_statistics.json text eol=crlf
+reports/tactic_evaluation_report.md text eol=lf
+reports/tactic_evaluation_results.json text eol=crlf
+data/processed/tactic_evaluation_predictions.csv text eol=crlf
+data/processed_7ep/attack_sequences.json text eol=crlf
+data/processed_7ep/attack_timelines.json text eol=crlf
+data/processed_7ep/loeo_folds.json text eol=crlf
+data/processed_7ep/next_technique_samples.json text eol=crlf
+data/processed_7ep/normalized_events.json text eol=crlf
+data/processed_7ep/technique_tactic_reference.json text eol=crlf
+reports/7ep/data_quality_report.json text eol=crlf
+reports/7ep/timeline_validation_report.json text eol=crlf
+reports/7ep/tactic_discrepancy_report.json text eol=crlf
+reports/7ep/sequence_statistics.json text eol=crlf
+data/processed_7ep/evaluation_7ep_predictions.csv text eol=crlf
+reports/7ep/evaluation_7ep_results.json text eol=crlf
+reports/7ep/evaluation_7ep_report.md text eol=crlf
+data/processed_7ep/learning_curve_7ep.csv text eol=crlf
+reports/7ep/learning_curve_7ep_results.json text eol=crlf
+reports/7ep/learning_curve_7ep_report.md text eol=crlf
+reports/7ep/learning_curve_7ep.png -text
+reports/7ep/learning_curve_7ep_plot_data.json text eol=crlf
+data/processed_7ep/permutation_7ep_null_distribution.csv text eol=crlf
+reports/7ep/permutation_7ep_report.json text eol=crlf
+reports/7ep/permutation_7ep_report.md text eol=crlf
+data/processed_7ep/planted_realscale_7ep_predictions.csv text eol=crlf
+reports/7ep/planted_realscale_7ep_report.json text eol=crlf
+reports/7ep/planted_realscale_7ep_report.md text eol=crlf
+data/processed_7ep/e5_removed_predictions.csv text eol=crlf
+reports/7ep/e5_removed_results.json text eol=crlf
+reports/7ep/e5_removed_report.md text eol=crlf
+reports/7ep/holm_claim_rule_results.json text eol=crlf
+reports/7ep/holm_claim_rule_report.md text eol=crlf
+reports/7ep/diagnostics_7ep.json text eol=crlf
+reports/7ep/diagnostics_7ep.md text eol=crlf
+reports/7ep/e5_hit1_change_diagnostic.json text eol=crlf
+reports/7ep/e5_hit1_change_diagnostic.md text eol=crlf
+data/processed_7ep/tie_sensitivity_7ep_samples.csv text eol=crlf
+reports/7ep/tie_sensitivity_7ep.json text eol=crlf
+reports/7ep/tie_sensitivity_7ep.md text eol=crlf
+data/processed_7ep/exploratory_tactic_conditioned_predictions.csv text eol=crlf
+reports/7ep/exploratory_tactic_conditioned_results.json text eol=crlf
+reports/7ep/exploratory_tactic_conditioned_report.md text eol=crlf
+artifacts/7ep/production_model/collapsed_full.json text eol=crlf
+artifacts/7ep/production_model/tactic_collapsed.json text eol=crlf
+artifacts/7ep/production_model/manifest.json text eol=crlf
+data/processed_7ep/prediction_records_loeo.jsonl text eol=crlf
+reports/7ep/prediction_record_examples.md text eol=crlf
+reports/7ep/requirements_trace.md text eol=crlf
+reports/_baseline_hashes_stage2.json text eol=crlf
+reports/_baseline_hashes_tactic.json text eol=crlf
+reports/_baseline_hashes_7ep_stage1.json text eol=crlf
+reports/_baseline_hashes_7ep_eval.json text eol=lf
+reports/_baseline_hashes_7ep_inference.json text eol=lf
+
+# Pipeline Output CSVs Pinned Line Endings (Clean-Clone & Rebuild Parity)
+data/processed/attack_timelines.csv text eol=lf
+data/processed/normalized_events.csv text eol=lf
+data/processed/wazuh_alerts_normalized.csv text eol=lf
+data/processed_7ep/attack_timelines.csv text eol=lf
+data/processed_7ep/normalized_events.csv text eol=lf
+data/processed_7ep/wazuh_alerts_normalized.csv text eol=lf
+reports/confusion_matrix_parent.csv text eol=lf
+

@@ -1,0 +1,186 @@
+{
+  "_metadata": {
+    "source": "Research Proposal IT23348370",
+    "transcription_note": "Transcribed by Claude from IT23348370; mark: confirm against PDF",
+    "component": "Component 4 (C4)",
+    "status": "DRAFT_TRANSCRIPTION"
+  },
+  "record_metrics": {
+    "total_records": 171,
+    "cautioned_records": 92
+  },
+  "named_json_pointers": {
+    "fr4_episodes": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/metadata/episodes",
+      "type": "length"
+    },
+    "fr4_technique_samples": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/comparison_with_4ep/technique_collapsed_full/7ep/n_samples",
+      "type": "int"
+    },
+    "fr4_tactic_samples": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/comparison_with_4ep/tactic_collapsed/7ep/n_samples",
+      "type": "int"
+    },
+    "fr4_p2_markov_hit3": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/comparison_with_4ep/technique_collapsed_full/7ep/markov_hit3",
+      "type": "int"
+    },
+    "fr4_p2_frequency_hit3": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/comparison_with_4ep/technique_collapsed_full/7ep/frequency_hit3",
+      "type": "int"
+    },
+    "fr4_p2_adjusted_p": {
+      "file": "reports/7ep/holm_claim_rule_results.json",
+      "pointer": "/family/P2/adjusted_p",
+      "type": "float",
+      "format": "{:.4f}"
+    },
+    "fr4_p1_markov_hit3": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/comparison_with_4ep/tactic_collapsed/7ep/markov_hit3",
+      "type": "int"
+    },
+    "fr4_p1_frequency_hit3": {
+      "file": "reports/7ep/evaluation_7ep_results.json",
+      "pointer": "/comparison_with_4ep/tactic_collapsed/7ep/frequency_hit3",
+      "type": "int"
+    },
+    "fr4_p1_adjusted_p": {
+      "file": "reports/7ep/holm_claim_rule_results.json",
+      "pointer": "/family/P1/adjusted_p",
+      "type": "float",
+      "format": "{:.4f}"
+    },
+    "fr4_formal_verdict": {
+      "file": "reports/7ep/holm_claim_rule_results.json",
+      "pointer": "/claim_rule_evaluation/formal_verdict",
+      "type": "str"
+    },
+    "fr7_total_records": {
+      "file": "docs/proposal_requirements.json",
+      "pointer": "/record_metrics/total_records",
+      "type": "int"
+    },
+    "fr7_cautioned_records": {
+      "file": "docs/proposal_requirements.json",
+      "pointer": "/record_metrics/cautioned_records",
+      "type": "int"
+    },
+    "nfr1_warm_median": {
+      "file": "reports/measurements/nfr1_timing.json",
+      "pointer": "/criteria/warm_median_threshold_seconds",
+      "type": "float",
+      "format": "{:.2f}"
+    },
+    "nfr1_warm_p95": {
+      "file": "reports/measurements/nfr1_timing.json",
+      "pointer": "/criteria/warm_p95_threshold_seconds",
+      "type": "float",
+      "format": "{:.2f}"
+    },
+    "nfr1_cold_start": {
+      "file": "reports/measurements/nfr1_timing.json",
+      "pointer": "/criteria/process_cold_start_threshold_seconds",
+      "type": "float",
+      "format": "{:.2f}"
+    }
+  },
+  "requirements": [
+    {
+      "id": "FR1",
+      "proposal_title": "Attack Timeline Reconstruction",
+      "proposal_wording": "Reconstruct chronological attack timeline from ingested normalized security events.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "FR2",
+      "proposal_title": "Attack Episode Separation",
+      "proposal_wording": "Separate attack activity into distinct attack simulation episodes.",
+      "status": "IMPLEMENTED_DEMONSTRATED_ON_DATASET"
+    },
+    {
+      "id": "FR3",
+      "proposal_title": "ATT&CK Sequence Representation",
+      "proposal_wording": "Represent attack progression as sequences of MITRE ATT&CK techniques and tactics.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "FR4",
+      "proposal_title": "Next-Technique Prediction (First-Order Markov)",
+      "proposal_wording": "Predict the most likely next attack technique using a first-order Markov model.",
+      "status": "IMPLEMENTED_DEMONSTRATED_ON_DATASET"
+    },
+    {
+      "id": "FR5",
+      "proposal_title": "Probability Output",
+      "proposal_wording": "Output transition probabilities and ranked candidates for next-step predictions.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "FR6",
+      "proposal_title": "Alternative Predictions",
+      "proposal_wording": "Provide alternative candidate predictions beyond the top prediction.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "FR7",
+      "proposal_title": "Explainable Prediction",
+      "proposal_wording": "Provide structured explanations and supporting empirical evidence for predictions.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "FR8",
+      "proposal_title": "Context Integration (C3 information)",
+      "proposal_wording": "Integrate contextual intelligence and incident priority signals from Component 3 (C3).",
+      "status": "NOT_TESTABLE_UNTIL_C3"
+    },
+    {
+      "id": "FR9",
+      "proposal_title": "Incident Information Display",
+      "proposal_wording": "Display incident progression, prediction results, and explanation summaries for forensic analysts.",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "NFR1",
+      "proposal_title": "Performance (\"acceptable response time\", the proposal gives no number)",
+      "proposal_wording": "Achieve acceptable response time for digital forensic investigation.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "NFR2",
+      "proposal_title": "Reliability (consistent predictions)",
+      "proposal_wording": "Produce consistent and reliable predictions across repeated evaluations.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "NFR3",
+      "proposal_title": "Security (shall not modify original event records from C3)",
+      "proposal_wording": "Shall not modify original event records from C3 during ingestion and processing.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    },
+    {
+      "id": "NFR4",
+      "proposal_title": "Usability",
+      "proposal_wording": "Provide an intuitive and interpretable interface for forensic triage.",
+      "status": "PENDING_HUMAN_EVIDENCE"
+    },
+    {
+      "id": "NFR5",
+      "proposal_title": "Interoperability (accept C3 structured event format)",
+      "proposal_wording": "Accept and process structured event records conforming to C3 interface specifications.",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "NFR6",
+      "proposal_title": "Explainability",
+      "proposal_wording": "Ensure model outputs and reasoning are transparent and verifiable by forensic experts.",
+      "status": "IMPLEMENTED_AND_TESTED"
+    }
+  ]
+}

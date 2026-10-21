@@ -1,0 +1,2075 @@
+{
+  "metadata": {
+    "eval_name": "7-Episode Learning Curve Evaluation (E1-E7)",
+    "slices_evaluated": [
+      "technique_collapsed_full",
+      "tactic_collapsed"
+    ],
+    "models_evaluated": [
+      "markov",
+      "frequency",
+      "markov_fallback"
+    ],
+    "episodes": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7"
+    ],
+    "k_values": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "subsets_per_k": {
+      "1": 6,
+      "2": 15,
+      "3": 20,
+      "4": 15,
+      "5": 6,
+      "6": 1
+    },
+    "total_subsets_per_ep": 63,
+    "total_evaluations_per_slice": 441
+  },
+  "learning_curve": {
+    "technique_collapsed_full": {
+      "k_1": {
+        "k": 1,
+        "n_subsets_per_episode": 6,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 18,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0462962962962963,
+              "hit3_rate": 0.10185185185185185
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.037037037037037035,
+              "hit3_rate": 0.08333333333333333
+            },
+            "coverage_rate": 0.2222222222222222,
+            "ceiling_rate": 0.23148148148148148
+          },
+          "E2": {
+            "n_samples": 19,
+            "markov": {
+              "hit1_rate": 0.008771929824561403,
+              "hit3_rate": 0.017543859649122806
+            },
+            "frequency": {
+              "hit1_rate": 0.02631578947368421,
+              "hit3_rate": 0.09649122807017545
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.02631578947368421,
+              "hit3_rate": 0.07894736842105263
+            },
+            "coverage_rate": 0.24561403508771928,
+            "ceiling_rate": 0.2807017543859649
+          },
+          "E3": {
+            "n_samples": 20,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.016666666666666666,
+              "hit3_rate": 0.049999999999999996
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.016666666666666666,
+              "hit3_rate": 0.03333333333333333
+            },
+            "coverage_rate": 0.18333333333333335,
+            "ceiling_rate": 0.18333333333333335
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.016666666666666666,
+              "hit3_rate": 0.016666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.016666666666666666,
+              "hit3_rate": 0.03333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.03333333333333333,
+              "hit3_rate": 0.05000000000000001
+            },
+            "coverage_rate": 0.23333333333333336,
+            "ceiling_rate": 0.21666666666666667
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.0,
+            "ceiling_rate": 0.0
+          },
+          "E6": {
+            "n_samples": 14,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.03571428571428571
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.023809523809523808
+            },
+            "coverage_rate": 0.2619047619047619,
+            "ceiling_rate": 0.22619047619047616
+          },
+          "E7": {
+            "n_samples": 12,
+            "markov": {
+              "hit1_rate": 0.013888888888888888,
+              "hit3_rate": 0.013888888888888888
+            },
+            "frequency": {
+              "hit1_rate": 0.013888888888888888,
+              "hit3_rate": 0.05555555555555555
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.013888888888888888,
+              "hit3_rate": 0.027777777777777776
+            },
+            "coverage_rate": 0.2916666666666667,
+            "ceiling_rate": 0.3055555555555555
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.005618212197159566,
+          "markov_hit3": 0.006871345029239766,
+          "frequency_hit1": 0.01711918685602896,
+          "frequency_hit3": 0.05327803636074313,
+          "markov_fallback_hit1": 0.018177387914230018,
+          "markov_fallback_hit3": 0.04245733381071727,
+          "coverage": 0.20543919322114812,
+          "ceiling": 0.2062756096590683
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 95,
+          "markov_hit1": 0.005263157894736842,
+          "markov_hit3": 0.007017543859649122,
+          "frequency_hit1": 0.021052631578947368,
+          "frequency_hit3": 0.0649122807017544,
+          "markov_fallback_hit1": 0.021052631578947364,
+          "markov_fallback_hit3": 0.05087719298245614,
+          "coverage": 0.22982456140350876,
+          "ceiling": 0.2333333333333333
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.00655458089668616,
+            "markov_hit3": 0.008016569200779727,
+            "frequency_hit1": 0.019972384665367122,
+            "frequency_hit3": 0.06215770908753365,
+            "markov_fallback_hit1": 0.021206952566601687,
+            "markov_fallback_hit3": 0.049533556112503485,
+            "coverage": 0.23967905875800613,
+            "ceiling": 0.2406548779355797
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.005376344086021506,
+            "markov_hit3": 0.007168458781362007,
+            "frequency_hit1": 0.021505376344086023,
+            "frequency_hit3": 0.06630824372759857,
+            "markov_fallback_hit1": 0.021505376344086023,
+            "markov_fallback_hit3": 0.05197132616487455,
+            "coverage": 0.23476702508960573,
+            "ceiling": 0.2383512544802867
+          }
+        }
+      },
+      "k_2": {
+        "k": 2,
+        "n_subsets_per_episode": 15,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 18,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.059259259259259255,
+              "hit3_rate": 0.1259259259259259
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.04444444444444444,
+              "hit3_rate": 0.09259259259259259
+            },
+            "coverage_rate": 0.37037037037037035,
+            "ceiling_rate": 0.36666666666666664
+          },
+          "E2": {
+            "n_samples": 19,
+            "markov": {
+              "hit1_rate": 0.017543859649122806,
+              "hit3_rate": 0.031578947368421054
+            },
+            "frequency": {
+              "hit1_rate": 0.042105263157894736,
+              "hit3_rate": 0.1087719298245614
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.03859649122807018,
+              "hit3_rate": 0.08070175438596491
+            },
+            "coverage_rate": 0.4105263157894737,
+            "ceiling_rate": 0.4666666666666667
+          },
+          "E3": {
+            "n_samples": 20,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.03333333333333333,
+              "hit3_rate": 0.06333333333333334
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.02666666666666667,
+              "hit3_rate": 0.043333333333333335
+            },
+            "coverage_rate": 0.29333333333333333,
+            "ceiling_rate": 0.2866666666666667
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.03333333333333333,
+              "hit3_rate": 0.03333333333333333
+            },
+            "frequency": {
+              "hit1_rate": 0.03333333333333333,
+              "hit3_rate": 0.060000000000000005
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.04666666666666667,
+              "hit3_rate": 0.05333333333333334
+            },
+            "coverage_rate": 0.38,
+            "ceiling_rate": 0.36000000000000004
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.0,
+            "ceiling_rate": 0.0
+          },
+          "E6": {
+            "n_samples": 14,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.05714285714285714
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.03333333333333333
+            },
+            "coverage_rate": 0.4,
+            "ceiling_rate": 0.35238095238095235
+          },
+          "E7": {
+            "n_samples": 12,
+            "markov": {
+              "hit1_rate": 0.027777777777777776,
+              "hit3_rate": 0.027777777777777776
+            },
+            "frequency": {
+              "hit1_rate": 0.027777777777777776,
+              "hit3_rate": 0.06666666666666667
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.027777777777777776,
+              "hit3_rate": 0.03333333333333333
+            },
+            "coverage_rate": 0.5111111111111112,
+            "ceiling_rate": 0.5222222222222223
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.011236424394319131,
+          "markov_hit3": 0.013241436925647452,
+          "frequency_hit1": 0.02797270955165692,
+          "frequency_hit3": 0.06883438755619206,
+          "markov_fallback_hit1": 0.026307435254803675,
+          "markov_fallback_hit3": 0.048089668615984404,
+          "coverage": 0.33790587580061265,
+          "ceiling": 0.3363718820861678
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 95,
+          "markov_hit1": 0.010526315789473684,
+          "markov_hit3": 0.013333333333333332,
+          "frequency_hit1": 0.03368421052631579,
+          "frequency_hit3": 0.08210526315789472,
+          "markov_fallback_hit1": 0.030175438596491227,
+          "markov_fallback_hit3": 0.05754385964912281,
+          "coverage": 0.3775438596491228,
+          "ceiling": 0.37894736842105264
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.01310916179337232,
+            "markov_hit3": 0.015448343079922025,
+            "frequency_hit1": 0.03263482781026641,
+            "frequency_hit3": 0.08030678548222407,
+            "markov_fallback_hit1": 0.030692007797270954,
+            "markov_fallback_hit3": 0.05610461338531514,
+            "coverage": 0.39422352176738146,
+            "ceiling": 0.3924338624338624
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.010752688172043012,
+            "markov_hit3": 0.013620071684587813,
+            "frequency_hit1": 0.034408602150537634,
+            "frequency_hit3": 0.08387096774193548,
+            "markov_fallback_hit1": 0.03082437275985663,
+            "markov_fallback_hit3": 0.05878136200716846,
+            "coverage": 0.385663082437276,
+            "ceiling": 0.3870967741935484
+          }
+        }
+      },
+      "k_3": {
+        "k": 3,
+        "n_subsets_per_episode": 20,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 18,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.07222222222222222,
+              "hit3_rate": 0.1361111111111111
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.04444444444444444,
+              "hit3_rate": 0.08333333333333333
+            },
+            "coverage_rate": 0.47777777777777775,
+            "ceiling_rate": 0.4583333333333333
+          },
+          "E2": {
+            "n_samples": 19,
+            "markov": {
+              "hit1_rate": 0.02631578947368421,
+              "hit3_rate": 0.042105263157894736
+            },
+            "frequency": {
+              "hit1_rate": 0.055263157894736833,
+              "hit3_rate": 0.11052631578947367
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.04473684210526315,
+              "hit3_rate": 0.07105263157894737
+            },
+            "coverage_rate": 0.5210526315789473,
+            "ceiling_rate": 0.5894736842105263
+          },
+          "E3": {
+            "n_samples": 20,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.05500000000000001,
+              "hit3_rate": 0.0775
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.030000000000000006,
+              "hit3_rate": 0.0475
+            },
+            "coverage_rate": 0.3675,
+            "ceiling_rate": 0.35
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.05,
+              "hit3_rate": 0.05
+            },
+            "frequency": {
+              "hit1_rate": 0.05500000000000001,
+              "hit3_rate": 0.07
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.05500000000000001,
+              "hit3_rate": 0.05500000000000001
+            },
+            "coverage_rate": 0.47000000000000003,
+            "ceiling_rate": 0.45499999999999996
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.0,
+            "ceiling_rate": 0.0
+          },
+          "E6": {
+            "n_samples": 14,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.02142857142857143,
+              "hit3_rate": 0.075
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.010714285714285714,
+              "hit3_rate": 0.039285714285714285
+            },
+            "coverage_rate": 0.4714285714285714,
+            "ceiling_rate": 0.42142857142857143
+          },
+          "E7": {
+            "n_samples": 12,
+            "markov": {
+              "hit1_rate": 0.041666666666666664,
+              "hit3_rate": 0.041666666666666664
+            },
+            "frequency": {
+              "hit1_rate": 0.025,
+              "hit3_rate": 0.08333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.041666666666666664,
+              "hit3_rate": 0.041666666666666664
+            },
+            "coverage_rate": 0.6708333333333333,
+            "ceiling_rate": 0.6666666666666667
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.0168546365914787,
+          "markov_hit3": 0.019110275689223057,
+          "frequency_hit1": 0.040559135935075784,
+          "frequency_hit3": 0.07892439431913115,
+          "markov_fallback_hit1": 0.03236603413295143,
+          "markov_fallback_hit3": 0.04826262083780881,
+          "coverage": 0.4255131877312328,
+          "ceiling": 0.42012889366272826
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 95,
+          "markov_hit1": 0.015789473684210527,
+          "markov_hit3": 0.01894736842105263,
+          "frequency_hit1": 0.04842105263157894,
+          "frequency_hit3": 0.09315789473684208,
+          "markov_fallback_hit1": 0.03631578947368421,
+          "markov_fallback_hit3": 0.05684210526315789,
+          "coverage": 0.4757894736842105,
+          "ceiling": 0.4726315789473684
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.01966374269005848,
+            "markov_hit3": 0.0222953216374269,
+            "frequency_hit1": 0.04731899192425509,
+            "frequency_hit3": 0.09207846003898634,
+            "markov_fallback_hit1": 0.03776037315511,
+            "markov_fallback_hit3": 0.05630639097744361,
+            "coverage": 0.49643205235310495,
+            "ceiling": 0.4901503759398496
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.016129032258064516,
+            "markov_hit3": 0.019354838709677417,
+            "frequency_hit1": 0.04946236559139785,
+            "frequency_hit3": 0.09516129032258064,
+            "markov_fallback_hit1": 0.037096774193548385,
+            "markov_fallback_hit3": 0.05806451612903226,
+            "coverage": 0.48602150537634403,
+            "ceiling": 0.4827956989247312
+          }
+        }
+      },
+      "k_4": {
+        "k": 4,
+        "n_subsets_per_episode": 15,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 18,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.08888888888888888,
+              "hit3_rate": 0.14814814814814817
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.03703703703703704,
+              "hit3_rate": 0.06666666666666667
+            },
+            "coverage_rate": 0.5666666666666667,
+            "ceiling_rate": 0.5333333333333333
+          },
+          "E2": {
+            "n_samples": 19,
+            "markov": {
+              "hit1_rate": 0.03508771929824561,
+              "hit3_rate": 0.04912280701754386
+            },
+            "frequency": {
+              "hit1_rate": 0.07017543859649122,
+              "hit3_rate": 0.12631578947368421
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.04912280701754386,
+              "hit3_rate": 0.06666666666666667
+            },
+            "coverage_rate": 0.5964912280701754,
+            "ceiling_rate": 0.6736842105263158
+          },
+          "E3": {
+            "n_samples": 20,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.07333333333333333,
+              "hit3_rate": 0.09333333333333334
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.02666666666666667,
+              "hit3_rate": 0.04
+            },
+            "coverage_rate": 0.4233333333333334,
+            "ceiling_rate": 0.39333333333333337
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.06666666666666667,
+              "hit3_rate": 0.06666666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.07333333333333333,
+              "hit3_rate": 0.08000000000000002
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.06666666666666667,
+              "hit3_rate": 0.06666666666666667
+            },
+            "coverage_rate": 0.5266666666666667,
+            "ceiling_rate": 0.52
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.0,
+            "ceiling_rate": 0.0
+          },
+          "E6": {
+            "n_samples": 14,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.04285714285714285,
+              "hit3_rate": 0.11428571428571428
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.019047619047619046,
+              "hit3_rate": 0.04761904761904761
+            },
+            "coverage_rate": 0.5142857142857143,
+            "ceiling_rate": 0.46190476190476193
+          },
+          "E7": {
+            "n_samples": 12,
+            "markov": {
+              "hit1_rate": 0.05555555555555555,
+              "hit3_rate": 0.05555555555555555
+            },
+            "frequency": {
+              "hit1_rate": 0.01111111111111111,
+              "hit3_rate": 0.10555555555555556
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.05555555555555555,
+              "hit3_rate": 0.05555555555555555
+            },
+            "coverage_rate": 0.7833333333333333,
+            "ceiling_rate": 0.7555555555555556
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.022472848788638262,
+          "markov_hit3": 0.02447786131996658,
+          "frequency_hit1": 0.05138560687432868,
+          "frequency_hit3": 0.0953769343994908,
+          "markov_fallback_hit1": 0.03629947885586983,
+          "markov_fallback_hit3": 0.04902494331065759,
+          "coverage": 0.4872538489079843,
+          "ceiling": 0.47683017066475714
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 95,
+          "markov_hit1": 0.021052631578947368,
+          "markov_hit3": 0.023859649122807018,
+          "frequency_hit1": 0.061754385964912284,
+          "frequency_hit3": 0.11157894736842107,
+          "markov_fallback_hit1": 0.03929824561403508,
+          "markov_fallback_hit3": 0.05543859649122807,
+          "coverage": 0.5459649122807018,
+          "ceiling": 0.536842105263158
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.02621832358674464,
+            "markov_hit3": 0.028557504873294347,
+            "frequency_hit1": 0.05994987468671679,
+            "frequency_hit3": 0.11127309013273927,
+            "markov_fallback_hit1": 0.042349391998514806,
+            "markov_fallback_hit3": 0.05719576719576719,
+            "coverage": 0.5684628237259817,
+            "ceiling": 0.55630186577555
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.021505376344086023,
+            "markov_hit3": 0.024372759856630823,
+            "frequency_hit1": 0.06308243727598566,
+            "frequency_hit3": 0.1139784946236559,
+            "markov_fallback_hit1": 0.04014336917562724,
+            "markov_fallback_hit3": 0.056630824372759854,
+            "coverage": 0.5577060931899641,
+            "ceiling": 0.5483870967741935
+          }
+        }
+      },
+      "k_5": {
+        "k": 5,
+        "n_subsets_per_episode": 6,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 18,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.10185185185185185,
+              "hit3_rate": 0.16666666666666666
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.018518518518518517,
+              "hit3_rate": 0.037037037037037035
+            },
+            "coverage_rate": 0.6481481481481481,
+            "ceiling_rate": 0.6018518518518519
+          },
+          "E2": {
+            "n_samples": 19,
+            "markov": {
+              "hit1_rate": 0.043859649122807015,
+              "hit3_rate": 0.05263157894736842
+            },
+            "frequency": {
+              "hit1_rate": 0.08771929824561403,
+              "hit3_rate": 0.15789473684210525
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.05263157894736842,
+              "hit3_rate": 0.06140350877192982
+            },
+            "coverage_rate": 0.6491228070175439,
+            "ceiling_rate": 0.7368421052631579
+          },
+          "E3": {
+            "n_samples": 20,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.08333333333333333,
+              "hit3_rate": 0.10000000000000002
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.016666666666666666,
+              "hit3_rate": 0.016666666666666666
+            },
+            "coverage_rate": 0.4666666666666666,
+            "ceiling_rate": 0.425
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.08333333333333333,
+              "hit3_rate": 0.08333333333333333
+            },
+            "frequency": {
+              "hit1_rate": 0.08333333333333333,
+              "hit3_rate": 0.10000000000000002
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.08333333333333333,
+              "hit3_rate": 0.08333333333333333
+            },
+            "coverage_rate": 0.5666666666666667,
+            "ceiling_rate": 0.5666666666666667
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.0,
+            "ceiling_rate": 0.0
+          },
+          "E6": {
+            "n_samples": 14,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.03571428571428571,
+              "hit3_rate": 0.17857142857142858
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.011904761904761904,
+              "hit3_rate": 0.059523809523809514
+            },
+            "coverage_rate": 0.5476190476190476,
+            "ceiling_rate": 0.4880952380952381
+          },
+          "E7": {
+            "n_samples": 12,
+            "markov": {
+              "hit1_rate": 0.06944444444444443,
+              "hit3_rate": 0.06944444444444443
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.125
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.06944444444444443,
+              "hit3_rate": 0.06944444444444443
+            },
+            "coverage_rate": 0.861111111111111,
+            "ceiling_rate": 0.8055555555555557
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.028091060985797826,
+          "markov_hit3": 0.029344193817878027,
+          "frequency_hit1": 0.0559931574969169,
+          "frequency_hit3": 0.1183046902971715,
+          "markov_fallback_hit1": 0.0360713291164419,
+          "markov_fallback_hit3": 0.04677268568246012,
+          "coverage": 0.5341906353184548,
+          "ceiling": 0.5177159167760672
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 95,
+          "markov_hit1": 0.02631578947368421,
+          "markov_hit3": 0.02807017543859649,
+          "frequency_hit1": 0.06842105263157894,
+          "frequency_hit3": 0.1368421052631579,
+          "markov_fallback_hit1": 0.03684210526315789,
+          "markov_fallback_hit3": 0.04912280701754385,
+          "coverage": 0.5999999999999999,
+          "ceiling": 0.5842105263157895
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.032772904483430794,
+            "markov_hit3": 0.03423489278752436,
+            "frequency_hit1": 0.06532535041306971,
+            "frequency_hit3": 0.1380221386800334,
+            "markov_fallback_hit1": 0.042083217302515546,
+            "markov_fallback_hit3": 0.05456813329620347,
+            "coverage": 0.6232224078715306,
+            "ceiling": 0.6040019029054117
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.026881720430107527,
+            "markov_hit3": 0.02867383512544803,
+            "frequency_hit1": 0.06989247311827956,
+            "frequency_hit3": 0.13978494623655913,
+            "markov_fallback_hit1": 0.03763440860215054,
+            "markov_fallback_hit3": 0.050179211469534045,
+            "coverage": 0.6129032258064516,
+            "ceiling": 0.5967741935483871
+          }
+        }
+      },
+      "k_6": {
+        "k": 6,
+        "n_subsets_per_episode": 1,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 18,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.1111111111111111,
+              "hit3_rate": 0.2222222222222222
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.7222222222222222,
+            "ceiling_rate": 0.6666666666666666
+          },
+          "E2": {
+            "n_samples": 19,
+            "markov": {
+              "hit1_rate": 0.05263157894736842,
+              "hit3_rate": 0.05263157894736842
+            },
+            "frequency": {
+              "hit1_rate": 0.10526315789473684,
+              "hit3_rate": 0.21052631578947367
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.05263157894736842,
+              "hit3_rate": 0.05263157894736842
+            },
+            "coverage_rate": 0.6842105263157895,
+            "ceiling_rate": 0.7894736842105263
+          },
+          "E3": {
+            "n_samples": 20,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.1,
+              "hit3_rate": 0.1
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.5,
+            "ceiling_rate": 0.45
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.1,
+              "hit3_rate": 0.1
+            },
+            "frequency": {
+              "hit1_rate": 0.1,
+              "hit3_rate": 0.1
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.1,
+              "hit3_rate": 0.1
+            },
+            "coverage_rate": 0.6,
+            "ceiling_rate": 0.6
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "coverage_rate": 0.0,
+            "ceiling_rate": 0.0
+          },
+          "E6": {
+            "n_samples": 14,
+            "markov": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.0
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.21428571428571427
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.07142857142857142
+            },
+            "coverage_rate": 0.5714285714285714,
+            "ceiling_rate": 0.5
+          },
+          "E7": {
+            "n_samples": 12,
+            "markov": {
+              "hit1_rate": 0.08333333333333333,
+              "hit3_rate": 0.08333333333333333
+            },
+            "frequency": {
+              "hit1_rate": 0.0,
+              "hit3_rate": 0.16666666666666666
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.08333333333333333,
+              "hit3_rate": 0.08333333333333333
+            },
+            "coverage_rate": 0.9166666666666666,
+            "ceiling_rate": 0.8333333333333334
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.0337092731829574,
+          "markov_hit3": 0.0337092731829574,
+          "frequency_hit1": 0.05948203842940685,
+          "frequency_hit3": 0.14481441699486813,
+          "markov_fallback_hit1": 0.0337092731829574,
+          "markov_fallback_hit3": 0.04391335481561045,
+          "coverage": 0.5706468552333214,
+          "ceiling": 0.5484962406015038
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 95,
+          "markov_hit1": 0.031578947368421054,
+          "markov_hit3": 0.031578947368421054,
+          "frequency_hit1": 0.07368421052631578,
+          "frequency_hit3": 0.16842105263157894,
+          "markov_fallback_hit1": 0.031578947368421054,
+          "markov_fallback_hit3": 0.042105263157894736,
+          "coverage": 0.6421052631578947,
+          "ceiling": 0.6210526315789474
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.03932748538011696,
+            "markov_hit3": 0.03932748538011696,
+            "frequency_hit1": 0.06939571150097466,
+            "frequency_hit3": 0.1689501531606795,
+            "markov_fallback_hit1": 0.03932748538011696,
+            "markov_fallback_hit3": 0.05123224728487886,
+            "coverage": 0.6657546644388749,
+            "ceiling": 0.6399122807017544
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 93,
+            "markov_hit1": 0.03225806451612903,
+            "markov_hit3": 0.03225806451612903,
+            "frequency_hit1": 0.07526881720430108,
+            "frequency_hit3": 0.17204301075268819,
+            "markov_fallback_hit1": 0.03225806451612903,
+            "markov_fallback_hit3": 0.043010752688172046,
+            "coverage": 0.6559139784946236,
+            "ceiling": 0.6344086021505376
+          }
+        }
+      }
+    },
+    "tactic_collapsed": {
+      "k_1": {
+        "k": 1,
+        "n_subsets_per_episode": 6,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.2692307692307692,
+              "hit3_rate": 0.4230769230769231
+            },
+            "frequency": {
+              "hit1_rate": 0.32051282051282054,
+              "hit3_rate": 0.576923076923077
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.32051282051282054,
+              "hit3_rate": 0.5256410256410257
+            },
+            "coverage_rate": 0.782051282051282,
+            "ceiling_rate": 0.923076923076923
+          },
+          "E2": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.16666666666666666,
+              "hit3_rate": 0.26666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.19999999999999998,
+              "hit3_rate": 0.4444444444444444
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2111111111111111,
+              "hit3_rate": 0.35555555555555557
+            },
+            "coverage_rate": 0.6777777777777777,
+            "ceiling_rate": 0.7666666666666666
+          },
+          "E3": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.05555555555555555,
+              "hit3_rate": 0.2222222222222222
+            },
+            "frequency": {
+              "hit1_rate": 0.14444444444444446,
+              "hit3_rate": 0.35555555555555557
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.13333333333333333,
+              "hit3_rate": 0.35555555555555557
+            },
+            "coverage_rate": 0.6666666666666666,
+            "ceiling_rate": 0.6777777777777777
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.4666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.18333333333333335,
+              "hit3_rate": 0.5333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.6166666666666667
+            },
+            "coverage_rate": 0.8333333333333334,
+            "ceiling_rate": 0.9833333333333334
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.4166666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.4166666666666667,
+              "hit3_rate": 0.5833333333333334
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.3333333333333333,
+              "hit3_rate": 0.5
+            },
+            "coverage_rate": 0.8333333333333334,
+            "ceiling_rate": 1.0
+          },
+          "E6": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.14102564102564105,
+              "hit3_rate": 0.32051282051282054
+            },
+            "frequency": {
+              "hit1_rate": 0.16666666666666666,
+              "hit3_rate": 0.38461538461538464
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.15384615384615385,
+              "hit3_rate": 0.4230769230769231
+            },
+            "coverage_rate": 0.782051282051282,
+            "ceiling_rate": 0.8461538461538461
+          },
+          "E7": {
+            "n_samples": 8,
+            "markov": {
+              "hit1_rate": 0.1875,
+              "hit3_rate": 0.4166666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.5
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2708333333333333,
+              "hit3_rate": 0.5833333333333334
+            },
+            "coverage_rate": 0.6875,
+            "ceiling_rate": 0.7916666666666666
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.18856837606837606,
+          "markov_hit3": 0.3617826617826618,
+          "frequency_hit1": 0.24023199023199024,
+          "frequency_hit3": 0.4826007326007326,
+          "markov_fallback_hit1": 0.2389957264957265,
+          "markov_fallback_hit3": 0.47997557997558,
+          "coverage": 0.7518162393162393,
+          "ceiling": 0.8555250305250305
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 76,
+          "markov_hit1": 0.1732456140350877,
+          "markov_hit3": 0.3399122807017544,
+          "frequency_hit1": 0.212719298245614,
+          "frequency_hit3": 0.4605263157894737,
+          "markov_fallback_hit1": 0.2192982456140351,
+          "markov_fallback_hit3": 0.45833333333333337,
+          "coverage": 0.7368421052631579,
+          "ceiling": 0.8267543859649124
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.17832977207977208,
+            "markov_hit3": 0.3526353276353276,
+            "frequency_hit1": 0.2108262108262108,
+            "frequency_hit3": 0.46581196581196577,
+            "markov_fallback_hit1": 0.22327279202279202,
+            "markov_fallback_hit3": 0.47663817663817665,
+            "coverage": 0.738230056980057,
+            "ceiling": 0.8314458689458689
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.1711711711711712,
+            "markov_hit3": 0.33783783783783783,
+            "frequency_hit1": 0.20720720720720723,
+            "frequency_hit3": 0.45720720720720726,
+            "markov_fallback_hit1": 0.21621621621621623,
+            "markov_fallback_hit3": 0.45720720720720726,
+            "coverage": 0.7342342342342342,
+            "ceiling": 0.8220720720720721
+          }
+        }
+      },
+      "k_2": {
+        "k": 2,
+        "n_subsets_per_episode": 15,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.26666666666666666,
+              "hit3_rate": 0.5333333333333333
+            },
+            "frequency": {
+              "hit1_rate": 0.3384615384615385,
+              "hit3_rate": 0.6974358974358974
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.27692307692307694,
+              "hit3_rate": 0.558974358974359
+            },
+            "coverage_rate": 0.9384615384615385,
+            "ceiling_rate": 0.9897435897435898
+          },
+          "E2": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.21777777777777776,
+              "hit3_rate": 0.3688888888888889
+            },
+            "frequency": {
+              "hit1_rate": 0.20444444444444446,
+              "hit3_rate": 0.5155555555555555
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.24888888888888888,
+              "hit3_rate": 0.45777777777777773
+            },
+            "coverage_rate": 0.8666666666666667,
+            "ceiling_rate": 0.888888888888889
+          },
+          "E3": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.08444444444444445,
+              "hit3_rate": 0.3377777777777778
+            },
+            "frequency": {
+              "hit1_rate": 0.15555555555555556,
+              "hit3_rate": 0.4
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.13333333333333333,
+              "hit3_rate": 0.4222222222222222
+            },
+            "coverage_rate": 0.8711111111111111,
+            "ceiling_rate": 0.8
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.30666666666666664,
+              "hit3_rate": 0.6666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.14666666666666667,
+              "hit3_rate": 0.62
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.30666666666666664,
+              "hit3_rate": 0.6666666666666666
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.3333333333333333,
+              "hit3_rate": 0.6666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.43333333333333335,
+              "hit3_rate": 0.9
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.3333333333333333,
+              "hit3_rate": 0.6666666666666666
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E6": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.20512820512820515,
+              "hit3_rate": 0.4358974358974359
+            },
+            "frequency": {
+              "hit1_rate": 0.2,
+              "hit3_rate": 0.4717948717948718
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2153846153846154,
+              "hit3_rate": 0.4512820512820513
+            },
+            "coverage_rate": 0.9743589743589743,
+            "ceiling_rate": 0.958974358974359
+          },
+          "E7": {
+            "n_samples": 8,
+            "markov": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.525
+            },
+            "frequency": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.6166666666666667
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2833333333333333,
+              "hit3_rate": 0.625
+            },
+            "coverage_rate": 0.8333333333333334,
+            "ceiling_rate": 0.8666666666666667
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.23771672771672772,
+          "markov_hit3": 0.5048901098901099,
+          "frequency_hit1": 0.24692307692307694,
+          "frequency_hit3": 0.6030647130647131,
+          "markov_fallback_hit1": 0.25683760683760687,
+          "markov_fallback_hit3": 0.5497985347985348,
+          "coverage": 0.9262759462759462,
+          "ceiling": 0.9291819291819292
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 76,
+          "markov_hit1": 0.2157894736842105,
+          "markov_hit3": 0.46578947368421053,
+          "frequency_hit1": 0.22017543859649125,
+          "frequency_hit3": 0.5508771929824562,
+          "markov_fallback_hit1": 0.23859649122807017,
+          "markov_fallback_hit3": 0.5175438596491228,
+          "coverage": 0.9157894736842105,
+          "ceiling": 0.9157894736842106
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2217806267806268,
+            "markov_hit3": 0.47792735042735046,
+            "frequency_hit1": 0.21585470085470085,
+            "frequency_hit3": 0.5535754985754986,
+            "markov_fallback_hit1": 0.24408831908831907,
+            "markov_fallback_hit3": 0.5303205128205128,
+            "coverage": 0.9139886039886039,
+            "ceiling": 0.9173789173789174
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.21261261261261263,
+            "markov_hit3": 0.4603603603603603,
+            "frequency_hit1": 0.21441441441441442,
+            "frequency_hit3": 0.5414414414414414,
+            "markov_fallback_hit1": 0.23603603603603607,
+            "markov_fallback_hit3": 0.5135135135135135,
+            "coverage": 0.9135135135135134,
+            "ceiling": 0.9135135135135134
+          }
+        }
+      },
+      "k_3": {
+        "k": 3,
+        "n_subsets_per_episode": 20,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.2923076923076923,
+              "hit3_rate": 0.5846153846153846
+            },
+            "frequency": {
+              "hit1_rate": 0.38461538461538464,
+              "hit3_rate": 0.7730769230769231
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2923076923076923,
+              "hit3_rate": 0.6038461538461538
+            },
+            "coverage_rate": 0.9615384615384615,
+            "ceiling_rate": 1.0
+          },
+          "E2": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.24,
+              "hit3_rate": 0.44666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.23333333333333334,
+              "hit3_rate": 0.5366666666666666
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.27666666666666667,
+              "hit3_rate": 0.5233333333333333
+            },
+            "coverage_rate": 0.9133333333333333,
+            "ceiling_rate": 0.9400000000000001
+          },
+          "E3": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.09666666666666666,
+              "hit3_rate": 0.39666666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.15,
+              "hit3_rate": 0.4333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.15,
+              "hit3_rate": 0.4666666666666667
+            },
+            "coverage_rate": 0.9166666666666666,
+            "ceiling_rate": 0.8400000000000001
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.29500000000000004,
+              "hit3_rate": 0.73
+            },
+            "frequency": {
+              "hit1_rate": 0.135,
+              "hit3_rate": 0.73
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.29500000000000004,
+              "hit3_rate": 0.73
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.375,
+              "hit3_rate": 0.775
+            },
+            "frequency": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 0.95
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.375,
+              "hit3_rate": 0.775
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E6": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.23846153846153845,
+              "hit3_rate": 0.5076923076923077
+            },
+            "frequency": {
+              "hit1_rate": 0.19230769230769232,
+              "hit3_rate": 0.5307692307692308
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.23846153846153845,
+              "hit3_rate": 0.5115384615384616
+            },
+            "coverage_rate": 0.9961538461538462,
+            "ceiling_rate": 0.9846153846153847
+          },
+          "E7": {
+            "n_samples": 8,
+            "markov": {
+              "hit1_rate": 0.28125,
+              "hit3_rate": 0.575
+            },
+            "frequency": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.6625
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.30625,
+              "hit3_rate": 0.65625
+            },
+            "coverage_rate": 0.875,
+            "ceiling_rate": 0.875
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.25981227106227106,
+          "markov_hit3": 0.5736630036630037,
+          "frequency_hit1": 0.2636080586080586,
+          "frequency_hit3": 0.659478021978022,
+          "markov_fallback_hit1": 0.2762408424908425,
+          "markov_fallback_hit3": 0.6095192307692308,
+          "coverage": 0.9518131868131868,
+          "ceiling": 0.9485164835164835
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 76,
+          "markov_hit1": 0.23552631578947367,
+          "markov_hit3": 0.5302631578947369,
+          "frequency_hit1": 0.23157894736842108,
+          "frequency_hit3": 0.6052631578947368,
+          "markov_fallback_hit1": 0.25592105263157894,
+          "markov_fallback_hit3": 0.5717105263157896,
+          "coverage": 0.9460526315789473,
+          "ceiling": 0.9407894736842105
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.24061431623931626,
+            "markov_hit3": 0.5401068376068375,
+            "frequency_hit1": 0.2242094017094017,
+            "frequency_hit3": 0.6110576923076924,
+            "markov_fallback_hit1": 0.2597809829059829,
+            "markov_fallback_hit3": 0.5819391025641026,
+            "coverage": 0.9437820512820513,
+            "ceiling": 0.9399358974358974
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.23175675675675675,
+            "markov_hit3": 0.5236486486486487,
+            "frequency_hit1": 0.22432432432432434,
+            "frequency_hit3": 0.595945945945946,
+            "markov_fallback_hit1": 0.2527027027027027,
+            "markov_fallback_hit3": 0.5662162162162162,
+            "coverage": 0.9445945945945945,
+            "ceiling": 0.9391891891891891
+          }
+        }
+      },
+      "k_4": {
+        "k": 4,
+        "n_subsets_per_episode": 15,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.3333333333333333,
+              "hit3_rate": 0.6461538461538461
+            },
+            "frequency": {
+              "hit1_rate": 0.38461538461538464,
+              "hit3_rate": 0.7897435897435898
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.3333333333333333,
+              "hit3_rate": 0.6564102564102564
+            },
+            "coverage_rate": 0.9743589743589743,
+            "ceiling_rate": 1.0
+          },
+          "E2": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.28,
+              "hit3_rate": 0.5155555555555555
+            },
+            "frequency": {
+              "hit1_rate": 0.22222222222222224,
+              "hit3_rate": 0.5333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.31555555555555553,
+              "hit3_rate": 0.5866666666666666
+            },
+            "coverage_rate": 0.9288888888888889,
+            "ceiling_rate": 0.9688888888888889
+          },
+          "E3": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.09777777777777778,
+              "hit3_rate": 0.4266666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.14666666666666667,
+              "hit3_rate": 0.4577777777777778
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.1511111111111111,
+              "hit3_rate": 0.49333333333333335
+            },
+            "coverage_rate": 0.9288888888888889,
+            "ceiling_rate": 0.8577777777777779
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.2733333333333333,
+              "hit3_rate": 0.7466666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.1,
+              "hit3_rate": 0.8466666666666668
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2733333333333333,
+              "hit3_rate": 0.7466666666666666
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.43333333333333335,
+              "hit3_rate": 0.7666666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 1.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.43333333333333335,
+              "hit3_rate": 0.7666666666666667
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E6": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.26666666666666666,
+              "hit3_rate": 0.5692307692307692
+            },
+            "frequency": {
+              "hit1_rate": 0.17435897435897435,
+              "hit3_rate": 0.5794871794871794
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.26666666666666666,
+              "hit3_rate": 0.5692307692307692
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 0.9948717948717949
+          },
+          "E7": {
+            "n_samples": 8,
+            "markov": {
+              "hit1_rate": 0.30833333333333335,
+              "hit3_rate": 0.625
+            },
+            "frequency": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.6666666666666666
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.31666666666666665,
+              "hit3_rate": 0.6833333333333333
+            },
+            "coverage_rate": 0.9166666666666666,
+            "ceiling_rate": 0.875
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.2846825396825397,
+          "markov_hit3": 0.6137057387057387,
+          "frequency_hit1": 0.253980463980464,
+          "frequency_hit3": 0.6962393162393162,
+          "markov_fallback_hit1": 0.29857142857142854,
+          "markov_fallback_hit3": 0.6431868131868131,
+          "coverage": 0.9641147741147742,
+          "ceiling": 0.9566483516483517
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 76,
+          "markov_hit1": 0.2570175438596492,
+          "markov_hit3": 0.5780701754385964,
+          "frequency_hit1": 0.2210526315789474,
+          "frequency_hit3": 0.637719298245614,
+          "markov_fallback_hit1": 0.27543859649122804,
+          "markov_fallback_hit3": 0.6131578947368421,
+          "coverage": 0.9587719298245613,
+          "ceiling": 0.9517543859649122
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2599074074074074,
+            "markov_hit3": 0.5882122507122507,
+            "frequency_hit1": 0.21297720797720798,
+            "frequency_hit3": 0.6456125356125356,
+            "markov_fallback_hit1": 0.2761111111111111,
+            "markov_fallback_hit3": 0.6226068376068375,
+            "coverage": 0.9581339031339032,
+            "ceiling": 0.949423076923077
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.2522522522522523,
+            "markov_hit3": 0.572972972972973,
+            "frequency_hit1": 0.21351351351351353,
+            "frequency_hit3": 0.627927927927928,
+            "markov_fallback_hit1": 0.2711711711711712,
+            "markov_fallback_hit3": 0.609009009009009,
+            "coverage": 0.9576576576576575,
+            "ceiling": 0.9504504504504504
+          }
+        }
+      },
+      "k_5": {
+        "k": 5,
+        "n_subsets_per_episode": 6,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.35897435897435903,
+              "hit3_rate": 0.717948717948718
+            },
+            "frequency": {
+              "hit1_rate": 0.38461538461538464,
+              "hit3_rate": 0.7692307692307693
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.35897435897435903,
+              "hit3_rate": 0.717948717948718
+            },
+            "coverage_rate": 0.9871794871794872,
+            "ceiling_rate": 1.0
+          },
+          "E2": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.35555555555555557,
+              "hit3_rate": 0.5555555555555555
+            },
+            "frequency": {
+              "hit1_rate": 0.17777777777777778,
+              "hit3_rate": 0.5333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.39999999999999997,
+              "hit3_rate": 0.6222222222222222
+            },
+            "coverage_rate": 0.9333333333333332,
+            "ceiling_rate": 0.9888888888888889
+          },
+          "E3": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.09999999999999999,
+              "hit3_rate": 0.4444444444444445
+            },
+            "frequency": {
+              "hit1_rate": 0.14444444444444446,
+              "hit3_rate": 0.45555555555555555
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.15555555555555556,
+              "hit3_rate": 0.5111111111111111
+            },
+            "coverage_rate": 0.9333333333333332,
+            "ceiling_rate": 0.8666666666666667
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.7666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.10000000000000002,
+              "hit3_rate": 0.9
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.7666666666666666
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 0.6666666666666666
+            },
+            "frequency": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 1.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 0.6666666666666666
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E6": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.2820512820512821,
+              "hit3_rate": 0.6025641025641025
+            },
+            "frequency": {
+              "hit1_rate": 0.15384615384615385,
+              "hit3_rate": 0.5
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2820512820512821,
+              "hit3_rate": 0.6025641025641025
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E7": {
+            "n_samples": 8,
+            "markov": {
+              "hit1_rate": 0.3125,
+              "hit3_rate": 0.6458333333333334
+            },
+            "frequency": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.6875
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.3125,
+              "hit3_rate": 0.6875
+            },
+            "coverage_rate": 0.9583333333333334,
+            "ceiling_rate": 0.875
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.30844017094017095,
+          "markov_hit3": 0.628525641025641,
+          "frequency_hit1": 0.2443833943833944,
+          "frequency_hit3": 0.6922313797313798,
+          "markov_fallback_hit1": 0.32272588522588525,
+          "markov_fallback_hit3": 0.6535256410256409,
+          "coverage": 0.9731684981684982,
+          "ceiling": 0.9615079365079365
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 76,
+          "markov_hit1": 0.2785087719298246,
+          "markov_hit3": 0.6096491228070176,
+          "frequency_hit1": 0.20833333333333334,
+          "frequency_hit3": 0.6293859649122806,
+          "markov_fallback_hit1": 0.29824561403508776,
+          "markov_fallback_hit3": 0.6403508771929826,
+          "coverage": 0.9671052631578947,
+          "ceiling": 0.9583333333333335
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2765135327635328,
+            "markov_hit3": 0.6221688034188034,
+            "frequency_hit1": 0.2017806267806268,
+            "frequency_hit3": 0.6409366096866097,
+            "markov_fallback_hit1": 0.29318019943019946,
+            "markov_fallback_hit3": 0.6513354700854701,
+            "coverage": 0.9686965811965812,
+            "ceiling": 0.9550925925925927
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.2725225225225225,
+            "markov_hit3": 0.6081081081081081,
+            "frequency_hit1": 0.20045045045045046,
+            "frequency_hit3": 0.6193693693693694,
+            "markov_fallback_hit1": 0.2927927927927928,
+            "markov_fallback_hit3": 0.6396396396396397,
+            "coverage": 0.9662162162162162,
+            "ceiling": 0.9572072072072071
+          }
+        }
+      },
+      "k_6": {
+        "k": 6,
+        "n_subsets_per_episode": 1,
+        "per_episode_means": {
+          "E1": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.38461538461538464,
+              "hit3_rate": 0.7692307692307693
+            },
+            "frequency": {
+              "hit1_rate": 0.38461538461538464,
+              "hit3_rate": 0.7692307692307693
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.38461538461538464,
+              "hit3_rate": 0.7692307692307693
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E2": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.4666666666666667,
+              "hit3_rate": 0.6
+            },
+            "frequency": {
+              "hit1_rate": 0.06666666666666667,
+              "hit3_rate": 0.5333333333333333
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.5333333333333333,
+              "hit3_rate": 0.6666666666666666
+            },
+            "coverage_rate": 0.9333333333333333,
+            "ceiling_rate": 1.0
+          },
+          "E3": {
+            "n_samples": 15,
+            "markov": {
+              "hit1_rate": 0.13333333333333333,
+              "hit3_rate": 0.4666666666666667
+            },
+            "frequency": {
+              "hit1_rate": 0.13333333333333333,
+              "hit3_rate": 0.4666666666666667
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2,
+              "hit3_rate": 0.5333333333333333
+            },
+            "coverage_rate": 0.9333333333333333,
+            "ceiling_rate": 0.8666666666666667
+          },
+          "E4": {
+            "n_samples": 10,
+            "markov": {
+              "hit1_rate": 0.2,
+              "hit3_rate": 0.8
+            },
+            "frequency": {
+              "hit1_rate": 0.1,
+              "hit3_rate": 0.9
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.2,
+              "hit3_rate": 0.8
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E5": {
+            "n_samples": 2,
+            "markov": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 0.5
+            },
+            "frequency": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 1.0
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.5,
+              "hit3_rate": 0.5
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E6": {
+            "n_samples": 13,
+            "markov": {
+              "hit1_rate": 0.23076923076923078,
+              "hit3_rate": 0.6153846153846154
+            },
+            "frequency": {
+              "hit1_rate": 0.15384615384615385,
+              "hit3_rate": 0.46153846153846156
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.23076923076923078,
+              "hit3_rate": 0.6153846153846154
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 1.0
+          },
+          "E7": {
+            "n_samples": 8,
+            "markov": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.625
+            },
+            "frequency": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.75
+            },
+            "markov_fallback": {
+              "hit1_rate": 0.25,
+              "hit3_rate": 0.625
+            },
+            "coverage_rate": 1.0,
+            "ceiling_rate": 0.875
+          }
+        },
+        "unweighted_episode_mean": {
+          "markov_hit1": 0.3093406593406593,
+          "markov_hit3": 0.6251831501831502,
+          "frequency_hit1": 0.22692307692307695,
+          "frequency_hit3": 0.6972527472527473,
+          "markov_fallback_hit1": 0.3283882783882784,
+          "markov_fallback_hit3": 0.6442307692307693,
+          "coverage": 0.980952380952381,
+          "ceiling": 0.9630952380952381
+        },
+        "pooled_sample_weighted": {
+          "total_samples": 76,
+          "markov_hit1": 0.2894736842105263,
+          "markov_hit3": 0.631578947368421,
+          "frequency_hit1": 0.18421052631578946,
+          "frequency_hit3": 0.631578947368421,
+          "markov_fallback_hit1": 0.3157894736842105,
+          "markov_fallback_hit3": 0.6578947368421053,
+          "coverage": 0.9736842105263158,
+          "ceiling": 0.9605263157894737
+        },
+        "e5_excluded": {
+          "unweighted_episode_mean": {
+            "markov_hit1": 0.2775641025641026,
+            "markov_hit3": 0.6460470085470086,
+            "frequency_hit1": 0.18141025641025643,
+            "frequency_hit3": 0.6467948717948718,
+            "markov_fallback_hit1": 0.2997863247863248,
+            "markov_fallback_hit3": 0.6682692307692308,
+            "coverage": 0.9777777777777779,
+            "ceiling": 0.9569444444444445
+          },
+          "pooled_sample_weighted": {
+            "total_samples": 74,
+            "markov_hit1": 0.28378378378378377,
+            "markov_hit3": 0.6351351351351351,
+            "frequency_hit1": 0.17567567567567569,
+            "frequency_hit3": 0.6216216216216216,
+            "markov_fallback_hit1": 0.3108108108108108,
+            "markov_fallback_hit3": 0.6621621621621622,
+            "coverage": 0.972972972972973,
+            "ceiling": 0.9594594594594594
+          }
+        }
+      }
+    }
+  }
+}

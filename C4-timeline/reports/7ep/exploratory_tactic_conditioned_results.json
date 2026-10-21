@@ -1,0 +1,457 @@
+{
+  "meta": {
+    "disclaimer": "EXPLORATORY, POST HOC, NOT A PRE-REGISTERED RESULT",
+    "amendment": "Amendment 7 (2026-10-15)",
+    "verdict_statement": "The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant."
+  },
+  "runs": {
+    "7ep": {
+      "n_samples": 95,
+      "coverage": {
+        "covered_samples": 90,
+        "coverage_rate": 0.9473684210526315
+      },
+      "ceiling": {
+        "ceiling_samples": 59,
+        "ceiling_rate": 0.6210526315789474
+      },
+      "models": {
+        "variant": {
+          "hit1": 5,
+          "hit3": 8,
+          "pooled_top1": 0.05263157894736842,
+          "pooled_top3": 0.08421052631578947,
+          "wilson95_top1": [
+            0.02268811304914955,
+            0.11734886117037888
+          ],
+          "wilson95_top3": [
+            0.0432881153842945,
+            0.15745213124326723
+          ],
+          "fold_mean_top1": 0.04281537176274018,
+          "fold_mean_top3": 0.07286072323666308
+        },
+        "frequency": {
+          "hit1": 7,
+          "hit3": 16,
+          "pooled_top1": 0.07368421052631578,
+          "pooled_top3": 0.16842105263157894,
+          "wilson95_top1": [
+            0.036148969609054685,
+            0.14435685288249595
+          ],
+          "wilson95_top3": [
+            0.10641255003021141,
+            0.25620308968543903
+          ],
+          "fold_mean_top1": 0.05948203842940685,
+          "fold_mean_top3": 0.14481441699486813
+        },
+        "markov": {
+          "hit1": 3,
+          "hit3": 3,
+          "pooled_top1": 0.031578947368421054,
+          "pooled_top3": 0.031578947368421054,
+          "wilson95_top1": [
+            0.010797139474424379,
+            0.08877098647308188
+          ],
+          "wilson95_top3": [
+            0.010797139474424379,
+            0.08877098647308188
+          ],
+          "fold_mean_top1": 0.0337092731829574,
+          "fold_mean_top3": 0.0337092731829574
+        }
+      },
+      "mcnemar_vs_frequency": {
+        "top1": {
+          "b": 5,
+          "c": 7,
+          "p_value": 0.7744140625
+        },
+        "top3": {
+          "b": 3,
+          "c": 11,
+          "p_value": 0.057373046875
+        }
+      },
+      "tie_sensitivity": {
+        "tied_samples_top1": 6,
+        "tied_samples_top3": 68,
+        "top1": {
+          "observed": 5,
+          "observed_rate": 0.05263157894736842,
+          "expected": 5.0,
+          "expected_rate": 0.05263157894736842,
+          "best": 5,
+          "best_rate": 0.05263157894736842,
+          "worst": 5,
+          "worst_rate": 0.05263157894736842,
+          "fold_mean_observed": 0.04281537176274018,
+          "fold_mean_expected": 0.04281537176274018,
+          "fold_mean_best": 0.04281537176274018,
+          "fold_mean_worst": 0.04281537176274018
+        },
+        "top3": {
+          "observed": 8,
+          "observed_rate": 0.08421052631578947,
+          "expected": 8.25,
+          "expected_rate": 0.0868421052631579,
+          "best": 9,
+          "best_rate": 0.09473684210526316,
+          "worst": 8,
+          "worst_rate": 0.08421052631578947,
+          "fold_mean_observed": 0.07286072323666308,
+          "fold_mean_expected": 0.07464643752237736,
+          "fold_mean_best": 0.08000358037952023,
+          "fold_mean_worst": 0.07286072323666308
+        }
+      },
+      "per_fold": {
+        "E1": {
+          "test_episode": "E1",
+          "n": 18,
+          "variant_hit1": 2,
+          "variant_hit3": 3,
+          "frequency_hit1": 2,
+          "frequency_hit3": 4,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 18,
+          "ceiling": 12,
+          "exp_hit1": 2.0,
+          "exp_hit3": 3.0,
+          "best_hit1": 2,
+          "best_hit3": 3,
+          "worst_hit1": 2,
+          "worst_hit3": 3
+        },
+        "E2": {
+          "test_episode": "E2",
+          "n": 19,
+          "variant_hit1": 2,
+          "variant_hit3": 2,
+          "frequency_hit1": 2,
+          "frequency_hit3": 4,
+          "markov_hit1": 1,
+          "markov_hit3": 1,
+          "covered": 18,
+          "ceiling": 15,
+          "exp_hit1": 2.0,
+          "exp_hit3": 2.0,
+          "best_hit1": 2,
+          "best_hit3": 2,
+          "worst_hit1": 2,
+          "worst_hit3": 2
+        },
+        "E3": {
+          "test_episode": "E3",
+          "n": 20,
+          "variant_hit1": 0,
+          "variant_hit3": 0,
+          "frequency_hit1": 2,
+          "frequency_hit3": 2,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 16,
+          "ceiling": 9,
+          "exp_hit1": 0.0,
+          "exp_hit3": 0.25,
+          "best_hit1": 0,
+          "best_hit3": 1,
+          "worst_hit1": 0,
+          "worst_hit3": 0
+        },
+        "E4": {
+          "test_episode": "E4",
+          "n": 10,
+          "variant_hit1": 0,
+          "variant_hit3": 0,
+          "frequency_hit1": 1,
+          "frequency_hit3": 1,
+          "markov_hit1": 1,
+          "markov_hit3": 1,
+          "covered": 10,
+          "ceiling": 6,
+          "exp_hit1": 0.0,
+          "exp_hit3": 0.0,
+          "best_hit1": 0,
+          "best_hit3": 0,
+          "worst_hit1": 0,
+          "worst_hit3": 0
+        },
+        "E5": {
+          "test_episode": "E5",
+          "n": 2,
+          "variant_hit1": 0,
+          "variant_hit3": 0,
+          "frequency_hit1": 0,
+          "frequency_hit3": 0,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 2,
+          "ceiling": 0,
+          "exp_hit1": 0.0,
+          "exp_hit3": 0.0,
+          "best_hit1": 0,
+          "best_hit3": 0,
+          "worst_hit1": 0,
+          "worst_hit3": 0
+        },
+        "E6": {
+          "test_episode": "E6",
+          "n": 14,
+          "variant_hit1": 0,
+          "variant_hit3": 1,
+          "frequency_hit1": 0,
+          "frequency_hit3": 3,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 14,
+          "ceiling": 7,
+          "exp_hit1": 0.0,
+          "exp_hit3": 1.0,
+          "best_hit1": 0,
+          "best_hit3": 1,
+          "worst_hit1": 0,
+          "worst_hit3": 1
+        },
+        "E7": {
+          "test_episode": "E7",
+          "n": 12,
+          "variant_hit1": 1,
+          "variant_hit3": 2,
+          "frequency_hit1": 0,
+          "frequency_hit3": 2,
+          "markov_hit1": 1,
+          "markov_hit3": 1,
+          "covered": 12,
+          "ceiling": 10,
+          "exp_hit1": 1.0,
+          "exp_hit3": 2.0,
+          "best_hit1": 1,
+          "best_hit3": 2,
+          "worst_hit1": 1,
+          "worst_hit3": 2
+        }
+      }
+    },
+    "e5_removed": {
+      "n_samples": 93,
+      "coverage": {
+        "covered_samples": 88,
+        "coverage_rate": 0.946236559139785
+      },
+      "ceiling": {
+        "ceiling_samples": 59,
+        "ceiling_rate": 0.6344086021505376
+      },
+      "models": {
+        "variant": {
+          "hit1": 5,
+          "hit3": 8,
+          "pooled_top1": 0.053763440860215055,
+          "pooled_top3": 0.08602150537634409,
+          "wilson95_top1": [
+            0.023180674253084205,
+            0.11974838721760417
+          ],
+          "wilson95_top3": [
+            0.04423306687520164,
+            0.16065292991085864
+          ],
+          "fold_mean_top1": 0.04995126705653021,
+          "fold_mean_top3": 0.08500417710944026
+        },
+        "frequency": {
+          "hit1": 7,
+          "hit3": 16,
+          "pooled_top1": 0.07526881720430108,
+          "pooled_top3": 0.17204301075268819,
+          "wilson95_top1": [
+            0.03693668398168047,
+            0.1472970010325892
+          ],
+          "wilson95_top3": [
+            0.1087656386118496,
+            0.2613388523485358
+          ],
+          "fold_mean_top1": 0.06939571150097466,
+          "fold_mean_top3": 0.1689501531606795
+        },
+        "markov": {
+          "hit1": 3,
+          "hit3": 3,
+          "pooled_top1": 0.03225806451612903,
+          "pooled_top3": 0.03225806451612903,
+          "wilson95_top1": [
+            0.011030612815892044,
+            0.09059382511121503
+          ],
+          "wilson95_top3": [
+            0.011030612815892044,
+            0.09059382511121503
+          ],
+          "fold_mean_top1": 0.03932748538011696,
+          "fold_mean_top3": 0.03932748538011696
+        }
+      },
+      "mcnemar_vs_frequency": {
+        "top1": {
+          "b": 5,
+          "c": 7,
+          "p_value": 0.7744140625
+        },
+        "top3": {
+          "b": 3,
+          "c": 11,
+          "p_value": 0.057373046875
+        }
+      },
+      "tie_sensitivity": {
+        "tied_samples_top1": 9,
+        "tied_samples_top3": 53,
+        "top1": {
+          "observed": 5,
+          "observed_rate": 0.053763440860215055,
+          "expected": 5.0,
+          "expected_rate": 0.053763440860215055,
+          "best": 5,
+          "best_rate": 0.053763440860215055,
+          "worst": 5,
+          "worst_rate": 0.053763440860215055,
+          "fold_mean_observed": 0.04995126705653021,
+          "fold_mean_expected": 0.04995126705653021,
+          "fold_mean_best": 0.04995126705653021,
+          "fold_mean_worst": 0.04995126705653021
+        },
+        "top3": {
+          "observed": 8,
+          "observed_rate": 0.08602150537634409,
+          "expected": 8.0,
+          "expected_rate": 0.08602150537634409,
+          "best": 8,
+          "best_rate": 0.08602150537634409,
+          "worst": 8,
+          "worst_rate": 0.08602150537634409,
+          "fold_mean_observed": 0.08500417710944026,
+          "fold_mean_expected": 0.08500417710944026,
+          "fold_mean_best": 0.08500417710944026,
+          "fold_mean_worst": 0.08500417710944026
+        }
+      },
+      "per_fold": {
+        "E1": {
+          "test_episode": "E1",
+          "n": 18,
+          "variant_hit1": 2,
+          "variant_hit3": 3,
+          "frequency_hit1": 2,
+          "frequency_hit3": 4,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 18,
+          "ceiling": 12,
+          "exp_hit1": 2.0,
+          "exp_hit3": 3.0,
+          "best_hit1": 2,
+          "best_hit3": 3,
+          "worst_hit1": 2,
+          "worst_hit3": 3
+        },
+        "E2": {
+          "test_episode": "E2",
+          "n": 19,
+          "variant_hit1": 2,
+          "variant_hit3": 2,
+          "frequency_hit1": 2,
+          "frequency_hit3": 4,
+          "markov_hit1": 1,
+          "markov_hit3": 1,
+          "covered": 18,
+          "ceiling": 15,
+          "exp_hit1": 2.0,
+          "exp_hit3": 2.0,
+          "best_hit1": 2,
+          "best_hit3": 2,
+          "worst_hit1": 2,
+          "worst_hit3": 2
+        },
+        "E3": {
+          "test_episode": "E3",
+          "n": 20,
+          "variant_hit1": 0,
+          "variant_hit3": 0,
+          "frequency_hit1": 2,
+          "frequency_hit3": 2,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 16,
+          "ceiling": 9,
+          "exp_hit1": 0.0,
+          "exp_hit3": 0.0,
+          "best_hit1": 0,
+          "best_hit3": 0,
+          "worst_hit1": 0,
+          "worst_hit3": 0
+        },
+        "E4": {
+          "test_episode": "E4",
+          "n": 10,
+          "variant_hit1": 0,
+          "variant_hit3": 0,
+          "frequency_hit1": 1,
+          "frequency_hit3": 1,
+          "markov_hit1": 1,
+          "markov_hit3": 1,
+          "covered": 10,
+          "ceiling": 6,
+          "exp_hit1": 0.0,
+          "exp_hit3": 0.0,
+          "best_hit1": 0,
+          "best_hit3": 0,
+          "worst_hit1": 0,
+          "worst_hit3": 0
+        },
+        "E6": {
+          "test_episode": "E6",
+          "n": 14,
+          "variant_hit1": 0,
+          "variant_hit3": 1,
+          "frequency_hit1": 0,
+          "frequency_hit3": 3,
+          "markov_hit1": 0,
+          "markov_hit3": 0,
+          "covered": 14,
+          "ceiling": 7,
+          "exp_hit1": 0.0,
+          "exp_hit3": 1.0,
+          "best_hit1": 0,
+          "best_hit3": 1,
+          "worst_hit1": 0,
+          "worst_hit3": 1
+        },
+        "E7": {
+          "test_episode": "E7",
+          "n": 12,
+          "variant_hit1": 1,
+          "variant_hit3": 2,
+          "frequency_hit1": 0,
+          "frequency_hit3": 2,
+          "markov_hit1": 1,
+          "markov_hit3": 1,
+          "covered": 12,
+          "ceiling": 10,
+          "exp_hit1": 1.0,
+          "exp_hit3": 2.0,
+          "best_hit1": 1,
+          "best_hit3": 2,
+          "worst_hit1": 1,
+          "worst_hit3": 2
+        }
+      }
+    }
+  }
+}

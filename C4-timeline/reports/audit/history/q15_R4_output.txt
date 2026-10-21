@@ -1,0 +1,73 @@
+=== R4 VIVA PACK AND DEMO REPAIR AUDIT LOG ===
+2026-10-15T10:55:00.000000+00:00
+
+--- 1. viva_pack/07_reproduce.md REGENERATION ---
+Regenerated viva_pack/07_reproduce.md dynamically from scripts/reproduce_all.py:
+- Verifier count: 18 (matches len(VERIFIERS))
+- Pipeline steps count: 25 (matches len(PIPELINE_STEPS))
+- All 25 cited script paths verified to exist on disk.
+- Duration: omitted when q15_R7_output.txt is absent, per specification.
+
+--- 2. verify_viva_pack.py ---
+--- Verifying Viva Pack Documents and Figures ---
+  [OK] Document exists: README.md (1849 bytes)
+  [OK] Document exists: 01_dataset.md (2746 bytes)
+  [OK] Document exists: 02_split_and_training.md (2203 bytes)
+  [OK] Document exists: 03_scores.md (2661 bytes)
+  [OK] Document exists: 04_worked_examples.md (66191 bytes)
+  [OK] Document exists: 06_claims_and_limits.md (2179 bytes)
+  [OK] Document exists: 07_reproduce.md (2743 bytes)
+  [OK] Valid PNG figure: learning_curve_7ep.png (374522 bytes)
+  [OK] Valid PNG figure: a4_power_curve.png (222031 bytes)
+  [OK] Valid PNG figure: loeo_performance_bar_chart.png (139000 bytes)
+[PASS] All viva pack documents, figures, tokens, and 07_reproduce.md verified successfully!
+
+--- 3. pytest tests/test_viva_pack_sweep.py ---
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+collected 4 items
+tests\test_viva_pack_sweep.py ....                                       [100%]
+============================== 4 passed in 0.11s ==============================
+
+--- 4. DEMO SCRIPT & AppTest VERIFICATION ---
+docs/demo_script.md updated:
+- E1 event count corrected from 19 to 38 (matching nfr1_timing.json and attack_timelines.json).
+- Cryptographic provenance and Schema Validation: 100% PASS badge added to Streamlit panel and tested.
+- tests/test_demo_script_steps.py added using streamlit.testing.v1.AppTest executing steps 2-10:
+  * Step 2: Select episode E1 (38 events confirmed)
+  * Step 3: Inspect chronological forensic timeline (38 events, timestamps, techniques)
+  * Step 4: Position selector (sample E1-col-ful-K01)
+  * Step 5: Ranked Top-3 Candidate Predictions (T1589.002, probability 1.0000)
+  * Step 6: Empirical evidence basis (numerator 1.00 / denominator 1.00, episode E7)
+  * Step 7: Alternatives & tie notices (E1-tac-col-K01 expander and tied boundary flag verified)
+  * Step 8: Upstream C3 interface fields ("not provided by dataset" verified across all 6 fields)
+  * Step 9: Empirical reliability banner (Markov Hit@3 3.16%, Frequency 16.84%, Coverage 64.21%)
+  * Step 10: Cryptographic hashes (record_id, model SHA, input SHA, record SHA) and schema badge (100% PASS)
+
+pytest tests/test_demo_script_steps.py:
+============================== 1 passed in 4.55s ==============================
+
+--- 5. UNLABELED PNG COPIES REMOVAL ---
+Deleted via git rm:
+- reports/measurements/dashboard_prediction_panel.png
+- reports/measurements/dashboard_unseen_state.png
+- reports/measurements/dashboard_tied_case.png
+- reports/measurements/dashboard_tactic_prediction.png
+All references updated to *_static_render.png and explicitly labelled static.
+
+--- 6. LIVE CAPTURE EXECUTION (C:\c4_capture_venv) ---
+Virtual environment created at C:\c4_capture_venv with playwright installed (channel="chrome").
+Live capture executed via scripts/capture_live_dashboard.py against real Streamlit app on port 8501:
+- live_prediction_panel.png (248529 bytes)
+- live_unseen_state.png (256916 bytes)
+- live_tied_case.png (252971 bytes)
+- live_tactic_prediction.png (256306 bytes)
+- reports/measurements/live_capture_log.txt recorded full execution log.
+
+--- 7. FULL REGRESSION SUITE ---
+======================= 209 passed in 254.61s (0:04:14) =======================
+
+--- 8. BASELINE HASH INTEGRITY ---
+================================================================================
+ALL BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED (61/61 MATCH)
+================================================================================

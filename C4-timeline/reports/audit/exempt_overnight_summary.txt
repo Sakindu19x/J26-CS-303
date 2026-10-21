@@ -1,0 +1,7 @@
+# Exempt Tokens for reports/overnight_summary.md
+# Specific markdown formatting / heading number tokens
+HEADING_NUMBER: 4 in line '# Component 4 Overnight Master Execution Summary' (markdown structure heading)
+SCHEMA_VERSION_TOKEN: 1.0 in '- **Explainable Prediction Records**: 171/171 explainable LOEO prediction records generated, validated against schema v1.1.0 with support metrics.' (schema version token)
+SCHEMA_VERSION_TOKEN: 1.0 in '| Explainability | JSON Schema validation (v1.1.0) | 171/171 records valid | **PASS** |' (schema version token)
+HASH_ALGORITHM_NAME: 256 in '| Determinism (NFR2) | Multi-process PYTHONHASHSEED parity | Identical SHA-256 | **PASS** |' (cryptographic algorithm name token)
+HASH_ALGORITHM_NAME: 256 in '| Immutability (NFR3) | Deep-frozen event objects | Bit-identical SHA-256 | **PASS** |' (cryptographic algorithm name token)

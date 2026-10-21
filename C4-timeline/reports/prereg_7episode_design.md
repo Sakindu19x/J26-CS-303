@@ -1,0 +1,447 @@
+# Pre-Registration: 7-Episode Evaluation Design
+
+**Registration Date**: 2026-10-14  
+**Scope**: Experimental protocol, evaluation slices, model variants, evaluation metrics, statistical comparisons, learning curves, and permutation null hypotheses for the extended 7-episode CAM-LDS benchmark.  
+**Integrity Rule**: Committed prior to running any models or evaluations on episodes E5, E6, or E7.
+
+---
+
+## 1. Episodes and Archive Identification
+
+The 7-episode evaluation dataset consists of episodes E1 through E7. Scenario folder names and archive MD5 hashes are drawn directly from `reports/raw_archive_hashes.json` and `reports/raw_archive_hashes_extended.json`:
+
+| Episode ID | Scenario Folder Name | Archive File Name | Archive MD5 Checksum | Archive SHA-256 Checksum | Zenodo Published MD5 Match |
+|:---|:---|:---|:---|:---|:---:|
+| **E1** | `scenario_1_sudo_pam` | `scenario_1_sudo_pam.zip` | `e7e5bd19cda62a5bfb9a68525715cd78` | `0851d2cec590d3b56575fc385416190e12e258442023257d66879e19cb9e74fc` | TRUE |
+| **E2** | `scenario_2_cron` | `scenario_2_cron.zip` | `c33aca73d6962414bd6c2c3f82b934c4` | `b2026121bdb035628b7536a042f01c3e92e36852b65cac9d69fd05c31ba98791` | TRUE |
+| **E3** | `scenario_3_vnc_apt` | `scenario_3_vnc_apt.zip` | `bfd7e44cdb2d038a9deab800350e4b98` | `5c23b9d614689194f43cc844e4a25ed43568879ae83edc43df93336e0a33f911` | TRUE |
+| **E4** | `scenario_4` | `scenario_4.zip` | `f1bf6ecd793c6c51f922ee43e33d7cf4` | `a79fefbfeebd25b163e57f9ec7b9581f8e6f0abed2f2775fba45cf55a004b637` | TRUE |
+| **E5** | `scenario_5` | `scenario_5.zip` | `c56fce722a7b714eba004d6fd6319879` | `e54df7f4c2f8e12e374272544809cee42b2c7e68ac37d950934e4123364f7911` | TRUE |
+| **E6** | `scenario_6_macro_binary` | `scenario_6_macro_binary.zip` | `aedd7c0b51700b16c04539f10784d5d4` | `73a31bf763c5a65ed1a14bb5919151dbbf324563d4f8eaabb0c58d9c0f67f3b1` | TRUE |
+| **E7** | `scenario_7` | `scenario_7.zip` | `88122133a82079e07e7ed1b782bc203f` | `7f0ff0b5d939437b5ebad7f52eea69dc024775e5c73663c5b4ac7ba58f1b3a56` | TRUE |
+
+### Selection of `scenario_6_macro_binary` as E6 Representative
+Inspection of `reports/new_episodes_intake_audit.md` indicates that while `scenario_6_macro_binary.zip` was audited against decision rules D1–D6, the specific selection rule distinguishing `scenario_6_macro_binary` from any alternative (e.g., `scenario_6_macro_library`) is:
+**rule not recorded**.
+
+---
+
+## 2. Folds and Partitioning
+
+- **Cross-Validation Scheme**: 7-fold Leave-One-Episode-Out (LOEO).
+- **Independence Guarantee**: A completely fresh model instance is trained for each fold from the remaining 6 training episodes. No model weights, state, or frequency statistics are shared across folds.
+- **Scenario Alignment**: Each episode constitutes its own distinct scenario; evaluating LOEO directly measures cross-scenario generalization.
+
+---
+
+## 3. Evaluation Slices
+
+The evaluation evaluates three slices:
+1. **Primary Slice**: Technique level, `collapsed_full` (consecutive duplicate multi-label steps collapsed into single transitions, preserving complete technique identifier strings).
+2. **Secondary Slice**: Tactic level, `tactic_collapsed` (consecutive duplicate tactic sets collapsed).
+3. **Reference Slice**: Technique level, `raw_full` (uncollapsed consecutive steps, reported for completeness and benchmark transparency).
+
+---
+
+## 4. Models and Tuning Constraints
+
+The models evaluated in this design are:
+1. `MarkovModel`: First-order Markov chain predicting conditional transition probabilities $P(S_{t+1} \mid S_t)$.
+2. `FrequencyBaseline`: Global unigram frequency baseline predicting unconditional marginal probabilities $P(S_{t+1})$.
+3. `markov_fallback`: Markov model that falls back to marginal unigram frequency whenever the conditioning state $S_t$ was unseen in training (`unseen_history`).
+
+### Model Constraints:
+- All models are evaluated **exactly as implemented in `src/c4/models.py`** without hyperparameter tuning.
+- **No Random Forest**: Tree-based ensembles or other feature-engineered discriminative models are explicitly excluded.
+- **No ad-hoc model variants**: Any further variant (e.g., Laplace-smoothed Markov, second-order Markov, weighted interpolation/blends) requires a separate, pre-declared prompt with nested cross-validation to prevent data leakage and multiple-testing inflation.
+
+---
+
+## 5. Evaluation Metrics
+
+For every model and fold, as well as pooled across all evaluated samples, the following metrics are computed:
+- **Hit@1**: Proportion of test transitions where at least one ground-truth technique/tactic is in the top-1 prediction.
+- **Hit@3**: Proportion of test transitions where at least one ground-truth technique/tactic is in the top-3 predictions.
+- **Coverage**: Proportion of test samples where the model produces a valid prediction (status `'ok'`).
+- **Ceiling**: Upper bound on achievable recall given the training vocabulary (proportion of test targets containing at least one item present in the training set).
+- **Wilson 95% Confidence Intervals**: Exact binomial confidence intervals computed for Hit@1, Hit@3, Coverage, and Ceiling.
+- **Micro and Macro Precision / Recall / F1**: Multi-label classification metrics across all classes, computed at both pooled and per-fold levels.
+
+---
+
+## 6. Primary Hypotheses and Statistical Comparisons
+
+### Pre-Registered Primary Comparisons:
+- **P1**: Tactic level (`tactic_collapsed`) — `MarkovModel` Hit@3 vs. `FrequencyBaseline` Hit@3.
+- **P2**: Technique level (`collapsed_full`) — `MarkovModel` Hit@3 vs. `FrequencyBaseline` Hit@3.
+- **P3**: Tactic level (`tactic_collapsed`) — `MarkovModel` Hit@3 vs. shuffled-order null distributions (S1 collapsed-order shuffle and S3 constrained shuffle).
+- **P4**: Technique level (`collapsed_full`) — `MarkovModel` Hit@3 vs. shuffled-order null distributions (S1 collapsed-order shuffle and S3 constrained shuffle).
+
+### Statistical Testing Protocol:
+- **Paired Hypothesis Test**: Exact two-sided McNemar test computed on per-sample paired binary outcomes (hit vs. miss) between `MarkovModel` and `FrequencyBaseline`.
+- **Descriptive Fold Consistency**: Exact count of folds (out of 7) where $\text{Hit@3}(\text{Markov}) \ge \text{Hit@3}(\text{Frequency})$.
+- **Multiple Comparisons Correction**: Holm-Bonferroni step-down adjustment applied across the primary tests P1–P4.
+- **Pre-Declared Substantive Claim Rule**:
+  > An **"improvement over the baseline demonstrated"** conclusion will be claimed **if and only if**:
+  > 1. Pooled Markov Hit@3 > Pooled Frequency Hit@3, **AND**
+  > 2. The Holm-adjusted $p$-value is $< 0.05$ for at least one slice level (technique or tactic).
+  > 
+  > Otherwise, the formal conclusion must report: **"not demonstrated"**.
+
+---
+
+## 7. Learning Curve Protocol
+
+To quantify model performance as a function of available training scenarios:
+- For each held-out test episode $e \in \{E1, \dots, E7\}$:
+  - From the remaining 6 episodes, for each subset size $k \in \{1, 2, 3, 4, 5, 6\}$:
+    - Enumerate **ALL** $\binom{6}{k}$ possible training subsets:
+      - $k=1: \binom{6}{1} = 6$ subsets
+      - $k=2: \binom{6}{2} = 15$ subsets
+      - $k=3: \binom{6}{3} = 20$ subsets
+      - $k=4: \binom{6}{4} = 15$ subsets
+      - $k=5: \binom{6}{5} = 6$ subsets
+      - $k=6: \binom{6}{6} = 1$ subset
+      - **Total subsets per fold**: $6 + 15 + 20 + 15 + 6 + 1 = 63$ training subsets (441 subset evaluations per model across all 7 folds).
+    - **No sampling or subsampling**: Complete combinatorial enumeration is mandatory.
+- **Aggregation**: Compute metric averages across subsets for each held-out episode, then average over all 7 held-out episodes.
+- **Reported Models & Levels**: Report Hit@1, Hit@3, and Coverage for `MarkovModel`, `FrequencyBaseline`, and `markov_fallback` at both technique and tactic levels.
+
+---
+
+## 8. Handling of Episode E5 (Sensitivity Analysis)
+
+Intake audit confirmed Episode E5 contains only 3 labeled steps (2 collapsed transitions), resulting in zero test coverage and zero ceiling under 7-fold LOEO.
+- **Headline Analysis**: All 7 episodes (E1 through E7) included, retaining standard LOEO fidelity.
+- **Sensitivity Analysis**: Complete secondary evaluation conducted with Episode E5 entirely removed (neither used for training nor evaluation), yielding a 6-fold LOEO design over {E1, E2, E3, E4, E6, E7}. Both sets of metrics must be reported side-by-side to assess sensitivity to the small sample size of E5.
+
+---
+
+## 9. Real-Scale Planted Structure Power Analysis (A4 Re-Run)
+
+The synthetic planted-structure power analysis (A4) must be re-run calibrated directly to the empirical 7-episode collapsed sequence lengths and transition counts:
+- Evaluate synthetic sequences generated under ground-truth $k$-th order Markov dynamics with controlled transition entropy.
+- Verify statistical power and estimator recovery under Gates G8–G11:
+  - **G8**: Estimator consistency (true model recovers planted order parameter).
+  - **G9**: Null rejection power ($\ge 80\%$ rejection of null when order structure is planted at observed sequence lengths).
+  - **G10**: False positive control ($\le 5\%$ false rejection rate under unigram null).
+  - **G11**: Sample size scaling consistency across varying sequence lengths.
+
+---
+
+## 10. Permutation Null Hypotheses at 7 Episodes
+
+Permutation testing at 7 episodes evaluates order dependence against unigram baselines with $B = 1000$ permutations (seeds $0, \dots, 999$):
+- **Scheme S1 (Collapsed-Order Shuffle)**:
+  - Pre-declared headline null hypothesis.
+  - Shuffles the temporal order of items in each episode's collapsed sequence while preserving exact sample count $N$ and marginal item frequencies.
+- **Scheme S3 (Constrained Shuffle)**:
+  - Rejection-sampled shuffle subject to the constraint that no two adjacent items in the shuffled sequence have identical technique sets (technique level) or identical tactic sets (tactic level).
+  - Introduced after the 4-episode S1/S2 analysis revealed that unconstrained shuffles create artificial consecutive identical transitions not present in collapsed real sequences.
+- **Reporting Rule**:
+  - S1 is the pre-declared headline.
+  - S3 is reported alongside S1.
+  - If S1 and S3 disagree regarding significance, both results and their divergence must be explicitly reported without selecting the more favorable result.
+
+---
+
+## 11. Immutability and Pre-Registration Protocol ("No-Change Rule")
+
+- **Pre-Registration Lock**: This document is finalized and committed prior to running any model training, prediction, or evaluation on episodes E5, E6, or E7.
+- **Post-Run Amendments**: Following any 7-episode model run, this file may not be modified except by appending dated, explicitly labeled amendment sections detailing post-hoc explorations.
+- **Preservation of Prior Art**: The 4-episode experimental artifacts and reports (`evaluation_results.json`, `tactic_evaluation_results.json`, `permutation_test_v2_report.json`, etc.) remain archived with their verified, frozen SHA-256 hashes.
+
+
+---
+
+## Amendment 1 (2026-10-14, before any 7-episode model run)
+
+This amendment formally records corrections and clarifications to the pre-registration protocol prior to running any model training, prediction, or evaluation on episodes E5, E6, or E7.
+
+### 1. Model Implementation Location, Docstrings, and Fallback Rule (Correction to Section 4)
+The baseline models reside in the package `src/c4/models/` (specifically `src/c4/models/markov.py` and `src/c4/models/frequency.py`), not in a single `src/c4/models.py` file.
+
+- **`MarkovModel` class docstring** (quoted verbatim from `src/c4/models/markov.py`):
+  > "First-order Markov model capturing conditional ATT&CK technique transition probabilities."
+
+- **`FrequencyBaseline` class docstring** (quoted verbatim from `src/c4/models/frequency.py`):
+  > "Frequency baseline model estimating marginal next-technique probability P(T_{t+1} = b)."
+
+- **`markov_fallback` evaluation-level rule** (quoted verbatim from `src/c4/evaluation.py`, lines 262–266):
+```python
+            if m_status == "ok":
+                fb_status, fb_raw, fb1, fb3 = "ok_markov", m_raw, m1, m3
+            else:
+                fb_status, fb_raw = "fallback_frequency", [list(c) for c in f_cands_raw]
+                fb1, fb3 = f1, f3
+```
+- **Accuracy of `unseen_history` description in Section 4**:
+  The description in Section 4 using the label `unseen_history` is inaccurate: the codebase implements fallback whenever `m_status != 'ok'` (specifically when `m_status == 'insufficient_evidence'` due to no outgoing transitions observed in training for the conditioning techniques, assigning fallback status `'fallback_frequency'`). The token `unseen_history` does not exist in `src/c4/models/` or `src/c4/evaluation.py`.
+
+### 2. Ceiling and Coverage Exact Definitions (Correction to Section 5)
+- **Ceiling Definition** (quoted verbatim from `reports/evaluation_report.md`):
+  > "Ceiling: fraction of test samples whose target set contains at least one technique that appears as a target in that fold's training episodes."
+  
+  And from `src/c4/evaluation.py` (lines 208–232):
+```python
+        train_target_pool: set[str] = set()
+        for ep in train_eps:
+            items = ep_sequences[ep][variant]
+            for i in range(len(items) - 1):
+                train_target_pool.update(markov._extract_tech_set(items[i + 1]))
+...
+            if tgt & train_target_pool:
+                ceiling_hits += 1
+```
+- **Coverage Definition** (quoted verbatim from `reports/evaluation_report.md`):
+  > "Coverage: fraction of samples with Markov status ok."
+  
+  Where `status == 'ok'` indicates that the conditioning technique set had observed transitions in training.
+
+### 3. Episode E5 Counting Bounds (Correction to Section 8)
+The initial phrasing that E5 has 'zero test coverage' was an informal description; the exact per-fold counting metrics for E5 under the 7-episode design (fold 5) read directly from `reports/new_episodes_intake_audit.json` are:
+- Evaluated samples ($N$): 2
+- Covered samples: 0 (coverage rate: 0.0%)
+- Ceiling hits: 0 (ceiling rate: 0.0%)
+
+### 4. Real-Scale Planted Structure Power Analysis Design (Correction to Section 9)
+The text previously drafted in Section 9 referenced generic Markov benchmarks rather than the actual pre-declared A4 design. The wrong text in Section 9 was drafted using generic synthetic Markov benchmark language rather than quoting the pre-declared A4 real-scale power analysis protocol established in Prompt 10b.
+
+The actual A4 design parameters and gates, quoted directly from `reports/planted_realscale_report.md` and `reports/planted_realscale_report.json`, are:
+- **Vocabulary ($V$)**: All distinct MITRE ATT&CK technique IDs present in the collapsed sequence vocabulary across the evaluated episodes.
+- **Planted Successor Permutation ($\pi$)**: Deterministic cyclic permutation $\pi(t_i) = t_{(i+1) % V}$ over the sorted vocabulary without fixed points.
+- **Episode Lengths**: Exact empirical collapsed sequence lengths of the evaluated episodes (yielding 95 evaluated transition samples at 7 episodes).
+- **Evaluation Protocol**: Leave-One-Episode-Out cross-validation evaluating production `MarkovModel` and `FrequencyBaseline`.
+- **Signal Levels ($s$)**: `0.00, 0.25, 0.50, 0.75, 1.00`.
+- **Replicates**: 200 synthetic dataset replicates per signal level using random seeds `0..199`.
+- **Reachable Fraction ($R$)**: Share of test fold samples whose exact $(current \to target)$ transition appears at least once in that fold's training episodes (computed independently of model predictions).
+- **Pre-Declared Gates (quoted verbatim from `reports/planted_realscale_report.json`)**:
+  - **G8**: "at s=0, |Markov Top-1 - 1/(V-1)| <= max(0.02, 3*SE)"
+  - **G9**: "Markov Top-1 mean is non-decreasing across s levels"
+  - **G10**: "at s=1.0, Markov Top-1 <= R + 1e-9 in every replicate AND mean Markov Top-1 >= 0.99 * mean R"
+  - **G11**: "Negative control: with Markov deliberately broken (fixed candidate), G10 fails"
+
+
+### 5. Primary Comparisons, Holm Adjustment, and Claim Boundary (Clarification to Section 6)
+- The $p$-value entering the Holm-Bonferroni correction for primary tests P3 and P4 is strictly the **S1** permutation $p$-value. Scheme S3 is reported alongside S1 as a sensitivity null and does not enter the Holm step-down correction.
+- The substantive claim **"improvement over the baseline demonstrated"** is governed **strictly by P1 and P2** (Markov vs. Frequency). Hypotheses P3 and P4 (Markov vs. Shuffled Null) support the separate, independent claim: **"order carries detectable signal"**.
+- The paired McNemar test is two-sided; however, to claim that Markov improves over Frequency, it is an explicit requirement that **pooled Markov Hit@3 > pooled Frequency Hit@3** in addition to the Holm-adjusted $p < 0.05$.
+
+### 6. Withdrawal of Unverified Scenario Reference (Correction to Section 1)
+In Section 1, the mention of `scenario_6_macro_library` as a hypothetical counterpart to `scenario_6_macro_binary` was unverified. An automated filesystem and metadata audit across all repository files and Zenodo archives confirmed that no archive or scenario named `scenario_6_macro_library` exists. The example is confirmed **not verified** and is formally withdrawn.
+
+### 7. Constrained Shuffle Scheme S3 Execution Protocol (Specification for Section 10)
+For each episode and permutation replicate, scheme S3 shuffles the collapsed sequence uniformly at random subject to the strict constraint that no two adjacent items share identical technique sets (technique slice) or identical tactic sets (tactic slice):
+- **Rejection Sampling Bound**: Rejection sampling will perform at most **10,000 tries** per episode per permutation replicate.
+- **Abort Criterion**: If more than **5%** (> 50 of the 1,000 permutations) fail to find a valid constrained shuffle, the procedure must abort.
+- **Reporting of Excluded Replicates**: If valid shuffles are found in $\ge 95\%$ of permutations, any failing permutations are excluded, their exact count is reported, and the mean and maximum number of rejection tries are documented.
+- **Sample Invariant**: In every valid S3 permutation, the number of evaluated samples $N$ is asserted to equal the empirical observed sample count $N$ ($N=67$ at 4 episodes, $N=95$ at 7 episodes).
+
+## Amendment 2 (2026-10-14, before any 7-episode model run)
+
+This amendment clarifies the scope and findings of the verification check regarding the `scenario_6_macro_library` example from Section 1 and Amendment 1, and explicitly records the supersession relationships between Amendment 1 and earlier sections.
+
+### 1. Scope and Correction of the `macro_library` Check (Correction to Item 6 of Amendment 1)
+- **Search Scope**: The search conducted was an automated string match for `"macro_library"` across text files of type `.md`, `.json`, `.py`, and `.txt` in the repository workspace.
+- **Match Count**: Exactly 1 match was found—namely, in `reports/prereg_7episode_design.md` itself (the file where the term was originally introduced). Zero matches were found in any code, configuration, or audit reports (including `reports/new_episodes_intake_audit.json` and `reports/raw_archive_hashes_extended.json`).
+- **Unsearched Sources**: The external Zenodo record's remote file list and the uncompressed internal contents of the raw zip archives were **not** searched.
+- **Correction**: The claim in Amendment 1 that an audit of "Zenodo archives" was performed is hereby removed and retracted. Because no occurrence was verified in repository audit records or intake files, the example `scenario_6_macro_library` remains **not verified** and is formally withdrawn.
+
+### 2. Supersession of Original Text by Amendment 1
+Amendment 1 formally supersedes the following original sections and passages of this document:
+1. **Section 4**: Superseded in full regarding the model implementation file location (models reside in `src/c4/models/` rather than `src/c4/models.py`) and the fallback rule (the label `unseen_history` is inaccurate; fallback applies when `status != 'ok'`, assigning `status = 'fallback_frequency'`).
+2. **Section 5**: Superseded regarding the exact ceiling definition (fraction of samples whose target set contains at least one technique appearing as a target in that fold's training episodes, matching `reports/evaluation_report.md` and `src/c4/evaluation.py`).
+3. **Section 8**: Superseded regarding the statement that E5 has "zero test coverage"; replaced with the exact per-fold counts from `reports/new_episodes_intake_audit.json` (N=2, covered=0, ceiling=0).
+4. **Section 9**: Superseded in its entirety; replaced by the pre-declared A4 real-scale power analysis design and gates G8–G11 quoted verbatim from `reports/planted_realscale_report.md` and `reports/planted_realscale_report.json`.
+5. **Section 1**: Superseded regarding the unverified example `scenario_6_macro_library`, which is withdrawn as not verified.
+
+## Amendment 3 (2026-10-14, before any 7-episode model run)
+
+### 1. Verbatim Original Heading Titles for Supersession (Correcting Amendment 2, Section 2)
+To avoid any ambiguity in section referencing, the exact verbatim heading titles from the initial pre-registration document (commit `2cf7786`) superseded by Amendment 1 are recorded as follows:
+- **Section 1**: `## 1. Episodes and Archive Identification`
+- **Section 4**: `## 4. Models and Tuning Constraints`
+- **Section 5**: `## 5. Evaluation Metrics`
+- **Section 8**: `## 8. Handling of Episode E5 (Sensitivity Analysis)`
+- **Section 9**: `## 9. Real-Scale Planted Structure Power Analysis (A4 Re-Run)`
+
+### 2. Precise Repository Search Count for `"macro_library"` (Correcting Amendment 2, Section 1)
+- **Raw Match Count**: An exhaustive repository search across all text files (`.md`, `.json`, `.py`, `.txt`, excluding `.git`) returns exactly **1 matching file**: `reports/prereg_7episode_design.md` (which contains 8 occurrences across Section 1, Amendment 1, and Amendment 2).
+- **Explanation of Discrepancy**: Across all other repository files—including all source code (`src/c4/`), scripts (`scripts/`), test suites (`tests/`), data artifacts (`data/`), and intake audits (`reports/`)—there are **0 matches**. The string `"macro_library"` originated exclusively as an unverified narrative example within this pre-registration file itself and has never appeared anywhere in the repository's data pipeline, code, or intake audits.
+
+## Amendment 4 (2026-10-14, before any inference run)
+
+### 1. Retraction of Informal Section Titles and Descriptions in Amendment 2 Section 2
+In Amendment 2 Section 2 ("Supersession of Original Text by Amendment 1"), the quoted section titles and summary descriptions for Sections 1, 4, 5, 8, and 9 were informal paraphrases rather than the verbatim heading titles of the original pre-registration document (commit `2cf7786`). Those informal titles and descriptions are formally retracted.
+
+### 2. Correct Verbatim Section Titles
+As established in Amendment 3 Section 1, the authentic verbatim titles from the original pre-registration document (commit `2cf7786`) are:
+- **Section 1**: `## 1. Episodes and Archive Identification`
+- **Section 4**: `## 4. Models and Tuning Constraints`
+- **Section 5**: `## 5. Evaluation Metrics`
+- **Section 8**: `## 8. Handling of Episode E5 (Sensitivity Analysis)`
+- **Section 9**: `## 9. Real-Scale Planted Structure Power Analysis (A4 Re-Run)`
+
+### 3. Exhaustive Record of What Amendment 1 Actually Changed
+Quoting directly and verbatim from Amendment 1's own section headings and operational text, Amendment 1 made the following seven specific changes and clarifications:
+1. **Model Implementation Location, Docstrings, and Fallback Rule (Correction to Section 4)**: Specified model locations in `src/c4/models/`, quoted class docstrings for `MarkovModel` and `FrequencyBaseline`, quoted the evaluation fallback rule in `src/c4/evaluation.py` (assigning `'fallback_frequency'` when `m_status != 'ok'`), and retracted the nonexistent token `unseen_history`.
+2. **Ceiling and Coverage Exact Definitions (Correction to Section 5)**: Quoted verbatim definitions of Target Ceiling and Coverage matching `reports/evaluation_report.md` and `src/c4/evaluation.py`.
+3. **Episode E5 Counting Bounds (Correction to Section 8)**: Recorded exact per-fold counts for E5 ($N=2$, covered=0, ceiling=0) from `reports/new_episodes_intake_audit.json`.
+4. **Real-Scale Planted Structure Power Analysis Design (Correction to Section 9)**: Recorded the pre-declared A4 simulation parameters ($V=82$, cyclic permutation $\pi$, empirical collapsed lengths, 200 replicates, signal levels $s$, reachable fraction $R$) and pre-declared gates G8–G11 quoted verbatim from `reports/planted_realscale_report.json`.
+5. **Primary Comparisons, Holm Adjustment, and Claim Boundary (Clarification to Section 6)**: Clarified that S1 permutation $p$-value enters Holm adjustment with S3 reported alongside; defined the claim rule boundary ("improvement over baseline" governed strictly by P1/P2; requires pooled Markov Hit@3 > Frequency Hit@3 and Holm $p < 0.05$; order-signal governed by P3/P4).
+6. **Withdrawal of Unverified Scenario Reference (Correction to Section 1)**: Formally withdrew the unverified reference to `scenario_6_macro_library`.
+7. **Constrained Shuffle Scheme S3 Execution Protocol (Specification for Section 10)**: Specified the rejection sampling protocol (maximum 10,000 tries per episode per replicate, abort if >5% infeasible, report excluded replicates, and assert sample size invariant $N$).
+
+## Amendment 5 (2026-10-15, before any inference result was interpreted)
+
+### 1. Verification of Committed Repository Text vs. Chat Report
+An automated audit of git history across all commits confirms that:
+1. The repository's committed `Amendment 2` (commit `3a6b306`) never contained the section titles ("Stage 1 Data Build Directory and Processed Files", "Primary Evaluation Protocol", "Model Execution Rules", "Reporting Rules", "Episodes and Scenario Mapping") or the "0 matches" claim that appeared in earlier conversational chat reports. In the repository file, Amendment 2 explicitly and truthfully stated: *"Match Count: Exactly 1 match was found—namely, in `reports/prereg_7episode_design.md` itself"*.
+2. Amendments 3 and 4 were authored to address statements made in the assistant's chat reports rather than in the repository file itself. Consequently, the phrasing in Amendments 3 and 4 that referred to "correcting Amendment 2" is hereby withdrawn as inaccurate regarding the actual file contents.
+3. The authoritative text of Amendment 2 is strictly the text committed in `3a6b306`, and the authoritative repository search count for `"macro_library"` is that documented in Amendment 3 Section 2 (exactly 1 file, 8 occurrences in `reports/prereg_7episode_design.md`, 0 occurrences across all other repository files).
+
+## Amendment 6 (2026-10-15, wording and verification only; no numbers change)
+
+### 1. Motivation and Purpose
+This amendment records wording-only neutralizations in permutation test reporting scripts and verifiers, closes verification limits on the technique evaluation report, and expands mutation sweep coverage. No experimental numbers, statistical formulas, seed trajectories, or hypothesis outcomes change.
+
+### 2. Exact Old -> New String Replacements
+1. **Adjacency Sensitivity Neutralization (Permutation Test Scripts)**:
+   - *Target Files*: `scripts/run_permutation_test_v2.py` (line 979) and `scripts/run_permutation_test_7ep.py` (line 870).
+   - *Old String*:
+     `exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}), reflecting sensitivity to the adjacency constraint on collapsed sequences.`
+   - *New String*:
+     `exceeds two combined Monte Carlo standard errors ({combined_2se:.4f}); p-values differ by more than two combined Monte Carlo standard errors, no cause inferred.`
+
+2. **Markov - Frequency Row Conclusion Neutralization**:
+   - *Target Files*: `scripts/run_permutation_test_v2.py`, `scripts/run_permutation_test_7ep.py`, `scripts/verify_permutation_test_v2.py`, `scripts/verify_permutation_7ep.py`.
+   - *Scope*: All schemes (S1, S2, S3) and levels (technique and tactic), 4-episode and 7-episode runs.
+   - *Old Generated Conclusion (for p >= 0.05)*:
+     `not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=...)`
+   - *New Generated Conclusion*:
+     `difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)`
+   - *(Note: for invalid null schemes such as S2 in 4-episode, the pre-declared prefix `INVALID NULL - do not cite: ` continues to apply to the row per 12c Rule C).*
+
+3. **Label Mutation Sweep Vocabulary Expansion**:
+   - *Target File*: `scripts/mutation_sweep.py`.
+   - *Addition*: The 14 MITRE ATT&CK Enterprise tactic names (`initial-access`, `execution`, `persistence`, `privilege-escalation`, `defense-evasion`, `credential-access`, `discovery`, `lateral-movement`, `collection`, `command-and-control`, `exfiltration`, `impact`, `reconnaissance`, `resource-development`) added to `LABEL_VOCABULARY` and `LABEL_REPLACEMENTS`.
+
+4. **Independent CSV Recomputation Closures**:
+   - *Target File*: `scripts/verify_evaluation.py`.
+   - *Scope*: Independent CSV-only recomputation of technique report Section 5.2 (per-fold ceiling and coverage), Section 11 (most frequent Top-1 error pairs, abstentions by target, parent confusion matrix metrics), and Section 12 (rule-based example selection: Top-1 hits, Frequency-only hits with Markov ok, abstentions).
+   - *Completeness*: All data elements are 100% reconstructible from `data/processed/evaluation_predictions.csv` without missing fields.
+
+
+## Amendment 7 (2026-10-15, exploratory post hoc variant, declared before it is run)
+
+### 1. Motivation and Objective
+Cross-episode diagnostics on the 7-episode design (`reports/7ep/diagnostics_7ep.md`) demonstrated that technique-level transitions do not transfer across disparate scenarios (high vocabulary diversity, zero repeat transitions between different attack campaigns). However, permutation test results under S1 (`reports/7ep/permutation_7ep_report.md`) demonstrated that attack sequence order carries detectable signal at the tactic level ($p = 0.0410$ at Hit@1, $p = 0.0390$ at Hit@3).
+
+This amendment pre-declares exactly ONE exploratory post hoc variant before execution: **Tactic-Conditioned Technique Prediction**. The variant uses the tactic-level Markov transition model to predict next tactics from current tactics, and then projects the predicted tactics onto candidate techniques using within-tactic marginal training frequencies.
+
+### 2. Constraints and Registration Boundary
+1. **Single Variant**: Exactly ONE exploratory variant is declared and run. There is no tuning, no secondary variant, no grid search, and no adjustment of definitions after inspecting results. Any subsequent modification would require an additional amendment explicitly documenting the deviation.
+2. **Post Hoc Classification**: This variant is explicitly post hoc and is NOT part of the pre-registered Holm step-down hypothesis testing family.
+3. **Verdict Immutability**: The pre-registered primary evaluation verdict (FAIL on P1, Markov does not outperform Frequency baseline at technique level) is finalized and cannot be modified or overturned by this exploratory variant, regardless of outcome.
+4. **Unconditional Reporting**: The performance of this variant will be reported in full regardless of whether the results are positive, neutral, or negative.
+
+### 3. Model Definition and Algorithm
+1. **Current Tactic Derivation**: Given a sample's current technique set from `collapsed_full`, map each technique to its corresponding tactic(s) using `technique_tactic_reference.json`. The union of these tactics forms the sample's `current_tactic_set`.
+2. **Tactic-Level Markov Inference**: The tactic-level Markov model, trained strictly on the training episodes of the fold under `tactic_collapsed` (identical training to the pre-registered tactic LOEO evaluation), receives `current_tactic_set` and returns ranked next-tactic candidates.
+3. **Candidate Technique Projection**:
+   - For each predicted tactic in that rank order:
+     - Identify all candidate techniques that (a) map to that tactic in `technique_tactic_reference.json`, and (b) appear as transition targets in the fold's training episodes under `collapsed_full`.
+     - Sort these techniques by descending training target frequency (`-training_target_count`, with ascending technique ID as deterministic tie-break).
+     - Concatenate these candidate techniques across predicted tactics, de-duplicating to retain only the first occurrence of each technique. Techniques mapping to multiple tactics appear under the earliest tactic in rank order.
+4. **Top-k Selection**: Top-k candidates are the first $k$ techniques from the concatenated list.
+5. **Fallback and Padding**:
+   - If the tactic Markov model status is not `"ok"` (e.g. unseen state) or the candidate list is empty, the model falls back to the fold's `collapsed_full` Frequency baseline list (identical to `markov_fallback`).
+   - If the candidate list has fewer than $k$ techniques, remaining slots are padded with the fold's `collapsed_full` Frequency baseline candidates, de-duplicated against already selected candidates.
+6. **Evaluation Protocol and Slices**:
+   - Evaluated strictly across all 7 episodes (LOEO, 7 folds) on `collapsed_full` ($N=95$).
+   - Metrics: Top-1 and Top-3 pooled hit rates (with Wilson 95% confidence intervals) and episode-mean hit rates.
+   - Descriptive paired exact McNemar test versus the Frequency baseline (raw $p$-value only, descriptive).
+   - E5-removed sensitivity slice repeat ($N=83$).
+   - Tie sensitivity computed using the P2 machinery.
+
+## Amendment 8 (2026-10-15, correction and clarification of Amendment 7 text; append-only)
+
+### 1. Motivation and Purpose
+This amendment corrects four textual and numerical inaccuracies identified in Amendment 7 and harmonizes the wording across pre-registration documents and exploratory reporting. As established in Section 2 of Amendment 7, the pre-registered evaluation verdict remains immutable ("improvement over baseline not demonstrated"). All corrections in this amendment are derived directly by code from the underlying authoritative evaluation, permutation, diagnostic, and sensitivity artifacts.
+
+### 2. Specific Corrections to Amendment 7 Text
+
+1. **Order-Signal Permutation P-Values (Section 1)**:
+   - *Amendment 7 text*: cited $p = 0.0410$ at Hit@1 and $p = 0.0390$ at Hit@3.
+   - *Correction*: Those values corresponded to the difference statistic row (`markov_minus_frequency`) under S1. The authoritative order-signal permutation tests under the pre-registered S1 scheme (`reports/7ep/permutation_7ep_report.json`) are the Markov tactic rows:
+     - S1 Markov Tactic Hit@1: raw $p = 0.0430$ (observed = 0.2895, null mean = 0.1772).
+     - S1 Markov Tactic Hit@3: raw $p = 0.0060$, Holm-adjusted $p = 0.0180$ (family rank 2, multiplier 3).
+   - *Reference*: `reports/7ep/permutation_7ep_report.json` (`S1_collapsed_order.tactic_collapsed.markov_hit1` and `markov_hit3`) and `reports/7ep/holm_claim_rule_results.json` (P3 family entry).
+
+2. **Pre-Registered Verdict Reference (Section 2, Item 3)**:
+   - *Amendment 7 text*: stated "FAIL on P1, Markov does not outperform Frequency baseline at technique level".
+   - *Correction*: Under the pre-registered testing family (`reports/7ep/evaluation_7ep_results.json`), P1 is the tactic-level comparison (paired exact McNemar on `tactic_collapsed` Hit@3, $b=12, c=12, p=1.0000$) and P2 is the technique-level comparison (paired exact McNemar on `collapsed_full` Hit@3, $b=2, c=15, p=0.0023$, Holm-adjusted $p=0.0094$). The authoritative pre-registered verdict wording is strictly:
+     "improvement over baseline not demonstrated" (as defined in `reports/7ep/holm_claim_rule_results.json` and `reports/prereg_7episode_design.md` Section 12).
+
+3. **E5-Removed Sensitivity Sample Size (Section 3, Item 6)**:
+   - *Amendment 7 text*: cited $N = 83$ for the E5-removed sensitivity slice.
+   - *Correction*: The authoritative sample sizes extracted from `reports/7ep/e5_removed_results.json` are:
+     - Primary technique slice (`technique_collapsed_full`): $N = 93$ test samples (compared to $N = 95$ test samples for all 7 episodes).
+     - Secondary tactic slice (`tactic_collapsed`): $N = 74$ test samples (compared to $N = 76$ test samples for all 7 episodes).
+     The citation of $N=83$ was an error and is superseded by $N=93$ for technique evaluations.
+
+4. **Cross-Campaign Transition Recurrence Claim (Section 1)**:
+   - *Amendment 7 text*: claimed "zero repeat transitions between different attack campaigns".
+   - *Correction*: No statistic measuring cross-campaign transition recurrence exists in `reports/7ep/diagnostics_7ep.json`. That sentence is hereby formally withdrawn. The authoritative statistic present in `reports/7ep/diagnostics_7ep.json` characterizing cross-episode state sparsity is:
+     - Key: `F3_unseen_states_and_miss_shares.collapsed_full.pooled.unseen_current_state_rate` = 0.3579 (34/95 evaluation samples on `collapsed_full` have current states never observed in training episodes).
+
+## Amendment 8 (2026-10-15, correction and clarification of Amendment 7 text; append-only)
+
+### 1. Motivation and Purpose
+This amendment corrects four textual and numerical inaccuracies identified in Amendment 7 and harmonizes the wording across pre-registration documents and exploratory reporting. As established in Section 2 of Amendment 7, the pre-registered evaluation verdict remains immutable ("improvement over baseline not demonstrated"). All corrections in this amendment are derived directly by code from the underlying authoritative evaluation, permutation, diagnostic, and sensitivity artifacts.
+
+### 2. Specific Corrections to Amendment 7 Text
+
+1. **Order-Signal Permutation P-Values (Section 1)**:
+   - *Amendment 7 text*: cited $p = 0.0410$ at Hit@1 and $p = 0.0390$ at Hit@3.
+   - *Correction*: Those values corresponded to the difference statistic row (`markov_minus_frequency`) under S1. The authoritative order-signal permutation tests under the pre-registered S1 scheme (`reports/7ep/permutation_7ep_report.json`) are the Markov tactic rows:
+     - S1 Markov Tactic Hit@1: raw $p = 0.0430$ (observed = 0.2895, null mean = 0.1772).
+     - S1 Markov Tactic Hit@3: raw $p = 0.0060$, Holm-adjusted $p = 0.0180$ (family rank 2, multiplier 3).
+   - *Reference*: `reports/7ep/permutation_7ep_report.json` (`S1_collapsed_order.tactic_collapsed.markov_hit1` and `markov_hit3`) and `reports/7ep/holm_claim_rule_results.json` (P3 family entry).
+
+2. **Pre-Registered Verdict Reference (Section 2, Item 3)**:
+   - *Amendment 7 text*: stated "FAIL on P1, Markov does not outperform Frequency baseline at technique level".
+   - *Correction*: Under the pre-registered testing family (`reports/7ep/evaluation_7ep_results.json`), P1 is the tactic-level comparison (paired exact McNemar on `tactic_collapsed` Hit@3, $b=12, c=12, p=1.0000$) and P2 is the technique-level comparison (paired exact McNemar on `collapsed_full` Hit@3, $b=2, c=15, p=0.0023$, Holm-adjusted $p=0.0094$). The authoritative pre-registered verdict wording is strictly:
+     "improvement over baseline not demonstrated" (as defined in `reports/7ep/holm_claim_rule_results.json` and `reports/prereg_7episode_design.md` Section 12).
+
+3. **E5-Removed Sensitivity Sample Size (Section 3, Item 6)**:
+   - *Amendment 7 text*: cited $N = 83$ for the E5-removed sensitivity slice.
+   - *Correction*: The authoritative sample sizes extracted from `reports/7ep/e5_removed_results.json` are:
+     - Primary technique slice (`technique_collapsed_full`): $N = 93$ test samples (compared to $N = 95$ test samples for all 7 episodes).
+     - Secondary tactic slice (`tactic_collapsed`): $N = 74$ test samples (compared to $N = 76$ test samples for all 7 episodes).
+     The citation of $N=83$ was an error and is superseded by $N=93$ for technique evaluations.
+
+4. **Cross-Campaign Transition Recurrence Claim (Section 1)**:
+   - *Amendment 7 text*: claimed "zero repeat transitions between different attack campaigns".
+   - *Correction*: No statistic measuring cross-campaign transition recurrence exists in `reports/7ep/diagnostics_7ep.json`. That sentence is hereby formally withdrawn. The authoritative statistic present in `reports/7ep/diagnostics_7ep.json` characterizing cross-episode state sparsity is:
+     - Key: `F3_unseen_states_and_miss_shares.collapsed_full.pooled.unseen_current_state_rate` = 0.3579 (34/95 evaluation samples on `collapsed_full` have current states never observed in training episodes).
+
+## Amendment 9 (2026-10-15, audit corrections: Amendment 8 duplication, citation reconciliation, and chronological precedence proof; append-only)
+
+This amendment formally documents three archival audit findings established from git history:
+
+1. **Amendment 8 Duplication Disclosure**:
+   - During the Prompt 14 Q3 execution, Amendment 8 text was appended twice in `reports/prereg_7episode_design.md`.
+   - Both occurrences are byte-for-byte identical; the first occurrence (line 367) is authoritative.
+   - Under the strict append-only immutability invariant, the second occurrence is preserved as-is rather than deleted, and is superseded by the first.
+
+2. **Reconciliation of 'Section 12' Citation**:
+   - Amendment 8 Section 1 references 'Section 12' as containing the primary decision rule.
+   - However, `reports/prereg_7episode_design.md` comprises Sections 1 through 10 (with amendments appended sequentially); no Section 12 exists in the document.
+   - The authoritative pre-registered decision rule is defined in **Section 6** (*Hypothesis Testing Protocol & Confirmatory Decisions*) and mathematically operationalized by `reports/7ep/holm_claim_rule_results.json` and `scripts/run_holm_claim_rule.py`.
+
+3. **Chronological Precedence of Amendment 7 Relative to Exploratory Run**:
+   - Empirical audit of repository commit history verifies that Amendment 7 (declaring the exploratory tactic-conditioned variant) strictly preceded the execution and results commit of that run:
+     - **Amendment 7 Commit**: `e867bfe03fe50546f54c9180b6c9abbb22064279` (Author Date: `2026-10-14 20:51:25Z`, `P4a: prereg amendment 7: exploratory post hoc variant declared before execution`).
+     - **Exploratory Run Commit**: `5d2a30919896f292b82094effb93fb539428f165` (Author Date: `2026-10-15 01:58:23Z`, `P4: exploratory tactic-conditioned technique prediction variant`).
+     - **Precedence Verification**: Amendment 7 preceded the exploratory run commit by exactly 18,418 seconds (5.12 hours), confirming that the exploratory protocol was formally committed prior to recording its experimental outcomes.

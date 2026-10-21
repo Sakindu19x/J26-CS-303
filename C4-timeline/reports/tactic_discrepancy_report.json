@@ -1,0 +1,172 @@
+{
+  "attack_version": "16.1",
+  "source_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-16.1.json",
+  "version_selection_rationale": "ATT&CK Enterprise v16.1 was chosen because it represents the latest mature release retaining the canonical 14 Enterprise tactics (including 'Defense Evasion'). In bleeding-edge releases (such as v19.2), MITRE restructured Defense Evasion into 'Stealth' and 'Defense Impairment', which generates 14 false-positive taxonomic discrepancies for standard defense evasion techniques while leaving the 8 genuine dataset anomalies unchanged. v16.1 maintains semantic alignment with the CAM-LDS ground-truth labeling taxonomy.",
+  "reference_counts": {
+    "total_techniques": 799,
+    "active_techniques": 656,
+    "deprecated_techniques": 12,
+    "revoked_techniques": 131,
+    "flagged_techniques_total": 143
+  },
+  "total_cam_techniques": 64,
+  "missing_techniques": [],
+  "deprecated_or_revoked_techniques": [],
+  "discrepancies_count": 8,
+  "discrepancies": [
+    {
+      "event_id": "E2-S016",
+      "episode_id": "E2",
+      "techniques": [
+        "T1003.008",
+        "T1041"
+      ],
+      "dataset_tactics": [
+        "Collection",
+        "Credential Access",
+        "Exfiltration"
+      ],
+      "official_tactics": [
+        "Credential Access",
+        "Exfiltration"
+      ],
+      "discrepancy_tactics": [
+        "Collection"
+      ]
+    },
+    {
+      "event_id": "E2-S017",
+      "episode_id": "E2",
+      "techniques": [
+        "T1560.001",
+        "T1074.001"
+      ],
+      "dataset_tactics": [
+        "Collection",
+        "Exfiltration"
+      ],
+      "official_tactics": [
+        "Collection"
+      ],
+      "discrepancy_tactics": [
+        "Exfiltration"
+      ]
+    },
+    {
+      "event_id": "E2-S024",
+      "episode_id": "E2",
+      "techniques": [
+        "T1003.008"
+      ],
+      "dataset_tactics": [
+        "Discovery"
+      ],
+      "official_tactics": [
+        "Credential Access"
+      ],
+      "discrepancy_tactics": [
+        "Discovery"
+      ]
+    },
+    {
+      "event_id": "E4-S003",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003",
+        "T1105",
+        "T1205.001"
+      ],
+      "dataset_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Command and Control",
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S007",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S009",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S041",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    },
+    {
+      "event_id": "E4-S043",
+      "episode_id": "E4",
+      "techniques": [
+        "T1078.003"
+      ],
+      "dataset_tactics": [
+        "Lateral Movement"
+      ],
+      "official_tactics": [
+        "Defense Evasion",
+        "Initial Access",
+        "Persistence",
+        "Privilege Escalation"
+      ],
+      "discrepancy_tactics": [
+        "Lateral Movement"
+      ]
+    }
+  ]
+}

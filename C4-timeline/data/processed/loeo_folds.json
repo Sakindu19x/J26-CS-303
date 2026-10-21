@@ -1,0 +1,38 @@
+[
+  {
+    "fold_id": "fold_1",
+    "test_episode": "E1",
+    "training_episodes": [
+      "E2",
+      "E3",
+      "E4"
+    ]
+  },
+  {
+    "fold_id": "fold_2",
+    "test_episode": "E2",
+    "training_episodes": [
+      "E1",
+      "E3",
+      "E4"
+    ]
+  },
+  {
+    "fold_id": "fold_3",
+    "test_episode": "E3",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E4"
+    ]
+  },
+  {
+    "fold_id": "fold_4",
+    "test_episode": "E4",
+    "training_episodes": [
+      "E1",
+      "E2",
+      "E3"
+    ]
+  }
+]

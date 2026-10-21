@@ -1,0 +1,244 @@
+================================================================================
+AUDIT LOG HEADER
+Command    : ..\.venv\Scripts\python.exe scripts/audit/reproduce_clean_clone_t6.py
+Exit Code  : 0
+Git HEAD   : b6866842d73e3f3328bba638d363ca0fda270b43
+UTC Start  : 2026-10-21T04:31:02Z
+UTC End    : 2026-10-21T04:33:34Z
+================================================================================
+================================================================================
+PROMPT 17 - PART T6 PRISTINE CLEAN-CLONE DOUBLE REBUILD PROOF
+================================================================================
+Timestamp      : 2026-10-21T10:01:02Z
+Master Repo    : C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4
+Clone Target   : C:\c4_clean_clone_t6
+Python Runtime : C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\.venv\Scripts\python.exe
+
+[*] Removing existing clone directory: C:\c4_clean_clone_t6...
+    -> Removed.
+[*] Cloning C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4 -> C:\c4_clean_clone_t6...
+    -> Clone completed successfully.
+
+[*] Checking git status --porcelain on fresh clone:
+    -> Fresh clone working tree is 100% clean (git status --porcelain is empty).
+
+[*] Providing raw archives to clone data/raw/ and verifying SHA-256 against provenance:
+    scenario_1_sudo_pam.zip      SHA-256: 0851d2cec590d3b56575fc385416190e12e258442023257d66879e19cb9e74fc [MATCH]
+    scenario_2_cron.zip          SHA-256: b2026121bdb035628b7536a042f01c3e92e36852b65cac9d69fd05c31ba98791 [MATCH]
+    scenario_3_vnc_apt.zip       SHA-256: 5c23b9d614689194f43cc844e4a25ed43568879ae83edc43df93336e0a33f911 [MATCH]
+    scenario_4.zip               SHA-256: a79fefbfeebd25b163e57f9ec7b9581f8e6f0abed2f2775fba45cf55a004b637 [MATCH]
+    scenario_5.zip               SHA-256: e54df7f4c2f8e12e374272544809cee42b2c7e68ac37d950934e4123364f7911 [MATCH]
+    scenario_6_macro_binary.zip  SHA-256: 73a31bf763c5a65ed1a14bb5919151dbbf324563d4f8eaabb0c58d9c0f67f3b1 [MATCH]
+    scenario_7.zip               SHA-256: 7f0ff0b5d939437b5ebad7f52eea69dc024775e5c73663c5b4ac7ba58f1b3a56 [MATCH]
+
+[*] Executing Rebuild Run 1 (& PYTHON scripts/reproduce_all.py --rebuild)...
+    Rebuild Run 1 Exit Code: 0 (75.31s)
+
+[*] Executing Rebuild Run 2 (& PYTHON scripts/reproduce_all.py --rebuild)...
+    Rebuild Run 2 Exit Code: 0 (58.87s)
+    -> ALL 61 BASELINE FILES BYTE-IDENTICAL ACROSS RUN 1 AND RUN 2 (100% DETERMINISM).
+
+[*] Verifying 61 baseline hashes in clone via verify_all_hashes.py:
+    -> ALL 61 PROTECTED BASELINE FILES MATCH 100% (Exit 0).
+
+[*] Checking git status --porcelain for Master repository:
+    -> Master git status --porcelain is clean (ignoring active T6 log/runner).
+
+[*] Checking git status --porcelain for Clean Clone repository:
+    -> Clean Clone git status --porcelain is 100% EMPTY.
+
+[*] Running 'git diff --stat c4-7ep-verified-v4 HEAD' on Master repo:
+docs/PROJECT_MAP.md                                |  74 +--
+ docs/data_lineage.md                               | 163 ++----
+ reports/audit/q16_baseline_changes.md              | 556 ++++-----------------
+ reports/audit/q16_s1_recheck.md                    |  64 ++-
+ reports/audit/q17_T5_output.txt                    |  23 +
+ reports/audit/q17_head_vs_tag.txt                  |   4 +
+ reports/audit/q17_rename_regression.md             |  73 +++
+ scripts/audit/build_lineage.py                     | 351 +++++++++++++
+ scripts/audit/build_project_map.py                 | 165 ++++++
+ scripts/audit/build_q16_s1_recheck.py              | 174 +++++++
+ scripts/audit/check_imports.py                     | 189 +++++++
+ scripts/audit/record_baseline_change.py            | 402 +++++++++------
+ .../pipeline/s15_exploratory_tactic_conditioned.py |  17 +-
+ scripts/pipeline/s19_build_claims_map.py           |   5 +-
+ tests/test_generated_docs.py                       |  34 +-
+ tests/test_import_integrity.py                     |  13 +
+ tests/test_inference_7ep.py                        |  10 +-
+ tests/test_lineage_doc.py                          |  99 ++++
+ tests/test_record_baseline_change.py               |  25 +-
+ tests/test_viva_pack_sweep.py                      |   5 +-
+ 20 files changed, 1651 insertions(+), 795 deletions(-)
+
+[*] Line-Ending Safety Proof:
+--- .gitattributes ---
+# Auto-generated .gitattributes pinning exact baseline line endings (Prompt 14 Q1)
+# Explicitly preserves binary files and pinned LF/CRLF text files regardless of core.autocrlf
+* text=auto
+
+# Binary files (-text)
+*.png -text
+reports/7ep/learning_curve_7ep.png -text
+
+# Protected Baseline Files Pinned Line Endings
+reports/evaluation_report.md text eol=lf
+reports/evaluation_results.json text eol=crlf
+data/processed/evaluation_predictions.csv text eol=crlf
+data/processed/attack_sequences.json text eol=crlf
+data/processed/attack_timelines.json text eol=crlf
+data/processed/loeo_folds.json text eol=crlf
+data/processed/next_technique_samples.json text eol=crlf
+data/processed/normalized_events.json text eol=crlf
+data/processed/technique_tactic_reference.json text eol=crlf
+reports/data_quality_report.json text eol=crlf
+reports/timeline_validation_report.json text eol=crlf
+reports/tactic_discrepancy_report.json text eol=crlf
+reports/sequence_statistics.json text eol=crlf
+reports/tactic_evaluation_report.md text eol=lf
+reports/tactic_evaluation_results.json text eol=crlf
+data/processed/tactic_evaluation_predictions.csv text eol=crlf
+data/processed_7ep/attack_sequences.json text eol=crlf
+data/processed_7ep/attack_timelines.json text eol=crlf
+data/processed_7ep/loeo_folds.json text eol=crlf
+data/processed_7ep/next_technique_samples.json text eol=crlf
+data/processed_7ep/normalized_events.json text eol=crlf
+data/processed_7ep/technique_tactic_reference.json text eol=crlf
+reports/7ep/data_quality_report.json text eol=crlf
+reports/7ep/timeline_validation_report.json text eol=crlf
+reports/7ep/tactic_discrepancy_report.json text eol=crlf
+reports/7ep/sequence_statistics.json text eol=crlf
+data/processed_7ep/evaluation_7ep_predictions.csv text eol=crlf
+reports/7ep/evaluation_7ep_results.json text eol=crlf
+reports/7ep/evaluation_7ep_report.md text eol=crlf
+data/processed_7ep/learning_curve_7ep.csv text eol=crlf
+reports/7ep/learning_curve_7ep_results.json text eol=crlf
+reports/7ep/learning_curve_7ep_report.md text eol=crlf
+reports/7ep/learning_curve_7ep.png -text
+reports/7ep/learning_curve_7ep_plot_data.json text eol=crlf
+data/processed_7ep/permutation_7ep_null_distribution.csv text eol=crlf
+reports/7ep/permutation_7ep_report.json text eol=crlf
+reports/7ep/permutation_7ep_report.md text eol=crlf
+data/processed_7ep/planted_realscale_7ep_predictions.csv text eol=crlf
+reports/7ep/planted_realscale_7ep_report.json text eol=crlf
+reports/7ep/planted_realscale_7ep_report.md text eol=crlf
+data/processed_7ep/e5_removed_predictions.csv text eol=crlf
+reports/7ep/e5_removed_results.json text eol=crlf
+reports/7ep/e5_removed_report.md text eol=crlf
+reports/7ep/holm_claim_rule_results.json text eol=crlf
+reports/7ep/holm_claim_rule_report.md text eol=crlf
+reports/7ep/diagnostics_7ep.json text eol=crlf
+reports/7ep/diagnostics_7ep.md text eol=crlf
+reports/7ep/e5_hit1_change_diagnostic.json text eol=crlf
+reports/7ep/e5_hit1_change_diagnostic.md text eol=crlf
+data/processed_7ep/tie_sensitivity_7ep_samples.csv text eol=crlf
+reports/7ep/tie_sensitivity_7ep.json text eol=crlf
+reports/7ep/tie_sensitivity_7ep.md text eol=crlf
+data/processed_7ep/exploratory_tactic_conditioned_predictions.csv text eol=crlf
+reports/7ep/exploratory_tactic_conditioned_results.json text eol=crlf
+reports/7ep/exploratory_tactic_conditioned_report.md text eol=crlf
+artifacts/7ep/production_model/collapsed_full.json text eol=crlf
+artifacts/7ep/production_model/tactic_collapsed.json text eol=crlf
+artifacts/7ep/production_model/manifest.json text eol=crlf
+data/processed_7ep/prediction_records_loeo.jsonl text eol=crlf
+reports/7ep/prediction_record_examples.md text eol=crlf
+reports/7ep/requirements_trace.md text eol=crlf
+reports/_baseline_hashes_stage2.json text eol=crlf
+reports/_baseline_hashes_tactic.json text eol=crlf
+reports/_baseline_hashes_7ep_stage1.json text eol=crlf
+reports/_baseline_hashes_7ep_eval.json text eol=lf
+reports/_baseline_hashes_7ep_inference.json text eol=lf
+
+# Pipeline Output CSVs Pinned Line Endings (Clean-Clone & Rebuild Parity)
+data/processed/attack_timelines.csv text eol=lf
+data/processed/normalized_events.csv text eol=lf
+data/processed/wazuh_alerts_normalized.csv text eol=lf
+data/processed_7ep/attack_timelines.csv text eol=lf
+data/processed_7ep/normalized_events.csv text eol=lf
+data/processed_7ep/wazuh_alerts_normalized.csv text eol=lf
+reports/confusion_matrix_parent.csv text eol=lf
+
+[*] Comparing Clone vs Master 61 baseline hashes:
+    -> 61/61 hashes match identically between Master working tree and Clean Clone (0 mismatches).
+
+================================================================================
+ALL T6 CLEAN-CLONE PROOF GATES PASSED PERFECTLY (GATE STATUS: PASS)
+================================================================================
+--- STDERR ---
+Cloning into 'C:\c4_clean_clone_t6'...
+done.
+Updating files:  26% (123/468)
+Updating files:  27% (127/468)
+Updating files:  28% (132/468)
+Updating files:  29% (136/468)
+Updating files:  30% (141/468)
+Updating files:  31% (146/468)
+Updating files:  32% (150/468)
+Updating files:  33% (155/468)
+Updating files:  34% (160/468)
+Updating files:  35% (164/468)
+Updating files:  36% (169/468)
+Updating files:  37% (174/468)
+Updating files:  38% (178/468)
+Updating files:  39% (183/468)
+Updating files:  40% (188/468)
+Updating files:  41% (192/468)
+Updating files:  42% (197/468)
+Updating files:  43% (202/468)
+Updating files:  44% (206/468)
+Updating files:  45% (211/468)
+Updating files:  46% (216/468)
+Updating files:  47% (220/468)
+Updating files:  48% (225/468)
+Updating files:  49% (230/468)
+Updating files:  50% (234/468)
+Updating files:  51% (239/468)
+Updating files:  52% (244/468)
+Updating files:  53% (249/468)
+Updating files:  54% (253/468)
+Updating files:  55% (258/468)
+Updating files:  56% (263/468)
+Updating files:  57% (267/468)
+Updating files:  58% (272/468)
+Updating files:  59% (277/468)
+Updating files:  60% (281/468)
+Updating files:  61% (286/468)
+Updating files:  62% (291/468)
+Updating files:  63% (295/468)
+Updating files:  64% (300/468)
+Updating files:  65% (305/468)
+Updating files:  66% (309/468)
+Updating files:  67% (314/468)
+Updating files:  68% (319/468)
+Updating files:  69% (323/468)
+Updating files:  70% (328/468)
+Updating files:  71% (333/468)
+Updating files:  72% (337/468)
+Updating files:  73% (342/468)
+Updating files:  74% (347/468)
+Updating files:  75% (351/468)
+Updating files:  76% (356/468)
+Updating files:  77% (361/468)
+Updating files:  78% (366/468)
+Updating files:  79% (370/468)
+Updating files:  80% (375/468)
+Updating files:  81% (380/468)
+Updating files:  82% (384/468)
+Updating files:  83% (389/468)
+Updating files:  84% (394/468)
+Updating files:  85% (398/468)
+Updating files:  86% (403/468)
+Updating files:  87% (408/468)
+Updating files:  88% (412/468)
+Updating files:  89% (417/468)
+Updating files:  90% (422/468)
+Updating files:  91% (426/468)
+Updating files:  92% (431/468)
+Updating files:  93% (436/468)
+Updating files:  94% (440/468)
+Updating files:  95% (445/468)
+Updating files:  96% (450/468)
+Updating files:  97% (454/468)
+Updating files:  98% (459/468)
+Updating files:  99% (464/468)
+Updating files: 100% (468/468)
+Updating files: 100% (468/468), done.

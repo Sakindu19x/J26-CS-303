@@ -1,0 +1,172 @@
+{
+  "telemetry": {
+    "cpu_model": "13th Gen Intel(R) Core(TM) i5-13420H",
+    "machine": "AMD64",
+    "os": "Windows 11 (10.0.26300)",
+    "python_version": "3.12.10",
+    "python_executable": "C:\\Users\\Lenovo\\OneDrive - EGUARDIAN\\Documents\\Dataset\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "python": "3.12.10",
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "streamlit": "1.65.0",
+      "pytest": "9.1.1",
+      "jsonschema": "4.26.0"
+    }
+  },
+  "criteria": {
+    "warm_median_threshold_seconds": 2.0,
+    "warm_p95_threshold_seconds": 5.0,
+    "process_cold_start_threshold_seconds": 10.0,
+    "cold_start_threshold_seconds": 10.0
+  },
+  "timed_region_definitions": {
+    "warm_end_to_end": {
+      "name": "Warm End-to-End Pipeline Latency",
+      "description": "Ingestion of raw events via C3 adapter, chronological timeline reconstruction, sequence extraction, production Markov technique and tactic inference, and explainable prediction record generation over 30 repetitions following 3 warm-ups."
+    },
+    "process_cold_start": {
+      "name": "Process-Level Cold Start (Parent-Timed)",
+      "description": "Fresh Python subprocess invocation from parent process, complete interpreter initialization, package imports, model deserialization from disk, and emission of first explainable prediction record, timed externally by the parent."
+    },
+    "in_process_cold_start": {
+      "name": "In-Process First-Record Latency",
+      "description": "Elapsed duration within an initialized Python environment to load production models into memory and emit the first prediction record (informational)."
+    },
+    "streamlit_server_ready": {
+      "name": "Streamlit Server Ready Time",
+      "description": "Duration from launching `python -m streamlit run` headless on port 8765 to receiving HTTP 200 OK from the `/_stcore/health` endpoint (informational)."
+    },
+    "scaling_stress": {
+      "name": "Synthetic Scaling Stress Benchmark",
+      "description": "Throughput and latency scaling under synthetic 1x, 10x, and 100x event volume expansion on the longest observed episode (informational)."
+    }
+  },
+  "summary_warm": {
+    "total_repetitions": 210,
+    "mean_seconds": 0.0014,
+    "median_seconds": 0.0014,
+    "p95_seconds": 0.0026,
+    "pass_median": true,
+    "pass_p95": true
+  },
+  "cold_start": {
+    "cold_start_seconds": 0.2013,
+    "pass_cold_start": true
+  },
+  "process_cold_start": {
+    "parent_timed_seconds": 0.2013,
+    "threshold_seconds": 10.0,
+    "pass": true
+  },
+  "in_process_cold_start": {
+    "first_record_latency_seconds": 0.1383,
+    "informational": true
+  },
+  "streamlit_server_ready": {
+    "ready_time_seconds": 1.859,
+    "endpoint": "http://localhost:8765/_stcore/health",
+    "port": 8765,
+    "status_code": 200,
+    "informational": true
+  },
+  "episodes": {
+    "E1": {
+      "events_count": 38,
+      "repetitions": 30,
+      "mean_seconds": 0.0014,
+      "median_seconds": 0.0014,
+      "p95_seconds": 0.0016,
+      "min_seconds": 0.0013,
+      "max_seconds": 0.0017,
+      "std_seconds": 0.0001
+    },
+    "E2": {
+      "events_count": 29,
+      "repetitions": 30,
+      "mean_seconds": 0.0011,
+      "median_seconds": 0.001,
+      "p95_seconds": 0.0017,
+      "min_seconds": 0.001,
+      "max_seconds": 0.0018,
+      "std_seconds": 0.0002
+    },
+    "E3": {
+      "events_count": 77,
+      "repetitions": 30,
+      "mean_seconds": 0.0027,
+      "median_seconds": 0.0026,
+      "p95_seconds": 0.0029,
+      "min_seconds": 0.0025,
+      "max_seconds": 0.0031,
+      "std_seconds": 0.0002
+    },
+    "E4": {
+      "events_count": 46,
+      "repetitions": 30,
+      "mean_seconds": 0.0016,
+      "median_seconds": 0.0016,
+      "p95_seconds": 0.002,
+      "min_seconds": 0.0015,
+      "max_seconds": 0.0022,
+      "std_seconds": 0.0002
+    },
+    "E5": {
+      "events_count": 7,
+      "repetitions": 30,
+      "mean_seconds": 0.0003,
+      "median_seconds": 0.0003,
+      "p95_seconds": 0.0004,
+      "min_seconds": 0.0002,
+      "max_seconds": 0.0005,
+      "std_seconds": 0.0
+    },
+    "E6": {
+      "events_count": 51,
+      "repetitions": 30,
+      "mean_seconds": 0.0018,
+      "median_seconds": 0.0017,
+      "p95_seconds": 0.0021,
+      "min_seconds": 0.0016,
+      "max_seconds": 0.0024,
+      "std_seconds": 0.0002
+    },
+    "E7": {
+      "events_count": 26,
+      "repetitions": 30,
+      "mean_seconds": 0.0009,
+      "median_seconds": 0.0009,
+      "p95_seconds": 0.001,
+      "min_seconds": 0.0009,
+      "max_seconds": 0.0011,
+      "std_seconds": 0.0001
+    }
+  },
+  "scaling_benchmark": {
+    "base_episode": "E3",
+    "results": {
+      "1x": {
+        "multiplier": 1,
+        "event_count": 77,
+        "timeline_length": 77,
+        "elapsed_seconds": 0.0082,
+        "throughput_events_per_sec": 9349.4
+      },
+      "10x": {
+        "multiplier": 10,
+        "event_count": 770,
+        "timeline_length": 770,
+        "elapsed_seconds": 0.0333,
+        "throughput_events_per_sec": 23096.3
+      },
+      "100x": {
+        "multiplier": 100,
+        "event_count": 7700,
+        "timeline_length": 7700,
+        "elapsed_seconds": 0.3316,
+        "throughput_events_per_sec": 23220.9
+      }
+    }
+  },
+  "verdict": "PASS"
+}

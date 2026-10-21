@@ -1,0 +1,34 @@
+=== R5 HYGIENE AUDIT LOG ===
+2026-10-15T11:00:00.000000+00:00
+
+--- 1. GIT UNTRACK SCRATCH DIRECTORY ---
+Executed: git rm --cached -r scratch
+Untracked:
+- scratch/analyze_steps.py
+- scratch/audit_r1_r15.py
+- scratch/check_zenodo_hashes.py
+- scratch/print_samples.py
+- scratch/samples.txt
+- scratch/test_r13_reproducibility.py
+- scratch/test_r14_clean_venv.py
+Added 'scratch/' to .gitignore.
+
+--- 2. OVERNIGHT LEDGER AUDIT NOTE ---
+Appended note to reports/overnight_ledger.md without rewriting existing entries:
+- Missing Q0 row recorded:
+  | Q0 | 996bd71102c8d87c8190d0617766b382f1051eb5 | 0 | 184 | 0 | PASS | 2026-10-15T06:00:00Z |
+- Clarified that the 'Git HEAD (SHA)' column records the commit immediately BEFORE each part's own commit.
+
+--- 3. KNOWN LIMITATIONS UPDATE ---
+Updated reports/audit/known_limitations.json and generated reports/audit/known_limitations.md:
+- LIM-11: Clean Clone Shares Parent Virtual Environment (rebuild scripts share parent venv; verified via pip freeze vs requirements.lock.txt).
+- LIM-12: Dashboard Visual Artifacts Static Renders vs Live Captures (Prompt 15 R4(d) successfully executed interactive Playwright live capture in separate venv C:\c4_capture_venv with channel='chrome').
+- LIM-13: C3 Interface Contract Unagreed by Component 3 (format proposed by C4, not agreed by C3; tested only against C4 fixtures).
+- LIM-14: High Proportion of Low-Support Predictions (92/171 records flagged with support caution due to <2 supporting episodes or <3 transitions).
+- LIM-15: Streamlit Readiness Metric Measures Health Endpoint, Not First Render (measured via http://localhost:8501/_stcore/health latency).
+- LIM-16: Prompt 14 Unattended Agent Log Access Procedural Violation (Prompt 14 agent opened transcript and task logs; strictly forbidden and eliminated in Prompt 15).
+
+--- 4. BASELINE INTEGRITY VERIFICATION ---
+================================================================================
+ALL BASELINE FILES BYTE-IDENTICAL AND FULLY VERIFIED (61/61 MATCH)
+================================================================================

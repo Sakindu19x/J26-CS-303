@@ -1,0 +1,587 @@
+{
+  "metadata": {
+    "test_name": "7-Episode Permutation Test (E1-E7)",
+    "b_permutations": 1000,
+    "decision_rule": "p < 0.05 under primary scheme S1; S3 reported alongside",
+    "p_value_formula": "p = (1 + count(null >= observed)) / (1 + B)",
+    "observed_sample_counts": {
+      "technique_collapsed_full": 95,
+      "tactic_collapsed": 76
+    },
+    "observed_baseline_counts": {
+      "technique_collapsed_full": {
+        "markov_hit1": 3,
+        "markov_hit3": 3,
+        "frequency_hit1": 7,
+        "frequency_hit3": 16,
+        "markov_fallback_hit1": 3,
+        "markov_fallback_hit3": 4,
+        "markov_minus_frequency_hit1": -4,
+        "markov_minus_frequency_hit3": -13
+      },
+      "tactic_collapsed": {
+        "markov_hit1": 22,
+        "markov_hit3": 48,
+        "frequency_hit1": 14,
+        "frequency_hit3": 48,
+        "markov_fallback_hit1": 24,
+        "markov_fallback_hit3": 50,
+        "markov_minus_frequency_hit1": 8,
+        "markov_minus_frequency_hit3": 0
+      }
+    },
+    "observed_baseline_rates": {
+      "technique_collapsed_full": {
+        "markov_hit1": 0.031578947368421054,
+        "markov_hit3": 0.031578947368421054,
+        "frequency_hit1": 0.07368421052631578,
+        "frequency_hit3": 0.16842105263157894,
+        "markov_fallback_hit1": 0.031578947368421054,
+        "markov_fallback_hit3": 0.042105263157894736,
+        "markov_minus_frequency_hit1": -0.042105263157894736,
+        "markov_minus_frequency_hit3": -0.1368421052631579
+      },
+      "tactic_collapsed": {
+        "markov_hit1": 0.2894736842105263,
+        "markov_hit3": 0.631578947368421,
+        "frequency_hit1": 0.18421052631578946,
+        "frequency_hit3": 0.631578947368421,
+        "markov_fallback_hit1": 0.3157894736842105,
+        "markov_fallback_hit3": 0.6578947368421053,
+        "markov_minus_frequency_hit1": 0.10526315789473684,
+        "markov_minus_frequency_hit3": 0.0
+      }
+    },
+    "sample_counts_summary": {
+      "S1_collapsed_order": {
+        "technique_collapsed_full": {
+          "min": 95,
+          "mean": 95.0,
+          "max": 95,
+          "is_constant": true
+        },
+        "tactic_collapsed": {
+          "min": 76,
+          "mean": 76.0,
+          "max": 76,
+          "is_constant": true
+        }
+      },
+      "S3_constrained_shuffle": {
+        "technique_collapsed_full": {
+          "min": 95,
+          "mean": 95.0,
+          "max": 95,
+          "is_constant": true
+        },
+        "tactic_collapsed": {
+          "min": 76,
+          "mean": 76.0,
+          "max": 76,
+          "is_constant": true
+        }
+      }
+    },
+    "s3_rejection_sampling_summary": {
+      "max_tries_per_episode": 10000,
+      "technique_collapsed_full": {
+        "excluded_permutations": 0,
+        "min_total_tries": 7,
+        "mean_total_tries": 8.818,
+        "max_total_tries": 18
+      },
+      "tactic_collapsed": {
+        "excluded_permutations": 0,
+        "min_total_tries": 7,
+        "mean_total_tries": 19.375,
+        "max_total_tries": 61
+      }
+    }
+  },
+  "schemes": {
+    "S1_collapsed_order": {
+      "technique_collapsed_full": {
+        "markov_hit1": {
+          "observed": 0.031578947368421054,
+          "null_mean": 0.012442105263157895,
+          "null_sd": 0.013767304745453717,
+          "null_p2_5": 0.0,
+          "null_p97_5": 0.042105263157894736,
+          "null_min": 0.0,
+          "null_max": 0.07368421052631578,
+          "n_ge_observed": 154,
+          "b_permutations": 1000,
+          "p_value": 0.15484515484515485,
+          "mc_se": 0.011439761049346043,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1548)"
+        },
+        "markov_hit3": {
+          "observed": 0.031578947368421054,
+          "null_mean": 0.02356842105263158,
+          "null_sd": 0.019561203992685922,
+          "null_p2_5": 0.0,
+          "null_p97_5": 0.06315789473684211,
+          "null_min": 0.0,
+          "null_max": 0.11578947368421053,
+          "n_ge_observed": 385,
+          "b_permutations": 1000,
+          "p_value": 0.3856143856143856,
+          "mc_se": 0.015392073649174939,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3856)"
+        },
+        "frequency_hit1": {
+          "observed": 0.07368421052631578,
+          "null_mean": 0.071,
+          "null_sd": 0.01014522746525489,
+          "null_p2_5": 0.05263157894736842,
+          "null_p97_5": 0.10526315789473684,
+          "null_min": 0.031578947368421054,
+          "null_max": 0.11578947368421053,
+          "n_ge_observed": 663,
+          "b_permutations": 1000,
+          "p_value": 0.6633366633366633,
+          "mc_se": 0.014943933030164632,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6633)"
+        },
+        "frequency_hit3": {
+          "observed": 0.16842105263157894,
+          "null_mean": 0.15817894736842106,
+          "null_sd": 0.02377963088035693,
+          "null_p2_5": 0.10526315789473684,
+          "null_p97_5": 0.18947368421052632,
+          "null_min": 0.06315789473684211,
+          "null_max": 0.18947368421052632,
+          "n_ge_observed": 562,
+          "b_permutations": 1000,
+          "p_value": 0.5624375624375625,
+          "mc_se": 0.015687624128492353,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5624)"
+        },
+        "markov_fallback_hit1": {
+          "observed": 0.031578947368421054,
+          "null_mean": 0.04217894736842105,
+          "null_sd": 0.01842560850433782,
+          "null_p2_5": 0.010526315789473682,
+          "null_p97_5": 0.08421052631578947,
+          "null_min": 0.0,
+          "null_max": 0.11578947368421053,
+          "n_ge_observed": 801,
+          "b_permutations": 1000,
+          "p_value": 0.8011988011988012,
+          "mc_se": 0.01262058961207459,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.8012)"
+        },
+        "markov_fallback_hit3": {
+          "observed": 0.042105263157894736,
+          "null_mean": 0.08416842105263157,
+          "null_sd": 0.025874245263982545,
+          "null_p2_5": 0.04210526315789473,
+          "null_p97_5": 0.1368421052631579,
+          "null_min": 0.0,
+          "null_max": 0.16842105263157894,
+          "n_ge_observed": 981,
+          "b_permutations": 1000,
+          "p_value": 0.981018981018981,
+          "mc_se": 0.004315175535185237,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.9810)"
+        },
+        "markov_minus_frequency_hit1": {
+          "observed": -0.042105263157894736,
+          "null_mean": -0.0585578947368421,
+          "null_sd": 0.016876942922032095,
+          "null_p2_5": -0.09473684210526316,
+          "null_p97_5": -0.021052631578947368,
+          "null_min": -0.11578947368421053,
+          "null_max": 0.010526315789473684,
+          "n_ge_observed": 235,
+          "b_permutations": 1000,
+          "p_value": 0.23576423576423577,
+          "mc_se": 0.013423094311623592,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        },
+        "markov_minus_frequency_hit3": {
+          "observed": -0.1368421052631579,
+          "null_mean": -0.13461052631578949,
+          "null_sd": 0.029741339276222648,
+          "null_p2_5": -0.17894736842105263,
+          "null_p97_5": -0.07368421052631578,
+          "null_min": -0.18947368421052632,
+          "null_max": -0.010526315789473684,
+          "n_ge_observed": 547,
+          "b_permutations": 1000,
+          "p_value": 0.5474525474525475,
+          "mc_se": 0.015740020830363084,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        }
+      },
+      "tactic_collapsed": {
+        "markov_hit1": {
+          "observed": 0.2894736842105263,
+          "null_mean": 0.18693421052631579,
+          "null_sd": 0.05216216136299059,
+          "null_p2_5": 0.09210526315789473,
+          "null_p97_5": 0.3026315789473684,
+          "null_min": 0.039473684210526314,
+          "null_max": 0.35526315789473684,
+          "n_ge_observed": 42,
+          "b_permutations": 1000,
+          "p_value": 0.04295704295704296,
+          "mc_se": 0.006411843371248999,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0430)"
+        },
+        "markov_hit3": {
+          "observed": 0.631578947368421,
+          "null_mean": 0.47765789473684206,
+          "null_sd": 0.06177605492747854,
+          "null_p2_5": 0.35526315789473684,
+          "null_p97_5": 0.5921052631578947,
+          "null_min": 0.2631578947368421,
+          "null_max": 0.6447368421052632,
+          "n_ge_observed": 5,
+          "b_permutations": 1000,
+          "p_value": 0.005994005994005994,
+          "mc_se": 0.002440917427146976,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0060)"
+        },
+        "frequency_hit1": {
+          "observed": 0.18421052631578946,
+          "null_mean": 0.20421052631578948,
+          "null_sd": 0.04081752690494121,
+          "null_p2_5": 0.14473684210526316,
+          "null_p97_5": 0.2631578947368421,
+          "null_min": 0.13157894736842105,
+          "null_max": 0.2631578947368421,
+          "n_ge_observed": 542,
+          "b_permutations": 1000,
+          "p_value": 0.5424575424575424,
+          "mc_se": 0.015754280595713217,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5425)"
+        },
+        "frequency_hit3": {
+          "observed": 0.631578947368421,
+          "null_mean": 0.6045263157894737,
+          "null_sd": 0.03924442141434592,
+          "null_p2_5": 0.5263157894736842,
+          "null_p97_5": 0.6710526315789473,
+          "null_min": 0.5,
+          "null_max": 0.6973684210526315,
+          "n_ge_observed": 325,
+          "b_permutations": 1000,
+          "p_value": 0.3256743256743257,
+          "mc_se": 0.014819263114976363,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3257)"
+        },
+        "markov_fallback_hit1": {
+          "observed": 0.3157894736842105,
+          "null_mean": 0.19089473684210526,
+          "null_sd": 0.052105292426921634,
+          "null_p2_5": 0.10526315789473684,
+          "null_p97_5": 0.3026315789473684,
+          "null_min": 0.05263157894736842,
+          "null_max": 0.3684210526315789,
+          "n_ge_observed": 19,
+          "b_permutations": 1000,
+          "p_value": 0.01998001998001998,
+          "mc_se": 0.004425021896173846,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0200)"
+        },
+        "markov_fallback_hit3": {
+          "observed": 0.6578947368421053,
+          "null_mean": 0.49114473684210525,
+          "null_sd": 0.06138384922020721,
+          "null_p2_5": 0.3684210526315789,
+          "null_p97_5": 0.6055921052631577,
+          "null_min": 0.2894736842105263,
+          "null_max": 0.6578947368421053,
+          "n_ge_observed": 1,
+          "b_permutations": 1000,
+          "p_value": 0.001998001998001998,
+          "mc_se": 0.0014120941845422272,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0020)"
+        },
+        "markov_minus_frequency_hit1": {
+          "observed": 0.10526315789473684,
+          "null_mean": -0.017276315789473685,
+          "null_sd": 0.06394608192561452,
+          "null_p2_5": -0.13157894736842105,
+          "null_p97_5": 0.11842105263157894,
+          "null_min": -0.21052631578947367,
+          "null_max": 0.19736842105263158,
+          "n_ge_observed": 40,
+          "b_permutations": 1000,
+          "p_value": 0.04095904095904096,
+          "mc_se": 0.0062674873691740745,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        },
+        "markov_minus_frequency_hit3": {
+          "observed": 0.0,
+          "null_mean": -0.12686842105263157,
+          "null_sd": 0.06721344470069641,
+          "null_p2_5": -0.25,
+          "null_p97_5": 0.0,
+          "null_min": -0.35526315789473684,
+          "null_max": 0.06578947368421052,
+          "n_ge_observed": 38,
+          "b_permutations": 1000,
+          "p_value": 0.03896103896103896,
+          "mc_se": 0.006119074799682985,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        }
+      }
+    },
+    "S3_constrained_shuffle": {
+      "technique_collapsed_full": {
+        "markov_hit1": {
+          "observed": 0.031578947368421054,
+          "null_mean": 0.012105263157894737,
+          "null_sd": 0.013261015228292131,
+          "null_p2_5": 0.0,
+          "null_p97_5": 0.042105263157894736,
+          "null_min": 0.0,
+          "null_max": 0.07368421052631578,
+          "n_ge_observed": 143,
+          "b_permutations": 1000,
+          "p_value": 0.14385614385614387,
+          "mc_se": 0.011097817521070722,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.1439)"
+        },
+        "markov_hit3": {
+          "observed": 0.031578947368421054,
+          "null_mean": 0.02237894736842105,
+          "null_sd": 0.018386961462404927,
+          "null_p2_5": 0.0,
+          "null_p97_5": 0.06315789473684211,
+          "null_min": 0.0,
+          "null_max": 0.11578947368421053,
+          "n_ge_observed": 365,
+          "b_permutations": 1000,
+          "p_value": 0.36563436563436563,
+          "mc_se": 0.015229769410648365,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.3656)"
+        },
+        "frequency_hit1": {
+          "observed": 0.07368421052631578,
+          "null_mean": 0.07148421052631579,
+          "null_sd": 0.010839444637159067,
+          "null_p2_5": 0.05263157894736842,
+          "null_p97_5": 0.10526315789473684,
+          "null_min": 0.010526315789473684,
+          "null_max": 0.11578947368421053,
+          "n_ge_observed": 672,
+          "b_permutations": 1000,
+          "p_value": 0.6723276723276723,
+          "mc_se": 0.014842613427227916,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.6723)"
+        },
+        "frequency_hit3": {
+          "observed": 0.16842105263157894,
+          "null_mean": 0.15701052631578946,
+          "null_sd": 0.024307075851066583,
+          "null_p2_5": 0.10526315789473684,
+          "null_p97_5": 0.18947368421052632,
+          "null_min": 0.07368421052631578,
+          "null_max": 0.18947368421052632,
+          "n_ge_observed": 540,
+          "b_permutations": 1000,
+          "p_value": 0.5404595404595405,
+          "mc_se": 0.015759537606979554,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5405)"
+        },
+        "markov_fallback_hit1": {
+          "observed": 0.031578947368421054,
+          "null_mean": 0.04138947368421053,
+          "null_sd": 0.0180744055409633,
+          "null_p2_5": 0.010526315789473682,
+          "null_p97_5": 0.08421052631578947,
+          "null_min": 0.0,
+          "null_max": 0.10526315789473684,
+          "n_ge_observed": 787,
+          "b_permutations": 1000,
+          "p_value": 0.7872127872127872,
+          "mc_se": 0.012942519648872943,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.7872)"
+        },
+        "markov_fallback_hit3": {
+          "observed": 0.042105263157894736,
+          "null_mean": 0.08368421052631579,
+          "null_sd": 0.02566661486462353,
+          "null_p2_5": 0.04210526315789473,
+          "null_p97_5": 0.1368421052631579,
+          "null_min": 0.0,
+          "null_max": 0.16842105263157894,
+          "n_ge_observed": 977,
+          "b_permutations": 1000,
+          "p_value": 0.977022977022977,
+          "mc_se": 0.004738045946604605,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.9770)"
+        },
+        "markov_minus_frequency_hit1": {
+          "observed": -0.042105263157894736,
+          "null_mean": -0.05937894736842105,
+          "null_sd": 0.017021198234359932,
+          "null_p2_5": -0.09473684210526316,
+          "null_p97_5": -0.021052631578947368,
+          "null_min": -0.11578947368421053,
+          "null_max": 0.010526315789473684,
+          "n_ge_observed": 215,
+          "b_permutations": 1000,
+          "p_value": 0.21578421578421578,
+          "mc_se": 0.013008512136390033,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        },
+        "markov_minus_frequency_hit3": {
+          "observed": -0.1368421052631579,
+          "null_mean": -0.1346315789473684,
+          "null_sd": 0.02979879696750664,
+          "null_p2_5": -0.17894736842105263,
+          "null_p97_5": -0.07368421052631578,
+          "null_min": -0.18947368421052632,
+          "null_max": -0.010526315789473684,
+          "n_ge_observed": 554,
+          "b_permutations": 1000,
+          "p_value": 0.5544455544455544,
+          "mc_se": 0.015717368787463,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        }
+      },
+      "tactic_collapsed": {
+        "markov_hit1": {
+          "observed": 0.2894736842105263,
+          "null_mean": 0.20256578947368423,
+          "null_sd": 0.054503127583664095,
+          "null_p2_5": 0.10526315789473684,
+          "null_p97_5": 0.3157894736842105,
+          "null_min": 0.05263157894736842,
+          "null_max": 0.39473684210526316,
+          "n_ge_observed": 75,
+          "b_permutations": 1000,
+          "p_value": 0.07592407592407592,
+          "mc_se": 0.008376133393108724,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.0759)"
+        },
+        "markov_hit3": {
+          "observed": 0.631578947368421,
+          "null_mean": 0.49207894736842106,
+          "null_sd": 0.06118239558317907,
+          "null_p2_5": 0.3684210526315789,
+          "null_p97_5": 0.6052631578947368,
+          "null_min": 0.3026315789473684,
+          "null_max": 0.6710526315789473,
+          "n_ge_observed": 10,
+          "b_permutations": 1000,
+          "p_value": 0.01098901098901099,
+          "mc_se": 0.003296703296703297,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0110)"
+        },
+        "frequency_hit1": {
+          "observed": 0.18421052631578946,
+          "null_mean": 0.20227631578947367,
+          "null_sd": 0.04036125022145754,
+          "null_p2_5": 0.14473684210526316,
+          "null_p97_5": 0.2631578947368421,
+          "null_min": 0.13157894736842105,
+          "null_max": 0.2631578947368421,
+          "n_ge_observed": 529,
+          "b_permutations": 1000,
+          "p_value": 0.5294705294705294,
+          "mc_se": 0.01578389964149312,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.5295)"
+        },
+        "frequency_hit3": {
+          "observed": 0.631578947368421,
+          "null_mean": 0.6015526315789474,
+          "null_sd": 0.03722656655804984,
+          "null_p2_5": 0.5263157894736842,
+          "null_p97_5": 0.6710526315789473,
+          "null_min": 0.5,
+          "null_max": 0.6973684210526315,
+          "n_ge_observed": 276,
+          "b_permutations": 1000,
+          "p_value": 0.27672327672327673,
+          "mc_se": 0.014147349746253167,
+          "conclusion": "not distinguishable from the shuffled-order null at this sample size (this is not proof of absence) (p=0.2767)"
+        },
+        "markov_fallback_hit1": {
+          "observed": 0.3157894736842105,
+          "null_mean": 0.20730263157894738,
+          "null_sd": 0.054525380928195366,
+          "null_p2_5": 0.10526315789473684,
+          "null_p97_5": 0.3157894736842105,
+          "null_min": 0.05263157894736842,
+          "null_max": 0.39473684210526316,
+          "n_ge_observed": 39,
+          "b_permutations": 1000,
+          "p_value": 0.03996003996003996,
+          "mc_se": 0.006193806193806194,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0400)"
+        },
+        "markov_fallback_hit3": {
+          "observed": 0.6578947368421053,
+          "null_mean": 0.506328947368421,
+          "null_sd": 0.06047876531171753,
+          "null_p2_5": 0.3815789473684211,
+          "null_p97_5": 0.618421052631579,
+          "null_min": 0.32894736842105265,
+          "null_max": 0.6973684210526315,
+          "n_ge_observed": 8,
+          "b_permutations": 1000,
+          "p_value": 0.008991008991008992,
+          "mc_se": 0.002984990912604691,
+          "conclusion": "observed exceeds the shuffled-order null (p=0.0090)"
+        },
+        "markov_minus_frequency_hit1": {
+          "observed": 0.10526315789473684,
+          "null_mean": 0.00028947368421052634,
+          "null_sd": 0.06213789538800785,
+          "null_p2_5": -0.11842105263157894,
+          "null_p97_5": 0.13157894736842105,
+          "null_min": -0.15789473684210525,
+          "null_max": 0.18421052631578946,
+          "n_ge_observed": 63,
+          "b_permutations": 1000,
+          "p_value": 0.06393606393606394,
+          "mc_se": 0.007736164661150089,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        },
+        "markov_minus_frequency_hit3": {
+          "observed": 0.0,
+          "null_mean": -0.10947368421052632,
+          "null_sd": 0.06742423913165291,
+          "null_p2_5": -0.25,
+          "null_p97_5": 0.013157894736842105,
+          "null_min": -0.3026315789473684,
+          "null_max": 0.07894736842105263,
+          "n_ge_observed": 60,
+          "b_permutations": 1000,
+          "p_value": 0.060939060939060936,
+          "mc_se": 0.007564753253803217,
+          "conclusion": "difference statistic compared with its shuffled-order null; this row is not a test of Markov against Frequency (that test is P1/P2 in the evaluation report)"
+        }
+      }
+    }
+  },
+  "scheme_validity_check": {
+    "S1_collapsed_order": {
+      "order_free_stats_checked": [
+        "technique_collapsed_full:frequency_hit1",
+        "technique_collapsed_full:frequency_hit3",
+        "tactic_collapsed:frequency_hit1",
+        "tactic_collapsed:frequency_hit3"
+      ],
+      "significant_order_free_stats": [],
+      "is_valid_order_null": true,
+      "warning": null
+    },
+    "S3_constrained_shuffle": {
+      "order_free_stats_checked": [
+        "technique_collapsed_full:frequency_hit1",
+        "technique_collapsed_full:frequency_hit3",
+        "tactic_collapsed:frequency_hit1",
+        "tactic_collapsed:frequency_hit3"
+      ],
+      "significant_order_free_stats": [],
+      "is_valid_order_null": true,
+      "warning": null
+    }
+  }
+}

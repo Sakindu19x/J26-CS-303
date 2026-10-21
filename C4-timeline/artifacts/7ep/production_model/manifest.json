@@ -1,0 +1,50 @@
+{
+  "files": {
+    "artifacts/7ep/production_model/collapsed_full.json": {
+      "model_level": "technique",
+      "n_sequences": 7,
+      "n_states": 78,
+      "n_transitions": 143,
+      "sha256": "73002ab557b86143a612cb67b7dc6a31fafa0640346e865d38df05af0ead5485",
+      "size_bytes": 24327,
+      "slice": "collapsed_full",
+      "training_episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7"
+      ]
+    },
+    "artifacts/7ep/production_model/tactic_collapsed.json": {
+      "model_level": "tactic",
+      "n_sequences": 7,
+      "n_states": 13,
+      "n_transitions": 132,
+      "sha256": "250dd1f09f5b3c20554aed87277c90575b8b3967938a2fa7296d018ecc9ec7ad",
+      "size_bytes": 10595,
+      "slice": "tactic_collapsed",
+      "training_episodes": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7"
+      ]
+    }
+  },
+  "production_model_training_policy": "all_seven_episodes",
+  "training_episodes": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6",
+    "E7"
+  ]
+}

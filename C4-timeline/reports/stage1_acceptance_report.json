@@ -1,0 +1,393 @@
+{
+  "audit_version": "Stage 1 Acceptance Audit (Updated Post-Verification)",
+  "audit_date": "2026-10-13T15:25:00+00:00",
+  "dataset": "CAM-LDS (Cyber Attack Manifestations Log Data Set)",
+  "zenodo_record_url": "https://zenodo.org/records/18390560",
+  "overall_verdict": "PASS",
+  "requirements": {
+    "R1": {
+      "status": "PASS",
+      "summary": "All 4 archives discovered and parsed according to real formats",
+      "evidence": {
+        "scenario_1_sudo_pam.zip": {"members": 10505, "regular_files": 9070, "attackmate_steps": 38},
+        "scenario_2_cron.zip": {"members": 10459, "regular_files": 9024, "attackmate_steps": 29},
+        "scenario_3_vnc_apt.zip": {"members": 14402, "regular_files": 12538, "attackmate_steps": 77},
+        "scenario_4.zip": {"members": 14398, "regular_files": 12534, "attackmate_steps": 46}
+      },
+      "verification_file": "src/c4/data_loading.py, tests/test_basic.py"
+    },
+    "R2": {
+      "status": "PASS",
+      "summary": "Original archives unchanged: SHA-256 baseline recorded, published Zenodo MD5 checksums verified byte-for-byte",
+      "evidence": {
+        "baseline_hashes_file": "reports/raw_archive_hashes.json",
+        "hash_verification_statement": "SHA-256 hashes represent the local baseline recorded at audit start (not proof of unchanged-since-download). Download integrity was independently verified by comparing local MD5 hashes against published Zenodo Record 18390560 metadata, matching 100% across all 4 files.",
+        "archives": {
+          "scenario_1_sudo_pam.zip": {
+            "local_sha256_baseline": "0851d2cec590d3b56575fc385416190e12e258442023257d66879e19cb9e74fc",
+            "local_md5": "e7e5bd19cda62a5bfb9a68525715cd78",
+            "zenodo_published_md5": "e7e5bd19cda62a5bfb9a68525715cd78",
+            "match": true,
+            "mtime_utc": "2026-08-28T17:23:00.129916+00:00"
+          },
+          "scenario_2_cron.zip": {
+            "local_sha256_baseline": "b2026121bdb035628b7536a042f01c3e92e36852b65cac9d69fd05c31ba98791",
+            "local_md5": "c33aca73d6962414bd6c2c3f82b934c4",
+            "zenodo_published_md5": "c33aca73d6962414bd6c2c3f82b934c4",
+            "match": true,
+            "mtime_utc": "2026-08-28T17:22:23.476014+00:00"
+          },
+          "scenario_3_vnc_apt.zip": {
+            "local_sha256_baseline": "5c23b9d614689194f43cc844e4a25ed43568879ae83edc43df93336e0a33f911",
+            "local_md5": "bfd7e44cdb2d038a9deab800350e4b98",
+            "zenodo_published_md5": "bfd7e44cdb2d038a9deab800350e4b98",
+            "match": true,
+            "mtime_utc": "2026-08-28T17:22:41.270601+00:00"
+          },
+          "scenario_4.zip": {
+            "local_sha256_baseline": "a79fefbfeebd25b163e57f9ec7b9581f8e6f0abed2f2775fba45cf55a004b637",
+            "local_md5": "f1bf6ecd793c6c51f922ee43e33d7cf4",
+            "zenodo_published_md5": "f1bf6ecd793c6c51f922ee43e33d7cf4",
+            "match": true,
+            "mtime_utc": "2026-08-28T17:23:22.577201+00:00"
+          }
+        },
+        "codebase_write_check": "Zero occurrences of write mode ('w', 'a', 'x', '+') targeting data/raw/ in codebase"
+      },
+      "verification_file": "reports/raw_archive_hashes.json, src/c4/data_loading.py"
+    },
+    "R3": {
+      "status": "PASS",
+      "summary": "Normalized records keep source references and episode IDs: 190 events, malformed records audited",
+      "evidence": {
+        "total_events": 190,
+        "labeled_per_episode": {"E1": 27, "E2": 21, "E3": 29, "E4": 22},
+        "unlabeled_per_episode": {"E1": 11, "E2": 8, "E3": 48, "E4": 24},
+        "whitespace_fixes_applied": 4,
+        "malformed_records_found": [
+          {
+            "episode_id": "E1",
+            "step_index": 23,
+            "description": "Malformed technique_name JSON key with embedded quotes/colons recovered",
+            "raw_key": "technique_name:\"Ingress Tool Transfer,Modify Authentication Process",
+            "raw_val": "Pluggable Authentication Modules\"",
+            "recovered_name": "Ingress Tool Transfer,Modify Authentication Process: Pluggable Authentication Modules"
+          }
+        ],
+        "malformed_key_recoveries_count": 1,
+        "invalid_technique_ids": 0,
+        "source_references_preserved": "100% of events maintain episode_id, scenario_id, source_archive, and source_line_or_step_index"
+      },
+      "verification_file": "data/processed/normalized_events.json, reports/data_quality_report.json"
+    },
+    "R4": {
+      "status": "PASS",
+      "summary": "Timestamp normalization and ordering: all UTC-aware, 0 missing timestamps, non-monotonic raw steps documented, sequences chronological",
+      "evidence": {
+        "utc_aware_fraction": 1.0,
+        "missing_timestamps": 0,
+        "raw_attackmate_file_order_monotonicity": "False in E3; strictly True in E1, E2, E4",
+        "raw_inversions_by_episode": {
+          "E1": [],
+          "E2": [],
+          "E3": [
+            {
+              "step_index": 5,
+              "step_num_1indexed": 6,
+              "timestamp": "2025-12-12T18:09:04.102559",
+              "preceding_step_index": 4,
+              "preceding_timestamp": "2025-12-12T18:09:19.112907",
+              "time_difference_seconds": -15.01,
+              "step_type": "loop",
+              "cmd": "items(LISTA)",
+              "is_composite": true,
+              "techniques": ["T1110.001", "T1021.005"]
+            },
+            {
+              "step_index": 67,
+              "step_num_1indexed": 68,
+              "timestamp": "2025-12-12T18:30:25.124334",
+              "preceding_step_index": 66,
+              "preceding_timestamp": "2025-12-12T18:32:01.643304",
+              "time_difference_seconds": -96.52,
+              "step_type": "include",
+              "cmd": "include commands",
+              "is_composite": true,
+              "techniques": []
+            }
+          ],
+          "E4": []
+        },
+        "composite_steps_finding": "Both timestamp inversions in E3 are composite container/directive steps (type='loop' and type='include') in AttackMate.",
+        "chronological_reconstruction": "Reconstructed timelines and ATT&CK sequences strictly sort events chronologically by (timestamp, step_index), so Step 5 (18:09:04) correctly precedes Step 4 (18:09:19)."
+      },
+      "verification_file": "src/c4/timeline.py, src/c4/attack_sequence.py"
+    },
+    "R5": {
+      "status": "PASS",
+      "summary": "Episodes stay separate through normalization, timelines, sequences and samples",
+      "evidence": {
+        "event_cross_contamination": 0,
+        "timeline_cross_contamination": 0,
+        "sequence_cross_contamination": 0,
+        "sample_cross_contamination": 0,
+        "total_samples_audited": 324
+      },
+      "verification_file": "src/c4/episodes.py, src/c4/samples.py, tests/test_samples_and_stats.py"
+    },
+    "R6": {
+      "status": "PASS",
+      "summary": "ATT&CK labels come only from attackmate ground truth; Wazuh alerts tagged detector-derived",
+      "evidence": {
+        "event_ground_truth_source": "parameters.metadata['techniques'] and ['tactics'] exclusively",
+        "wazuh_alerts_count": 14574,
+        "wazuh_detector_derived_flag": 14574,
+        "wazuh_in_event_labels": 0
+      },
+      "verification_file": "src/c4/normalization.py, data/processed/wazuh_alerts_normalized.csv"
+    },
+    "R7": {
+      "status": "PASS",
+      "summary": "Missing/invalid data is reported, not fabricated; proposal C3 fields audited",
+      "evidence": {
+        "actual_columns_always_null_in_normalized_events": [
+          "asset_criticality",
+          "c3_threat_score",
+          "cti_confidence",
+          "freshness",
+          "incident_stage",
+          "investigation_priority",
+          "ioc",
+          "ioc_type"
+        ],
+        "proposal_c3_fields_status": {
+          "ioc": {"in_schema": true, "always_null": true},
+          "ioc_type": {"in_schema": true, "always_null": true},
+          "incident_stage": {"in_schema": true, "always_null": true},
+          "asset_criticality": {"in_schema": true, "always_null": true},
+          "local_occurrence": {"in_schema": true, "always_null": false, "derived_by_c4": true, "null_count": 91, "labeled_count": 99},
+          "cti_confidence": {"in_schema": true, "always_null": true},
+          "freshness": {"in_schema": true, "always_null": true},
+          "c3_threat_score": {"in_schema": true, "always_null": true},
+          "investigation_priority": {"in_schema": true, "always_null": true}
+        },
+        "clarification_on_alert_volumes": "alert_volume_pre_window, alert_volume_in_window, snort_alerts_count, and wazuh_alerts_count do NOT exist as event columns in normalized_events.json/csv. They are summary metrics from raw simulation logs and are not C3 fields.",
+        "derived_fields_marked_derived": ["local_occurrence", "n_techniques", "duration_seconds", "label_status"]
+      },
+      "verification_file": "data/processed/normalized_events.json, reports/data_quality_report.json"
+    },
+    "R8": {
+      "status": "PASS",
+      "summary": "Timeline exports (CSV/JSON) contain expected fields and preserve event_id and episode_id",
+      "evidence": {
+        "csv_export_file": "data/processed/attack_timelines.csv",
+        "json_export_file": "data/processed/attack_timelines.json",
+        "mandatory_columns_verified": ["event_id", "episode_id", "timestamp", "techniques", "tactics", "label_status"],
+        "null_id_count": 0
+      },
+      "verification_file": "src/c4/dashboard/export_utils.py, tests/test_dashboard.py"
+    },
+    "R9": {
+      "status": "PASS",
+      "summary": "Sequences: raw lengths 27/21/29/22, collapsed lengths 19/20/21/11, unlabeled steps excluded",
+      "evidence": {
+        "raw_sequence_lengths": {"E1": 27, "E2": 21, "E3": 29, "E4": 22},
+        "collapsed_sequence_lengths": {"E1": 19, "E2": 20, "E3": 21, "E4": 11},
+        "unlabeled_steps_in_sequences": 0,
+        "skipped_fields_tracked": "unlabeled_steps_skipped_before and unlabeled_steps_skipped_between consistently recorded"
+      },
+      "verification_file": "data/processed/attack_sequences.json, reports/timeline_validation_report.json"
+    },
+    "R10": {
+      "status": "PASS",
+      "summary": "Samples: 67 collapsed and 95 raw samples at full ID, parent mapping verified, alignment verified on 10 random samples",
+      "evidence": {
+        "collapsed_full_samples": 67,
+        "raw_full_samples": 95,
+        "collapsed_parent_samples": 67,
+        "raw_parent_samples": 95,
+        "total_samples": 324,
+        "random_samples_audited": 10,
+        "independent_recomputation_matches": 10,
+        "cross_episode_samples": 0
+      },
+      "verification_file": "data/processed/next_technique_samples.json, tests/test_samples_and_stats.py"
+    },
+    "R11": {
+      "status": "PASS",
+      "summary": "Coverage statistics: recomputed pooled usable/reachable bounds (34/67 and 35/67 full ID) match report; no test-leakage",
+      "evidence": {
+        "collapsed_full_id": {
+          "usable_sources": "34 / 67 (50.7%)",
+          "reachable_targets": "35 / 67 (52.2%)"
+        },
+        "collapsed_parent_id": {
+          "usable_sources": "41 / 67 (61.2%)",
+          "reachable_targets": "39 / 67 (58.2%)"
+        },
+        "test_train_leakage": "Zero test episode techniques present in training folds"
+      },
+      "verification_file": "data/processed/loeo_folds.json, reports/sequence_statistics.json"
+    },
+    "R12": {
+      "status": "PASS",
+      "summary": "Dashboard: all 9 sections render for each of E1..E4 via AppTest, filters/exports work, 0 exceptions, real data only",
+      "evidence": {
+        "test_runner": "streamlit.testing.v1.AppTest",
+        "browser_environment": "Headless AppTest programmatic environment (no interactive browser session used)",
+        "episodes_rendered": ["E1", "E2", "E3", "E4"],
+        "sections_rendered": [
+          "Overview & Metrics",
+          "Episode Selector",
+          "Interactive Plotly Timeline",
+          "Event Deep Inspector",
+          "Sequence Progression",
+          "Tactic Discrepancy Panel",
+          "Data Quality & Cleaning",
+          "Detector-Derived Wazuh Telemetry",
+          "Data Export (CSV/JSON)"
+        ],
+        "unhandled_exceptions": 0
+      },
+      "verification_file": "src/c4/dashboard/app.py, tests/test_dashboard.py"
+    },
+    "R13": {
+      "status": "PASS",
+      "summary": "Reproducibility from scratch: deleted processed and reports, reran pipeline, 100% SHA-256 match without hard-coded timestamps",
+      "evidence": {
+        "generated_at_handling": "Omitted dynamic and hard-coded generated_at timestamps from reports, producing naturally deterministic JSON output",
+        "processed_json_matches": {
+          "attack_sequences.json": true,
+          "attack_timelines.json": true,
+          "loeo_folds.json": true,
+          "next_technique_samples.json": true,
+          "normalized_events.json": true,
+          "technique_tactic_reference.json": true
+        },
+        "report_json_matches": {
+          "data_quality_report.json": true,
+          "timeline_validation_report.json": true,
+          "tactic_discrepancy_report.json": true,
+          "sequence_statistics.json": true
+        },
+        "retained_reports_verified": {
+          "dataset_inventory.md": true,
+          "dataset_inventory.json": true,
+          "raw_archive_hashes.json": true
+        }
+      },
+      "verification_file": "scratch/test_r13_reproducibility.py"
+    },
+    "R14": {
+      "status": "PASS",
+      "summary": "README setup and run instructions followed literally in fresh temporary virtual environment and confirmed working",
+      "evidence": {
+        "temporary_venv_path": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\c4_test_venv",
+        "steps_executed": [
+          "pip install -r requirements.txt (Exit code 0)",
+          "pip install -e . (Exit code 0)",
+          "pip install pytest (Exit code 0)",
+          "python scripts/run_normalization.py (Exit code 0)",
+          "python scripts/run_timeline_pipeline.py (Exit code 0)",
+          "python scripts/run_samples_and_stats.py (Exit code 0)",
+          "pytest -v (Exit code 0, 38 passed in 3.14s)"
+        ],
+        "execution_status": "All commands succeeded with return code 0"
+      },
+      "verification_file": "scratch/test_r14_clean_venv.py, README.md"
+    },
+    "R15": {
+      "status": "PASS",
+      "summary": "Automated tests cover normal input, malformed records, missing values, ties, duplicates, boundaries",
+      "evidence": {
+        "total_collected": 38,
+        "total_passed": 38,
+        "total_failed": 0,
+        "total_skipped": 0,
+        "coverage_mapping": {
+          "normal_input": [
+            "test_basic.py::test_reads_synthetic_zip_without_modifying",
+            "test_normalization.py::test_timestamp_parsing_and_utc_assumption",
+            "test_timeline_and_sequences.py::test_real_archives_regression",
+            "test_dashboard.py::test_load_dashboard_data_success"
+          ],
+          "malformed_records": [
+            "test_normalization.py::test_malformed_key_case",
+            "test_basic.py::test_unreadable_archive"
+          ],
+          "missing_values": [
+            "test_normalization.py::test_invalid_technique_id",
+            "test_basic.py::test_missing_archives_reported",
+            "test_normalization.py::test_timestamp_tie_ordering_and_missing_last",
+            "test_dashboard.py::test_export_empty_timeline",
+            "test_dashboard.py::test_charts_empty_timeline_figure"
+          ],
+          "timestamp_ties": [
+            "test_normalization.py::test_timestamp_tie_ordering_and_missing_last",
+            "test_timeline_and_sequences.py::test_timeline_ordering_ties_and_missing_timestamps"
+          ],
+          "duplicate_events": [
+            "test_normalization.py::test_stable_event_ids_across_runs",
+            "test_timeline_and_sequences.py::test_pipeline_hash_stability_double_run",
+            "test_timeline_and_sequences.py::test_real_archives_regression"
+          ],
+          "episode_boundaries": [
+            "test_normalization.py::test_episode_separation",
+            "test_timeline_and_sequences.py::test_episode_manager_synthetic",
+            "test_timeline_and_sequences.py::test_events_from_different_episodes_never_in_one_sequence",
+            "test_samples_and_stats.py::test_no_cross_episode_samples_synthetic",
+            "test_samples_and_stats.py::test_fold_construction_never_leaks_test_episode_synthetic"
+          ],
+          "dashboard_headless": [
+            "test_dashboard.py::test_dashboard_renders_all_episodes_via_apptest"
+          ]
+        }
+      },
+      "verification_file": "tests/"
+    }
+  },
+  "att_and_ck_version_comparison": {
+    "report_files": [
+      "reports/attack_version_comparison.json",
+      "reports/attack_version_comparison.md"
+    ],
+    "baseline_version": "v16.1",
+    "baseline_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-16.1.json",
+    "newest_version": "v19.2",
+    "newest_url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-19.2.json",
+    "v16_discrepancies": 8,
+    "v19_discrepancies": 22,
+    "discrepant_events_preserved": ["E2-S016", "E2-S017", "E2-S024", "E4-S003", "E4-S007", "E4-S009", "E4-S041", "E4-S043"],
+    "analysis": "In v19.2, MITRE ATT&CK introduced the Stealth and Defense Impairment tactics, restructuring Defense Evasion. Because CAM-LDS was authored using traditional Defense Evasion tactics, evaluating against v19.2 increases discrepancies from 8 to 22. v16.1 represents the faithful historical baseline for CAM-LDS ground-truth tactics."
+  },
+  "fixes_applied": [
+    {
+      "component": "c4.mitre_reference",
+      "defect": "technique_tactic_reference.json key serialization order non-determinism across runs",
+      "resolution": "Enforced sorted dictionary keys during STIX parsing and json.dump serialization"
+    },
+    {
+      "component": "c4.data_quality, c4.timeline_validation, c4.sequence_statistics",
+      "defect": "Generated report JSON files embedded dynamic datetime.now() timestamps causing hash drift on regeneration",
+      "resolution": "Omitted dynamic generated_at timestamps from reports to ensure natural, bit-identical determinism without fabricating timestamps"
+    },
+    {
+      "component": "Packaging & Pytest configuration",
+      "defect": "Missing pyproject.toml and implicit src resolution in pytest",
+      "resolution": "Created pyproject.toml with metadata/dependencies and added pythonpath = src to pytest.ini"
+    },
+    {
+      "component": "Dashboard Test Automation",
+      "defect": "Dashboard lacked automated AppTest execution within the test suite",
+      "resolution": "Added test_dashboard_renders_all_episodes_via_apptest verifying error-free rendering of E1..E4"
+    }
+  ],
+  "known_limitations": [
+    "Small Dataset Size: CAM-LDS comprises only 4 attack scenarios (E1..E4) yielding 190 total events and 67 collapsed transition samples at full technique granularity.",
+    "Single Run per Archive: Each raw archive represents exactly one execution of an attack campaign; no repeated runs exist to assess within-scenario variance.",
+    "Attack Window UTC Assumption: UTC alignment is verified via syslog/auth.log for scenario_1 and scenario_4; for scenario_2 and scenario_3, system timestamps are consistent (Etc/UTC) but lack external time anchors.",
+    "Absence of Real C3 Telemetry: The 8 proposal C3 fields (ioc, ioc_type, incident_stage, asset_criticality, cti_confidence, freshness, c3_threat_score, investigation_priority) are null across all 190 events in CAM-LDS. Only local_occurrence is populated (derived by C4 for labeled events).",
+    "ATT&CK Tactic Discrepancies: 8 steps in CAM-LDS exhibit discrepancies between AttackMate recorded tactics and official MITRE ATT&CK v16.1 enterprise mappings (e.g. E2-S024 maps T1003.008 to Discovery instead of Credential Access, and E4-S007 maps T1078.003 to Lateral Movement instead of Defense Evasion / Initial Access / Persistence / Privilege Escalation).",
+    "Vocabulary Divergence & Coverage Bounds: Cross-episode technique overlap is limited; pooled leave-one-episode-out reachable target coverage is bounded at 52.2% (35/67) for full technique IDs and 58.2% (39/67) for parent IDs."
+  ]
+}

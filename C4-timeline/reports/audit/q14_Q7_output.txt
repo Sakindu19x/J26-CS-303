@@ -1,0 +1,38 @@
+================================================================================
+Q7 PREDICTION RECORD REPAIR & GATES EXECUTION (2026-10-15T06:41:51.507670+00:00)
+================================================================================
+
+--- [Step 1] Running scripts/verify_prediction_records.py ---
+================================================================================
+INDEPENDENT PREDICTION RECORDS VERIFICATION (G-P5-1, G-P5-2, G-P5-5)
+================================================================================
+[Step 1] Loaded JSON schema (c4_prediction_record.schema.json) [PASS]
+[Step 2] Read 171 prediction records from JSONL [PASS]
+[Step 3] Gate G-P5-5: 100% (171/171) records validate against schema [PASS]
+[Step 4] Canonical SHA-256 record hashes verified for all 171 records [PASS]
+[Step 5] Gate G-P5-1: All 171 records match evaluation_7ep_predictions.csv exactly [PASS]
+[Step 6] Gate G-P5-2: Independent transition recount matched all probabilities within 1e-9 [PASS]
+[Step 7] Schema 1.1.0 field completeness, support metrics, and non-placeholder alternatives verified [PASS]
+[Step 8] Worked examples report structure (7 distinct categories) verified [PASS]
+
+================================================================================
+ALL PREDICTION RECORD VERIFICATIONS PASSED SUCCESSFULLY (Exit 0)
+================================================================================
+
+--- [Step 2] G-P5-3: Determinism across PYTHONHASHSEED=0, 1, 4242 ---
+PYTHONHASHSEED=0     SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421 (size: 986082 bytes)
+PYTHONHASHSEED=1     SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421 (size: 986082 bytes)
+PYTHONHASHSEED=4242  SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421 (size: 986082 bytes)
+G-P5-3 Result: PASS (All 3 processes produced identical SHA-256: 373bc11b0b1a3a424bc650f0244b207289820375688dcea9d7d86148e3139421)
+Saved determinism log to C:\Users\Lenovo\OneDrive - EGUARDIAN\Documents\Dataset\c4\reports\audit\q14_determinism_log.txt
+
+--- [Step 3] G-P5-4: Deep-frozen inputs non-modification & 100 permutations ---
+G-P5-4 Result: PASS (Input SHA-256 identical before/after: 51b754f5ebd687f52fbeec5dd4493922b80032fea8114bc7105927dec34815ba)
+G-P5-4 Result: PASS (100 permutations with seeds 0..99 produced identical event timelines)
+
+--- [Step 4] Numeric Leaf Comparison with HEAD ---
+Numeric leaves compared across 171 records: 171 records, 0 mismatches [PASS]
+
+================================================================================
+Q7 GATES ALL PASSED (G-P5-1, G-P5-2, G-P5-3, G-P5-4, G-P5-5)
+================================================================================
