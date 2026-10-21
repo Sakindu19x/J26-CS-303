@@ -9,10 +9,7 @@ import re
 from pathlib import Path
 import pytest
 
-try:
-    from scripts.verify.verify_viva_pack import verify_viva_pack
-except ImportError:
-    from scripts.verify_viva_pack import verify_viva_pack
+from scripts.verify.verify_viva_pack import verify_viva_pack
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 VIVA_DIR = REPO_ROOT / "viva_pack"
