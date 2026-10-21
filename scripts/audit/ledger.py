@@ -34,7 +34,7 @@ OLD_LEDGER_PATH = HISTORY_DIR / "overnight_ledger_old.md"
 def get_git_commits_by_prefix() -> dict[str, tuple[str, str, str]]:
     """Return dict of part -> (commit_sha, author_date_utc, subject)."""
     res = subprocess.run(
-        ["git", "log", "--grep=^[PQRS][0-9a-z]*:", "--format=%H|%aI|%s"],
+        ["git", "log", "--grep=^[PQRST][0-9a-z]*:", "--format=%H|%aI|%s"],
         cwd=str(REPO_ROOT),
         capture_output=True,
         text=True,
@@ -46,7 +46,7 @@ def get_git_commits_by_prefix() -> dict[str, tuple[str, str, str]]:
         parts = line.split("|", 2)
         if len(parts) == 3:
             sha, date_str, msg = parts
-            m = re.match(r"^([PQRS][0-9a-z]*):", msg)
+            m = re.match(r"^([PQRST][0-9a-z]*):", msg)
             if m:
                 part_id = m.group(1).upper()
                 # Convert author date to UTC ISO format (YYYY-MM-DDTHH:MM:SSZ)
@@ -112,6 +112,18 @@ def main() -> int:
         ("S3", {"hashes": 0, "full_pytest": "215", "new_tests": 5, "reconstructed": "no"}),
         ("S4", {"hashes": 0, "full_pytest": "217", "new_tests": 2, "reconstructed": "no"}),
         ("S5", {"hashes": 0, "full_pytest": "217", "new_tests": 0, "reconstructed": "no"}),
+        ("S6", {"sha": "3cd2af7d589547b41e48da8b1db980fc19caaad8", "utc": "2026-10-15T19:23:47Z", "hashes": "fail", "full_pytest": "not recorded", "new_tests": 0, "status": "FAIL (branch only)", "reconstructed": "no"}),
+        # T-series (Prompt 17)
+        ("T0", {"hashes": 0, "full_pytest": "217", "new_tests": 0, "reconstructed": "no"}),
+        ("T1", {"hashes": 0, "full_pytest": "221", "new_tests": 4, "reconstructed": "no"}),
+        ("T2", {"hashes": 0, "full_pytest": "221", "new_tests": 0, "reconstructed": "no"}),
+        ("T3", {"hashes": 0, "full_pytest": "221", "new_tests": 0, "reconstructed": "no"}),
+        ("T4", {"hashes": 0, "full_pytest": "221", "new_tests": 0, "reconstructed": "no"}),
+        ("T5", {"sha": "010c6c60d5e3e53abd8dae1989734b2f2eb022e3", "utc": "2026-10-21T04:17:52Z", "hashes": 0, "full_pytest": "222", "new_tests": 1, "reconstructed": "no"}),
+        ("T6", {"hashes": 0, "full_pytest": "222", "new_tests": 0, "reconstructed": "no"}),
+        ("T7", {"hashes": 0, "full_pytest": "222", "new_tests": 0, "reconstructed": "no"}),
+        ("T8", {"hashes": 0, "full_pytest": "222", "new_tests": 0, "reconstructed": "no"}),
+        ("T9", {"hashes": 0, "full_pytest": "222", "new_tests": 0, "reconstructed": "no"}),
     ]
 
     headers = [
@@ -137,15 +149,16 @@ def main() -> int:
     ]
 
     for p_id, meta in part_meta:
-        if p_id in commits:
-            sha, utc_date, _ = commits[p_id]
-        elif meta.get("sha"):
+        if meta.get("sha"):
             sha = meta["sha"]
             utc_date = meta.get("utc", "PENDING")
+        elif p_id in commits:
+            sha, utc_date, _ = commits[p_id]
         else:
             sha = "PENDING"
             utc_date = "PENDING"
 
+        status = meta.get("status", "PASS")
         row = [
             f"**{p_id}**",
             f"`{sha}`" if sha != "PENDING" else "`PENDING`",
@@ -153,7 +166,7 @@ def main() -> int:
             str(meta["hashes"]),
             str(meta["full_pytest"]),
             f"+{meta['new_tests']}" if meta["new_tests"] > 0 else str(meta["new_tests"]),
-            "**PASS**",
+            f"**{status}**",
             meta["reconstructed"],
         ]
         lines.append("| " + " | ".join(row) + " |")

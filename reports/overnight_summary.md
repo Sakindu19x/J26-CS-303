@@ -5,9 +5,9 @@ Generated automatically by `scripts/build_overnight_summary.py`.
 
 ## 1. Executive Summary
 
-All protocol phases recorded in the overnight ledger through `S5` have completed with status **PASS**.
+All protocol phases recorded in the overnight ledger through `T9` have completed with status **PASS**.
 - **Baselines & Code Frozen**: Baseline verification confirmed 61/61 protected baseline hashes intact; all modifications remain additive or within authorized allow-lists.
-- **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 217 passed unit/regression tests.
+- **Integrity Verifiers**: Independent verification suites and regression tests exited with code 0, verifying all 61 protected hashes and 222 passed unit/regression tests.
 - **Empirical Scope**: Production Markov models and evaluation pipelines cover all 7 empirical attack episodes in the benchmark dataset.
 - **Explainable Prediction Records**: 171/171 explainable LOEO prediction records generated, validated against schema v1.1.0 with support metrics.
 - **Operational Feasibility**: Pipeline runtime satisfies declared latency constraints with warm median latency of 0.0014s, warm p95 of 0.0026s, and parent-timed process cold start of 0.2013s.
@@ -59,7 +59,18 @@ All protocol phases recorded in the overnight ledger through `S5` have completed
 | **S2** | `621d24c9a1e0dbd608e1b6c37521b5f14750df21` | 2026-10-15T18:30:17Z | 0 | 210 | 0 | **PASS** | no |
 | **S3** | `f7805177a1fd484302a6ba7405e89d694cf91ec9` | 2026-10-15T18:44:51Z | 0 | 215 | +5 | **PASS** | no |
 | **S4** | `22b7eb65ce7b6d7c4b1c5cd320141fe5755f45eb` | 2026-10-15T18:47:44Z | 0 | 217 | +2 | **PASS** | no |
-| **S5** | `0c73d0fcbdcf546be9fb90f7e0037d85e0481254` | 2026-10-15T19:16:58Z | 0 | 217 | 0 | **PASS** | no |
+| **S5** | `bf5907728b97e588dfdc0469f9fd2107a62a6cf8` | 2026-10-15T19:16:58Z | 0 | 217 | 0 | **PASS** | no |
+| **S6** | `3cd2af7d589547b41e48da8b1db980fc19caaad8` | 2026-10-15T19:23:47Z | fail | not recorded | 0 | **FAIL (branch only)** | no |
+| **T0** | `3524d83746cc93983e506ca71fcc7814bc1776bb` | 2026-10-16T01:41:54Z | 0 | 217 | 0 | **PASS** | no |
+| **T1** | `46c4e629c46a3c4ffb8d359302c78cd5fc3eb63d` | 2026-10-16T01:54:05Z | 0 | 221 | +4 | **PASS** | no |
+| **T2** | `49298287d9c199eac370350cc16720bf63d8d9a5` | 2026-10-16T01:56:31Z | 0 | 221 | 0 | **PASS** | no |
+| **T3** | `aaae98408cb928c088b2f4ead013c749f64d2ed0` | 2026-10-16T03:02:41Z | 0 | 221 | 0 | **PASS** | no |
+| **T4** | `c0c74c08553513f805505fb9fa1e12795c90fc10` | 2026-10-16T03:09:58Z | 0 | 221 | 0 | **PASS** | no |
+| **T5** | `010c6c60d5e3e53abd8dae1989734b2f2eb022e3` | 2026-10-21T04:17:52Z | 0 | 222 | +1 | **PASS** | no |
+| **T6** | `1a881840072cfab05cb4104182baecdac39edc1a` | 2026-10-21T04:34:15Z | 0 | 222 | 0 | **PASS** | no |
+| **T7** | `PENDING` | PENDING | 0 | 222 | 0 | **PASS** | no |
+| **T8** | `PENDING` | PENDING | 0 | 222 | 0 | **PASS** | no |
+| **T9** | `PENDING` | PENDING | 0 | 222 | 0 | **PASS** | no |
 
 ## Notes and Historical Disclosures
 
@@ -122,7 +133,7 @@ Note: Prompt 13 final chat message blocks with contradictions vs generated files
 | Verification Domain | Criterion | Result | Status |
 |:---|:---|:---:|:---:|
 | Baseline Integrity | 61 SHA-256 baseline hashes | 61/61 Match | **PASS** |
-| Test Suite | Pytest unit and regression tests | 217 passed, 0 failed | **PASS** |
+| Test Suite | Pytest unit and regression tests | 222 passed, 0 failed | **PASS** |
 | Explainability | JSON Schema validation (v1.1.0) | 171/171 records valid | **PASS** |
 | Timing (NFR1 Warm Median) | End-to-end warm median <= 2.0s | 0.0014s | **PASS** |
 | Timing (NFR1 Warm P95) | End-to-end warm p95 <= 5.0s | 0.0026s | **PASS** |

@@ -31,7 +31,7 @@ def load_source_metrics() -> dict:
                     "part": p_name,
                     "commit": parts[2].replace("`", ""),
                     "author_date": parts[3],
-                    "verify_exit": int(parts[4]),
+                    "verify_exit": int(parts[4]) if parts[4].isdigit() else parts[4],
                     "pytest_total": parts[5],
                     "new_tests": parts[6],
                     "status": parts[7].replace("*", ""),

@@ -82,7 +82,7 @@ def verify_overnight_summary(md_override: str | None = None, verbose: bool = Tru
             if p_name:
                 rows.append({
                     "part": p_name,
-                    "verify_exit": int(parts[4]),
+                    "verify_exit": int(parts[4]) if parts[4].isdigit() else parts[4],
                     "pytest_total": parts[5],
                 })
     assert rows, "No valid ledger rows found"
