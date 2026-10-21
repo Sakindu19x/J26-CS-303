@@ -1,9 +1,5 @@
 """
-PP1 Visual Demonstration - Multi-Label Web Attack Detection
-Component 1: Adaptive Web Attack Detection & Correlation Model
-Final Year Research - Group J26-CS-303
 
-Run from the RA 1 folder:
     python -m streamlit run demo/demo_app_full.py
 """
 
