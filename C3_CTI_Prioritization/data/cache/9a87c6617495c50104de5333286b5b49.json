@@ -1,0 +1,20 @@
+{
+  "ioc": "http://phish-login.example/bad",
+  "ioc_type": "url",
+  "virustotal": {
+    "malicious": 0,
+    "suspicious": 0,
+    "total": 0,
+    "not_found": true
+  },
+  "otx": {
+    "pulse_count": 0,
+    "reputation": 0,
+    "sections": [
+      "general",
+      "url_list",
+      "http_scans",
+      "screenshot"
+    ]
+  }
+}

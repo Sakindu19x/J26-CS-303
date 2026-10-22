@@ -1,0 +1,15 @@
+{
+  "ioc": "download.evil-payload.example",
+  "ioc_type": "domain",
+  "virustotal": {
+    "malicious": 0,
+    "suspicious": 0,
+    "total": 0,
+    "not_found": true
+  },
+  "otx": {
+    "pulse_count": 0,
+    "reputation": 0,
+    "not_found": true
+  }
+}

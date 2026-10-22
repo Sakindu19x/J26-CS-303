@@ -1,0 +1,62 @@
+[
+  {
+    "rank": 1,
+    "ioc": "185.220.101.1",
+    "ioc_type": "ip",
+    "threat_score": 75.65,
+    "priority": "Critical",
+    "score_breakdown": {
+      "CTI_Confidence": 23.34,
+      "Freshness": 18.1,
+      "Local_Evidence": 7.22,
+      "Asset_Criticality": 10.0,
+      "Incident_Stage": 8.5,
+      "MITRE_Severity": 8.5,
+      "Benign_Penalty": -0.0,
+      "Final_Score": 75.65,
+      "Priority": "Critical"
+    },
+    "timestamp": "2026-09-06T16:19:49.192042+00:00",
+    "source_component": "C3"
+  },
+  {
+    "rank": 2,
+    "ioc": "185.220.101.45",
+    "ioc_type": "ip",
+    "threat_score": 70.76,
+    "priority": "High",
+    "score_breakdown": {
+      "CTI_Confidence": 24.0,
+      "Freshness": 16.37,
+      "Local_Evidence": 5.89,
+      "Asset_Criticality": 7.5,
+      "Incident_Stage": 8.5,
+      "MITRE_Severity": 8.5,
+      "Benign_Penalty": -0.0,
+      "Final_Score": 70.76,
+      "Priority": "High"
+    },
+    "timestamp": "2026-09-06T16:19:49.192059+00:00",
+    "source_component": "C3"
+  },
+  {
+    "rank": 3,
+    "ioc": "8.8.8.8",
+    "ioc_type": "ip",
+    "threat_score": 29.45,
+    "priority": "Medium",
+    "score_breakdown": {
+      "CTI_Confidence": 0.0,
+      "Freshness": 19.02,
+      "Local_Evidence": 8.42,
+      "Asset_Criticality": 2.5,
+      "Incident_Stage": 5.5,
+      "MITRE_Severity": 4.0,
+      "Benign_Penalty": -10.0,
+      "Final_Score": 29.45,
+      "Priority": "Medium"
+    },
+    "timestamp": "2026-09-06T16:19:49.192064+00:00",
+    "source_component": "C3"
+  }
+]

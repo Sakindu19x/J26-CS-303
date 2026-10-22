@@ -1,0 +1,16 @@
+{
+  "ioc": "45.33.32.156",
+  "ioc_type": "ip",
+  "virustotal": {
+    "malicious": 1,
+    "suspicious": 0,
+    "harmless": 54,
+    "undetected": 35,
+    "total": 90,
+    "reputation": 0
+  },
+  "otx": {
+    "pulse_count": 3,
+    "reputation": 0
+  }
+}

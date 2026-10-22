@@ -1,0 +1,26 @@
+{
+  "ioc": "93.184.216.34",
+  "ioc_type": "ip",
+  "virustotal": {
+    "malicious": 1,
+    "suspicious": 0,
+    "harmless": 54,
+    "undetected": 34,
+    "total": 89,
+    "reputation": -45
+  },
+  "otx": {
+    "pulse_count": 34,
+    "reputation": 0,
+    "sections": [
+      "general",
+      "geo",
+      "reputation",
+      "url_list",
+      "passive_dns",
+      "malware",
+      "nids_list",
+      "http_scans"
+    ]
+  }
+}

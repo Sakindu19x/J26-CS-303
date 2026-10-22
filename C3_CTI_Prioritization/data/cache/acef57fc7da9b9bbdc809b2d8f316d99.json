@@ -1,0 +1,25 @@
+{
+  "ioc": "malware-c2.example.net",
+  "ioc_type": "domain",
+  "virustotal": {
+    "malicious": 0,
+    "suspicious": 0,
+    "harmless": 0,
+    "undetected": 89,
+    "total": 89,
+    "reputation": 0
+  },
+  "otx": {
+    "pulse_count": 0,
+    "reputation": 0,
+    "sections": [
+      "general",
+      "geo",
+      "url_list",
+      "passive_dns",
+      "malware",
+      "whois",
+      "http_scans"
+    ]
+  }
+}

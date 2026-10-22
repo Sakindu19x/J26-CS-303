@@ -1,0 +1,178 @@
+[
+  {
+    "ioc": "185.220.101.1",
+    "local_count": 12,
+    "asset_criticality": "critical",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 2,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "185.220.101.1"
+  },
+  {
+    "ioc": "185.220.101.45",
+    "local_count": 5,
+    "asset_criticality": "high",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 5,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "185.220.101.45"
+  },
+  {
+    "ioc": "45.33.32.156",
+    "local_count": 4,
+    "asset_criticality": "critical",
+    "mitre_tactic": "exfiltration",
+    "mitre_technique": "T1041",
+    "age_days": 3,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "45.33.32.156"
+  },
+  {
+    "ioc": "malware-c2.example.net",
+    "local_count": 8,
+    "asset_criticality": "high",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071.001",
+    "age_days": 1,
+    "trusted": false,
+    "ioc_type": "domain",
+    "ioc_value": "malware-c2.example.net"
+  },
+  {
+    "ioc": "http://phish-login.example/bad",
+    "local_count": 6,
+    "asset_criticality": "medium",
+    "mitre_tactic": "initial-access",
+    "mitre_technique": "T1566",
+    "age_days": 1,
+    "trusted": false,
+    "ioc_type": "url",
+    "ioc_value": "http://phish-login.example/bad"
+  },
+  {
+    "ioc": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "local_count": 2,
+    "asset_criticality": "high",
+    "mitre_tactic": "execution",
+    "mitre_technique": "T1204",
+    "age_days": 4,
+    "trusted": false,
+    "ioc_type": "hash",
+    "ioc_value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "ioc": "185.220.101.1",
+    "local_count": 1,
+    "asset_criticality": "low",
+    "mitre_tactic": "reconnaissance",
+    "mitre_technique": "T1595",
+    "age_days": 40,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "185.220.101.1"
+  },
+  {
+    "ioc": "8.8.8.8",
+    "local_count": 50,
+    "asset_criticality": "low",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 1,
+    "trusted": true,
+    "ioc_type": "ip",
+    "ioc_value": "8.8.8.8"
+  },
+  {
+    "ioc": "1.1.1.1",
+    "local_count": 30,
+    "asset_criticality": "medium",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 2,
+    "trusted": true,
+    "ioc_type": "ip",
+    "ioc_value": "1.1.1.1"
+  },
+  {
+    "ioc": "192.168.1.10",
+    "local_count": 15,
+    "asset_criticality": "critical",
+    "mitre_tactic": "lateral-movement",
+    "mitre_technique": "T1021",
+    "age_days": 1,
+    "trusted": true,
+    "ioc_type": "ip",
+    "ioc_value": "192.168.1.10"
+  },
+  {
+    "ioc": "139.59.1.1",
+    "local_count": 3,
+    "asset_criticality": "high",
+    "mitre_tactic": "discovery",
+    "mitre_technique": "T1046",
+    "age_days": 7,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "139.59.1.1"
+  },
+  {
+    "ioc": "update-cdn.example.com",
+    "local_count": 20,
+    "asset_criticality": "medium",
+    "mitre_tactic": "defense-evasion",
+    "mitre_technique": "T1070",
+    "age_days": 10,
+    "trusted": false,
+    "ioc_type": "domain",
+    "ioc_value": "update-cdn.example.com"
+  },
+  {
+    "ioc": "185.220.101.1",
+    "local_count": 7,
+    "asset_criticality": "high",
+    "mitre_tactic": "persistence",
+    "mitre_technique": "T1133",
+    "age_days": 15,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "185.220.101.1"
+  },
+  {
+    "ioc": "93.184.216.34",
+    "local_count": 2,
+    "asset_criticality": "low",
+    "mitre_tactic": "reconnaissance",
+    "mitre_technique": "T1595",
+    "age_days": 20,
+    "trusted": false,
+    "ioc_type": "ip",
+    "ioc_value": "93.184.216.34"
+  },
+  {
+    "ioc": "download.evil-payload.example",
+    "local_count": 4,
+    "asset_criticality": "critical",
+    "mitre_tactic": "execution",
+    "mitre_technique": "T1105",
+    "age_days": 2,
+    "trusted": false,
+    "ioc_type": "domain",
+    "ioc_value": "download.evil-payload.example"
+  },
+  {
+    "ioc": "https://safe-docs.example.org/file",
+    "local_count": 9,
+    "asset_criticality": "low",
+    "mitre_tactic": "initial-access",
+    "mitre_technique": "T1566",
+    "age_days": 3,
+    "trusted": true,
+    "ioc_type": "url",
+    "ioc_value": "https://safe-docs.example.org/file"
+  }
+]

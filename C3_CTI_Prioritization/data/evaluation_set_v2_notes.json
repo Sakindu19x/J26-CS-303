@@ -1,0 +1,178 @@
+[
+  {
+    "ioc": "185.220.101.1",
+    "type": "ip",
+    "local_count": 12,
+    "asset_criticality": "critical",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 2,
+    "trusted": false,
+    "note": "Tor exit / malicious IP, fresh, critical asset, C2"
+  },
+  {
+    "ioc": "185.220.101.45",
+    "type": "ip",
+    "local_count": 5,
+    "asset_criticality": "high",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 5,
+    "trusted": false,
+    "note": "Related malicious IP, high asset"
+  },
+  {
+    "ioc": "45.33.32.156",
+    "type": "ip",
+    "local_count": 4,
+    "asset_criticality": "critical",
+    "mitre_tactic": "exfiltration",
+    "mitre_technique": "T1041",
+    "age_days": 3,
+    "trusted": false,
+    "note": "Weak CTI possible, but late stage + critical asset"
+  },
+  {
+    "ioc": "malware-c2.example.net",
+    "type": "domain",
+    "local_count": 8,
+    "asset_criticality": "high",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071.001",
+    "age_days": 1,
+    "trusted": false,
+    "note": "Suspicious domain, fresh C2-like"
+  },
+  {
+    "ioc": "http://phish-login.example/bad",
+    "type": "url",
+    "local_count": 6,
+    "asset_criticality": "medium",
+    "mitre_tactic": "initial-access",
+    "mitre_technique": "T1566",
+    "age_days": 1,
+    "trusted": false,
+    "note": "Phishing-style URL"
+  },
+  {
+    "ioc": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "type": "hash",
+    "local_count": 2,
+    "asset_criticality": "high",
+    "mitre_tactic": "execution",
+    "mitre_technique": "T1204",
+    "age_days": 4,
+    "trusted": false,
+    "note": "Sample hash case (placeholder hash pattern)"
+  },
+  {
+    "ioc": "185.220.101.1",
+    "type": "ip",
+    "local_count": 1,
+    "asset_criticality": "low",
+    "mitre_tactic": "reconnaissance",
+    "mitre_technique": "T1595",
+    "age_days": 40,
+    "trusted": false,
+    "note": "Same malicious IP, old + low asset + recon (should drop)"
+  },
+  {
+    "ioc": "8.8.8.8",
+    "type": "ip",
+    "local_count": 50,
+    "asset_criticality": "low",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 1,
+    "trusted": true,
+    "note": "Google DNS trusted noise"
+  },
+  {
+    "ioc": "1.1.1.1",
+    "type": "ip",
+    "local_count": 30,
+    "asset_criticality": "medium",
+    "mitre_tactic": "command-and-control",
+    "mitre_technique": "T1071",
+    "age_days": 2,
+    "trusted": true,
+    "note": "Cloudflare DNS trusted noise"
+  },
+  {
+    "ioc": "192.168.1.10",
+    "type": "ip",
+    "local_count": 15,
+    "asset_criticality": "critical",
+    "mitre_tactic": "lateral-movement",
+    "mitre_technique": "T1021",
+    "age_days": 1,
+    "trusted": true,
+    "note": "Internal host, high local evidence + critical (context raise)"
+  },
+  {
+    "ioc": "139.59.1.1",
+    "type": "ip",
+    "local_count": 3,
+    "asset_criticality": "high",
+    "mitre_tactic": "discovery",
+    "mitre_technique": "T1046",
+    "age_days": 7,
+    "trusted": false,
+    "note": "Moderate suspicion"
+  },
+  {
+    "ioc": "update-cdn.example.com",
+    "type": "domain",
+    "local_count": 20,
+    "asset_criticality": "medium",
+    "mitre_tactic": "defense-evasion",
+    "mitre_technique": "T1070",
+    "age_days": 10,
+    "trusted": false,
+    "note": "Possibly noisy domain"
+  },
+  {
+    "ioc": "185.220.101.1",
+    "type": "ip",
+    "local_count": 7,
+    "asset_criticality": "high",
+    "mitre_tactic": "persistence",
+    "mitre_technique": "T1133",
+    "age_days": 15,
+    "trusted": false,
+    "note": "Same IP mid age + persistence"
+  },
+  {
+    "ioc": "93.184.216.34",
+    "type": "ip",
+    "local_count": 2,
+    "asset_criticality": "low",
+    "mitre_tactic": "reconnaissance",
+    "mitre_technique": "T1595",
+    "age_days": 20,
+    "trusted": false,
+    "note": "Low context IP"
+  },
+  {
+    "ioc": "download.evil-payload.example",
+    "type": "domain",
+    "local_count": 4,
+    "asset_criticality": "critical",
+    "mitre_tactic": "execution",
+    "mitre_technique": "T1105",
+    "age_days": 2,
+    "trusted": false,
+    "note": "Suspicious download domain on critical asset"
+  },
+  {
+    "ioc": "https://safe-docs.example.org/file",
+    "type": "url",
+    "local_count": 9,
+    "asset_criticality": "low",
+    "mitre_tactic": "initial-access",
+    "mitre_technique": "T1566",
+    "age_days": 3,
+    "trusted": true,
+    "note": "Trusted-looking URL noise"
+  }
+]

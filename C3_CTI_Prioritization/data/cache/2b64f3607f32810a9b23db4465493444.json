@@ -1,0 +1,13 @@
+{
+  "ioc": "139.59.1.1",
+  "ioc_type": "ip",
+  "virustotal": {
+    "malicious": 0,
+    "suspicious": 1,
+    "harmless": 54,
+    "undetected": 35,
+    "total": 90,
+    "reputation": 0
+  },
+  "otx": null
+}

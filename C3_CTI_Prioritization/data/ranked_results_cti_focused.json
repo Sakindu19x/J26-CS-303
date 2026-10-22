@@ -1,0 +1,59 @@
+[
+  {
+    "ioc": "185.220.101.1",
+    "ioc_type": "ip",
+    "score": 75.65,
+    "priority": "Critical",
+    "breakdown": {
+      "CTI_Confidence": 23.34,
+      "Freshness": 18.1,
+      "Local_Evidence": 7.22,
+      "Asset_Criticality": 10.0,
+      "Incident_Stage": 8.5,
+      "MITRE_Severity": 8.5,
+      "Benign_Penalty": -0.0,
+      "Final_Score": 75.65,
+      "Priority": "Critical"
+    },
+    "weight_config": "cti_focused",
+    "rank": 1
+  },
+  {
+    "ioc": "185.220.101.45",
+    "ioc_type": "ip",
+    "score": 70.76,
+    "priority": "High",
+    "breakdown": {
+      "CTI_Confidence": 24.0,
+      "Freshness": 16.37,
+      "Local_Evidence": 5.89,
+      "Asset_Criticality": 7.5,
+      "Incident_Stage": 8.5,
+      "MITRE_Severity": 8.5,
+      "Benign_Penalty": -0.0,
+      "Final_Score": 70.76,
+      "Priority": "High"
+    },
+    "weight_config": "cti_focused",
+    "rank": 2
+  },
+  {
+    "ioc": "8.8.8.8",
+    "ioc_type": "ip",
+    "score": 29.45,
+    "priority": "Medium",
+    "breakdown": {
+      "CTI_Confidence": 0.0,
+      "Freshness": 19.02,
+      "Local_Evidence": 8.42,
+      "Asset_Criticality": 2.5,
+      "Incident_Stage": 5.5,
+      "MITRE_Severity": 4.0,
+      "Benign_Penalty": -10.0,
+      "Final_Score": 29.45,
+      "Priority": "Medium"
+    },
+    "weight_config": "cti_focused",
+    "rank": 3
+  }
+]

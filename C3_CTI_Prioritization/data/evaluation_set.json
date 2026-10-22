@@ -1,0 +1,98 @@
+[
+  {
+    "event_id": "EVAL-001",
+    "ioc": "185.220.101.1",
+    "ioc_type": "ip",
+    "local_count": 9,
+    "asset_level": "Critical",
+    "tactic": "command-and-control",
+    "technique_id": "T1071",
+    "days_old": 1,
+    "is_trusted": false,
+    "description": "Known malicious Tor IP + Critical asset + recent"
+  },
+  {
+    "event_id": "EVAL-002",
+    "ioc": "185.220.101.45",
+    "ioc_type": "ip",
+    "local_count": 4,
+    "asset_level": "High",
+    "tactic": "command-and-control",
+    "technique_id": "T1071",
+    "days_old": 3,
+    "is_trusted": false,
+    "description": "Malicious IP + High asset"
+  },
+  {
+    "event_id": "EVAL-003",
+    "ioc": "8.8.8.8",
+    "ioc_type": "ip",
+    "local_count": 20,
+    "asset_level": "Low",
+    "tactic": "discovery",
+    "technique_id": "T1595",
+    "days_old": 1,
+    "is_trusted": true,
+    "description": "Trusted Google DNS (should get low priority)"
+  },
+  {
+    "event_id": "EVAL-004",
+    "ioc": "1.1.1.1",
+    "ioc_type": "ip",
+    "local_count": 15,
+    "asset_level": "Medium",
+    "tactic": "discovery",
+    "technique_id": "T1595",
+    "days_old": 2,
+    "is_trusted": true,
+    "description": "Trusted Cloudflare DNS"
+  },
+  {
+    "event_id": "EVAL-005",
+    "ioc": "45.33.32.156",
+    "ioc_type": "ip",
+    "local_count": 6,
+    "asset_level": "Critical",
+    "tactic": "exfiltration",
+    "technique_id": "T1041",
+    "days_old": 2,
+    "is_trusted": false,
+    "description": "Suspicious IP with Exfiltration stage"
+  },
+  {
+    "event_id": "EVAL-006",
+    "ioc": "185.220.101.1",
+    "ioc_type": "ip",
+    "local_count": 2,
+    "asset_level": "Low",
+    "tactic": "reconnaissance",
+    "technique_id": "T1595",
+    "days_old": 25,
+    "is_trusted": false,
+    "description": "Same malicious IP but old + Low asset + Recon stage"
+  },
+  {
+    "event_id": "EVAL-007",
+    "ioc": "139.59.1.1",
+    "ioc_type": "ip",
+    "local_count": 3,
+    "asset_level": "High",
+    "tactic": "initial-access",
+    "technique_id": "T1190",
+    "days_old": 5,
+    "is_trusted": false,
+    "description": "Medium suspicion IP"
+  },
+  {
+    "event_id": "EVAL-008",
+    "ioc": "192.168.1.10",
+    "ioc_type": "ip",
+    "local_count": 10,
+    "asset_level": "Critical",
+    "tactic": "lateral-movement",
+    "technique_id": "T1021",
+    "days_old": 1,
+    "is_trusted": true,
+    "description": "Internal IP (should normally be low unless context is strong)"
+  }
+]

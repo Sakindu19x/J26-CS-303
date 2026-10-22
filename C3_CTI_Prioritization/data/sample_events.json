@@ -1,0 +1,41 @@
+[
+  {
+    "event_id": "EVT-001",
+    "timestamp": "2026-09-05T14:22:10Z",
+    "source_component": "C1",
+    "ioc": "185.220.101.1",
+    "ioc_type": "ip",
+    "local_count": 8,
+    "asset_level": "Critical",
+    "tactic": "command-and-control",
+    "technique_id": "T1071",
+    "days_old": 2,
+    "is_trusted": false
+  },
+  {
+    "event_id": "EVT-002",
+    "timestamp": "2026-09-05T14:25:33Z",
+    "source_component": "C2",
+    "ioc": "8.8.8.8",
+    "ioc_type": "ip",
+    "local_count": 12,
+    "asset_level": "Low",
+    "tactic": "discovery",
+    "technique_id": "T1595",
+    "days_old": 1,
+    "is_trusted": true
+  },
+  {
+    "event_id": "EVT-003",
+    "timestamp": "2026-09-05T15:01:05Z",
+    "source_component": "C1",
+    "ioc": "185.220.101.45",
+    "ioc_type": "ip",
+    "local_count": 5,
+    "asset_level": "High",
+    "tactic": "command-and-control",
+    "technique_id": "T1071",
+    "days_old": 4,
+    "is_trusted": false
+  }
+]

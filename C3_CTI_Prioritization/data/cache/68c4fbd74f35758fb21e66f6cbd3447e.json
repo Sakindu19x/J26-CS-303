@@ -1,0 +1,16 @@
+{
+  "ioc": "185.220.101.45",
+  "ioc_type": "ip",
+  "virustotal": {
+    "malicious": 16,
+    "suspicious": 4,
+    "harmless": 44,
+    "undetected": 26,
+    "total": 90,
+    "reputation": 16
+  },
+  "otx": {
+    "pulse_count": 50,
+    "reputation": 0
+  }
+}
